@@ -3,7 +3,7 @@
 Amazon RDS supports DB instances running several versions of PostgreSQL\. For a list of supported versions, see [Supported PostgreSQL database versions](#PostgreSQL.Concepts.General.DBVersions)\.
 
 **Note**  
-Deprecation of PostgreSQL 9\.6 is scheduled for January 18, 2022\. For more information, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
+Deprecation of PostgreSQL 9\.6 is scheduled for April 26, 2022\. For more information, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
 
 You can create DB instances and DB snapshots, point\-in\-time restores and backups\. DB instances running PostgreSQL support Multi\-AZ deployments, read replicas, Provisioned IOPS, and can be created inside a VPC\. You can also use Secure Socket Layer \(SSL\) to connect to a DB instance running PostgreSQL\.
 
@@ -127,22 +127,21 @@ aws rds describe-db-engine-versions ––default-only ––engine postgres
 + [PostgreSQL 12 versions](#PostgreSQL.Concepts.General.version12)
 + [PostgreSQL 11 versions](#PostgreSQL.Concepts.General.version11)
 + [PostgreSQL 10 versions](#PostgreSQL.Concepts.General.version10)
-+ [PostgreSQL 9\.6 versions \(Deprecated\)](#PostgreSQL.Concepts.General.version96)
++ [PostgreSQL 9\.6 versions](#PostgreSQL.Concepts.General.version96)
 
 ### Deprecation of PostgreSQL version 9\.6<a name="PostgreSQL.Concepts.General.DBVersions.Deprecation96"></a>
 
-On January 18, 2022, Amazon RDS plans to deprecate support for PostgreSQL 9\.6 using the following schedule, which includes upgrade recommendations\. We recommend that you upgrade all PostgreSQL 9\.6 DB instances to PostgreSQL 12 or higher as soon as possible\. For more information, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+On March 31, 2022, Amazon RDS plans to deprecate support for PostgreSQL 9\.6 using the following schedule\. This extends the previously announced date of January 18, 2022 to April 26, 2022\. You should upgrade all your PostgreSQL 9\.6 DB instances to PostgreSQL 12 or higher as soon as possible\. We recommend that you first upgrade to minor version 9\.6\.20 or higher and then upgrade directly to PostgreSQL 12 rather than upgrading to an intermediate major version\. For more information, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
 
 | Action or recommendation | Dates | 
 | --- | --- | 
-|  After this date and time, you can't create new Amazon RDS instances with PostgreSQL major version 9\.6 from either the AWS Management Console or the AWS CLI\.   |  August 3, 2021 00:00:01 AM UTC  | 
-|  We recommend that you start upgrading RDS for PostgreSQL 9\.6 DB instances to PostgreSQL 12 or higher at any time\.   |  Now – January 18, 2022  | 
-|  We recommend that you upgrade PostgreSQL 9\.6 snapshots manually to the version of your choice\.  |  Now–January 18, 2022  | 
-|  Amazon RDS automatically upgrades PostgreSQL 9\.6 instances to version 12 within the earliest scheduled subsequent maintenance window\. After this date and time, restoration of RDS for PostgreSQL 9\.6 database snapshots results in an automatic upgrade of the restored database to a version that's still supported at the time\.  |  January 18, 2022 00:00:01 AM UTC  | 
-|  Amazon RDS automatically upgrades any remaining PostgreSQL 9\.6 instances to version 12 whether or not they are in a maintenance window\.  |  February 22, 2022 00:00:01 AM UTC  | 
+|  The PostgreSQL community discontinued support for PostgreSQL 9\.6, and will no longer provide bug fixes or security patches for this version\.   |  November 11, 2021  | 
+|  Start upgrading RDS for PostgreSQL 9\.6 DB instances to PostgreSQL 12 or higher as soon as possible\. Although you can continue to restore PostgreSQL 9\.6 snapshots and create read replicas with version 9\.6, be aware of the other critical dates in this deprecation schedule and their impact\.   |  Now – March 31, 2022  | 
+|  After this date, you can't create new Amazon RDS instances with PostgreSQL major version 9\.6 from either the AWS Management Console or the AWS CLI\.   |  March 31, 2022  | 
+|  Amazon RDS automatically upgrades PostgreSQL 9\.6 instances to version 12\. If you restore a PostgreSQL 9\.6 database snapshot, Amazon RDS automatically upgrades the restored database to PostgreSQL 12\.   |  April 26, 2022  | 
 
-For more information about RDS for PostgreSQL 9\.6 deprecation, see [ Announcement: Amazon RDS for PostgreSQL 9\.6 End\-of\-Life date is January 18, 2022 ](http://forums.aws.amazon.com/ann.jspa?annID=8499)\.
+For more information about RDS for PostgreSQL 9\.6 deprecation, see [ Announcement: Extending end\-of\-life process for Amazon RDS for PostgreSQL 9\.6](http://forums.aws.amazon.com/ann.jspa?annID=9092)\.
 
 ### PostgreSQL 13 versions<a name="PostgreSQL.Concepts.General.version13"></a>
 
@@ -640,9 +639,9 @@ PostgreSQL version 10\.1 includes the following changes:
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [PostgreSQL extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
 
-### PostgreSQL 9\.6 versions \(Deprecated\)<a name="PostgreSQL.Concepts.General.version96"></a>
+### PostgreSQL 9\.6 versions<a name="PostgreSQL.Concepts.General.version96"></a>
 
-RDS for PostgreSQL is deprecated as of January 18, 2022\. The version information that follows is for historical purposes only\. For more information about version 9\.6 deprecation, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
+RDS for PostgreSQL 9\.6 will be deprecated on April 26, 2022\. For more information about version 9\.6 deprecation, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
 
 **Topics**
 + [PostgreSQL version 9\.6\.23 on Amazon RDS](#PostgreSQL.Concepts.General.version9623)
@@ -1270,7 +1269,7 @@ The `tsearch2` extension is deprecated in version 10\. The `tsearch2` extension 
 
 ### PostgreSQL version 9\.6\.x extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x"></a>
 
-RDS for PostgreSQL 9\.6 is deprecated as of January 18, 2022\. For more information, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. The information following is retained for historical purposes only\. 
+RDS for PostgreSQL 9\.6 will be deprecated on April 26, 2022\. For more information, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. The information following is retained for historical purposes only\. 
 
 The following tables show PostgreSQL extensions for PostgreSQL version 9\.6\.x that are currently supported by RDS for PostgreSQL\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 

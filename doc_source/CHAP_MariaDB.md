@@ -183,7 +183,7 @@ Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 
 ## MariaDB file size limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
 
-For MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for MariaDB DB instances\. For more information, see [Amazon RDS DB instance storage](CHAP_Storage.md)\. 
+For MariaDB DB instances, the maximum size of a table is 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for MariaDB DB instances\. This limit isn't related to the maximum storage limit for MariaDB DB instances\. For more information about the storage limit, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
 There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, see [File\-per\-table tablespaces](https://dev.mysql.com/doc/refman/5.7/en/innodb-file-per-table-tablespaces.html) in the MySQL documentation\.
 

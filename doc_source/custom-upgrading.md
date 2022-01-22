@@ -21,7 +21,7 @@ You can see existing CEVs on the **Custom engine versions** page in the AWS Mana
 You can also use the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command to find valid upgrades for your DB instances, as shown in the following example\. This example assumes that a DB instance was created using the version 19\.my\_cev1, and that the upgrade versions 19\.my\_cev2 and 19\.my\_cev exist\.
 
 ```
-aws describe-db-engine-versions --engine custom-oracle-ee --engine-version 19.my_cev1
+aws rds describe-db-engine-versions --engine custom-oracle-ee --engine-version 19.my_cev1
 ```
 
 The output resembles the following\.

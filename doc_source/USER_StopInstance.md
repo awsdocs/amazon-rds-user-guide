@@ -19,7 +19,9 @@ You can stop and start a DB instance whether it is configured for a single Avail
 **Note**  
 For a Multi\-AZ deployment, a large amount of time might be required to stop a DB instance\. If you have at least one backup after a previous failover, then you can speed up the stop DB instance operation by performing a reboot with failover operation before stopping the DB instance\.
 
-When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\. Any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. 
+When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\.  Occasionally, an RDS for PostgreSQL DB instance doesn't shut down cleanly\. If this happens, you see that the instance goes through a recovery process when you restart it later\. This is expected behavior of the database engine, intended to protect database integrity\. Some memory\-based statistics and counters don't retain history and are re\-initialized after restart, to capture the operational workload moving forward\.
+
+At the end of the normal shutdown process, any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. 
 
 Stopping a DB instance removes pending actions, except for pending actions for the DB instance's option group or DB parameter group\.
 

@@ -4,7 +4,7 @@ Amazon RDS creates and saves automated backups of your DB instance during the ba
 
 Automated backups follow these rules:
 + Your DB instance must be in the `AVAILABLE` state for automated backups to occur\. Automated backups don't occur while your DB instance is in a state other than `AVAILABLE`, for example `STORAGE_FULL`\.
-+ Automated backups and automated snapshots don't occur while a copy is running in the same AWS Region for the same DB instance\.
++ Automated backups don't occur while a DB snapshot copy is running in the same AWS Region for the same DB instance\.
 
 You can also back up your DB instance manually, by manually creating a DB snapshot\. For more information about creating a DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\. 
 

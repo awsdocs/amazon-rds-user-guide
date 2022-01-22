@@ -177,9 +177,15 @@ Before you can use APEX, you need to download the ords\.war file, use Java to in
    cd /home/apexuser/ORDS
    ```
 
-1. Download the file ords\.*version\.number*\.zip from [Oracle REST data services](http://www.oracle.com/technetwork/developer-tools/rest-data-services/downloads/index.html)\.
+1. Download the file `ords.version.number.zip` from [Oracle REST data services](http://www.oracle.com/technetwork/developer-tools/rest-data-services/downloads/index.html)\.
 
 1. Unzip the file into the `/home/apexuser/ORDS` directory\.
+
+1. If you're installing ORDS in a multitenant database, add the following line to the file `/home/apexuser/ORDS/params/ords_params.properties`:
+
+   ```
+   pdb.disable.lockdown=false
+   ```
 
 1. Grant the master user the required privileges to install ORDS\.
 
@@ -214,7 +220,7 @@ These commands apply to ORDS version 19\.1 and later\.
    The program prompts you for the following information\. The default values are in brackets\. For more information, see [Introduction to Oracle REST data services](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/20.2/aelig/installing-REST-data-services.html#GUID-6F7B4E61-B730-4E73-80B8-F53299123730) in the Oracle documentation\.
    + Enter the location to store configuration data:
 
-     Enter `/home/apexuser/ORDS`\. This is the location of the ORDS configuration files\.
+     Enter */home/apexuser/ORDS*\. This is the location of the ORDS configuration files\.
    + Specify the database connection type to use\. Enter number for \[1\] Basic \[2\] TNS \[3\] Custom URL \[1\]:
 
      Choose the desired connection type\.

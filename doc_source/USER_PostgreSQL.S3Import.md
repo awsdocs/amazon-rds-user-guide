@@ -407,13 +407,13 @@ a | b | c | d | e
 
 ### Importing an Amazon S3 compressed \(gzip\) file<a name="USER_PostgreSQL.S3Import.FileFormats.gzip"></a>
 
-The following example shows how to import a file from Amazon S3 that is compressed with gzip\. 
-
-Ensure that the file contains the following Amazon S3 metadata:
+The following example shows how to import a file from Amazon S3 that is compressed with gzip\. The file that you import needs to have the following Amazon S3 metadata:
 + Key: `Content-Encoding`
 + Value: `gzip`
 
-For more about adding these values to Amazon S3 metadata, see [How do I add metadata to an S3 object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service User Guide*\.
+If you upload the file using the AWS Management Console, the metadata is typically applied by the system\. For information about uploading files to Amazon S3 using the AWS Management Console, the AWS CLI, or the API, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the *Amazon Simple Storage Service User Guide*\. 
+
+For more information about Amazon S3 metadata and details about system\-provided metadata, see [Editing object metadata in the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service User Guide*\.
 
 Import the gzip file into your RDS for PostgreSQL DB instance as shown following\.
 

@@ -47,6 +47,12 @@ If you restore a DB instance into a different VPC, you must do one of the follow
 
 For more information about DB option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
 
+## Resource tagging considerations<a name="restore-from-snapshot.tagging"></a>
+
+When you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot, and then adds those tags to the restored DB instance\.
+
+For more information, see [Copying tags to DB instance snapshots](USER_Tagging.md#USER_Tagging.CopyTags)\.
+
 ## Microsoft SQL Server considerations<a name="USER_RestoreFromSnapshot.MSSQL"></a>
 
 When you restore an RDS for Microsoft SQL Server DB snapshot to a new instance, you can always restore to the same edition as your snapshot\. In some cases, you can also change the edition of the DB instance\. The following limitations apply when you change editions:

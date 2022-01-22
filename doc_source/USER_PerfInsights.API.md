@@ -613,7 +613,7 @@ In this response, all values are filtered according to the contribution of token
 
 ### Retrieving the full text of a SQL statement<a name="USER_PerfInsights.API.Examples.GetDimensionKeyDetails"></a>
 
-The following example retrieves the full text of a SQL statement for DB instance `db-10BCD2EFGHIJ3KL4M5NO6PQRS5`\. The `--dimension-group` is `db.sql`, and the `--dimension-group-identifier` is `db.sql.id`\. In this example, *my\-sql\-id* represents a SQL ID retrieved by invoking `pi get-resource-metrics` or `pi describe-dimension-keys`\.
+The following example retrieves the full text of a SQL statement for DB instance `db-10BCD2EFGHIJ3KL4M5NO6PQRS5`\. The `--group` is `db.sql`, and the `--group-identifier` is `db.sql.id`\. In this example, *my\-sql\-id* represents a SQL ID retrieved by invoking `pi get-resource-metrics` or `pi describe-dimension-keys`\.
 
 Run the following command\.
 

@@ -8,7 +8,7 @@ Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS serv
 
 ## Creating rules to send Amazon RDS events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
 
-You can write simple rules to indicate which Amazon RDSAmazon Aurora events interest you and which automated actions to take when an event matches a rule\. You can set a variety of targets, such as an AWS Lambda function or an Amazon SNS topic, which receive events in JSON format\. For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
+You can write simple rules to indicate which Amazon RDS events interest you and which automated actions to take when an event matches a rule\. You can set a variety of targets, such as an AWS Lambda function or an Amazon SNS topic, which receive events in JSON format\. For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
 
 Use the following steps to create a CloudWatch Events rule that triggers on an event emitted by an AWS service\.
 

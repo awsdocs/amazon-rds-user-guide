@@ -154,7 +154,7 @@ The following table provides a list of the allowed XML tags and their characteri
 
 ## Copying tags to DB instance snapshots<a name="USER_Tagging.CopyTags"></a>
 
-When you create or restore a DB instance, you can specify that the tags from the DB instance are copied to snapshots of the DB instance\. Copying tags ensures that the metadata for the DB snapshots matches that of the source DB instance and any access policies for the DB snapshot also match those of the source DB instance\. Tags are not copied by default\. 
+When you create or restore a DB instance, you can specify that the tags from the DB instance are copied to snapshots of the DB instance\. Copying tags ensures that the metadata for the DB snapshots matches that of the source DB instance, and that any access policies for the DB snapshots also match those of the source DB instance\.
 
 You can specify that tags are copied to DB snapshots for the following actions: 
 + Creating a DB instance\.
@@ -162,8 +162,12 @@ You can specify that tags are copied to DB snapshots for the following actions:
 + Creating a read replica\.
 + Copying a DB snapshot\.
 
+In most cases, tags aren't copied by default\. However, when you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot, and then adds those tags to the restored DB instance\.
+
+To prevent tags from source DB instances from being added to restored DB instances, we recommend that you specify new tags when restoring a DB instance\.
+
 **Note**  
-If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API operation\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. Once you have created your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API operation\) you can then add tags as described later in this topic\.
+If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API operation\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. After you create your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API operation\), you can then add tags as described later in this topic\.
 
 ## Tutorial: Use tags to specify which DB instances to stop<a name="Tagging.RDS.Autostop"></a>
 

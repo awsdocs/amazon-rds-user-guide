@@ -49,10 +49,10 @@ Exporting DB snapshot data to Amazon S3 has the following limitations:
   + Digits \(0–9\)
   + Dollar symbol \($\)
   + Underscore \(\_\)
-+ Some characters aren't supported in database table column names\. Tables with the following characters in column names are skipped during export:
++ Spaces \( \) and certain characters aren't supported in database table column names\. Tables with the following characters in column names are skipped during export:
 
   ```
-  , ; { } ( ) \n \t =
+  , ; { } ( ) \n \t = (space)
   ```
 + If the data contains a large object such as a BLOB or CLOB, close to or greater than 500 MB, the export fails\.
 + If a table contains a large row close to or greater than 2 GB, the table is skipped during export\.
