@@ -391,6 +391,9 @@ A PostgreSQL engine upgrade doesn't upgrade most PostgreSQL extensions\. To upda
 **Note**  
 If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you update the extension\. 
 
+**Note**  
+If you are running the `pg_repack` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [pg_repack install instructions](https://reorg.github.io/pg_repack/) in the documentation to update the extension\. 
+
 To upgrade an extension, use the following command\. 
 
 ```
