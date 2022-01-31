@@ -2,7 +2,7 @@
 
 If you have existing manual DB snapshots, you can upgrade them to a later version of the Oracle database engine\. 
 
-When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle engine version management](USER_UpgradeDBInstance.Oracle.md#Oracle.Concepts.Patching)\.
+When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle engine version management](USER_UpgradeDBInstance.Oracle.Overview.md#Oracle.Concepts.Patching)\.
 
 The following snapshot upgrades are currently supported\. You can't upgrade a snapshot and downgrade the minor version\. For example, you can't upgrade a snapshot from the 11\.2\.0\.4 October 2020 PSU to the 19\.0 July 2020 PSU\.
 

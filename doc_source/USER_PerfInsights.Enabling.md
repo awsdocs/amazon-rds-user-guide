@@ -21,7 +21,7 @@ To create a DB instance, follow the instructions for your DB engine in [Creating
 
 The following screenshot shows the **Performance Insights** section\.
 
-![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_enabling.png)
+![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_enabling.png)
 
 If you choose **Enable Performance Insights**, you have the following options:
 + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.

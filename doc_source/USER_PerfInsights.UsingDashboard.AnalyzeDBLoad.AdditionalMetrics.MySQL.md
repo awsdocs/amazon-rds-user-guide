@@ -83,10 +83,10 @@ The statistics are available in the **Top SQL** tab of the **Database load** cha
 1. Go to the Performance Insights dashboard\.
 
 1. Choose the **SQL** tab and expand a query\.  
-![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_digest.png)
+![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_digest.png)
 
 Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
 
 The following screenshot shows the preferences for MariaDB and MySQL DB instances\.
 
-![\[Preferences for metrics for running queries for MariaDB and MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_ams.png)
+![\[Preferences for metrics for running queries for MariaDB and MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_pref_ams.png)

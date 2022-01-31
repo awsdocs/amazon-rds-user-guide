@@ -53,17 +53,17 @@ The following table shows the difference in settings when Performance Insights i
 1. Enter **performance\_schema** in the search bar\.
 
 1. Select the `performance_schema` parameter\.  
-![\[Select performance_schema\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_schema.png)
+![\[Select performance_schema\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_schema.png)
 
 1. Check whether **Source** is **system** and **Values** is **0**\. If so, Performance Insights is managing the Performance Schema automatically\. If not, proceed to the next step\.  
-![\[Shows the settings for the performance_schema parameter\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_schema_user.png)
+![\[Shows the settings for the performance_schema parameter\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_schema_user.png)
 
 1. Choose **Edit parameters**\.
 
 1. In **Values**, choose **0**\.
 
 1. Select **Reset**\. When you reset, Amazon RDS sets **Source** to **system** and **Values** to **0**\.  
-![\[Shows the settings for the performance_schema parameter\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/reset.png)
+![\[Shows the settings for the performance_schema parameter\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/reset.png)
 
    The **Reset parameters in DB parameter group** page appears\.
 

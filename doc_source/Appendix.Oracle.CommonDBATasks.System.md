@@ -424,7 +424,7 @@ ALTER PROFILE DEFAULT LIMIT PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 
 ## Setting up a custom DNS server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS"></a>
 
-Amazon RDS supports outbound network access on your DB instances running Oracle\.  For more information about outbound network access, including prerequisites, see [Configuring outbound network access on your Oracle DB instance](Oracle.Concepts.ONA.md)\. 
+Amazon RDS supports outbound network access on your DB instances running Oracle\.  For more information about outbound network access, including prerequisites, see [Configuring UTL\_HTTP access using certificates and an Oracle wallet](Oracle.Concepts.ONA.md)\. 
 
 Amazon RDS Oracle allows Domain Name Service \(DNS\) resolution from a custom DNS server owned by the customer\. You can resolve only fully qualified domain names from your Amazon RDS DB instance through your custom DNS server\. 
 

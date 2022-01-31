@@ -69,7 +69,7 @@ To use Performance Insights, make sure that you have access to Amazon RDS in add
 1. On the **Summary** page, choose **Add permissions**\.
 
 1. Choose **Attach existing policies directly**\. For **Search**, type the first few characters of your policy name, as shown following\.  
-![\[Choose a Policy\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_attach_iam_policy.png)
+![\[Choose a Policy\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_attach_iam_policy.png)
 
 1. Choose your policy, and then choose **Next: Review**\.
 

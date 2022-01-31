@@ -62,7 +62,7 @@ After you add the NNE option, you don't need to restart your DB instances\. As s
 
 ## Setting NNE values in the sqlnet\.ora<a name="Oracle.Options.NNE.Using"></a>
 
- With Oracle native network encryption, you can set network encryption on the server side and client side\. The client is the computer used to connect to the DB instance\. You can specify the following client settings in the slqnet\.ora: 
+ With Oracle native network encryption, you can set network encryption on the server side and client side\. The client is the computer used to connect to the DB instance\. You can specify the following client settings in the sqlnet\.ora: 
 + `SQLNET.CRYPTO_CHECKSUM_CLIENT`
 + `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT`
 + `SQLNET.ENCRYPTION_CLIENT`

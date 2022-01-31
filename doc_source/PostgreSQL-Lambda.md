@@ -3,7 +3,8 @@
 AWS Lambda is an event\-driven compute service that lets you run code without provisioning or managing servers\. It's available for use with many AWS services, including RDS for PostgreSQL\. For example, you can use Lambda functions to process event notifications from a database, or to load data from files whenever a new file is uploaded to Amazon S3\. To learn more about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the *AWS Lambda Developer Guide\.* 
 
 **Note**  
-Invoking AWS Lambda functions is supported in the following RDS for PostgreSQL versions:  
+Invoking an AWS Lambda function is supported in these RDS for PostgreSQL versions:  
+14\.1 and higher minor versions
 13\.2 and higher minor versions
 12\.6 and higher minor versions
 

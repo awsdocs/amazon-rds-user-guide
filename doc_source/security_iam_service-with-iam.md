@@ -106,7 +106,7 @@ Amazon RDS does not support resource\-based policies\.
 
 ## Authorization based on Amazon RDS tags<a name="security_iam_service-with-iam-tags"></a>
 
-You can attach tags to Amazon RDS resources or pass tags in a request to Amazon RDS\. To control access based on tags, you provide tag information in the [condition element](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) of a policy using the `aws:ResourceTag/key-name`, `aws:RequestTag/key-name`, or `aws:TagKeys` condition keys\. For more information about tagging Amazon RDS resources, see [Specifying conditions: Using custom tags](security_iam_id-based-policy-examples.md#UsingWithRDS.IAM.SpecifyingCustomTags)\.
+You can attach tags to Amazon RDS resources or pass tags in a request to Amazon RDS\. To control access based on tags, you provide tag information in the [condition element](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) of a policy using the `aws:ResourceTag/key-name`, `aws:RequestTag/key-name`, or `aws:TagKeys` condition keys\. For more information, see [Controlling access to AWS resources using tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in the *IAM User Guide*\. For more information about tagging Amazon RDS resources, see [Specifying conditions: Using custom tags](security_iam_id-based-policy-examples.md#UsingWithRDS.IAM.SpecifyingCustomTags)\.
 
 To view an example identity\-based policy for limiting access to a resource based on the tags on that resource, see [Grant permission for actions on a resource with a specific tag with two different values](security_iam_id-based-policy-examples.md#security_iam_id-based-policy-examples-grant-permissions-tags)\.
 

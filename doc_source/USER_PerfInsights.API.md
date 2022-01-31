@@ -46,7 +46,7 @@ The `GetResourceMetrics` operation retrieves one or more time\-series metrics fr
 
 For example, the AWS Management Console uses `GetResourceMetrics` to populate the **Counter Metrics** chart and the **Database Load** chart, as seen in the following image\.
 
-![\[Counter Metrics and Database Load charts\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-charts.png)
+![\[Counter Metrics and Database Load charts\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-api-charts.png)
 
 All metrics returned by `GetResourceMetrics` are standard time\-series metrics, with the exception of `db.load`\. This metric is displayed in the **Database Load** chart\. The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called *dimensions*\. In the previous image, `db.load` is broken down and grouped by the waits states that make up the `db.load`\.
 
@@ -100,7 +100,7 @@ The following examples show how to use the AWS CLI for Performance Insights\.
 
 The following screenshot shows two counter metrics charts in the AWS Management Console\.
 
-![\[Counter Metrics charts.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-counters-charts.png)
+![\[Counter Metrics charts.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-api-counters-charts.png)
 
 The following example shows how to gather the same data that the AWS Management Console uses to generate the two counter metric charts\.
 
@@ -340,7 +340,7 @@ The following example groups `db.wait_events` by the top 10 SQL statements\. The
 + `db.sql` – The full SQL statement, such as `select * from customers where customer_id = 123`
 + `db.sql_tokenized` – The tokenized SQL statement, such as `select * from customers where customer_id = ?`
 
-When analyzing database performance, it can be useful to consider SQL statements that only differ by their parameters as one logic item\. So, you can use `db.sql_tokenized` when querying\. However, especially when you are interested in explain plans, sometimes it's more useful to examine full SQL statements with parameters, and query grouping by `db.sql`\. There is a parent\-child relationship between tokenized and full SQL, with multiple full SQL \(children\) grouped under the same tokenized SQL \(parent\)\.
+When analyzing database performance, it can be useful to consider SQL statements that only differ by their parameters as one logic item\. So, you can use `db.sql_tokenized` when querying\. However, especially when you're interested in explain plans, sometimes it's more useful to examine full SQL statements with parameters, and query grouping by `db.sql`\. There is a parent\-child relationship between tokenized and full SQL, with multiple full SQL \(children\) grouped under the same tokenized SQL \(parent\)\.
 
 The command in this example is the similar to the command in [Retrieving the DB load average for top wait events](#USER_PerfInsights.API.Examples.DBLoadAverage)\. However, the query\.json file has the following contents\.
 
@@ -447,7 +447,7 @@ When querying, it might be convenient to specify a `Group` in `GroupBy`\. Howeve
 
 ### Retrieving the DB load average filtered by SQL<a name="USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL"></a>
 
-![\[Filter by SQL chart.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-filter-chart.png)
+![\[Filter by SQL chart.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-api-filter-chart.png)
 
 The preceding image shows that a particular query is selected, and the top average active sessions stacked area line graph is scoped to that query\. Although the query is still for the top seven overall wait events, the value of the response is filtered\. The filter causes it to take into account only sessions that are a match for the particular filter\.
 

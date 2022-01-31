@@ -515,7 +515,7 @@ The following example downloads all of the files in the Amazon S3 bucket named `
 
 ```
 SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
-      p_bucket_name    =>  'mys3bucket',       
+      p_bucket_name    =>  'mys3bucket',
       p_directory_name =>  'DATA_PUMP_DIR') 
    AS TASK_ID FROM DUAL;
 ```
@@ -540,12 +540,22 @@ SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
    AS TASK_ID FROM DUAL;
 ```
 
+The following example downloads the file `mydumpfile.dmp` in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\.
+
+```
+SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
+      p_bucket_name    =>  'mys3bucket', 
+      p_s3_prefix      =>  'mydumpfile.dmp', 
+      p_directory_name =>  'DATA_PUMP_DIR') 
+   AS TASK_ID FROM DUAL;
+```
+
 In each example, the `SELECT` statement returns the ID of the task in a `VARCHAR2` data type\.
 
 You can view the result by displaying the task's output file\.
 
 ```
-SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));                
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));
 ```
 
 Replace *`task-id`* with the task ID returned by the procedure\.

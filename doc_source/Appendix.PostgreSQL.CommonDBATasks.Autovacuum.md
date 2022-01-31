@@ -1,8 +1,10 @@
 # Working with PostgreSQL autovacuum on Amazon RDS<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum"></a>
 
-We strongly recommend that you use the autovacuum feature for PostgreSQL databases to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the start of the VACUUM and the ANALYZE commands\. Autovacuum checks for tables that have had a large number of inserted, updated, or deleted tuples\. Autovacuum then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
+We strongly recommend that you use the autovacuum feature to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the start of the VACUUM and the ANALYZE commands\. It checks for tables with a large number of inserted, updated, or deleted tuples, and it then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
 
-Autovacuum is enabled by default for all new Amazon RDS for PostgreSQL DB instances, and the related autovacuum configuration parameters are appropriately set by default\. Because our defaults are somewhat generic, you can benefit from tuning parameters to your specific workload\. The following section can help you perform the needed autovacuum tuning\.
+By default, autovacuum is enabled on the Amazon RDS for PostgreSQL DB instances that you create using any of the default PostgreSQL DB parameter groups, such as `default.postgres10`, `default.postgres11`, and so on\. All default PostgreSQL DB parameter groups have an `rds.adaptive_autovacuum` parameter that's set to `1`, thus activating the feature\. Other configuration parameters associated with the autovacuum feature are also set by default\. Because these defaults are somewhat generic, you can benefit from tuning some of the parameters associated with the autovacuum feature for your specific workload\.
+
+Following, you can find more information about the autovacuum feature and how to tune the parameters associated with the autovacuum for your RDS for PostgreSQL DB instance\.
 
 **Topics**
 + [Allocating memory for autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)

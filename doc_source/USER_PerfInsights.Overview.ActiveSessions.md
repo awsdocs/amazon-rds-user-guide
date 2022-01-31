@@ -16,7 +16,7 @@ A session is active when it's either running on CPU or waiting for a resource to
 
 ## Average active sessions<a name="USER_PerfInsights.Overview.ActiveSessions.AAS"></a>
 
-The *average active sessions \(AAS\)* is the unit for the `DBLoad` metric in Performance Insights\. To get the average active sessions, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples for a specific time period\. The following table shows 5 consecutive samples of a running query\. 
+The *average active sessions \(AAS\)* is the unit for the `DBLoad` metric in Performance Insights\. To get the average active sessions, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples for a specific time period\. The following table shows 5 consecutive samples of a running query\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.ActiveSessions.html)
 
@@ -34,7 +34,16 @@ In most cases, the AAS and AAE for a query are approximately the same\. However,
 
 ## Dimensions<a name="USER_PerfInsights.Overview.ActiveSessions.dimensions"></a>
 
-The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. You can think of dimensions as categories or "group by" clauses for the different characteristics of the `DBLoad` metric\. When you are diagnosing performance issues, the most useful dimensions are wait events and top SQL\.
+The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. You can think of dimensions as "slice by" categories for the different characteristics of the `DBLoad` metric\.
+
+When you are diagnosing performance issues, the following dimensions are often the most useful:
+
+**Topics**
++ [Wait events](#USER_PerfInsights.Overview.ActiveSessions.waits)
++ [Top SQL](#USER_PerfInsights.Overview.ActiveSessions.top-sql)
++ [Plans](#USER_PerfInsights.Overview.ActiveSessions.plans)
+
+For a complete list of dimensions for the Amazon RDS engines, see [DB load sliced by dimensions](USER_PerfInsights.UsingDashboard.Components.md#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.dims)\.
 
 ### Wait events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
 
@@ -58,6 +67,29 @@ For example, when the archiver is performing I/O, the Performance Insights repor
 
 ### Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>
 
-Where wait events show bottlenecks, top SQL shows which queries are contributing the most to DB load\. For example, many queries might be currently running on the database, but a single query might consume 99 percent of the DB load\. In this case, the high load might indicate a problem with the query\. 
+Where wait events show bottlenecks, top SQL shows which queries are contributing the most to DB load\. For example, many queries might be currently running on the database, but a single query might consume 99 percent of the DB load\. In this case, the high load might indicate a problem with the query\.
 
 By default, the Performance Insights console displays top SQL queries that are contributing to the database load\. The console also shows relevant statistics for each statement\. To diagnose performance problems for a specific statement, you can examine its execution plan\.
+
+### Plans<a name="USER_PerfInsights.Overview.ActiveSessions.plans"></a>
+
+An *execution plan*, also called simply a *plan*, is a sequence of steps that access data\. For example, a plan for joining tables `t1` and `t2` might loop through all rows in `t1` and compare each row to a row in `t2`\. In a relational database, an *optimizer* is built\-in code that determines the most efficient plan for a SQL query\.
+
+For Oracle DB instances, Performance Insights collects execution plans automatically\. To diagnose SQL performance problems, examine the captured plans for high\-resource Oracle SQL queries\. The plans show how Oracle Database has parsed and run queries\.
+
+To learn how to analyze DB load using plans, see [Analyzing Oracle execution plans using the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.AccessPlans.md)\.
+
+#### Plan capture<a name="USER_PerfInsights.Overview.ActiveSessions.plans.capture"></a>
+
+Every five minutes, Performance Insights identifies the most resource\-intensive Oracle queries and captures their plans\. Thus, you don't need to manually collect and manage a huge number of plans\. Instead, you can use the **Top SQL** tab to focus on the plans for the most problematic queries\. 
+
+**Note**  
+Performance Insights doesn't capture plans for queries whose text exceeds the maximum collectable query text limit\. For more information, see [Viewing more SQL text in the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.SQLTextSize.md)\.
+
+The retention period for execution plans is the same as for all your Performance Insights data\. The default is seven days in the free tier or two years for the long retention tier\.
+
+#### Digest queries<a name="USER_PerfInsights.Overview.ActiveSessions.plans.digest"></a>
+
+The **Top SQL** tab shows digest queries by default\. A digest query doesn't itself have a plan, but all queries that use literal values have plans\. For example, a digest query might include the text `WHERE `email`=?`\. The digest might contain two queries, one with the text `WHERE email=user1@example.com` and another with `WHERE email=user2@example.com`\. Each of these literal queries might include multiple plans\.
+
+If you select a digest query, the console shows all plans for child statements of the selected digest\. Thus, you don't need to look through all the child statements to find the plan\. You might see plans that aren’t in the displayed list of top 10 child statements\. The console shows plans for all child queries for which plans have been collected, regardless of whether the queries are in the top 10\.

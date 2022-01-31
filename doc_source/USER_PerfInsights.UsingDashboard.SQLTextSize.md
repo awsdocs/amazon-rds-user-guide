@@ -18,10 +18,10 @@ Amazon RDS for PostgreSQL handles text differently\. Using the Performance Insig
 1. Choose a DB instance\. The Performance Insights dashboard is displayed for that DB instance\.
 
    SQL statements with text larger than 500 bytes look similar to the following image\.  
-![\[SQL statements with large text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-large-text-1.png)
+![\[SQL statements with large text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-large-text-1.png)
 
 1. Examine the SQL information section to view more of the SQL text\.  
-![\[SQL information section shows more of the SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-large-text-2.png)
+![\[SQL information section shows more of the SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-large-text-2.png)
 
    The Performance Insights dashboard can display up to 4,096 bytes for each SQL statement\.
 

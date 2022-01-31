@@ -74,4 +74,4 @@ A Local Zone can't be included in a Multi\-AZ deployment\.
    For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 **Important**  
-Currently, Local Zones are only available in the US West \(Oregon\) Region\. In this AWS Region, the Los Angeles AWS Local Zone is available\.
+Currently, the only AWS Local Zone where Amazon RDS is available is Los Angeles in the US West \(Oregon\) Region\.

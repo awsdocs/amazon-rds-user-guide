@@ -2,7 +2,7 @@
 
 Amazon RDS for Oracle collects SQL statistics both at the statement and digest level\. At the statement level, the ID column represents the value of `V$SQL.SQL_ID`\. At the digest level, the ID column shows the value of `V$SQL.FORCE_MATCHING_SIGNATURE`\. 
 
-If the ID is `0` at the digest level, Oracle Database has determined that this statement is not suitable for reuse\. In this case, the child SQL statements could belong to different digests\. However, the statements are grouped together under the `digest_text` for the first SQL collected\.
+If the ID is `0` at the digest level, Oracle Database has determined that this statement is not suitable for reuse\. In this case, the child SQL statements could belong to different digests\. However, the statements are grouped together under the `digest_text` for the first SQL statement collected\.
 
 **Topics**
 + [Per\-second statistics for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-second)
@@ -80,12 +80,12 @@ The statistics are available in the **Top SQL** tab of the **Database load** cha
 1. Choose the **Top SQL** tab\.
 
 1. Choose a digest query or individual statement\.  
-![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_sql.png)
+![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_sql.png)
 
 1. Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
 
    The following screenshot shows the preferences for Oracle DB instances\.  
-![\[Preferences for metrics for running queries for Oracle DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_oracle.png)
+![\[Preferences for metrics for running queries for Oracle DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_pref_oracle.png)
 
    The following screenshot shows the statistics for a SQL statement\.  
-![\[Statistics for a SQL statement\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_stats_oracle.png)
+![\[Statistics for a SQL statement\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_stats_oracle.png)

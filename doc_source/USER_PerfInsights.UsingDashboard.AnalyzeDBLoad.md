@@ -1,4 +1,4 @@
-# Analyzing DB load using the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad"></a>
+# Analyzing DB load by wait events<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad"></a>
 
 If the **Database load** chart shows a bottleneck, you can find out where the load is coming from\. To do so, look at the top load items table below the **Database load** chart\. Choose a particular item, like a SQL query or a user, to drill down into that item and see details about it\.
 
@@ -16,4 +16,4 @@ Your typical workflow for diagnosing performance issues is as follows:
 
 For example, in the dashboard following, **log file sync** waits account for most of the DB load\. The **LGWR all worker groups** wait is also high\. The **Top SQL** chart shows what is causing the **log file sync** waits: frequent `COMMIT` statements\. In this case, committing less frequently will reduce DB load\.
 
-![\[log file sync errors\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_7.png)
+![\[log file sync errors\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_7.png)
