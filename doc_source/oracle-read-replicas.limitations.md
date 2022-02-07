@@ -4,7 +4,7 @@ Before creating an Oracle replica, check the following requirements\.
 
 **Topics**
 + [Version and licensing requirements for Oracle replicas](#oracle-read-replicas.limitations.versions-and-licenses)
-+ [Option requirements and restrictions for Oracle replicas](#oracle-read-replicas.limitations.options)
++ [Option requirements and limitations for Oracle replicas](#oracle-read-replicas.limitations.options)
 + [Miscellaneous requirements and restrictions for Oracle replicas](#oracle-read-replicas.limitations.miscellaneous)
 
 ## Version and licensing requirements for Oracle replicas<a name="oracle-read-replicas.limitations.versions-and-licenses"></a>
@@ -22,7 +22,7 @@ Before creating an Oracle replica, check the following version and licensing req
 
   For more information about upgrading the DB engine version, see [Upgrading the Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)\.
 
-## Option requirements and restrictions for Oracle replicas<a name="oracle-read-replicas.limitations.options"></a>
+## Option requirements and limitations for Oracle replicas<a name="oracle-read-replicas.limitations.options"></a>
 
 Before creating a replica for Oracle, check the requirements and restrictions for option groups:
 + If your Oracle replica is in the same AWS Region as its source DB instance, make sure that it belongs to the same option group as the source DB instance\. Modifications to the source option group or source option group membership propagate to replicas\. These changes are applied to the replicas immediately after they are applied to the source DB instance, regardless of the replica's maintenance window\.

@@ -45,7 +45,7 @@ The following example creates a subscription for backup and recovery events for 
 
 ## Troubleshooting custom engine version creation for RDS Custom for Oracle<a name="custom-troubleshooting.cev"></a>
 
-When CEV creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version 19.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
+When CEV creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version major-engine-version.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
 
 CEV creation might fail because of the following issues:
 + The Amazon S3 bucket containing your installation files isn't in the same AWS Region as your CEV\.

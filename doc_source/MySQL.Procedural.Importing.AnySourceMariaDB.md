@@ -1,4 +1,4 @@
-# Importing data from any source to a MariaDB or MySQL DB instance<a name="MySQL.Procedural.Importing.AnySource"></a>
+# Importing data from any source to a MariaDB or MySQL DB instance<a name="MySQL.Procedural.Importing.AnySourceMariaDB"></a>
 
 If you have more than 1 GiB of data to load, or if your data is coming from somewhere other than a MariaDB or MySQL database, we recommend creating flat files and loading them with mysqlimport\. The mysqlimport utility is another command line utility bundled with the MySQL and MariaDB client software\. Its purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- a data import program](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html) in the MySQL documentation\.
 

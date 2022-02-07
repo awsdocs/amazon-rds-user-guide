@@ -224,7 +224,7 @@ GRANT rds_ad TO "username@CORP.EXAMPLE.COM";
 
  Replace `username ` with the user name and include the domain name in uppercase\. Users \(both humans and applications\) from your domain can now connect to the RDS PostgreSQL instance from a domain\-joined client machine using Kerberos authentication\. 
 
-Note that a database user can use either Kerberos or IAM authentication but not both, so this user can't also have the `rds_iam` role\. This also applies to nested memberships\. For more information, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
+Note that a database user can use either Kerberos or IAM authentication but not both, so this user can't also have the `rds_iam` role\. This also applies to nested memberships\. For more information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
 ## Step 8: Configure a PostgreSQL client<a name="postgresql-kerberos-setting-up.configure-client"></a>
 

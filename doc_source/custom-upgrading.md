@@ -2,6 +2,8 @@
 
 You can upgrade an Amazon RDS Custom DB instance by modifying it to use a new custom engine version \(CEV\)\. To do this, make sure that the new CEV already exists\.
 
+Only minor version upgrades are supported\. For example, you can't upgrade from a version 12\.1 CEV to a version 19c CEV\.
+
 Read replicas are upgraded after the primary DB instance is upgraded\. You don't have to upgrade read replicas manually\.
 
 When you upgrade a CEV, data in the `bin` volume of your DB instance is deleted\.

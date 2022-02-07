@@ -70,13 +70,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
 | db\.m6g – standard instance classes powered by AWS Graviton2 processors | 
-| db\.m6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.8xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.4xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.m5d – newest generation standard instance classes | 
 | db\.m5d\.24xlarge | No | Yes | No | No | No | 
 | db\.m5d\.16xlarge | No | Yes | No | No | No | 
@@ -108,13 +108,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m3\.large | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.x2g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.x2g\.16xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.12xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.8xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.4xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.2xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.large | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.16xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.12xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.8xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.4xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.2xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.large | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
 | db\.z1d – memory\-optimized instance classes | 
 | db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
@@ -133,13 +133,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
 | db\.r6g – memory optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.8xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.4xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.r5d – newest generation memory optimized instance classes | 
 | db\.r5d\.24xlarge | No | Yes | No | No | No | 
 | db\.r5d\.16xlarge | No | Yes | No |  No  | No | 
@@ -198,12 +198,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.t4g – newest generation burstable performance instance classes | 
-| db\.t4g\.2xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.large | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.medium | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.small | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.micro | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.2xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.xlarge | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.large | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.medium | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.small | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.micro | All MariaDB 10\.6 versions, MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
 | db\.t3 – latest generation burstable performance instance classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
@@ -482,6 +482,7 @@ You can configure the number of CPU cores and threads per core for the DB instan
 + [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)
 + [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)
 + [Restoring a DB instance to a specified time](USER_PIT.md)
++ [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)
 
 **Note**  
 When you modify a DB instance to configure the number of CPU cores or threads per core, there is a brief DB instance outage\.

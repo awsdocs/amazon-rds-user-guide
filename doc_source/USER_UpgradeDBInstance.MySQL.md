@@ -218,6 +218,10 @@ If you specify the following settings when creating or modifying a DB instance, 
 + The **Auto minor version upgrade** setting is enabled\.
 + The **Backup retention period** setting is greater than 0\.
 
+In the AWS Management Console, these settings are under **Additional configuration**\. The following image shows the **Auto minor version upgrade** setting\.
+
+![\[Auto minor version upgrade setting\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/amvu.png)
+
 For more information about these settings, see [Settings for DB instances](Overview.DBInstance.Modifying.md#USER_ModifyInstance.Settings)\.
 
 For some RDS for MySQL major versions in some AWS Regions, one minor version is designated by RDS as the automatic upgrade version\. After a minor version has been tested and approved by Amazon RDS, the minor version upgrade occurs automatically during your maintenance window\. RDS doesn't automatically set newer released minor versions as the automatic upgrade version\. Before RDS designates a newer automatic upgrade version, several criteria are considered, such as the following:

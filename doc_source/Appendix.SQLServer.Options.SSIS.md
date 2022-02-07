@@ -41,7 +41,7 @@ If you enable the `clr enabled` parameter on SQL Server 2017 or 2019, you can't 
   + Update Statistics Task
 + Only project deployment is supported\.
 + Running SSIS packages by using SQL Server Agent is supported\.
-+ Only SQL Server–based logging is supported\.
++ SSIS log records can be inserted only into user\-created databases\.
 + Use only the `D:\S3` folder for working with files\. Files placed in any other directory are deleted\. Be aware of a few other file location details:
   + Place SSIS project input and output files in the `D:\S3` folder\.
   + For the Data Flow Task, change the location for `BLOBTempStoragePath` and `BufferTempStoragePath` to a file inside the `D:\S3` folder\. The file path must start with `D:\S3\`\.

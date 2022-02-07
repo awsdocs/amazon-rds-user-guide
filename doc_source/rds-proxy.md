@@ -84,6 +84,6 @@ RDS Proxy is available in the following AWS Regions:
 
  The following RDS Proxy limitations apply to PostgreSQL:
 +  Currently, all proxies listen on port 5432 for PostgreSQL\.
-+  Query cancellation isn't supported for PostgreSQL\.
++ For PostgreSQL, RDS Proxy doesn't currently support canceling a query from a client by issuing a `CancelRequest`\. This is the case for example, when you cancel a long\-running query in an interactive psql session by using Ctrl\+C\. 
 +  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.
 + RDS Proxy doesn't multiplex connections when your client application drivers use the PostgreSQL extended query protocol\.

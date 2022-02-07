@@ -15,7 +15,7 @@ Before creating an RDS Custom for SQL Server DB instance, make sure that you hav
 
 For each task, RDS Custom topics describe the requirements and limitations specific to that task\. For example, when you create your RDS Custom DB instance, use one of the SQL Server instances listed in [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 
-For general requirements that apply to RDS Custom for SQL Server, see [RDS Custom for SQL Server general requirements](custom-reqs-limits.md#custom-reqs-limits.reqsMS)\.
+For general requirements that apply to RDS Custom for SQL Server, see [General requirements for RDS Custom for SQL Server](custom-reqs-limits.md#custom-reqs-limits.reqsMS)\.
 
 ## Make sure that you have a symmetric AWS KMS key<a name="custom-setup-sqlserver.cmk"></a>
 

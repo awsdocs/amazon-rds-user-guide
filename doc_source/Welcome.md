@@ -3,8 +3,7 @@
 Amazon Relational Database Service \(Amazon RDS\) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud\. It provides cost\-efficient, resizable capacity for an industry\-standard relational database and manages common database administration tasks\.
 
 **Note**  
-This guide covers Amazon RDS database engines other than Amazon Aurora\. For information about using Amazon Aurora, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.  
-This guide covers using Amazon RDS in the AWS Cloud\. For information about using Amazon RDS in on\-premises VMware environments, see the [https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html](https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)\.
+This guide covers Amazon RDS database engines other than Amazon Aurora\. For information about using Amazon Aurora, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
 
 If you are new to AWS products and services, begin learning more with the following resources:
 + For an overview of all AWS products, see [What is cloud computing?](http://aws.amazon.com/what-is-aws/)
@@ -82,28 +81,9 @@ You can use the control capabilities of RDS Custom to access and customize the d
 
 In this deployment model, you can install applications and change configuration settings to suit your applications\. At the same time, you can offload database administration tasks such as provisioning, scaling, upgrading, and backup to AWS\. You can take advantage of the database management benefits of Amazon RDS, with more control and flexibility\.
 
-For Oracle Database and Microsoft SQL Server, RDS Custom combines the automation of Amazon RDS with the flexibility of Amazon EC2\. 
+For Oracle Database and Microsoft SQL Server, RDS Custom combines the automation of Amazon RDS with the flexibility of Amazon EC2\. For more information on RDS Custom, see [Working with Amazon RDS Custom](rds-custom.md)\.
 
-The following table shows the shared responsibility model for RDS Custom\. 
-
-
-|  Feature  |  Amazon RDS management  |  RDS Custom management  | 
-| --- | --- | --- | 
-|  Application optimization  |  Customer  |  Customer  | 
-|  Scaling  |  AWS  |  Shared  | 
-|  High availability  |  AWS  |  Shared  | 
-|  Database backups  |  AWS  |  Shared  | 
-|  Database software patching  |  AWS  |  Shared  | 
-|  Database software install  |  AWS  |  Shared  | 
-|  OS patching  |  AWS  |  Customer  | 
-|  OS installation  |  AWS  |  Shared  | 
-|  Server maintenance  |  AWS  |  AWS  | 
-|  Hardware lifecycle  |  AWS  |  AWS  | 
-|  Power, network, and cooling  |  AWS  | AWS | 
-
-With the shared responsibility model of RDS Custom, you get more control than in Amazon RDS, but also more responsibility\. To meet your application and business requirements, you manage everything at or above the OS layer yourself\.
-
-For more information on RDS Custom, see [Working with Amazon RDS Custom](rds-custom.md)\.
+With the shared responsibility model of RDS Custom, you get more control than in Amazon RDS, but also more responsibility\. For more information, see [Shared responsibility model](rds-custom.md#custom-intro.solution.shared)\.
 
 ## DB instances<a name="Welcome.Concepts.DBInstance"></a>
 

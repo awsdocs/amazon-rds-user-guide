@@ -53,7 +53,7 @@ The following are some use cases for replication filters:
 + For a DB instance that has read replicas in different AWS Regions, to replicate different databases or tables in different AWS Regions\.
 
 **Note**  
-You can also use replication filters to specify which databases and tables are replicated with a primary MySQL DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
+You can also use replication filters to specify which databases and tables are replicated with a primary MySQL DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
 
 **Topics**
 + [Replication filtering parameters for RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring)
@@ -277,6 +277,7 @@ On RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\
 + [Configuring delayed replication during read replica creation](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation)
 + [Modifying delayed replication for an existing read replica](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ExistingReplica)
 + [Setting a location to stop replication to a read replica](#USER_MySQL.Replication.ReadReplicas.DelayReplication.StartUntil)
++ [Promoting a read replica](#USER_MySQL.Replication.ReadReplicas.DelayReplication.Promote)
 
 ### Configuring delayed replication during read replica creation<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation"></a>
 
@@ -336,7 +337,9 @@ After stopping replication to the read replica, you can start replication and th
 
 Replication stops automatically when the stop point is reached\. The following RDS event is generated: `Replication has been stopped since the replica reached the stop point specified by the rds_start_replication_until stored procedure`\.
 
-After replication is stopped, in a disaster recovery scenario, you can [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote) promote the read replica to be the new source DB instance\. For information about promoting the read replica, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+### Promoting a read replica<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication.Promote"></a>
+
+After replication is stopped, in a disaster recovery scenario, you can promote a read replica to be the new source DB instance\. For information about promoting a read replica, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 ## Read replica updates with MySQL<a name="USER_MySQL.Replication.ReadReplicas.Updates"></a>
 
@@ -367,7 +370,7 @@ When the `ReplicaLag` metric reaches 0, the replica has caught up to the source 
 
 ## Starting and stopping replication with MySQL read replicas<a name="USER_MySQL.Replication.ReadReplicas.StartStop"></a>
 
-You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
+You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
 
 If replication is stopped for more than 30 consecutive days, either manually or due to a replication error, Amazon RDS terminates replication between the source DB instance and all read replicas\. It does so to prevent increased storage requirements on the source DB instance and long failover times\. The read replica DB instance is still available\. However, replication can't be resumed because the binary logs required by the read replica are deleted from the source DB instance after replication is terminated\. You can create a new read replica for the source DB instance to reestablish replication\. 
 
@@ -376,7 +379,7 @@ If replication is stopped for more than 30 consecutive days, either manually or 
 For MySQL DB instances, in some cases read replicas present replication errors or data inconsistencies \(or both\) between the read replica and its source DB instance\. This problem occurs when some binary log \(binlog\) events or InnoDB redo logs aren't flushed during a failure of the read replica or the source DB instance\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\.
 
 **Warning**  
-In the paramter group associated with the source DB instance, we recommend keeping these parameters values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These parameters are dynamic\. If you don't want to use these settings, we recommend temporarily setting those values before executing any operation on the source DB instance that might cause it to restart\. These operations include, but are not limited to, rebooting, rebooting with failover, upgrading the database version, and changing the DB instance class or its storage\. The same recommendation applies to creating new read replicas for the source DB instance\.  
+In the parameter group associated with the source DB instance, we recommend keeping these parameters values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These parameters are dynamic\. If you don't want to use these settings, we recommend temporarily setting those values before executing any operation on the source DB instance that might cause it to restart\. These operations include, but are not limited to, rebooting, rebooting with failover, upgrading the database version, and changing the DB instance class or its storage\. The same recommendation applies to creating new read replicas for the source DB instance\.  
 Failure to follow this guidance increases the risk of read replicas presenting replication errors or data inconsistencies \(or both\) between the read replica and its source DB instance\.
 
 The replication technologies for MySQL are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the read replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the read replica are serialized using a single I/O thread, which can lead to a lag between the source instance and read replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication implementation details](https://dev.mysql.com/doc/refman/8.0/en/replication-implementation-details.html)\.

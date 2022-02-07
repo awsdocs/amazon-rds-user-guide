@@ -28,7 +28,7 @@ For information about using Secrets Manager with Amazon RDS, see [Creating a bas
 
 You can authenticate to your DB instance using AWS Identity and Access Management \(IAM\) database authentication\. IAM database authentication works with MySQL and PostgreSQL\. With this authentication method, you don't need to use a password when you connect to a DB instance\. Instead, you use an authentication token\.
 
-For more information about IAM database authentication, including information about availability for specific DB engines, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
+For more information about IAM database authentication, including information about availability for specific DB engines, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
 ## Kerberos authentication<a name="kerberos-authentication"></a>
 

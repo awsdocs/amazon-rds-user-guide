@@ -37,7 +37,7 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
 1. For **Edition**, choose **Oracle Enterprise Edition**\.
 
-1. For **Database version**, choose the RDS Custom custom engine version \(CEV\) that you previously created\. The CEV has the following format: `19.customized_string`\. An example identifier is `19.my_cev1`\.
+1. For **Database version**, choose the RDS Custom custom engine version \(CEV\) that you previously created\. The CEV has the following format: `major-engine-version.customized_string`\. An example identifier is `19.my_cev1`\.
 
 1. In **Templates**, choose **Production**\.
 

@@ -12,7 +12,7 @@ Before you create a DB instance based on Amazon RDS Custom for Oracle, perform t
 ## Prerequisites for creating an RDS Custom for Oracle instance<a name="custom-setup-orcl.review"></a>
 
 Before creating an RDS Custom for Oracle DB instance, make sure that you meet the following prerequisites:
-+ You have access to [My Oracle Support](https://support.oracle.com/portal/) and [Oracle Software Delivery Cloud](https://edelivery.oracle.com/osdc/faces/Home.jspx) to download the supported list of installation files and patches for Oracle Database 19c Enterprise Edition\. For example, you can use the April 2021 RU/RUR\.
++ You have access to [My Oracle Support](https://support.oracle.com/portal/) and [Oracle Software Delivery Cloud](https://edelivery.oracle.com/osdc/faces/Home.jspx) to download the supported list of installation files and patches for Oracle Database 12\.1 or 19c Enterprise Edition\. For example, you can use the April 2021 RU/RUR for 19c\.
 
   If you use an unknown patch, custom engine version \(CEV\) creation fails\. In this case, contact the RDS Custom support team and ask it to add the missing patch\.
 

@@ -65,13 +65,17 @@ For RDS Custom, you supply your own media\. When you create a custom engine vers
 
 An RDS Custom custom engine version \(CEV\) is a binary volume snapshot of a database version and AMI\. You store your database installation files in Amazon S3\. When you create your CEV, you specify the files in a JSON document called a CEV manifest\.
 
-Name your CEV using a customer\-specified string\. The name format is `19.customized_string`\. You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might name your CEV `19.my_cev1`\. To learn how to create a CEV, see [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)\.
+Name your CEV using a customer\-specified string\. The name format is the following, depending on your Oracle Database version:
++ `12.1.customized_string`
++ `19.customized_string`
 
-### RDS Custom for Oracle DB instance creation<a name="custom-concept.workflow.instance"></a>
+You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might name your CEV `19.my_cev1`\. To learn how to create a CEV, see [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)\.
+
+### Creating a DB instance for RDS Custom for Oracle<a name="custom-concept.workflow.instance"></a>
 
 After you create the CEV, it's available for use\. You can create multiple CEVs, and you can create multiple RDS Custom for Oracle instances from any CEV\. You can also change the status of a CEV to make it available or inactive\.
 
-To create your RDS Custom for Oracle DB instance, use the `create-db-instance` command\. In this command, specify which CEV to use\. The creation procedure is similar to the creation of an Amazon RDS instance\. However, some of the parameters are different\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
+To create your RDS Custom for Oracle DB instance, use the `create-db-instance` command\. In this command, specify which CEV to use\. The procedure is similar to creating an Amazon RDS instance\. However, some of the parameters are different\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
 ### Database connection<a name="custom-concept.workflow.db-connection"></a>
 
@@ -109,9 +113,9 @@ A typical workflow is as follows:
 
 RDS Custom monitors the DB instance and notifies you of any problems\.
 
-### RDS Custom DB instance creation<a name="custom-sqlserver.workflow.instance"></a>
+### Creating a DB instance for RDS Custom<a name="custom-sqlserver.workflow.instance"></a>
 
-You create your RDS Custom DB instance using the `create-db-instance` command\. The creation procedure is similar to the creation of an Amazon RDS instance\. However, some of the parameters are different\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for SQL Server](custom-creating-sqlserver.md)\.
+You create your RDS Custom DB instance using the `create-db-instance` command\. The procedure is similar to creating an Amazon RDS instance\. However, some of the parameters are different\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for SQL Server](custom-creating-sqlserver.md)\.
 
 ### Database connection<a name="custom-sqlserver.workflow.db-connection"></a>
 

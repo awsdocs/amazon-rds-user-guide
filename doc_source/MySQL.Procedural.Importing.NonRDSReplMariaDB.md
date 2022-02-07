@@ -1,4 +1,4 @@
-# Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime<a name="MySQL.Procedural.Importing.NonRDSRepl"></a>
+# Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime<a name="MySQL.Procedural.Importing.NonRDSReplMariaDB"></a>
 
 In some cases, you might need to import data from an external MariaDB or MySQL database that supports a live application to a MariaDB or MySQL DB instance\. In these cases, you can use the following procedure to minimize the impact on application availability\. This procedure can also help if you are working with a very large database\. Here, the procedure helps because you can reduce the cost of the import by reducing the amount of data that is passed across the network to AWS\.
 

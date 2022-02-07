@@ -1,4 +1,4 @@
-# Configuring GTID\-based replication into a MariaDB DB instance<a name="MariaDB.Procedural.Replication.GTID"></a>
+# Using GTID\-based replication into a MariaDB DB instance<a name="MariaDB.Procedural.Replication.GTID"></a>
 
 You can set up replication based on global transaction identifiers \(GTIDs\) from an external MariaDB instance of version 10\.0\.24 or higher into a MariaDB DB instance\. Follow these guidelines when you set up an external source instance and a replica on Amazon RDS:
 + Monitor failover events for the Amazon RDS for MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
@@ -23,7 +23,7 @@ To start replication between an external source instance and a MariaDB DB instan
 
    The GTID is formatted as `<domain-id>-<server-id>-<sequence-id>`\. A typical GTID looks something like **0\-1234510749\-1728**\. For more information about GTIDs and their component parts, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\. 
 
-1. Copy the database from the external MariaDB instance to the MariaDB DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
+1. Copy the database from the external MariaDB instance to the MariaDB DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
 **Note**  
 Make sure there is not a space between the `-p` option and the entered password\. 
 

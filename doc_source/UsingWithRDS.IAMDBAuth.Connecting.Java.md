@@ -1,6 +1,6 @@
 # Connecting to your DB instance using IAM authentication and the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
 
-You can connect to an RDS for MySQL or RDS for PostgreSQL DB instance with the AWS SDK for Java as described following\.
+You can connect to an RDS for MariaDB, MySQL, or PostgreSQL DB instance with the AWS SDK for Java as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
@@ -234,7 +234,7 @@ public class CreateRDSAuthTokenManually {
 
 ## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect"></a>
 
-The following code example shows how to generate an authentication token, and then use it to connect to an instance running MySQL\. 
+The following code example shows how to generate an authentication token, and then use it to connect to an instance running MariaDB or MySQL\. 
 
 To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/sdk-for-java/), found on the AWS site\. In addition, you need the following:
 + MySQL Connector/J\. This code example was tested with `mysql-connector-java-5.1.33-bin.jar`\.

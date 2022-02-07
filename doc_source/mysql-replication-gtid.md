@@ -14,7 +14,7 @@ GTID\-based replication is supported for RDS for MySQL version 5\.7\.23 and high
 + [Disabling GTID\-based replication for a MySQL DB instance with read replicas](#mysql-replication-gtid.disabling)
 
 **Note**  
-For information about configuring GTID\-based replication with an external database, see [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
+For information about configuring GTID\-based replication with an external database, see [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
 
 ## Overview of global transaction identifiers \(GTIDs\)<a name="mysql-replication-gtid.overview"></a>
 

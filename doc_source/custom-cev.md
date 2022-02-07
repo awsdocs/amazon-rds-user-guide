@@ -10,7 +10,7 @@ A *custom engine version \(CEV\)* for Amazon RDS Custom for Oracle is a binary v
 
 ## Preparing to create a CEV<a name="custom-cev.preparing"></a>
 
-To create a CEV, access the installation files and patches for Oracle Database 19c Enterprise Edition that are stored in your Amazon S3 bucket\. For example, you can use the April 2021 RU/RUR, or any valid combination of installation files and patches\.
+To create a CEV, access the installation files and patches for Oracle Database 12\.1 or 19c Enterprise Edition that are stored in your Amazon S3 bucket\. For example, you can use the April 2021 RU/RUR for 19c, or any valid combination of installation files and patches\.
 
 **Topics**
 + [Downloading your database installation files and patches from Oracle](#custom-cev.preparing.download)
@@ -23,17 +23,45 @@ To create a CEV, access the installation files and patches for Oracle Database 1
 
 The Oracle Database installation files and patches are hosted on Oracle Software Delivery Cloud\.
 
-**To download the database installation files**
+**To download the database installation files for 12\.1**
 
 1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
 
 1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
 
-1. Select **DLP: Oracle Database Enterprise Edition 19\.3\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
+1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.1\.0\.2\.0 \( Oracle Database Enterprise Edition \)**\.
 
 1. Choose **Continue**\.
 
-1. Clear **Download Queue**\.
+1. Clear the **Download Queue** check box\.
+
+1. Choose **Oracle Database 12\.1\.0\.2\.0**\.
+
+1. Choose **Linux x86\-64** in **Platform/Languages**\.
+
+1. Choose **Continue**, and then sign the waiver\.
+
+1. Choose **V46095\-01\_1of2\.zip** and **V46095\-01\_2of2\.zip**, choose **Download**, and then save the files\.
+
+   
+**Note**  
+The SHA\-256 hash for `V46095-01_1of2.zip` is `31FDC2AF41687B4E547A3A18F796424D8C1AF36406D2160F65B0AF6A9CD47355`\.  
+The SHA\-256 hash for `V46095-01_2of2.zip` is `03DA14F5E875304B28F0F3BB02AF0EC33227885B99C9865DF70749D1E220ACCD`\.
+
+1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html)
+
+**To download the database installation files for 19c**
+
+1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
+
+1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
+
+1. Choose **DLP: Oracle Database Enterprise Edition 19\.3\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
+
+1. Choose **Continue**\.
+
+1. Clear the **Download Queue** check box\.
 
 1. Choose **Oracle Database 19\.3\.0\.0\.0 \- Long Term Release**\.
 
@@ -41,7 +69,7 @@ The Oracle Database installation files and patches are hosted on Oracle Software
 
 1. Choose **Continue**, and then sign the waiver\.
 
-1. Choose **V982063\-01\.zip**, and then save the file\.
+1. Choose **V982063\-01\.zip**, choose **Download**, and then save the file\.
 **Note**  
 The SHA\-256 hash is `BA8329C757133DA313ED3B6D7F86C5AC42CD9970A28BF2E6233F3235233AA8D8`\.
 
@@ -58,13 +86,13 @@ Choose either of the following options:
   Upload each installation \.zip file separately\. Don't combine the \.zip files into a single \.zip file\.
 + Use `aws s3 sync` to upload a directory\.
 
-List your installation files using either the AWS Management Console or the AWS CLI\. 
+List your installation files using either the AWS Management Console or the AWS CLI\.
 
 Examples in this section use the following placeholders:
 + `install-or-patch-file.zip` – Oracle installation media file\. For example, p32126828\_190000\_Linux\-x86\-64\.zip is a patch\.
 + `my-custom-installation-files` – Your Amazon S3 bucket designated for your uploaded installation files\.
-+ *123456789012/cev1* – An optional prefix in your Amazon S3 bucket\.
-+ *source\-bucket* – An Amazon S3 bucket where you can optionally stage files\.
++ `123456789012/cev1` – An optional prefix in your Amazon S3 bucket\.
++ `source-bucket` – An Amazon S3 bucket where you can optionally stage files\.
 
 The following example uploads `install-or-patch-file.zip` to the `123456789012/cev1` folder in the RDS Custom Amazon S3 bucket\. Run a separate `aws s3` command for each \.zip that you want to upload\.
 
@@ -111,7 +139,7 @@ aws s3 sync cev1 ^
     s3://my-custom-installation-files/123456789012/cev1/
 ```
 
-The following example uploads all files in *source\-bucket* to the **123456789012/cev1** folder in your Amazon S3 bucket\.
+The following example uploads all files in `source-bucket` to the **`123456789012/cev1`** folder in your Amazon S3 bucket\.
 
 For Linux, macOS, or Unix:
 
@@ -131,9 +159,59 @@ aws s3 sync s3://source-bucket/ ^
 
 A CEV manifest is a JSON document that describes installation \.zip files stored in Amazon S3\.
 
-Either save the CEV manifest as a file, or edit the template when creating the CEV using the console\. 
+Either save the CEV manifest as a file, or edit the template when creating the CEV using the console\.
 
-The following CEV manifest lists the files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they are listed\. In the following example, RDS Custom applies p32126828, then p29213893, then p29782284, and so on\. 
+The following CEV manifest lists the files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they're listed\.
+
+In the following example for the October 2021 PSU for 12\.1, RDS Custom applies p32768233, then p32876425, then p16799735, and so on\.
+
+```
+{
+    "mediaImportTemplateVersion":"2020-08-14",
+    "databaseInstallationFileNames":[
+        "V46095-01_1of2.zip",
+        "V46095-01_2of2.zip"
+    ],
+    "opatchFileNames":[
+        "p6880880_121010_Linux-x86-64.zip"
+    ],
+    "psuRuPatchFileNames":[
+        "p32768233_121020_Linux-x86-64.zip"
+    ],
+    "otherPatchFileNames":[
+        "p32876425_121020_Linux-x86-64.zip",
+        "p16799735_121020_Linux-x86-64.zip",
+        "p17432124_12102190716_Linux-x86-64.zip",
+        "p18759211_121020_Linux-x86-64.zip",
+        "p19396455_121020_Linux-x86-64.zip",
+        "p20875898_121020_Linux-x86-64.zip",
+        "p22037014_121020_Linux-x86-64.zip",
+        "p22873635_121020_Linux-x86-64.zip",
+        "p23614158_121020_Linux-x86-64.zip",
+        "p24701840_121020_Linux-x86-64.zip",
+        "p25881255_121020_Linux-x86-64.zip",
+        "p27015449_121020_Linux-x86-64.zip",
+        "p28125601_121020_Linux-x86-64.zip",
+        "p28852325_121020_Linux-x86-64.zip",
+        "p29997937_121020_Linux-x86-64.zip",
+        "p31335037_121020_Linux-x86-64.zip",
+        "p32327201_121020_Linux-x86-64.zip",
+        "p32327208_121020_Generic.zip",
+        "p17969866_12102210119_Linux-x86-64.zip",
+        "p20394750_12102210119_Linux-x86-64.zip",
+        "p24835919_121020_Linux-x86-64.zip",
+        "p23262847_12102201020_Linux-x86-64.zip",
+        "p21171382_12102201020_Generic.zip",
+        "p21091901_12102210720_Linux-x86-64.zip",
+        "p33013352_12102210720_Linux-x86-64.zip",
+        "p25031502_12102210720_Linux-x86-64.zip",
+        "p23711335_12102191015_Generic.zip",
+        "p19504946_121020_Linux-x86-64.zip"
+    ]
+}
+```
+
+In the following example for 19c, RDS Custom applies p32126828, then p29213893, then p29782284, and so on\.
 
 ```
 {
@@ -160,18 +238,18 @@ The following CEV manifest lists the files that you uploaded to Amazon S3\. RDS 
 }
 ```
 
-The following table describes the JSON fields\.
+The following table describes the JSON fields in the manifest\.
 
 
-| JSON field | Description | Valid values | 
-| --- | --- | --- | 
-| MediaImportTemplateVersion |  Version of the CEV manifest\. The date is in the format `YYYY-MM-DD`\.  |  2020\-08\-14  | 
-| databaseInstallationFileNames |  Ordered list of installation files for the database\.  |  V982063\-01\.zip  | 
-| opatchFileNames |  Ordered list of OPatch installers used for the Oracle DB engine\. Only one value is valid\.  |  p6880880\_190000\_Linux\-x86\-64\.zip  If you include a `psuRuPatchFileNames` or `OtherPatchFileNames` section \(or both\), the `opatchFileNames` section is required\. Values for `opatchFileNames` must start with `p6880880_`\.   | 
-| psuRuPatchFileNames |  The PSU and RU patches for this database\.  |  p32126828\_190000\_Linux\-x86\-64\.zip  | 
-| OtherPatchFileNames |  The patches that aren't in the list of PSU and RU patches\. RDS Custom applies these patches after applying the PSU and RU patches\.  |  p29213893\_1910000DBRU\_Generic\.zip p29782284\_1910000DBRU\_Generic\.zip p28730253\_190000\_Linux\-x86\-64\.zip p29374604\_1910000DBRU\_Linux\-x86\-64\.zip p28852325\_190000\_Linux\-x86\-64\.zip p29997937\_190000\_Linux\-x86\-64\.zip p31335037\_190000\_Linux\-x86\-64\.zip p31335142\_190000\_Generic\.zip  | 
+| JSON field | Description | Valid values for 12\.1 | Valid values for 19c | 
+| --- | --- | --- | --- | 
+| MediaImportTemplateVersion |  Version of the CEV manifest\. The date is in the format `YYYY-MM-DD`\.  |  2020\-08\-14  |  2020\-08\-14  | 
+| databaseInstallationFileNames |  Ordered list of installation files for the database\.  |  V46095\-01\_1of2\.zip V46095\-01\_2of2\.zip  |  V982063\-01\.zip  | 
+| opatchFileNames |  Ordered list of OPatch installers used for the Oracle DB engine\. Only one value is valid\. If you include a `psuRuPatchFileNames` or `OtherPatchFileNames` section \(or both\), the `opatchFileNames` section is required\. Values for `opatchFileNames` must start with `p6880880_`\.  |  p6880880\_121010\_Linux\-x86\-64\.zip  |  p6880880\_190000\_Linux\-x86\-64\.zip  | 
+| psuRuPatchFileNames |  The PSU and RU patches for this database\.  |  p32768233\_121020\_Linux\-x86\-64\.zip  |  p32126828\_190000\_Linux\-x86\-64\.zip  | 
+| OtherPatchFileNames |  The patches that aren't in the list of PSU and RU patches\. RDS Custom applies these patches after applying the PSU and RU patches\.  |  p32876425\_121020\_Linux\-x86\-64\.zip p16799735\_121020\_Linux\-x86\-64\.zip p17432124\_12102190716\_Linux\-x86\-64\.zip p18759211\_121020\_Linux\-x86\-64\.zip p19396455\_121020\_Linux\-x86\-64\.zip p20875898\_121020\_Linux\-x86\-64\.zip p22037014\_121020\_Linux\-x86\-64\.zip p22873635\_121020\_Linux\-x86\-64\.zip p23614158\_121020\_Linux\-x86\-64\.zip p24701840\_121020\_Linux\-x86\-64\.zip p25881255\_121020\_Linux\-x86\-64\.zip p27015449\_121020\_Linux\-x86\-64\.zip p28125601\_121020\_Linux\-x86\-64\.zip p28852325\_121020\_Linux\-x86\-64\.zip p29997937\_121020\_Linux\-x86\-64\.zip p31335037\_121020\_Linux\-x86\-64\.zip p32327201\_121020\_Linux\-x86\-64\.zip p32327208\_121020\_Generic\.zip p17969866\_12102210119\_Linux\-x86\-64\.zip p20394750\_12102210119\_Linux\-x86\-64\.zip p24835919\_121020\_Linux\-x86\-64\.zip p23262847\_12102201020\_Linux\-x86\-64\.zip p21171382\_12102201020\_Generic\.zip p21091901\_12102210720\_Linux\-x86\-64\.zip p33013352\_12102210720\_Linux\-x86\-64\.zip p25031502\_12102210720\_Linux\-x86\-64\.zip p23711335\_12102191015\_Generic\.zip p19504946\_121020\_Linux\-x86\-64\.zip  |  p29213893\_1910000DBRU\_Generic\.zip p29782284\_1910000DBRU\_Generic\.zip p28730253\_190000\_Linux\-x86\-64\.zip p29374604\_1910000DBRU\_Linux\-x86\-64\.zip p28852325\_190000\_Linux\-x86\-64\.zip p29997937\_190000\_Linux\-x86\-64\.zip p31335037\_190000\_Linux\-x86\-64\.zip p31335142\_190000\_Generic\.zip  | 
 
-If you include a JSON field, it can't be empty\. For example, the following manifest is invalid because `otherPatchFileNames` is empty\.
+If you include a JSON field, it can't be empty\. For example, the following manifest isn't valid because `otherPatchFileNames` is empty\.
 
 ```
 {
@@ -192,7 +270,7 @@ If you include a JSON field, it can't be empty\. For example, the following mani
 
 ### Validating the CEV manifest<a name="custom-cev.preparing.validating"></a>
 
-Optionally, verify that manifest is a valid JSON file by running the `json.tool` Python script\. 
+Optionally, verify that manifest is a valid JSON file by running the `json.tool` Python script\.
 
 For example, if you change into the directory containing a CEV manifest named `manifest.json`, run the following command\.
 
@@ -202,7 +280,7 @@ python -m json.tool < manifest.json
 
 ### Adding necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
 
-The IAM principal that creates the CEV must have either of the following policies:
+Make sure that the IAM principal that creates the CEV has either of the following policies:
 + The `AdministratorAccess` policy
 + The `AmazonRDSFullAccess` policy with the following additional permissions:
   + The `mediaimport` action
@@ -244,9 +322,9 @@ You can also grant similar permissions for Amazon S3 to callers' accounts using 
 
 ## Creating a CEV<a name="custom-cev.create"></a>
 
-You can create a CEV using the AWS Management Console or the AWS CLI\. Typically, the creation time is about two hours\. 
+You can create a CEV using the AWS Management Console or the AWS CLI\. Typically, creating a CEV takes about two hours\.
 
-You can then use the CEV to create an RDS Custom instance\. The Amazon S3 bucket containing your installation files must be in the same AWS Region as your CEV\. Otherwise, creation fails\.
+You can then use the CEV to create an RDS Custom instance\. Make sure that the Amazon S3 bucket containing your installation files is in the same AWS Region as your CEV\. Otherwise, the process to create a CEV fails\.
 
 For more information, see [Creating an RDS Custom for Oracle DB instance](custom-creating.md#custom-creating.create)\.
 
@@ -266,17 +344,17 @@ For more information, see [Creating an RDS Custom for Oracle DB instance](custom
 
 1. For **Edition**, choose **Oracle Enterprise Edition**\. **Oracle Enterprise Edition \(Oracle RAC option\)** isn't supported\.
 
-1. For **Major version**, choose **Oracle 19c**\.
+1. For **Major version**, choose the major engine version\.
 
-1. In **Version details**, enter a valid name in **Custom engine version name**\. 
+1. In **Version details**, enter a valid name in **Custom engine version name**\.
 
-   The name format is `19.customized_string`\. You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might enter the name **19\.my\_cev1**\.
+   The name format is `major-engine-version.customized_string`\. You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might enter the name **19\.my\_cev1**\.
 
-   Optionally, enter a description for your CEV\. 
+   Optionally, enter a description for your CEV\.
 
 1. For **S3 location of manifest files**, enter the location of the Amazon S3 bucket that you specified in [Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)\. For example, enter **s3://my\-custom\-installation\-files/806242271698/cev1/**\.
 
-1. In the **RDS Custom encryption** section, select **Enter a key ARN** to list the available AWS KMS keys\. 
+1. In the **RDS Custom encryption** section, select **Enter a key ARN** to list the available AWS KMS keys\.
 
    Then select your KMS key from the list\. An AWS KMS key is required for RDS Custom\. For more information, see [Make sure that you have a symmetric AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
 
@@ -284,7 +362,7 @@ For more information, see [Creating an RDS Custom for Oracle DB instance](custom
 
    If the CEV manifest has an invalid form, the console displays **Error validating the CEV manifest**\. Fix the problems, and try again\.
 
-The **Custom engine versions** page appears\. Your CEV is shown with the status **Creating**\. Creation takes approximately two hours\. 
+The **Custom engine versions** page appears\. Your CEV is shown with the status **Creating**\. The process to create the CEV takes approximately two hours\.
 
 ### AWS CLI<a name="custom-cev.create.CEV"></a>
 
@@ -292,13 +370,13 @@ To create a CEV by using the AWS CLI, run the [create\-custom\-db\-engine\-versi
 
 The following options are required:
 + `--engine custom-oracle-ee`
-+ `--engine-version cev`, where *cev* is the name of your custom engine version
++ `--engine-version major-engine-version.customized_string`
 + `--kms-key-id`
-+ `--manifest manifest_string` 
++ `--manifest manifest_string`
 
-  Newlines aren't permitted in `manifest_string`\. If you copy the following string, remove all newlines before pasting it into your command\.
+  Newline characters aren't permitted in `manifest_string`\. Make sure to escape double quotes \("\) in the JSON code by prefixing them with a backslash \(\\\)\.
 
-  The `manifest_string` string is as follows:
+  The following example shows the `manifest_string` for 19c from [Creating the CEV manifest](#custom-cev.preparing.manifest)\. If you copy this string, remove all newline characters before pasting it into your command\.
 
   `"{\"mediaImportTemplateVersion\": \"2020-08-14\",\"databaseInstallationFileNames\": [\"V982063-01.zip\"],\"opatchFileNames\": [\"p6880880_190000_Linux-x86-64.zip\"],\"psuRuPatchFileNames\": [\"p32126828_190000_Linux-x86-64.zip\"],\"otherPatchFileNames\": [\"p29213893_1910000DBRU_Generic.zip\",\"p29782284_1910000DBRU_Generic.zip\",\"p28730253_190000_Linux-x86-64.zip\",\"p29374604_1910000DBRU_Linux-x86-64.zip\",\"p28852325_190000_Linux-x86-64.zip\",\"p29997937_190000_Linux-x86-64.zip\",\"p31335037_190000_Linux-x86-64.zip\",\"p31335142_190000_Generic.zip\"]}"`
 + `--database-installation-files-s3-bucket-name`` s3-bucket-name`, where `s3-bucket-name` is the bucket name that you specified in [Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)\. The AWS Region in which you run `create-custom-db-engine-version` must be in the same AWS Region as the bucket\.
@@ -307,7 +385,7 @@ You can also specify the following options:
 + `--description` *`my-cev-description`*
 + `database-installation-files-s3-prefix` *`prefix`*, where *`prefix`* is the folder name that you specified in [Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)\.
 
-The following example creates a CEV named `19.my_cev1`\.
+The following example creates a CEV named `19.my_cev1`\. Make sure that the name of your CEV starts with the major engine version number\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -370,9 +448,9 @@ The following partial output shows the engine, parameter groups, and other infor
 22. ]
 ```
 
-### CEV creation failure<a name="custom-cev.create.failure"></a>
+### Failure to create a CEV<a name="custom-cev.create.failure"></a>
 
-If CEV creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version 19.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
+If the process to create a CEV fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version major-engine-version.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
 
 You can't modify a failed CEV\. You can only delete it, then try again to create a CEV after fixing the causes of the failure\. For information on troubleshooting the reasons for CEV creation failure, see [Troubleshooting custom engine version creation for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting.cev)\.
 
@@ -441,7 +519,7 @@ You can delete a CEV using the AWS Management Console or the AWS CLI\. Typically
 
 To delete a CEV, it can't be in use by any of the following:
 + An RDS Custom DB instance
-+ A snapshot of an RDS Custom DB instance 
++ A snapshot of an RDS Custom DB instance
 + An automated backup of your RDS Custom DB instance
 
 ### Console<a name="custom-cev.create.console"></a>
@@ -456,7 +534,7 @@ To delete a CEV, it can't be in use by any of the following:
 
 1. For **Actions**, choose **Delete**\.
 
-   The **Delete *cev\_name*?** dialog appears\.
+   The **Delete *cev\_name*?** dialog box appears\.
 
 1. Enter **delete me**, and then choose **Delete**\.
 

@@ -1,6 +1,7 @@
 # MariaDB on Amazon RDS<a name="CHAP_MariaDB"></a>
 
 Amazon RDS supports DB instances running several versions of MariaDB\. You can use the following major versions: 
++ MariaDB 10\.6
 + MariaDB 10\.5
 + MariaDB 10\.4
 + MariaDB 10\.3
@@ -52,6 +53,7 @@ Amazon RDS currently supports the following versions of MariaDB:
 
 | Major version | Minor version | 
 | --- | --- | 
+| MariaDB 10\.6 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.5 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.4 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.3 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
@@ -76,12 +78,38 @@ aws rds describe-db-engine-versions --default-only --engine mariadb --engine-ver
 In the following sections, find MariaDB feature support on Amazon RDS for MariaDB major versions:
 
 **Topics**
++ [MariaDB 10\.6 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-6)
 + [MariaDB 10\.5 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-5)
 + [MariaDB 10\.4 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-4)
 + [MariaDB 10\.3 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-3)
 + [MariaDB 10\.2 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-2)
 
 For information about supported minor versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\.
+
+### MariaDB 10\.6 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-6"></a>
+
+Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.6 or later: 
++ **MyRocks storage engine** – You can use the MyRocks storage engine with RDS for MariaDB to optimize storage consumption of your write\-intensive, high\-performance web applications\. For more information, see [Supported storage engines for MariaDB on Amazon RDS](#MariaDB.Concepts.Storage) and [MyRocks](https://mariadb.com/kb/en/myrocks/)\.
++ **IAM DB authentication** – You can use IAM DB authentication for better security and central management of connections to your MariaDB DB instances\. For more information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
++ **Upgrade options** – You can now upgrade to RDS for MariaDB version 10\.6 from any prior major release \(10\.2, 10\.3, 10\.4, 10\.5\)\. You can also take a snapshot of an existing MySQL 5\.6 or 5\.7 DB instance and restore the snapshot to a MariaDB 10\.6 instance\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
++ **Delayed replication** – You can now set a configurable time period for which a read replica lags behind the source database\. In a standard MariaDB replication configuration, there is minimal replication delay between the source and the replica\. With delayed replication, you can set an intentional delay as a strategy for disaster recovery\. For more information, see [Configuring delayed replication with MySQL](USER_MySQL.Replication.ReadReplicas.md#USER_MySQL.Replication.ReadReplicas.DelayReplication)\.
++ **Oracle PL/SQL compatibility** – By using RDS for MariaDB version 10\.6, you can more easily migrate your legacy Oracle applications to Amazon RDS\. For more information, see [SQL\_MODE=ORACLE](https://mariadb.com/kb/en/sql_modeoracle/)\.
++ **Atomic DDL** – Your dynamic data language \(DDL\) statements can be relatively crash\-safe with RDS for MariaDB version 10\.6\. `CREATE TABLE`, `ALTER TABLE`, `RENAME TABLE`, `DROP TABLE`, `DROP DATABASE` and related DDL statements are now atomic\. Either the statement succeeds, or it's completely reversed\. For more information, see [Atomic DDL](https://mariadb.com/kb/en/atomic-ddl/)\.
++ **Other enhancements** – These enhancements include a `JSON_TABLE` function for transforming JSON data to relational format within SQL, and faster empty table data load with Innodb\. They also include new `sys_schema` for analysis and troubleshooting, optimizer enhancement for ignoring unused indexes, and performance improvements\. For more information, see [JSON\_TABLE](https://mariadb.com/kb/en/json_table/)\.
++ **New default values for parameters** – The following parameters have new default values for MariaDB version 10\.6 DB instances:
+  + The default value for the following parameters has changed from `utf8` to `utf8mb3`: 
+    + [character\_set\_client](https://mariadb.com/kb/en/server-system-variables/#character_set_client)
+    + [character\_set\_connection](https://mariadb.com/kb/en/server-system-variables/#character_set_connection)
+    + [character\_set\_results](https://mariadb.com/kb/en/server-system-variables/#character_set_results)
+    + [character\_set\_system](https://mariadb.com/kb/en/server-system-variables/#character_set_system)
+
+    Although the default values have changed for these parameters, there is no functional change\. For more information, see [Supported Character Sets and Collations](https://mariadb.com/kb/en/supported-character-sets-and-collations/)\.
+  + The default value of the [ collation\_connection](https://mariadb.com/kb/en/server-system-variables/#collation_connection) parameter has changed from `utf8_general_ci` to `utf8mb3_general_ci`\. Although the default value has changed for this parameter, there is no functional change\.
+  + The default value of the [ old\_mode](https://mariadb.com/kb/en/server-system-variables/#old_mode) parameter has changed from unset to `UTF8_IS_UTF8MB3`\. Although the default value has changed for this parameter, there is no functional change\.
+
+For a list of all MariaDB 10\.6 features and their documentation, see [Changes and improvements in MariaDB 10\.6](https://mariadb.com/kb/en/changes-improvements-in-mariadb-106/) and [Release notes \- MariaDB 10\.6 series](https://mariadb.com/kb/en/release-notes-mariadb-106-series/) on the MariaDB website\. 
+
+For a list of unsupported features, see [Features not supported](#MariaDB.Concepts.FeatureNonSupport)\. 
 
 ### MariaDB 10\.5 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-5"></a>
 
@@ -151,21 +179,20 @@ For a list of unsupported features, see [Features not supported](#MariaDB.Concep
 ## Features not supported<a name="MariaDB.Concepts.FeatureNonSupport"></a>
 
 The following MariaDB features are not supported on Amazon RDS:
-+ ColumnStore storage engine
 + S3 storage engine
 + Authentication plugin – GSSAPI
 + Authentication plugin – Unix Socket
 + AWS Key Management encryption plugin
-+ Delayed replication
-+ Native MariaDB encryption at rest for XtraDB, InnoDB, and Aria\.
++ Delayed replication for MariaDB versions lower than 10\.6
++ Native MariaDB encryption at rest for InnoDB and Aria\.
 
   You can enable encryption at rest for a MariaDB DB instance by following the instructions in [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 + HandlerSocket
-+ JSON table type
++ JSON table type for MariaDB versions lower than 10\.6
 + MariaDB ColumnStore
 + MariaDB Galera Cluster
 + Multisource replication
-+ MyRocks storage engine
++ MyRocks storage engine for MariaDB versions lower than 10\.6
 + Password validation plugin, `simple_password_check`, and `cracklib_password_check` 
 + Spider storage engine
 + Sphinx storage engine
@@ -177,9 +204,49 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 ## Supported storage engines for MariaDB on Amazon RDS<a name="MariaDB.Concepts.Storage"></a>
 
-While MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. InnoDB is the recommended and supported storage engine for MariaDB DB instances on Amazon RDS\. Amazon RDS features such as Point\-In\-Time Restore and snapshot restore require a recoverable storage engine and are supported only for the recommended storage engine for the MariaDB version\. Amazon RDS also supports Aria, although using Aria might have a negative impact on recovery in the event of an instance failure\.
+RDS for MariaDB supports the following storage engines\.
 
-Other storage engines are not currently supported by Amazon RDS for MariaDB\.
+**Topics**
++ [The InnoDB storage engine](#MariaDB.Concepts.Storage.InnoDB)
++ [The MyRocks storage engine](#MariaDB.Concepts.Storage.MyRocks)
+
+Other storage engines aren't currently supported by RDS for MariaDB\.
+
+### The InnoDB storage engine<a name="MariaDB.Concepts.Storage.InnoDB"></a>
+
+Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. InnoDB is the recommended storage engine for MariaDB DB instances on Amazon RDS\. Amazon RDS features such as point\-in\-time restore and snapshot restore require a recoverable storage engine and are supported only for the recommended storage engine for the MariaDB version\.
+
+For more information, see [InnoDB](https://mariadb.com/kb/en/innodb/)\.
+
+### The MyRocks storage engine<a name="MariaDB.Concepts.Storage.MyRocks"></a>
+
+The MyRocks storage engine is available by default in RDS for MariaDB version 10\.6 and higher\. Before using the MyRocks storage engine in a production database, we recommend that you perform thorough benchmarking and testing to verify any potential benefits over InnoDB for your use case\. RDS for MariaDB already performs well with the default InnoDB storage engine\. We haven't identified workloads where MyRocks outperforms InnoDB on RDS for MariaDB, apart from bulk inserts\. So, we recommend that you test the MyRocks storage engine only if you are knowledgeable about it or if you are committed to learn about it\.
+
+The default parameter group for MariaDB version 10\.6 includes MyRocks parameters\. For more information, see [Parameters for MariaDB](Appendix.MariaDB.Parameters.md) and [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+
+To create a table that uses the MyRocks storage engine, specify `ENGINE=RocksDB` in the `CREATE TABLE` statement\. The following example creates a table that uses the MyRocks storage engine\.
+
+```
+CREATE TABLE test (a INT NOT NULL, b CHAR(10)) ENGINE=RocksDB;
+```
+
+We strongly recommend that you don't run transactions that span both InnoDB and MyRocks tables\. MariaDB doesn't guarantee ACID \(atomicity, consistency, isolation, durability\) for transactions across storage engines\. Although it is possible to have both InnoDB and MyRocks tables in a DB instance, we don't recommend this approach except during a migration from one storage engine to the other\. When both InnoDB and MyRocks tables exist in a DB instance, each storage engine has its own buffer pool, which might cause performance to degrade\.
+
+MyRocks doesn’t support `SERIALIZABLE` isolation or gap locks\. So, generally you can't use MyRocks with statement\-based replication\. For more information, see [ MyRocks and Replication](https://mariadb.com/kb/en/myrocks-and-replication/)\.
+
+Currently, you can modify only the following MyRocks parameters:
++ [https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_block_cache_size](https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_block_cache_size)
++ [https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_bulk_load](https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_bulk_load)
++ [https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_bulk_load_size](https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_bulk_load_size)
++ [https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_deadlock_detect](https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_deadlock_detect)
++ [https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_deadlock_detect_depth](https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_deadlock_detect_depth)
++ [https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_max_latest_deadlocks](https://mariadb.com/kb/en/myrocks-system-variables/#rocksdb_max_latest_deadlocks)
+
+The MyRocks storage engine and the InnoDB storage engine can compete for memory based on the settings for the `rocksdb_block_cache_size` and `innodb_buffer_pool_size` parameters\. In some cases, you might only intend to use the MyRocks storage engine on a particular DB instance\. If so, we recommend setting the `innodb_buffer_pool_size minimal` parameter to a minimal value and setting the `rocksdb_block_cache_size` as high as possible\.
+
+You can access MyRocks log files by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html) and [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html) operations\.
+
+For more information about MyRocks, see [MyRocks](https://mariadb.com/kb/en/myrocks/) on the MariaDB website\.
 
 ## MariaDB file size limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
 
@@ -276,6 +343,7 @@ Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 
 
 | MariaDB version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | TLS 1\.3 | 
 | --- | --- | --- | --- | --- | 
+|  MariaDB 10\.6  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.5  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.4  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.3  |  Supported  |  Supported  |  Supported  |  Supported  | 
@@ -351,7 +419,7 @@ By default, a MariaDB DB instance uses a DB parameter group that is specific to 
 
 ## Common DBA tasks for MariaDB<a name="MariaDB.Concepts.DBA.Tasks"></a>
 
-Ending sessions or queries, skipping replication errors, working with InnoDB tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in a MySQL DB instance, as described in [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
+Ending sessions or queries, skipping replication errors, working with InnoDB tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in a MySQL DB instance, as described in [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB DB instance running InnoDB as well\.
 
 ## Local time zone for MariaDB DB instances<a name="MariaDB.Concepts.LocalTimeZone"></a>
 

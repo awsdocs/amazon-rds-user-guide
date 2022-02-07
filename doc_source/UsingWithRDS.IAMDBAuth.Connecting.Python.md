@@ -1,6 +1,6 @@
 # Connecting to your DB instance using IAM authentication and the AWS SDK for Python \(Boto3\)<a name="UsingWithRDS.IAMDBAuth.Connecting.Python"></a>
 
-You can connect to an RDS for MySQL or RDS for PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
+You can connect to an RDS for MariaDB, MySQL, or PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
@@ -27,7 +27,7 @@ Modify the values of the following variables as needed:
 
 For `ssl_ca`, specify an SSL certificate\. To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
-This code connects to a MySQL DB instance\.
+This code connects to a MariaDB or MySQL DB instance\.
 
 Before running this code, install Connector/Python by following the instructions in [ Connector/Python Installation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation.html) in the MySQL documentation\.
 

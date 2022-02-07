@@ -96,7 +96,7 @@ For definitions of these native metrics, see [Server Status Variables](https://d
 | Com\_analyze | SQL | Queries per second | db\.SQL\.Com\_analyze | 
 | Com\_optimize | SQL | Queries per second | db\.SQL\.Com\_optimize | 
 | Com\_select | SQL | Queries per second | db\.SQL\.Com\_select | 
-| Connections | SQL | The number of connection attempts per minute \(successful or not\) to the MySQL server | db\.SQL\.Connections | 
+| Connections | SQL | The number of connection attempts per minute \(successful or not\) to the MySQL server | db\.Users\.Connections | 
 | Innodb\_rows\_deleted | SQL | Rows per second | db\.SQL\.Innodb\_rows\_deleted | 
 | Innodb\_rows\_inserted | SQL | Rows per second | db\.SQL\.Innodb\_rows\_inserted | 
 | Innodb\_rows\_read | SQL | Rows per second | db\.SQL\.Innodb\_rows\_read | 
@@ -141,11 +141,11 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 
 | Counter | Type | Metric | Description | Definition | 
 | --- | --- | --- | --- | --- | 
-| innodb\_buffer\_pool\_hits | Cache | db\.Cache\.innodb\_buffer\_pool\_hits | The number of reads that InnoDB could satisfy from the buffer pool\. | innodb\_buffer\_pool\_read\_requests \- innodb\_buffer\_pool\_reads | 
-| innodb\_buffer\_pool\_hit\_rate | Cache | db\.Cache\.innodb\_buffer\_pool\_hit\_rate | The percentage of reads that InnoDB could satisfy from the buffer pool\. | 100 \* innodb\_buffer\_pool\_read\_requests / \(innodb\_buffer\_pool\_read\_requests \+ innodb\_buffer\_pool\_reads\) | 
-| innodb\_buffer\_pool\_usage | Cache | db\.Cache\.innodb\_buffer\_pool\_usage |  The percentage of the InnoDB buffer pool that contains data \(pages\)\.  When using compressed tables, this value can vary\. For more information, see the information about `Innodb_buffer_pool_pages_data` and `Innodb_buffer_pool_pages_total` in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.   | Innodb\_buffer\_pool\_pages\_data / Innodb\_buffer\_pool\_pages\_total \* 100\.0 | 
+| innodb\_buffer\_pool\_hits | Cache | db\.Cache\.innoDB\_buffer\_pool\_hits | The number of reads that InnoDB could satisfy from the buffer pool\. | innodb\_buffer\_pool\_read\_requests \- innodb\_buffer\_pool\_reads | 
+| innodb\_buffer\_pool\_hit\_rate | Cache | db\.Cache\.innoDB\_buffer\_pool\_hit\_rate | The percentage of reads that InnoDB could satisfy from the buffer pool\. | 100 \* innodb\_buffer\_pool\_read\_requests / \(innodb\_buffer\_pool\_read\_requests \+ innodb\_buffer\_pool\_reads\) | 
+| innodb\_buffer\_pool\_usage | Cache | db\.Cache\.innoDB\_buffer\_pool\_usage |  The percentage of the InnoDB buffer pool that contains data \(pages\)\.  When using compressed tables, this value can vary\. For more information, see the information about `Innodb_buffer_pool_pages_data` and `Innodb_buffer_pool_pages_total` in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.   | Innodb\_buffer\_pool\_pages\_data / Innodb\_buffer\_pool\_pages\_total \* 100\.0 | 
 | query\_cache\_hit\_rate | Cache | db\.Cache\.query\_cache\_hit\_rate | MySQL result set cache \(query cache\) hit ratio\. | Qcache\_hits / \(QCache\_hits \+ Com\_select\) \* 100 | 
-| innodb\_datafile\_writes\_to\_disk | I/O | db\.IO\.innodb\_datafile\_writes\_to\_disk | The number of InnoDB data file writes to disk, excluding double write and redo logging write operations\. | Innodb\_data\_writes \- Innodb\_log\_writes \- Innodb\_dblwr\_writes | 
+| innodb\_datafile\_writes\_to\_disk | I/O | db\.IO\.innoDB\_datafile\_writes\_to\_disk | The number of InnoDB data file writes to disk, excluding double write and redo logging write operations\. | Innodb\_data\_writes \- Innodb\_log\_writes \- Innodb\_dblwr\_writes | 
 | innodb\_rows\_changed | SQL | db\.SQL\.innodb\_rows\_changed | The total InnoDB row operations\. | db\.SQL\.Innodb\_rows\_inserted \+ db\.SQL\.Innodb\_rows\_deleted \+ db\.SQL\.Innodb\_rows\_updated | 
 | active\_transactions | Transactions | db\.Transactions\.active\_transactions | The total active transactions\. | SELECT COUNT\(1\) AS active\_transactions FROM INFORMATION\_SCHEMA\.INNODB\_TRX | 
 | innodb\_deadlocks | Locks | db\.Locks\.innodb\_deadlocks | The total number of deadlocks\. | SELECT COUNT AS innodb\_deadlocks FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_deadlocks' | 

@@ -47,7 +47,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  DB parameter groups  |  Yes  |  —  |  [Working with DB parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  Read replicas  |  No  |  —  |  [Working with read replicas](USER_ReadRepl.md)  | 
 |  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS resources](Overview.Encryption.md)  | 
-|  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
+|  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
 |  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) AWS CLI command and [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 
 |  Kerberos authentication  |  No  |  —  |  [Kerberos authentication](database-authentication.md#kerberos-authentication)  | 
 |  Tagging Amazon RDS resources  |  Yes  |  —  |  [Tagging Amazon RDS resources](USER_Tagging.md)  | 
@@ -71,7 +71,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the AWS CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the AWS CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
-|  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
+|  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
 |  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
 
 **Note**  

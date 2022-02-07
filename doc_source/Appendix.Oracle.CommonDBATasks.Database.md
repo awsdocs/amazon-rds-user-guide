@@ -20,6 +20,7 @@ Following, you can find how to perform certain common DBA tasks related to datab
 + [Skipping corrupt blocks](#Appendix.Oracle.CommonDBATasks.SkippingCorruptBlocks)
 + [Resizing the temporary tablespace in a read replica](#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 + [Purging the recycle bin](#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
++ [Setting the Data Redaction policy for full redaction](#Appendix.Oracle.CommonDBATasks.FullRedaction)
 
 ## Changing the global name of a database<a name="Appendix.Oracle.CommonDBATasks.RenamingGlobalName"></a>
 
@@ -624,3 +625,48 @@ The following example purges the entire recycle bin\.
 ```
 EXEC rdsadmin.rdsadmin_util.purge_dba_recyclebin;
 ```
+
+## Setting the Data Redaction policy for full redaction<a name="Appendix.Oracle.CommonDBATasks.FullRedaction"></a>
+
+To change the default displayed values for a Data Redaction policy for full redaction on your Amazon RDS Oracle instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.dbms_redact_upd_full_rdct_val`\.
+
+The `dbms_redact_upd_full_rdct_val` procedure has the following parameters\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `p_number_val`  |  number  |  Null  |  No  |  Modifies the default value for columns of the NUMBER datatype\.  | 
+|  `p_binfloat_val`  |  binary\_float  |  Null  |  No  |  Modifies the default value for columns of the BINARY\_FLOAT datatype\.  | 
+|  `p_bindouble_val`  |  binary\_double  |  Null  |  No  |  Modifies the default value for columns of the BINARY\_DOUBLE datatype\.  | 
+|  `p_char_val`  |  char  |  Null  |  No  |  Modifies the default value for columns of the CHAR datatype\.  | 
+|  `p_varchar_val`  |   varchar2  |  Null  |  No  |  Modifies the default value for columns of the VARCHAR2 datatype\.  | 
+|  `p_nchar_val`  |  nchar  |  Null  |  No  |  Modifies the default value for columns of the NCHAR datatype\.  | 
+|  `p_nvarchar_val`  |  nvarchar2  |  Null  |  No  |  Modifies the default value for columns of the NVARCHAR2 datatype\.  | 
+|  `p_date_val`  |  date  |  Null  |  No  |  Modifies the default value for columns of the DATE datatype\.  | 
+|  `p_ts_val`  |  timestamp  |  Null  |  No  |  Modifies the default value for columns of the TIMESTAMP datatype\.  | 
+|  `p_tswtz_val`  |  timestamp with time zone  |  Null  |  No  |  Modifies the default value for columns of the TIMESTAMP WITH TIME ZONE datatype\.  | 
+|  `p_blob_val`  |  blob  |  Null  |  No  |  Modifies the default value for columns of the BLOB datatype\.  | 
+|  `p_clob_val`  |  clob  |  Null  |  No  |  Modifies the default value for columns of the CLOB datatype\.  | 
+|  `p_nclob_val`  |  nclob  |  Null  |  No  |  Modifies the default value for columns of the NCLOB datatype\.  | 
+
+The following example changes the default redacted value to \* for char datatype:
+
+```
+EXEC rdsadmin.rdsadmin_util.dbms_redact_upd_full_rdct_val(p_char_val => '*');
+```
+
+The following example changes the default redacted values for number, date and char datatypes:
+
+```
+begin
+                rdsadmin.rdsadmin_util.dbms_redact_upd_full_rdct_val(
+                p_number_val=>1,
+                p_date_val=>to_date('1900-01-01','YYYY-MM-DD'),
+                p_varchar_val=>'X');
+end;
+/
+```
+
+After you alter the default values for full redaction with the dbms\_redact\_upd\_full\_rdct\_val procedure, reboot your DB instance for the change to take effect\. For more information, see Rebooting a DB instance [USER\_RebootInstance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html)\.

@@ -16,7 +16,7 @@ This procedure is only supported for MariaDB DB instances running MariaDB versio
 
 This procedure is the equivalent of the `SHOW REPLICA STATUS` command\. This command isn't supported for MariaDB version 10\.5 and higher DB instances\.
 
-In prior versions of MariaDB, the equivalent `SHOW SLAVE STATUS` command required the `REPLICATION SLAVE` privilege\. In MariaDB version 10\.5, it requires the `REPLICATION REPLICA ADMIN` privilege\. To protect the RDS management of MariaDB 10\.5 DB instances, this new privilege isn't granted to the RDS master user\.
+In prior versions of MariaDB, the equivalent `SHOW SLAVE STATUS` command required the `REPLICATION SLAVE` privilege\. In MariaDB version 10\.5 and higher, it requires the `REPLICATION REPLICA ADMIN` privilege\. To protect the RDS management of MariaDB 10\.5 and higher DB instances, this new privilege isn't granted to the RDS master user\.
 
 ## Examples<a name="mysql_rds_replica_status-examples"></a>
 

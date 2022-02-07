@@ -2,7 +2,7 @@
 
 This appendix describes system stored procedures that are available for Amazon RDS instances running the MariaDB DB engine\.
 
-You can use the system stored procedures that are available for MySQL DB instances and MariaDB DB instances\. These stored procedures are documented at [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)\. MariaDB DB instances support all of the stored procedures, except for `mysql.rds_set_source_delay`\.
+You can use the system stored procedures that are available for MySQL DB instances and MariaDB DB instances\. These stored procedures are documented at [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)\. MariaDB DB instances support all of the stored procedures, except for `mysql.rds_start_replication_until` and `mysql.rds_start_replication_until_gtid`\.
 
 Additionally, the following system stored procedures are supported only for Amazon RDS DB instances running MariaDB:
 + [mysql\.rds\_replica\_status](mysql_rds_replica_status.md)

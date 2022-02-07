@@ -1,6 +1,6 @@
 # Creating a database user<a name="Appendix.SQLServer.CommonDBATasks.CreateUser"></a>
 
-You can create a database user for your Amazon RDS for Microsoft SQL Server DB instance by running a T\-SQL script like the following example\.
+You can create a database user for your Amazon RDS for Microsoft SQL Server DB instance by running a T\-SQL script like the following example\. Use an application such as SQL Server Management Suite \(SSMS\)\. You log into the DB instance as the master user that was created when you created the DB instance\.
 
 ```
 --Initially set context to master database

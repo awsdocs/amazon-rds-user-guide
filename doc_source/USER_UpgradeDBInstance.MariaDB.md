@@ -79,11 +79,14 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon RDS doesn't apply major version upgrades automatically\. You must manually modify your DB instance\. We recommend that you thoroughly test any upgrade before applying it to your production instances\. 
 
 Amazon RDS supports the following in\-place upgrades for major versions of the MariaDB database engine:
-+ MariaDB 10\.2 to MariaDB 10\.3
-+ MariaDB 10\.3 to MariaDB 10\.4
++ Any MariaDB version to MariaDB 10\.6
 + MariaDB 10\.4 to MariaDB 10\.5
++ MariaDB 10\.3 to MariaDB 10\.4
++ MariaDB 10\.2 to MariaDB 10\.3
 
-To perform a major version upgrade for a MariaDB version 10\.2 DB instance on Amazon RDS to MariaDB version 10\.3 or later, first upgrade to each major version: 10\.2 to 10\.3, 10\.3 to 10\.4, and then 10\.4 to 10\.5\.
+To perform a major version upgrade to MariaDB version 10\.6, you can upgrade directly from any MariaDB version to version 10\.6\.
+
+To perform a major version upgrade to a MariaDB version lower than 10\.6, upgrade to each major version in order\. For example, to upgrade from version 10\.2 to version 10\.5, upgrade in the following order: 10\.2 to 10\.3, 10\.3 to 10\.4, and then 10\.4 to 10\.5\.
 
 If you are using a custom parameter group, and you perform a major version upgrade, you must specify either a default parameter group for the new DB engine version or create your own custom parameter group for the new DB engine version\. Associating the new parameter group with the DB instance requires a customer\-initiated database reboot after the upgrade completes\. The instance's parameter group status will show `pending-reboot` if the instance needs to be rebooted to apply the parameter group changes\. An instance's parameter group status can be viewed in the AWS console or by using a "describe" call such as `describe-db-instances`\.
 
@@ -96,6 +99,10 @@ For information about manually or automatically upgrading a MariaDB DB instance,
 If you specify the following settings when creating or modifying a DB instance, you can have your DB instance automatically upgraded\.
 + The **Auto minor version upgrade** setting is enabled\.
 + The **Backup retention period** setting is greater than 0\.
+
+In the AWS Management Console, these settings are under **Additional configuration**\. The following image shows the **Auto minor version upgrade** setting\.
+
+![\[Auto minor version upgrade setting\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/amvu.png)
 
 For more information about these settings, see [Settings for DB instances](Overview.DBInstance.Modifying.md#USER_ModifyInstance.Settings)\.
 

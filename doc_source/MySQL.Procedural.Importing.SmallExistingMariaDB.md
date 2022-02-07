@@ -1,4 +1,4 @@
-# Importing data from a MariaDB or MySQL database to a MariaDB or MySQL DB instance<a name="MySQL.Procedural.Importing.SmallExisting"></a>
+# Importing data from a MariaDB or MySQL database to a MariaDB or MySQL DB instance<a name="MySQL.Procedural.Importing.SmallExistingMariaDB"></a>
 
 If your scenario supports it, it's easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)\. 
 

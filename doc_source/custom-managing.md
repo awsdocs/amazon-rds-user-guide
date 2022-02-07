@@ -38,7 +38,7 @@ You can configure your high availability environment in the following ways:
 + Fail over or switch over from the primary database to a standby database with no data loss\.
 + Migrate data by configuring high availability for your on\-premises instance, and then failing over or switching over to the RDS Custom standby database\.
 
-To learn how to configure high availability, see the blog post *Configuring high availability with Always On Availability Groups on Amazon RDS Custom for SQL Server*\. You can perform the following tasks:
+To learn how to configure high availability, see the blog post [Configure high availability with Always On Availability Groups on Amazon RDS Custom for SQL Server](http://aws.amazon.com/blogs/database/configure-high-availability-with-always-on-availability-groups-on-amazon-rds-custom-for-sql-server/)\. You can perform the following tasks:
 + Use a virtual private network \(VPN\) tunnel to encrypt data in transit for your high availability instances\. Encryption in transit isn't configured automatically by RDS Custom\.
 + Configure Always On AGs to monitor your high availability instances\.
 + Allow the observer to perform automatic failover when necessary conditions are met\.

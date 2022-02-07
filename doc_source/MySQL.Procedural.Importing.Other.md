@@ -1,10 +1,10 @@
 # Importing data into a MySQL DB instance<a name="MySQL.Procedural.Importing.Other"></a>
 
-You can use several different techniques to import data into an Amazon RDS for MySQL DB instance\. The best approach depends on the source of the data, the amount of data, and whether the import is done one time or is ongoing\. If you are migrating an application along with the data, also consider the amount of downtime that you are willing to experience\.
+You can use several different techniques to import data into an RDS for MySQL DB instance\. The best approach depends on the source of the data, the amount of data, and whether the import is done one time or is ongoing\. If you are migrating an application along with the data, also consider the amount of downtime that you are willing to experience\.
 
 ## Overview<a name="MySQL.Procedural.Importing.Overview"></a>
 
-Find techniques to import data into an Amazon RDS for MySQL DB instance in the following table\.
+Find techniques to import data into an RDS for MySQL DB instance in the following table\.
 
 
 ****  
@@ -12,11 +12,11 @@ Find techniques to import data into an Amazon RDS for MySQL DB instance in the f
 | Source | Amount of data | One time or ongoing | Application downtime | Technique | More information | 
 | --- | --- | --- | --- | --- | --- | 
 | Existing MySQL database on premises or on Amazon EC2 | Any | One time | Some | Create a backup of your on\-premises database, store it on Amazon S3, and then restore the backup file to a new Amazon RDS DB instance running MySQL\. | [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md) | 
-| Any existing database | Any | One time or ongoing | Minimal | Use AWS Database Migration Service to migrate the database with minimal downtime and, for many database DB engines, continue ongoing replication\. | [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) in the AWS Database Migration Service User Guide | 
+| Any existing database | Any | One time or ongoing | Minimal | Use AWS Database Migration Service to migrate the database with minimal downtime and, for many database DB engines, continue ongoing replication\. | [What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) and [Using a MySQL\-compatible database as a target for AWS DMS](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html) in the AWS Database Migration Service User Guide  | 
 | Existing MySQL DB instance | Any | One time or ongoing | Minimal | Create a read replica for ongoing replication\. Promote the read replica for one\-time creation of a new DB instance\. | [Working with read replicas](USER_ReadRepl.md) | 
-| Existing MySQL or MariaDB database | Small | One time | Some | Copy the data directly to your MySQL DB instance using a command\-line utility\. | [Importing data from a MySQL or MariaDB DB to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.SmallExisting.md) | 
-| Data not stored in an existing database | Medium | One time | Some | Create flat files and import them using the mysqlimport utility\. | [Importing data from any source to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.AnySource.md) | 
-| Existing MySQL or MariaDB database on premises or on Amazon EC2 | Any | Ongoing | Minimal | Configure replication with an existing MySQL database as the replication source\. | [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md) or [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) | 
+| Existing MariaDB or MySQL database | Small | One time | Some | Copy the data directly to your MySQL DB instance using a command\-line utility\. | [Importing data from a MariaDB or MySQL database to a MariaDB or MySQL DB instance](MySQL.Procedural.Importing.SmallExisting.md) | 
+| Data not stored in an existing database | Medium | One time | Some | Create flat files and import them using the mysqlimport utility\. | [Importing data from any source to a MariaDB or MySQL DB instance](MySQL.Procedural.Importing.AnySource.md) | 
+| Existing MariaDB or MySQL database on premises or on Amazon EC2 | Any | Ongoing | Minimal | Configure replication with an existing MariaDB or MySQL database as the replication source\. |  [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md) [Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)  | 
 
 **Note**  
 The `'mysql'` system database contains authentication and authorization information required to log in to your DB instance and access your data\. Dropping, altering, renaming, or truncating tables, data, or other contents of the `'mysql'` database in your DB instance can result in error and might render the DB instance and your data inaccessible\. If this occurs, you can restore the DB instance from a snapshot using the AWS CLI `restore-db-instance-from-db-snapshot` command\. You can recover the DB instance using the AWS CLI `restore-db-instance-to-point-in-time` command\. 
@@ -119,6 +119,6 @@ Using innodb\_flush\_log\_at\_trx\_commit=0 causes InnoDB to flush its logs ever
 + [Overview](#MySQL.Procedural.Importing.Overview)
 + [Importing data considerations](#MySQL.Procedural.Importing.Advanced)
 + [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)
-+ [Importing data from a MySQL or MariaDB DB to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.SmallExisting.md)
-+ [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)
-+ [Importing data from any source to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.AnySource.md)
++ [Importing data from a MariaDB or MySQL database to a MariaDB or MySQL DB instance](MySQL.Procedural.Importing.SmallExisting.md)
++ [Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)
++ [Importing data from any source to a MariaDB or MySQL DB instance](MySQL.Procedural.Importing.AnySource.md)

@@ -17,6 +17,11 @@ You can tag the following Amazon RDS resources:
 + DB cluster parameter groups
 + DB security groups
 + DB subnet groups
++ RDS Proxies
++ RDS Proxy endpoints
+
+**Note**  
+Currently, you can't tag RDS Proxies and RDS Proxy endpoints by using the AWS Management Console\.
 
 **Topics**
 + [Overview of Amazon RDS resource tags](#Overview.Tagging)
@@ -31,6 +36,8 @@ You can tag the following Amazon RDS resources:
 ## Overview of Amazon RDS resource tags<a name="Overview.Tagging"></a>
 
 An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of "project" and a tag value of "Salix", indicating that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as `environment=test` or `environment=production`\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
+
+In addition, you can use conditions in your IAM policies to control access to AWS resources based on the tags on that resource\. You can do this by using the global `aws:ResourceTag/tag-key` condition key\. For more information, see [Controlling access to AWS resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html#access_tags_control-resources) in the *AWS Identity and Access Management User Guide*\.
 
 Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 50 tags, or it can be empty\. If you add a tag to an Amazon RDS resource that has the same key as an existing tag on resource, the new value overwrites the old value\. 
 

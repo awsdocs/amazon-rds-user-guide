@@ -9,7 +9,7 @@ AWS Identity and Access Management \(IAM\) is an AWS service that helps an admin
 + [How Amazon RDS works with IAM](security_iam_service-with-iam.md)
 + [Amazon RDS identity\-based policy examples](security_iam_id-based-policy-examples.md)
 + [Preventing cross\-service confused deputy problems](cross-service-confused-deputy-prevention.md)
-+ [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)
++ [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)
 + [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md)
 
 ## Audience<a name="security_iam_audience"></a>
@@ -50,7 +50,7 @@ IAM database authentication works with the following DB engines:
 + Amazon RDS for MySQL
 + Amazon RDS for PostgreSQL
 
-For more information about authenticating to your DB instance using IAM, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
+For more information about authenticating to your DB instance using IAM, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
 ### IAM roles<a name="security_iam_authentication-iamrole"></a>
 

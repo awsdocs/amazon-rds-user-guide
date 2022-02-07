@@ -2,6 +2,88 @@
 
 By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. For information about working with parameter groups and setting parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
+## Viewing MariaDB parameters<a name="Appendix.MariaDB.Parameters.Viewing"></a>
+
+RDS for MariaDB parameters are set to the default values of the storage engine that you have selected\. For more information about MariaDB parameters, see the [MariaDB documentation](http://mariadb.com/kb/en/mariadb/documentation/)\. For more information about MariaDB storage engines, see [Supported storage engines for MariaDB on Amazon RDS](CHAP_MariaDB.md#MariaDB.Concepts.Storage)\.
+
+You can view the parameters available for a specific RDS for MariaDB version using the RDS console or the AWS CLI\. For information about viewing the parameters in a MariaDB parameter group in the RDS console, see [Viewing parameter values for a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
+
+Using the AWS CLI, you can view the parameters for an RDS for MariaDB version by running the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\. Specify one of the following values for the `--db-parameter-group-family` option:
++ `mariadb10.6`
++ `mariadb10.5`
++ `mariadb10.4`
++ `mariadb10.3`
++ `mariadb10.2`
+
+For example, to view the parameters for RDS for MariaDB version 10\.6, run the following command\.
+
+```
+aws rds describe-engine-default-parameters --db-parameter-group-family mariadb10.6
+```
+
+Your output looks similar to the following\.
+
+```
+{
+    "EngineDefaults": {
+        "Parameters": [
+            {
+                "ParameterName": "alter_algorithm",
+                "Description": "Specify the alter table algorithm.",
+                "Source": "engine-default",
+                "ApplyType": "dynamic",
+                "DataType": "string",
+                "AllowedValues": "DEFAULT,COPY,INPLACE,NOCOPY,INSTANT",
+                "IsModifiable": true
+            },
+            {
+                "ParameterName": "analyze_sample_percentage",
+                "Description": "Percentage of rows from the table ANALYZE TABLE will sample to collect table statistics.",
+                "Source": "engine-default",
+                "ApplyType": "dynamic",
+                "DataType": "float",
+                "AllowedValues": "0-100",
+                "IsModifiable": true
+            },
+            {
+                "ParameterName": "aria_block_size",
+                "Description": "Block size to be used for Aria index pages.",
+                "Source": "engine-default",
+                "ApplyType": "static",
+                "DataType": "integer",
+                "AllowedValues": "1024-32768",
+                "IsModifiable": false
+            },
+            {
+                "ParameterName": "aria_checkpoint_interval",
+                "Description": "Interval in seconds between automatic checkpoints.",
+                "Source": "engine-default",
+                "ApplyType": "dynamic",
+                "DataType": "integer",
+                "AllowedValues": "0-4294967295",
+                "IsModifiable": true
+            },
+        ...
+```
+
+To list only the modifiable parameters for RDS for MariaDB version 10\.6, run the following command\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-engine-default-parameters --db-parameter-group-family mariadb10.6 \
+   --query 'EngineDefaults.Parameters[?IsModifiable==`true`]'
+```
+
+For Windows:
+
+```
+aws rds describe-engine-default-parameters --db-parameter-group-family mariadb10.6 ^
+   --query "EngineDefaults.Parameters[?IsModifiable==`true`]"
+```
+
+## MySQL parameters that aren't available<a name="Appendix.MariaDB.Parameters.MySQLNotAvailable"></a>
+
 The following MySQL parameters are not available in MariaDB\-specific DB parameter groups:
 + bind\_address
 + binlog\_error\_action
@@ -53,129 +135,4 @@ The following MySQL parameters are not available in MariaDB\-specific DB paramet
 + validate\_password\_policy
 + validate\_password\_special\_char\_count
 
-For more information on MySQL parameters, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/)\.
-
-The MariaDB\-specific DB parameter groups also contain the following parameters that are applicable to MariaDB only\. Acceptable ranges for the modifiable parameters are the same as specified in the MariaDB documentation except where noted\. RDS for MariaDB parameters are set to the default values of the storage engine you have selected\.
-+ aria\_block\_size
-+ aria\_checkpoint\_interval
-+ aria\_checkpoint\_log\_activity
-+ aria\_force\_start\_after\_recovery\_failures
-+ aria\_group\_commit
-+ aria\_group\_commit\_interval
-+ aria\_log\_dir\_path
-+ aria\_log\_file\_size
-+ aria\_log\_purge\_type
-+ aria\_max\_sort\_file\_size
-+ aria\_page\_checksum
-+ aria\_pagecache\_age\_threshold
-+ aria\_pagecache\_division\_limit
-+ aria\_recover
-
-  RDS for MariaDB supports the values of NORMAL, OFF, and QUICK, but not FORCE or BACKUP\.
-+ aria\_repair\_threads
-+ aria\_sort\_buffer\_size
-+ aria\_stats\_method
-+ aria\_sync\_log\_dir
-+ binlog\_annotate\_row\_events
-+ binlog\_commit\_wait\_count
-+ binlog\_commit\_wait\_usec
-+ binlog\_row\_image
-+ deadlock\_search\_depth\_long
-+ deadlock\_search\_depth\_short
-+ deadlock\_timeout\_long
-+ deadlock\_timeout\_short
-+ explicit\_defaults\_for\_timestamp
-+ extra\_max\_connections
-+ extra\_port
-+ feedback
-+ feedback\_send\_retry\_wait
-+ feedback\_send\_timeout
-+ feedback\_url
-+ feedback\_user\_info
-+ gtid\_domain\_id
-+ gtid\_strict\_mode
-+ histogram\_size
-+ histogram\_type
-+ innodb\_adaptive\_hash\_index\_partitions
-+ innodb\_background\_scrub\_data\_check\_interval
-+ innodb\_background\_scrub\_data\_compressed
-+ innodb\_background\_scrub\_data\_interval
-+ innodb\_background\_scrub\_data\_uncompressed
-+ innodb\_buf\_dump\_status\_frequency
-+ innodb\_buffer\_pool\_populate
-+ innodb\_cleaner\_lsn\_age\_factor
-+ innodb\_compression\_algorithm
-+ innodb\_corrupt\_table\_action
-+ innodb\_defragment
-+ innodb\_defragment\_fill\_factor
-+ innodb\_defragment\_fill\_factor\_n\_recs
-+ innodb\_defragment\_frequency
-+ innodb\_defragment\_n\_pages
-+ innodb\_defragment\_stats\_accuracy
-+ innodb\_empty\_free\_List\_algorithm
-+ innodb\_fake\_changes
-+ innodb\_fatal\_semaphore\_wait\_threshold
-+ innodb\_foreground\_preflush
-+ innodb\_idle\_flush\_pct
-+ innodb\_immediate\_scrub\_data\_uncompressed
-+ innodb\_instrument\_semaphores
-+ innodb\_locking\_fake\_changes
-+ innodb\_log\_arch\_dir
-+ innodb\_log\_arch\_expire\_sec
-+ innodb\_log\_archive
-+ innodb\_log\_block\_size
-+ innodb\_log\_checksum\_algorithm
-+ innodb\_max\_bitmap\_file\_size
-+ innodb\_max\_changed\_pages
-+ innodb\_prefix\_index\_cluster\_optimization
-+ innodb\_sched\_priority\_cleaner
-+ innodb\_scrub\_log
-+ innodb\_scrub\_log\_speed
-+ innodb\_show\_locks\_held
-+ innodb\_show\_verbose\_locks
-+ innodb\_simulate\_comp\_failures
-+ innodb\_stats\_modified\_counter
-+ innodb\_stats\_traditional
-+ innodb\_use\_atomic\_writes
-+ innodb\_use\_fallocate
-+ innodb\_use\_global\_flush\_log\_at\_trx\_commit
-+ innodb\_use\_stacktrace
-+ innodb\_use\_trim
-+ join\_buffer\_space\_limit
-+ join\_cache\_level
-+ key\_cache\_file\_hash\_size
-+ key\_cache\_segments
-+ max\_digest\_length
-+ max\_statement\_time
-+ mysql56\_temporal\_format
-+ progress\_report\_time
-+ query\_cache\_strip\_comments
-+ replicate\_annotate\_row\_events
-+ replicate\_do\_db
-+ replicate\_do\_table
-+ replicate\_events\_marked\_for\_skip
-+ replicate\_ignore\_db
-+ replicate\_ignore\_table
-+ replicate\_wild\_ignore\_table
-+ slave\_domain\_parallel\_threads
-+ slave\_parallel\_max\_queued
-+ slave\_parallel\_mode
-+ slave\_parallel\_threads
-+ slave\_run\_triggers\_for\_rbr
-+ sql\_error\_log\_filename
-+ sql\_error\_log\_rate
-+ sql\_error\_log\_rotate
-+ sql\_error\_log\_rotations
-+ sql\_error\_log\_size\_limit
-+ thread\_handling
-+ thread\_pool\_idle\_timeout
-+ thread\_pool\_max\_threads
-+ thread\_pool\_min\_threads
-+ thread\_pool\_oversubscribe
-+ thread\_pool\_size
-+ thread\_pool\_stall\_limit
-+ transaction\_write\_set\_extraction
-+ use\_stat\_tables
-+ userstat
-
- For more information on MariaDB parameters, go to the [MariaDB documentation](http://mariadb.com/kb/en/mariadb/documentation/)\.
+For more information on MySQL parameters, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/)\.
