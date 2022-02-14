@@ -473,7 +473,7 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.z1d\.12xlarge  |  48  |  24  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
 
 **Note**  
-You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
+You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Monitoring Amazon RDS API calls in AWS CloudTrail](logging-using-cloudtrail.md)\.
 
 ### Setting the CPU cores and threads per CPU core for a DB instance class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
 

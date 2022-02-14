@@ -34,7 +34,7 @@ The following are the common management tasks you perform with an RDS for MySQL 
 |  **Modifying a DB instance running the MySQL database engine** Change the settings of a DB instance to accomplish tasks such as adding additional storage or changing the DB instance class\.  |   [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)   | 
 |  **Configuring database backup and restore** Configure your DB instance to take automated backups\. You can also back up and restore your databases manually by using full backup files\.   |   [Working with backups](USER_WorkingWithAutomatedBackups.md)   [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)   | 
 |  **Importing and exporting data** Import data from other MySQL DB instances, MySQL instances running external to Amazon RDS, and other types of data sources, and export data to MySQL instances running external to Amazon RDS\.  |   [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)   | 
-|  **Monitoring a MySQL DB instance** Monitor your MySQL DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your MySQL DB instance\.  |   [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)   [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring)   [Viewing Amazon RDS events](USER_ListEvents.md)   [Working with Amazon RDS database log files](USER_LogAccess.md)   [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)   | 
+|  **Monitoring a MySQL DB instance** Monitor your MySQL DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your MySQL DB instance\.  |   [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md)   [Viewing metrics in the Amazon RDS console](USER_Monitoring.md)   [Viewing Amazon RDS events](USER_ListEvents.md)   [Monitoring Amazon RDS log files](USER_LogAccess.md)   [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)   | 
 |  **Replicating your data** Create a MySQL read replica, in the same AWS Region or a different one\. You can use read replicas for load balancing, disaster recovery, and processing read\-heavy database workloads, such as for analysis and reporting\.   |   [Working with read replicas](USER_ReadRepl.md)   [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)   | 
 
 There are also several sections with useful information about working with MySQL DB instances: 
@@ -90,7 +90,7 @@ On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6 using 
 | --- | --- | 
 |  We recommend that you upgrade MySQL 5\.6 DB instances manually to the version of your choice\.   |  Now–February 1, 2022  | 
 |  We recommend that you upgrade MySQL 5\.6 snapshots manually to the version of your choice\.  |  Now–February 1, 2022  | 
-|  You can no longer create new MySQL 5\.6 DB instances\.  |  February 1, 2022  | 
+|  You can no longer create new MySQL 5\.6 DB instances\. You can still create read replicas of existing MySQL 5\.6 DB instances and change them from Single\-AZ deployments to Multi\-AZ deployments\.  |  February 1, 2022  | 
 |  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  March 1, 2022  | 
 |  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  March 1, 2022  | 
 

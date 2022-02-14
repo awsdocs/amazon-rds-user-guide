@@ -63,12 +63,12 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
 |  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
 |  Point\-in\-time recovery  |  Yes  |  You can store automated backups and manual snapshots for the restored DB instance in the parent AWS Region or locally on your Outpost, with one exception\.  |  [Considerations for restoring DB instances](#rds-on-outposts.restoring) [Restoring a DB instance to a specified time](USER_PIT.md)  | 
-|  Enhanced monitoring  |  No  |  —  |  [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)  | 
+|  Enhanced monitoring  |  No  |  —  |  [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Amazon CloudWatch monitoring  |  Yes  |  You can view the same set of metrics that are available for your databases in the AWS Region\.  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
 |  Publishing database engine logs to CloudWatch Logs  |  Yes  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.Procedural.UploadtoCloudWatch.md)  | 
 |  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
 |  Amazon RDS Performance Insights  |  No  |  —  |  [Monitoring DB load with Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
-|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the AWS CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the AWS CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
+|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the AWS CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the AWS CLI or RDS API\.  |  [Monitoring Amazon RDS log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
 |  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
@@ -132,7 +132,7 @@ You can enable or disable a CoIP when you perform any of the following actions:
   For more information, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
 **Note**  
-If you enable a CoIP for a DB instance, but Amazon RDS is unable to allocate a CoIP for the DB instance, the DB instance status is changed to **incompatible\-network**\. For more information about the DB instance status, see [Viewing DB instance status](accessing-monitoring.md#Overview.DBInstance.Status)\.
+If you enable a CoIP for a DB instance, but Amazon RDS is unable to allocate a CoIP for the DB instance, the DB instance status is changed to **incompatible\-network**\. For more information about the DB instance status, see [Viewing Amazon RDS DB instance status](accessing-monitoring.md#Overview.DBInstance.Status)\.
 
 The following limitations apply to CoIP support for RDS on Outposts DB instances:
 + When a CoIP is enabled for a DB instance, make sure that public accessibility is disabled for the DB instance\.

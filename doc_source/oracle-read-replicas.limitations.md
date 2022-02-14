@@ -25,22 +25,20 @@ Before creating an Oracle replica, check the following version and licensing req
 ## Option requirements and limitations for Oracle replicas<a name="oracle-read-replicas.limitations.options"></a>
 
 Before creating a replica for Oracle, check the requirements and restrictions for option groups:
-+ If your Oracle replica is in the same AWS Region as its source DB instance, make sure that it belongs to the same option group as the source DB instance\. Modifications to the source option group or source option group membership propagate to replicas\. These changes are applied to the replicas immediately after they are applied to the source DB instance, regardless of the replica's maintenance window\.
++ If your Oracle replica is in the same AWS Region as its source DB instance, make sure that it belongs to the same option group as the source DB instance\. Modifications to the source option group or source option group membership propagate to replicas\. These changes are applied to the replicas immediately after they are applied to the source DB instance, regardless of the replica maintenance window\.
 
   For more information about option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
-+ When you create an Oracle cross\-Region replica, Amazon RDS creates a dedicated option group for it\.
++ When you create an Oracle cross\-Region replica, Amazon RDS creates a dedicated option group for it\. This option group is shared among all cross\-Region replicas in that Region that have the same source DB instance\.
 
-  You can't remove an Oracle cross\-Region replica from its dedicated option group\. No other DB instances can use the dedicated option group for an Oracle cross\-Region replica\.
-
-  You can only add or remove the following nonreplicated options from a dedicated option group:
+  You can't remove an Oracle cross\-Region replica from its dedicated option group\. You can only add or remove the following nonreplicated options from a dedicated option group:
   + `NATIVE_NETWORK_ENCRYPTION`
   + `OEM`
   + `OEM_AGENT`
   + `SSL`
 
-  To add other options to an Oracle cross\-Region replica, add them to the source DB instance's option group\. The option is also installed on all of the source DB instance's replicas\. For licensed options, make sure that there are sufficient licenses for the replicas\.
+  To add other options to an Oracle cross\-Region replica, add them to the option group of the source DB instance\. The option is also installed on all replicas of the source DB instance\. For licensed options, make sure that there are sufficient licenses for the replicas\.
 
-  When you promote an Oracle cross\-Region replica, the promoted replica behaves the same as other Oracle DB instances, including the management of its options\. You can promote a replica explicitly or implicitly by deleting its source DB instance\.
+  When you promote an Oracle cross\-Region replica, the promoted replica gets a new, standard option group that resembles the previous dedicated option group\. At this point, the promoted replica behaves the same as other Oracle DB instances, including the management of its options\. You can promote a replica explicitly or implicitly by deleting its source DB instance\.
 
   For more information about option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
 

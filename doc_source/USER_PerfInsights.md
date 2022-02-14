@@ -8,7 +8,5 @@ Performance Insights expands on existing Amazon RDS monitoring features to illus
 + [Enabling the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)
 + [Configuring access policies for Performance Insights](USER_PerfInsights.access-control.md)
 + [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)
-+ [Adding counter metrics to the Performance Insights dashboard](USER_PerfInsights_Counters.md)
 + [Retrieving metrics with the Performance Insights API](USER_PerfInsights.API.md)
-+ [Performance Insights metrics published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)
 + [Logging Performance Insights calls using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)

@@ -1,15 +1,14 @@
-# Viewing key monitoring information<a name="accessing-monitoring"></a>
+# Viewing instance status and recommendations<a name="accessing-monitoring"></a>
 
-The Amazon RDS console provides quick access to key monitoring features\.
+Using the Amazon RDS console, you can quickly access the status of your DB instance and respond to Amazon RDS recommendations\.
 
 **Topics**
-+ [Viewing DB instance status](#Overview.DBInstance.Status)
++ [Viewing Amazon RDS DB instance status](#Overview.DBInstance.Status)
 + [Viewing Amazon RDS recommendations](#USER_Recommendations)
-+ [Viewing DB instance metrics](#USER_Monitoring)
 
-## Viewing DB instance status<a name="Overview.DBInstance.Status"></a>
+## Viewing Amazon RDS DB instance status<a name="Overview.DBInstance.Status"></a>
 
-The status of a DB instance indicates the health of the DB instance\. You can view the status of a DB instance by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
+The status of a DB instance indicates the health of the DB instance\. You can view the status of a DB instance by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
 
 **Note**  
 Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
@@ -62,7 +61,7 @@ You can find examples of these recommendations in the following table\.
 |  Automated backups disabled  |  Your DB instance has automated backups disabled\.  |  We recommend that you enable automated backups on your DB instance\. Automated backups enable point\-in\-time recovery of your DB instance\. You receive backup storage up to the storage size of your DB instance at no additional charge\.  |  [Working with backups](USER_WorkingWithAutomatedBackups.md)  | 
 |  Magnetic volumes in use  |  Your DB instance is using magnetic storage\.  |  Magnetic storage is not recommended for most DB instances\. We recommend switching to General Purpose \(SSD\) storage or provisioned IOPS storage\.  |  [Amazon RDS DB instance storage](CHAP_Storage.md)  | 
 |  EC2\-Classic platform in use  |  Your DB instance is using the legacy EC2\-Classic platform\.  |  We recommend moving your DB instance to the EC2\-VPC platform for better network access control\. Amazon VPC provides a virtual network that is logically isolated from other virtual networks in the AWS Cloud\.  |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)  | 
-|  Enhanced Monitoring disabled  |  Your DB instance doesn't have Enhanced Monitoring enabled\.  |  We recommend enabling Enhanced Monitoring\. Enhanced Monitoring provides real\-time operating system metrics for monitoring and troubleshooting\.  |  [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)  | 
+|  Enhanced Monitoring disabled  |  Your DB instance doesn't have Enhanced Monitoring enabled\.  |  We recommend enabling Enhanced Monitoring\. Enhanced Monitoring provides real\-time operating system metrics for monitoring and troubleshooting\.  |  [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Encryption disabled  |  Your DB instance doesn't have encryption enabled\.  |  We recommend enabling encryption\. You can encrypt your existing Amazon RDS DB instances by restoring from an encrypted snapshot\.  |  [Encrypting Amazon RDS resources](Overview.Encryption.md)  | 
 |  Previous generation DB instance class in use  |  Your DB instance is running on a previous\-generation DB instance class\.  |  Previous\-generation DB instance classes have been replaced by DB instance classes with better price, better performance, or both\. We recommend running your DB instance on a later generation DB instance class\.  |  [DB instance classes](Concepts.DBInstanceClass.md)  | 
 |  Huge pages not used for an Oracle DB instance  |  The `use_large_pages` parameter is not set to `ONLY` in the DB parameter group used by your DB instance\.  |  For increased database scalability, we recommend setting `use_large_pages` to `ONLY` in the DB parameter group used by your DB instance\.  |  [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)  | 
@@ -114,65 +113,3 @@ You can find recommendations in the AWS Management Console\. You can perform the
       For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 **Note**  
 When you choose **Apply now**, a brief DB instance outage might result\.
-
-## Viewing DB instance metrics<a name="USER_Monitoring"></a>
-
-Amazon RDS provides metrics so that you can monitor the health of your DB instances\. You can monitor both DB instance metrics and operating system \(OS\) metrics\.
-
-Following, you can find details about how to view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
-
-### Viewing metrics by using the console<a name="USER_Monitoring.CON"></a>
-
-**To view DB and OS metrics for a DB instance**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**\.
-
-1. Choose the name of the DB instance that you need information about to show its details\.
-
-1. Choose the **Monitoring** tab\.
-
-1. For **Monitoring**, choose the option for how you want to view your metrics from these:
-   + **CloudWatch** – Shows a summary of DB instance metrics available from Amazon CloudWatch\. Each metric includes a graph showing the metric monitored over a specific time span\.
-   + **Enhanced monitoring** – Shows a summary of OS metrics available for a DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\.
-   + **OS Process list** – Shows details for each process running in the selected instance\.
-   + **Performance Insights** – Opens the Amazon RDS Performance Insights console for your DB instance\.
-
-     
-![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics0.png)
-**Tip**  
-To choose the time range of the metrics represented by the graphs, you can use the time range list\.  
-To bring up a more detailed view, you can choose any graph\. You can also apply metric\-specific filters to the data\. 
-
-### Viewing DB instance metrics with the CLI or API<a name="USER_Monitoring.DB"></a>
-
-Amazon RDS integrates with CloudWatch metrics to provide a variety of DB instance metrics\. You can view CloudWatch metrics using the RDS console, AWS CLI, or API\.
-
- For a complete list of Amazon RDS metrics, go to [ Amazon RDS dimensions and metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html) in the *Amazon CloudWatch User Guide*\. 
-
-#### Viewing DB metrics by using the CloudWatch CLI<a name="USER_Monitoring.CLI"></a>
-
-**Note**  
-The following CLI example requires the CloudWatch command line tools\. For more information on CloudWatch and to download the developer tools, see [Amazon CloudWatch](https://aws.amazon.com/cloudwatch) on the AWS website\. The `StartTime` and `EndTime` values supplied in this example are for illustration only\. Substitute appropriate start and end time values for your DB instance\.
-
-**To view usage and performance statistics for a DB instance**
-+ Use the CloudWatch command `mon-get-stats` with the following parameters\.
-
-  ```
-  1. PROMPT>mon-get-stats FreeStorageSpace --dimensions="DBInstanceIdentifier=mydbinstance" --statistics= Average 
-  2.   --namespace="AWS/RDS" --start-time 2009-10-16T00:00:00 --end-time 2009-10-16T00:02:00
-  ```
-
-#### Viewing DB metrics by using the CloudWatch API<a name="USER_Monitoring.API"></a>
-
-The `StartTime` and `EndTime` values supplied in this example are for illustration only\. Substitute appropriate start and end time values for your DB instance\.
-
-**To view usage and performance statistics for a DB instance**
-+ Call the CloudWatch API `GetMetricStatistics` with the following parameters:
-  + `Statistics.member.1` = `Average`
-  + `Namespace` = `AWS/RDS`
-  + `StartTime` = `2009-10-16T00:00:00`
-  + `EndTime` = `2009-10-16T00:02:00`
-  + `Period` = `60`
-  + `MeasureName` = `FreeStorageSpace`

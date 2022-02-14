@@ -1,8 +1,8 @@
 # Overview of Database Activity Streams<a name="DBActivityStreams.Overview"></a>
 
-As an Oracle database administrator, you need to safeguard your database and meet compliance and regulatory requirements\. One strategy is to integrate database activity streams with your monitoring tools\. In this way, you monitor and set alarms for audit activity in your Oracle database\.
+As an Oracle database administrator, you need to safeguard your database and meet compliance and regulatory requirements\. One strategy is to integrate database activity streams with your monitoring tools\. In this way, you monitor and set alarms for auditing activity in your Oracle database\.
 
-Security threats are both external and internal\. To protect against internal threats, you can control administrator access to data streams by using the Database Activity Streams feature\. Oracle DBAs don't have access to the collection, transmission, storage, and processing of the streams\.
+Security threats are both external and internal\. To protect against internal threats, you can control administrator access to data streams by configuring the Database Activity Streams feature\. Oracle DBAs don't have access to the collection, transmission, storage, and processing of the streams\.
 
 **Topics**
 + [How database activity streams work](#DBActivityStreams.Overview.how-they-work)
@@ -12,22 +12,22 @@ Security threats are both external and internal\. To protect against internal th
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
-Database activity streams provide a near\-real\-time stream of the activity in your Oracle DB instance\. Amazon RDS pushes activities to an Amazon Kinesis data stream\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
+Amazon RDS pushes activities to an Amazon Kinesis data stream in near real time\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
 
 **Important**  
-Database Activity Streams is a free feature, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
+Use of the Database Activity Streams feature in Amazon Aurora and Amazon RDS is free, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
 
-Applications for compliance management can also consume activity streams\. These applications can use the stream to generate alerts and audit activity on your Oracle database\.
+Applications for compliance management can also consume database activity streams\. These applications can use the stream to generate alerts and audit activity on your Oracle database\.
 
 
 
 ## Unified auditing in Oracle Database<a name="DBActivityStreams.Overview.unified-auditing"></a>
 
-Amazon RDS for Oracle doesn't capture any activities by default\. You create and manage audit policies in Oracle Database yourself\.
+Amazon RDS for Oracle doesn't capture database activity by default\. You create and manage audit policies in Oracle Database yourself\.
 
 Auditing is the monitoring and recording of configured database actions\. In an Oracle database, a *unified audit policy* is a named group of audit settings that you can use to audit an aspect of user behavior\. A policy can be as simple as auditing the activities of a single user\. You can also create complex audit policies that use conditions\.
 
-An Oracle database writes audit records, including `SYS` audit records, to the *unified audit trail*\. For example, if an error occurs during an `INSERT` statement, standard auditing indicates the error number and the SQL that was executed\. The audit trail resides in a read\-only table in the `AUDSYS` schema\. Access these records by querying the `UNIFIED_AUDIT_TRAIL` data dictionary view\.
+An Oracle database writes audit records, including `SYS` audit records, to the *unified audit trail*\. For example, if an error occurs during an `INSERT` statement, standard auditing indicates the error number and the SQL that was executed\. The audit trail resides in a read\-only table in the `AUDSYS` schema\. To access these records, query the `UNIFIED_AUDIT_TRAIL` data dictionary view\.
 
 Typically, you configure database activity streams as follows:
 

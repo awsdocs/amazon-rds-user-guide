@@ -65,7 +65,7 @@ RDS Proxy is available in the following AWS Regions:
   For RDS DB instances in replication configurations, you can associate a proxy only with the writer DB instance, not a read replica\.
 + You can't use RDS Proxy with Aurora Serverless clusters\.
 + Using RDS Proxy with Aurora clusters that are part of an Aurora global database isn't currently supported\.
-+  Your RDS Proxy must be in the same virtual private cloud \(VPC\) as the database\. The proxy can't be publicly accessible, although the database can be\. For example, if you're prototyping on a local host, you can't connect to your RDS Proxy because the proxy would be outside of the VPC\.
++  Your RDS Proxy must be in the same virtual private cloud \(VPC\) as the database\. The proxy can't be publicly accessible, although the database can be\. For example, if you're prototyping on a local host, you can't connect to your RDS Proxy unless you set up dedicated networking\. This is the case because your local host is outside of the proxy's VPC\.
 **Note**  
  For Aurora DB clusters, you can turn on cross\-VPC access\. To do this, create an additional endpoint for a proxy and specify a different VPC, subnets, and security groups with that endpoint\. For more information, see [Accessing Aurora and RDS databases across VPCs](rds-proxy-endpoints.md#rds-proxy-cross-vpc)\. 
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 

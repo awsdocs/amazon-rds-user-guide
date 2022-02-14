@@ -454,7 +454,7 @@ Logfile D:\rdsdbdata\MSDTC\Trace\dtctrace.log:
 Processing completed   Buffers: 1, Events: 3, EventsLost: 0 :: Format Errors: 0, Unknowns: 3
 Event traces dumped to d:\rdsdbdata\Log\msdtc_<timestamp>.log
 ```
-You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.  
+You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\.  
 The trace session logs remain on the instance for 35 days\. Any older trace session logs are automatically deleted\.
 
 **Example of STATUS tracing action**  

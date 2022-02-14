@@ -1,16 +1,18 @@
-# Working with AWS CloudTrail and Amazon RDS<a name="logging-using-cloudtrail"></a>
+# Monitoring Amazon RDS API calls in AWS CloudTrail<a name="logging-using-cloudtrail"></a>
 
-AWS CloudTrail is an AWS service that helps you audit your AWS account\. CloudTrail is enabled on your AWS account when you create it\.
+AWS CloudTrail is an AWS service that helps you audit your AWS account\. AWS CloudTrail is turned on for your AWS account when you create it\. For more information about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
-For complete information about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
+**Topics**
++ [CloudTrail integration with Amazon RDS](#service-name-info-in-cloudtrail)
++ [Amazon RDS log file entries](#understanding-service-name-entries)
 
 ## CloudTrail integration with Amazon RDS<a name="service-name-info-in-cloudtrail"></a>
 
-All Amazon RDS actions are logged by CloudTrail\. CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon RDS\. 
+All Amazon RDS actions are logged by CloudTrail\. CloudTrail provides a record of actions taken by a user, role, or an AWS service in Amazon RDS\.
 
 ### CloudTrail events<a name="service-name-info-in-cloudtrail.events"></a>
 
-CloudTrail captures API calls for Amazon RDS as events\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. Events include calls from the Amazon RDS console and from code calls to the Amazon RDS APIs\. 
+CloudTrail captures API calls for Amazon RDS as events\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. Events include calls from the Amazon RDS console and from code calls to the Amazon RDS API operations\. 
 
 Amazon RDS activity is recorded in a CloudTrail event in **Event history**\. You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS Region\. For more information, see [Viewing events with CloudTrail event history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
@@ -21,7 +23,7 @@ For an ongoing record of events in your AWS account, including events for Amazon
 **Note**  
 If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\.
 
-You can create two types of trails for an AWS account: a trail that applies to all regions, or a trail that applies to one region\. By default, when you create a trail in the console, the trail applies to all regions\. 
+You can create two types of trails for an AWS account: a trail that applies to all Regions, or a trail that applies to one Region\. By default, when you create a trail in the console, the trail applies to all Regions\. 
 
 Additionally, you can configure other AWS services to further analyze and act upon the event data collected in CloudTrail logs\. For more information, see: 
 + [Overview for creating a trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html)

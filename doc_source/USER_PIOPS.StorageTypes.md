@@ -100,7 +100,7 @@ The following limitations apply to storage autoscaling:
 + If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
 + Autoscaling can't be used with magnetic storage\.
 + Autoscaling can't be used with the following previous\-generation instance classes that have less than 6 TiB of orderable storage: db\.m3\.large, db\.m3\.xlarge, and db\.m3\.2xlarge\.
-+ Autoscaling operations aren't logged by AWS CloudTrail\. For more information on CloudTrail, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
++ Autoscaling operations aren't logged by AWS CloudTrail\. For more information on CloudTrail, see [Monitoring Amazon RDS API calls in AWS CloudTrail](logging-using-cloudtrail.md)\.
 
 Although automatic scaling helps you to increase storage on your Amazon RDS DB instance dynamically, you should still configure the initial storage for your DB instance to an appropriate size for your typical workload\.
 

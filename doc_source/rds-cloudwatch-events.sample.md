@@ -10,6 +10,8 @@ Amazon RDS records events that relate to your DB instances, DB snapshots, and DB
 + The source name and source type of the event
 + A message associated with the event\.
 
+The following examples illustrate different types of Amazon RDS events\.
+
 **Topics**
 + [Example of a DB instance event](#rds-cloudwatch-events.db-instances)
 + [Example of a DB parameter group event](#rds-cloudwatch-events.db-parameter-groups)

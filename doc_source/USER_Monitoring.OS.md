@@ -1,4 +1,4 @@
-# Monitoring the OS by using Enhanced Monitoring<a name="USER_Monitoring.OS"></a>
+# Monitoring OS metrics with Enhanced Monitoring<a name="USER_Monitoring.OS"></a>
 
 With Enhanced Monitoring, you can monitor the operating system of your DB instance in real time\. When you want to see how different processes or threads use the CPU, Enhanced Monitoring metrics are useful\.
 

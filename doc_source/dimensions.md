@@ -1,4 +1,4 @@
-# Amazon RDS dimensions<a name="dimensions"></a>
+# Amazon CloudWatch dimensions for Amazon RDS<a name="dimensions"></a>
 
 You can filter Amazon RDS metrics data by using any dimension in the following table\.
 

@@ -19,14 +19,6 @@ Amazon RDS supports Multi\-AZ with DBM for the following SQL Server versions and
 + SQL Server 2014: Standard and Enterprise Editions
 + SQL Server 2012: Standard and Enterprise Editions
 
-Amazon RDS supports Multi\-AZ for SQL Server in all AWS Regions, with the following exceptions:
-+ Asia Pacific \(Osaka\): Neither DBM nor Always On AGs are supported here\.
-+ Asia Pacific \(Sydney\): Supported for DB instances in virtual private clouds \(VPCs\)\.
-+ Asia Pacific \(Tokyo\): Supported for DB instances in VPCs\.
-
-  For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.
-+ South America \(São Paulo\): Supported on all [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types) except m1 and m2\.
-
 You can use the following SQL query to determine whether your SQL Server DB instance is Single\-AZ, Multi\-AZ with DBM, or Multi\-AZ with Always On AGs:
 
 ```

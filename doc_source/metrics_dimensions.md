@@ -1,6 +1,8 @@
-# Viewing Amazon RDS metrics and dimensions<a name="metrics_dimensions"></a>
+# Viewing DB instance metrics in the CloudWatch console and CLI<a name="metrics_dimensions"></a>
 
-When you use Amazon RDS resources, Amazon RDS sends metrics and dimensions to Amazon CloudWatch every minute\. You can use the following procedures to view the metrics for Amazon RDS\.
+Following, you can find details about how to view metrics for your DB instance using CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.
+
+When you use Amazon RDS resources, Amazon RDS sends metrics and dimensions to Amazon CloudWatch every minute\. You can use the following procedures to view the metrics for Amazon RDS in the CloudWatch console and CLI\.
 
 ## Console<a name="metrics_dimensions.console"></a>
 
@@ -12,12 +14,24 @@ Metrics are grouped first by the service namespace, and then by the various dime
 
 1. If necessary, change the AWS Region\. From the navigation bar, choose the AWS Region where your AWS resources are\. For more information, see [Regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)\.
 
-1. In the navigation pane, choose **Metrics**\. Choose the **RDS** metric namespace\.  
+1. In the navigation pane, choose **Metrics** and then **All metrics**\.  
+![\[Choose metric namespace\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/cw-all-metrics.png)
+
+1. Scroll down and choose the **RDS** metric namespace\.
+
+   The page displays the Amazon RDS dimensions\. For descriptions of these dimensions, see [Amazon CloudWatch dimensions for Amazon RDS](dimensions.md)\.  
 ![\[Choose metric namespace\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-01.png)
 
-1. Choose a metric dimension, for example **By Database Class**\.
+1. Choose a metric dimension, for example **By Database Class**\.  
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics-by-instance-class.png)
 
-1. To sort the metrics, use the column heading\. To graph a metric, select the check box next to the metric\. To filter by resource, choose the resource ID, and then choose **Add to search**\. To filter by metric, choose the metric name, and then choose **Add to search**\.  
+1. Do any of the following actions:
+   + To sort the metrics, use the column heading\.
+   + To graph a metric, select the check box next to the metric\.
+   + To filter by resource, choose the resource ID, and then choose **Add to search**\.
+   + To filter by metric, choose the metric name, and then choose **Add to search**\.
+
+   The following example filters on the **db\.t3\.medium** class and graphs the **CPUUtilization** metric\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-03.png)
 
 ## AWS CLI<a name="metrics_dimensions.CLI"></a>

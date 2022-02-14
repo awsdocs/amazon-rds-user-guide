@@ -256,7 +256,7 @@ Use the Amazon RDS master user credentials to connect to the Oracle DB instance 
 
 To configure an Oracle client, meet the following requirements:
 + Create a configuration file named krb5\.conf \(Linux\) or krb5\.ini \(Windows\) to point to the domain\. Configure the Oracle client to use this configuration file\.
-+ Verify that traffic can flow between the client host and AWS Directory Service over DNS port 53 and Kerberos ports \(88 and 464 for managed AWS Directory Service\) over TCP/UDP\.
++ Verify that traffic can flow between the client host and AWS Directory Service over DNS port 53 over TCP/UDP, Kerberos ports \(88 and 464 for managed AWS Directory Service\) over TCP, and LDAP port 389 over TCP\.
 + Verify that traffic can flow between the client host and the DB instance over the database port\.
 
 Following is sample content for AWS Managed Microsoft AD\.

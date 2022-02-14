@@ -4,7 +4,7 @@ You can monitor the MariaDB error log, slow query log, and the general log\. The
 
 You can monitor the MariaDB logs directly through the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. You can also access MariaDB logs by directing the logs to a database table in the main database and querying that table\. You can use the mysqlbinlog utility to download a binary log\. 
 
-For more information about viewing, downloading, and watching file\-based database logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\. 
+For more information about viewing, downloading, and watching file\-based database logs, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\. 
 
 **Topics**
 + [Accessing MariaDB error logs](#USER_LogAccess.MariaDB.Errorlog)

@@ -6,7 +6,6 @@ RDS delivers the metrics from Enhanced Monitoring into your Amazon CloudWatch Lo
 
 **Topics**
 + [Enhanced Monitoring availability](#USER_Monitoring.OS.Availability)
-+ [Enhanced Monitoring metric descriptions](#USER_Monitoring-Available-OS-Metrics)
 + [Differences between CloudWatch and Enhanced Monitoring metrics](#USER_Monitoring.OS.CloudWatchComparison)
 + [Retention of Enhanced Monitoring metrics](#USER_Monitoring.OS.retention)
 + [Cost of Enhanced Monitoring](#USER_Monitoring.OS.cost)
@@ -21,22 +20,6 @@ Enhanced Monitoring is available for the following database engines:
 + PostgreSQL
 
 Enhanced Monitoring is available for all DB instance classes except for the db\.m1\.small instance class\.
-
-## Enhanced Monitoring metric descriptions<a name="USER_Monitoring-Available-OS-Metrics"></a>
-
-The following tables list the OS metrics available using Amazon CloudWatch Logs\.
-
-**Topics**
-+ [Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances](#USER_Monitoring-Available-OS-Metrics-RDS)
-+ [Metrics for Microsoft SQL Server DB instances](#USER_Monitoring-Available-OS-Metrics-RDS.SQLServer)
-
-### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="USER_Monitoring-Available-OS-Metrics-RDS"></a>
-
-<a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.overview.html)
-
-### Metrics for Microsoft SQL Server DB instances<a name="USER_Monitoring-Available-OS-Metrics-RDS.SQLServer"></a>
-
-<a name="cloudwatch-sql-server-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.overview.html)
 
 ## Differences between CloudWatch and Enhanced Monitoring metrics<a name="USER_Monitoring.OS.CloudWatchComparison"></a>
 

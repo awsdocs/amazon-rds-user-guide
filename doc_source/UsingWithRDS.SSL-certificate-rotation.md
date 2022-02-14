@@ -174,6 +174,8 @@ Before scheduling the CA certificate rotation on your database, update any clien
 
 The following are sample shell scripts that import the certificate bundle into a trust store\.
 
+Each sample shell script uses keytool, which is part of the Java Development Kit \(JDK\)\. For information about installing the JDK, see [ JDK Installation Guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html)\.
+
 **Topics**
 + [Sample script for importing certificates on Linux](#UsingWithRDS.SSL-certificate-rotation-sample-script.linux)
 + [Sample script for importing certificates on macOS](#UsingWithRDS.SSL-certificate-rotation-sample-script.macos)

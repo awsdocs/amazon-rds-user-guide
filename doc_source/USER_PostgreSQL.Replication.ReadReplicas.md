@@ -37,7 +37,7 @@ If you use the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgre
 
 For your RDS for PostgreSQL read replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. *Replica lag* is the amount of time, in milliseconds, that a read replica lags behind the source DB instance\. The `ReplicaLag` metric reports the value of `SELECT extract(epoch from now() - pg_last_xact_replay_timestamp()) AS replica_lag`\. 
 
-To learn more about `ReplicaLag` and other metrics for Amazon RDS, see [Amazon RDS metrics](rds-metrics.md)\. 
+To learn more about `ReplicaLag` and other metrics for Amazon RDS, see [Amazon CloudWatch metrics for Amazon RDS](rds-metrics.md)\. 
 
 ## Read replica limitations with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Limitations"></a>
 

@@ -2,7 +2,7 @@
 
 Amazon RDS PostgreSQL generates query and error logs\. You can use log messages to troubleshoot performance and auditing issues while using the database\.
 
-To view, download, and watch file\-based database logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\. 
+To view, download, and watch file\-based database logs, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\. 
 
 **Topics**
 + [Overview of PostgreSQL logs](#USER_LogAccess.Concepts.PostgreSQL.overview)

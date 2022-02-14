@@ -1,82 +1,12 @@
-# Adding counter metrics to the Performance Insights dashboard<a name="USER_PerfInsights_Counters"></a>
+# Performance Insights counter metrics<a name="USER_PerfInsights_Counters"></a>
 
-With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs show a selection of dozens of operating system and database performance metrics\. You can correlate this information with DB load to help identify and analyze performance problems\.
+Counter metrics are operating system and database performance metrics in the Performance Insights dashboard\. To help identify and analyze performance problems, you can correlate counter metrics with DB load\.
 
 **Topics**
-+ [Performance Insights operating system counters](#USER_PerfInsights_Counters.OS)
 + [Performance Insights counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
 + [Performance Insights counters for Amazon RDS for Microsoft SQL Server](#USER_PerfInsights_Counters.SQLServer)
 + [Performance Insights counters for Amazon RDS for Oracle](#USER_PerfInsights_Counters.Oracle)
 + [Performance Insights counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
-
-## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
-
-The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing OS metrics using CloudWatch Logs](USER_Monitoring.OS.CloudWatchLogs.md)\. 
-
-
-| Counter | Type | Metric | 
-| --- | --- | --- | 
-| active | memory | os\.memory\.active | 
-| buffers | memory | os\.memory\.buffers | 
-| cached | memory | os\.memory\.cached | 
-| dirty | memory | os\.memory\.dirty | 
-| free | memory | os\.memory\.free | 
-| hugePagesFree | memory | os\.memory\.hugePagesFree | 
-| hugePagesRsvd | memory | os\.memory\.hugePagesRsvd | 
-| hugePagesSize | memory | os\.memory\.hugePagesSize | 
-| hugePagesSurp | memory | os\.memory\.hugePagesSurp | 
-| hugePagesTotal | memory | os\.memory\.hugePagesTotal | 
-| inactive | memory | os\.memory\.inactive | 
-| mapped | memory | os\.memory\.mapped | 
-| pageTables | memory | os\.memory\.pageTables | 
-| slab | memory | os\.memory\.slab | 
-| total | memory | os\.memory\.total | 
-| writeback | memory | os\.memory\.writeback | 
-| guest | cpuUtilization | os\.cpuUtilization\.guest | 
-| idle | cpuUtilization | os\.cpuUtilization\.idle | 
-| irq | cpuUtilization | os\.cpuUtilization\.irq | 
-| nice | cpuUtilization | os\.cpuUtilization\.nice | 
-| steal | cpuUtilization | os\.cpuUtilization\.steal | 
-| system | cpuUtilization | os\.cpuUtilization\.system | 
-| total | cpuUtilization | os\.cpuUtilization\.total | 
-| user | cpuUtilization | os\.cpuUtilization\.user | 
-| wait | cpuUtilization | os\.cpuUtilization\.wait | 
-| avgQueueLen | diskIO | os\.diskIO\.avgQueueLen | 
-| avgReqSz | diskIO | os\.diskIO\.avgReqSz | 
-| await | diskIO | os\.diskIO\.await | 
-| readIOsPS | diskIO | os\.diskIO\.readIOsPS | 
-| readKb | diskIO | os\.diskIO\.readKb | 
-| readKbPS | diskIO | os\.diskIO\.readKbPS | 
-| rrqmPS | diskIO | os\.diskIO\.rrqmPS | 
-| tps | diskIO | os\.diskIO\.tps | 
-| util | diskIO | os\.diskIO\.util | 
-| writeIOsPS | diskIO | os\.diskIO\.writeIOsPS | 
-| writeKb | diskIO | os\.diskIO\.writeKb | 
-| writeKbPS | diskIO | os\.diskIO\.writeKbPS | 
-| wrqmPS | diskIO | os\.diskIO\.wrqmPS | 
-| blocked | tasks | os\.tasks\.blocked | 
-| running | tasks | os\.tasks\.running | 
-| sleeping | tasks | os\.tasks\.sleeping | 
-| stopped | tasks | os\.tasks\.stopped | 
-| total | tasks | os\.tasks\.total | 
-| zombie | tasks | os\.tasks\.zombie | 
-| one | loadAverageMinute | os\.loadAverageMinute\.one | 
-| fifteen | loadAverageMinute | os\.loadAverageMinute\.fifteen | 
-| five | loadAverageMinute | os\.loadAverageMinute\.five | 
-| cached | swap | os\.swap\.cached | 
-| free | swap | os\.swap\.free | 
-| in | swap | os\.swap\.in | 
-| out | swap | os\.swap\.out | 
-| total | swap | os\.swap\.total | 
-| maxFiles | fileSys | os\.fileSys\.maxFiles | 
-| usedFiles | fileSys | os\.fileSys\.usedFiles | 
-| usedFilePercent | fileSys | os\.fileSys\.usedFilePercent | 
-| usedPercent | fileSys | os\.fileSys\.usedPercent | 
-| used | fileSys | os\.fileSys\.used | 
-| total | fileSys | os\.fileSys\.total | 
-| rx | network | os\.network\.rx | 
-| tx | network | os\.network\.tx | 
-| numVCPUs | general | os\.general\.numVCPUs | 
 
 ## Performance Insights counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
 

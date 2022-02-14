@@ -3,7 +3,7 @@
 When you configure unified auditing for use with database activity streams, the following situations are possible:
 + Unified auditing isn't configured for your Oracle database\.
 
-  In this case, create new policies with the `CREATE AUDIT POLICY` command, and then enable them with the `AUDIT POLICY` command\. The following example creates and enables a policy to monitor users with specific privileges and roles:
+  In this case, create new policies with the `CREATE AUDIT POLICY` command, and then enable them with the `AUDIT POLICY` command\. The following example creates and enables a policy to monitor users with specific privileges and roles\.
 
   ```
   CREATE AUDIT POLICY table_pol
@@ -17,9 +17,9 @@ When you configure unified auditing for use with database activity streams, the 
 + Unified auditing is configured for your Oracle database\.
 
   When you enable a database activity stream, RDS for Oracle automatically clears existing audit data\. It also revokes audit trail privileges\. RDS for Oracle can no longer do the following:
-  + Purge unified audit trail records
-  + Add, delete, or modify the unified audit policy
-  + Update the last archived time stamp
+  + Purge unified audit trail records\.
+  + Add, delete, or modify the unified audit policy\.
+  + Update the last archived time stamp\.
 **Important**  
 We strongly recommend that you back up your audit data before enabling a database activity stream\.
 

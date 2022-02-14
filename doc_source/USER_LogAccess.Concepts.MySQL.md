@@ -2,7 +2,7 @@
 
 You can monitor the MySQL logs directly through the Amazon RDS console, Amazon RDS API, AWS CLI, or AWS SDKs\. You can also access MySQL logs by directing the logs to a database table in the main database and querying that table\. You can use the mysqlbinlog utility to download a binary log\. 
 
-For more information about viewing, downloading, and watching file\-based database logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.
+For more information about viewing, downloading, and watching file\-based database logs, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\.
 
 **Topics**
 + [Overview of MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md)

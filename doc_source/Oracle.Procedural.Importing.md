@@ -21,7 +21,7 @@ The following video summarizes the different Oracle Database migration technique
 
 The following video explains how to plan and execute a data migration\.
 
-
+[![AWS Videos](http://img.youtube.com/vi/qwoiCMwiEk0/0.jpg)](http://www.youtube.com/watch?v=qwoiCMwiEk0)
 
 **Topics**
 + [Importing using Oracle SQL Developer](Oracle.Procedural.Importing.SQLDeveloper.md)

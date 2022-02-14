@@ -8,5 +8,5 @@ The Performance Insights dashboard contains database performance information to 
 + [Analyzing DB load by wait events](USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.md)
 + [Analyzing running queries using the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.md)
 + [Analyzing Oracle execution plans using the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.AccessPlans.md)
-+ [Viewing more SQL text in the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.SQLTextSize.md)
++ [Accessing the text of SQL statements](USER_PerfInsights.UsingDashboard.SQLTextSize.md)
 + [Zooming In on the DB Load chart](USER_PerfInsights.UIcontrols.md)

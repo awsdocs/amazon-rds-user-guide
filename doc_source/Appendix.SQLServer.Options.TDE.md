@@ -80,6 +80,12 @@ Because the TDE option is a persistent option, you can have a conflict between 
 + The current option group has the TDE option, and you replace it with an option group that does not have the TDE option\.
 + You restore from a DB snapshot to a new DB instance that does not have an option group that contains the TDE option\. For more information about this scenario, see [Option group considerations](USER_CopySnapshot.md#USER_CopySnapshot.Options)\. 
 
+## SQL Server performance considerations<a name="Appendix.SQLServer.Options.TDE.Perf"></a>
+
+The performance of a SQL Server DB instance can be impacted by using Transparent Data Encryption\.
+
+Performance for unencrypted databases can also be degraded if the databases are on a DB instance that has at least one encrypted database\. As a result, we recommend that you keep encrypted and unencrypted databases on separate DB instances\.
+
 ## Disabling TDE<a name="TDE.Disabling"></a>
 
 To disable TDE for a DB instance, first make sure that there are no encrypted objects left on the DB instance by either decrypting the objects or by dropping them\. If any encrypted objects exist on the DB instance, you can't disable TDE for the DB instance\. When you use the console to remove the TDE option from an option group, the console indicates that it is processing\. In addition, an error event is created if the option group is associated with an encrypted DB instance or DB snapshot\.

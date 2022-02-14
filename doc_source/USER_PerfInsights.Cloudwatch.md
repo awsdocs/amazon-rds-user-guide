@@ -1,4 +1,4 @@
-# Performance Insights metrics published to Amazon CloudWatch<a name="USER_PerfInsights.Cloudwatch"></a>
+# Amazon CloudWatch metrics for Performance Insights<a name="USER_PerfInsights.Cloudwatch"></a>
 
 Performance Insights automatically publishes metrics to Amazon CloudWatch\. The same data can be queried from Performance Insights, but having the metrics in CloudWatch makes it easy to add CloudWatch alarms\. It also makes it easy to add the metrics to existing CloudWatch Dashboards\.
 
@@ -34,37 +34,37 @@ This example generates output similar to the following\.
 {
 		"Datapoints": [
 		{
-		"Timestamp": "2018-07-19T21:30:00Z",
+		"Timestamp": "2021-07-19T21:30:00Z",
 		"Unit": "None",
 		"Average": 2.1
 		},
 		{
-		"Timestamp": "2018-07-19T21:34:00Z",
+		"Timestamp": "2021-07-19T21:34:00Z",
 		"Unit": "None",
 		"Average": 1.7
 		},
 		{
-		"Timestamp": "2018-07-19T21:35:00Z",
+		"Timestamp": "2021-07-19T21:35:00Z",
 		"Unit": "None",
 		"Average": 2.8
 		},
 		{
-		"Timestamp": "2018-07-19T21:31:00Z",
+		"Timestamp": "2021-07-19T21:31:00Z",
 		"Unit": "None",
 		"Average": 1.5
 		},
 		{
-		"Timestamp": "2018-07-19T21:32:00Z",
+		"Timestamp": "2021-07-19T21:32:00Z",
 		"Unit": "None",
 		"Average": 1.8
 		},
 		{
-		"Timestamp": "2018-07-19T21:29:00Z",
+		"Timestamp": "2021-07-19T21:29:00Z",
 		"Unit": "None",
 		"Average": 3.0
 		},
 		{
-		"Timestamp": "2018-07-19T21:33:00Z",
+		"Timestamp": "2021-07-19T21:33:00Z",
 		"Unit": "None",
 		"Average": 2.4
 		}

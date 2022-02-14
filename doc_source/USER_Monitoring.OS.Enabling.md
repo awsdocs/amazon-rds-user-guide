@@ -2,6 +2,11 @@
 
 To use Enhanced Monitoring, you must create an IAM role, and then enable Enhanced Monitoring\.
 
+**Topics**
++ [Creating an IAM role for Enhanced Monitoring](#USER_Monitoring.OS.Enabling.Prerequisites)
++ [Turning Enhanced Monitoring on and off](#USER_Monitoring.OS.Enabling.Procedure)
++ [Protecting against the confused deputy problem](#USER_Monitoring.OS.confused-deputy)
+
 ## Creating an IAM role for Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Prerequisites"></a>
 
 Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring permissions using an AWS Identity and Access Management \(IAM\) role\. You can either create this role when you enable Enhanced Monitoring or create it beforehand\.

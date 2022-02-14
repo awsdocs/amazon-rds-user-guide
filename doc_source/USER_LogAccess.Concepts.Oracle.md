@@ -1,6 +1,6 @@
 # Oracle database log files<a name="USER_LogAccess.Concepts.Oracle"></a>
 
-You can access Oracle alert logs, audit files, and trace files by using the Amazon RDS console or API\. For more information about viewing, downloading, and watching file\-based database logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\. 
+You can access Oracle alert logs, audit files, and trace files by using the Amazon RDS console or API\. For more information about viewing, downloading, and watching file\-based database logs, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\. 
 
 The Oracle audit files provided are the standard Oracle auditing files\. Amazon RDS supports the Oracle fine\-grained auditing \(FGA\) feature\. However, log access doesn't provide access to FGA events that are stored in the `SYS.FGA_LOG$` table and that are accessible through the `DBA_FGA_AUDIT_TRAIL` view\. 
 

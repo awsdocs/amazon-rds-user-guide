@@ -1,6 +1,6 @@
-# Amazon RDS metrics<a name="rds-metrics"></a>
+# Amazon CloudWatch metrics for Amazon RDS<a name="rds-metrics"></a>
 
-The `AWS/RDS` namespace includes the following metrics\.
+The `AWS/RDS` namespace in Amazon CloudWatch includes the following metrics\.
 
 **Note**  
 The Amazon RDS console might display metrics in units that are different from the units sent to Amazon CloudWatch\. For example, the Amazon RDS console might display a metric in megabytes \(MB\), while the metric is sent to Amazon CloudWatch in bytes\.
@@ -8,7 +8,7 @@ The Amazon RDS console might display metrics in units that are different from th
 
 | Metric | Console name | Description | Units | 
 | --- | --- | --- | --- | 
-| BinLogDiskUsage |   **Binary Log Disk Usage \(MB\)**   |  The amount of disk space occupied by binary logs\. If autobackups are enabled for MySQL and MariaDB instances, including read replicas, binary logs are created\.  |  Bytes  | 
+| BinLogDiskUsage |   **Binary Log Disk Usage \(MB\)**   |  The amount of disk space occupied by binary logs\. If automatic backups are enabled for MySQL and MariaDB instances, including read replicas, binary logs are created\.  |  Bytes  | 
 | BurstBalance |   **Burst Balance \(Percent\)**   |  The percent of General Purpose SSD \(gp2\) burst\-bucket I/O credits available\.   |  Percent  | 
 | CPUUtilization |   **CPU Utilization \(Percent\)**   |  The percentage of CPU utilization\.  |  Percent  | 
 | CPUCreditUsage |  **CPU Credit Usage \(Count\)**   |  \(T2 instances\) The number of CPU credits spent by the instance for CPU utilization\. One CPU credit equals one vCPU running at 100 percent utilization for one minute or an equivalent combination of vCPUs, utilization, and time\. For example, you might have one vCPU running at 50 percent utilization for two minutes or two vCPUs running at 25 percent utilization for two minutes\. CPU credit metrics are available at a five\-minute frequency only\. If you specify a period greater than five minutes, use the `Sum` statistic instead of the `Average` statistic\.  |  Credits \(vCPU\-minutes\)  | 

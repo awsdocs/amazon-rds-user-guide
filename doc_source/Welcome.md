@@ -144,7 +144,7 @@ For more information about security groups, see [Security in Amazon RDS](UsingWi
 
 ## Monitoring an Amazon RDS DB instance<a name="Welcome.Monitoring"></a>
 
-There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)\. 
+There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md)\. 
 
 ## How to work with Amazon RDS<a name="Welcome.Interfaces"></a>
 

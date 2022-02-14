@@ -84,7 +84,7 @@ To learn how to analyze DB load using plans, see [Analyzing Oracle execution pla
 Every five minutes, Performance Insights identifies the most resource\-intensive Oracle queries and captures their plans\. Thus, you don't need to manually collect and manage a huge number of plans\. Instead, you can use the **Top SQL** tab to focus on the plans for the most problematic queries\. 
 
 **Note**  
-Performance Insights doesn't capture plans for queries whose text exceeds the maximum collectable query text limit\. For more information, see [Viewing more SQL text in the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.SQLTextSize.md)\.
+Performance Insights doesn't capture plans for queries whose text exceeds the maximum collectable query text limit\. For more information, see [Accessing the text of SQL statements](USER_PerfInsights.UsingDashboard.SQLTextSize.md)\.
 
 The retention period for execution plans is the same as for all your Performance Insights data\. The default is seven days in the free tier or two years for the long retention tier\.
 

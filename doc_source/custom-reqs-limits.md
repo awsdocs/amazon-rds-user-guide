@@ -74,11 +74,10 @@ The following limitations apply to RDS Custom for Oracle:
   + Specify your own DB parameter group, option group, or character set\.
   + Turn on Performance Insights\.
   + Turn on automatic minor version upgrade\.
-+ You can't change the DB instance class, for example from db\.m5\.xlarge to db\.m5\.2xlarge\.
-
-  However, you can restore a DB snapshot to a different DB instance class\.
++ You can't change the DB instance class\. For example, you can't change a db\.m5\.xlarge instance to db\.m5\.2xlarge\. However, you can restore a DB snapshot to a different DB instance class\.
 + The maximum DB instance storage is 64 TiB\.
-+ You can't use the Oracle Multitenant pluggable architecture\.
++ You can't use the Oracle Multitenant architecture\.
++ Only one database is supported on an RDS Custom for Oracle instance\.
 
 ## Limitations for RDS Custom for SQL Server<a name="custom-reqs-limits.limitsMS"></a>
 
