@@ -181,7 +181,7 @@ Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. Y
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceAccount": "111122223333",
                    "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333db:dbname"
                    }
                 }
@@ -206,7 +206,7 @@ Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. Y
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceAccount": "111122223333",
                    "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333db:dbname"
                    }
                 }

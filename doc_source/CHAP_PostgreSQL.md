@@ -191,8 +191,8 @@ PostgreSQL version 13\.4 is now available on Amazon RDS\. PostgreSQL contains se
 
 This version also includes the following changes:
 + The [spi module](https://www.postgresql.org/docs/13/contrib-spi.html) extensions refint, autoinc, inset\_username, and moddatetime version 1\.0 are added\. 
-+ The [pgrouting](PostgreSQL_Partitions.md) extension is updated to version 3\.1\.3\.
-+ The [pglogical](PostgreSQL_Partitions.md) extension is updated to version 2\.4\.0\.
++ The [pgrouting](http://docs.pgrouting.org/latest/en/index.html) extension is updated to version 3\.1\.3\.
++ The `pglogical` extension is updated to version 2\.4\.0\.
 + The [PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#CHAP_PostgreSQL.Extensions.PostGIS) extension is updated to version 3\.1\.4, along with the following related extensions:
   + [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html)
   + [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html)
@@ -267,8 +267,8 @@ For information on all extensions, see [PostgreSQL version 12 extensions support
 PostgreSQL version 12\.8 is now available on Amazon RDS\. PostgreSQL version 12\.8 contains several improvements that were announced for PostgreSQL release [12\.8](https://www.postgresql.org/docs/release/12.8/)\. 
 
 This version also includes the following changes:
-+ The [pgrouting](PostgreSQL_Partitions.md) extension is updated to version 3\.0\.5\.
-+ The [pglogical](PostgreSQL_Partitions.md) extension is updated to version 2\.4\.0\.
++ The [pgrouting](http://docs.pgrouting.org/latest/en/index.html) extension is updated to version 3\.0\.5\.
++ The `pglogical` extension is updated to version 2\.4\.0\.
 + The [PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#CHAP_PostgreSQL.Extensions.PostGIS) extension is updated to version 3\.1\.4, along with the following related extensions:
   + [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html)
   + [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html)
@@ -377,8 +377,8 @@ For information on all extensions, see [PostgreSQL version 11\.x extensions supp
 PostgreSQL version 11\.13 is now available on Amazon RDS\. PostgreSQL version 11\.13 contains several improvements that were announced for PostgreSQL release [11\.13](https://www.postgresql.org/docs/release/11.13/)\. 
 
 This version also includes the following changes:
-+ The [pgrouting](PostgreSQL_Partitions.md) extension is updated to version 2\.6\.3\.
-+ The [pglogical](PostgreSQL_Partitions.md) extension is updated to version 2\.4\.0\.
++ The [pgrouting](http://docs.pgrouting.org/latest/en/index.html) extension is updated to version 2\.6\.3\.
++ The `pglogical` extension is updated to version 2\.4\.0\.
 + The [PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#CHAP_PostgreSQL.Extensions.PostGIS) extension is updated to version 3\.1\.4, along with the following related extensions:
   + [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html)
   + [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html)
@@ -539,8 +539,8 @@ For information on all extensions, see [PostgreSQL version 10\.x extensions supp
 PostgreSQL version 10\.18 is now available on Amazon RDS\. PostgreSQL version 10\.18 contains several improvements that were announced for PostgreSQL release [10\.18](https://www.postgresql.org/docs/release/10.18/)\. 
 
 This version also includes the following changes:
-+ The [pgrouting](PostgreSQL_Partitions.md) extension is updated to version 2\.5\.5\.
-+ The [pglogical](PostgreSQL_Partitions.md) extension is updated to version 2\.4\.0\.
++ The [pgrouting](http://docs.pgrouting.org/latest/en/index.html) extension is updated to version 2\.5\.5\.
++ The `pglogical` extension is updated to version 2\.4\.0\.
 + The [PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#CHAP_PostgreSQL.Extensions.PostGIS) extension is updated to version 3\.1\.4, along with the following related extensions:
   + [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html)
   + [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html)
@@ -745,7 +745,7 @@ For information on all extensions, see [PostgreSQL version 9\.6\.x extensions su
 PostgreSQL version 9\.6\.23 is now available on Amazon RDS\. PostgreSQL version 9\.6\.23 contains several improvements that were announced for PostgreSQL release [9\.6\.23](https://www.postgresql.org/docs/release/9.6.23/)\. 
 
 This version also includes the following changes:
-+ The [pglogical](PostgreSQL_Partitions.md) extension is updated to version 2\.4\.0\.
++ The `pglogical` extension is updated to version 2\.4\.0\.
 + The [PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#CHAP_PostgreSQL.Extensions.PostGIS) extension is updated to version 2\.5\.5, along with the following related extensions:
   + [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html)
   + [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html)

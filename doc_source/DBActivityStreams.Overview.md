@@ -1,14 +1,17 @@
 # Overview of Database Activity Streams<a name="DBActivityStreams.Overview"></a>
 
-As an Oracle database administrator, you need to safeguard your database and meet compliance and regulatory requirements\. One strategy is to integrate database activity streams with your monitoring tools\. In this way, you monitor and set alarms for auditing activity in your Oracle database\.
+As an RDS for Oracle database administrator, you need to safeguard your database and meet compliance and regulatory requirements\. One strategy is to integrate database activity streams with your monitoring tools\. In this way, you monitor and set alarms for auditing activity in your Oracle database\.
 
-Security threats are both external and internal\. To protect against internal threats, you can control administrator access to data streams by configuring the Database Activity Streams feature\. Oracle DBAs don't have access to the collection, transmission, storage, and processing of the streams\.
+Security threats are both external and internal\. To protect against internal threats, you can control administrator access to data streams by configuring the Database Activity Streams feature\. RDS for Oracle DBAs don't have access to the collection, transmission, storage, and processing of the streams\.
 
 **Topics**
 + [How database activity streams work](#DBActivityStreams.Overview.how-they-work)
 + [Unified auditing in Oracle Database](#DBActivityStreams.Overview.unified-auditing)
-+ [Asynchronous mode](#DBActivityStreams.Overview.sync-mode)
++ [Asynchronous mode for database activity streams](#DBActivityStreams.Overview.sync-mode)
 + [Requirements for database activity streams](#DBActivityStreams.Overview.requirements)
++ [Supported RDS for Oracle engine versions for database activity streams](#DBActivityStreams.Overview.requirements.version)
++ [Supported DB instance classes for database activity streams](#DBActivityStreams.Overview.requirements.classes)
++ [Supported AWS Regions for database activity streams](#DBActivityStreams.Overview.requirements.Regions)
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
@@ -63,7 +66,7 @@ Typically, you turn on unified auditing in RDS for Oracle by attaching a paramet
 + If you enable an activity stream, RDS for Oracle ignores the auditing parameters in the parameter group\. 
 + If you disable an activity stream, RDS for Oracle stops ignoring the auditing parameters\.
 
-## Asynchronous mode<a name="DBActivityStreams.Overview.sync-mode"></a>
+## Asynchronous mode for database activity streams<a name="DBActivityStreams.Overview.sync-mode"></a>
 
 Activity streams in RDS for Oracle are always asynchronous\. When a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, the activity stream event is made a durable record\. If an error occurs in the background task, Amazon RDS generates an event\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\. Asynchronous mode favors database performance over the accuracy of the activity stream\.
 
@@ -72,17 +75,25 @@ Activity streams in RDS for Oracle are always asynchronous\. When a database ses
 In RDS for Oracle, database activity streams have the following requirements and limitations\.
 
 **Topics**
-+ [Supported RDS for Oracle engine versions](#DBActivityStreams.Overview.requirements.version)
-+ [Supported DB instance classes](#DBActivityStreams.Overview.requirements.classes)
 + [Oracle feature requirements](#DBActivityStreams.Overview.requirements.oracle)
-+ [AWS Region support](#DBActivityStreams.Overview.requirements.Regions)
 + [Miscellaneous requirements](#DBActivityStreams.Overview.requirements.misc)
 
-### Supported RDS for Oracle engine versions<a name="DBActivityStreams.Overview.requirements.version"></a>
+### Oracle feature requirements<a name="DBActivityStreams.Overview.requirements.oracle"></a>
+
+RDS for Oracle has the following requirements for database activity streams:
++ CDBs aren't supported\.
++ Oracle read replicas aren't supported\.
++ In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
+
+### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
++ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
++ Database activity streams require use of Amazon Kinesis\.
+
+## Supported RDS for Oracle engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 
 Database activity streams are supported for Oracle Database 19c using version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher\. Your database can use either Enterprise Edition or Standard Edition 2 \(SE2\)\.
 
-### Supported DB instance classes<a name="DBActivityStreams.Overview.requirements.classes"></a>
+## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 
 For Oracle for RDS, you can use database activity streams with the following DB instance classes:
 + db\.m4
@@ -96,22 +107,10 @@ The memory optimized db\.r5 classes, which use the naming pattern db\.r5\.*insta
 
 For more information about instance class types, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
-### Oracle feature requirements<a name="DBActivityStreams.Overview.requirements.oracle"></a>
-
-RDS for Oracle has the following requirements for database activity streams:
-+ CDBs aren't supported\.
-+ Oracle read replicas aren't supported\.
-+ In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
-
-### AWS Region support<a name="DBActivityStreams.Overview.requirements.Regions"></a>
+## Supported AWS Regions for database activity streams<a name="DBActivityStreams.Overview.requirements.Regions"></a>
 
 Database activity streams are supported in all AWS Regions except the following:
-+ Asia Pacific \(Jakarta\) Region, `ap-southeast-3`
 + China \(Beijing\) Region, `cn-north-1`
 + China \(Ningxia\) Region, `cn-northwest-1`
 + AWS GovCloud \(US\-East\), `us-gov-east-1`
 + AWS GovCloud \(US\-West\), `us-gov-west-1`
-
-### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
-+ Database activity streams require use of Amazon Kinesis\.

@@ -116,7 +116,7 @@ Amazon RDS Oracle doesn't support the following Oracle Database features:
 + Workspace Manager \(WMSYS\) schema
 
 **Note**  
-The preceding list is not exhausive\.
+The preceding list is not exhaustive\.
 
 **Warning**  
 In general, Amazon RDS doesn't prevent you from creating schemas for unsupported features\. However, if you create schemas for Oracle features and components that require SYS privileges, you can damage the data dictionary and affect the availability of your instance\. Use only supported features and schemas that are available in [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)\.

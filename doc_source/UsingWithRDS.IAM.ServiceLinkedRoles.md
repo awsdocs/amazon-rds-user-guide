@@ -15,7 +15,7 @@ Amazon RDS uses the service\-linked role named AWSServiceRoleForRDS to allow Ama
 The AWSServiceRoleForRDS service\-linked role trusts the following services to assume the role:
 + `rds.amazonaws.com`
 
-The role permissions policy allows Amazon RDS to complete the following actions on the specified resources:
+This service\-linked role has a permissions policy attached to it called `AmazonRDSServiceRolePolicy` that grants it permissions to operate in your account\. The role permissions policy allows Amazon RDS to complete the following actions on the specified resources:
 
 ```
 {
@@ -181,12 +181,12 @@ You can use the IAM console, the IAM CLI, or the IAM API to delete the AWSServic
 
 ## Service\-linked role permissions for Amazon RDS Custom<a name="slr-permissions-custom"></a>
 
-Amazon RDS Custom uses the service\-linked role named AmazonRDSCustomServiceRolePolicy to allow RDS Custom to call AWS services on behalf of your DB instances\.
+Amazon RDS Custom uses the service\-linked role named AWSServiceRoleForRDSCustom to allow RDS Custom to call AWS services on behalf of your DB instances\.
 
-The AmazonRDSCustomServiceRolePolicy service\-linked role trusts the following services to assume the role:
+The AWSServiceRoleForRDSCustom service\-linked role trusts the following services to assume the role:
 + `custom.rds.amazonaws.com`
 
-The role permissions policy allows RDS Custom to complete the following actions on the specified resources:
+This service\-linked role has a permissions policy attached to it called `AmazonRDSCustomServiceRolePolicy` that grants it permissions to operate in your account\. The role permissions policy allows RDS Custom to complete the following actions on the specified resources:
 
 ```
 {

@@ -1,19 +1,21 @@
 # Transporting PostgreSQL databases between DB instances<a name="PostgreSQL.TransportableDB"></a>
 
-By using PostgreSQL Transportable Databases for Amazon RDS, you can transport a PostgreSQL database between two DB instances\. This provides an extremely fast method of migrating large databases between separate DB instances\. To transport databases using this method, your DB instances must both run the same major version of PostgreSQL\.
+By using PostgreSQL transportable databases for Amazon RDS, you can move a PostgreSQL database between two DB instances\. This is a very fast way to migrate large databases between different DB instances\. To use this approach, your DB instances must both run the same major version of PostgreSQL\. 
 
-To use transportable databases, install the `pg_transport` extension\. This extension provides a physical transport mechanism to move each database\. By streaming the database files with minimal processing, physical transport moves data much faster than traditional dump and load processes and takes minimal downtime\. PostgreSQL transportable databases use a pull model where the destination DB instance imports the database from the source DB instance\.
+This capability requires that you install the `pg_transport` extension on both the source and the destination DB instance\. The `pg_transport` extension provides a physical transport mechanism that moves the database files with minimal processing\. This mechanism moves data much faster than traditional dump and load processes, with less downtime\. 
 
 **Note**  
-PostgreSQL transportable databases are available in RDS for PostgreSQL versions 10\.10 and later, and 11\.5 and later\. 
+PostgreSQL transportable databases are available in RDS for PostgreSQL 11\.5 and higher, and RDS for PostgreSQL version 10\.10 and higher\.
+
+To transport a PostgreSQL DB instance from one RDS for PostgreSQL DB instance to another, you first set up the source and destination instances as detailed in [ Setting up a DB instance for transport](#PostgreSQL.TransportableDB.Setup)\. You can then transport the database by using the function described in [ Transporting a PostgreSQL database](#PostgreSQL.TransportableDB.Transporting)\. 
 
 **Topics**
 + [Limitations for using PostgreSQL transportable databases](#PostgreSQL.TransportableDB.Limits)
-+ [Setting up to transport PostgreSQL databases](#PostgreSQL.TransportableDB.Setup)
-+ [Transporting a PostgreSQL database using the transport\.import\_from\_server function](#PostgreSQL.TransportableDB.Transporting)
++ [Setting up to transport a PostgreSQL database](#PostgreSQL.TransportableDB.Setup)
++ [Transporting a PostgreSQL database to the destination from the source](#PostgreSQL.TransportableDB.Transporting)
 + [What happens during database transport](#PostgreSQL.TransportableDB.DuringTransport)
-+ [transport\.import\_from\_server function reference](#PostgreSQL.TransportableDB.transport.import_from_server)
-+ [Configuration parameters for the pg\_transport extension](#PostgreSQL.TransportableDB.Parameters)
++ [Transportable databases function reference](#PostgreSQL.TransportableDB.transport.import_from_server)
++ [Transportable databases parameter reference](#PostgreSQL.TransportableDB.Parameters)
 
 ## Limitations for using PostgreSQL transportable databases<a name="PostgreSQL.TransportableDB.Limits"></a>
 
@@ -22,40 +24,65 @@ Transportable databases have the following limitations:
 + **Unsupported column types** – You can't use the `reg` data types in any database tables that you plan to transport with this method\. These types depend on system catalog object IDs \(OIDs\), which often change during transport\.
 + **Tablespaces** – All source database objects must be in the default `pg_default` tablespace\. 
 + **Compatibility** – Both the source and destination DB instances must run the same major version of PostgreSQL\. 
-
-  Before transport begins, the `transport.import_from_server` function compares the source and destination DB instances to ensure database compatibility\. This includes verifying PostgreSQL major version compatibility\. Also, the function verifies that the destination DB instance likely has enough space to receive the source database\. The function performs several additional checks to make sure that the transport is smooth\.
-+ **Extensions** – The only extension that you can install on the source DB instance during transport is `pg_transport`\.
++ **Extensions** – The source DB instance can have only the `pg_transport` installed\. 
 + **Roles and ACLs** – The source database's access privileges and ownership information aren't carried over to the destination database\. All database objects are created and owned by the local destination user of the transport\.
-+ **Concurrent transports** – You can run up to 32 total transports at the same time on a DB instance, including both imports and exports\. To define the worker processes used for each transport, use the `pg_transport.work_mem` and `pg_transport.num_workers` parameters\. To accommodate concurrent transports, you might need to increase the `max_worker_processes` parameter quite a bit\. For more information, see [ Configuration parameters for the pg\_transport extension](#PostgreSQL.TransportableDB.Parameters)\.
-+ **Only RDS for PostgreSQL DB instances** – You can only use PostgreSQL transportable databases with RDS for PostgreSQL DB instances\. You can't use it with on\-premises databases or databases running on Amazon EC2\.
++ **Concurrent transports** – A single DB instance can support up to 32 concurrent transports, including both imports and exports, if worker processes have been configured properly\. 
++ **RDS for PostgreSQL DB instances only** – PostgreSQL transportable databases are supported on RDS for PostgreSQL DB instances only\. You can't use it with on\-premises databases or databases running on Amazon EC2\.
 
-## Setting up to transport PostgreSQL databases<a name="PostgreSQL.TransportableDB.Setup"></a>
+## Setting up to transport a PostgreSQL database<a name="PostgreSQL.TransportableDB.Setup"></a>
 
-To prepare to transport a PostgreSQL database from one DB instance to another, take the following steps\. 
+Before you begin, make sure that that your RDS for PostgreSQL DB instances meet the following requirements\.
++ The RDS for PostgreSQL DB instances for source and destination must run the same version of PostgreSQL\.
++ The destination DB can't have a database of the same name as the source DB that you want to transport\.
++ The account you use to run the transport needs `rds_superuser` privileges on both the source DB and the destination DB\. 
++ The security group for the source DB instance must allow inbound access from the destination DB instance\. This might already be the case if your source and destination DB instances are located in the VPC\. For more information about security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
 
-**To set up for transporting a PostgreSQL database**
-
-1. Make sure that the source DB instance's security group allows inbound traffic from the destination DB instance\. This is required because the destination DB instance starts the database transport with an import call to the source DB instance\. For information about how to use security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
-
-1. For both the source and destination DB instances, add `pg_transport` to the `shared_preload_libraries` parameter for each parameter group\. The `shared_preload_libraries` parameter is static and requires a database restart for changes to take effect\. For information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
-
-1. For both the source and destination DB instances, install the required `pg_transport` PostgreSQL extension\.
-
-   To do so, start psql as a user with the `rds_superuser` role for each DB instance, and then run the following command\.
-
-   ```
-   psql=> CREATE EXTENSION pg_transport;
-   ```
-
-## Transporting a PostgreSQL database using the transport\.import\_from\_server function<a name="PostgreSQL.TransportableDB.Transporting"></a>
-
-After you complete the process described in [ Setting up to transport PostgreSQL databases](#PostgreSQL.TransportableDB.Setup), you can start the transport\. To do so, run the [transport\.import\_from\_server](#PostgreSQL.TransportableDB.transport.import_from_server) function on the destination DB instance\. 
+Transporting databases from a source DB instance to a destination DB instance requires several changes to the DB parameter group associated with each instance\. That means that you must create a custom DB parameter group for the source DB instance and create a custom DB parameter group for the destination DB instance\.
 
 **Note**  
-Both the destination user for transport and the source user for the connection must be members of the `rds_superuser` role\.   
-The destination DB instance can't already contain a database with the same name as the source database to be transported, or the transport fails\.
+If your DB instances are already configured using custom DB parameter groups, you can start with step 2 in the following procedure\. 
 
-The following shows an example transport\.
+**To configure the custom DB group parameters for transporting databases**
+
+For the following steps, use an account that has `rds_superuser` privileges\. 
+
+1. If the source and destination DB instances use a default DB parameter group, you need to create a custom DB parameter using the appropriate version for your instances\. You do this so you can change values for several parameters\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+1. In the custom DB parameter group, change values for the following parameters:
+   + `shared_preload_libraries` – Add `pg_transport` to the list of libraries\. 
+   + `pg_transport.num_workers` – The default value is 3\. Increase or reduce this value as needed for your database\. For a 200 GB database, we recommend no larger than 8\. Keep in mind that if you increase the default value for this parameter, you should also increase the value of `max_worker_processes`\. 
+   + `pg_transport.work_mem` – The default value is either 128 MB or 256 MB, depending on the PostgreSQL version\. The default setting can typically be left unchanged\. 
+   + `max_worker_processes` – We recommend that you set this parameter to at least three times the `pg_transport.num_workers` parameter \(3x `pg_transport.num_workers`\) to handle the many background worker processes used by the transport process, plus other non\-transport background processes\. To learn more about `max_worker_processes` and other parameters, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html) in the PostgreSQL documentation\. 
+
+   For more information about these parameters, see [Transportable databases parameter reference ](#PostgreSQL.TransportableDB.Parameters)\.
+
+1. Reboot the source RDS for PostgreSQL DB instance and the destination instance so that the settings for the parameters take effect\.
+
+1. Connect to your RDS for PostgreSQL source DB instance\.
+
+   ```
+   psql --host=source-instance.111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password
+   ```
+
+1. Remove extraneous extensions from the public schema of the DB instance\. Only the `pg_transport` extension is allowed during the actual transport operation\.
+
+1. Install the `pg_transport` extension as follows:
+
+   ```
+   postgres=> CREATE EXTENSION pg_transport;
+   CREATE EXTENSION
+   ```
+
+1. Connect to your RDS for PostgreSQL destination DB instance\. Remove any extraneous extensions, and then install the `pg_transport` extension\.
+
+   ```
+   postgres=> CREATE EXTENSION pg_transport;
+   CREATE EXTENSION
+   ```
+
+## Transporting a PostgreSQL database to the destination from the source<a name="PostgreSQL.TransportableDB.Transporting"></a>
+
+After you complete the process described in [Setting up to transport a PostgreSQL database](#PostgreSQL.TransportableDB.Setup), you can start the transport\. To do so, run the `transport.import_from_server` function on the destination DB instance\. In the syntax following you can find the function parameters\.
 
 ```
 SELECT transport.import_from_server( 
@@ -68,29 +95,66 @@ SELECT transport.import_from_server(
    false);
 ```
 
+The `false` value shown in the example tells the function that this is not a dry run\. To test your transport setup, you can specify `true` for the `dry_run` option when you call the function, as shown following:
+
+```
+postgres=> SELECT transport.import_from_server(
+    'docs-lab-source-db.666666666666aws-region.rds.amazonaws.com', 5432,
+    'postgres', '********', 'labdb', '******', true);
+INFO:  Starting dry-run of import of database "labdb".
+INFO:  Created connections to remote database        (took 0.03 seconds).
+INFO:  Checked remote cluster compatibility          (took 0.05 seconds).
+INFO:  Dry-run complete                         (took 0.08 seconds total).
+ import_from_server
+--------------------
+
+(1 row)
+```
+
+The INFO lines are output because the `pg_transport.timing` parameter is set to its default value, `true`\. Set the `dry_run` to `false` when you run the command and the source database is imported to the destination, as shown following:
+
+```
+INFO:  Starting import of database "labdb".
+INFO:  Created connections to remote database        (took 0.02 seconds).
+INFO:  Marked remote database as read only           (took 0.13 seconds).
+INFO:  Checked remote cluster compatibility          (took 0.03 seconds).
+INFO:  Signaled creation of PITR blackout window     (took 2.01 seconds).
+INFO:  Applied remote database schema pre-data       (took 0.50 seconds).
+INFO:  Created connections to local cluster          (took 0.01 seconds).
+INFO:  Locked down destination database              (took 0.00 seconds).
+INFO:  Completed transfer of database files          (took 0.24 seconds).
+INFO:  Completed clean up                            (took 1.02 seconds).
+INFO:  Physical transport complete              (took 3.97 seconds total).
+import_from_server
+--------------------
+(1 row)
+```
+
 This function requires that you provide database user passwords\. Thus, we recommend that you change the passwords of the user roles you used after transport is complete\. Or, you can use SQL bind variables to create temporary user roles\. Use these temporary roles for the transport and then discard the roles afterwards\. 
 
-For details of the `transport.import_from_server` function and its parameters, see [ transport\.import\_from\_server function reference](#PostgreSQL.TransportableDB.transport.import_from_server)\.
+For more information about the `transport.import_from_server` function and its parameters, see [Transportable databases function reference](#PostgreSQL.TransportableDB.transport.import_from_server)\. 
 
 ## What happens during database transport<a name="PostgreSQL.TransportableDB.DuringTransport"></a>
 
-The `transport.import_from_server` function creates the in\-transit database on the destination DB instance\. The in\-transit database is inaccessible on the destination DB instance for the duration of the transport\.
+The PostgreSQL transportable databases feature uses a pull model to import the database from the source DB instance to the destination\. The `transport.import_from_server` function creates the in\-transit database on the destination DB instance\. The in\-transit database is inaccessible on the destination DB instance for the duration of the transport\.
 
 When transport begins, all current sessions on the source database are ended\. Any databases other than the source database on the source DB instance aren't affected by the transport\. 
 
 The source database is put into a special read\-only mode\. While it's in this mode, you can connect to the source database and run read\-only queries\. However, write\-enabled queries and some other types of commands are blocked\. Only the specific source database that is being transported is affected by these restrictions\. 
 
-During transport, you can't restore the destination DB instance to a point in time\. This is because the transport isn't transactional and doesn't use the PostgreSQL write\-ahead log to record changes\. If the destination DB instance has automatic backups enabled, a backup is automatically taken after transport completes\. Point\-in\-time restores are available for times after the backup finishes\.
+During transport, you can't restore the destination DB instance to a point in time\. This is because the transport isn't transactional and doesn't use the PostgreSQL write\-ahead log to record changes\. If the destination DB instance has automatic backups enabled, a backup is automatically taken after transport completes\. Point\-in\-time restores are available for times *after* the backup finishes\.
 
 If the transport fails, the `pg_transport` extension attempts to undo all changes to the source and destination DB instances\. This includes removing the destination's partially transported database\. Depending on the type of failure, the source database might continue to reject write\-enabled queries\. If this happens, use the following command to allow write\-enabled queries\.
 
 ```
-ALTER DATABASE my-database SET default_transaction_read_only = false;
+ALTER DATABASE db-name SET default_transaction_read_only = false;
 ```
 
-## transport\.import\_from\_server function reference<a name="PostgreSQL.TransportableDB.transport.import_from_server"></a>
+## Transportable databases function reference<a name="PostgreSQL.TransportableDB.transport.import_from_server"></a>
 
 The `transport.import_from_server` function transports a PostgreSQL database by importing it from a source DB instance to a destination DB instance\. It does this by using a physical database connection transport mechanism\.
+
+Before starting the transport, this function verifies that the source and the destination DB instances are the same version and are compatible for the migration\. It also confirms that the destination DB instance has enough space for the source\. 
 
 **Syntax**
 
@@ -129,25 +193,18 @@ You can find descriptions of the `transport.import_from_server` function paramet
 
 **Example**
 
-For an example, see [ Transporting a PostgreSQL database using the transport\.import\_from\_server function](#PostgreSQL.TransportableDB.Transporting)\.
+For an example, see [ Transporting a PostgreSQL database to the destination from the source](#PostgreSQL.TransportableDB.Transporting)\.
 
-## Configuration parameters for the pg\_transport extension<a name="PostgreSQL.TransportableDB.Parameters"></a>
+## Transportable databases parameter reference<a name="PostgreSQL.TransportableDB.Parameters"></a>
 
-Use the following parameters to configure the `pg_transport` extension behavior\.
+Several parameters control the behavior of the `pg_transport` extension\. Following, you can find descriptions of these parameters\. 
 
-```
-SET pg_transport.num_workers = integer; 
-SET pg_transport.work_mem = kilobytes;
-SET pg_transport.timing = Boolean;
-```
+**`pg_transport.num_workers`**  
+The number of workers to use for the transport process\. The default is 3\. Valid values are 1–32\. Even the largest database transports typically require fewer than 8 workers\. The value of this setting on the destination DB instance is used by both destination and source during transport\.
 
-You can find descriptions of these parameters in the following table\.
+**`pg_transport.timing` **  
+Specifies whether to report timing information during the transport\. The default is `true`, meaning that timing information is reported\. We recommend that you leave this parameter set to `true` so you can monitor progress\. For example output, see [ Transporting a PostgreSQL database to the destination from the source](#PostgreSQL.TransportableDB.Transporting)\.
 
-
-****  
-
-| Parameter | Description | 
-| --- | --- | 
-| pg\_transport\.num\_workers |  The number of workers to use for a physical transport\. The default is 3\. Valid values are 1–32\. Even large transports typically reach their maximum throughput with fewer than 8 workers\. During transport, the `pg_transport.num_workers` setting on the destination DB instance is used on both the destination and source DB instances\.  A related parameter is the PostgreSQL `max_worker_processes` parameter\. The transport process creates several background worker processes\. Thus, your setting for the `pg_transport.num_workers` parameter might require you to set the `max_worker_processes` parameter significantly higher on both the source and destination DB instances\.  We recommend that you set `max_worker_processes` on both the source and destination DB instances to at least three times the destination DB instance's setting for the `pg_transport.num_workers` parameter\. Add a few more to provide nontransport background worker processes\. For more information about the `max_worker_processes` parameter, see the PostgreSQL documentation about [Asynchronous behavior](https://www.postgresql.org/docs/devel/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-ASYNC-BEHAVIOR)\.  | 
-| pg\_transport\.timing  |  A Boolean value that specifies whether to report timing information during the transport\. The default is `true`\. Valid values are `true` to report timing information and `false` to disable the reporting of timing information\. We don't recommend that you set this parameter to `false`\. Disabling `pg_transport.timing` significantly reduces your ability to track the progress of transports\.  | 
-| pg\_transport\.work\_mem  |  The maximum amount of memory to allocate for each worker\. The default is 131,072 kilobytes \(KB\)\. The minimum value is 64 megabytes \(65,536 KB\)\. Valid values are in kilobytes \(KBs\) as binary base\-2 units, where 1 KB = 1,024 bytes\.  The transport might use less memory than is specified in this parameter\. Even large transports typically reach their maximum throughput with less than 256 MB \(262,144 KB\) of memory per worker\.  | 
+**`pg_transport.work_mem`**  
+The maximum amount of memory to allocate for each worker\. The default is 131072 kilobytes \(KB\) or 262144 KB \(256 MB\), depending on the PostgreSQL version\. The minimum value is 64 megabytes \(65536 KB\)\. Valid values are in kilobytes \(KBs\) as binary base\-2 units, where 1 KB = 1024 bytes\.   
+The transport might use less memory than is specified in this parameter\. Even large database transports typically require less than than 256 MB \(262144 KB\) of memory per worker\.

@@ -72,11 +72,6 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + `max server memory (mb)` >= 256 MB
   + `max worker threads` >= \(number of logical CPUs \* 7\)
 
-    For the upper limit on `max worker threads`, see [Configure the max worker threads server configuration option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option) in the Microsoft documentation\.
-**Note**  
-If you set `max worker threads` too high, the DB instance status is `incompatible-parameters` after the DB parameter group is applied\. Set `max worker threads` to a value within the limits\.  
-If you don't set the value correctly, the DB parameter group remains in the `pending-reboot` state even after you reboot the DB instance\.
-
   For more information on setting DB parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 + The maximum storage size for SQL Server DB instances is the following: 
   + General Purpose \(SSD\) storage – 16 TiB for all editions 
@@ -131,7 +126,6 @@ The following server\-level roles aren't available in Amazon RDS for SQL Server:
 + sysadmin
 
 The following server\-level permissions aren't available on RDS for SQL Server DB instances:
-+ ALTER ANY CREDENTIAL
 + ALTER ANY DATABASE
 + ALTER ANY EVENT NOTIFICATION
 + ALTER RESOURCES
@@ -140,6 +134,7 @@ The following server\-level permissions aren't available on RDS for SQL Server D
 + CONTROL\_SERVER
 + CREATE DDL EVENT NOTIFICATION
 + CREATE ENDPOINT
++ CREATE SERVER ROLE
 + CREATE TRACE EVENT NOTIFICATION
 + DROP ANY DATABASE
 + EXTERNAL ACCESS ASSEMBLY

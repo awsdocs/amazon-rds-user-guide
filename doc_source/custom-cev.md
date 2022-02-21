@@ -163,7 +163,7 @@ Either save the CEV manifest as a file, or edit the template when creating the C
 
 The following CEV manifest lists the files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they're listed\.
 
-In the following example for the October 2021 PSU for 12\.1, RDS Custom applies p32768233, then p32876425, then p16799735, and so on\.
+In the following example for the July 2021 PSU for Oracle Database 12c Release 1 \(12\.1\), RDS Custom applies p32768233, then p32876425, then p16799735, and so on\.
 
 ```
 {
@@ -211,7 +211,7 @@ In the following example for the October 2021 PSU for 12\.1, RDS Custom applies 
 }
 ```
 
-In the following example for 19c, RDS Custom applies p32126828, then p29213893, then p29782284, and so on\.
+In the following example for Oracle Database 19c, RDS Custom applies p32126828, then p29213893, then p29782284, and so on\.
 
 ```
 {

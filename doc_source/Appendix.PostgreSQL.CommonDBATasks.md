@@ -8,7 +8,7 @@ For information about working with RDS for PostgreSQL log files, see [PostgreSQL
 + [Understanding the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL database access](#Appendix.PostgreSQL.CommonDBATasks.Access)
 + [Working with RDS for PostgreSQL parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
-+ [Audit logging for a PostgreSQL DB instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
++ [Logging PostgreSQL DB instance operations and activities](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
 + [Working with the pgaudit extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
 + [Working with the pg\_repack extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
 + [Using pgBadger for log analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
@@ -39,9 +39,9 @@ As mentioned, the `rds_superuser` role can't do everything that the `postgres` s
 The following example shows how to create a user and then grant the user the `rds_superuser` role\. 
 
 ```
-pgres=> CREATE ROLE bus_app_admin WITH PASSWORD 'change_me' LOGIN;
+postgres=> CREATE ROLE bus_app_admin WITH PASSWORD 'change_me' LOGIN;
 CREATE ROLE
-pgres=> GRANT rds_superuser TO bus_app_admin;
+postgres=> GRANT rds_superuser TO bus_app_admin;
 GRANT ROLE
 ```
 
@@ -54,8 +54,8 @@ New databases in PostgreSQL are always created with a default set of privileges\
 To control which users are allowed to connect to a given database in Amazon RDS, first revoke the default `PUBLIC` privileges\. Then grant back the privileges on a more granular basis\. The following example code shows how\.
 
 ```
-psql> revoke all on database <database-name> from public;
-psql> grant connect, temporary on database <database-name> to <user/role name>;
+postgres=> REVOKE ALL on database db-name from public;
+postgres=> GRANT CONNECT, TEMPORARY on database db-name to user/role;
 ```
 
 For more information about privileges in PostgreSQL databases, see the [https://www.postgresql.org/docs/current/static/sql-grant.html](https://www.postgresql.org/docs/current/static/sql-grant.html) command in the PostgreSQL documentation\.
@@ -64,14 +64,14 @@ For more information about privileges in PostgreSQL databases, see the [https://
 
 When you create an RDS for PostgreSQL DB instance without specifying a custom parameter group, the instance is created using the default parameter group for the version of PostgreSQL that you choose\. For example, if you create an RDS for PostgreSQL DB instance using PostgreSQL 13\.3, the DB instance is created using the values in the parameter group for PostgreSQL 13 releases, `default.postgres13`\. 
 
-You can also create your own custom DB parameter group and modify the settings for you Aurora PostgreSQL DB instance\. To learn how, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+You can also create your own custom DB parameter group\. You need to do this if you want to modify any settings for the RDS for PostgreSQL DB instance from their default values\. To learn how, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 You can keep track of the settings on your RDS for PostgreSQL DB instance in many different ways, such as by using the AWS Management Console, or by using the AWS CLI or the Amazon RDS API\. You can also query the values from the PostgreSQL `pg_settings` table of your instance, as shown following\. 
 
 ```
-select name, setting, boot_val, reset_val, unit
-from pg_settings
-order by name;
+SELECT name, setting, boot_val, reset_val, unit
+FROM pg_settings
+ORDER BY name;
 ```
 
 To learn more about the values returned from this query, see [https://www.postgresql.org/docs/current/view-pg-settings.html](https://www.postgresql.org/docs/current/view-pg-settings.html) in the PostgreSQL documentation\.
@@ -300,40 +300,39 @@ Amazon RDS uses the default PostgreSQL units for all parameters\. The following 
 | `wal_writer_delay` | ms | 
 | `wal_receiver_status_interval` | s | 
 
-## Audit logging for a PostgreSQL DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
+## Logging PostgreSQL DB instance operations and activities<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 
-There are several parameters you can set to log activity that occurs on your PostgreSQL DB instance\. These parameters include the following:
-+  The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. For more information, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
+There are several parameters, extensions, and other configurable items that you can set to log activities that occur on your PostgreSQL DB instance\. These include the following:
++ The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. To learn more about RDS for PostgreSQL logging and how to monitor the logs, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 + The `rds.force_admin_logging_level` parameter logs actions by the Amazon RDS internal user \(rdsadmin\) in the databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\.
-+ The `rds.force_autovacuum_logging_level` parameter logs autovacuum worker operations in all databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\. The Amazon RDS recommended setting for rds\.force\_autovacuum\_logging\_level: is LOG\. Set log\_autovacuum\_min\_duration to a value from 1000 or 5000\. Setting this value to 5,000 writes activity to the log that takes more than 5 seconds and shows "vacuum skipped" messages\. For more information on this parameter, see [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\. 
++ The `rds.force_autovacuum_logging_level` parameter can be set to capture various autovacuum operations in the PostgreSQL error log\. For more information, see [Logging autovacuum and vacuum activities](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging)\. 
++ The `pgaudit` extension can be installed and configured to capture activities at the session level or at the object level\. For more information, see [Working with the pgaudit extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)\.
++ The `log_fdw` extension lets you access the database engine log using SQL\. For more information, see [Using the log\_fdw extension](CHAP_PostgreSQL.md#CHAP_PostgreSQL.Extensions.log_fdw)\.
++ The `pg_stat_statements` library is specified as the default for the `shared_preload_libraries` parameter in RDS for PostgreSQL version 10 and higher\. It's this library that lets you analzye running queries\. Be sure that `pg_stat_statements` is set in your DB parameter group\. For more information about monitoring your RDS for PostgreSQL DB instance using the information that this library provides, see [Analyzing running queries in PostgreSQL](USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL.md)\.
+
+In general terms, the point of logging is so that the DBA can monitor, tune performance, and troubleshoot\. Many of the logs are uploaded automatically to CloudWatch or Performance Insights, where they are sorted and grouped to provide complete metrics for the instance\. To learn more about Amazon RDS monitoring and metrics, see [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md)\. 
 
 ## Working with the pgaudit extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
 
-The `pgaudit` extension provides detailed session and object audit logging for RDS for PostgreSQL\. You can enable session auditing or object auditing using this extension\. You can use the `pgaudit` extension with the following versions:
-+ RDS for PostgreSQL version 13, all minor versions
-+ RDS for PostgreSQL version 12, all minor versions
-+ RDS for PostgreSQL version 11, all minor versions
-+ RDS for PostgreSQL version 10, all minor versions
-+ RDS for PostgreSQL version 9\.6\.3 and higher 9\.6 versions
-+ RDS for PostgreSQL version 9\.5\.7 and higher 9\.5 versions
+You can log activity at the session level or at the object level by installing the `pgaudit` extension on your RDS for PostgreSQL DB instance\. This extension is supported for all available RDS for PostgreSQL versions\. It uses the underlying native PostgreSQL logging mechanism\. 
 
-For more information on the `pgaudit` extension, see the [GitHub project documentation](https://github.com/pgaudit/pgaudit/blob/master/README.md)\. Choose the documentation for your PostgreSQL version\.
-
-To use the `pgaudit` extension, make sure a custom DB parameter group is associated with your DB instance and set parameters in this custom DB parameter group\. For information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+To learn more about the `pgaudit` extension, see [pgAudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) on GitHub\.
 
 With *session auditing*, you can log audit events from various sources and include the fully qualified command text when available\. Modify the custom parameter group that is associated with your DB instance so that `shared_preload_libraries` contains `pgaudit` and then set the `pgaudit.log` parameter to log any of the following types of events:
-+ `READ` – Audits `SELECT` and `COPY` when the source is a relation or a query\.
-+ `WRITE` – Audits `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` when the destination is a relation\.
-+ `FUNCTION` – Audits function calls and `DO` blocks\.
-+ `ROLE` – Audits statements related to roles and privileges, such as `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`\.
-+ `DDL` – Audits all data definition language \(DDL\) statements that aren't included in the `ROLE` class\.
-+ `MISC` – Audits miscellaneous commands, such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`\.
++ `READ` – Logs `SELECT` and `COPY` when the source is a relation or a query\.
++ `WRITE` – Logs `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` when the destination is a relation\.
++ `FUNCTION` – Logs function calls and `DO` blocks\.
++ `ROLE` – Logs statements related to roles and privileges, such as `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`\.
++ `DDL` – Logs all data definition language \(DDL\) statements that aren't included in the `ROLE` class\.
++ `MISC` – Logs miscellaneous commands, such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`\.
 
-To log more than one of these types of events with session auditing, use a comma\-separated list\. To log all of these types of events, set `pgaudit.log` to `ALL`\. You might need to reboot your DB instance to apply the changes\.
+To log multiple event types with session auditing, use a comma\-separated list\. To log all event types, set `pgaudit.log` to `ALL`\. Reboot your DB instance to apply the changes\.
 
-With *object auditing*, you can refine the audit logging to work with specific relations\. For example, you can specify that you want audit logging for `READ` operations on a specific number of tables\.
+With *object auditing*, you can refine audit logging to work with specific relations\. For example, you can specify that you want audit logging for `READ` operations on a specific number of tables\.
 
 **To use object auditing with the `pgaudit` extension**
+
+To use the `pgaudit` extension, you need to add it to the `shared_preload_libraries` parameter on the RDS for PostgreSQL DB instance\. You can't edit values in the default DB parameter groups, so that means you need to use a custom DB parameter group for the DB instance\. For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. Create a database role called `rds_pgaudit` using the following command\.
 
@@ -341,37 +340,38 @@ With *object auditing*, you can refine the audit logging to work with specific r
    CREATE ROLE rds_pgaudit;
    ```
 
-1. Modify the custom parameter group that is associated with your DB instance to do the following:
-   + Set `pgaudit.role` to the role `rds_pgaudit`\.
-   + Use the shared preload libraries that contain `pgaudit`\.
+1. Modify the DB custom parameter group that is associated with your DB instance as follows:
 
-   The following commands modify a custom parameter group\.
+   1. Add `pgaudit` to the `shared_preload_libraries` parameter list\. Using the AWS CLI, you run the following:
 
-   ```
-   aws rds modify-db-parameter-group \
-      --db-parameter-group-name my-parameter-group \
-      --parameters "ParameterName=pgaudit.role,ParameterValue=rds_pgaudit,ApplyMethod=pending-reboot" \
-      --region us-west-2
-   
-   aws rds modify-db-parameter-group \
-      --db-parameter-group-name my-parameter-group \
-      --parameters "ParameterName=shared_preload_libraries,ParameterValue=pgaudit,ApplyMethod=pending-reboot" \
-      --region us-west-2
-   ```
+      ```
+      aws rds modify-db-parameter-group \
+         --db-parameter-group-name custom-param-group-name \
+         --parameters "ParameterName=shared_preload_libraries,ParameterValue=pgaudit,ApplyMethod=pending-reboot" \
+         --region aws-region
+      ```
 
-1. Reboot the instance so that the DB instance picks up the changes to the parameter group\.
+   1. Set `pgaudit.role` to the role `rds_pgaudit`\. Using the AWS CLI, run the following: 
+
+      ```
+      aws rds modify-db-parameter-group \
+         --db-parameter-group-name custom-param-group-name \
+         --parameters "ParameterName=pgaudit.role,ParameterValue=rds_pgaudit,ApplyMethod=pending-reboot" \
+         --region aws-region
+      ```
+
+1. Reboot the DB instance so that the changes to the parameter group take effect\.
 
    ```
    aws rds reboot-db-instance \
-       --db-instance-identifier rds-test-instance \
-       --region us-west-2
+       --db-instance-identifier your-RDS-db-instance \
+       --region aws-region
    ```
 
 1. Run the following command to confirm that `pgaudit` has been initialized\.
 
    ```
    SHOW shared_preload_libraries;
-   
    shared_preload_libraries 
    --------------------------
    rdsutils,pgaudit
@@ -388,19 +388,17 @@ With *object auditing*, you can refine the audit logging to work with specific r
 
    ```
    SHOW pgaudit.role;
-   
    pgaudit.role 
    ------------------
    rds_pgaudit
    ```
 
-To test the audit logging, run several commands that you have chosen to audit\. For example, you might run the following commands\.
+To test the `pgaudit` logging, you can run several example commands that you want to audit\. For example, you might run the following commands\.
 
 ```
 CREATE TABLE t1 (id int);
 GRANT SELECT ON t1 TO rds_pgaudit;
 SELECT * FROM t1;
-
 id 
 ----
 (0 rows)
@@ -436,10 +434,10 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
    ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT USAGE, SELECT ON SEQUENCES TO PUBLIC;
    ```
 
-1. Use the pg\_repack client utility to connect to a database\. Use a database role that has *rds\_superuser* privileges to connect to the database\. In the following connection example, the *rds\_test* role has *rds\_superuser* privileges, and the database endpoint used is *rds\-test\-instance\.cw7jjfgdr4on8\.us\-west\-2\.rds\.amazonaws\.com*\.
+1. Connect to the database using the `pg_repack` client utility\. Use an account that has *rds\_superuser* privileges\. As an example, assume that *rds\_test* role has *rds\_superuser* privileges\. The command syntax is shown following\.
 
    ```
-   pg_repack -h rds-test-instance.cw7jjfgdr4on8.us-west-2.rds.amazonaws.com -U rds_test -k postgres
+   pg_repack -h db-instance-name.111122223333.aws-region.rds.amazonaws.com -U rds_test -k postgres
    ```
 
    Connect using the \-k option\. The \-a option is not supported\.
@@ -464,11 +462,11 @@ For example, the following command correctly formats an Amazon RDS for PostgreSQ
 
 ## Viewing the contents of pg\_config<a name="Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig"></a>
 
-In PostgreSQL version 9\.6\.1, you can see the compile\-time configuration parameters of the currently installed version of PostgreSQL using the new view pg\_config\. You can use the view by calling the pg\_config function as shown in the following sample\.
+You can see the compile\-time configuration parameters of the currently installed version of PostgreSQL using the `pg_config`\. You can use the view by calling the `pg_config` function, as shown following\.
 
 ```
-select * from pg_config();
-       name        |             setting
+SELECT * from pg_config();
+name        |             setting
 
 -------------------+---------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -600,7 +598,7 @@ The oracle\_fdw extension is supported on Amazon RDS for PostgreSQL versions 12\
    CREATE SERVER
    ```
 
-1. Grant usage to a user who doesn't have `rds_superuser` permissions, for example `user1`\.
+1. Grant usage to a user who doesn't have `rds_superuser` privileges, for example `user1`\.
 
    ```
    test=> GRANT USAGE ON FOREIGN SERVER oradb TO user1;
@@ -617,17 +615,17 @@ The oracle\_fdw extension is supported on Amazon RDS for PostgreSQL versions 12\
 1. Create a foreign table linked to an Oracle table\.
 
    ```
-   test=> create foreign table mytab (a int) SERVER oradb OPTIONS (table 'MYTABLE');
+   test=> CREATE FOREIGN TABLE mytab (a int) SERVER oradb OPTIONS (table 'MYTABLE');
    CREATE FOREIGN TABLE
    ```
 
 1. Query the foreign table\.
 
    ```
-   test=> select * from mytab;
-    a
+   test=>  SELECT * FROM mytab;
+   a
    ---
-    1
+   1
    (1 row)
    ```
 
@@ -646,13 +644,10 @@ If your database is on RDS for Oracle, see [Oracle native network encryption](Ap
 
 ### pg\_user\_mapping and pg\_user\_mappings permissions<a name="postgresql-oracle-fdw.permissions"></a>
 
-User mapping permissions are illustrated using the example roles in the following table\. The `rdssu1` and `rdssu2` users have the `rds_superuser` role, while `user1` doesn't\.
-
-**Note**  
-You can use the `\du` metacommand in psql to list existing roles\.
+In the following output you can find roles and permissions mapped to three different example users\. Users `rdssu1` and `rdssu2` are members of the `rds_superuser` role, while `user1` isn't\. The `psql` metacommand `\du` lists existing roles\.
 
 ```
-test=> \du
+test=>  \du
                                                                List of roles
     Role name    |                         Attributes                         |                          Member of
 -----------------+------------------------------------------------------------+-------------------------------------------------------------
@@ -661,50 +656,48 @@ test=> \du
  user1           |                                                            | {}
 ```
 
-Users with the `rds_superuser` role can't query the `pg_user_mapping` table\. The following example uses `rdssu1`\.
+RDS for PostgreSQL users can see only their own user mappings \(`umoptions`\) in the `pg_user_mappings` table\. Users with `rds_superuser` role are no exception\. For example, `rdssu1` can't obtain all mappings from the table even though `rdssu1` has `rds_superuser` privileges\. 
 
 ```
-test=> SET SESSION AUTHORIZATION rdssu1;
-SET
-test=> select * from pg_user_mapping;
+test=> SELECT * FROM pg_user_mapping;
 ERROR: permission denied for table pg_user_mapping
 ```
 
-On RDS for PostgreSQL, all users—even ones with the `rds_superuser` role—can see only their own user mappings \(`umoptions`\) in the `pg_user_mappings` table\. Following is an example\.
+Following are some examples\.
 
 ```
 test=> SET SESSION AUTHORIZATION rdssu1;
 SET
-test=> select * from pg_user_mappings;
+test=> SELECT * FROM pg_user_mappings;
  umid  | srvid | srvname | umuser | usename    |            umoptions
 -------+-------+---------+--------+------------+----------------------------------
  16414 | 16411 | oradb   |  16412 | user1      |
  16423 | 16411 | oradb   |  16421 | rdssu1     | {user=oracleuser,password=mypwd}
  16424 | 16411 | oradb   |  16422 | rdssu2     |
-(3 rows)
-
+ (3 rows)
+  
 test=> SET SESSION AUTHORIZATION rdssu2;
 SET
-test=> select * from pg_user_mappings;
+test=> SEELCT * FROM pg_user_mappings;
  umid  | srvid | srvname | umuser | usename    |            umoptions
 -------+-------+---------+--------+------------+----------------------------------
  16414 | 16411 | oradb   |  16412 | user1      |
  16423 | 16411 | oradb   |  16421 | rdssu1     |
  16424 | 16411 | oradb   |  16422 | rdssu2     | {user=oracleuser,password=mypwd}
-(3 rows)
-
+ (3 rows)
+  
 test=> SET SESSION AUTHORIZATION user1;
 SET
-test=> select * from pg_user_mappings;
+test=> SELECT * FROM pg_user_mappings;
  umid  | srvid | srvname | umuser | usename    |           umoptions
 -------+-------+---------+--------+------------+--------------------------------
  16414 | 16411 | oradb   |  16412 | user1      | {user=oracleuser,password=mypwd}
  16423 | 16411 | oradb   |  16421 | rdssu1     |
  16424 | 16411 | oradb   |  16422 | rdssu2     |
-(3 rows)
+ (3 rows)
 ```
 
-Because of differences in implementation of `information_schema._pg_user_mappings` and `pg_catalog.pg_user_mappings`, a manually created `rds_superuser` requires additional permissions to view passwords in `pg_catalog.pg_user_mappings`\.
+Because of implementation differences between `information_schema._pg_user_mappings` and `pg_catalog.pg_user_mappings`, a manually created `rds_superuser` requires additional permissions to view passwords in `pg_catalog.pg_user_mappings`\.
 
 No additional permissions are required for an `rds_superuser` to view passwords in `information_schema._pg_user_mappings`\.
 

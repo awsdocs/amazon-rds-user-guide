@@ -2,9 +2,9 @@
 
 We strongly recommend that you use the autovacuum feature to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the start of the VACUUM and the ANALYZE commands\. It checks for tables with a large number of inserted, updated, or deleted tuples, and it then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
 
-By default, autovacuum is enabled on the Amazon RDS for PostgreSQL DB instances that you create using any of the default PostgreSQL DB parameter groups, such as `default.postgres10`, `default.postgres11`, and so on\. All default PostgreSQL DB parameter groups have an `rds.adaptive_autovacuum` parameter that's set to `1`, thus activating the feature\. Other configuration parameters associated with the autovacuum feature are also set by default\. Because these defaults are somewhat generic, you can benefit from tuning some of the parameters associated with the autovacuum feature for your specific workload\.
+By default, autovacuum is enabled on the Amazon RDS for PostgreSQL DB instances that you create using any of the default PostgreSQL DB parameter groups, such as `default.postgres10`, `default.postgres11`, and so on\. All default PostgreSQL DB parameter groups have an `rds.adaptive_autovacuum` parameter that's set to `1`, thus activating the feature\. Other configuration parameters associated with the autovacuum feature are also set by default\. Because these defaults are somewhat generic, you can benefit from tuning some of the parameters associated with the autovacuum feature for your specific workload\. 
 
-Following, you can find more information about the autovacuum feature and how to tune the parameters associated with the autovacuum for your RDS for PostgreSQL DB instance\.
+Following, you can find more information about the autovacuum feature and how to tune the parameters associated with the autovacuum for your RDS for PostgreSQL DB instance\. For high level information, see [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\.
 
 **Topics**
 + [Allocating memory for autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)
@@ -16,7 +16,7 @@ Following, you can find more information about the autovacuum feature and how to
 + [Reindexing a table when autovacuum is running](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Reindexing)
 + [Other parameters that affect autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.OtherParms)
 + [Setting table\-level autovacuum parameters](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.TableParameters)
-+ [Autovacuum logging](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging)
++ [Logging autovacuum and vacuum activities](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging)
 
 ## Allocating memory for autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory"></a>
 
@@ -40,7 +40,7 @@ Transaction ID wraparound is still possible even when Amazon RDS tunes the autov
 
 With adaptive autovacuum parameter tuning enabled, Amazon RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the value of the `autovacuum_freeze_max_age` parameter or 500,000,000, whichever is greater\. 
 
-RDS continues to adjust parameters for autovacuum if a table continues to trend toward transaction ID wraparound\. Each of these adjustments dedicates more resources to autovacuum to avoid wraparound\. Amazon RDS updates the following autovacuum\-related parameters: 
+Amazon RDS continues to adjust parameters for autovacuum if a table continues to trend toward transaction ID wraparound\. Each of these adjustments dedicates more resources to autovacuum to avoid wraparound\. Amazon RDS updates the following autovacuum\-related parameters: 
 + [autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
 + [ autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 +  [autovacuum\_work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-AUTOVACUUM-WORK-MEM) 
@@ -99,44 +99,30 @@ Vacuum-threshold = vacuum-base-threshold + vacuum-scale-factor * number-of-tuple
 While you are connected to your database, run the following query to see a list of tables that autovacuum sees as eligible for vacuuming:
 
 ```
-  WITH vbt AS (SELECT setting AS autovacuum_vacuum_threshold FROM 
-pg_settings WHERE name = 'autovacuum_vacuum_threshold')
-    , vsf AS (SELECT setting AS autovacuum_vacuum_scale_factor FROM 
-pg_settings WHERE name = 'autovacuum_vacuum_scale_factor')
-    , fma AS (SELECT setting AS autovacuum_freeze_max_age FROM 
-pg_settings WHERE name = 'autovacuum_freeze_max_age')
-    , sto AS (select opt_oid, split_part(setting, '=', 1) as param, 
-split_part(setting, '=', 2) as value from (select oid opt_oid, 
-unnest(reloptions) setting from pg_class) opt)
-SELECT
-    '"'||ns.nspname||'"."'||c.relname||'"' as relation
-    , pg_size_pretty(pg_table_size(c.oid)) as table_size
-    , age(relfrozenxid) as xid_age
-    , coalesce(cfma.value::float, autovacuum_freeze_max_age::float) 
-autovacuum_freeze_max_age
-    , (coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) 
-+ coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-c.reltuples) as autovacuum_vacuum_tuples
-    , n_dead_tup as dead_tuples
-FROM pg_class c join pg_namespace ns on ns.oid = c.relnamespace
-join pg_stat_all_tables stat on stat.relid = c.oid
-join vbt on (1=1) join vsf on (1=1) join fma on (1=1)
-left join sto cvbt on cvbt.param = 'autovacuum_vacuum_threshold' and 
-c.oid = cvbt.opt_oid
-left join sto cvsf on cvsf.param = 'autovacuum_vacuum_scale_factor' and 
-c.oid = cvsf.opt_oid
-left join sto cfma on cfma.param = 'autovacuum_freeze_max_age' and 
-c.oid = cfma.opt_oid
+WITH vbt AS (SELECT setting AS autovacuum_vacuum_threshold FROM 
+pg_settings WHERE name = 'autovacuum_vacuum_threshold'),
+vsf AS (SELECT setting AS autovacuum_vacuum_scale_factor FROM 
+pg_settings WHERE name = 'autovacuum_vacuum_scale_factor'), 
+fma AS (SELECT setting AS autovacuum_freeze_max_age FROM pg_settings WHERE name = 'autovacuum_freeze_max_age'),
+sto AS (select opt_oid, split_part(setting, '=', 1) as param,
+split_part(setting, '=', 2) as value from (select oid opt_oid, unnest(reloptions) setting from pg_class) opt)
+SELECT '"'||ns.nspname||'"."'||c.relname||'"' as relation,
+pg_size_pretty(pg_table_size(c.oid)) as table_size,
+age(relfrozenxid) as xid_age,
+coalesce(cfma.value::float, autovacuum_freeze_max_age::float) autovacuum_freeze_max_age,
+(coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) +
+coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * c.reltuples)
+AS autovacuum_vacuum_tuples, n_dead_tup as dead_tuples FROM
+pg_class c join pg_namespace ns on ns.oid = c.relnamespace 
+join pg_stat_all_tables stat on stat.relid = c.oid join vbt on (1=1) join vsf on (1=1) join fma on (1=1)
+left join sto cvbt on cvbt.param = 'autovacuum_vacuum_threshold' and c.oid = cvbt.opt_oid 
+left join sto cvsf on cvsf.param = 'autovacuum_vacuum_scale_factor' and c.oid = cvsf.opt_oid
+left join sto cfma on cfma.param = 'autovacuum_freeze_max_age' and c.oid = cfma.opt_oid
 WHERE c.relkind = 'r' and nspname <> 'pg_catalog'
-and (
-    age(relfrozenxid) >= coalesce(cfma.value::float, 
-autovacuum_freeze_max_age::float)
-    or
-    coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) + 
+AND (age(relfrozenxid) >= coalesce(cfma.value::float, autovacuum_freeze_max_age::float)
+OR coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) + 
 coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-c.reltuples <= n_dead_tup
-   -- or 1 = 1
-)
+c.reltuples <= n_dead_tup -- or 1 = 1)
 ORDER BY age(relfrozenxid) DESC LIMIT 50;
 ```
 
@@ -145,8 +131,6 @@ ORDER BY age(relfrozenxid) DESC LIMIT 50;
 If you need to manually vacuum a table, you need to determine if autovacuum is currently running\. If it is, you might need to adjust parameters to make it run more efficiently, or terminate autovacuum so you can manually run VACUUM\.
 
 Use the following query to determine if autovacuum is running, how long it has been running, and if it is waiting on another session\. 
-
-If you are using RDS for PostgreSQL 9\.6\+ or higher, use this query:
 
 ```
 SELECT datname, usename, pid, state, wait_event, current_timestamp - xact_start AS xact_runtime, query
@@ -167,29 +151,6 @@ After running the query, you should see output similar to the following\.
          |          |       |        |            |                         | FROM pg_stat_activity                                                                                 +
          |          |       |        |            |                         | WHERE query like '%VACUUM%'                                                                           +
          |          |       |        |            |                         | ORDER BY xact_start;                                                                                  +
-```
-
-If you are using an RDS for PostgreSQL version less than 9\.6, use the following query\.
-
-```
-SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query
-FROM pg_stat_activity 
-WHERE upper(query) LIKE '%VACUUM%' 
-ORDER BY xact_start;
-```
-
-After running the query, you should see output similar to the following\.
-
-```
- datname | usename  |  pid  | waiting |       xact_runtime      | query  
- --------+----------+-------+---------+-------------------------+----------------------------------------------------------------------------------------------
- mydb    | rdsadmin | 16473 | f       | 33 days 16:32:11.600656 | autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
- mydb    | rdsadmin | 22553 | f       | 14 days 09:15:34.073141 | autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
- mydb    | rdsadmin | 41909 | f       | 3 days 02:43:54.203349  | autovacuum: VACUUM ANALYZE public.mytable3
- mydb    | rdsadmin |   618 | f       | 00:00:00                | SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query+
-         |          |       |         |                         | FROM pg_stat_activity                                                                       +                 
-         |          |       |         |                         | WHERE query like '%VACUUM%'                                                                 +
-         |          |       |         |                         | ORDER BY xact_start;                                                                        +
 ```
 
 Several issues can cause a long\-running autovacuum session \(that is, multiple days long\)\. The most common issue is that your [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value is set too low for the size of the table or rate of updates\. 
@@ -228,7 +189,7 @@ The following steps are a guideline, and there are several variations to the pro
 1. In session two, calculate the amount of memory you need for this operation\. In this example, we determine that we can afford to use up to 2 GB of memory for this operation, so we set [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) for the current session to 2 GB\.
 
    ```
-   set maintenance_work_mem='2 GB';
+   SET maintenance_work_mem='2 GB';
    SET
    ```
 
@@ -273,7 +234,7 @@ The following steps are a guideline, and there are several variations to the pro
 If an index has become corrupt, autovacuum continues to process the table and fails\. If you attempt a manual vacuum in this situation, you will receive an error message similar to the following:
 
 ```
-mydb=# vacuum freeze pgbench_branches;
+postgres=>  vacuum freeze pgbench_branches;
 ERROR: index "pgbench_branches_test_index" contains unexpected 
    zero page at block 30521
 HINT: Please REINDEX it.
@@ -303,13 +264,13 @@ When the index is corrupted and autovacuum is attempting to run against the tabl
    Timing is on.
    reindex index pgbench_branches_test_index;
    REINDEX
-   Time: 9.966 ms
+     Time: 9.966 ms
    ```
 
 1. In session one, if autovacuum was blocking, you see in `pg_stat_activity` that waiting is "T" for your vacuum session\. In this case, you will need to terminate the autovacuum process\. 
 
    ```
-   select pg_terminate_backend('the_pid');
+   SELECT pg_terminate_backend('the_pid');
    ```
 
 1. At this point, your session begins\. It's important to note that autovacuum restarts immediately because this table is probably the highest on its list of work\. Initiate your command in session 2 and then terminate the autovacuum process in session 1\.
@@ -343,7 +304,7 @@ While these all affect autovacuum, some of the most important ones are:
 + [autovacuum\_freeze\_max\_age](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE)
 + [autovacuum\_max\_workers](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS)
 + [autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
-+ [ Autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
++ [ autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
 ## Setting table\-level autovacuum parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.TableParameters"></a>
 
@@ -365,11 +326,23 @@ ALTER TABLE mytable set (autovacuum_vacuum_cost_delay=0);
 
 Doing this disables the cost\-based autovacuum delay for this table at the expense of more resource usage on your system\. Normally, autovacuum pauses for autovacuum\_vacuum\_cost\_delay each time autovacuum\_cost\_limit is reached\. You can find more details in the PostgreSQL documentation about [cost\-based vacuuming](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-VACUUM-COST)\.
 
-## Autovacuum logging<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging"></a>
+## Logging autovacuum and vacuum activities<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging"></a>
 
-By default, the *postgresql\.log* doesn't contain information about the autovacuum process\. You can see output in the PostgreSQL error log from the autovacuum worker operations by setting the `rds.force_autovacuum_logging_level` parameter\. Allowed values are `disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal,` and `panic`\. The default value is `disabled` because the other allowable values can add significant amount of information to your logs\.
+Information about autovacuum activities is sent to the `postgresql.log` based on the level specified in the `rds.force_autovacuum_logging_level` parameter\. Following are the allowable values for this parameter and the PostgreSQL versions for which that value is the default setting\. 
++ `disabled` \(PostgreSQL 10, PostgreSQL 9\.6\)
++ `debug5`, `debug4`, `debug3`, `debug2`, `debug1`
++ `info` \(PostgreSQL 12, PostgreSQL 11\)
++ `notice`
++ `warning` \(PostgreSQL 14, PostgreSQL 13\)
++ `error`, log, `fatal`, `panic`
 
-We recommend that you set the value of the `rds.force_autovacuum_logging_level` parameter to `warning` and that you set the `log_autovacuum_min_duration` parameter to a value from 1,000 to 5,000 milliseconds\. If you set this value to 5,000, Amazon RDS writes any activity to the log that takes more than five seconds\. It also shows "vacuum skipped" messages when application locking is causing autovacuum to intentionally skip tables\. If you are troubleshooting a problem and need more detail, you can use a different logging level value, such as `debug1` or `debug3`\. Use these debug parameters for a short period of time because these settings produce extremely verbose content written to the error log file\. For more information about these debug settings, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN)\.
+The `rds.force_autovacuum_logging_level` works in conjunction with the `log_autovacuum_min_duration` parameter\. The `log_autovacuum_min_duration` parameter's value is the threshold \(in milliseconds\) above which autovacuum actions get logged\. A setting of `-1` logs nothing, while a setting of 0 logs all actions\. As with `rds.force_autovacuum_logging_level`, default values for `log_autovacuum_min_duration` are version dependent, as follows: 
++ `10000 ms` – PostgreSQL 14, PostgreSQL 13, PostgreSQL 12, and PostgreSQL 11 
++ `(empty)` – No default value for PostgreSQL 10 and PostgreSQL 9\.6
+
+We recommend that you set the `rds.force_autovacuum_logging_level` to `LOG`\. We also recommend that you set `log_autovacuum_min_duration` to a value from 1000 to 5000\. A setting of 5000 logs activity that takes longer than 5000 ms\. Any setting other than \-1 also logs messages if autovacuum action is skipped due to conflicting lock or concurrently dropped relations\. For more information, see [Automatic Vacuuming](https://www.postgresql.org/docs/current/runtime-config-autovacuum.html) in the PostgreSQL documentation\. 
+
+To troubleshoot issues, you can change the `rds.force_autovacuum_logging_level` parameter to one of the debug levels, from `debug1` up to `debug5` for the most verbose information\. We recommend that you use debug settings for short periods of time and for troubleshooting purposes only\. To learn more, see the [When to log](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN) in the PostgreSQL documentation\. 
 
 **Note**  
 PostgreSQL allows the `rds_superuser` account to view autovacuum sessions in `pg_stat_activity`\. For example, you can identify and end an autovacuum session that is blocking a command from running, or running slower than a manually issued vacuum command\.

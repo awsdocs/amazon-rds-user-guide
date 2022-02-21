@@ -59,6 +59,9 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 
 Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-LATEST/)\. 
 
+**Warning**  
+When creating a database backup, XtraBackup might save credentials in the xtrabackup\_info file\. Make sure you examine that file so that the `tool_command` setting in it doesn't contain any sensitive information\.
+
 **Note**  
 For MySQL 8\.0 migration, you must use Percona XtraBackup 8\.0\. Percona XtraBackup 8\.0\.12 and higher versions support migration of all versions of MySQL\. If you are migrating to RDS for MySQL 8\.0\.20 or higher, you must use Percona XtraBackup 8\.0\.12 or higher\.  
 For MySQL 5\.7 migrations, you can also use Percona XtraBackup 2\.4\. For migrations of earlier MySQL versions, you can also use Percona XtraBackup 2\.3 or 2\.4\.

@@ -2,7 +2,7 @@
 
 You can create read replicas for RDS Custom for Oracle DB instances\. Read replica creation is similar to that in Amazon RDS, but with some important differences\. For general information on creating and managing read replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
 
-Not all options are supported when you create RDS Custom read replicas\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
+Not all options are supported when you create RDS Custom for Oracle read replicas\. For example, you must specify the replica mode as mounted when you create the replica, which you can then change to read\-only\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
 
 As with RDS for Oracle, you can have up to six managed read replicas\. You can create your own manually configured \(external\) RDS Custom for Oracle read replicas, which don't count toward the limit, but they're outside the support perimeter\. For more information on the support perimeter, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 
@@ -32,6 +32,7 @@ The `tnsnames.ora` file contains network service names mapped to listener protoc
 ## Limitations<a name="custom-rr.limitations"></a>
 
 RDS Custom for Oracle read replicas have the following limitations:
++ You must create RDS Custom for Oracle replicas in mounted mode\. However, you can manually change the mode of mounted replicas to read\-only, and from read\-only back to mounted\.
 + Cross\-Region read replicas aren't supported\.
 + Deleting the primary DB instance for a read replica isn't supported\. Delete the read replicas first, then delete the primary\.
 + Promoting a read replica using the [promote\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html) AWS CLI command isn't supported, but you can promote a read replica manually\.
