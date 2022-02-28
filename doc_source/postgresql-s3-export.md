@@ -175,7 +175,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceAccount": "111122223333",
                    "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333:db:dbname"
                    }
                 }
@@ -200,7 +200,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceAccount": "111122223333",
                    "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333:db:dbname"
                    }
                 }

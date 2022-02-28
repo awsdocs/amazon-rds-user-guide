@@ -43,6 +43,7 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 
 |  PSU  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\)  |  Oracle Database 11g \(11\.2\.0\.4\)  | 
 | --- | --- | --- | 
+|  2021 October  |  [12\.1\.0\.2\.v26](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v26)  |  N/A  | 
 |  2021 July  |  [12\.1\.0\.2\.v25](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v25)  |  N/A  | 
 |  2021 April  |  [12\.1\.0\.2\.v24](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v24)  |  N/A  | 
 |  2021 January  |  [12\.1\.0\.2\.v23](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v23)  |  N/A  | 

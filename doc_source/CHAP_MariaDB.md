@@ -220,7 +220,7 @@ For more information, see [InnoDB](https://mariadb.com/kb/en/innodb/)\.
 
 ### The MyRocks storage engine<a name="MariaDB.Concepts.Storage.MyRocks"></a>
 
-The MyRocks storage engine is available by default in RDS for MariaDB version 10\.6 and higher\. Before using the MyRocks storage engine in a production database, we recommend that you perform thorough benchmarking and testing to verify any potential benefits over InnoDB for your use case\. RDS for MariaDB already performs well with the default InnoDB storage engine\. We haven't identified workloads where MyRocks outperforms InnoDB on RDS for MariaDB, apart from bulk inserts\. So, we recommend that you test the MyRocks storage engine only if you are knowledgeable about it or if you are committed to learn about it\.
+The MyRocks storage engine is available in RDS for MariaDB version 10\.6 and higher\. Before using the MyRocks storage engine in a production database, we recommend that you perform thorough benchmarking and testing to verify any potential benefits over InnoDB for your use case\.
 
 The default parameter group for MariaDB version 10\.6 includes MyRocks parameters\. For more information, see [Parameters for MariaDB](Appendix.MariaDB.Parameters.md) and [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 

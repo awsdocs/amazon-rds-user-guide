@@ -373,7 +373,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Database engine: 18.0.0.0](Appendix.Oracle.RU-RUR.18.0.0.0.md)
       + [Database engine: 12.2.0.1](Appendix.Oracle.RU-RUR.12.2.0.1.md)
       + [Database engine: 12.1.0.2](Appendix.Oracle.PatchComposition.12.1.0.2.md)
-      + [Database engine: 11.2.0.4](Appendix.Oracle.PatchComposition.11.2.0.4.md)
+         + [Database engine: 11.2.0.4](Appendix.Oracle.PatchComposition.11.2.0.4.md)
 + [PostgreSQL on Amazon RDS](CHAP_PostgreSQL.md)
    + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
    + [Security with RDS for PostgreSQL](PostgreSQL.Concepts.General.Security.md)

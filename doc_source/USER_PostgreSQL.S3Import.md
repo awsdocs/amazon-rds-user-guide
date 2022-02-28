@@ -1,8 +1,6 @@
 # Importing Amazon S3 data into an RDS for PostgreSQL DB instance<a name="USER_PostgreSQL.S3Import"></a>
 
-You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL \. 
-
-If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't import data from a bucket that is encrypted with a customer managed key\.
+You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL\. 
 
 For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
@@ -182,7 +180,7 @@ Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. Y
             "Condition": {
                 "StringEquals": {
                    "aws:SourceAccount": "111122223333",
-                   "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333db:dbname"
+                   "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333:db:dbname"
                    }
                 }
           }
@@ -207,7 +205,7 @@ Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. Y
             "Condition": {
                 "StringEquals": {
                    "aws:SourceAccount": "111122223333",
-                   "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333db:dbname"
+                   "aws:SourceArn": "arn:aws:rds:us-east-1:111122223333:db:dbname"
                    }
                 }
           }
