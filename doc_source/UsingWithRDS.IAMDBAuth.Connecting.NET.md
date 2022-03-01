@@ -74,7 +74,7 @@ Modify the values of the following variables as needed:
 + `SSL Mode` – The SSL mode to use
 
   When you use `SSL Mode=Required`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
-+ `SSL Certificate` – The full path to the SSL certificate for Amazon RDS
++ `Root Certificate` – The full path to the SSL certificate for Amazon RDS
 
   To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
@@ -92,7 +92,7 @@ namespace ConsoleApp1
             var pwd = RDSAuthTokenGenerator.GenerateAuthToken("postgresmydb.123456789012.us-east-1.rds.amazonaws.com", 5432, "jane_doe");
 // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresmydb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=password;Database=mydb;SSL Mode=Require;SSL Certificate=full_path_to_ssl_certificate");
+            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresmydb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=password;Database=mydb;SSL Mode=Require;Root Certificate=full_path_to_ssl_certificate");
             conn.Open();
 
             // Define a query
