@@ -140,7 +140,7 @@ If your DB instance uses a custom DB parameter group:
 
   For example, when you upgrade to a new major version, you must specify a new parameter group\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
 
-For more information, see [Creating a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating) or [Copying a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Copying)\.
+For more information, see [Creating a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Creating) or [Copying a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Copying)\.
 
 ## Testing an upgrade<a name="USER_UpgradeDBInstance.SQLServer.UpgradeTesting"></a>
 

@@ -16,7 +16,6 @@ This code connects to a MariaDB or MySQL DB instance\.
 Modify the values of the following variables as needed:
 + `server` – The endpoint of the DB instance that you want to access
 + `user` – The database account that you want to access
-+ `password` – The password for the specified user
 + `database` – The database that you want to access
 + `port` – The port number used for connecting to your DB instance
 + `SslMode` – The SSL mode to use
@@ -42,7 +41,7 @@ namespace ubuntu
       var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.USEast1, "mysqldb.123456789012.us-east-1.rds.amazonaws.com", 3306, "jane_doe");
       // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-      MySqlConnection conn = new MySqlConnection($"server=mysqldb.123456789012.us-east-1.rds.amazonaws.com;user=jane_doe;database=mydB;port=3306;password=password;SslMode=Required;SslCa=full_path_to_ssl_certificate");
+      MySqlConnection conn = new MySqlConnection($"server=mysqldb.123456789012.us-east-1.rds.amazonaws.com;user=jane_doe;database=mydB;port=3306;password=pwd;SslMode=Required;SslCa=full_path_to_ssl_certificate");
       conn.Open();
 
       // Define a query
@@ -68,7 +67,6 @@ This code connects to a PostgreSQL DB instance\.
 Modify the values of the following variables as needed:
 + `Server` – The endpoint of the DB instance that you want to access
 + `User ID` – The database account that you want to access
-+ `Password` – The password for the specified user
 + `Database` – The database that you want to access
 + `Port` – The port number used for connecting to your DB instance
 + `SSL Mode` – The SSL mode to use
@@ -92,7 +90,7 @@ namespace ConsoleApp1
             var pwd = RDSAuthTokenGenerator.GenerateAuthToken("postgresmydb.123456789012.us-east-1.rds.amazonaws.com", 5432, "jane_doe");
 // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresmydb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=password;Database=mydb;SSL Mode=Require;Root Certificate=full_path_to_ssl_certificate");
+            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresmydb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=pwd;Database=mydb;SSL Mode=Require;Root Certificate=full_path_to_ssl_certificate");
             conn.Open();
 
             // Define a query

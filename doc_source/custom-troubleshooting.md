@@ -163,7 +163,7 @@ After the replacement process, the Amazon EC2 host has a new public IP address\.
 The Amazon EC2 host replacement feature covers the majority of Amazon EC2 impairment scenarios\. We recommend that you adhere to the following best practices:
 + Before you change your configuration or the operating system, back up your data\. If the root volume or operating system becomes corrupt, host replacement can't repair it\. Your only options are restoring from a DB snapshot or point\-in\-time recovery\.
 + Don't manually stop or terminate the physical Amazon EC2 host\. Both actions result in the instance being put outside the RDS Custom support perimeter\.
-+ If you attach additional volumes to the Amazon EC2 host, configure them to remount upon restart\. If the host is impaired, RDS Custom might stop and start the host automatically\.
++ \(RDS Custom for SQL Server\) If you attach additional volumes to the Amazon EC2 host, configure them to remount upon restart\. If the host is impaired, RDS Custom might stop and start the host automatically\.
 
 ## Troubleshooting upgrade issues for RDS Custom for Oracle DB instances<a name="custom-troubleshooting-upgrade"></a>
 

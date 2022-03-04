@@ -5,7 +5,7 @@ Amazon RDS provides high availability and failover support for DB instances usin
 In a Multi\-AZ DB instance deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance\. It can also help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\.
 
 **Note**  
-The high availability option isn't a scaling solution for read\-only scenarios\. You can't use a standby replica to serve read traffic\. To serve read\-only traffic, use a Multi\-AZ DB cluster or a read replica instead\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments \(preview\)](multi-az-db-clusters-concepts.md)\. For more information about read replicas, see [Working with read replicas](USER_ReadRepl.md)\.
+The high availability option isn't a scaling solution for read\-only scenarios\. You can't use a standby replica to serve read traffic\. To serve read\-only traffic, use a Multi\-AZ DB cluster or a read replica instead\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\. For more information about read replicas, see [Working with read replicas](USER_ReadRepl.md)\.
 
 ![\[High availability scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
 
@@ -47,7 +47,7 @@ Amazon RDS handles failovers automatically so you can resume database operations
 | The storage volume underlying the primary host of the RDS Multi\-AZ instance experienced a failure\. | The Multi\-AZ DB instance deployment detected a storage issue on the primary DB instance and failed over\. | 
 | The user requested a failover of the DB instance\. |  You rebooted the DB instance and chose **Reboot with failover**\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.  | 
 
-To determine if your Multi\-AZ DB cluster has failed over, you can do the following:
+To determine if your Multi\-AZ DB instance has failed over, you can do the following:
 + Set up DB event subscriptions to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS event notification](USER_Events.md)\.
 + View your DB events by using the RDS console or API operations\.
 + View the current state of your Multi\-AZ DB instance deployment by using the RDS console or API operations\.

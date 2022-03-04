@@ -40,23 +40,23 @@ This function uses the following additional parameter\.
 | --- | --- | --- | --- | --- | --- | 
 |  `detail`  |  boolean  | TRUE or FALSE |  `FALSE`  |  No  |  If `TRUE`, the function lists incidents in detail mode\. If `FALSE`, the function lists incidents in basic mode\.  | 
 
-To list all incidents, call the `rdsadmin.rdsadmin_adrci_util.list_adrci_incidents` function without any arguments\. You can store the output in a SQL client variable\.
+To list all incidents, query the `rdsadmin.rdsadmin_adrci_util.list_adrci_incidents` function without any arguments\. The query returns the task ID\.
+
+```
+SQL> SELECT rdsadmin.rdsadmin_adrci_util.list_adrci_incidents AS task_id FROM DUAL;
+
+TASK_ID
+------------------
+1590786706158-3126
+```
+
+Or call the `rdsadmin.rdsadmin_adrci_util.list_adrci_incidents` function without any arguments and store the output in a SQL client variable\. You can use the variable in other statements\.
 
 ```
 SQL> VAR task_id VARCHAR2(80);
 SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_incidents;
 
 PL/SQL procedure successfully completed.
-```
-
-To get the task ID, specify the variable in a query of the `dual` table\.
-
-```
-SQL> SELECT :task_id FROM DUAL;
-
-:TASK_ID
-------------------
-1590786706158-3126
 ```
 
 To read the log file, call the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`\. Supply the task ID as part of the file name\. The following output shows three incidents: 53523, 53522, and 53521\.

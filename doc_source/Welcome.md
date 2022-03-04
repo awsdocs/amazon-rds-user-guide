@@ -104,12 +104,12 @@ Each DB engine has its own supported features, and each version of a DB engine m
 
 ### DB instance classes<a name="Welcome.Concepts.DBInstance.instance-class"></a>
 
-A *DB instance class* determines the computation and memory capacity of a DB instance\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance classes powered by AWS Graviton2 processors\.
+A *DB instance class* determines the computation and memory capacity of a DB instance\. A DB instance class consists of both the DB instance type and the size\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors, while db\.m6g\.2xlarge is a DB instance class\.
 
 You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 **Note**  
-For pricing information on DB instance classes, see the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\. 
+For pricing information on DB instance classes, see the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\.
 
 ### DB instance storage<a name="Welcome.Concepts.DBInstance.storage"></a>
 
@@ -134,7 +134,7 @@ Amazon cloud computing resources are housed in highly available data center faci
 
 Each AWS Region contains multiple distinct locations called Availability Zones, or AZs\. Each Availability Zone is engineered to be isolated from failures in other Availability Zones\. Each is engineered to provide inexpensive, low\-latency network connectivity to other Availability Zones in the same AWS Region\. By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location\. For more information, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
 
-You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you choose this option, Amazon automatically provisions and maintains a secondary standby DB instance in a different Availability Zone\. Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance\. This approach helps provide data redundancy and failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
+You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you choose this option, Amazon automatically provisions and maintains one or more secondary standby DB instances in a different Availability Zone\. Your primary DB instance is replicated across Availability Zones to each secondary DB instance\. This approach helps provide data redundancy and failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. In a Multi\-AZ DB clusters deployment, the secondary DB instances can also serve read traffic\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
 ## Security<a name="Welcome.Concepts.SecurityGroups"></a>
 

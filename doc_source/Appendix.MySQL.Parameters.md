@@ -1,10 +1,10 @@
 # Parameters for MySQL<a name="Appendix.MySQL.Parameters"></a>
 
-By default, a MySQL DB instance uses a DB parameter group that is specific to a MySQL database\. This parameter group contains parameters for the MySQL database engine\. For information about working with parameter groups and setting parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+By default, a MySQL DB instance uses a DB parameter group that is specific to a MySQL database\. This parameter group contains parameters for the MySQL database engine\. For information about working with parameter groups and setting parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 RDS for MySQL parameters are set to the default values of the storage engine that you have selected\. For more information about MySQL parameters, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html)\. For more information about MySQL storage engines, see [Supported storage engines for RDS for MySQL](CHAP_MySQL.md#MySQL.Concepts.Storage)\.
 
-You can view the parameters available for a specific RDS for MySQL version using the RDS console or the AWS CLI\. For information about viewing the parameters in a MySQL parameter group in the RDS console, see [Viewing parameter values for a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
+You can view the parameters available for a specific RDS for MySQL version using the RDS console or the AWS CLI\. For information about viewing the parameters in a MySQL parameter group in the RDS console, see [Viewing parameter values for a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
 
 Using the AWS CLI, you can view the parameters for an RDS for MySQL version by running the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\. Specify one of the following values for the `--db-parameter-group-family` option:
 + `mysql8.0`

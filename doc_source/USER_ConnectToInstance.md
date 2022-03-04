@@ -46,6 +46,7 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 + [Connecting from the MySQL command\-line client \(unencrypted\)](#USER_ConnectToInstance.CLI)
 + [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)
 + [Connecting from MySQL Workbench](#USER_ConnectToInstance.MySQLWorkbench)
++ [Connecting with the Amazon Web Services JDBC Driver for MySQL](#USER_ConnectToInstance.JDBCDriverMySQL)
 + [Troubleshooting connections to your MySQL DB instance](#USER_ConnectToInstance.Troubleshooting)
 
 ## Finding the connection information for a MySQL DB instance<a name="USER_ConnectToInstance.EndpointAndPort"></a>
@@ -218,6 +219,14 @@ mysql>
 1. From **Stored Connection**, choose your connection\.
 
 1. Choose **OK**\.
+
+## Connecting with the Amazon Web Services JDBC Driver for MySQL<a name="USER_ConnectToInstance.JDBCDriverMySQL"></a>
+
+The AWS JDBC Driver for MySQL is a client driver designed for RDS for MySQL\. By default, the AWS JDBC Driver for MySQL has optimized settings for use with RDS for MySQL\.
+
+The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
+
+For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see [the AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
 ## Troubleshooting connections to your MySQL DB instance<a name="USER_ConnectToInstance.Troubleshooting"></a>
 

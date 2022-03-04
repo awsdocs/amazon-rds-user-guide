@@ -308,7 +308,7 @@ HugePages are not enabled by default for the following DB instance classes\.
 
 For more information about DB instance classes, see [Hardware specifications for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 
-To enable HugePages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use HugePages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+To enable HugePages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use HugePages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 You can also set the `sga_target`, `sga_max_size`, and `pga_aggregate_target` parameters\. When you set system global area \(SGA\) and program global area \(PGA\) memory parameters, add the values together\. Subtract this total from your available instance memory \(`DBInstanceClassMemory`\) to determine the free memory beyond the HugePages allocation\. You must leave free memory of at least 2 GiB, or 10 percent of the total available instance memory, whichever is smaller\. 
 
@@ -382,7 +382,7 @@ When the DB instance status is `incompatible-parameters` because of the `MAX_STR
 
    To set the parameter, you can either create a new parameter group or modify an existing parameter group\.
 
-   For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+   For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. Create a new Amazon RDS Oracle DB instance, and associate the parameter group with `MAX_STRING_SIZE` set to `EXTENDED` with the DB instance\.
 
@@ -407,7 +407,7 @@ After you enable extended data types, you can't perform a point\-in\-time restor
 
    To set the parameter, you can either create a new parameter group or modify an existing parameter group\.
 
-   For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+   For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. Modify the DB instance to associate it with the parameter group with `MAX_STRING_SIZE` set to `EXTENDED`\.
 

@@ -14,3 +14,4 @@ If you are using Amazon RDS Performance Insights, additional metrics are availab
 **Topics**
 + [Viewing DB instance metrics in the CloudWatch console and CLI](metrics_dimensions.md)
 + [Creating CloudWatch alarms to monitor Amazon RDS](creating_alarms.md)
++ [Tutorial: Creating an Amazon CloudWatch alarm for Multi\-AZ DB cluster replica lag](multi-az-db-cluster-cloudwatch-alarm.md)

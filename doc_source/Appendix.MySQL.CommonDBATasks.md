@@ -146,7 +146,7 @@ MySQL maintains many status variables that provide information about its operati
 
 To allow for monitoring of these values over time, Amazon RDS provides a set of procedures that will snapshot the values of these status variables over time and write them to a table, along with any changes since the last snapshot\. This infrastructure, called Global Status History \(GoSH\), is installed on all MySQL DB instances starting with versions 5\.5\.23\. GoSH is disabled by default\. 
 
-To enable GoSH, you first enable the event scheduler from a DB parameter group by setting the parameter event\_scheduler to ON\. For information about creating and modifying a DB parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+To enable GoSH, you first enable the event scheduler from a DB parameter group by setting the parameter event\_scheduler to ON\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 You can then use the procedures in the following table to enable and configure GoSH\. First connect to your MySQL DB instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)\. For each procedure, type the following: 
 

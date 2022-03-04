@@ -1,4 +1,4 @@
-# Function reference<a name="PostgreSQL-Lambda-functions"></a>
+# AWS Lambda function reference<a name="PostgreSQL-Lambda-functions"></a>
 
 Following is the reference for the functions to use for invoking Lambda functions with RDS for PostgreSQL\.
 

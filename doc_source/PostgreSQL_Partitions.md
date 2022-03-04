@@ -154,7 +154,7 @@ SELECT cron.schedule('@hourly', $$CALL partman.run_maintenance_proc()$$);
 
 Following, you can find a step\-by\-step explanation of the preceding example: 
 
-1. Modify the parameter group associated with your DB instance and add `pg_cron` to the `shared_preload_libraries` parameter value\. This change requires a DB instance restart for it to take effect\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
+1. Modify the parameter group associated with your DB instance and add `pg_cron` to the `shared_preload_libraries` parameter value\. This change requires a DB instance restart for it to take effect\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
 1. Run the command `CREATE EXTENSION pg_cron;` using an account that has the `rds_superuser` permissions\. Doing this enables the `pg_cron` extension\. For more information, see [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)\.
 

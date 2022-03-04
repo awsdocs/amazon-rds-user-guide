@@ -75,7 +75,7 @@ Perform the following steps to prepare the source MySQL DB instance as the repli
 
 1. After the Amazon RDS read replica has been created, call the `mysql.rds_stop_replication` stored procedure to stop the replication process\. The source MySQL DB instance no longer purges its binary log files, so they are available for the replication process\.
 
-1. \(Optional\) Set both the `max_allowed_packet` parameter and the `slave_max_allowed_packet` parameter to the maximum size to avoid replication errors\. The maximum size for both parameters is 1 GB\. We recommend this setting for both parameters\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+1. \(Optional\) Set both the `max_allowed_packet` parameter and the `slave_max_allowed_packet` parameter to the maximum size to avoid replication errors\. The maximum size for both parameters is 1 GB\. We recommend this setting for both parameters\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Copy the database<a name="MySQL.Procedural.Exporting.NonRDSRepl.CopyData"></a>
 

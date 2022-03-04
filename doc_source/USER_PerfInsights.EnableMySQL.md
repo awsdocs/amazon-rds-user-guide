@@ -20,7 +20,7 @@ When the Performance Schema is enabled for Amazon RDS for MariaDB or MySQL, Perf
 You have the following options for enabling the Performance Schema:
 + Allow Performance Insights to manage required Performance Schema parameters automatically\.
 
-  When you create an Amazon RDS for MariaDB or MySQL DB instance with Performance Insights enabled, the Performance Schema is also enabled\. In this case, Performance Insights automatically manages your Performance Schema parameters\. 
+  When you create an Amazon RDS for MariaDB or MySQL DB instance or Multi\-AZ DB cluster with Performance Insights enabled, the Performance Schema is also enabled\. In this case, Performance Insights automatically manages your Performance Schema parameters\. 
 
   For automatic management, the `performance_schema` must be set to `0` and the **Source** must be set to a value other than `0`\. By default, **Source** is `engine-default`\. If you change the `performance_schema` value manually, and then later want to revert to automatic management, see [Configuring the Performance Schema for automatic management](#USER_PerfInsights.EnableMySQL.RDS)\.
 **Important**  
@@ -48,7 +48,7 @@ The following table shows the difference in settings when Performance Insights i
 
 1. Choose **Parameter groups**\.
 
-1. Select the name of the parameter group for your DB instance\.
+1. Select the name of the parameter group for your DB instance or Multi\-AZ DB cluster\.
 
 1. Enter **performance\_schema** in the search bar\.
 
@@ -69,8 +69,8 @@ The following table shows the difference in settings when Performance Insights i
 
 1. Select **Reset parameters**\.
 
-1. Restart the DB instance\.
+1. Reboot the DB instance or Multi\-AZ DB cluster\.
 **Important**  
-Whenever you enable or disable the Performance Schema, you must restart the DB instance\.
+Whenever you enable or disable the Performance Schema, you must reboot the DB instance or Multi\-AZ DB cluster\.
 
-For more information about modifying instance parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For more information about the dashboard, see [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.
+For more information about modifying instance parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For more information about the dashboard, see [Analyzing metrics with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.

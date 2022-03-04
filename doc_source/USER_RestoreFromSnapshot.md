@@ -23,7 +23,7 @@ The default DB parameter group is associated with the restored instance, unless 
 
 You can specify the parameter group when you restore the DB instance\.
 
-For more information about DB parameter groups and DB cluster parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about DB parameter groups and DB cluster parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Security group considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 

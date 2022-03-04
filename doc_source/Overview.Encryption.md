@@ -39,7 +39,8 @@ Once you have created an encrypted DB instance, you can't change the KMS key use
 If you use the AWS CLI `create-db-instance` command to create an encrypted DB instance with a customer managed key, set the `--kms-key-id` parameter to any key identifier for the KMS key\. If you use the Amazon RDS API `CreateDBInstance` operation, set the `KmsKeyId` parameter to any key identifier for the KMS key\. To use a customer managed key in a different AWS account, specify the key ARN or alias ARN\.
 
 **Important**  
-If Amazon RDS loses access to the KMS key for a DB instance—for example, when RDS access to a KMS key is revoked—then the encrypted DB instance goes into a terminal state\. In this case, you can only restore the DB instance from a backup\. We strongly recommend that you always enable backups for encrypted DB instances to guard against the loss of encrypted data in your databases\.
+Amazon RDS can lose access to the KMS key for a DB instance\. For example, RDS loses access when the KMS key is disabled, or when RDS access to a KMS key is revoked\. In these cases, the encrypted DB instance goes into `inaccessible-encryption-credentials-recoverable` state\. The DB instance remains in this state for seven days\. When you start the DB instance during that time, it checks if the KMS key is active and recovers the KMS key if it is\.  
+If the KMS key isn't recovered, then the encrypted DB instance goes into the terminal `inaccessible-encryption-credentials` state\. In this case, you can only restore the DB instance from a backup\. We strongly recommend that you always enable backups for encrypted DB instances to guard against the loss of encrypted data in your databases\.
 
 ## Determining whether encryption is turned on for a DB instance<a name="Overview.Encryption.Determining"></a>
 

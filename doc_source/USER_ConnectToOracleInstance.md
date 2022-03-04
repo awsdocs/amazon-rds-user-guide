@@ -179,7 +179,7 @@ For more information about why you might set sqlnet\.ora parameters, see [Config
 
 Amazon RDS for Oracle parameter groups include a subset of sqlnet\.ora parameters\. You set them in the same way that you set other Oracle parameters\. The `sqlnetora.` prefix identifies which parameters are sqlnet\.ora parameters\. For example, in an Oracle parameter group in Amazon RDS, the `default_sdu_size` sqlnet\.ora parameter is `sqlnetora.default_sdu_size`\.
 
-For information about managing parameter groups and setting parameter values, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For information about managing parameter groups and setting parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ### Supported sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet.Supported"></a>
 
@@ -212,7 +212,7 @@ You can view sqlnet\.ora parameters and their settings using the AWS Management 
 
 #### Viewing sqlnet\.ora parameters using the console<a name="USER_ModifyInstance.Oracle.sqlnet.Viewing.Console"></a>
 
-For information about viewing parameters in a parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For information about viewing parameters in a parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 In Oracle parameter groups, the `sqlnetora.` prefix identifies which parameters are sqlnet\.ora parameters\.
 

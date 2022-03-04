@@ -28,6 +28,9 @@ The following tutorials in this guide show you how to perform common tasks with 
 + [Tutorial: log the state of an Amazon RDS instance using EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
 
   Learn how to log a DB instance state change using Amazon EventBridge and AWS Lambda\.
++ [Tutorial: Creating an Amazon CloudWatch alarm for Multi\-AZ DB cluster replica lag](multi-az-db-cluster-cloudwatch-alarm.md)
+
+  Learn how to create a CloudWatch alarm that sends an Amazon SNS message when replica lag for a Multi\-AZ DB cluster has exceeded a threshold\. An alarm watches the `ReplicaLag` metric over a time period that you specify\. The action is a notification sent to an Amazon SNS topic or Amazon EC2 Auto Scaling policy\.
 
 ## Tutorials in other AWS guides<a name="CHAP_Tutorials.OtherGuides"></a>
 

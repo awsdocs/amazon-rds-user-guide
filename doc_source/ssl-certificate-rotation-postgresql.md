@@ -1,14 +1,11 @@
-# Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates<a name="ssl-certificate-rotation-postgresql"></a>
+# Updating applications to use new SSL/TLS certificates<a name="ssl-certificate-rotation-postgresql"></a>
 
-As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
-
-This topic can help you to determine whether any client applications use SSL/TLS to connect to your DB instances\. If they do, you can further check whether those applications require certificate verification to connect\. 
+Certificates used for Secure Socket Layer or Transport Layer Security \(SSL/TLS\) typically have a set lifetime\. When service providers update their Certificate Authority \(CA\) certificates, clients must update their applications to use the new certificates\. Following, you can find information about how to determine if your client applications use SSL/TLS to connect to your Amazon RDS for PostgreSQL DB instance\. You also find information about how to check if those applications verify the server certificate when they connect\.
 
 **Note**  
-Some applications are configured to connect to PostgreSQL DB instances only if they can successfully verify the certificate on the server\.   
-For such applications, you must update your client application trust stores to include the new CA certificates\. 
+A client application that's configured to verify the server certificate before SSL/TLS connection must have a valid CA certificate in the client's trust store\. Update the client trust store when necessary for new certificates\.
 
-After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
+After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a nonproduction environment before implementing them in your production environments\.
 
 For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with PostgreSQL DB instances, see [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)\.
 
@@ -20,7 +17,7 @@ For more information about certificate rotation, see [Rotating your SSL/TLS cert
 
 ## Determining whether applications are connecting to PostgreSQL DB instances using SSL<a name="ssl-certificate-rotation-postgresql.determining-server"></a>
 
-Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `0` \(off\)\. If the `rds.force_ssl` parameter is set to `1` \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `0` \(off\)\. If the `rds.force_ssl` parameter is set to `1` \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 If you are using RDS PostgreSQL version 9\.5 or later major version and `rds.force_ssl` is not set to `1` \(on\), query the `pg_stat_ssl` view to check connections using SSL\. For example, the following query returns only SSL connections and information about the clients using SSL\.
 

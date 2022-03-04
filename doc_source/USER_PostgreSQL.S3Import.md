@@ -1,6 +1,6 @@
 # Importing Amazon S3 data into an RDS for PostgreSQL DB instance<a name="USER_PostgreSQL.S3Import"></a>
 
-You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL\. 
+You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL\. You can import into a provisioned DB instance only\. That is, these steps aren't supported for Aurora Serverless v1\. 
 
 For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
@@ -80,6 +80,9 @@ To import data from an Amazon S3 file, give the RDS for PostgreSQL DB instance p
 Before you load data from an Amazon S3 file, give your RDS for PostgreSQL DB instance permission to access the Amazon S3 bucket the file is in\. This way, you don't have to manage additional credential information or provide it in the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function call\.
 
 To do this, create an IAM policy that provides access to the Amazon S3 bucket\. Create an IAM role and attach the policy to the role\. Then assign the IAM role to your DB instance\. 
+
+**Note**  
+You can't associate an IAM role with an Aurora Serverless v1 DB cluster, so the following steps don't apply\.
 
 **To give an RDS for PostgreSQL DB instance access to Amazon S3 through an IAM role**
 
@@ -237,8 +240,6 @@ Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. Y
 1. Add the IAM role to the DB instance\. 
 
    You do so by using the AWS Management Console or AWS CLI, as described following\. 
-**Note**  
-Also, be sure the database you use doesn't have any restrictions noted in [Importing Amazon S3 data into an RDS for PostgreSQL DB instance](#USER_PostgreSQL.S3Import)\. 
 
 #### Console<a name="collapsible-section-1"></a>
 

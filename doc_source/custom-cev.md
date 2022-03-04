@@ -280,45 +280,7 @@ python -m json.tool < manifest.json
 
 ### Adding necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
 
-Make sure that the IAM principal that creates the CEV has either of the following policies:
-+ The `AdministratorAccess` policy
-+ The `AmazonRDSFullAccess` policy with the following additional permissions:
-  + The `mediaimport` action
-  + Get and list access to the Amazon S3 bucket that contains the installation files
-
-The following JSON example grants access to `mediaimport` and Amazon S3\.
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AccessToS3MediaBucket",
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObjectAcl",
-        "s3:GetObject",
-        "s3:GetObjectTagging",
-        "s3:ListBucket"
-      ],
-      "Resource": [
-        "arn:aws:s3:::my-custom-installation-files",
-        "arn:aws:s3:::my-custom-installation-files/*"
-      ]
-    },
-    {
-      "Sid": "PermissionForByom",
-      "Effect": "Allow",
-      "Action": [
-        "mediaimport:*"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-```
-
-You can also grant similar permissions for Amazon S3 to callers' accounts using an S3 bucket policy\.
+Make sure that the IAM principal that creates the CEV has the necessary policies described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
 
 ## Creating a CEV<a name="custom-cev.create"></a>
 

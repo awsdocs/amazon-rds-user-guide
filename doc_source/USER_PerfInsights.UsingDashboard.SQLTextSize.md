@@ -23,7 +23,7 @@ If you use the AWS CLI or API, Performance Insights doesn't have the 4 KB limit 
 Amazon RDS for PostgreSQL handles text differently\. You can set the text size limit with the DB instance parameter `track_activity_query_size`\. This parameter has the following characteristics:
 
 Default text size  
-
+On Amazon RDS for PostgreSQL version 9\.6, the default setting for the `track_activity_query_size` parameter is 1,024 bytes\. On Amazon RDS for PostgreSQL version 10 or higher, the default is 4,096 bytes\.
 
 Maximum text size  
 The limit for `track_activity_query_size` is 102,400 bytes for Amazon RDS for PostgreSQL version 12 and lower\. The maximum is 1 MB for version 13 and higher\.   
@@ -39,7 +39,7 @@ To increase the SQL text size, increase the `track_activity_query_size` limit\. 
 
 1. Associate the new parameter group with the DB instance\.
 
-For information about setting a DB instance parameter, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+For information about setting a DB instance parameter, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Viewing and downloading SQL text in the Performance Insights dashboard<a name="view-download-text"></a>
 
@@ -51,12 +51,18 @@ In the Performance Insights dashboard, you can view or download SQL text\.
 
 1. In the navigation pane, choose **Performance Insights**\.
 
-1. Choose a DB instance\. The Performance Insights dashboard is displayed for that DB instance\.
+1. Choose a DB instance\.
+
+   The Performance Insights dashboard is displayed for your DB instance\.
+
+1. Scroll down to the **Top SQL** tab\.
+
+1. Choose a SQL statement\.
 
    SQL statements with text larger than 500 bytes look similar to the following image\.  
 ![\[SQL statements with large text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-large-text-1.png)
 
-1. Examine the SQL information section to view more of the SQL text\.  
+1. Scroll down to the **SQL text** tab\.  
 ![\[SQL information section shows more of the SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-large-text-2.png)
 
    The Performance Insights dashboard can display up to 4,096 bytes for each SQL statement\.

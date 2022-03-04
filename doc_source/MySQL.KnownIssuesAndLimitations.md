@@ -43,7 +43,7 @@ For example, consider a query on a table with two indexes where the search argum
 In this case, the search engine will search both indexes\. However, due to the bug, the merged results are incorrect\. 
 
 To resolve this issue, you can do one of the following: 
-+ Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
++ Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 + Upgrade your MySQL DB instance to MySQL version 5\.6, 5\.7, or 8\.0\. For more information, see [Upgrading a MySQL DB snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
@@ -57,7 +57,7 @@ For more information, go to [Index merge optimization](https://dev.mysql.com/doc
 
 ## Log file size<a name="MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize"></a>
 
-For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](https://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\. 
+For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](https://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\. 
 
 ## MySQL parameter exceptions for Amazon RDS DB instances<a name="MySQL.Concepts.ParameterNotes"></a>
 
@@ -110,7 +110,7 @@ One option that you can use for breaking a large table up into smaller tables is
 **To disable InnoDB file\-per\-table tablespaces**
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
-For information on updating a parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+For information on updating a parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can issue an `ALTER TABLE` command to move a table from the global tablespace to its own tablespace, or from its own tablespace to the global tablespace as shown in the following example: 
 

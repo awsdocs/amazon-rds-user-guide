@@ -1,8 +1,10 @@
-# Working with the PostGIS extension<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS"></a>
+# Managing spatial data with the PostGIS extension<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS"></a>
 
-PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, see [PostGIS\.net](https://postgis.net/)\. 
+PostGIS is an extension to PostgreSQL for storing and managing spatial information\. To learn more about PostGIS, see [PostGIS\.net](https://postgis.net/)\. 
 
-You need to perform some setup before you can use the PostGIS extension\. The following list shows what you need to do\. Each step is described in greater detail later in this section\.
+Starting with version 10\.5, PostgreSQL supports the libprotobuf 1\.3\.0 library used by PostGIS for working with map box vector tile data\.
+
+Before you can use the PostGIS extension, you need to perform some setup\. The following list shows what you need to do\. Each step is described in greater detail later in this section\.
 
 **Topics**
 + [Step 1: Connect to the DB instance using the user name used to create the DB instance](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect)
@@ -43,7 +45,7 @@ CREATE EXTENSION postgis_topology;
 CREATE EXTENSION
 ```
 
-You can verify the results by running the SQL query shown in this example, which lists the extensions and their owners\. 
+You can verify the results by running the SQL query shown in the following example, which lists the extensions and their owners\. 
 
 ```
 SELECT n.nspname AS "Name",
@@ -61,7 +63,7 @@ List of schemas
 (4 rows)
 ```
 
-If you use the `psql` command\-line, you can obtain the same information by running the `\dn` meta\-command\. 
+If you use the psql command line, you can get the same information by running the `\dn` metacommand\. 
 
 **Note**  
 Extra extensions aren't required for some use cases\.
@@ -79,7 +81,7 @@ ALTER SCHEMA topology OWNER TO rds_superuser;
 ALTER SCHEMA
 ```
 
-If you want to confirm the ownership change, you can run this SQL query \(or, you can use the `\dn` meta\-command from the `psql` command\-line\)\. 
+If you want to confirm the ownership change, you can run the following SQL query\. Or you can use the `\dn` metacommand from the psql command line\. 
 
 ```
 SELECT n.nspname AS "Name",
@@ -106,7 +108,7 @@ Use the following function to transfer ownership of the PostGIS objects to the `
 CREATE FUNCTION exec(text) returns text language plpgsql volatile AS $f$ BEGIN EXECUTE $1; RETURN $1; END; $f$;
 ```
 
-Next, run this query to run the exec function that in turn runs the statements and alters the permissions\.
+Next, run the following query to run the `exec` function that in turn runs the statements and alters the permissions\.
 
 ```
 SELECT exec('ALTER TABLE ' || quote_ident(s.nspname) || '.' || quote_ident(s.relname) || ' OWNER TO rds_superuser;')
@@ -179,12 +181,9 @@ You can list the versions that are available in your release by using the follow
 SELECT * from pg_available_extension_versions where name='postgis';
 ```
 
-You can also obtain information about versions for PostGIS and all other extensions for each release of RDS for PostgreSQL on the following pages:
+You can also find version information in the following:
 + [PostgreSQL version 13 extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)
 +  [PostgreSQL version 12 extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x) 
 +  [PostgreSQL version 11\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x) 
 +  [PostgreSQL version 10\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x) 
 +  [PostgreSQL version 9\.6\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x) 
-
-**Note**  
-PostgreSQL 10\.5 added support for the `libprotobuf` extension version 1\.3\.0 to the PostGIS component\. 

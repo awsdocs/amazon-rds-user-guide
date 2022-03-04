@@ -69,7 +69,7 @@ You can also set the following National Language Support \(NLS\) initialization 
 + NLS\_TIMESTAMP\_FORMAT
 + NLS\_TIMESTAMP\_TZ\_FORMAT
 
-For information about modifying instance parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For information about modifying instance parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 You can set other NLS initialization parameters in your SQL client\. For example, the following statement sets the NLS\_LANGUAGE initialization parameter to GERMAN in a SQL client that is connected to an Oracle DB instance:
 

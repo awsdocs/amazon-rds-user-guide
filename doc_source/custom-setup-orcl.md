@@ -467,18 +467,123 @@ RDS Custom for Oracle automation uses IMDSv2 by default, by setting `HttpTokens=
 
 ## Grant required permissions to your IAM user<a name="custom-setup-orcl.iam-user"></a>
 
-The IAM principal that creates the CEV must have either of the following policies:
+Make sure that the IAM principal that creates the CEV or DB instance has either of the following policies:
 + The `AdministratorAccess` policy
-+ The `AmazonRDSFullAccess` policy with the following additional permissions:
++ The `AmazonRDSFullAccess` policy with required permissions for Amazon S3 and AWS KMS \(required for both CEV and DB creation\), CEV creation, and DB instance creation\.
 
-  ```
-  iam:SimulatePrincipalPolicy
-  cloudtrail:CreateTrail
-  cloudtrail:StartLogging
-  s3:CreateBucket
-  s3:PutBucketPolicy
-  mediaimport:CreateDatabaseBinarySnapshot
-  kms:CreateGrant
-  ```
+**Topics**
++ [Permissions required for Amazon S3 and AWS KMS](#custom-setup-orcl.s3-kms)
++ [Permissions required for creating a CEV](#custom-setup-orcl.cev)
++ [Permissions required for creating a DB instance from a CEV](#custom-setup-orcl.db)
 
-  For more information on the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.
+### Permissions required for Amazon S3 and AWS KMS<a name="custom-setup-orcl.s3-kms"></a>
+
+To create CEVs or RDS Custom for Oracle DB instances, the IAM principal needs to access Amazon S3 and AWS KMS\. The following sample JSON policy grants the required permissions\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CreateS3Bucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:PutBucketPolicy",
+                "s3:PutBucketObjectLockConfiguration",
+                "s3:PutBucketVersioning"
+            ],
+            "Resource": "arn:aws:s3:::do-not-delete-rds-custom-*"
+        },
+        {
+            "Sid": "CreateKmsGrant",
+            "Effect": "Allow",
+            "Action": "kms:CreateGrant",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+For more information on the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.
+
+### Permissions required for creating a CEV<a name="custom-setup-orcl.cev"></a>
+
+To create a CEV, the IAM principal needs the following additional permissions:
+
+```
+s3:GetObjectAcl
+s3:GetObject
+s3:GetObjectTagging
+s3:ListBucket
+mediaimport:CreateDatabaseBinarySnapshot
+```
+
+The following sample JSON policy grants the additional permissions to bucket *my\-custom\-installation\-files* and it contents\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AccessToS3MediaBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObjectAcl",
+                "s3:GetObject",
+                "s3:GetObjectTagging",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::my-custom-installation-files",
+                "arn:aws:s3:::my-custom-installation-files/*"
+            ]
+        },
+        {
+            "Sid": "PermissionForByom",
+            "Effect": "Allow",
+            "Action": [
+                "mediaimport:CreateDatabaseBinarySnapshot"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+You can grant similar permissions for Amazon S3 to caller accounts using an S3 bucket policy\.
+
+### Permissions required for creating a DB instance from a CEV<a name="custom-setup-orcl.db"></a>
+
+To create a DB instance from an existing CEV, the IAM principal needs the following additional permissions:
+
+```
+iam:SimulatePrincipalPolicy
+cloudtrail:CreateTrail
+cloudtrail:StartLogging
+```
+
+The following sample JSON policy grants the required permissions\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ValidateIamRole",
+            "Effect": "Allow",
+            "Action": "iam:SimulatePrincipalPolicy",
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateCloudTrail",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:CreateTrail",
+                "cloudtrail:StartLogging"
+            ],
+            "Resource": "arn:aws:cloudtrail:*:*:trail/do-not-delete-rds-custom-*"
+        }
+    ]
+}
+```

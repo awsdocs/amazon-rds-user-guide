@@ -263,7 +263,7 @@ By creating a MariaDB or MySQL DB instance in the same AWS Region as your Amazon
 
    Don't configure multiple Availability Zones, backup retention, or read replicas until after you have imported the database backup\. When that import is done, you can set Multi\-AZ and backup retention the way that you want them for the production instance\. For a detailed walkthrough of creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-1. Review the default configuration options for the Amazon RDS DB instance\. In the RDS console navigation pane, choose **Parameter groups**, and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group doesn't have the configuration options that you want, find a different one that does or create a new parameter group\. For more information on creating a parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+1. Review the default configuration options for the Amazon RDS DB instance\. In the RDS console navigation pane, choose **Parameter groups**, and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group doesn't have the configuration options that you want, find a different one that does or create a new parameter group\. For more information on creating a parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
    To use a different parameter group than the default, associate it with your Amazon RDS DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 

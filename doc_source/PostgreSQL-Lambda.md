@@ -19,7 +19,7 @@ For more information about Lambda functions, see [Getting started with Lambda](h
 + [Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)](#PostgreSQL-Lambda-specify-function)
 + [Step 5: Invoke a Lambda function from your RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-invoke)
 + [Lambda function error messages](#PostgreSQL-Lambda-errors)
-+ [Function reference](PostgreSQL-Lambda-functions.md)
++ [AWS Lambda function reference](PostgreSQL-Lambda-functions.md)
 
 ## Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda<a name="PostgreSQL-Lambda-network"></a>
 
@@ -36,7 +36,7 @@ Lambda functions always run inside an Amazon VPC owned by the AWS Lambda service
 
 1. Configure your VPC with a VPC endpoint for AWS Lambda\. For details, see [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*\. The endpoint returns responses to calls made by your RDS for PostgreSQL DB instance to your Lambda functions\. 
 
-1. Add the endpoint to your VPC's route table\. For more information, see [Work with route tables](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the the *Amazon VPC User Guide*\. 
+1. Add the endpoint to your VPC's route table\. For more information, see [Work with route tables](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the *Amazon VPC User Guide*\. 
 
 1. The VPC endpoint uses its own private DNS resolution\. RDS for PostgreSQL can't use the Lambda VPC endpoint until you change the value of the `rds.custom_dns_resolution` from its default value of 0 \(not enabled\) to 1\. 
 

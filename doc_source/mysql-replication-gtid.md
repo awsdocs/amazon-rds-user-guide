@@ -50,7 +50,7 @@ For GTID\-based replication, use these settings for the parameter group for your
 + `OFF_PERMISSIVE`, if set, means that your RDS DB instances or Aurora DB cluster can accept incoming replication from an external database\. It can do this whether the external database uses GTID\-based replication or not\. 
 +  `OFF`, if set, means that your RDS DB instances or Aurora DB cluster only accept incoming replication from external databases that don't use GTID\-based replication\. 
 
-For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Configuring GTID\-based replication for new read replicas<a name="mysql-replication-gtid.configuring-new-read-replicas"></a>
 
@@ -62,7 +62,7 @@ When GTID\-based replication is enabled for an RDS for MySQL DB instance, GTID\-
    + `gtid_mode` – `ON` or `ON_PERMISSIVE`
    + `enforce_gtid_consistency` – `ON`
 
-   For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+   For more information about setting configuration parameters using parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. If you changed the parameter group of the DB instance, reboot the DB instance\. For more information on how to do so, see [Rebooting a DB instance](USER_RebootInstance.md)\.
 
@@ -86,7 +86,7 @@ For an existing MySQL DB instance with read replicas that doesn't use GTID\-base
 
    1. Make sure that the parameter group associated with the DB instance and each read replica has the `enforce_gtid_consistency` parameter set to `WARN`\.
 
-      For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+      For more information about setting configuration parameters using parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
    1. If you changed the parameter group of the DB instance, reboot the DB instance\. If you changed the parameter group for a read replica, reboot the read replica\.
 
@@ -159,7 +159,7 @@ You can disable GTID\-based replication for a MySQL DB instance with read replic
 
    1. Make sure that the parameter group associated with the MySQL DB instance and each read replica has `gtid_mode` set to `ON_PERMISSIVE`\.
 
-      For more information about setting configuration parameters using parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+      For more information about setting configuration parameters using parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
    1. Reboot the MySQL DB instance and each read replica\. For more information about rebooting, see [Rebooting a DB instance](USER_RebootInstance.md)\.
 

@@ -30,7 +30,7 @@ The log retention period is different between Amazon RDS and Aurora\.
 
 ## MySQL slow query and general logs<a name="USER_LogAccess.MySQL.Generallog"></a>
 
-The MySQL slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
+The MySQL slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
 
 You can control MySQL logging by using the parameters in this list:
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
@@ -68,4 +68,4 @@ The MySQL slow query log, error log, and the general log file sizes are constrai
 
 ## Size limits on BLOBs<a name="USER_LogAccess.MySQL.LogFileSize.BLOBs"></a>
 
-For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.
+For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.

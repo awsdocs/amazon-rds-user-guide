@@ -9,7 +9,7 @@ Backup replication is available for RDS DB instances running the following datab
 + PostgreSQL version 9\.6 and higher
 + Microsoft SQL Server version 2012 and higher
 
-  Backup replication isn't supported for encrypted SQL Server DB instances\.
+  Backup replication isn't supported for encrypted SQL Server DB instances\. Make sure to clear the **Enable encryption** check box when you create a SQL Server DB instance for which you want to use backup replication\.
 
 For an example of using backup replication, see the AWS online tech talk [Managed Disaster Recovery with Amazon RDS for Oracle Cross\-Region Automated Backups](https://pages.awscloud.com/Managed-Disaster-Recovery-with-Amazon-RDS-for-Oracle-Cross-Region-Automated-Backups_2021_0908-DAT_OD.html)\.
 

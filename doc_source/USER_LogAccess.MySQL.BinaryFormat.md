@@ -35,7 +35,7 @@ Statement\-based replication can cause inconsistencies between the source DB ins
 
    You can't modify a default parameter group\. If the DB instance is using a default parameter group, create a new parameter group and associate it with the DB instance\.
 
-   For more information on parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+   For more information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. From **Parameter group actions**, choose **Edit**\.
 

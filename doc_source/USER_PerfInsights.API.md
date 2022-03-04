@@ -9,7 +9,7 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you
 + Add Performance Insights data to existing monitoring dashboards
 + Build monitoring tools
 
-To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\. For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com/performance-insights/latest/APIReference/Welcome.html)\.
+To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Turning Performance Insights on and off](USER_PerfInsights.Enabling.md)\. For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com/performance-insights/latest/APIReference/Welcome.html)\.
 
 The Performance Insights API provides the following operations\.
 

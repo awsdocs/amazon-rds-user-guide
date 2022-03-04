@@ -38,7 +38,7 @@ To learn more about Multi\-AZ deployments, see [Multi\-AZ DB instance deployment
 
 You can create a read replica as a Multi\-AZ DB instance\. Amazon RDS creates a standby of your replica in another Availability Zone \(AZ\) for failover support for the replica\. Creating your read replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
 
-If you use the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension to access data from a remote server, the read replica also has access to the remote server\. For more information about using `postgres_fdw`, see [Accessing external data with the postgres\_fdw extension](Appendix.PostgreSQL.CommonDBATasks.md#postgresql-commondbatasks-fdw)\.
+If you use the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension to access data from a remote server, the read replica also has access to the remote server\. For more information about using `postgres_fdw`, see [Using the postgres\_fdw extension to access external data](Appendix.PostgreSQL.CommonDBATasks.Extensions.foreign-data-wrappers.md#postgresql-commondbatasks-fdw)\.
 
 ## Monitoring PostgreSQL read replicas<a name="USER_PostgreSQL.Replication.ReadReplicas.Monitor"></a>
 

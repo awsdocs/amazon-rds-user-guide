@@ -24,7 +24,7 @@ MariaDB writes to the error log only on startup, shutdown, and when it encounter
 
 ## Accessing the MariaDB slow query and general logs<a name="USER_LogAccess.MariaDB.Generallog"></a>
 
-The MariaDB slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, AWS CLI, or AWS SDKs\.
+The MariaDB slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, AWS CLI, or AWS SDKs\.
 
 You can control MariaDB logging by using the parameters in this list:
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
@@ -207,7 +207,7 @@ Statement\-based replication can cause inconsistencies between the source DB ins
 
    You can't modify a default parameter group\. If the DB instance is using a default parameter group, create a new parameter group and associate it with the DB instance\.
 
-   For more information on DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+   For more information on DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 1. For **Parameter group actions**, choose **Edit**\.
 

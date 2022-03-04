@@ -31,7 +31,7 @@ Transportable databases have the following limitations:
 
 ## Setting up to transport a PostgreSQL database<a name="PostgreSQL.TransportableDB.Setup"></a>
 
-Before you begin, make sure that that your RDS for PostgreSQL DB instances meet the following requirements\.
+Before you begin, make sure that your RDS for PostgreSQL DB instances meet the following requirements:
 + The RDS for PostgreSQL DB instances for source and destination must run the same version of PostgreSQL\.
 + The destination DB can't have a database of the same name as the source DB that you want to transport\.
 + The account you use to run the transport needs `rds_superuser` privileges on both the source DB and the destination DB\. 
@@ -46,7 +46,7 @@ If your DB instances are already configured using custom DB parameter groups, yo
 
 For the following steps, use an account that has `rds_superuser` privileges\. 
 
-1. If the source and destination DB instances use a default DB parameter group, you need to create a custom DB parameter using the appropriate version for your instances\. You do this so you can change values for several parameters\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+1. If the source and destination DB instances use a default DB parameter group, you need to create a custom DB parameter using the appropriate version for your instances\. You do this so you can change values for several parameters\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 1. In the custom DB parameter group, change values for the following parameters:
    + `shared_preload_libraries` – Add `pg_transport` to the list of libraries\. 
@@ -132,6 +132,24 @@ import_from_server
 
 This function requires that you provide database user passwords\. Thus, we recommend that you change the passwords of the user roles you used after transport is complete\. Or, you can use SQL bind variables to create temporary user roles\. Use these temporary roles for the transport and then discard the roles afterwards\. 
 
+If your transport isn't successful, you might see an error message similar to the following:
+
+```
+pg_transport.num_workers=8 25% of files transported failed to download file data
+```
+
+The "failed to download file data" error message indicates that the number of worker processes isn't set correctly for the size of the database\. You might need to increase or decrease the value set for `pg_transport.num_workers`\. Each failure reports the percentage of completion, so you can see the impact of your changes\. For example, changing the setting from 8 to 4 in one case resulted in the following:
+
+```
+pg_transport.num_workers=4 75% of files transported failed to download file data
+```
+
+Keep in mind that the `max_worker_processes` parameter is also taken into account during the transport process\. In other words, you might need to modify both `pg_transport.num_workers` and `max_worker_processes` to successfully transport the database\. The example shown finally worked when the `pg_transport.num_workers` was set to 2:
+
+```
+pg_transport.num_workers=2 100% of files transported
+```
+
 For more information about the `transport.import_from_server` function and its parameters, see [Transportable databases function reference](#PostgreSQL.TransportableDB.transport.import_from_server)\. 
 
 ## What happens during database transport<a name="PostgreSQL.TransportableDB.DuringTransport"></a>
@@ -207,4 +225,4 @@ Specifies whether to report timing information during the transport\. The defaul
 
 **`pg_transport.work_mem`**  
 The maximum amount of memory to allocate for each worker\. The default is 131072 kilobytes \(KB\) or 262144 KB \(256 MB\), depending on the PostgreSQL version\. The minimum value is 64 megabytes \(65536 KB\)\. Valid values are in kilobytes \(KBs\) as binary base\-2 units, where 1 KB = 1024 bytes\.   
-The transport might use less memory than is specified in this parameter\. Even large database transports typically require less than than 256 MB \(262144 KB\) of memory per worker\.
+The transport might use less memory than is specified in this parameter\. Even large database transports typically require less than 256 MB \(262144 KB\) of memory per worker\.

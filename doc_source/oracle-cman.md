@@ -55,4 +55,4 @@ The following table shows how to set the `REMOTE_LISTENER` value\. The `LOCAL_LI
 
 ### Step 3: Associate your DB instance with the parameter group<a name="oracle-cman.configuring-cman.parameter-group"></a>
 
-Create or modify your DB instance to use the parameter group that you configured in [Step 2: Configure database parameters for CMAN](#oracle-cman.configuring-cman.parameters)\. For more information, see [Associating a DB parameter group with a DB instance](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Associating)\.
+Create or modify your DB instance to use the parameter group that you configured in [Step 2: Configure database parameters for CMAN](#oracle-cman.configuring-cman.parameters)\. For more information, see [Associating a DB parameter group with a DB instance](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Associating)\.

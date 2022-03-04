@@ -31,7 +31,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Multi\-AZ deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\. Multi\-AZ deployments for SQL Server are implemented using SQL Server's native DBM or AGs technology\.   |  [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md) [Multi\-AZ deployments using Microsoft SQL Server Database Mirroring or Always On availability groups](#SQLServer.Concepts.General.Mirroring)  | 
 |  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account does not have a default VPC, and you want the DB instance in a VPC, you must create the VPC and subnet groups before you create the DB instance\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.   In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Controlling access with security groups](Overview.RDSSecurityGroups.md)   | 
-|  **Parameter groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB parameter groups](USER_WorkingWithParamGroups.md)  | 
+|  **Parameter groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  **Option groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)  | 
 |  **Connecting to your DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\.   |  [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)  | 
 |  **Backup and restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md) [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
@@ -72,7 +72,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + `max server memory (mb)` >= 256 MB
   + `max worker threads` >= \(number of logical CPUs \* 7\)
 
-  For more information on setting DB parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+  For more information on setting DB parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 + The maximum storage size for SQL Server DB instances is the following: 
   + General Purpose \(SSD\) storage – 16 TiB for all editions 
   + Provisioned IOPS storage – 16 TiB for all editions 
@@ -129,7 +129,7 @@ The following server\-level permissions aren't available on RDS for SQL Server D
 + ALTER ANY DATABASE
 + ALTER ANY EVENT NOTIFICATION
 + ALTER RESOURCES
-+ ALTER SETTINGS \(you can use the DB parameter group API operations to modify parameters; for more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\) 
++ ALTER SETTINGS \(you can use the DB parameter group API operations to modify parameters; for more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\) 
 + AUTHENTICATE SERVER
 + CONTROL\_SERVER
 + CREATE DDL EVENT NOTIFICATION
@@ -165,7 +165,7 @@ To enable HIPAA support on your DB instance, set up the following three componen
 
 | Component | Details | 
 | --- | --- | 
-|  Auditing  |  To set up auditing, set the parameter `rds.sqlserver_audit` to the value `fedramp_hipaa`\. If your DB instance is not already using a custom DB parameter group, you must create a custom parameter group and attach it to your DB instance before you can modify the `rds.sqlserver_audit` parameter\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.  | 
+|  Auditing  |  To set up auditing, set the parameter `rds.sqlserver_audit` to the value `fedramp_hipaa`\. If your DB instance is not already using a custom DB parameter group, you must create a custom parameter group and attach it to your DB instance before you can modify the `rds.sqlserver_audit` parameter\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.  | 
 |  Transport encryption  |  To set up transport encryption, force all connections to your DB instance to use Secure Sockets Layer \(SSL\)\. For more information, see [Forcing connections to your DB instance to use SSL](SQLServer.Concepts.General.SSL.Using.md#SQLServer.Concepts.General.SSL.Forcing)\.  | 
 |  Encryption at rest  |  To set up encryption at rest, you have two options: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)  | 
 

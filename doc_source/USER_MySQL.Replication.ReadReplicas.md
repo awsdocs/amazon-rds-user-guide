@@ -102,9 +102,9 @@ The following limitations apply to replication filtering for RDS for MySQL:
 To configure replication filtering for a read replica, modify the replication filtering parameters in the parameter group associated with the read replica\.
 
 **Note**  
-You can't modify a default parameter group\. If the read replica is using a default parameter group, create a new parameter group and associate it with the read replica\. For more information on DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+You can't modify a default parameter group\. If the read replica is using a default parameter group, create a new parameter group and associate it with the read replica\. For more information on DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-You can set parameters in a parameter group using the AWS Management Console, AWS CLI, or RDS API\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. When you set parameters in a parameter group, all of the DB instances associated with the parameter group use the parameter settings\. If you set the replication filtering parameters in a parameter group, make sure that the parameter group is associated only with read replicas\. Leave the replication filtering parameters empty for source DB instances\.
+You can set parameters in a parameter group using the AWS Management Console, AWS CLI, or RDS API\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. When you set parameters in a parameter group, all of the DB instances associated with the parameter group use the parameter settings\. If you set the replication filtering parameters in a parameter group, make sure that the parameter group is associated only with read replicas\. Leave the replication filtering parameters empty for source DB instances\.
 
 The following examples set the parameters using the AWS CLI\. These examples set `ApplyMethod` to `immediate` so that the parameter changes occur immediately after the CLI command completes\. If you want a pending change to be applied after the read replica is rebooted, set `ApplyMethod` to `pending-reboot`\. 
 
@@ -242,7 +242,7 @@ aws rds modify-db-parameter-group ^
 You can view the replication filters for a read replica in the following ways:
 + Check the settings of the replication filtering parameters in the parameter group associated with the read replica\.
 
-  For instructions, see [Viewing parameter values for a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
+  For instructions, see [Viewing parameter values for a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
 + In a MySQL client, connect to the read replica and run the `SHOW REPLICA STATUS` statement\.
 
   In the output, the following fields show the replication filters for the read replica:

@@ -173,7 +173,7 @@ GTID\-based replication is only supported on RDS for MySQL version 5\.7\.23 and 
       + `gtid_mode` – `ON`, `ON_PERMISSIVE`, or `OFF_PERMISSIVE`
       + `enforce_gtid_consistency` – `ON`
 
-      For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+      For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
    1. If you changed the parameter group of the DB instance, reboot the DB instance\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.
 

@@ -1,8 +1,8 @@
 # DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
-The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
+The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class you need depends on your processing power and memory requirements\. 
 
-For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
+For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
 **Topics**
 + [DB instance class types](#Concepts.DBInstanceClass.Types)
@@ -16,16 +16,19 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 Amazon RDS supports three types of instance classes: standard, memory optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
-The following are the Standard DB instance classes available:
+The following are the standard DB instance types available:
 + **db\.m6g** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range of general purpose workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
++ **db\.m6gd** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range of general purpose workloads\. These have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
+
+  These DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.m5d** – Newest generation instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.m5** – Latest generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
 
-The following are the memory optimized DB instance classes available:
+The following are the memory optimized DB instance types available:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
@@ -35,12 +38,15 @@ The following are the memory optimized DB instance classes available:
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
++ **db\.r6gd** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. These have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
+
+  These DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.r5b** – Instance classes that are memory optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-The following are the burstable performance DB instance classes available:
+The following are the burstable performance DB instance types available:
 + **db\.t4g** – Newest\-generation general\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous\-generation burstable performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode, which means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as with any other DB instance modification\.
@@ -77,6 +83,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.m6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.m6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6gd – standard instance classes powered by AWS Graviton2 processors | 
+| db\.m6gd\.16xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.m6gd\.12xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.m6gd\.8xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.m6gd\.4xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.m6gd\.2xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.m6gd\.xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.m6gd\.large | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
 | db\.m5d – newest generation standard instance classes | 
 | db\.m5d\.24xlarge | No | Yes | No | No | No | 
 | db\.m5d\.16xlarge | No | Yes | No | No | No | 
@@ -140,6 +154,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.r6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.r6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6gd – memory optimized instance classes powered by AWS Graviton2 processors | 
+| db\.r6gd\.16xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.r6gd\.12xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.r6gd\.8xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.r6gd\.4xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.r6gd\.2xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.r6gd\.xlarge | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
+| db\.r6gd\.large | No | No | MySQL 8\.0\.26 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 & higher Multi\-AZ DB clusters | 
 | db\.r5d – newest generation memory optimized instance classes | 
 | db\.r5d\.24xlarge | No | Yes | No | No | No | 
 | db\.r5d\.16xlarge | No | Yes | No |  No  | No | 
@@ -769,6 +791,14 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.m6g\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6g\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6g\.large\* | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6gd | 
+| db\.m6gd\.16xlarge | 64 | – | 256 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.m6gd\.12xlarge | 48 | – | 192 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.m6gd\.8xlarge | 32 | – | 128 | Yes | Yes | 9,000 | 12 Gbps | 
+| db\.m6gd\.4xlarge | 16 | – | 64 | Yes | Yes | 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.2xlarge | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.xlarge | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.large | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m5d – latest generation standard instance classes | 
 | db\.m5d\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m5d\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -837,6 +867,14 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r6g\.2xlarge\* | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.xlarge\* | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.large\* | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6gd | 
+| db\.r6gd\.16xlarge | 64 | – | 512 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.r6gd\.12xlarge | 48 | – | 384 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.r6gd\.8xlarge | 32 | – | 256 | Yes | Yes | 9,000 | 12 Gbps | 
+| db\.r6gd\.4xlarge | 16 | – | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.2xlarge | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.xlarge | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.large | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r5d – latest generation memory optimized instance classes | 
 | db\.r5d\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5d\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 

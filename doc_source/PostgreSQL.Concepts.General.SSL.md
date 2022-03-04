@@ -43,7 +43,7 @@ $ psql -h testpg.555555555555.us-east-1.rds.amazonaws.com -p 5432 \
 
 You can require that connections to your PostgreSQL DB instance use SSL by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB instance\. Updating the `rds.force_ssl` parameter also sets the PostgreSQL `ssl` parameter to 1 \(on\) and modifies your DB instance's `pg_hba.conf` file to support the new SSL configuration\.
 
-You can set the `rds.force_ssl` parameter value by updating the parameter group for your DB instance\. If the parameter group for your DB instance isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB instance\. Otherwise, you must reboot your DB instance for the change to take effect\. For more information on parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+You can set the `rds.force_ssl` parameter value by updating the parameter group for your DB instance\. If the parameter group for your DB instance isn't the default one, and the `ssl` parameter is already set to 1 when you set `rds.force_ssl` to 1, you don't need to reboot your DB instance\. Otherwise, you must reboot your DB instance for the change to take effect\. For more information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 When the `rds.force_ssl` parameter is set to 1 for a DB instance, you see output similar to the following when you connect, indicating that SSL is now required:
 

@@ -43,7 +43,7 @@ Some option changes are applied immediately, and some option changes are applied
 
 You manage your DB engine configuration through the use of parameters in a DB parameter group\. When you created your Oracle DB instance, you used the default DB parameter group\. If you want to customize your database configuration, you can create a new parameter group for your DB instance\. 
 
-When you change a parameter, depending on the type of the parameter, the changes are applied either immediately or after you manually reboot the DB instance\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. After you create a customized parameter group, modify your DB instance to attach it\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+When you change a parameter, depending on the type of the parameter, the changes are applied either immediately or after you manually reboot the DB instance\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. After you create a customized parameter group, modify your DB instance to attach it\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 To optimize your Oracle DB instance for Siebel CRM, you can customize certain parameters\. The following table shows some recommended parameter settings\. For more information about performance tuning Siebel CRM, see [Siebel CRM Performance Tuning Guide](https://docs.oracle.com/cd/E63029_01/books/PerformTun/toc.htm)\.  
 

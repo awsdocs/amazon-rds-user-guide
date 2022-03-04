@@ -23,7 +23,7 @@ For common recommendations for Amazon RDS, see [Viewing Amazon RDS recommendatio
 ## Amazon RDS basic operational guidelines<a name="CHAP_BestPractices.DiskPerformance"></a>
 
 The following are basic operational guidelines that everyone should follow when working with Amazon RDS\. Note that the Amazon RDS Service Level Agreement requires that you follow these guidelines:
-+ Monitor your memory, CPU, and storage usage\. Amazon CloudWatch can be set up to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
++ Use metrics to monitor your memory, CPU, replica lag, and storage usage\. Amazon CloudWatch can be set up to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
 + Scale up your DB instance when you are approaching storage capacity limits\. You should have some buffer in storage and memory to accommodate unforeseen increases in demand from your applications\. 
 + Enable automatic backups and set the backup window to occur during the daily low in write IOPS\. That's when a backup is least disruptive to your database usage\.
 + If your database workload requires more I/O than you have provisioned, recovery after a failover or database failure will be slow\. To increase the I/O capacity of a DB instance, do any or all of the following:
@@ -54,6 +54,8 @@ When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time fo
 You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 
 To troubleshoot performance issues, it's important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\.
+
+If you are using Multi\-AZ DB clusters, you can monitor the difference in time between the latest transaction on the writer DB instance and the latest applied transaction on a reader DB instance\. This difference is called *replica lag*\. For more information, see [Replica lag and Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-replica-lag)\.
 
 **To view performance metrics**
 
@@ -130,7 +132,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 +  **High CPU or RAM consumption –** High values for CPU or RAM consumption might be appropriate, provided that they are in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 
 +  **Disk space consumption – ** Investigate disk space consumption if space used is consistently at or above 85 percent of the total disk space\. See if it is possible to delete data from the instance or archive data to a different system to free up space\. 
 +  **Network traffic –** For network traffic, talk with your system administrator to understand what expected throughput is for your domain network and Internet connection\. Investigate network traffic if throughput is consistently lower than expected\. 
-+  **Database connections –** Consider constraining database connections if you see high numbers of user connections in conjunction with decreases in instance performance and response time\. The best number of user connections for your DB instance will vary based on your instance class and the complexity of the operations being performed\. You can determine the number of database connections by associating your DB instance with a parameter group where the *User Connections* parameter is set to other than 0 \(unlimited\)\. You can either use an existing parameter group or create a new one\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
++  **Database connections –** Consider constraining database connections if you see high numbers of user connections in conjunction with decreases in instance performance and response time\. The best number of user connections for your DB instance will vary based on your instance class and the complexity of the operations being performed\. You can determine the number of database connections by associating your DB instance with a parameter group where the *User Connections* parameter is set to other than 0 \(unlimited\)\. You can either use an existing parameter group or create a new one\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 +  **IOPS metrics –** The expected values for IOPS metrics depend on disk specification and server configuration, so use your baseline to know what is typical\. Investigate if values are consistently different than your baseline\. For best IOPS performance, make sure your typical working set will fit into memory to minimize read and write operations\. 
 
  For issues with any performance metrics, one of the first things you can do to improve performance is tune the most used and most expensive queries to see if that lowers the pressure on system resources\. For more information, see [Tuning queries](#CHAP_BestPractices.TuningQueries)\.
@@ -248,7 +250,7 @@ A 2020 AWS virtual workshop included a presentation on running production Oracle
 
 Two important areas where you can improve performance with PostgreSQL on Amazon RDS are when loading data into a DB instance and when using the PostgreSQL autovacuum feature\. The following sections cover some of the practices we recommend for these areas\.
 
-For information on how Amazon RDS implements other common PostgreSQL DBA tasks, see [Common DBA tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)\.
+For information on how Amazon RDS implements other common PostgreSQL DBA tasks, see [Common DBA tasks for Amazon RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)\.
 
 ### Loading data into a PostgreSQL DB instance<a name="CHAP_BestPractices.PostgreSQL.LoadingData"></a>
 

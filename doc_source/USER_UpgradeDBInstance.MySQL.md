@@ -194,7 +194,7 @@ Before you perform a major version upgrade on your DB instance, thoroughly test 
    +  [Changes in MySQL 5\.7](http://dev.mysql.com/doc/refman/5.7/en/upgrading-from-previous-series.html) 
    +  [Changes in MySQL 8\.0](http://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html) 
 
-1. If your DB instance is a member of a custom DB parameter group, create a new DB parameter group with your existing settings that is compatible with the new major version\. Specify the new DB parameter group when you upgrade your test instance, so your upgrade testing ensures that it works correctly\. For more information about creating a DB parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+1. If your DB instance is a member of a custom DB parameter group, create a new DB parameter group with your existing settings that is compatible with the new major version\. Specify the new DB parameter group when you upgrade your test instance, so your upgrade testing ensures that it works correctly\. For more information about creating a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 1. Create a DB snapshot of the DB instance to be upgraded\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\. 
 
@@ -378,9 +378,9 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 
    If you want the DB instance to use a custom parameter group after it is promoted to a standalone DB instance, you can create the DB parameter group now can associate it with the read replica\.
 
-   1. Create a custom DB parameter group for MySQL 8\.0\. For instructions, see [Creating a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating)\.
+   1. Create a custom DB parameter group for MySQL 8\.0\. For instructions, see [Creating a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Creating)\.
 
-   1. Modify the parameters that you want to change in the DB parameter group you just created\. For instructions, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+   1. Modify the parameters that you want to change in the DB parameter group you just created\. For instructions, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
    1. In the console, choose **Databases**, and then choose the read replica\.
 

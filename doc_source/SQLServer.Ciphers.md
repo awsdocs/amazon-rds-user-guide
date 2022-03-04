@@ -34,7 +34,7 @@ Use the following process to configure the security protocols and ciphers:
 
 1. Associate the DB parameter group with your DB instance\.
 
-For more information on DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information on DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Creating the security\-related parameter group<a name="CreateParamGroup.Ciphers"></a>
 
