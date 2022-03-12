@@ -36,18 +36,18 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 ****  
 
-| APEX version | Storage requirements | Supported Oracle database versions | Notes | 
+| APEX version | Storage requirements | Supported Oracle Database versions | Notes | 
 | --- | --- | --- | --- | 
 |  Oracle APEX version 21\.1\.v1  |  125 MiB  |  All  |  This version includes patch 32598392: PSE BUNDLE FOR APEX 21\.1\.  | 
-|  Oracle APEX version 20\.2\.v1  |  148 MiB  |  All  |  This version includes patch p32006852\_2020\_Generic\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
-|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All  |  This version includes patch 30990551\.  | 
-|  Oracle APEX version 19\.2\.v1  |  149 MiB  |  All  |  | 
-|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  All  |  | 
-|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  All except 19c  |  | 
-|  Oracle APEX version 18\.1\.v1  |  145 MiB  | All except 19c |  | 
-|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  All except 19c  |  | 
-|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  12\.1 only  |  | 
-|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  12\.1 only  |  | 
+|  Oracle APEX version 20\.2\.v1  |  148 MiB  |  All except 21c  |  This version includes patch p32006852\_2020\_Generic\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
+|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All except 21c  |  This version includes patch 30990551\.  | 
+|  Oracle APEX version 19\.2\.v1  |  149 MiB  |  All except 21c  |  | 
+|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  All except 21c  |  | 
+|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  12\.1 and 12\.2 only  |  | 
+|  Oracle APEX version 18\.1\.v1  |  145 MiB  |  12\.1 and 12\.2 only  |  | 
+|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  12\.1 and 12\.2 only  |  | 
+|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  12\.1 and 12\.2 only  |  | 
+|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  12\.1 and 12\.2 only  |  | 
 |  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  12\.1 only  |  | 
 
 ## Prerequisites for Oracle APEX and ORDS<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
@@ -426,11 +426,11 @@ Your listener is now ready for use\.
 ## Upgrading the APEX version<a name="Appendix.Oracle.Options.APEX.Upgrade"></a>
 
 **Important**  
-Back up your DB instance before you upgrade APEX\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md) and [Testing an Oracle DB upgrade](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.UpgradeTesting)\. 
+Back up your DB instance before you upgrade APEX\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md) and [Testing an Oracle DB upgrade](USER_UpgradeDBInstance.Oracle.UpgradeTesting.md)\. 
 
 To upgrade APEX with your DB instance, do the following: 
 + Create a new option group for the upgraded version of your DB instance\. 
-+ Add the upgraded versions of APEX and APEX\-DEV to the new option group\. Be sure to include any other options that your DB instance uses\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
++ Add the upgraded versions of APEX and APEX\-DEV to the new option group\. Be sure to include any other options that your DB instance uses\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.OGPG.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
 + When you upgrade your DB instance, specify the new option group for your upgraded DB instance\. 
 
 After you upgrade your version of APEX, the APEX schema for the previous version might still exist in your database\. If you don't need it anymore, you can drop the old APEX schema from your database after you upgrade\. 

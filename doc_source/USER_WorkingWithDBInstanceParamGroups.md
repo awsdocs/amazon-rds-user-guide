@@ -49,7 +49,7 @@ Include the following required parameters:
 To list all of the available parameter group families, use the following command:
 
 ```
-aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"				
+aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"
 ```
 
 **Note**  

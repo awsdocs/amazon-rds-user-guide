@@ -266,12 +266,13 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
                "Service": "rds.amazonaws.com"
              },
             "Action": "sts:AssumeRole",
-               "Condition": {
-                   "StringEquals": {
-                       "aws:SourceAccount": my_account_ID,
-                       "aws:SourceArn": "arn:aws:rds:Region:my_account_ID:db:dbname
-                   }
-               }
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": my_account_ID,
+                    "aws:SourceArn": "arn:aws:rds:Region:my_account_ID:db:dbname"
+                }
+            }
+          }
         ]
       }'
    ```
@@ -290,12 +291,13 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
                "Service": "rds.amazonaws.com"
              },
             "Action": "sts:AssumeRole",
-               "Condition": {
-                   "StringEquals": {
-                       "aws:SourceAccount": my_account_ID,
-                       "aws:SourceArn": "arn:aws:rds:Region:my_account_ID:db:dbname
-                   }
-               }
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": my_account_ID,
+                    "aws:SourceArn": "arn:aws:rds:Region:my_account_ID:db:dbname"
+                }
+            }
+          }
         ]
       }'
    ```

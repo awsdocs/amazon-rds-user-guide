@@ -169,7 +169,7 @@ The following example changes the time zone to the Africa/Algiers time zone\.
 EXEC rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
 ```
 
-After you alter the time zone by using the `alter_db_time_zone` procedure, reboot your DB instance for the change to take effect\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\. For information about upgrading time zones, see [Time zone considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.DST)\.
+After you alter the time zone by using the `alter_db_time_zone` procedure, reboot your DB instance for the change to take effect\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\. For information about upgrading time zones, see [Time zone considerations](USER_UpgradeDBInstance.Oracle.OGPG.md#USER_UpgradeDBInstance.Oracle.OGPG.DST)\.
 
 ## Working with Oracle external tables<a name="Appendix.Oracle.CommonDBATasks.External_Tables"></a>
 
@@ -240,9 +240,10 @@ When working with AWR, we recommend using the `rdsadmin.rdsadmin_diagnostic_util
 The `rdsadmin_diagnostic_util` procedures save the reports to the DB instance file system\. You can access these reports from the console\. You can also access reports using the `rdsadmin.rds_file_util` procedures, and you can access reports that are copied to Amazon S3 using the S3 Integration option\. For more information, see [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) and [Amazon S3 integration](oracle-s3-integration.md)\. 
 
 You can use the `rdsadmin_diagnostic_util` procedures in the following Amazon RDS for Oracle DB engine versions:
-+ 19\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 19c versions
-+ 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
-+ 12\.1\.0\.2\.v20 or higher 12\.1 versions
++ All Oracle Database 21c versions
++ 19\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 and higher Oracle Database 19c versions
++ 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 and higher Oracle Database 12c Release 2 \(12\.2\) versions
++ 12\.1\.0\.2\.v20 and higher Oracle Database 12c Release 1 \(12\.1\) versions
 
 ### Common parameters for the diagnostic utility package<a name="Appendix.Oracle.CommonDBATasks.CommonAWRParam"></a>
 
@@ -367,9 +368,10 @@ For more information about Oracle edition\-based redefinition, see [About editio
 
 ## Enabling auditing for the SYS\.AUD$ table<a name="Appendix.Oracle.CommonDBATasks.EnablingAuditing"></a>
 
-To enable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
+To enable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\.
 
 Enabling auditing is supported for Oracle DB instances running the following versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\)
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\.v14\) and later

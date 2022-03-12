@@ -13,11 +13,11 @@ Following are the supported Oracle versions for each SQLT version\.
 
 ****  
 
-| SQLT version | Oracle Database 19c | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
-| --- | --- | --- | --- | 
-|  12\.2\.180725  |  Supported  |  Supported  |  Supported  | 
-|  12\.2\.180331  |  Not supported  |  Supported  |  Supported  | 
-|  12\.1\.160429  |  Not supported  |  Supported  |  Supported  | 
+| SQLT version | Oracle Database 21c | Oracle Database 19c | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
+| --- | --- | --- | --- | --- | 
+|  2018\-07\-25\.v1  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  2018\-03\-31\.v1  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
+|  2016\-04\-29\.v1  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
 
 To download SQLT and access instructions for using it:
 + Log in to your My Oracle Support account, and open the following documents:
@@ -28,9 +28,10 @@ To download SQLT and access instructions for using it:
 + For interpreting the Main report: [Document 1922234\.1](https://support.oracle.com/epmos/faces/DocumentDisplay?parent=DOCUMENT&sourceId=215187.1&id=1922234.1)
 
  You can use SQLT with any edition of the following Oracle Database versions: 
++ Oracle Database 21c \(21\.0\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
-+ Oracle Database 12c Release 1 \(12\.1\.0\.2\_
++ Oracle Database 12c Release 1 \(12\.1\.0\.2\)
 
 Amazon RDS does not support the following SQLT methods: 
 + `XPLORE` 
@@ -73,7 +74,7 @@ Amazon RDS supports the following settings for the SQLT option\.
 | Option setting | Valid values | Default value | Description | 
 | --- | --- | --- | --- | 
 |  `LICENSE_PACK`  |  `T`, `D`, `N`  |  `N`   |  The Oracle Management Packs that you want to access with SQLT\. Enter one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Options.SQLT.html)  Amazon RDS does not provide licenses for these Oracle Management Packs\. If you indicate that you want to use a pack that is not included in your DB instance, you can use SQLT with the DB instance\. However, SQLT can't access the pack, and the SQLT report doesn't include the data for the pack\. For example, if you specify `T`, but the DB instance doesn't include the Oracle Tuning Pack, SQLT works on the DB instance, but the report it generates doesn't contain data related to the Oracle Tuning Pack\.   | 
-|  `VERSION`  |  `2016-04-29.v1` `2018-03-31.v1` `2018-07-25.v1`  |  `2016-04-29.v1`   |  The version of SQLT that you want to install\.  For Oracle Database 19c \(19\.0\.0\.0\), the only supported version is `2018-07-25.v1`\. This version is also the default for Oracle Database 19c\.   | 
+|  `VERSION`  |  `2016-04-29.v1` `2018-03-31.v1` `2018-07-25.v1`  |  `2016-04-29.v1`   |  The version of SQLT that you want to install\.  For Oracle Database 19c and 21c, the only supported version is `2018-07-25.v1`\. This version is the default for these releases\.   | 
 
 ## Adding the SQLT option<a name="Oracle.Options.SQLT.Add"></a>
 

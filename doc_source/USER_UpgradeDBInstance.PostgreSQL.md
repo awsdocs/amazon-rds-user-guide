@@ -89,55 +89,42 @@ The version numbering sequence for the PostgreSQL database engine is as follows:
 
 ## Choosing a major version upgrade for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 
-Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. 
+Major version upgrades can contain changes that are not backward\-compatible with previous versions of the database\. New functionality can cause your existing applications to stop working correctly\. For this reason, Amazon RDS doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB instance manually\. Make sure that you thoroughly test any upgrade to verify that your applications work correctly before applying the upgrade to your production DB instances\. When you do a PostgreSQL major version upgrade, we recommend that you follow the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)\. 
 
-As a result, Amazon RDS doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB instance manually\. Make sure that you thoroughly test any upgrade to verify that your applications work correctly before applying the upgrade to your production DB instances\. When you do a PostgreSQL major version upgrade, we recommend that you follow the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)\. 
+When you upgrade a PostgreSQL DB instance to its next major version, any read replicas associated with the DB instance are also upgraded to that next major version\. In some cases, you can skip to a higher major version when upgrading\. If your upgrade skips a major version, the read replicas are also upgraded to that target major version\. Upgrades to version 11 that skip other major versions have certain limitations\. You can find the details in the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)\.
 
-You can upgrade a PostgreSQL DB instance to its next major version, and any read replicas of the DB instance are also upgraded to that next major version\. From some PostgreSQL database versions, you can skip to a higher major version when upgrading\. If your upgrade skips a major version, the read replicas are also upgraded to that target major version\. The following table lists the source PostgreSQL database versions and the associated target major versions available for upgrading\.
+Most PostgreSQL extensions aren't upgraded during a PostgreSQL engine upgrade\. These must be upgraded separately\. For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\.
 
-**Note**  
-Upgrade targets are enabled to a higher version released at the same time as the source minor version or later\.  
-If a database uses the `PostGIS` extension, you can't skip major versions for some source to target combinations\. For these circumstances, upgrade to a recent minor version, then upgrade to PostgreSQL 12, and finally upgrade to your desired target version\.  
-The `pgRouting` extension isn't supported for an upgrade that skips a major version to versions 11\.x\. A major version is skipped when the upgrade goes from versions 9\.5\.x or 9\.6\.x to versions 11\.x or higher\. You can drop the `pgRouting` extension and then add it again after an upgrade\.   
-The `tsearch2` and `chkpass` extensions aren't supported in PostgreSQL 11 or later\. If you are upgrading to version 11\.x, drop these extensions before the upgrade\.
+You can find out which major versions are available for your RDS for PostgreSQL DB instance by running the following AWS CLI query:
+
+```
+aws rds describe-db-engine-versions --engine postgres  --engine-version your-version --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+The following table summarizes the results of this query for all available versions\. Deprecated versions are not listed\. If your current version isn't listed in the table, we recommend that you perform minor version upgrades until your instance is at a version level listed in the table, and then perform a major version upgrade for that version\. For more information about RDS for PostgreSQL 9\.6 deprecation, see [Deprecation of PostgreSQL version 9\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
 
 
-| Current source version | Newest upgrade target | Preferred major upgrade targets | 
+| Current source version | Newest upgrade target | Available upgrade targets | 
 | --- | --- | --- | 
-| 13\.5, 13\.4, 13\.3, 13\.2, 13\.1 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) |  |  |  |  | 
-| 12\.9 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) |  |  |  | 
-| 12\.8 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) |  |  |  |  | 
-| 12\.7, 12\.6, 12\.4 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) |  |  |  |  | 
-| 12\.5, 12\.3, 12\.2 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) |  |  |  |  | 
-| 11\.14 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) |  |  | 
-| 11\.13 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) |  |  |  | 
-| 11\.12 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version127) |  |  |  | 
-| 11\.11 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  |  |  | 
-| 11\.10 | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  |  |  | 
-| 11\.9, 11\.8, 11\.7, 11\.6, 11\.5, 11\.4, 11\.2, 11\.1 | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  |  |  |  | 
-| 10\.19 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) |  | 
-| 10\.18 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) | [11\.13](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1113) |  |  | 
-| 10\.17 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version127) | [11\.12](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1112) |  |  | 
-| 10\.16 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
-| 10\.15 | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [12\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version125) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
-| 10\.14 | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  |  | 
-| 10\.13 | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  |  | 
-| 10\.12 | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  |  | 
-| 10\.11, 10\.10, 10\.9, 10\.7, 10\.6, 10\.5, 10\.4, 10\.3, 10\.1 | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  |  |  | 
-| 9\.6\.24 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) | [10\.19](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) | 
-| 9\.6\.23 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) | [11\.13](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1113) | [10\.18](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1018) |  | 
-| 9\.6\.22 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version127) | [11\.12](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1112) | [10\.17](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1017) |  | 
-| 9\.6\.21 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132)  | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
-| 9\.6\.20 | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [12\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version125) | [11\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1110) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
-| 9\.6\.19 | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) | [11\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version119) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  | 
-| 9\.6\.18 | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [11\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version118)  | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  | 
-| 9\.6\.17 | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [11\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version117) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  | 
-| 9\.6\.16 | [11\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version116) | [11\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version116) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  |  | 
-| 9\.6\.15 | [11\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version114) | [11\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version115) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  |  | 
-| 9\.6\.14 | [11\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version114) | [11\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version114) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  |  | 
-| 9\.6\.12 | [11\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version112) | [11\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version112) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  |  | 
-| 9\.6\.11 | [11\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version111) | [11\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version111) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  |  | 
-| 9\.6\.10, 9\.6\.9, 9\.6\.8, 9\.6\.6, 9\.6\.5, 9\.6\.3, 9\.6\.2, 9\.6\.1  | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  |  |  |  | 
+| 14\.1 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) |  |  |  |  |  |  |  |  | 
+| 13\.5 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) |  |  |  |  |  |  | 
+| 13\.4 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) |  |  |  |  |  | 
+| 13\.3 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) |  |  |  |  | 
+| 12\.10 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) |  |  |  |  |  |  |  | 
+| 12\.9 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) |  |  |  |  |  | 
+| 12\.8 | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) |  |  |  |  | 
+| 12\.7 | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) |  |  | 
+| 11\.15 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) |  |  |  |  |  |  | 
+| 11\.14 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) |  |  |  |  | 
+| 11\.13 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) |  |  |  | 
+| 11\.12 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) | [12\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version127) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) | [11\.13](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1113) |  | 
+| 10\.20 | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [14\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version142) | [13\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version136) | [12\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1210) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) |  |  |  |  |  | 
+| 10\.19 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) | [10\.20](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1020) |  |  |  | 
+| 10\.18 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) | [11\.13](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1113) | [10\.20](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1020) | [10\.19](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) |  |  | 
+| 10\.17 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version127) | [11\.15](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1115) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) | [11\.13](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1113) | [11\.12](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1112) | [10\.20](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) | [10\.19](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) | [10\.18](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1018) | 
+| 9\.6\.24 | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [14\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version141) | [13\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version135) | [12\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version129) | [11\.14](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1114) | [10\.20](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) | [10\.19](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) |  |  |  | 
+| 9\.6\.23 | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [13\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version134) | [12\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version128) | [11\.13](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1113) | [10\.20](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1020) | [10\.19](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) | [10\.18](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1018) | [9\.6\.24](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9624) |  |  | 
+| 9\.6\.22 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version127) | [11\.12](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1112) | [10\.20](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1020) | [10\.19](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1019) | [10\.18](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1018) | [10\.17](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1017) | [9\.6\.24](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9624) | [9\.6\.23](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9623) | 
 
 ## How to perform a major version upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process"></a>
 
@@ -160,16 +147,16 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
      To verify that there are no uses of unsupported *reg\** data types, use the following query for each database\. 
 
      ```
-     SELECT count(*) FROM pg_catalog.pg_class c, pg_catalog.pg_namespace n, pg_catalog.pg_attribute a 
-       WHERE c.oid = a.attrelid 
-           AND NOT a.attisdropped 
-           AND a.atttypid IN ('pg_catalog.regproc'::pg_catalog.regtype, 
-                              'pg_catalog.regprocedure'::pg_catalog.regtype, 
-                              'pg_catalog.regoper'::pg_catalog.regtype, 
-                              'pg_catalog.regoperator'::pg_catalog.regtype, 
-                              'pg_catalog.regconfig'::pg_catalog.regtype, 
-                              'pg_catalog.regdictionary'::pg_catalog.regtype) 
-           AND c.relnamespace = n.oid 
+     SELECT count(*) FROM pg_catalog.pg_class c, pg_catalog.pg_namespace n, pg_catalog.pg_attribute a
+       WHERE c.oid = a.attrelid
+           AND NOT a.attisdropped
+           AND a.atttypid IN ('pg_catalog.regproc'::pg_catalog.regtype,
+                              'pg_catalog.regprocedure'::pg_catalog.regtype,
+                              'pg_catalog.regoper'::pg_catalog.regtype,
+                              'pg_catalog.regoperator'::pg_catalog.regtype,
+                              'pg_catalog.regconfig'::pg_catalog.regtype,
+                              'pg_catalog.regdictionary'::pg_catalog.regtype)
+           AND c.relnamespace = n.oid
            AND n.nspname NOT IN ('pg_catalog', 'information_schema');
      ```
 
@@ -209,7 +196,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
    For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\.
 
-1. **Drop certain extensions before the major version upgrade** – An upgrade that skips a major version to version 11\.x doesn't support updating the `pgRouting` extension\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. It's safe to drop the `pgRouting` extension and then reinstall it to a compatible version after the upgrade\. For the extension versions you can update to, see [Suppported PostgreSQL extension versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
+1. **Drop certain extensions before the major version upgrade** – An upgrade that skips a major version to version 11\.x doesn't support updating the `pgRouting` extension\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. It's safe to drop the `pgRouting` extension and then reinstall it to a compatible version after the upgrade\. For the extension versions you can update to, see [Supported PostgreSQL extension versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
 
    The `tsearch2` and `chkpass` extensions are no longer supported for PostgreSQL versions 11 or later\. If you are upgrading to version 11\.x, drop the `tsearch2`, and `chkpass` extensions before the upgrade\.
 
@@ -218,8 +205,8 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
    PostgreSQL version 10 stopped supporting the `unknown` data type\. If a version 9\.6 database uses the `unknown` data type, an upgrade to a version 10 shows an error message such as the following: 
 
    ```
-   Database instance is in a state that cannot be upgraded: PreUpgrade checks failed: 
-   The instance could not be upgraded because the 'unknown' data type is used in user tables. 
+   Database instance is in a state that cannot be upgraded: PreUpgrade checks failed:
+   The instance could not be upgraded because the 'unknown' data type is used in user tables.
    Please remove all usages of the 'unknown' data type and try again."
    ```
 
@@ -400,7 +387,7 @@ To upgrade an extension, use the following command\.
 ALTER EXTENSION extension_name UPDATE TO 'new_version'
 ```
 
-For the list of supported versions of PostgreSQL extensions, see [Suppported PostgreSQL extension versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
+For the list of supported versions of PostgreSQL extensions, see [Supported PostgreSQL extension versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
 
 To list your currently installed extensions, use the PostgreSQL [pg\_extension](https://www.postgresql.org/docs/current/catalog-pg-extension.html) catalog in the following command\.
 

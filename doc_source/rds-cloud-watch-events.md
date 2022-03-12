@@ -185,4 +185,6 @@ To test your rule, shut down an RDS DB instance\. After waiting a few minutes fo
    }
    ```
 
+   For more examples of RDS events in JSON format, see [Overview of events for Amazon RDS](rds-cloudwatch-events.sample.md)\.
+
 1. \(Optional\) When you're finished, you can open the Amazon RDS console and start the instance that you stopped\.

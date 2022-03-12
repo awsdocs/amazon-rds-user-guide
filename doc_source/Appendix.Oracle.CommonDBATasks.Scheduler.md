@@ -3,6 +3,7 @@
 Some scheduler jobs owned by `SYS` can interfere with normal database operations\. Oracle Support recommends you disable these jobs or modify the schedule\. To perform tasks for Oracle Scheduler jobs owned by `SYS`, use the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler`\.
 
 The `rdsadmin.rdsadmin_dbms_scheduler` procedures are supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c
 + Oracle Database 12c Release 2 \(12\.2\) on 12\.2\.0\.2\.ru\-2019\-07\.rur\-2019\-07\.r1 or higher 12\.2 versions
 + Oracle Database 12c Release 1 \(12\.1\) on 12\.1\.0\.2\.v17 or higher 12\.1 versions

@@ -20,6 +20,8 @@ To learn how to work with DB instances inside a VPC, see the following:
 
 Here are some tips on working with a DB instance in a VPC:
 + Your VPC must have at least two subnets\. These subnets must be in two different Availability Zones in the AWS Region where you want to deploy your DB instance\. A subnet is a segment of a VPC's IP address range that you can specify and that lets you group instances based on your security and operational needs\. 
+
+  For Multi\-AZ deployments, defining a subnet for two or more Availability Zones in an AWS Region allows Amazon RDS to create a new standby in another Availability Zone should the need arise\. You need to do this even for Single\-AZ deployments, just in case you want to convert them to Multi\-AZ deployments at some point\.
 **Note**  
 The DB subnet group for a Local Zone can have only one subnet\.
 + If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. 

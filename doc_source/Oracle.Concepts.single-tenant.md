@@ -2,7 +2,18 @@
 
 The multitenant architecture enables an Oracle database to function as a multitenant container database \(CDB\)\. A CDB can include customer\-created pluggable databases \(PDBs\)\. A non\-CDB is an Oracle database that uses the traditional architecture, which can't contain PDBs\. For more information about the multitenant architecture, see [https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22](https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22)\.
 
-For Oracle Database 19c, create a DB instance either as a CDB or a non\-CDB\. The architecture is a permanent characteristic that you can't change later\. For versions other than Oracle Database 19c, the architecture is always non\-multitenant\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+The architecture is a permanent characteristic that you can't change later\. The architecture requirements are as follows:
+
+Oracle Database 21c  
+You must create the instance as a CDB\.
+
+Oracle Database 19c  
+You can create the instance as either a CDB or non\-CDB\.
+
+Oracle Database 12c  
+You must create the instance as a non\-CDB\.
+
+For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 Currently, RDS for Oracle supports a subset of multitenant architecture called the single\-tenant architecture\. In this case, your CDB contains only one PDB\. The single\-tenant architecture uses the same RDS APIs as the non\-CDB architecture\. Your experience with a non\-CDB is mostly identical to your experience with a PDB\. You can't access the CDB itself\.
 
@@ -10,6 +21,7 @@ The following sections explain the principal differences between the non\-multit
 
 **Topics**
 + [Database creation and connections in a single\-tenant architecture](#Oracle.Concepts.single-tenant.creation)
++ [Database upgrades in a single\-tenant architecture](#Oracle.Concepts.single-tenant.upgrades)
 + [User accounts and privileges in a single\-tenant architecture](#Oracle.Concepts.single-tenant.users)
 + [Parameters in a single\-tenant architecture](#Oracle.Concepts.single-tenant.parameters)
 + [Snapshots in a single\-tenant architecture](#Oracle.Concepts.single-tenant.snapshots)
@@ -24,6 +36,10 @@ In the single\-tenant architecture, you always connect to the PDB rather than th
 sqlplus 'dbuser@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=endpoint)(PORT=port))(CONNECT_DATA=(SID=pdb_name)))'
 ```
 
+## Database upgrades in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.upgrades"></a>
+
+You can upgrade a CDB to a different Oracle Database release\. For example, you can upgrade a DB instance from Oracle Database 19c to Oracle Database 21c\. You can't upgrade a non\-CDB to a CDB\.
+
 ## User accounts and privileges in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.users"></a>
 
 In the Oracle multitenant architecture, all users accounts are either common users or local users\. A CDB common user is a database user whose single identity and password are known in the CDB root and in every existing and future PDB\. In contrast, a local user exists only in a single PDB\.
@@ -35,6 +51,8 @@ The `rdsadmin` user is a common user account\. You can run Oracle for RDS packag
 ## Parameters in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.parameters"></a>
 
 CDBs have their own parameter classes and different default parameter values\. The CDB parameter classes are as follows:
++ oracle\-ee\-cdb\-21
++ oracle\-se2\-cdb\-21
 + oracle\-ee\-cdb\-19
 + oracle\-se2\-cdb\-19
 

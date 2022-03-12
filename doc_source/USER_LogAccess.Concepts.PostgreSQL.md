@@ -86,14 +86,14 @@ The `log_min_duration_statement` parameter sets the limit in milliseconds of a s
 
 To set up query logging, take the following steps:
 
-1. Set the `log_statement` parameter to `all`\. The following example shows the information that is written to the `postgres.log` file\.
+1. Set the `log_statement` parameter to `all`\. The following example shows the information that is written to the `postgresql.log` file\.
 
    ```
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  received SIGHUP, reloading configuration files
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  parameter "log_statement" changed to "all"
    ```
 
-   Additional information is written to the postgres\.log file when you run a query\. The following example shows the type of information written to the file after a query\.
+   Additional information is written to the postgresql\.log file when you run a query\. The following example shows the type of information written to the file after a query\.
 
    ```
    2013-11-05 16:41:07 UTC::@:[2955]:LOG:  checkpoint starting: time
@@ -109,14 +109,14 @@ To set up query logging, take the following steps:
    2013-11-05 16:45:
    ```
 
-1. Set the `log_min_duration_statement` parameter\. The following example shows the information that is written to the `postgres.log` file when the parameter is set to `1`\.
+1. Set the `log_min_duration_statement` parameter\. The following example shows the information that is written to the `postgresql.log` file when the parameter is set to `1`\.
 
    ```
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  received SIGHUP, reloading configuration files
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  parameter "log_min_duration_statement" changed to "1"
    ```
 
-   Additional information is written to the `postgres.log` file when you run a query that exceeds the duration parameter setting\. The following example shows the type of information written to the file after a query\.
+   Additional information is written to the `postgresql.log` file when you run a query that exceeds the duration parameter setting\. The following example shows the type of information written to the file after a query\.
 
    ```
    2013-11-05 16:51:10 UTC:[local]:master@postgres:[9193]:LOG:  statement: SELECT c2.relname, i.indisprimary, i.indisunique, i.indisclustered, i.indisvalid, pg_catalog.pg_get_indexdef(i.indexrelid, 0, true),

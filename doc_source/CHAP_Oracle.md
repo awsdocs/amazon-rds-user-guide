@@ -1,6 +1,7 @@
 # Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
 
-Amazon RDS supports DB instances that run the following versions and editions of Oracle Database: 
+Amazon RDS supports DB instances that run the following versions and editions of Oracle Database:
++ Oracle Database 21c \(21\.0\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\)

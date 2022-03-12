@@ -106,9 +106,9 @@ The following list of DB instance classes supported for Microsoft SQL Server is 
 
 | SQL Server edition | 2019 support range | 2017 and 2016 support range | 2014 and 2012 support range | 
 | --- | --- | --- | --- | 
-|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
-|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
-|  Web Edition  |  `db.t3.small`–`db.t3.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.r5d.large`–`db.r5d.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.m5d.large`–`db.m5d.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.r5d.large`–`db.r5d.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.m5d.large`–`db.m5d.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.r5d.large`–`db.r5d.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.m5d.large`–`db.m5d.4xlarge`  | 
+|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.r6i.xlarge`–`db.r6i.32xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.m6i.xlarge`–`db.m6i.32xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.r6i.xlarge`–`db.r6i.32xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.m6i.xlarge`–`db.m6i.32xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.r6i.xlarge`–`db.r6i.32xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.m6i.xlarge`–`db.m6i.32xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
+|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.r6i.large`–`db.r6i.8xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge`  `db.m6i.large`–`db.m6i.8xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.r6i.large`–`db.r6i.8xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.m6i.large`–`db.m6i.8xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.r6i.large`–`db.r6i.8xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.m6i.large`–`db.m6i.8xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
+|  Web Edition  |  `db.t3.small`–`db.t3.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.r5d.large`–`db.r5d.4xlarge` `db.r6i.large`–`db.r6i.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.m5d.large`–`db.m5d.4xlarge` `db.m6i.large`–`db.m6i.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.r5d.large`–`db.r5d.4xlarge` `db.r6i.large`–`db.r6i.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.m5d.large`–`db.m5d.4xlarge` `db.m6i.large`–`db.m6i.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.r5d.large`–`db.r5d.4xlarge` `db.r6i.large`–`db.r6i.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.m5d.large`–`db.m5d.4xlarge` `db.m6i.large`–`db.m6i.4xlarge`  | 
 |  Express Edition  |  `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  | 
 
 ## Microsoft SQL Server security<a name="SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles"></a>
@@ -220,7 +220,15 @@ The following table displays the planned schedule of deprecations for major engi
 
 ## Microsoft SQL Server features on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport"></a>
 
-The supported SQL Server versions on Amazon RDS include the following features\.
+The supported SQL Server versions on Amazon RDS include the following features\. In general, a version also includes features from the previous versions, unless otherwise noted in the Microsoft documentation\.
+
+**Topics**
++ [Microsoft SQL Server 2019 features](#SQLServer.Concepts.General.FeatureSupport.2019)
++ [Microsoft SQL Server 2017 features](#SQLServer.Concepts.General.FeatureSupport.2017)
++ [Microsoft SQL Server 2016 features](#SQLServer.Concepts.General.FeatureSupport.2016)
++ [Microsoft SQL Server 2014 features](#SQLServer.Concepts.General.FeatureSupport.2014)
++ [Microsoft SQL Server 2012 features](#SQLServer.Concepts.General.FeatureSupport.2012)
++ [Microsoft SQL Server 2008 R2 deprecated on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport.2008)
 
 ### Microsoft SQL Server 2019 features<a name="SQLServer.Concepts.General.FeatureSupport.2019"></a>
 
@@ -282,7 +290,7 @@ In addition to supported features of SQL Server 2008 R2, Amazon RDS supports the
 + Columnstore indexes \(Enterprise Edition\)
 + Online Index Create, Rebuild and Drop for XML, varchar\(max\), nvarchar\(max\), and varbinary\(max\) data types \(Enterprise Edition\)
 + Flexible Server Roles
-+ Service Broker is supported, Service Broker endpoints are not supported
++ Service Broker is supported\. Service Broker endpoints aren't supported\.
 + Partially Contained Databases
 + Sequences
 + Transparent Data Encryption \(Enterprise Edition only\)
@@ -290,6 +298,7 @@ In addition to supported features of SQL Server 2008 R2, Amazon RDS supports the
 + New and enhanced spatial types
 + UTF\-16 Support
 + ALTER ANY SERVER ROLE server\-level permission
++ Secondary \(user\-defined\) filegroups
 
 For more information about SQL Server 2012, see [Features supported by the editions of SQL Server 2012](https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.110%29.aspx) in the Microsoft documentation\. 
 

@@ -1,15 +1,19 @@
 # Oracle Label Security<a name="Oracle.Options.OLS"></a>
 
-Amazon RDS supports Oracle Label Security for the Enterprise Edition of Oracle Database 12c through the use of the OLS option\. 
+Amazon RDS supports Oracle Label Security for the Enterprise Edition of Oracle Database through the use of the OLS option\.
 
-Most database security controls access at the object level\. Oracle Label Security provides fine\-grained control of access to individual table rows\. For example, you can use Label Security to enforce regulatory compliance with a policy\-based administration model\. You can use Label Security policies to control access to sensitive data, and restrict access to only users with the appropriate clearance level\. For more information, see [Introduction to Oracle Label Security](https://docs.oracle.com/database/121/OLSAG/intro.htm#OLSAG001) in the Oracle documentation\. 
+Most database security controls access at the object level\. Oracle Label Security provides fine\-grained control of access to individual table rows\. For example, you can use Label Security to enforce regulatory compliance with a policy\-based administration model\. You can use Label Security policies to control access to sensitive data, and restrict access to only users with the appropriate clearance level\. For more information, see [Introduction to Oracle Label Security](https://docs.oracle.com/database/121/OLSAG/intro.htm#OLSAG001) in the Oracle documentation\.
 
-**Important**  
-For Oracle Database 19c and Oracle Database 12c Release 2 \(12\.2\) on Amazon RDS, Oracle Label Security is a permanent and persistent option\.
+**Topics**
++ [Prerequisites for Oracle Label Security](#Oracle.Options.OLS.PreReqs)
++ [Adding the Oracle Label Security option](#Oracle.Options.OLS.Add)
++ [Using Oracle Label Security](#Oracle.Options.OLS.Using)
++ [Removing the Oracle Label Security option](#Oracle.Options.OLS.Remove)
++ [Troubleshooting](#Oracle.Options.OLS.Troubleshooting)
 
 ## Prerequisites for Oracle Label Security<a name="Oracle.Options.OLS.PreReqs"></a>
 
-The following are prerequisites for using Oracle Label Security: 
+Familiarize yourself with the following prerequisites for Oracle Label Security: 
 + Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 + You must have a valid license for Oracle Enterprise Edition with Software Update License and Support\. 
 + Your Oracle license must include the Label Security option\. 
@@ -22,6 +26,8 @@ The general process for adding the Oracle Label Security option to a DB instance
 1. Create a new option group, or copy or modify an existing option group\.
 
 1. Add the option to the option group\.
+**Important**  
+Oracle Label Security is a permanent and persistent option\.
 
 1. Associate the option group with the DB instance\.
 
@@ -45,7 +51,7 @@ If you add Label Security to an existing option group that is already attached t
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
 
       
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the Label Security option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the Label Security option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ## Using Oracle Label Security<a name="Oracle.Options.OLS.Using"></a>
 
@@ -53,7 +59,11 @@ To use Oracle Label Security, you create policies that control access to specifi
 
 When you work with Label Security, you perform all actions as the LBAC\_DBA role\. The master user for your DB instance is granted the LBAC\_DBA role\. You can grant the LBAC\_DBA role to other users so that they can administer Label Security policies\. 
 
-For Amazon RDS for Oracle Database 19c and Oracle Database 12c Release 2 \(12\.2\) DB instances, you must grant access to the `OLS_ENFORCEMENT` package to any new users who require access to Oracle Label Security\. To grant access to the `OLS_ENFORCEMENT` package, connect to the DB instance as the master user and run the following SQL statement:
+For the following releases, make sure to grant access to the `OLS_ENFORCEMENT` package to any new users who require access to Oracle Label Security:
++ Oracle Database 19c using the non\-CDB architecture
++ Oracle Database 12c Release 2 \(12\.2\)
+
+To grant access to the `OLS_ENFORCEMENT` package, connect to the DB instance as the master user and run the following SQL statement:
 
 ```
 GRANT ALL ON LBACSYS.OLS_ENFORCEMENT TO username;

@@ -39,7 +39,7 @@ You can use procedures in the Amazon RDS package `rdsadmin.rdsadmin_rman_util` t
 |  `p_directory_name`  |  varchar2  |  A valid database directory name\.  |  —  |  Yes  |  The name of the directory to contain the backup files\.  | 
 |  `p_label`  |  varchar2  |  `a-z`, `A-Z`, `0-9`, `'_'`, `'-'`, `'.'`  |  —  |  No  |  A unique string that is included in the backup file names\.  The limit is 30 characters\.   | 
 |  `p_owner`  |  varchar2  |  A valid owner of the directory specified in `p_directory_name`\.  |  —  |  Yes  |  The owner of the directory to contain the backup files\.  | 
-|  `p_tag`  |  varchar2  |  `a-z`, `A-Z`, `0-9`, `'_'`, `'-'`, `'.'`  |  NULL  |  No  |  A string that can be used to distinguish between backups to indicate the purpose or usage of backups, such as daily, weekly, or incremental\-level backups\.  The limit is 30 characters\. The tag is not case\-sensitive, Tags are always stored in uppercase, regardless of the case used when entering them\. Tags don't need to be unique, so multiple backups can have the same tag\. If you do not specify a tag, then RMAN assigns a default tag automatically using the format TAGYYYYMMDDTHHMMSS, where YYYY is the year, MM is the month, DD is the day, HH is the hour \(in 24\-hour format\), MM is the minutes, and SS is the seconds\. The date and time refer to when RMAN started the backup\. For example, a backup might receive a tag TAG20190927T214517, for a backup started on 2019\-09\-27 at 21:45:17\. The p\_tag parameter is supported for the following Amazon RDS for Oracle DB engine versions:   Oracle Database 19c \(19\.0\.0\), using 19\.0\.0\.0\.ru\-2021\-10\.rur\-2021\-10\.r1 or higher   Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2021\-10\.rur\-2021\-10\.r1 or higher   Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.V26 or higher     | 
+|  `p_tag`  |  varchar2  |  `a-z`, `A-Z`, `0-9`, `'_'`, `'-'`, `'.'`  |  NULL  |  No  |  A string that can be used to distinguish between backups to indicate the purpose or usage of backups, such as daily, weekly, or incremental\-level backups\. The limit is 30 characters\. The tag is not case\-sensitive\. Tags are always stored in uppercase, regardless of the case used when entering them\. Tags don't need to be unique, so multiple backups can have the same tag\. If you don't specify a tag, then RMAN assigns a default tag automatically using the format `TAGYYYYMMDDTHHMMSS`, where *YYYY* is the year, *MM* is the month, *DD* is the day, *HH* is the hour \(in 24\-hour format\), *MM* is the minutes, and *SS* is the seconds\. The date and time refer to when RMAN started the backup\. For example, a backup might receive a tag `TAG20190927T214517` for a backup that started on 2019\-09\-27 at 21:45:17\. The `p_tag` parameter is supported for the following Amazon RDS for Oracle DB engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.RMAN.html)  | 
 |  `p_compress`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  Specify `TRUE` to enable BASIC backup compression\. Specify `FALSE` to disable BASIC backup compression\.  | 
 |  `p_include_archive_logs`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  Specify `TRUE` to include archived redo logs in the backup\. Specify `FALSE` to exclude archived redo logs from the backup\. If you include archived redo logs in the backup, set retention to one hour or greater using the `rdsadmin.rdsadmin_util.set_configuration` procedure\. Also, call the `rdsadmin.rdsadmin_rman_util.crosscheck_archivelog` procedure immediately before running the backup\. Otherwise, the backup might fail due to missing archived redo log files that have been deleted by Amazon RDS management procedures\.  | 
 |  `p_include_controlfile`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  Specify `TRUE` to include the control file in the backup\. Specify `FALSE` to exclude the control file from the backup\.  | 
@@ -182,6 +182,7 @@ To enable block change tracking for a DB instance, use the Amazon RDS procedure 
 Read\-only replicas support block change tracking\. If you create a read\-only replica from a source DB that uses block change tracking, the replica uses block change tracking\. You can't enable block change tracking on a mounted replica\. If you place a mounted replica in read\-only mode, block change tracking isn't enabled, but you can enable it using `enable_block_change_tracking`\. If you promote an Oracle replica to a source DB, you can use block change tracking just as for any other Oracle DB instance\.
 
 Block change tracking procedures are supported for the following DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
@@ -230,6 +231,7 @@ This procedure also uses the following additional parameter\.
 |  `p_delete_expired`  |  boolean  |  `TRUE`, `FALSE`  |  `TRUE`  |  No  |  When `TRUE`, delete expired archived redo log records from the control file\. When `FALSE`, retain the expired archived redo log records in the control file\.   | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
@@ -261,6 +263,7 @@ END;
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to back up archived redo logs for an Amazon RDS Oracle DB instance\.
 
 The procedures for backing up archived redo logs are supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
@@ -442,6 +445,7 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
@@ -483,6 +487,7 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
@@ -541,6 +546,7 @@ This procedure also uses the following additional parameter\.
 |  `p_tablespace_name`  |  varchar2  |  A valid tablespace name\.  |  —  |  Yes  |  The name of the tablespace to back up\.  | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
@@ -576,6 +582,7 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
 + Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher

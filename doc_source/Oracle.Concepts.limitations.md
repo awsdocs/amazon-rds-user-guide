@@ -52,6 +52,7 @@ Use the master user account for administrative tasks such as creating additional
 ## Limitations of a single\-tenant CDB<a name="Oracle.Concepts.single-tenant-limitations"></a>
 
 The following options aren't supported for the single\-tenant architecture:
++ Database Activity Streams
 + Oracle Data Guard
 + Oracle Enterprise Manager
 + Oracle Enterprise Manager Agent

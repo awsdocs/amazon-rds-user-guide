@@ -7,90 +7,91 @@ RDS for Oracle Database 11g is deprecated\. If you maintain Oracle Database 11g 
 
 **Topics**
 + [Overview of Oracle DB engine upgrades](USER_UpgradeDBInstance.Oracle.Overview.md)
-+ [Major version upgrades](USER_UpgradeDBInstance.Oracle.Major.md)
-+ [Oracle minor version upgrades](USER_UpgradeDBInstance.Oracle.Minor.md)
-+ [Oracle SE2 upgrade paths](USER_UpgradeDBInstance.Oracle.SE2.md)
-+ [Considerations for Oracle DB upgrades](#USER_UpgradeDBInstance.Oracle.OGPG)
-+ [Testing an Oracle DB upgrade](#USER_UpgradeDBInstance.Oracle.UpgradeTesting)
-+ [Upgrading an Oracle DB instance](#USER_UpgradeDBInstance.Oracle.Upgrading)
++ [Oracle major version upgrades](#USER_UpgradeDBInstance.Oracle.Major)
++ [Oracle minor version upgrades](#USER_UpgradeDBInstance.Oracle.Minor)
++ [Oracle SE2 upgrade paths](#USER_UpgradeDBInstance.Oracle.SE2)
++ [Considerations for Oracle DB upgrades](USER_UpgradeDBInstance.Oracle.OGPG.md)
++ [Testing an Oracle DB upgrade](USER_UpgradeDBInstance.Oracle.UpgradeTesting.md)
++ [Upgrading an Oracle DB instance](USER_UpgradeDBInstance.Oracle.Upgrading.md)
 + [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)
 
-## Considerations for Oracle DB upgrades<a name="USER_UpgradeDBInstance.Oracle.OGPG"></a>
+## Oracle major version upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 
-Before upgrading, review the implications for option groups, parameter groups, and time zones\.
+To perform a major version upgrade, modify the DB instance manually\. Major version upgrades don't occur automatically\. 
 
-**Topics**
-+ [Option group considerations](#USER_UpgradeDBInstance.Oracle.OGPG.OG)
-+ [Parameter group considerations](#USER_UpgradeDBInstance.Oracle.OGPG.PG)
-+ [Time zone considerations](#USER_UpgradeDBInstance.Oracle.OGPG.DST)
+### Supported versions for major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.supported-versions"></a>
 
-### Option group considerations<a name="USER_UpgradeDBInstance.Oracle.OGPG.OG"></a>
+Amazon RDS supports the following major version upgrades\.
 
-If your DB instance uses a custom option group, sometimes Amazon RDS can't automatically assign a new option group\. For example, this situation occurs when you upgrade to a new major version\. In such cases, specify a new option group when you upgrade\. We recommend that you create a new option group, and add the same options to it as in your existing custom option group\. 
 
-For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create) or [Copying an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Copy)\. 
+****  
 
-If your DB instance uses a custom option group that contains the APEX option, you can sometimes reduce the upgrade time\. To do this, upgrade your version of APEX at the same time as your DB instance\. For more information, see [Upgrading the APEX version](Appendix.Oracle.Options.APEX.md#Appendix.Oracle.Options.APEX.Upgrade)\. 
+| Current version | Upgrade supported | 
+| --- | --- | 
+|  19\.0\.0\.0 using the CDB architecture  |  21\.0\.0\.0  | 
+|  12\.2\.0\.1  |  19\.0\.0\.0 using the non\-CDB architecture  | 
+|  12\.1\.0\.2  |  19\.0\.0\.0 using the non\-CDB architecture 12\.2\.0\.1  | 
 
-### Parameter group considerations<a name="USER_UpgradeDBInstance.Oracle.OGPG.PG"></a>
+A major version upgrade of Oracle Database must upgrade to a Release Update \(RU\) that was released in the same month or later\. Major version downgrades aren't supported for any Oracle Database versions\.
 
-If your DB instance uses a custom parameter group, sometimes Amazon RDS can't automatically assign your DB instance a new parameter group\. For example, this situation occurs when you upgrade to a new major version\. In such cases, make sure to specify a new parameter group when you upgrade\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
+### Supported instance classes for major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.instance-classes"></a>
 
-For more information, see [Creating a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Creating) or [Copying a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Copying)\. 
+Your current Oracle DB instance might run on a DB instance class that isn't supported for the version to which you are upgrading\. In this case, before you upgrade, migrate the DB instance to a supported DB instance class\. For more information about the supported DB instance classes for each version and edition of Amazon RDS for Oracle, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
-### Time zone considerations<a name="USER_UpgradeDBInstance.Oracle.OGPG.DST"></a>
+### Gathering statistics before major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.gathering-stats"></a>
 
-You can use the time zone option to change the *system time zone* used by your Oracle DB instance\. For example, you might change the time zone of a DB instance to be compatible with an on\-premises environment, or a legacy application\. The time zone option changes the time zone at the host level\. Amazon RDS for Oracle updates the system time zone automatically throughout the year\. For more information about the system time zone, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md)\.
+Before you perform a major version upgrade, Oracle recommends that you gather optimizer statistics on the DB instance that you are upgrading\. This action can reduce DB instance downtime during the upgrade\.
 
-When you create an Oracle DB instance, the database automatically sets the *database time zone*\. The database time zone is also known as the Daylight Saving Time \(DST\) time zone\. The database time zone is distinct from the system time zone\.
+To gather optimizer statistics, connect to the DB instance as the master user, and run the `DBMS_STATS.GATHER_DICTIONARY_STATS` procedure, as in the following example\.
 
-Between Oracle Database releases, patch sets or individual patches may include new DST versions\. These patches reflect the changes in transition rules for various time zone regions\. For example, a government might change when DST takes effect\. Changes to DST rules may affect existing data of the `TIMESTAMP WITH TIME ZONE` data type\.
+```
+EXEC DBMS_STATS.GATHER_DICTIONARY_STATS;
+```
 
-If you upgrade an RDS for Oracle DB instance, Amazon RDS doesn't upgrade the database time zone file automatically\. To upgrade the time zone file automatically, you can include the `TIMEZONE_FILE_AUTOUPGRADE` option in the option group associated with your DB instance during or after the engine version upgrade\. For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.
+For more information, see [ Gathering optimizer statistics to decrease Oracle database downtime](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/upgrd/database-preparation-tasks-to-complete-before-upgrades.html#GUID-6719608D-F145-403C-8CCE-CF23120BCC2A) in the Oracle documentation\.
 
-Alternatively, to upgrade the database time zone file manually, create a new Oracle DB instance that has the desired DST patch\. However, we recommend that you upgrade the database time zone file using the `TIMEZONE_FILE_AUTOUPGRADE` option\.
+### Allowing major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.allowing-upgrades"></a>
 
-After upgrading the time zone file, migrate the data from your current instance to the new instance\. You can migrate data using several techniques, including the following:
-+ AWS Database Migration Service
-+ Oracle GoldenGate
-+ Oracle Data Pump
-+ Original Export/Import \(desupported for general use\)
+A major engine version upgrade might be incompatible with your application\. The upgrade is irreversible\. If you specify a major version for the EngineVersion parameter that is different from the current major version, you must allow major version upgrades\.
+
+If you upgrade a major version using the CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), specify `--allow-major-version-upgrade`\. This setting isn't persistent, so you must specify `--allow-major-version-upgrade` whenever you perform a major upgrade\. This parameter has no impact on upgrades of minor engine versions\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+
+If you upgrade a major version using the console, you don't need to choose an option to allow the upgrade\. Instead, the console displays a warning that major upgrades are irreversible\.
+
+## Oracle minor version upgrades<a name="USER_UpgradeDBInstance.Oracle.Minor"></a>
+
+A minor version upgrade applies an Oracle Database Patch Set Update \(PSU\) or Release Update \(RU\) in a major version\. 
+
+An Amazon RDS for Oracle DB instance is scheduled to be upgraded automatically during its next maintenance window when it meets the following conditions:
++ The DB instance has the **Auto minor version upgrade** option enabled\.
++ The DB instance is not running the latest minor DB engine version\.
+
+The DB instance is upgraded to the latest quarterly PSU or RU four to six weeks after it is made available by Amazon RDS for Oracle\. For more information about PSUs and RUs, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\. 
+
+The following minor version upgrades aren't supported\.
+
+
+****  
+
+| Current version | Upgrade not supported | 
+| --- | --- | 
+| 12\.1\.0\.2\.v6 | 12\.1\.0\.2\.v7 | 
+| 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v7 | 
+| 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v6 | 
 
 **Note**  
-When you migrate data using Oracle Data Pump, the utility raises the error ORA\-39405 when the target time zone version is lower than the source time zone version\.
+Minor version downgrades aren't supported\.
 
-For more information, see [TIMESTAMP WITH TIMEZONE restrictions](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-9B6C92EE-860E-43DD-9728-735B17B9DA89) in the Oracle documentation\. 
+## Oracle SE2 upgrade paths<a name="USER_UpgradeDBInstance.Oracle.SE2"></a>
 
-## Testing an Oracle DB upgrade<a name="USER_UpgradeDBInstance.Oracle.UpgradeTesting"></a>
+The following table shows supported upgrade paths to Standard Edition Two \(SE2\)\. For more information about the License Included and Bring Your Own License \(BYOL\) models, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 
-Before you upgrade your DB instance to a major version, thoroughly test your database and all applications that access the database for compatibility with the new version\. We recommend that you use the following procedure\. 
 
-**To test a major version upgrade**
+****  
 
-1. Review the Oracle upgrade documentation for the new version of the database engine to see if there are compatibility issues that might affect your database or applications\. For more information, see [Database Upgrade Guide](https://docs.oracle.com/database/121/UPGRD/toc.htm) in the Oracle documentation\. 
+| Your existing configuration | Supported SE2 configuration | 
+| --- | --- | 
+|  12\.2\.0\.1 SE2, BYOL  |  12\.2\.0\.1 SE2, BYOL or License Included  | 
+|  12\.1\.0\.2 SE2, BYOL  |  12\.2\.0\.1 SE2, BYOL or License Included 12\.1\.0\.2 SE2, BYOL or License Included  | 
 
-1. If your DB instance uses a custom option group, create a new option group compatible with the new version you are upgrading to\. For more information, see [Option group considerations](#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
-
-1. If your DB instance uses a custom parameter group, create a new parameter group compatible with the new version you are upgrading to\. For more information, see [Parameter group considerations](#USER_UpgradeDBInstance.Oracle.OGPG.PG)\. 
-
-1. Create a DB snapshot of the DB instance to be upgraded\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\. 
-
-1. Restore the DB snapshot to create a new test DB instance\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\. 
-
-1. Modify this new test DB instance to upgrade it to the new version, by using one of the following methods: 
-   + [Console](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.Console)
-   + [AWS CLI](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.CLI)
-   + [RDS API](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.API)
-
-1. Perform testing: 
-   + Run as many of your quality assurance tests against the upgraded DB instance as needed to ensure that your database and application work correctly with the new version\. 
-   + Implement any new tests needed to evaluate the impact of any compatibility issues that you identified in step 1\. 
-   + Test all stored procedures, functions, and triggers\. 
-   + Direct test versions of your applications to the upgraded DB instance\. Verify that the applications work correctly with the new version\. 
-   + Evaluate the storage used by the upgraded instance to determine if the upgrade requires additional storage\. You might need to choose a larger instance class to support the new version in production\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
-
-1. If all tests pass, upgrade your production DB instance\. We recommend that you confirm that the DB instance working correctly before allowing write operations to the DB instance\.
-
-## Upgrading an Oracle DB instance<a name="USER_UpgradeDBInstance.Oracle.Upgrading"></a>
-
-For information about manually or automatically upgrading an Oracle DB instance, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+To upgrade from your existing configuration to a supported SE2 configuration, use a supported upgrade path\. For more information, see [Oracle major version upgrades](#USER_UpgradeDBInstance.Oracle.Major)\. 

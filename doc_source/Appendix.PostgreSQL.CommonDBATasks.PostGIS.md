@@ -151,9 +151,7 @@ SELECT topology.createtopology('my_new_topo',26986,0.5);
 
 ## Step 6: Update the PostGIS extension<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update"></a>
 
-PostgreSQL minor versions 13\.4, 12\.8, 11\.13, and 10\.18 now support version 3\.1\.4 of the PostGIS extension\. This support makes it easier to upgrade to later major versions of PostgreSQL\.
-
-If you have an older version of PostGIS installed, use the following command to upgrade your extension from the older version to 3\.1\.4\. This function is available with PostGIS 2\.5\.0 and higher versions\.
+Different versions of PostgreSQL support different versions of the PostGIS extension\. You can check to see if an upgrade is available by running the following command\. This function is available with PostGIS 2\.5\.0 and higher versions\.
 
 ```
 SELECT PostGIS_Extensions_Upgrade();
@@ -180,10 +178,3 @@ You can list the versions that are available in your release by using the follow
 ```
 SELECT * from pg_available_extension_versions where name='postgis';
 ```
-
-You can also find version information in the following:
-+ [PostgreSQL version 13 extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)
-+  [PostgreSQL version 12 extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x) 
-+  [PostgreSQL version 11\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x) 
-+  [PostgreSQL version 10\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x) 
-+  [PostgreSQL version 9\.6\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x) 

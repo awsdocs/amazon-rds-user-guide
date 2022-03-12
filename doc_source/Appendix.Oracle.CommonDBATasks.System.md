@@ -85,7 +85,7 @@ You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` para
 To cancel a SQL statement in a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.cancel`\.
 
 **Note**  
-This procedure is supported for Oracle Database 19c and later\.
+This procedure is supported for Oracle Database 19c \(19\.0\.0\) and all higher major and minor versions of RDS for Oracle\.
 
 The `cancel` procedure has the following parameters\. 
 
@@ -301,13 +301,15 @@ GRANT SELECT ON sh.sales TO user1;
 
 ## Creating custom functions to verify passwords<a name="Appendix.Oracle.CommonDBATasks.CustomPassword"></a>
 
-You can create a custom password verification function in two ways\. If you want to use standard verification logic, and to store your function in the `SYS` schema, use the `create_verify_function` procedure\. If you want to use custom verification logic, or you don't want to store your function in the `SYS` schema, use the `create_passthrough_verify_fcn` procedure\. 
+You can create a custom password verification function in the following ways:
++ To use standard verification logic, and to store your function in the `SYS` schema, use the `create_verify_function` procedure\. If you want to use custom verification logic, or you don't want to store your function in the `SYS` schema, use the `create_passthrough_verify_fcn` procedure\. 
++ To use custom verification logic, or to avoid storing your function in the `SYS` schema, use the `create_passthrough_verify_fcn` procedure\. 
 
 ### The create\_verify\_function procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Standard"></a>
 
-The `create_verify_function` procedure is supported for version 12\.1\.0\.2\.v5 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, and all Oracle Database 19c versions\.
+You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_verify_function`\. The `create_verify_function` procedure is supported for version 12\.1\.0\.2\.v5 and all higher major and minor versions of RDS for Oracle\.
 
-You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_verify_function`\. The `create_verify_function` procedure has the following parameters\. 
+The `create_verify_function` procedure has the following parameters\. 
 
 
 ****  
@@ -391,7 +393,7 @@ RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
 
 ### The create\_passthrough\_verify\_fcn procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Custom"></a>
 
-The `create_passthrough_verify_fcn` procedure is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\) versions, and all Oracle Database 19c versions\.
+The `create_passthrough_verify_fcn` procedure is supported for version 12\.1\.0\.2\.v7 and all higher major and minor versions of RDS for Oracle\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn`\. The `create_passthrough_verify_fcn` procedure has the following parameters\. 
 
@@ -449,9 +451,12 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 ## Setting and unsetting system diagnostic events<a name="Appendix.Oracle.CommonDBATasks.SystemEvents"></a>
 
 To set and unset diagnostic events at the session level, you can use the Oracle SQL statement `ALTER SESSION SET EVENTS`\. However, to set events at the system level you can't use Oracle SQL\. Instead, use the system event procedures in the `rdsadmin.rdsadmin_util` package\. The system event procedures are available in the following engine versions:
-+ [19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1) or higher 19c versions
-+ [12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1) or higher 12\.2\.0\.1 versions
-+ [12\.1\.0\.2\.V22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22) or higher 12\.1 versions
++ All Oracle Database 21c versions
++ [19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1) and higher Oracle Database 19c versions
++ [12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1) and higher Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions
++ [12\.1\.0\.2\.V22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22) and higher Oracle Database 12c Release 1 \(12\.1\.0\.2\) versions
+
+para
 
 **Important**  
 Internally, the `rdsadmin.rdsadmin_util` package sets events by using the `ALTER SYSTEM SET EVENTS` statement\. This `ALTER SYSTEM` statement isn't documented in the Oracle Database documentation\. Some system diagnostic events can generate large amounts of tracing information, cause contention, or affect database availability\. We recommend that you test specific diagnostic events in your nonproduction database, and only set events in your production database under guidance of Oracle Support\.

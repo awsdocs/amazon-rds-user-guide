@@ -24,19 +24,40 @@ This service\-linked role has a permissions policy attached to it called `Amazon
         {
             "Effect": "Allow",
             "Action": [
+                "rds:CrossRegionCommunication"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AllocateAddress",
+                "ec2:AssociateAddress",
                 "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateCoipPoolPermission",
+                "ec2:CreateLocalGatewayRouteTablePermission",
                 "ec2:CreateNetworkInterface",
                 "ec2:CreateSecurityGroup",
+                "ec2:DeleteCoipPoolPermission",
+                "ec2:DeleteLocalGatewayRouteTablePermission",
                 "ec2:DeleteNetworkInterface",
                 "ec2:DeleteSecurityGroup",
+                "ec2:DescribeAddresses",
                 "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeCoipPools",
                 "ec2:DescribeInternetGateways",
+                "ec2:DescribeLocalGatewayRouteTablePermissions",
+                "ec2:DescribeLocalGatewayRouteTables",
+                "ec2:DescribeLocalGatewayRouteTableVpcAssociations",
+                "ec2:DescribeLocalGateways",
                 "ec2:DescribeSecurityGroups",
                 "ec2:DescribeSubnets",
                 "ec2:DescribeVpcAttribute",
                 "ec2:DescribeVpcs",
+                "ec2:DisassociateAddress",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:ModifyVpcEndpoint",
+                "ec2:ReleaseAddress",
                 "ec2:RevokeSecurityGroupIngress",
                 "ec2:CreateVpcEndpoint",
                 "ec2:DescribeVpcEndpoints",
@@ -92,6 +113,22 @@ This service\-linked role has a permissions policy attached to it called `Amazon
             "Resource": [
                 "arn:aws:kinesis:*:*:stream/aws-rds-das-*"
             ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricData"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "cloudwatch:namespace": [
+                        "AWS/DocDB",
+                        "AWS/Neptune",
+                        "AWS/RDS"
+                    ]
+                }
+            }
         }
     ]
 }

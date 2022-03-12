@@ -164,7 +164,7 @@ The following example uses the `aws:SourceArn` and `aws:SourceAccount` global co
       "Action": "sts:AssumeRole",
       "Condition": {
         "StringLike": {
-          "aws:SourceArn": "arn:aws:rds:Region:my-account-id:db/dbname"
+          "aws:SourceArn": "arn:aws:rds:Region:my-account-id:db:dbname"
         },
         "StringEquals": {
           "aws:SourceAccount": "my-account-id"

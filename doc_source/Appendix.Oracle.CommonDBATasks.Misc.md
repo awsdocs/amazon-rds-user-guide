@@ -203,8 +203,9 @@ SPOOL OFF;
 Oracle Database includes a number of advisors\. Each advisor supports automated and manual tasks\. You can use procedures in the `rdsadmin.rdsadmin_util` package to manage some advisor tasks\.
 
 The advisor task procedures are available in the following engine versions:
-+ [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1) or higher 19c versions 
-+ [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1) or higher 12\.2\.0\.1 versions 
++ Oracle Database 21c \(21\.0\.0\)
++ [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1) and higher Oracle Database 19c versions 
++ [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1) and higher Oracle Database 12c \(Release 2\) 12\.2\.0\.1 versions 
 
 **Topics**
 + [Setting parameters for advisor tasks](#Appendix.Oracle.CommonDBATasks.setting-task-parameters)

@@ -3,7 +3,7 @@
 Oracle Enterprise Manager \(OEM\) Management Agent is a software component that monitors targets running on hosts and communicates that information to the middle\-tier Oracle Management Service \(OMS\)\. For more information, see [Overview of Oracle Enterprise Manager cloud control 12c](http://docs.oracle.com/cd/E24628_01/doc.121/e25353/overview.htm) and [Overview of Oracle Enterprise Manager cloud control 13c](http://docs.oracle.com/cd/E63000_01/EMCON/overview.htm#EMCON109) in the Oracle documentation\.
 
 Amazon RDS supports Management Agent through the use of the `OEM_AGENT` option\. Management Agent requires an Amazon RDS DB instance running any of the following releases: 
-+ Oracle Database 19c \(19\.0\.0\.0\)
++ Oracle Database 19c \(19\.0\.0\.0\) using the non\-CDB architecture
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\)
 
@@ -50,7 +50,7 @@ Following are the supported Oracle Database versions for each Management Agent v
 
 ****  
 
-| Management Agent version | Oracle Database 19c | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
+| Management Agent version | Oracle Database 19c using the non\-CDB architecture | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
 | --- | --- | --- | --- | 
 |  13\.5\.0\.0\.v1  |  Supported  |  Supported  |  Supported  | 
 |  13\.4\.0\.9\.v1  |  Supported  |  Supported  |  Supported  | 

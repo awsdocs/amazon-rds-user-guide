@@ -339,6 +339,7 @@ You might want to access your online and archived redo log files for mining with
    You can read the files by using PL/SQL\. For more information about reading files from directory objects, see [Listing files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ListDirectories) and [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
 
 Accessing transaction logs is supported for the following releases:
++ Oracle Database 21c
 + Oracle Database 19c
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\)

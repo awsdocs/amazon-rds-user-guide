@@ -26,7 +26,7 @@ The following example shows how you can use the `aws:SourceArn` and `aws:SourceA
     "Action": "sts:AssumeRole",
     "Condition": {
       "ArnLike": {
-        "aws:SourceArn": "arn:aws:rds:us-east-1:123456789012:db/mydbinstance"
+        "aws:SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mydbinstance"
       },
       "StringEquals": {
         "aws:SourceAccount": "123456789012"

@@ -25,7 +25,7 @@ The following table shows the engine versions that are supported for exporting s
 For complete lists of engine versions supported by Amazon RDS, see the following:
 + [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)
 + [MySQL on Amazon RDS versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)
-+ [Supported PostgreSQL database versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions)
++ [Available PostgreSQL database versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions)
 
 **Topics**
 + [Limitations](#USER_ExportSnapshot.Limits)

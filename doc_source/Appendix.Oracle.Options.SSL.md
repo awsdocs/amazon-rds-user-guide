@@ -8,6 +8,7 @@ You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL opt
 You can use Secure Sockets Layer or Native Network Encryption, but not both\. For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 
 You can use SSL encryption with all editions of the following Oracle database versions: 
++ Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\)
 + Oracle Database 12c Release 1 \(12\.1\)
@@ -33,6 +34,7 @@ The following table shows the TLS option settings that are supported for differe
 
 | Oracle engine version | SQLNET\.SSL\_VERSION = "1\.0" | SQLNET\.SSL\_VERSION = "1\.2" | SQLNET\.SSL\_VERSION = "1\.2 or 1\.0" | 
 | --- | --- | --- | --- | 
+|  21\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 

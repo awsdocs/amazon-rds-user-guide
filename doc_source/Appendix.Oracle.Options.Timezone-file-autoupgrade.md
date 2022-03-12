@@ -46,8 +46,6 @@ Additional downtime can occur when you do the following:
 **Note**  
 During the time zone file update, RDS for Oracle calls `PURGE DBA_RECYCLEBIN`\.
 
-Because an update of the time zone file modifies rows, the primary database pushes these changes to any read replicas automatically\. This replication occurs regardless of whether the `TIMEZONE_FILE_AUTOUPGRADE` option is installed in the replica option group\.
-
 ## Strategies for updating your time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies"></a>
 
 You can upgrade your engine and update your time zone file independently\. Thus, you must choose among different update strategies\. 

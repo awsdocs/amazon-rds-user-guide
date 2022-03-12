@@ -5,10 +5,14 @@ Amazon RDS supports Oracle Locator through the use of the `LOCATOR` option\. Ora
 **Important**  
 If you use Oracle Locator, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
-Amazon RDS supports Oracle Locator for the following versions of Oracle Database: 
+Amazon RDS supports Oracle Locator for the following releases of Oracle Database: 
 + Oracle Database 19c \(19\.0\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
+
+Oracle Locator isn't supported for Oracle Database 21c, but its functionality is available in the Oracle Spatial option\. Formerly, the Spatial option required additional licenses\. Oracle Locator represented a subset of Oracle Spatial features and didn't require additional licenses\. In 2019, Oracle announced that all Oracle Spatial features were included in the Enterprise Edition and Standard Edition Two licenses without additional cost\. Consequently, the Oracle Spatial option no longer required additional licensing\. 
+
+Starting with Oracle Database 21c, the Oracle Locator option is no longer supported\. To use the Oracle Locator features in Oracle Database 21c, install the Oracle Spatial option instead\. For more information, see [Machine Learning, Spatial and Graph \- No License Required\!](https://blogs.oracle.com/database/post/machine-learning-spatial-and-graph-no-license-required) in the Oracle Database Insider blog\.
 
 ## Prerequisites for Oracle Locator<a name="Oracle.Options.Locator.PreReqs"></a>
 
