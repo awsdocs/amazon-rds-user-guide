@@ -300,9 +300,11 @@ To modify the JVM's TTL, set the [https://docs.oracle.com/javase/7/docs/technote
 The following limitations apply to Multi\-AZ DB clusters:
 + You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.28 and higher 8\.0 versions, and PostgreSQL version 13\.4\.
 + You can create Multi\-AZ DB clusters only in the following AWS Regions:
+  + US East \(Ohio\)
   + US East \(N\. Virginia\)
   + US West \(Oregon\)
   + Europe \(Ireland\)
+  + Asia Pacific \(Tokyo\)
 + Multi\-AZ DB clusters only support Provisioned IOPS storage\.
 + You can't change a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
 + You can't restore a Multi\-AZ DB cluster snapshot to a Multi\-AZ DB instance deployment or single\-AZ deployment\.

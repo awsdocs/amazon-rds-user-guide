@@ -20,4 +20,4 @@ If you add or modify any triggers, and if replication fails afterward, the probl
 + `RDS_DATAGUARD`
 + `rdsdb`
 
-For more information, see[Miscellaneous requirements and restrictions for Oracle replicas](oracle-read-replicas.limitations.md#oracle-read-replicas.limitations.miscellaneous)\.
+For more information, see [Miscellaneous requirements and restrictions for Oracle replicas](oracle-read-replicas.limitations.md#oracle-read-replicas.limitations.miscellaneous)\.

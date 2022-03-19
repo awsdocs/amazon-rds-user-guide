@@ -18,10 +18,20 @@ If you need to store events for longer periods of time, you can send Amazon RDS 
 
 ## AWS CLI<a name="USER_ListEvents.CLI"></a>
 
-You can view all Amazon RDS instance events for the past 7 days by calling the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command and setting the `--duration` parameter to `10080`\. 
+You can view all Amazon RDS instance events for the past 10080 minutes \(7 days\) by calling the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command and setting the `--duration` parameter to `10080`\.
 
 ```
 1. aws rds describe-events --duration 10080
+```
+
+The following example shows the events in the specified time range for DB instance *my\-inst*\.
+
+```
+aws rds describe-events \
+    --source-identifier my-inst \
+    --source-type db-instance \
+    --start-time 2022-03-13T18:00Z \
+    --end-time 2022-03-13T19:00Z
 ```
 
 ## API<a name="USER_ListEvents.API"></a>

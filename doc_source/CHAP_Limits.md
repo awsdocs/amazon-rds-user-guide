@@ -60,7 +60,7 @@ For Oracle, you set the maximum number of user processes and user and system ses
 **Maximum database connections**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
 
-The following example shows how to calculate `max_connections` for a MariaDB or MySQL DB instance using the db\.m5\.xlarge instance class\. `DBInstanceClassMemory` is 16 GiB, or 17,179,869,184 bytes\. That divided by 12,582,880 = 1365 connections maximum\.
+In an instance where the total RAM is 16 GiB, or 17,179,869,184 bytes, the variable `DBInstanceClassMemory` will automatically subtract the amounts reserved to the operating system and the RDS processes that manage the instance\. The remainder of the subtraction is then divided by 12,582,880, which will result in the maximum connections number being around 1300, depending on instance type, instance size and DB engine\.
 
 Database connections consume memory\. Setting one of these parameters too high can cause a low memory condition that might cause a DB instance to be placed in the **incompatible\-parameters** status\. For more information, see [Diagnosing and resolving incompatible parameters status for a memory limit](CHAP_Troubleshooting.md#CHAP_Troubleshooting.incompatible-parameters-memory)\.
 
