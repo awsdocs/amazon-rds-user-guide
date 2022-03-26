@@ -42,20 +42,29 @@ When you use Oracle Data Pump to import data into an Oracle DB instance, we reco
 To exclude unsupported Scheduler objects, use additional directives during the Data Pump export\. If you use `DBMS_DATAPUMP`, add an additional `METADATA_FILTER` before the `DBMS_METADATA.START_JOB`:  
 
 ```
-DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
-   q'[IN (SELECT NAME FROM SYS.OBJ$ 
-          WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN
-            (SELECT USER# FROM SYS.USER$ WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+DBMS_DATAPUMP.METADATA_FILTER(
+  v_hdnl,
+  'EXCLUDE_NAME_EXPR',
+  q'[IN (SELECT NAME FROM SYS.OBJ$ 
+         WHERE TYPE# IN (66,67,74,79,59,62,46) 
+         AND OWNER# IN
+           (SELECT USER# FROM SYS.USER$ 
+            WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
             )
-          )]','PROCOBJ');
+        )
+  ]',
+  'PROCOBJ'
+);
 ```
 If you use `expdp`, create a parameter file that contains the exclude directive shown in the following example\. Then use `PARFILE=parameter_file` with your `expdp` command\.  
 
 ```
 exclude=procobj:"IN 
   (SELECT NAME FROM sys.OBJ$
-   WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN 
-     (SELECT USER# FROM SYS.USER$ WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+   WHERE TYPE# IN (66,67,74,79,59,62,46) 
+   AND OWNER# IN 
+     (SELECT USER# FROM SYS.USER$ 
+      WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
      )
   )"
 ```
@@ -125,22 +134,37 @@ The following script creates a dump file named *sample\.dmp* in the `DATA_PUMP_D
 DECLARE
   v_hdnl NUMBER;
 BEGIN
-  v_hdnl := DBMS_DATAPUMP.OPEN(operation => 'EXPORT', job_mode => 'SCHEMA', job_name=>null);
+  v_hdnl := DBMS_DATAPUMP.OPEN(
+    operation => 'EXPORT', 
+    job_mode  => 'SCHEMA', 
+    job_name  => null
+  );
   DBMS_DATAPUMP.ADD_FILE( 
-    handle    => v_hdnl, 
-    filename  => 'sample.dmp', 
+    handle    => v_hdnl         , 
+    filename  => 'sample.dmp'   , 
     directory => 'DATA_PUMP_DIR', 
-    filetype  => dbms_datapump.ku$_file_type_dump_file);
+    filetype  => dbms_datapump.ku$_file_type_dump_file
+  );
   DBMS_DATAPUMP.ADD_FILE( 
     handle    => v_hdnl, 
     filename  => 'sample_exp.log', 
-    directory => 'DATA_PUMP_DIR', 
-    filetype  => dbms_datapump.ku$_file_type_log_file);
+    directory => 'DATA_PUMP_DIR' , 
+    filetype  => dbms_datapump.ku$_file_type_log_file
+  );
   DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''SCHEMA_1'')');
-  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
-    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN 
-      (SELECT USER# FROM SYS.USER$ WHERE NAME IN 
-        ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
+  DBMS_DATAPUMP.METADATA_FILTER(
+    v_hdnl,
+    'EXCLUDE_NAME_EXPR',
+    q'[IN (SELECT NAME FROM sys.OBJ$ 
+           WHERE TYPE# IN (66,67,74,79,59,62,46) 
+           AND OWNER# IN 
+             (SELECT USER# FROM SYS.USER$ 
+              WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+             )
+          )
+    ]',
+    'PROCOBJ'
+  );
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /
@@ -315,24 +339,40 @@ DECLARE
   v_hdnl NUMBER;
 BEGIN
   v_hdnl := DBMS_DATAPUMP.OPEN( 
-    operation => 'EXPORT', 
-    job_mode  => 'SCHEMA', 
-    job_name  => null);
+    operation => 'EXPORT' , 
+    job_mode  => 'SCHEMA' , 
+    job_name  => null
+  );
   DBMS_DATAPUMP.ADD_FILE( 
     handle    => v_hdnl, 
-    filename  => 'sample.dmp', 
-    directory => 'DATA_PUMP_DIR', 
-    filetype  => dbms_datapump.ku$_file_type_dump_file);
+    filename  => 'sample.dmp'    , 
+    directory => 'DATA_PUMP_DIR' , 
+    filetype  => dbms_datapump.ku$_file_type_dump_file
+  );
   DBMS_DATAPUMP.ADD_FILE( 
-    handle    => v_hdnl, 
-    filename  => 'sample_exp.log', 
-    directory => 'DATA_PUMP_DIR', 
-    filetype  => dbms_datapump.ku$_file_type_log_file);
-  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''SCHEMA_1'')');
-  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
-    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN  
-      (SELECT USER# FROM SYS.USER$ WHERE NAME IN 
-      ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
+    handle    => v_hdnl           , 
+    filename  => 'sample_exp.log' , 
+    directory => 'DATA_PUMP_DIR'  , 
+    filetype  => dbms_datapump.ku$_file_type_log_file
+  );
+  DBMS_DATAPUMP.METADATA_FILTER(
+    v_hdnl              ,
+    'SCHEMA_EXPR'       ,
+    'IN (''SCHEMA_1'')'
+  );
+  DBMS_DATAPUMP.METADATA_FILTER(
+    v_hdnl,
+    'EXCLUDE_NAME_EXPR',
+    q'[IN (SELECT NAME FROM sys.OBJ$ 
+           WHERE TYPE# IN (66,67,74,79,59,62,46) 
+           AND OWNER# IN 
+             (SELECT USER# FROM SYS.USER$ 
+              WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+             )
+          )
+    ]',
+    'PROCOBJ'
+  );
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /

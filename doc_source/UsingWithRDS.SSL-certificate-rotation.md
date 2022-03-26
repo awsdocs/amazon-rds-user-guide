@@ -194,8 +194,8 @@ fi
 truststore=${mydir}/rds-truststore.jks
 storepassword=changeit
 
-curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
-awk 'split_after == 1 {n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1}{print > "rds-ca-" n ".pem"}' < ${mydir}/rds-combined-ca-bundle.pem
+curl -sS "https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem" > ${mydir}/global-bundle.pem
+awk 'split_after == 1 {n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1}{print > "rds-ca-" n ".pem"}' < ${mydir}/global-bundle.pem
 
 for CERT in rds-ca-*; do
   alias=$(openssl x509 -noout -text -in $CERT | perl -ne 'next unless /Subject:/; s/.*(CN=|CN = )//; print')
@@ -204,7 +204,7 @@ for CERT in rds-ca-*; do
   rm $CERT
 done
 
-rm ${mydir}/rds-combined-ca-bundle.pem
+rm ${mydir}/global-bundle.pem
 
 echo "Trust store content is: "
 
@@ -229,8 +229,8 @@ fi
 truststore=${mydir}/rds-truststore.jks
 storepassword=changeit
 
-curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
-split -p "-----BEGIN CERTIFICATE-----" ${mydir}/rds-combined-ca-bundle.pem rds-ca-
+curl -sS "https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem" > ${mydir}/global-bundle.pem
+split -p "-----BEGIN CERTIFICATE-----" ${mydir}/global-bundle.pem rds-ca-
 
 for CERT in rds-ca-*; do
   alias=$(openssl x509 -noout -text -in $CERT | perl -ne 'next unless /Subject:/; s/.*(CN=|CN = )//; print')
@@ -239,7 +239,7 @@ for CERT in rds-ca-*; do
   rm $CERT
 done
 
-rm ${mydir}/rds-combined-ca-bundle.pem
+rm ${mydir}/global-bundle.pem
 
 echo "Trust store content is: "
 

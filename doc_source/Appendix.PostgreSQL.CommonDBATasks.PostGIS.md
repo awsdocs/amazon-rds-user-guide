@@ -178,3 +178,10 @@ You can list the versions that are available in your release by using the follow
 ```
 SELECT * from pg_available_extension_versions where name='postgis';
 ```
+
+You can also find version information in the following sections in the *Amazon RDS for PostgreSQL Release Notes*:
++ [ PostgreSQL version 13 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-13x)
++ [ PostgreSQL version 12 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-12x)
++ [ PostgreSQL version 11\.x extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-11x)
++ [ PostgreSQL version 10\.x extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-101x)
++ [ PostgreSQL version 9\.6\.x extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-96x)

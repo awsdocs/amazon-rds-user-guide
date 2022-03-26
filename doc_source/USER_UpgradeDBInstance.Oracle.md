@@ -1,6 +1,6 @@
 # Upgrading the Oracle DB engine<a name="USER_UpgradeDBInstance.Oracle"></a>
 
-When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. For information about which Oracle versions are available on Amazon RDS, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\.
+When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. For information about which Oracle versions are available on Amazon RDS, see [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\.
 
 **Important**  
 RDS for Oracle Database 11g is deprecated\. If you maintain Oracle Database 11g snapshots, you can upgrade them to a later release\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
@@ -11,6 +11,7 @@ RDS for Oracle Database 11g is deprecated\. If you maintain Oracle Database 11g 
 + [Oracle minor version upgrades](#USER_UpgradeDBInstance.Oracle.Minor)
 + [Oracle SE2 upgrade paths](#USER_UpgradeDBInstance.Oracle.SE2)
 + [Considerations for Oracle DB upgrades](USER_UpgradeDBInstance.Oracle.OGPG.md)
++ [Preparing for the automatic upgrade of Oracle Database 12c](#USER_UpgradeDBInstance.Oracle.auto-upgrade)
 + [Testing an Oracle DB upgrade](USER_UpgradeDBInstance.Oracle.UpgradeTesting.md)
 + [Upgrading an Oracle DB instance](USER_UpgradeDBInstance.Oracle.Upgrading.md)
 + [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)
@@ -66,7 +67,7 @@ An Amazon RDS for Oracle DB instance is scheduled to be upgraded automatically d
 + The DB instance has the **Auto minor version upgrade** option enabled\.
 + The DB instance is not running the latest minor DB engine version\.
 
-The DB instance is upgraded to the latest quarterly PSU or RU four to six weeks after it is made available by Amazon RDS for Oracle\. For more information about PSUs and RUs, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\. 
+The DB instance is upgraded to the latest quarterly PSU or RU four to six weeks after it is made available by Amazon RDS for Oracle\. For more information about PSUs and RUs, see [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\. 
 
 The following minor version upgrades aren't supported\.
 
@@ -95,3 +96,41 @@ The following table shows supported upgrade paths to Standard Edition Two \(SE2\
 |  12\.1\.0\.2 SE2, BYOL  |  12\.2\.0\.1 SE2, BYOL or License Included 12\.1\.0\.2 SE2, BYOL or License Included  | 
 
 To upgrade from your existing configuration to a supported SE2 configuration, use a supported upgrade path\. For more information, see [Oracle major version upgrades](#USER_UpgradeDBInstance.Oracle.Major)\. 
+
+## Preparing for the automatic upgrade of Oracle Database 12c<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade"></a>
+
+*\*\*\* REVIEWERS 3/15/22: 12c deprecation*
+
+Oracle Database 12c is on a deprecation path\. As explained in [Oracle Database 12c with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12c), Amazon RDS plans to begin automatically upgrading Oracle Database 12c DB instances to Oracle Database 19c\. The automatic upgrades are scheduled to begin on the following dates:
++ April 1, 2022 for Oracle Database 12c Release 2 \(12\.2\.0\.1\)
++ August 1, 2022 for Oracle Database 12c Release 1 \(12\.1\.0\.2\)
+
+The automatic upgrades are not guaranteed to occur in your maintenance window\. All Oracle Database 12c DB instances, including reserved instances, will move to the latest available Release Update \(RU\)\.
+
+Before the automatic upgrades begin, we highly recommend that you upgrade your existing Oracle Database 12c DB instances to Oracle Database 19c manually\. In this way, you can validate that your applications work correctly\. To avoid the automatic upgrade, use one of the following strategies before the beginning of the automatic upgrades\.
+
+**Topics**
++ [Upgrade your Oracle Database 12c Release 2 \(12\.2\) DB instance](#USER_UpgradeDBInstance.Oracle.auto-upgrade.upgrade)
++ [Upgrade your Oracle Database 12c DB snapshots](#USER_UpgradeDBInstance.Oracle.auto-upgrade.snapshots)
++ [Downgrade your Oracle Database 12c Release 2 \(12\.2\) DB instance](#USER_UpgradeDBInstance.Oracle.auto-upgrade.downgrade)
+
+### Upgrade your Oracle Database 12c Release 2 \(12\.2\) DB instance<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade.upgrade"></a>
+
+Before you upgrade your Oracle Database 12c DB instance to Oracle Database 19c, consider the following:
++ Your SQL statements might perform differently after the upgrade\. If so, you can use the `OPTIMIZER_FEATURES_ENABLE` parameter to retain the behavior of the Oracle Database 12c optimizer\. For more information, see [Influencing the Optimizer](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgsql/influencing-the-optimizer.html#GUID-8758EF88-1CC6-41BD-8581-246702414D1D) in the Oracle Database documentation\.
++ If you have Extended Support for Oracle Database 12c on the BYOL model, consider the implications\. In this case, you must have Extended Support agreements from Oracle Support for Oracle Database 19c\. For details on licensing and support requirements for BYOL, see [Amazon RDS for Oracle FAQs](https://aws.amazon.com/rds/oracle/faqs/)\.
+
+### Upgrade your Oracle Database 12c DB snapshots<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade.snapshots"></a>
+
+You can upgrade your existing snapshots to Oracle Database 19c, and then restore them\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
+
+If you plan to upgrade Oracle Database 12c using snapshots, the planned deadlines to avoid the automatic upgrade are listed in [Oracle Database 12c with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12c)\.
+
+### Downgrade your Oracle Database 12c Release 2 \(12\.2\) DB instance<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade.downgrade"></a>
+
+You might decide not to upgrade your Oracle Database 12c Release 2 \(12\.2\) DB instances to Oracle Database 19c\. In this case, you can downgrade your instance to Oracle Database Release 1 \(12\.1\.0\.2\)\. Use any of the following techniques:
++ Oracle Data Pump
++ AWS Database Migration Service \(DMS\)
++ Any supported logical replication tool
+
+For more information about import options, see [Importing data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)\.

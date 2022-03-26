@@ -671,4 +671,4 @@ end;
 /
 ```
 
-After you alter the default values for full redaction with the dbms\_redact\_upd\_full\_rdct\_val procedure, reboot your DB instance for the change to take effect\. For more information, see Rebooting a DB instance [USER\_RebootInstance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html)\.
+After you alter the default values for full redaction with the dbms\_redact\_upd\_full\_rdct\_val procedure, reboot your DB instance for the change to take effect\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.

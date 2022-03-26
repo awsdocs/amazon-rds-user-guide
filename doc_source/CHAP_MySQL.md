@@ -256,14 +256,14 @@ The following example shows how to launch the client using the `--ssl-ca` parame
 
 ```
 mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-mode=VERIFY_IDENTITY
+--ssl-ca=[full path]global-bundle.pem --ssl-mode=VERIFY_IDENTITY
 ```
 
 The following example shows how to launch the client using the `--ssl-ca` parameter for MySQL 5\.6 and earlier\.
 
 ```
 mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
+--ssl-ca=[full path]global-bundle.pem --ssl-verify-server-cert
 ```
 
 For information about downloading certificate bundles, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.

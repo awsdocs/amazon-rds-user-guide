@@ -21,10 +21,7 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 
 For more information about addressing replication errors with Amazon RDS, see [Troubleshooting a MySQL read replica problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
 
-**Important**  
-If you try to call `mysql.rds_skip_repl_error`, you might encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`\. If you do, upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in this topic\.
-
-### Replication stopped error<a name="w613aac33c95c39b7c13"></a>
+### Replication stopped error<a name="w768aac33c95c39b7c11"></a>
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive an error message stating that the replica is down or disabled\.
 

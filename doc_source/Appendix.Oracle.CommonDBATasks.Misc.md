@@ -204,8 +204,12 @@ Oracle Database includes a number of advisors\. Each advisor supports automated 
 
 The advisor task procedures are available in the following engine versions:
 + Oracle Database 21c \(21\.0\.0\)
-+ [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1) and higher Oracle Database 19c versions 
-+ [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1) and higher Oracle Database 12c \(Release 2\) 12\.2\.0\.1 versions 
++ Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1 and higher Oracle Database 19c versions 
+
+  For more information, see [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-19-0.html#oracle-version-RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1) in the *Amazon RDS for Oracle Release Notes*\.
++ Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1 and higher Oracle Database 12c \(Release 2\) 12\.2\.0\.1 versions 
+
+  For more information, see [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-12-2.html#oracle-version-RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1) in the *Amazon RDS for Oracle Release Notes*\.
 
 **Topics**
 + [Setting parameters for advisor tasks](#Appendix.Oracle.CommonDBATasks.setting-task-parameters)

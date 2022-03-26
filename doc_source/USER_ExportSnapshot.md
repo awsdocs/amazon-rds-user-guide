@@ -56,6 +56,9 @@ Exporting DB snapshot data to Amazon S3 has the following limitations:
   ```
 + If the data contains a large object such as a BLOB or CLOB, close to or greater than 500 MB, the export fails\.
 + If a table contains a large row close to or greater than 2 GB, the table is skipped during export\.
++ We strongly recommend that you use a unique name for each export task\. If you don't use a unique task name, you might receive the following error message:
+
+  ExportTaskAlreadyExistsFault: An error occurred \(ExportTaskAlreadyExists\) when calling the StartExportTask operation: The export task with the ID *xxxxx* already exists\.
 
 ## Overview of exporting snapshot data<a name="USER_ExportSnapshot.Overview"></a>
 

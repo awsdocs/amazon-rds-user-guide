@@ -452,9 +452,15 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 
 To set and unset diagnostic events at the session level, you can use the Oracle SQL statement `ALTER SESSION SET EVENTS`\. However, to set events at the system level you can't use Oracle SQL\. Instead, use the system event procedures in the `rdsadmin.rdsadmin_util` package\. The system event procedures are available in the following engine versions:
 + All Oracle Database 21c versions
-+ [19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1) and higher Oracle Database 19c versions
-+ [12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1) and higher Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions
-+ [12\.1\.0\.2\.V22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22) and higher Oracle Database 12c Release 1 \(12\.1\.0\.2\) versions
++ 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1 and higher Oracle Database 19c versions
+
+  For more information, see [Version 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-19-0.html#oracle-version-RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1) in the *Amazon RDS for Oracle Release Notes*\.
++ 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1 and higher Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions
+
+  For more information, see [Version 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-12-2.html#oracle-version-RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1) in the *Amazon RDS for Oracle Release Notes*\.
++ 12\.1\.0\.2\.V22 and higher Oracle Database 12c Release 1 \(12\.1\.0\.2\) versions
+
+  For more information, see [Version 12\.1\.0\.2\.v22](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-12-1.html#oracle-version-12.1.0.2.v22) in the *Amazon RDS for Oracle Release Notes*\.
 
 para
 

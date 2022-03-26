@@ -44,7 +44,7 @@ During this outage, password verification functions are disabled briefly\. You c
 
 1. Determine the option group that you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group with the following settings: 
 
-   1. For **Engine**, choose **oracle\-ee**\. 
+   1. For **Engine**, choose the edition for your Oracle DB instance\. 
 
    1. For **Major engine version**, choose the version of your DB instance\. 
 

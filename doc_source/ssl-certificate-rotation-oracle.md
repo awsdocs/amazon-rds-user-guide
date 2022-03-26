@@ -78,42 +78,9 @@ When you update the trust store, you can retain older certificates in addition t
 
 You can update the trust store for applications that use JDBC for SSL/TLS connections\.
 
-**To update the trust store for JDBC applications**
+For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
-1. Download the 2019 root certificate that works for all AWS Regions and put the file in the ssl\_wallet directory\.
-
-   For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
-
-1. Convert the certificate to \.der format using the following command\.
-
-   ```
-   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                
-   ```
-
-   Replace the file name with the one that you downloaded\.
-
-1. Import the certificate into the key store using the following command\. 
-
-   ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                                    
-   ```
-
-1. Confirm that the key store was updated successfully\.
-
-   ```
-   keytool -list -v -keystore clientkeystore.jks
-   ```
-
-   Enter the key store password when you are prompted for it\.
-
-   Your output should contain the following\.
-
-   ```
-   rds-root,date, trustedCertEntry, 
-   Certificate fingerprint (SHA1): D4:0D:DB:29:E3:75:0D:FF:A6:71:C3:14:0B:BF:5F:47:8D:1C:80:96
-   # This fingerprint should match the output from the below command
-   openssl x509 -fingerprint -in rds-ca-2019-root.pem -noout
-   ```
+For sample scripts that import certificates, see [Sample script for importing certificates into your trust store](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
 
 ## Example Java code for establishing SSL connections<a name="ssl-certificate-rotation-oracle.java-example"></a>
 
