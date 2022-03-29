@@ -265,7 +265,7 @@ The following policy uses an RDS condition key and allows a user to create only 
 12.                "rds:DatabaseEngine":"mysql"
 13.             },
 14.             "Bool":{
-15.                     "rds:MultiAz": false
+15.                "rds:MultiAz": false
 16.             }
 17.          }
 18.       }
@@ -318,20 +318,27 @@ The following policy uses an RDS condition key and allows the addition of a tag 
 
 ```
  1. {
- 2. 
- 3.  {
- 4.     "Version" : "2012-10-17",
- 5.     "Statement" : [{
- 6.        "Effect" : "Allow",
- 7.        "Action" : [ "rds:AddTagsToResource", "rds:RemoveTagsFromResource" 
- 8.        ],
- 9.        "Resource" : "*",
-10.        "Condition" : { "streq" : { "rds:req-tag/stage" : [ "test", "qa", 
-11.        "production" ] } }
-12.   }
-13.  ]
-14. }
-15. }
+ 2.    {
+ 4.       "Version" : "2012-10-17",
+ 5.       "Statement" : [{
+ 6.          "Effect" : "Allow",
+ 7.          "Action" : [
+ 8.             "rds:AddTagsToResource",
+ 9.             "rds:RemoveTagsFromResource" 
+10.          ],
+11.          "Resource" : "*",
+12.          "Condition" : { 
+13.             "streq" : {
+14.                "rds:req-tag/stage" : [
+15.                    "test",
+16.                    "qa", 
+17.                    "production"
+18.                ]
+19.             }
+20.          }
+21.       }]
+22.    }
+23. }
 ```
 
 ## Specifying conditions: Using custom tags<a name="UsingWithRDS.IAM.SpecifyingCustomTags"></a>
