@@ -44,39 +44,39 @@ This example shows how you might create a policy that allows IAM users to view t
 
 ```
 {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Sid": "ViewOwnUserInfo",
-               "Effect": "Allow",
-               "Action": [
-                   "iam:GetUserPolicy",
-                   "iam:ListGroupsForUser",
-                   "iam:ListAttachedUserPolicies",
-                   "iam:ListUserPolicies",
-                   "iam:GetUser"
-               ],
-               "Resource": [
-                   "arn:aws:iam::*:user/${aws:username}"
-               ]
-           },
-           {
-               "Sid": "NavigateInConsole",
-               "Effect": "Allow",
-               "Action": [
-                   "iam:GetGroupPolicy",
-                   "iam:GetPolicyVersion",
-                   "iam:GetPolicy",
-                   "iam:ListAttachedGroupPolicies",
-                   "iam:ListGroupPolicies",
-                   "iam:ListPolicyVersions",
-                   "iam:ListPolicies",
-                   "iam:ListUsers"
-               ],
-               "Resource": "*"
-           }
-       ]
-   }
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Sid": "ViewOwnUserInfo",
+         "Effect": "Allow",
+         "Action": [
+            "iam:GetUserPolicy",
+            "iam:ListGroupsForUser",
+            "iam:ListAttachedUserPolicies",
+            "iam:ListUserPolicies",
+            "iam:GetUser"
+         ],
+         "Resource": [
+            "arn:aws:iam::*:user/${aws:username}"
+         ]
+      },
+      {
+         "Sid": "NavigateInConsole",
+         "Effect": "Allow",
+         "Action": [
+            "iam:GetGroupPolicy",
+            "iam:GetPolicyVersion",
+            "iam:GetPolicy",
+            "iam:ListAttachedGroupPolicies",
+            "iam:ListGroupPolicies",
+            "iam:ListPolicyVersions",
+            "iam:ListPolicies",
+            "iam:ListUsers"
+         ],
+         "Resource": "*"
+      }
+   ]
+}
 ```
 
 ## Allow a user to create DB instances in an AWS account<a name="security_iam_id-based-policy-examples-create-db-instance-in-account"></a>
@@ -85,28 +85,28 @@ The following is an example policy that allows the user with the ID `12345678901
 
 ```
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "AllowCreateDBInstanceOnly",
-            "Effect": "Allow",
-            "Action": [
-                "rds:CreateDBInstance"
-            ],
-            "Resource": [
-                "arn:aws:rds:*:123456789012:db:test*",
-                "arn:aws:rds:*:123456789012:og:default*",
-                "arn:aws:rds:*:123456789012:pg:default*",
-                "arn:aws:rds:*:123456789012:subgrp:default"
-            ],
-            "Condition": {
-                "StringEquals": {
-                    "rds:DatabaseEngine": "mysql",
-                    "rds:DatabaseClass": "db.t2.micro"
-                }
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Sid": "AllowCreateDBInstanceOnly",
+         "Effect": "Allow",
+         "Action": [
+            "rds:CreateDBInstance"
+         ],
+         "Resource": [
+            "arn:aws:rds:*:123456789012:db:test*",
+            "arn:aws:rds:*:123456789012:og:default*",
+            "arn:aws:rds:*:123456789012:pg:default*",
+            "arn:aws:rds:*:123456789012:subgrp:default"
+         ],
+         "Condition": {
+            "StringEquals": {
+               "rds:DatabaseEngine": "mysql",
+               "rds:DatabaseClass": "db.t2.micro"
             }
-        }
-    ]
+         }
+      }
+   ]
 }
 ```
 
@@ -145,13 +145,13 @@ The following permissions policy grants permissions to a user to run all of the 
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":[
+   "Version": "2012-10-17",
+   "Statement": [
       {
-         "Sid":"AllowRDSDescribe",
-         "Effect":"Allow",
-         "Action":"rds:Describe*",
-         "Resource":"*"
+         "Sid": "AllowRDSDescribe",
+         "Effect": "Allow",
+         "Action": "rds:Describe*",
+         "Resource": "*"
       }
    ]
 }
@@ -163,18 +163,18 @@ The following permissions policy grants permissions to allow a user to only crea
 
 ```
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": "rds:CreateDBInstance",
-            "Resource": [
-                "arn:aws:rds:*:*:pg:mydbpg",
-                "arn:aws:rds:*:*:subgrp:mydbsubnetgroup"
-            ]
-        }
-    ]
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Sid": "VisualEditor0",
+         "Effect": "Allow",
+         "Action": "rds:CreateDBInstance",
+         "Resource": [
+            "arn:aws:rds:*:*:pg:mydbpg",
+            "arn:aws:rds:*:*:subgrp:mydbsubnetgroup"
+         ]
+      }
+   ]
 }
 ```
 
@@ -184,19 +184,19 @@ You can use conditions in your identity\-based policy to control access to Amazo
 
 ```
  1. {
- 2.    "Version":"2012-10-17",
- 3.    "Statement":[
+ 2.    "Version": "2012-10-17",
+ 3.    "Statement": [
  4.       {
- 5.          "Sid":"AllowDevTestCreate",
- 6.          "Effect":"Allow",
- 7.          "Action":[
+ 5.          "Sid": "AllowDevTestCreate",
+ 6.          "Effect": "Allow",
+ 7.          "Action": [
  8.             "rds:ModifyDBInstance",
  9.             "rds:CreateDBSnapshot"
 10.          ],
-11.          "Resource":"*",
-12.          "Condition":{
-13.             "StringEquals":{
-14.                "rds:db-tag/stage":[
+11.          "Resource": "*",
+12.          "Condition": {
+13.             "StringEquals": {
+14.                "rds:db-tag/stage": [
 15.                   "development",
 16.                   "test"
 17.                ]
@@ -213,13 +213,13 @@ The following permissions policy grants permissions to prevent a user from delet
 
 ```
 {
-   "Version":"2012-10-17",
-   "Statement":[
+   "Version": "2012-10-17",
+   "Statement": [
       {
-         "Sid":"DenyDelete1",
-         "Effect":"Deny",
-         "Action":"rds:DeleteDBInstance",
-         "Resource":"arn:aws:rds:us-west-2:123456789012:db:my-mysql-instance"
+         "Sid": "DenyDelete1",
+         "Effect": "Deny",
+         "Action": "rds:DeleteDBInstance",
+         "Resource": "arn:aws:rds:us-west-2:123456789012:db:my-mysql-instance"
       }
    ]
 }
@@ -231,14 +231,14 @@ You can explicitly deny access to a resource\. Deny policies take precedence ove
 
 ```
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Deny",
-      "Action": "rds:*",
-      "Resource": "arn:aws:rds:us-east-1:123456789012:db:mydb"
-    }
-  ]
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Effect": "Deny",
+         "Action": "rds:*",
+         "Resource": "arn:aws:rds:us-east-1:123456789012:db:mydb"
+      }
+   ]
 }
 ```
 
@@ -246,34 +246,33 @@ You can explicitly deny access to a resource\. Deny policies take precedence ove
 
 Following are examples of how you can use condition keys in Amazon RDS IAM permissions policies\. 
 
-### Example 1: Grant permission to create a DB instance that uses a specific DB engine and isn't MultiAZ<a name="w768aac40c38c43c33b4"></a>
+### Example 1: Grant permission to create a DB instance that uses a specific DB engine and isn't MultiAZ<a name="w772aac40c38c43c33b4"></a>
 
 The following policy uses an RDS condition key and allows a user to create only DB instances that use the MySQL database engine and don't use MultiAZ\. The `Condition` element indicates the requirement that the database engine is MySQL\. 
 
 ```
  1. {
- 2. 
- 3.    "Version":"2012-10-17",
- 4.    "Statement":[
- 5.       {
- 6.          "Sid":"AllowMySQLCreate",
- 7.          "Effect":"Allow",
- 8.          "Action":"rds:CreateDBInstance",
- 9.          "Resource":"*",
-10.          "Condition":{
-11.             "StringEquals":{
-12.                "rds:DatabaseEngine":"mysql"
-13.             },
-14.             "Bool":{
-15.                "rds:MultiAz": false
-16.             }
-17.          }
-18.       }
-19.    ]
-20. }
+ 2.    "Version": "2012-10-17",
+ 3.    "Statement": [
+ 4.       {
+ 5.          "Sid": "AllowMySQLCreate",
+ 6.          "Effect": "Allow",
+ 7.          "Action": "rds:CreateDBInstance",
+ 8.          "Resource": "*",
+ 9.          "Condition": {
+10.             "StringEquals": {
+11.                "rds:DatabaseEngine": "mysql"
+12.             },
+13.             "Bool": {
+14.                "rds:MultiAz": false
+15.             }
+16.          }
+17.       }
+18.    ]
+19. }
 ```
 
-### Example 2: Explicitly deny permission to create DB instances for certain DB instance classes and create DB instances that use Provisioned IOPS<a name="w768aac40c38c43c33b6"></a>
+### Example 2: Explicitly deny permission to create DB instances for certain DB instance classes and create DB instances that use Provisioned IOPS<a name="w772aac40c38c43c33b6"></a>
 
 The following policy explicitly denies permission to create DB instances that use the DB instance classes `r3.8xlarge` and `m4.10xlarge`, which are the largest and most expensive DB instance classes\. This policy also prevents users from creating DB instances that use Provisioned IOPS, which incurs an additional cost\. 
 
@@ -281,16 +280,16 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 
 ```
  1. {
- 2.    "Version":"2012-10-17",
- 3.    "Statement":[
+ 2.    "Version": "2012-10-17",
+ 3.    "Statement": [
  4.       {
- 5.          "Sid":"DenyLargeCreate",
- 6.          "Effect":"Deny",
- 7.          "Action":"rds:CreateDBInstance",
- 8.          "Resource":"*",
- 9.          "Condition":{
-10.             "StringEquals":{
-11.                "rds:DatabaseClass":[
+ 5.          "Sid": "DenyLargeCreate",
+ 6.          "Effect": "Deny",
+ 7.          "Action": "rds:CreateDBInstance",
+ 8.          "Resource": "*",
+ 9.          "Condition": {
+10.             "StringEquals": {
+11.                "rds:DatabaseClass": [
 12.                   "db.r3.8xlarge",
 13.                   "db.m4.10xlarge"
 14.                ]
@@ -298,13 +297,13 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 16.          }
 17.       },
 18.       {
-19.          "Sid":"DenyPIOPSCreate",
-20.          "Effect":"Deny",
-21.          "Action":"rds:CreateDBInstance",
-22.          "Resource":"*",
-23.          "Condition":{
-24.             "NumericNotEquals":{
-25.                "rds:Piops":"0"
+19.          "Sid": "DenyPIOPSCreate",
+20.          "Effect": "Deny",
+21.          "Action": "rds:CreateDBInstance",
+22.          "Resource": "*",
+23.          "Condition": {
+24.             "NumericNotEquals": {
+25.                "rds:Piops": "0"
 26.             }
 27.          }
 28.       }
@@ -312,33 +311,33 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 30. }
 ```
 
-### Example 3: Limit the set of tag keys and values that can be used to tag a resource<a name="w768aac40c38c43c33b8"></a>
+### Example 3: Limit the set of tag keys and values that can be used to tag a resource<a name="w772aac40c38c43c33b8"></a>
 
 The following policy uses an RDS condition key and allows the addition of a tag with the key `stage` to be added to a resource with the values `test`, `qa`, and `production`\.
 
 ```
  1. {
- 2.    {
- 4.       "Version" : "2012-10-17",
- 5.       "Statement" : [{
- 6.          "Effect" : "Allow",
- 7.          "Action" : [
- 8.             "rds:AddTagsToResource",
- 9.             "rds:RemoveTagsFromResource" 
-10.          ],
-11.          "Resource" : "*",
-12.          "Condition" : { 
-13.             "streq" : {
-14.                "rds:req-tag/stage" : [
-15.                    "test",
-16.                    "qa", 
-17.                    "production"
-18.                ]
-19.             }
-20.          }
-21.       }]
-22.    }
-23. }
+ 2.    "Version": "2012-10-17",
+ 3.    "Statement": [
+ 4.       {
+ 5.          "Effect": "Allow",
+ 6.          "Action": [
+ 7.             "rds:AddTagsToResource",
+ 8.             "rds:RemoveTagsFromResource"
+ 9.          ],
+10.          "Resource": "*",
+11.          "Condition": {
+12.             "streq": {
+13.                "rds:req-tag/stage": [
+14.                   "test",
+15.                   "qa",
+16.                   "production"
+17.                ]
+18.             }
+19.          }
+20.       }
+21.    ]
+22. }
 ```
 
 ## Specifying conditions: Using custom tags<a name="UsingWithRDS.IAM.SpecifyingCustomTags"></a>
@@ -393,7 +392,7 @@ Following are examples of how you can use custom tags in Amazon RDS IAM permissi
 **Note**  
 All examples use the us\-west\-2 region and contain fictitious account IDs\.
 
-#### Example 1: Grant permission for actions on a resource with a specific tag with two different values<a name="w768aac40c38c43c35c28b6"></a>
+#### Example 1: Grant permission for actions on a resource with a specific tag with two different values<a name="w772aac40c38c43c35c28b6"></a>
 
 The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` APIs on DB instances with either the `stage` tag set to `development` or `test`\. 
 
@@ -422,7 +421,7 @@ The following policy allows permission to perform the `ModifyDBInstance` and `Cr
 22. }
 ```
 
-#### Example 2: Explicitly deny permission to create a DB instance that uses specified DB parameter groups<a name="w768aac40c38c43c35c28b8"></a>
+#### Example 2: Explicitly deny permission to create a DB instance that uses specified DB parameter groups<a name="w772aac40c38c43c35c28b8"></a>
 
 The following policy explicitly denies permission to create a DB instance that uses DB parameter groups with specific tag values\. You might apply this policy if you require that a specific customer\-created DB parameter group always be used when creating DB instances\. Policies that use `Deny` are most often used to restrict access that was granted by a broader policy\.
 
@@ -447,7 +446,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 16. }
 ```
 
-#### Example 3: Grant permission for actions on a DB instance with an instance name that is prefixed with a user name<a name="w768aac40c38c43c35c28c10"></a>
+#### Example 3: Grant permission for actions on a DB instance with an instance name that is prefixed with a user name<a name="w772aac40c38c43c35c28c10"></a>
 
 The following policy allows permission to call any API \(except to `AddTagsToResource` or `RemoveTagsFromResource`\) on a DB instance that has a DB instance name that is prefixed with the user's name and that has a tag called `stage` equal to `devo` or that has no tag called `stage`\.
 

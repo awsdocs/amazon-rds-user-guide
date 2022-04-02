@@ -18,7 +18,7 @@ The following database counters are available with Performance Insights for Amaz
 
 ### Native counters for RDS for MariaDB and RDS for MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
 
-For definitions of these native metrics, see [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
+Native metrics are defined by the database engine and not by Amazon RDS\. For definitions of these native metrics, see [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
 
 | Counter | Type | Unit | Metric | 
@@ -88,7 +88,7 @@ The following database counters are available with Performance Insights for RDS 
 
 ### Native counters for RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer.Native"></a>
 
-You can find definitions for these native metrics in [Use SQL Server Objects](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/use-sql-server-objects?view=sql-server-2017) in the Microsoft SQL Server documentation\.
+Native metrics are defined by the database engine and not by Amazon RDS\. You can find definitions for these native metrics in [Use SQL Server Objects](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/use-sql-server-objects?view=sql-server-2017) in the Microsoft SQL Server documentation\.
 
 
 | Counter | Type | Unit | Metric | 
@@ -120,7 +120,7 @@ The following database counters are available with Performance Insights for RDS 
 
 ### Native counters for RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle.Native"></a>
 
-You can find definitions for these native metrics in [Statistics Descriptions](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/statistics-descriptions-2.html#GUID-2FBC1B7E-9123-41DD-8178-96176260A639) in the Oracle documentation\.
+Native metrics are defined by the database engine and not by Amazon RDS\. You can find definitions for these native metrics in [Statistics Descriptions](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/statistics-descriptions-2.html#GUID-2FBC1B7E-9123-41DD-8178-96176260A639) in the Oracle documentation\.
 
 **Note**  
 For the `CPU used by this session` counter metric, the unit has been transformed from the native centiseconds to active sessions to make the value easier to use\. For example, CPU send in the DB Load chart represents the demand for CPU\. The counter metric `CPU used by this session` represents the amount of CPU used by Oracle sessions\. You can compare CPU send to the `CPU used by this session` counter metric\. When demand for CPU is higher than CPU used, sessions are waiting for CPU time\.
@@ -161,7 +161,7 @@ The following database counters are available with Performance Insights for Amaz
 
 ### Native counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.Native"></a>
 
-You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
+Native metrics are defined by the database engine and not by Amazon RDS\. You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
 
 
 | Counter | Type | Unit | Metric | 

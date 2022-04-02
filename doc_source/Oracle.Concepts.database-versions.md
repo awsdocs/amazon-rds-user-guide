@@ -120,16 +120,13 @@ Amazon RDS supports Oracle Database 12c for both Oracle Enterprise Edition and O
 
 ### Oracle Database 12c Release 2 \(12\.2\.0\.1\) with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV2Overview"></a>
 
-Oracle Corporation intends to deprecate support for Oracle Database 12c Release 2 \(12\.2\.0\.1\) for BYOL and LI on March 31, 2022\. The following schedule includes upgrade recommendations\. For more information, see [Preparing for the automatic upgrade of Oracle Database 12c ](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade)\.
+Oracle Corporation deprecated support for Oracle Database 12c Release 2 \(12\.2\.0\.1\) for BYOL and LI on March 31, 2022\. The following schedule describes the automatic upgrade schedule\. For more information, see [Preparing for the automatic upgrade of Oracle Database 12c ](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade)\.
 
 
 | Action or recommendation | Oracle Database 12c Release 2 \(12\.2\.0\.1\) | 
 | --- | --- | 
-|  We recommend that you upgrade Oracle Database 12c Release 2 \(12\.2\.0\.1\) instances manually to a higher release\.  |  Now–March 31, 2022  | 
-|  We recommend that you upgrade Oracle Database 12c Release 2 \(12\.2\.0\.1\) snapshots manually to a higher release\.  |  February 1, 2022  | 
-|  Amazon RDS ends support for Oracle Database 12c Release 2 \(12\.2\.0\.1\)\. You can no longer create DB instances for this version\. You can continue to restore 12\.2\.0\.1 DB snapshots without being automatically upgraded until March 31, 2022\.  |  February 1, 2022  | 
-|  Amazon RDS plans to start automatic upgrades of your Oracle Database 12c Release 2 \(12\.2\.0\.1\) instances to Oracle Database 19c\.  |  April 1, 2022  | 
-|  Amazon RDS plans to start automatic upgrades to Oracle Database 19c for any Oracle Database 12c Release 2 \(12\.2\.0\.1\) DB instances restored from snapshots\.  |  April 1, 2022  | 
+|  Amazon RDS begins automatic upgrades of your Oracle Database 12c Release 2 \(12\.2\.0\.1\) instances to Oracle Database 19c\.  |  April 1, 2022  | 
+|  Amazon RDS begins automatic upgrades to Oracle Database 19c for any Oracle Database 12c Release 2 \(12\.2\.0\.1\) DB instances restored from snapshots\.  |  April 1, 2022  | 
 
 ### Oracle Database 12c Release 1 \(12\.1\.0\.2\) with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV1Overview"></a>
 

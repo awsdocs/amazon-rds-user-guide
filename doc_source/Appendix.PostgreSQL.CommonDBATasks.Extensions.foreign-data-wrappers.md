@@ -1,6 +1,6 @@
 # Working with the supported foreign data wrappers for Amazon RDS for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Extensions.foreign-data-wrappers"></a>
 
-A foreign data wrapper \(FDW\) is a specific type of extension that provides access to external data\. For example, by using the PostgreSQL native `postgres_fdw` extension you can access data stored in PostgreSQL DB instances external to Amazon RDS for PostgreSQL\. As another example, the `oracle_fdw` extension lets your RDS for PostgreSQL DB instance work with an Oracle database instance\. For more information about accessing Oracle data from your RDS for PostgreSQL DB instance, see [Working with Oracle databases by using the oracle\_fdw extension](#postgresql-oracle-fdw)\.
+A foreign data wrapper \(FDW\) is a specific type of extension that provides access to external data\. For example, the `oracle_fdw` extension allows your RDS for PostgreSQL DB cluster to work with Oracle databases\. As another example, by using the PostgreSQL native `postgres_fdw` extension you can access data stored in PostgreSQL DB instances external to your RDS for PostgreSQL DB instance\.
 
 Following, you can find information about several supported PostgreSQL foreign data wrappers\. 
 
@@ -270,26 +270,28 @@ For more information about the `mysql_fdw` extension, see the [mysql\_fdw](https
 
 ## Working with Oracle databases by using the oracle\_fdw extension<a name="postgresql-oracle-fdw"></a>
 
-To access an Oracle database from your RDS for PostgreSQL DB instance, you can install and use the `oracle_fdw` extension\. This extension is a foreign data wrapper for Oracle databases\. To learn more about this extension, see the [oracle\_fdw](https://github.com/laurenz/oracle_fdw) documentation\.
+To access an Oracle database from your RDS for PostgreSQL DB instance you can install and use the `oracle_fdw` extension\. This extension is a foreign data wrapper for Oracle databases\. To learn more about this extension, see the [oracle\_fdw](https://github.com/laurenz/oracle_fdw) documentation\.
 
 The `oracle_fdw` extension is supported on Amazon RDS for PostgreSQL versions 12\.7, 13\.3, and higher\.
 
 **Topics**
-+ [Enabling the oracle\_fdw extension](#postgresql-oracle-fdw.enabling)
-+ [Example using a foreign server linked to an Amazon RDS for Oracle database](#postgresql-oracle-fdw.example)
-+ [Encryption in transit](#postgresql-oracle-fdw.encryption)
++ [Turning on the oracle\_fdw extension](#postgresql-oracle-fdw.enabling)
++ [Example: Using a foreign server linked to an Amazon RDS for Oracle database](#postgresql-oracle-fdw.example)
++ [Working with encryption in transit](#postgresql-oracle-fdw.encryption)
 + [pg\_user\_mapping and pg\_user\_mappings permissions](#postgresql-oracle-fdw.permissions)
 
-### Enabling the oracle\_fdw extension<a name="postgresql-oracle-fdw.enabling"></a>
+### Turning on the oracle\_fdw extension<a name="postgresql-oracle-fdw.enabling"></a>
 
-**To enable the oracle\_fdw extension**
+To use the oracle\_fdw extension, perform the following procedure\. 
+
+**To turn on the oracle\_fdw extension**
 + Run the following command using an account that has `rds_superuser` permissions\.
 
   ```
   CREATE EXTENSION oracle_fdw;
   ```
 
-### Example using a foreign server linked to an Amazon RDS for Oracle database<a name="postgresql-oracle-fdw.example"></a>
+### Example: Using a foreign server linked to an Amazon RDS for Oracle database<a name="postgresql-oracle-fdw.example"></a>
 
 The following example shows the use of a foreign server linked to an Amazon RDS for Oracle database\.
 
@@ -345,15 +347,15 @@ ERROR: connection for foreign table "mytab" cannot be established
 DETAIL: ORA-12170: TNS:Connect timeout occurred
 ```
 
-### Encryption in transit<a name="postgresql-oracle-fdw.encryption"></a>
+### Working with encryption in transit<a name="postgresql-oracle-fdw.encryption"></a>
 
 PostgreSQL\-to\-Oracle encryption in transit is based on a combination of client and server configuration parameters\. For an example using Oracle 21c, see [About the Values for Negotiating Encryption and Integrity](https://docs.oracle.com/en/database/oracle/oracle-database/21/dbseg/configuring-network-data-encryption-and-integrity.html#GUID-3A2AF4AA-AE3E-446B-8F64-31C48F27A2B5) in the Oracle documentation\. The client used for oracle\_fdw on Amazon RDS is configured with `ACCEPTED`, meaning that the encryption depends on the Oracle database server configuration\.
 
-If your database is on RDS for Oracle, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md) to configure the encryption\.
+If your database is on RDS for Oracle, see [Oracle native network encryption](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html) to configure the encryption\.
 
 ### pg\_user\_mapping and pg\_user\_mappings permissions<a name="postgresql-oracle-fdw.permissions"></a>
 
-In the following output, you can find roles and permissions mapped to three different example users\. Users `rdssu1` and `rdssu2` are members of the `rds_superuser` role, and `user1` isn't\. The `psql` metacommand `\du` lists existing roles\.
+In the following output, you can find roles and permissions mapped to three different example users\. Users `rdssu1` and `rdssu2` are members of the `rds_superuser` role, and `user1` isn't\. The example shows how you can use the `psql` metacommand `\du` to list existing roles\.
 
 ```
 test=>  \du
@@ -365,7 +367,7 @@ test=>  \du
  user1           |                                                            | {}
 ```
 
-RDS for PostgreSQL users can see only their own user mappings \(`umoptions`\) in the `pg_user_mappings` table\. Users with `rds_superuser` role are no exception\. For example, `rdssu1` can't get all mappings from the table even though `rdssu1` has `rds_superuser` privileges\. 
+All users, including users that have `rds_superuser` privileges, are allowed to view their own user mappings \(`umoptions`\) in the `pg_user_mappings` table\. As shown in the following example, when `rdssu1` tries to obtain all user mappings, an error is raised even though `rdssu1``rds_superuser` privileges:
 
 ```
 test=> SELECT * FROM pg_user_mapping;
@@ -496,4 +498,4 @@ Perform these tasks on the RDS for PostgreSQL DB instance using an account that 
 
 The connection from RDS for PostgreSQL to SQL Server uses encryption in transit \(TLS/SSL\) depending on the SQL Server database configuration\. If the SQL Server isn't configured for encryption, the RDS for PostgreSQL client making the request to the SQL Server database falls back to unencrypted\.
 
-You can enforce encryption for the connection to RDS for SQL Server DB instances by setting the `rds.force_ssl` parameter\. To learn how, see [Forcing connections to your DB instance to use SSL](SQLServer.Concepts.General.SSL.Using.md#SQLServer.Concepts.General.SSL.Forcing)\. For more information about SSL/TLS configuration for RDS for SQL Server, see [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)\. 
+You can enforce encryption for the connection to RDS for SQL Server DB instances by setting the `rds.force_ssl` parameter\. To learn how, see [Forcing connections to your DB instance to use SSL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.SSL.Using.html#SQLServer.Concepts.General.SSL.Forcing)\. For more information about SSL/TLS configuration for RDS for SQL Server, see [Using SSL with a Microsoft SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.SSL.Using.html)\. 

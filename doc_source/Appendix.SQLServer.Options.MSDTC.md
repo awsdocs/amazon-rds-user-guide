@@ -13,7 +13,7 @@ In RDS, starting with SQL Server 2012 \(version 11\.00\.5058\.0\.v1 and later\),
 The following limitations apply to using MSDTC on RDS for SQL Server:
 + MSDTC isn't supported on instances using SQL Server Database Mirroring\. For more information, see [Transactions \- availability groups and database mirroring](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/transactions-always-on-availability-and-database-mirroring?view=sql-server-ver15#non-support-for-distributed-transactions)\.
 + The `in-doubt xact resolution` parameter must be set to 1 or 2\. For more information, see [Modifying the parameter for MSDTC](#ModifyParam.MSDTC)\.
-+ MSDTC requires all host names participating in distributed transactions to be resolvable using their computer names\. RDS automatically maintains this functionality for domain\-joined instances\. However, for standalone instances make sure to configure the DNS server manually\.
++ MSDTC requires all hosts participating in distributed transactions to be resolvable using their host names\. RDS automatically maintains this functionality for domain\-joined instances\. However, for standalone instances make sure to configure the DNS server manually\.
 + Java Database Connectivity \(JDBC\) XA transactions are supported for SQL Server 2017 version 14\.00\.3223\.3 and higher, and SQL Server 2019\.
 + Distributed transactions that depend on client dynamic link libraries \(DLLs\) on RDS instances aren't supported\.
 + Using custom XA dynamic link libraries isn't supported\.

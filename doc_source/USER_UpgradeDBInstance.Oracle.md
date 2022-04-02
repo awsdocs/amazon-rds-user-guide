@@ -99,8 +99,6 @@ To upgrade from your existing configuration to a supported SE2 configuration, us
 
 ## Preparing for the automatic upgrade of Oracle Database 12c<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade"></a>
 
-*\*\*\* REVIEWERS 3/15/22: 12c deprecation*
-
 Oracle Database 12c is on a deprecation path\. As explained in [Oracle Database 12c with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12c), Amazon RDS plans to begin automatically upgrading Oracle Database 12c DB instances to Oracle Database 19c\. The automatic upgrades are scheduled to begin on the following dates:
 + April 1, 2022 for Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + August 1, 2022 for Oracle Database 12c Release 1 \(12\.1\.0\.2\)

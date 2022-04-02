@@ -4,7 +4,6 @@ Amazon RDS uses the Amazon Simple Notification Service \(Amazon SNS\) to provide
 
 **Topics**
 + [Overview of Amazon RDS event notification](USER_Events.overview.md)
-+ [Amazon RDS event categories and event messages](USER_Events.Messages.md)
 + [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)
 + [Listing Amazon RDS event notification subscriptions](USER_Events.ListSubscription.md)
 + [Modifying an Amazon RDS event notification subscription](USER_Events.Modifying.md)

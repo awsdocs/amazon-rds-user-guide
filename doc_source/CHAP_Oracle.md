@@ -7,7 +7,7 @@ Amazon RDS supports DB instances that run the following versions and editions of
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\)
 
 **Note**  
-Oracle Database 12c is on a deprecation path\. Oracle Corporation will no longer provide patches for Oracle Database 12c Release 1 \(12\.1\) and Oracle Database 12c Release 2 \(12\.2\) after their end\-of\-support dates\. For more information, see [Oracle Database 12c Release 2 \(12\.2\.0\.1\) with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12cV2Overview)\.  
+Oracle Database 12c is on a deprecation path\. Oracle Corporation will no longer provide patches for Oracle Database 12c Release 1 \(12\.1\) and Oracle Database 12c Release 2 \(12\.2\) after their end\-of\-support dates\. For more information, see [Oracle Database 12c with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12c)\.  
 RDS for Oracle Database 11g and Oracle Database 18c \(18\.0\.0\.0\) are legacy versions that are no longer supported\.
 
 Before creating a DB instance, complete the steps in the [Setting up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. When you create a DB instance using your master account, the account gets DBA privileges, with some limitations\. Use this account for administrative tasks such as creating additional database accounts\. You can't use SYS, SYSTEM, or other Oracle\-supplied administrative accounts\.

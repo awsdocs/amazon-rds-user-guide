@@ -32,7 +32,7 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Manual and automatic DB instance snapshots  |  Yes  | You can store automated backups and manual snapshots in your AWS Region or locally on your Outpost\.To store backups on your Outpost, make sure that you have Amazon S3 on Outposts configured\. |  [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md) [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/) [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
 |  Restoring from a DB snapshot  |  Yes  |  You can store automated backups and manual snapshots for the restored DB instance in the parent AWS Region or locally on your Outpost\.  |  [Considerations for restoring DB instances](rds-on-outposts.restoring.md) [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
 |  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
-|  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
+|  Exporting snapshot data to Amazon S3  |   No  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
 |  Point\-in\-time recovery  |  Yes  |  You can store automated backups and manual snapshots for the restored DB instance in the parent AWS Region or locally on your Outpost, with one exception\.  |  [Considerations for restoring DB instances](rds-on-outposts.restoring.md) [Restoring a DB instance to a specified time](USER_PIT.md)  | 
 |  Enhanced monitoring  |  No  |  —  |  [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Amazon CloudWatch monitoring  |  Yes  |  You can view the same set of metrics that are available for your databases in the AWS Region\.  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
@@ -44,6 +44,3 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
 |  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
 |  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
-
-**Note**  
-RDS on Outposts doesn't support use cases that require all data to remain in your data center\.

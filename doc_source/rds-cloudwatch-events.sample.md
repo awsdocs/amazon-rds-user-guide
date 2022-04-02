@@ -5,7 +5,24 @@ An *RDS event* indicates a change in the Amazon RDS environment\. For example, A
 **Note**  
 Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depend on the order or existence of notification events, because they might be out of sequence or missing\. 
 
-Amazon RDS records events that relate to your DB instances, DB snapshots, and DB parameter groups\. This information includes the following: 
+Amazon RDS records events that relate to the following resources:
++ DB instances
+
+  For a list of DB instance events, see [DB instance events](USER_Events.Messages.md#USER_Events.Messages.instance)\.
++ DB parameter groups
+
+  For a list of DB parameter group events, see [DB parameter group events](USER_Events.Messages.md#USER_Events.Messages.parameter-group)\.
++ DB security groups
+
+  For a list of DB security group events, see [DB security group events](USER_Events.Messages.md#USER_Events.Messages.security-group)\.
++ DB snapshots
+
+  For a list of DB snapshot events, see [DB snapshot events](USER_Events.Messages.md#USER_Events.Messages.snapshot)\.
++ RDS Proxy events
+
+  For a list of RDS Proxy events, see [RDS Proxy events](USER_Events.Messages.md#USER_Events.Messages.rds-proxy)\.
+
+This information includes the following: 
 + The date and time of the event
 + The source name and source type of the event
 + A message associated with the event

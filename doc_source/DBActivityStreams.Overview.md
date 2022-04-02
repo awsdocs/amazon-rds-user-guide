@@ -75,8 +75,13 @@ Activity streams in RDS for Oracle are always asynchronous\. When a database ses
 In RDS for Oracle, database activity streams have the following requirements and limitations\.
 
 **Topics**
++ [General requirements](#DBActivityStreams.Overview.requirements.misc)
 + [Oracle feature requirements](#DBActivityStreams.Overview.requirements.oracle)
-+ [Miscellaneous requirements](#DBActivityStreams.Overview.requirements.misc)
+
+### General requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
++ Database activity streams require use of Amazon Kinesis\.
++ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
++ Do not encrypt your Amazon Kinesis data stream\. This extra layer of encryption is incompatible with your database activity stream, which is already encrypted with your AWS KMS key\.
 
 ### Oracle feature requirements<a name="DBActivityStreams.Overview.requirements.oracle"></a>
 
@@ -84,10 +89,6 @@ RDS for Oracle has the following requirements for database activity streams:
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
 + In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
-
-### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
-+ Database activity streams require use of Amazon Kinesis\.
 
 ## Supported RDS for Oracle engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 

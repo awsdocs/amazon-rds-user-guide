@@ -71,13 +71,15 @@ For a production application that requires fast and consistent I/O performance, 
 **Note**  
 Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors that affect storage performance](#CHAP_Storage.Other.Factors)\.
 
-When you create a DB instance, you specify the IOPS rate and the size of the volume\. The ratio of IOPS to allocated storage \(in GiB\) must be at least 0\.5 \(1\.0 on RDS for SQL Server\) and not more than 50\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
+When you create a DB instance, you specify the IOPS rate and the size of the volume\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
++ The ratio of IOPS to allocated storage \(in GiB\) must be from 1–50 on RDS for SQL Server, and 0\.5–50 on other RDS DB engines\.
++ If you're using storage autoscaling, the same ratios between IOPS and maximum storage threshold \(in GiB\) also apply\.
+
+  For more information on storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
 
 The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 
 <a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
-
-The ratio of IOPS to allocated storage \(in GiB\) must be from 1–50 on RDS for SQL Server, and 0\.5–50 on other RDS DB engines\.
 
 **Note**  
  For SQL Server, the maximum 64,000 IOPS is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, m5d, r5, r5b, r5d, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\.  

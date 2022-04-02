@@ -38,9 +38,9 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 | APEX version | Storage requirements | Supported Oracle Database versions | Notes | 
 | --- | --- | --- | --- | 
-|  Oracle APEX version 21\.1\.v1  |  125 MiB  |  All  |  This version includes patch 32598392: PSE BUNDLE FOR APEX 21\.1\.  | 
-|  Oracle APEX version 20\.2\.v1  |  148 MiB  |  All except 21c  |  This version includes patch p32006852\_2020\_Generic\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
-|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All except 21c  |  This version includes patch 30990551\.  | 
+|  Oracle APEX version 21\.1\.v1  |  125 MiB  |  All  |  This version includes patch 32598392: PSE BUNDLE FOR APEX 21\.1, PATCH\_VERSION 3\.  | 
+|  Oracle APEX version 20\.2\.v1  |  148 MiB  |  All except 21c  |  This version includes patch 32006852: PSE BUNDLE FOR APEX 20\.2, PATCH\_VERSION 2020\.11\.12\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
+|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All except 21c  |  This version includes patch 30990551: PSE BUNDLE FOR APEX 20\.1, PATCH\_VERSION 2020\.07\.15\.  | 
 |  Oracle APEX version 19\.2\.v1  |  149 MiB  |  All except 21c  |  | 
 |  Oracle APEX version 19\.1\.v1  |  148 MiB  |  All except 21c  |  | 
 |  Oracle APEX version 18\.2\.v1  |  146 MiB  |  12\.1 and 12\.2 only  |  | 

@@ -18,14 +18,12 @@ To run this code example, you need the [AWS SDK for Python \(Boto3\)](http://aws
 Modify the values of the following variables as needed:
 + `ENDPOINT` – The endpoint of the DB instance that you want to access
 + `PORT` – The port number used for connecting to your DB instance
-+ `USER` – The database account that you want to access\.
++ `USER` – The database account that you want to access
 + `REGION` – The AWS Region where the DB instance is running
 + `DBNAME` – The database that you want to access
 + `SSLCERTIFICATE` – The full path to the SSL certificate for Amazon RDS
 
-  To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
-
-For `ssl_ca`, specify an SSL certificate\. To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
+  For `ssl_ca`, specify an SSL certificate\. To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 This code connects to a MariaDB or MySQL DB instance\.
 
