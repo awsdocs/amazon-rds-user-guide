@@ -260,7 +260,7 @@ For Oracle, the `ReplicaLag` metric is the sum of the `Apply Lag` value and the 
 For SQL Server, the `ReplicaLag` metric is the maximum lag of databases that have fallen behind, in seconds\. For example, if you have two databases that lag 5 seconds and 10 seconds, respectively, then `ReplicaLag` is 10 seconds\. The `ReplicaLag` metric returns the value of the following query\.
 
 ```
-select ag.name name, MAX(hdrs.secondary_lag_seconds) max_lag from sys.dm_hadr_database_replica_state
+SELECT MAX(secondary_lag_seconds) max_lag FROM sys.dm_hadr_database_replica_states;
 ```
 
 For more information, see [secondary\_lag\_seconds](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-hadr-database-replica-states-transact-sql) in the Microsoft documentation\.

@@ -98,6 +98,7 @@ You restore an RDS Custom DB snapshot by using the [ restore\-db\-instance\-from
 If the snapshot you are restoring from is for a private DB instance, make sure to specify both the correct `db-subnet-group-name` and `no-publicly-accessible`\. Otherwise, the DB instance defaults to publicly accessible\. The following options are required:
 + `db-snapshot-identifier` – Identifies the snapshot from which to restore
 + `db-instance-identifier` – Specifies the name of the RDS Custom DB instance to create from the DB snapshot
++ `custom-iam-instance-profile` – Specifies the instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance\.
 
 The following code restores the snapshot named `my-custom-snapshot` for `my-custom-instance`\.
 
@@ -108,6 +109,7 @@ For Linux, macOS, or Unix:
 aws restore-db-instance-from-db-snapshot \
   --db-snapshot-identifier my-custom-snapshot \
   --db-instance-identifier my-custom-instance \
+  --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance \
   --no-publicly-accessible
 ```
 For Windows:  
@@ -116,6 +118,7 @@ For Windows:
 aws restore-db-instance-from-db-snapshot ^
   --db-snapshot-identifier my-custom-snapshot ^
   --db-instance-identifier my-custom-instance ^
+  --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance ^
   --no-publicly-accessible
 ```
 
@@ -270,6 +273,8 @@ Use one of the following options to specify the backup to restore from:
 + `--source-dbi-resource-id dbinstanceresourceID`
 + `--source-db-instance-automated-backups-arn backupARN`
 
+The `custom-iam-instance-profile` option is required\.
+
 The following command restores `my-custom-instance` to a new DB instance named `my-restored-custom-instance`, as of the specified time\.
 
 **Example**  
@@ -279,7 +284,8 @@ For Linux, macOS, or Unix:
 1. aws rds restore-db-instance-to-point-in-time \
 2.     --source-db-instance-identifier my-custom-instance\
 3.     --target-db-instance-identifier my-restored-custom-instance \
-4.     --restore-time 2021-07-14T23:45:00.000Z
+4.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance \
+5.     --restore-time 2021-07-14T23:45:00.000Z
 ```
 For Windows:  
 
@@ -287,7 +293,8 @@ For Windows:
 1. aws rds restore-db-instance-to-point-in-time ^
 2.     --source-db-instance-identifier my-custom-instance ^
 3.     --target-db-instance-identifier my-restored-custom-instance ^
-4.     --restore-time 2021-07-14T23:45:00.000Z
+4.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance ^
+5.     --restore-time 2021-07-14T23:45:00.000Z
 ```
 
 ## Deleting an RDS Custom snapshot<a name="custom-backup.deleting"></a>

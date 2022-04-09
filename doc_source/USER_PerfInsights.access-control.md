@@ -1,24 +1,22 @@
 # Configuring access policies for Performance Insights<a name="USER_PerfInsights.access-control"></a>
 
-To access Performance Insights, you must have the appropriate permissions from AWS Identity and Access Management \(IAM\)\. You have the following options for granting access:
-+ Attach the `AmazonRDSFullAccess` managed policy to an IAM user or role\.
+To access Performance Insights, you must have the appropriate permissions from AWS Identity and Access Management \(IAM\)\. You can grant access in the following ways:
++ Attach the `AmazonRDSPerformanceInsightsReadOnly` managed policy to an IAM user or role\.
 + Create a custom IAM policy and attach it to an IAM user or role\.
 
 Also, if you specified a customer managed key when you turned on Performance Insights, make sure that users in your account have the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the KMS key\.
 
 
 
-## Attaching the AmazonRDSFullAccess policy to an IAM principal<a name="USER_PerfInsights.access-control.managed-policy"></a>
+## Attaching the AmazonRDSPerformanceInsightsReadOnly policy to an IAM principal<a name="USER_PerfInsights.access-control.managed-policy"></a>
 
-`AmazonRDSFullAccess` is an AWS\-managed policy that grants access to all of the Amazon RDS API operations\. This policy does the following:
-+ Grants access to related services used by the Amazon RDS console\. For example, this policy grants access to event notifications using Amazon SNS\.
-+ Grants permissions needed for using Performance Insights\. 
+`AmazonRDSPerformanceInsightsReadOnly` is an AWS\-managed policy that grants access to all read\-only operations of the Amazon RDS Performance Insights API\. Currently, all operations in this API are read\-only\.
 
-If you attach `AmazonRDSFullAccess` to an IAM user or role, the recipient can use Performance Insights with other console features\.
+If you attach `AmazonRDSPerformanceInsightsReadOnly` to an IAM user or role, the recipient can use Performance Insights with other console features\.
 
 ## Creating a custom IAM policy for Performance Insights<a name="USER_PerfInsights.access-control.custom-policy"></a>
 
-For users who don't have full access with the `AmazonRDSFullAccess` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
+For users who don't have the `AmazonRDSPerformanceInsightsReadOnly` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
 
 **To create a custom policy**
 
@@ -38,13 +36,43 @@ For users who don't have full access with the `AmazonRDSFullAccess` policy, you 
        "Statement": [
            {
                "Effect": "Allow",
-               "Action": "pi:*",
+               "Action": "rds:DescribeDBInstances",
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "rds:DescribeDBClusters",
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "pi:DescribeDimensionKeys",
                "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*"
            },
            {
                "Effect": "Allow",
-               "Action": "rds:DescribeDBInstances",
-               "Resource": "*"
+               "Action": "pi:GetDimensionKeyDetails",
+               "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "pi:GetResourceMetadata",
+               "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "pi:GetResourceMetrics",
+               "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "pi:ListAvailableResourceDimensions",
+               "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "pi:ListAvailableResourceMetrics",
+               "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*"
            }
        ]
    }
@@ -64,7 +92,7 @@ You can now attach the policy to an IAM user or role\. The following procedure a
 
 1. Choose an existing user from the list\.
 **Important**  
-To use Performance Insights, make sure that you have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSReadOnlyAccess` predefined policy provides read\-only access to Amazon RDS\. For more information, see [Managing access using policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
+To use Performance Insights, make sure that you have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSPerformanceInsightsReadOnly` predefined policy provides read\-only access to Amazon RDS\. For more information, see [Managing access using policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
 
 1. On the **Summary** page, choose **Add permissions**\.
 
@@ -77,7 +105,7 @@ To use Performance Insights, make sure that you have access to Amazon RDS in add
 
 ## Configuring an AWS KMS policy for Performance Insights<a name="USER_PerfInsights.access-control.cmk-policy"></a>
 
-Performance Insights uses an AWS KMS key to encrypt sensitive data\. When you enable Performance Insights through the API or the console, you have the following options:
+Performance Insights uses an AWS KMS key to encrypt sensitive data\. When you enable Performance Insights through the API or the console, you can do either of the following:
 + Choose the default AWS managed key\.
 
   Amazon RDS uses the AWS managed key for your new DB instance\. Amazon RDS creates an AWS managed key for your AWS account\. Your AWS account has a different AWS managed key for Amazon RDS for each AWS Region\.
@@ -86,7 +114,7 @@ Performance Insights uses an AWS KMS key to encrypt sensitive data\. When you en
   If you specify a customer managed key, users in your account that call the Performance Insights API need the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the KMS key\. You can configure these permissions through IAM policies\. However, we recommend that you manage these permissions through your KMS key policy\. For more information, see [ Using key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\. 
 
 **Example**  
-The following sample key policy shows how to add statements to your KMS key policy\. These statements allow access to Performance Insights\. Depending on how you use the KMS key, you might want to change some restrictions\. Before adding statements to your policy, remove all comments\.  
+The following example shows how to add statements to your KMS key policy\. These statements allow access to Performance Insights\. Depending on how you use the KMS key, you might want to change some restrictions\. Before adding statements to your policy, remove all comments\.  
 
 ```
 {

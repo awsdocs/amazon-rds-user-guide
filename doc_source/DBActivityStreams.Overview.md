@@ -15,18 +15,22 @@ Security threats are both external and internal\. To protect against internal th
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
-Amazon RDS pushes activities to an Amazon Kinesis data stream in near real time\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
+In Amazon Aurora, you start a database activity stream at the cluster level\. All DB instances within your cluster have database activity streams enabled\.
+
+Amazon RDS for Oracle pushes activities to an Amazon Kinesis data stream in near real time\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
 
 **Important**  
 Use of the Database Activity Streams feature in Amazon Aurora and Amazon RDS is free, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
 
-Applications for compliance management can also consume database activity streams\. These applications can use the stream to generate alerts and audit activity on your Oracle database\.
+You can configure applications for compliance management to consume database activity streams\. These applications can use the stream to generate alerts and audit activity on your Oracle database\.
 
 
+
+RDS for Oracle supports database activity streams in Multi\-AZ deployments\. In this case, database activity streams audit both the primary and standby instances\.
 
 ## Unified auditing in Oracle Database<a name="DBActivityStreams.Overview.unified-auditing"></a>
 
-Amazon RDS for Oracle doesn't capture database activity by default\. You create and manage audit policies in Oracle Database yourself\.
+RDS for Oracle doesn't capture database activity by default\. You create and manage audit policies in Oracle Database yourself\.
 
 Auditing is the monitoring and recording of configured database actions\. In an Oracle database, a *unified audit policy* is a named group of audit settings that you can use to audit an aspect of user behavior\. A policy can be as simple as auditing the activities of a single user\. You can also create complex audit policies that use conditions\.
 
@@ -73,22 +77,13 @@ Activity streams in RDS for Oracle are always asynchronous\. When a database ses
 ## Requirements for database activity streams<a name="DBActivityStreams.Overview.requirements"></a>
 
 In RDS for Oracle, database activity streams have the following requirements and limitations\.
-
-**Topics**
-+ [General requirements](#DBActivityStreams.Overview.requirements.misc)
-+ [Oracle feature requirements](#DBActivityStreams.Overview.requirements.oracle)
-
-### General requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
-+ Database activity streams require use of Amazon Kinesis\.
-+ Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
-+ Do not encrypt your Amazon Kinesis data stream\. This extra layer of encryption is incompatible with your database activity stream, which is already encrypted with your AWS KMS key\.
-
-### Oracle feature requirements<a name="DBActivityStreams.Overview.requirements.oracle"></a>
-
-RDS for Oracle has the following requirements for database activity streams:
++ Amazon Kinesis is required for database activity streams\.
++ AWS Key Management Service \(AWS KMS\) is required for database activity streams because they are always encrypted\.
++ Applying additional encryption to your Amazon Kinesis data stream is incompatible with database activity streams, which are already encrypted with your AWS KMS key\.
++ In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
++ In a Multi\-AZ deployment, start the database activity stream on only the primary DB instance\. The activity stream audits both the primary and standby instances automatically\. No additional steps are required during a failover\.
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
-+ In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
 
 ## Supported RDS for Oracle engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
 
@@ -96,7 +91,7 @@ Database activity streams are supported for Oracle Database 19c using version 19
 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 
-For Oracle for RDS, you can use database activity streams with the following DB instance classes:
+You can use database activity streams with the following DB instance classes:
 + db\.m4
 + db\.m5\.\*
 + db\.r4

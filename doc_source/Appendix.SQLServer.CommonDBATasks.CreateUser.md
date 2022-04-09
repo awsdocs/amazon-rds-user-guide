@@ -17,7 +17,7 @@ CREATE USER [theirname] FOR LOGIN [theirname];
 GO
 ```
 
-For an example of adding a database user to a role, see [Adding a user to the SQLAgentUser role](Appendix.SQLServer.CommonDBATasks.Agent.md#Appendix.SQLServer.CommonDBATasks.Agent.AddUser)\.
+For an example of adding a database user to a role, see [Adding a user to the SQLAgentUser role](Appendix.SQLServer.CommonDBATasks.Agent.md#SQLServerAgent.AddUser)\.
 
 **Note**  
 If you get permission errors when adding a user, you can restore privileges by modifying the DB instance master user password\. For more information, see [Resetting the `db_owner` role password](Appendix.SQLServer.CommonDBATasks.ResetPassword.md)\.

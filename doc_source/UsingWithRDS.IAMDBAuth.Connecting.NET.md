@@ -2,12 +2,14 @@
 
 You can connect to an RDS for MariaDB, MySQL, or PostgreSQL DB instance with the AWS SDK for \.NET as described following\.
 
+**Prerequisites**  
 The following are prerequisites for connecting to your DB instance using IAM authentication:
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
-The following code examples show how to generate an authentication token, and then use it to connect to a DB instance\. 
+**Examples**  
+The following code examples show how to generate an authentication token, and then use it to connect to a DB instance\.
 
 To run this code example, you need the [AWS SDK for \.NET](http://aws.amazon.com/sdk-for-net/), found on the AWS site\. The `AWSSDK.CORE` and the `AWSSDK.RDS` packages are required\. To connect to a DB instance, use the \.NET database connector for the DB engine, such as MySqlConnector for MariaDB or MySQL, or Npgsql for PostgreSQL\.
 

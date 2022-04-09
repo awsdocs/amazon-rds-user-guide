@@ -14,8 +14,6 @@ Each AWS account has quotas, for each AWS Region, on the number of Amazon RDS re
 
 The following table lists the resources and their quotas per AWS Region\.
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
-
 **Note**  
 By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.  
 The following limitations apply to the Amazon RDS DB instances:  

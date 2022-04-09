@@ -6,7 +6,7 @@ Some maintenance items require that Amazon RDS take your DB instance offline for
 
 Deferred DB instance modifications that you have chosen not to apply immediately are also applied during the maintenance window\. For example, you might choose to change the DB instance class or parameter group during the maintenance window\. Such modifications that you specify using the **pending reboot** setting don't show up in the **Pending maintenance** list\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-## Viewing pending maintenence<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
+## Viewing pending maintenance<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
 
 You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\.
 
@@ -223,7 +223,7 @@ RDS for MySQL and RDS for PostgreSQL DB instances occasionally require mandatory
 
 Whether a mandatory operating system update is required for a DB instance depends on its DB engine version and DB instance class\. In the following sections, you can find descriptions of the affected DB engine versions and DB instance classes for RDS for MySQL and RDS for PostgreSQL\.
 
-For information about viewing whether a maintenance update is available for your DB instance, see [Viewing pending maintenence](#USER_UpgradeDBInstance.Maintenance.Viewing)\.
+For information about viewing whether a maintenance update is available for your DB instance, see [Viewing pending maintenance](#USER_UpgradeDBInstance.Maintenance.Viewing)\.
 
 **Topics**
 + [Mandatory operating system updates for RDS for MySQL](#Aurora.Maintenance.Mandatory_OS_Updates.MySQL)

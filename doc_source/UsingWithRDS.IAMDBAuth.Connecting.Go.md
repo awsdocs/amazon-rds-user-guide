@@ -2,11 +2,13 @@
 
 You can connect to an RDS for MariaDB, MySQL, or PostgreSQL DB instance with the AWS SDK for Go as described following\.
 
+**Prerequisites**  
 The following are prerequisites for connecting to your DB instance using IAM authentication:
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
+**Examples**  
 To run these code examples, you need the [AWS SDK for Go](http://aws.amazon.com/sdk-for-go/), found on the AWS site\.
 
 Modify the values of the following variables as needed:
@@ -56,7 +58,7 @@ func main() {
 
      var dbName string = "DatabaseName"
      var dbUser string = "DatabaseUser"
-     var dbHost string = "mysqldb.123456789012.us-east-1.rds.amazonaws.com "
+     var dbHost string = "mysqldb.123456789012.us-east-1.rds.amazonaws.com"
      var dbPort int = 3306
      var dbEndpoint string = fmt.Sprintf("%s:%d", dbHost, dbPort)
      var region string = "us-east-1"

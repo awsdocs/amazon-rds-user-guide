@@ -1,25 +1,21 @@
 # Turning Performance Insights on and off<a name="USER_PerfInsights.Enabling"></a>
 
-To use Performance Insights, turn it on for your DB instance or Multi\-AZ DB cluster\. If needed, you can turn it off later\. Turning Performance Insights on and off doesn't cause downtime, a reboot, or a failover\.
+You can turn on Performance Insights for your DB instance or Multi\-AZ DB cluster when you create it\. If needed, you can turn it off later\. Turning Performance Insights on and off doesn't cause downtime, a reboot, or a failover\.
 
 **Note**  
-Performance Schema is an optional performance tool used by Amazon RDS for MariaDB or MySQL\. If you turn Performance Schema on or off, you need to reboot\. If you turn Performance Insights on or off, however, you don't need to reboot\. For more information, see [Enabling the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
+Performance Schema is an optional performance tool used by Amazon RDS for MariaDB or MySQL\. If you turn Performance Schema on or off, you need to reboot\. If you turn Performance Insights on or off, however, you don't need to reboot\. For more information, see [Turning on the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
 
 The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
-
-
 
 ## Console<a name="USER_PerfInsights.Enabling.Console"></a>
 
 In the console, you can turn Performance Insights on or off when you create or modify a DB instance or Multi\-AZ DB cluster\.
 
-### Turning Performance Insights on or off when creating a DB instance or DB cluster<a name="USER_PerfInsights.Console.Creating"></a>
+### Turning Performance Insights on or off when creating a DB instance or Multi\-AZ DB cluster<a name="USER_PerfInsights.Console.Creating"></a>
 
-When you create a new DB instance or Multi\-AZ DB cluster, turn on Performance Insights by choosing **Enable Performance Insights** in the **Performance Insights** section\. Or choose **Disable Performance Insights**\.
-
-To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
-
-To create a Multi\-AZ DB cluster, follow the instructions for your DB engine in [Creating a Multi\-AZ DB cluster](create-multi-az-db-cluster.md)\.
+When you create a new DB instance or Multi\-AZ DB cluster, turn on Performance Insights by choosing **Enable Performance Insights** in the **Performance Insights** section\. Or choose **Disable Performance Insights**\. For more information, see the following topics:
++ To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
++ To create a Multi\-AZ DB cluster, follow the instructions for your DB engine in [Creating a Multi\-AZ DB cluster](create-multi-az-db-cluster.md)\.
 
 The following screenshot shows the **Performance Insights** section\.
 
@@ -29,11 +25,11 @@ If you choose **Enable Performance Insights**, you have the following options:
 + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
 + **AWS KMS key** – Specify your AWS KMS key\. Performance Insights encrypts all potentially sensitive data using your KMS key\. Data is encrypted in flight and at rest\. For more information, see [Configuring an AWS KMS policy for Performance Insights](USER_PerfInsights.access-control.md#USER_PerfInsights.access-control.cmk-policy)\.
 
-### Turning Performance Insights on or off when modifying a DB instance or DB cluster<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
+### Turning Performance Insights on or off when modifying a DB instance or Multi\-AZ DB cluster<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
 
-In the console, you can modify a DB instance or Multi\-AZ DB cluster to turn Performance Insights on or off using the console\.
+In the console, you can modify a DB instance or Multi\-AZ DB cluster to turn Performance Insights on or off\. 
 
-**To turn Performance Insights on or off for a DB instance using the console**
+**To turn Performance Insights on or off for a DB instance or Multi\-AZ DB cluster using the console**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -64,7 +60,7 @@ You can also specify these values using the following AWS CLI commands:
 +  [create\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) \(Multi\-AZ DB cluster\) 
 +  [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) \(Multi\-AZ DB cluster\) 
 
-The following procedure describes how to turn Performance Insights on or off for a DB instance using the AWS CLI\.
+The following procedure describes how to turn Performance Insights on or off for an existing DB instance using the AWS CLI\.
 
 **To turn Performance Insights on or off for a DB instance using the AWS CLI**
 + Call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and supply the following values:
@@ -89,7 +85,7 @@ The following procedure describes how to turn Performance Insights on or off for
       --enable-performance-insights
   ```
 
-When you turn on Performance Insights, you can optionally specify the amount of time, in days, to retain Performance Insights data with the `--performance-insights-retention-period` option\. Valid values are 7 \(the default\) or 731 \(2 years\)\.
+When you turn on Performance Insights, you can optionally specify the number of days to retain Performance Insights data with the `--performance-insights-retention-period` option\. Valid values are 7 \(the default\) or 731 \(2 years\)\.
 
 The following example turns on Performance Insights for `sample-db-instance` and specifies that Performance Insights data is retained for two years\.
 

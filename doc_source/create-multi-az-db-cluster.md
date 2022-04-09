@@ -24,6 +24,8 @@ If you don't have a default VPC or you haven't created a VPC, and you don't plan
 + Specify a VPC security group that authorizes connections to your DB cluster\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
 + Specify an RDS DB subnet group that defines at least three subnets in the VPC that can be used by the Multi\-AZ DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
 
+For information about limitations that apply to Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts.Limitations)\.
+
 ### Additional prerequisites<a name="create-multi-az-db-cluster-prerequisites.Additional"></a>
 
 If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\.
@@ -48,7 +50,7 @@ You can create a Multi\-AZ DB cluster by choosing **Multi\-AZ DB cluster** in th
 
 1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB cluster\.
 
-   Only the US East \(N\. Virginia\), US West \(Oregon\), and Europe \(Ireland\) AWS Regions support Multi\-AZ DB clusters\.
+   For information about the AWS Regions that support Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts.Limitations)\.
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -60,7 +62,7 @@ You can create a Multi\-AZ DB cluster by choosing **Multi\-AZ DB cluster** in th
 
 1. For **Version**, choose the DB engine version\.
 
-   You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.28 and higher 8\.0 versions, and PostgreSQL version 13\.4 and higher 13 versions\.
+   For information about the DB engine versions that support Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts.Limitations)\.
 
 1. In **Templates**, choose the appropriate template for your deployment\.
 
@@ -108,6 +110,8 @@ To create a Multi\-AZ DB cluster by using the AWS CLI, call the [create\-db\-clu
 
 For information about each option, see [Settings for creating Multi\-AZ DB clusters](#create-multi-az-db-cluster-settings)\.
 
+For information about the AWS Regions, DB engines, and DB engine versions that support Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts.Limitations)\.
+
 The `create-db-cluster` command creates the writer DB instance for your DB cluster, and two reader DB instances\. Each DB instance is in a different Availability Zone\.
 
 For example, the following command creates a MySQL 8\.0 Multi\-AZ DB cluster named `mysql-multi-az-db-cluster`\.
@@ -119,7 +123,7 @@ For Linux, macOS, or Unix:
  1. aws rds create-db-cluster \
  2.    --db-cluster-identifier mysql-multi-az-db-cluster \
  3.    --engine mysql \
- 4.    --engine-version 8.0.26  \
+ 4.    --engine-version 8.0.28  \
  5.    --master-user-password password \
  6.    --master-username admin \
  7.    --port 3306 \
@@ -136,7 +140,7 @@ For Windows:
  1. aws rds create-db-cluster ^
  2.    --db-cluster-identifier mysql-multi-az-db-cluster ^
  3.    --engine mysql ^
- 4.    --engine-version 8.0.26 ^
+ 4.    --engine-version 8.0.28 ^
  5.    --master-user-password password ^
  6.    --master-username admin ^
  7.    --port 3306 ^

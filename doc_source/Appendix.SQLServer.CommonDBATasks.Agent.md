@@ -2,12 +2,13 @@
 
 With Amazon RDS, you can use SQL Server Agent on a DB instance running Microsoft SQL Server Enterprise Edition, Standard Edition, or Web Edition\. SQL Server Agent is a Microsoft Windows service that runs scheduled administrative tasks that are called jobs\. You can use SQL Server Agent to run T\-SQL jobs to rebuild indexes, run corruption checks, and aggregate data in a SQL Server DB instance\.
 
-When you create a SQL Server DB instance, the master user name is enrolled in the `SQLAgentUserRole` role\.
+When you create a SQL Server DB instance, the master user is enrolled in the `SQLAgentUserRole` role\.
 
 SQL Server Agent can run a job on a schedule, in response to a specific event, or on demand\. For more information, see [SQL Server Agent](http://msdn.microsoft.com/en-us/library/ms189237) in the Microsoft documentation\.
 
 **Note**  
 Avoid scheduling jobs to run during the maintenance and backup windows for your DB instance\. The maintenance and backup processes that are launched by AWS could interrupt a job or cause it to be canceled\.  
+In Multi\-AZ deployments, SQL Server Agent jobs are replicated from the primary host to the secondary host\.  
 Multi\-AZ deployments have a limit of 100 SQL Server Agent jobs\. If you need a higher limit, request an increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
 
 To view the history of an individual SQL Server Agent job in SQL Server Management Studio \(SSMS\), open Object Explorer, right\-click the job, and then choose **View History**\.
@@ -19,9 +20,48 @@ Because SQL Server Agent is running on a managed host in a DB instance, some act
 + SQL Server Agent alerts and operators aren't supported\.
 + Using SQL Server Agent to create backups isn't supported\. Use Amazon RDS to back up your DB instance\.
 
-## Adding a user to the SQLAgentUser role<a name="Appendix.SQLServer.CommonDBATasks.Agent.AddUser"></a>
+## Turning on SQL Server Agent job replication<a name="SQLServerAgent.Replicate"></a>
 
-To allow an additional login or user to use SQL Server Agent, you must log in as the master user and do the following:
+You can turn on SQL Server Agent job replication by using the following stored procedure:
+
+```
+EXECUTE msdb.dbo.rds_set_system_database_sync_objects @object_types = 'SQLAgentJob';
+```
+
+You can run the stored procedure on all SQL Server versions supported by Amazon RDS for SQL Server\. Jobs in the following categories are replicated:
++ \[Uncategorized \(Local\)\]
++ \[Uncategorized \(Multi\-Server\)\]
++ \[Uncategorized\]
++ Data Collector
++ Database Engine Tuning Advisor
++ Database Maintenance
++ Full\-Text
+
+Only jobs that use T\-SQL job steps are replicated\. Jobs with step types such as SQL Server Integration Services \(SSIS\), SQL Server Reporting Services \(SSRS\), Replication, and PowerShell aren't replicated\. Jobs that use Database Mail and server\-level objects aren't replicated\.
+
+You can use the following function to confirm whether replication is turned on\.
+
+```
+SELECT * from msdb.dbo.rds_fn_get_system_database_sync_objects();
+```
+
+ The T\-SQL query returns the following if SQL Server Agent jobs are replicating\. If they're not replicating, it returns nothing for `object_class`\.
+
+![\[SQL Server Agent jobs are replicating\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLAgentJob.png)
+
+You can use the following function to find the last time objects were synchronized\.
+
+```
+SELECT * from msdb.dbo.rds_fn_server_object_last_sync_time();
+```
+
+For example, suppose that you modify a SQL Server Agent job at 01:00\. You expect the most recent synchronization time to be after 01:00, indicating that synchronization has taken place\.
+
+![\[Last time server objects were synchronized was 01:21:23\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLAgentJob_last_sync_time.png)
+
+## Adding a user to the SQLAgentUser role<a name="SQLServerAgent.AddUser"></a>
+
+To allow an additional login or user to use SQL Server Agent, log in as the master user and do the following:
 
 1. Create another server\-level login by using the `CREATE LOGIN` command\.
 
@@ -29,7 +69,7 @@ To allow an additional login or user to use SQL Server Agent, you must log in as
 
 1. Add the user to the `SQLAgentUserRole` using the `sp_addrolemember` system stored procedure\.
 
-For example, suppose your master user name is **admin** and you want to give access to SQL Server Agent to a user named **theirname** with a password **theirpassword**\.
+For example, suppose that your master user name is **admin** and you want to give access to SQL Server Agent to a user named **theirname** with a password **theirpassword**\. In that case, you can use the following procedure\.
 
 **To add a user to the SQLAgentUser role**
 
@@ -54,7 +94,7 @@ For example, suppose your master user name is **admin** and you want to give acc
    EXEC sp_addrolemember [SQLAgentUserRole], [theirname];
    ```
 
-## Deleting a SQL Server Agent job<a name="Appendix.SQLServer.CommonDBATasks.Agent.DeleteJob"></a>
+## Deleting a SQL Server Agent job<a name="SQLServerAgent.DeleteJob"></a>
 
 You use the `sp_delete_job` stored procedure to delete SQL Server Agent jobs on Amazon RDS for Microsoft SQL Server\.
 

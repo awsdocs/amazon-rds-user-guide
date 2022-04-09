@@ -44,7 +44,7 @@ Subnets are segments of a VPC's IP address range that you designate to group you
 
 Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, you must choose a DB subnet group\. From the DB subnet group, Amazon RDS chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\.
 
-The subnets in a DB subnet group are either public or private\. They can't be a mix of both public and private subnets\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\.
+The subnets in a DB subnet group are either public or private\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\. For a DB instance to be publicly accessible, all of the subnets in its DB subnet group must be public\. If a subnet that is associated with a publicly accessible DB instance changes from public to private, it can affect DB instance availability\.
 
 **Note**  
 The DB subnet group for a Local Zone can have only one subnet\.

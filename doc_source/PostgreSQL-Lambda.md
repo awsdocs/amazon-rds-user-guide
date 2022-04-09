@@ -18,6 +18,8 @@ For more information about Lambda functions, see [Getting started with Lambda](h
 + [Step 3: Install the `aws_lambda` extension for an RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-install-extension)
 + [Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)](#PostgreSQL-Lambda-specify-function)
 + [Step 5: Invoke a Lambda function from your RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-invoke)
++ [Step 6: Grant other users permission to invoke Lambda functions](#PostgreSQL-Lambda-grant-users-permissions)
++ [Examples: Invoking Lambda functions from your RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-examples)
 + [Lambda function error messages](#PostgreSQL-Lambda-errors)
 + [AWS Lambda function reference](PostgreSQL-Lambda-functions.md)
 
@@ -200,6 +202,27 @@ As a simple test of your setup, you can connect to your DB instance using `psql`
 
 If your invocation attempt doesn't succeed, see [Lambda function error messages ](#PostgreSQL-Lambda-errors)\. 
 
+## Step 6: Grant other users permission to invoke Lambda functions<a name="PostgreSQL-Lambda-grant-users-permissions"></a>
+
+At this point in the procedures, only you as `rds_superuser` can invoke your Lambda functions\. To allow other users to invoke any functions that you create, you need to grant them permission\. 
+
+**To grant others permission to invoke Lambda functions**
+
+1. Connect to your DB instance using `psql` or pgAdmin\.
+
+   ```
+   psql -h instance.444455556666.aws-region.rds.amazonaws.com -U postgres -p 5432
+   ```
+
+1. Run the following SQL commands:
+
+   ```
+   postgres=>  GRANT USAGE ON SCHEMA aws_lambda TO db_username;
+   GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA aws_lambda TO db_username;
+   ```
+
+## Examples: Invoking Lambda functions from your RDS for PostgreSQL DB instance<a name="PostgreSQL-Lambda-examples"></a>
+
 Following, you can find several examples of calling the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) function\. Most all the examples use the composite structure `aws_lambda_arn_1` that you create in [Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)](#PostgreSQL-Lambda-specify-function) to simplify passing the function details\. For an example of asynchronous invocation, see [Example: Asynchronous \(Event\) invocation of Lambda functions](#PostgreSQL-Lambda-Event)\. All the other examples listed use synchronous invocation\. 
 
 To learn more about Lambda invocation types, see [Invoking Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html) in the *AWS Lambda Developer Guide*\. For more information about `aws_lambda_arn_1`, see [aws\_commons\.create\_lambda\_function\_arn](PostgreSQL-Lambda-functions.md#aws_commons.create_lambda_function_arn)\. 
@@ -287,24 +310,41 @@ For more information about `qualifier` and other parameters, see the [aws\_lambd
 
 ## Lambda function error messages<a name="PostgreSQL-Lambda-errors"></a>
 
-Incorrect VPC configuration can result in error messages, such as the following\. 
+In the following list you can find information about error messages, with possible causes and solutions\.
++ **VPC configuration issues**
 
-```
-ERROR:  invoke API failed
-DETAIL: AWS Lambda client returned 'Unable to connect to endpoint'.
-CONTEXT:  SQL function "invoke" statement 1
-```
+  VPC configuration issues can raise the following error messages when trying to connect: 
 
-The first thing to check is your VPC security group\. Make sure you have an outbound rule for TCP open on port 443 so that your VPC can connect to the Lambda VPC\.
+  ```
+  ERROR:  invoke API failed
+  DETAIL: AWS Lambda client returned 'Unable to connect to endpoint'.
+  CONTEXT:  SQL function "invoke" statement 1
+  ```
 
-If your DB instance is private, check the private DNS setup for your VPC\. Make sure that you set the `rds.custom_dns_resolution` parameter to 1 and setup AWS PrivateLink as outlined in [Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda](#PostgreSQL-Lambda-network)\. For more information, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#vpce-private-dns)\. 
+  A common cause for this error is improperly configured VPC security group\. Make sure you have an outbound rule for TCP open on port 443 of your VPC security group so that your VPC can connect to the Lambda VPC\.
 
-If a Lambda function throws an exception during request processing, `aws_lambda.invoke` fails with a PostgreSQL error such as the following\.
+  If your DB instance is private, check the private DNS setup for your VPC\. Make sure that you set the `rds.custom_dns_resolution` parameter to 1 and setup AWS PrivateLink as outlined in [Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda](#PostgreSQL-Lambda-network)\. For more information, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#vpce-private-dns)\. 
++ **Lack of permissions needed to invoke Lambda functions**
 
-```
-SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json);
-ERROR:  lambda invocation failed
-DETAIL:  "arn:aws:lambda:us-west-2:555555555555:function:my-function" returned error "Unhandled", details: "<Error details string>".
-```
+  If you see either of the following error messages, the user \(role\) invoking the function doesn't have proper permissions\.
 
-Be sure to handle errors in your Lambda functions or in your PostgreSQL application\.
+  ```
+  ERROR:  permission denied for schema aws_lambda
+  ```
+
+  ```
+  ERROR:  permission denied for function invoke
+  ```
+
+  A user \(role\) must be given specific grants to invoke Lambda functions\. For more information, see [Step 6: Grant other users permission to invoke Lambda functions](#PostgreSQL-Lambda-grant-users-permissions)\. 
++ **Improper handling of errors in your Lambda functions**
+
+  If a Lambda function throws an exception during request processing, `aws_lambda.invoke` fails with a PostgreSQL error such as the following\.
+
+  ```
+  SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json);
+  ERROR:  lambda invocation failed
+  DETAIL:  "arn:aws:lambda:us-west-2:555555555555:function:my-function" returned error "Unhandled", details: "<Error details string>".
+  ```
+
+  Be sure to handle errors in your Lambda functions or in your PostgreSQL application\.

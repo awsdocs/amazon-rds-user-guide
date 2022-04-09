@@ -16,7 +16,7 @@ Update the last archived time stamp
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose the RDS instance for which you want to enable an activity stream\.
+1. Choose the RDS for Oracle instance on which you want to start an activity stream\. In a Multi\-AZ deployment, start the stream on only the primary instance\. The activity stream audits both the primary and the standby instances\.
 
 1. For **Actions**, choose **Start activity stream**\. 
 

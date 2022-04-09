@@ -23,7 +23,7 @@ In this situation, MariaDB and MySQL don't track SQL queries\. To address this i
 + The table is full\.
 + Performance Insights manages the Performance Schema automatically\. For automatic management, the `performance_schema` parameter must be set to `0` and the **Source** must not be set to `user`\.
 
-If Performance Insights isn't managing the Performance Schema automatically, see [Enabling the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
+If Performance Insights isn't managing the Performance Schema automatically, see [Turning on the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
 
 In the AWS CLI, check the source of a parameter value by running the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
 

@@ -45,7 +45,7 @@ The following example creates a subscription for backup and recovery events for 
 
 ## Troubleshooting custom engine version creation for RDS Custom for Oracle<a name="custom-troubleshooting.cev"></a>
 
-When CEV creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version major-engine-version.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
+When CEV creation fails, RDS Custom issues `RDS-EVENT-0198` with the message `Creation failed for custom engine version major-engine-version.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
 
 CEV creation might fail because of the following issues:
 + The Amazon S3 bucket containing your installation files isn't in the same AWS Region as your CEV\.
@@ -58,7 +58,7 @@ CEV creation might fail because of the following issues:
 + The SHA\-256 checksums of the installation files are unknown to RDS Custom\.
 
   Confirm that the SHA\-256 checksums of the provided files match the SHA\-256 checksum on the Oracle website\. If the checksums match, contact [AWS Support](http://aws.amazon.com/premiumsupport) and provide the failed CEV name, file name, and checksum\.
-+ The OPatch version is incompatible with the patch files\.
++ The OPatch version is incompatible with your patch files\. You might get the following message: `OPatch is lower than minimum required version. Check that the version meets the requirements for all patches, and try again`\. To apply an Oracle patch, you must use a compatible version of the OPatch utility\. You can find the required version of the Opatch utility in the readme file for the patch\. Download the most recent OPatch utility from My Oracle Support, and try creating your CEV again\.
 + The patches specified in the CEV manifest are in the wrong order\.
 
 You can view RDS events either on the RDS console \(in the navigation pane, choose **Events**\) or by using the `describe-events` AWS CLI command\. The default duration is 60 minutes\. If no events are returned, specify a longer duration, as shown in the following example\.

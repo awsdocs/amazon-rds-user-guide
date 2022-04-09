@@ -374,8 +374,6 @@ Amazon RDS supports Microsoft SQL Server Transparent Data Encryption \(TDE\), wh
 
 The following table lists Amazon RDS functions and stored procedures that help automate SQL Server tasks\.
 
-
-**SQL Server functions and stored procedures**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)
 
 ## Local time zone for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.TimeZone"></a>

@@ -84,7 +84,7 @@
  Enforce SSL and verify the CA and CA hostname\.   
  You can use the SSL mode `VERIFY_IDENTITY` when connecting to the default proxy endpoint\. You can't use that SSL mode when you connect to proxy endpoints that you create\. 
 
- When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in `.pem` format\. For a `.pem` file that you can use, download the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+ When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in `.pem` format\. For the `.pem` file to use, download all root CA PEMs from [Amazon Trust Services ](https://www.amazontrust.com/repository/) and place them into a single `.pem` file\.
 
  RDS Proxy uses wildcard certificates, which apply to a both a domain and its subdomains\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
