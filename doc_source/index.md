@@ -382,7 +382,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using third-party software with your RDS for Oracle DB instance](Oracle.Resources.md)
       + [Setting up Amazon RDS to host tools and third-party software for Oracle](Oracle.Resources.Shared.md)
       + [Using Oracle GoldenGate with Amazon RDS](Appendix.OracleGoldenGate.md)
-      + [Using the Oracle Repository Creation Utility on Amazon RDS for Oracle](Oracle.Resources.RCU.md)
+      + [Using the Oracle Repository Creation Utility on RDS for Oracle](Oracle.Resources.RCU.md)
       + [Configuring Oracle Connection Manager on an Amazon EC2 instance](oracle-cman.md)
       + [Installing a Siebel database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)
    + [Oracle database engine releases](USER_Oracle_Releases.md)

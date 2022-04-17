@@ -25,7 +25,7 @@ The following tutorials in this guide show you how to perform common tasks with 
 + [Tutorial: Use tags to specify which DB instances to stop](USER_Tagging.md#Tagging.RDS.Autostop)
 
   Learn how to use tags to specify which DB instances to stop\.
-+ [Tutorial: log the state of an Amazon RDS instance using EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
++ [Tutorial: Log DB instance stage changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
 
   Learn how to log a DB instance state change using Amazon EventBridge and AWS Lambda\.
 + [Tutorial: Creating an Amazon CloudWatch alarm for Multi\-AZ DB cluster replica lag](multi-az-db-cluster-cloudwatch-alarm.md)

@@ -2,7 +2,7 @@
 
 You can view OS metrics reported by Enhanced Monitoring in the RDS console by choosing **Enhanced monitoring** for **Monitoring**\.
 
-The Enhanced Monitoring page is shown following\.
+The following example shows the Enhanced Monitoring page\. For descriptions of the Enhanced Monitoring metrics, see [OS metrics in Enhanced Monitoring](USER_Monitoring-Available-OS-Metrics.md)\.
 
 ![\[Dashboard view\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics1.png)
 

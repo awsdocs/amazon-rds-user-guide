@@ -5,7 +5,7 @@ Amazon RDS supports DB instances running several versions of MariaDB\. You can u
 + MariaDB 10\.5
 + MariaDB 10\.4
 + MariaDB 10\.3
-+ MariaDB 10\.2
++ MariaDB 10\.2 \(end of life scheduled for October 15, 2022\)
 
 For more information about minor version support, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\. 
 
@@ -72,6 +72,21 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 ```
 aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.5 --region us-west-2 --query "*[].{Engine:Engine,EngineVersion:EngineVersion}" --output text
 ```
+
+### MariaDB 10\.2 end of life<a name="MariaDB.Concepts.VersionMgmt.EndOfLife102"></a>
+
+On October 15, 2022, Amazon RDS is starting the end\-of\-life process for MariaDB version 10\.2 using the following schedule, which includes upgrade recommendations\. The end\-of\-life process ends standard support for this version\. We recommend that you upgrade all MariaDB 10\.2 DB instances to MariaDB 10\.3 or higher as soon as possible\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
+
+
+| Action or recommendation | Dates | 
+| --- | --- | 
+|  We recommend that you upgrade MariaDB 10\.2 DB instances manually to the version of your choice\. You can upgrade directly to MariaDB version 10\.3 or 10\.6\.  |  Now–October 15, 2022  | 
+|  We recommend that you upgrade MariaDB 10\.2 snapshots manually to the version of your choice\.  |  Now–October 15, 2022  | 
+|  You can no longer create new MariaDB 10\.2 DB instances\. You can still create read replicas of existing MariaDB 10\.2 DB instances and change them from Single\-AZ deployments to Multi\-AZ deployments\.  |  July 15, 2022  | 
+|  Amazon RDS starts automatic upgrades of your MariaDB 10\.2 DB instances to version 10\.3\.  |  October 15, 2022  | 
+|  Amazon RDS starts automatic upgrades to version 10\.3 for any MariaDB 10\.2 DB instances restored from snapshots\.  |  October 15, 2022  | 
+
+For more information about Amazon RDS for MariaDB 10\.2 end of life, see [ Announcement: Amazon Relational Database Service \(Amazon RDS\) for MariaDB 10\.2 End\-of\-Life date is October 15, 2022](https://repost.aws/questions/QUPGswEbHrT0m4tNgAVNmssw/announcement-amazon-relational-database-service-amazon-rds-for-maria-db-10-2-end-of-life-date-is-october-15-2022)\.
 
 ## MariaDB feature support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
@@ -493,7 +508,5 @@ You can set your local time zone to one of the following values\.
 ## Deprecated versions for Amazon RDS for MariaDB<a name="MariaDB.Concepts.DeprecatedVersions"></a>
 
 Amazon RDS for MariaDB version 10\.0 and 10\.1 are deprecated\.
-
-For more information, see [ Announcement: Extending end\-of\-life Process for Amazon RDS for MariaDB 10\.0 and 10\.1](http://forums.aws.amazon.com/ann.jspa?annID=8571)\.
 
 For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.

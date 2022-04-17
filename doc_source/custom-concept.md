@@ -3,37 +3,72 @@
 Amazon RDS Custom architecture is based on Amazon RDS, with important differences\.
 
 **Topics**
-+ [RDS Custom for Oracle components](#custom-concept.components)
++ [RDS Custom components](#custom-concept.components)
 + [RDS Custom for Oracle workflow](#custom-concept.workflow)
-+ [RDS Custom for SQL Server components](#custom-sqlserver.components)
 + [RDS Custom for SQL Server workflow](#custom-sqlserver.workflow)
 + [RDS Custom automation and monitoring](#custom-concept.workflow.automation)
 
-## RDS Custom for Oracle components<a name="custom-concept.components"></a>
+## RDS Custom components<a name="custom-concept.components"></a>
 
-The following diagram shows the most important components of the RDS Custom for Oracle architecture, listed and described after the diagram\.
+The following diagram shows the key components of the RDS Custom architecture\.
 
-![\[RDS Custom for Oracle architecture components\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/RDS_Custom_architecture_v2.png)
+![\[RDS Custom architecture components\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/RDS_Custom_gen_architecture.png)
 
 **Topics**
 + [VPC](#custom-concept.components.VPC)
 + [Amazon S3](#custom-concept.components.S3)
++ [AWS CloudTrail](#custom-concept.components.CloudTrail)
 
 ### VPC<a name="custom-concept.components.VPC"></a>
 
-As in Amazon RDS, the RDS Custom DB instance resides in a virtual private cloud \(VPC\)\. The DB instance consists of the following main components:
+As in Amazon RDS, your RDS Custom DB instance resides in a virtual private cloud \(VPC\)\. 
+
+![\[RDS Custom DB instance components\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/RDS_Custom_instance.png)
+
+The DB instance consists of the following main components:
 + Amazon EC2 instance
++ Instance endpoint
 + Operating system installed on the Amazon EC2 instance
 + Amazon EBS storage, which contains any additional file systems
-+ Instance endpoint
 
 ### Amazon S3<a name="custom-concept.components.S3"></a>
 
-Amazon S3 provides the storage for your installation media\. You use this media to create a custom engine version \(CEV\)\. A *CEV* is a binary volume snapshot of a database version and Amazon Machine Image \(AMI\)\. From the CEV, you create an RDS Custom instance\.
+If you use RDS Custom for Oracle, you upload installation media to a user\-created Amazon S3 bucket\. RDS Custom for Oracle uses the media in this bucket to create a custom engine version \(CEV\)\. A *CEV* is a binary volume snapshot of a database version and Amazon Machine Image \(AMI\)\. From the CEV, you can create an RDS Custom DB instance\. For more information, see [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)\.
+
+For both RDS Custom for Oracle and RDS Custom for SQL Server, RDS Custom automatically creates an Amazon S3 bucket prefixed with the string `do-not-delete-rds-custom-`\. RDS Custom uses the `do-not-delete-rds-custom-` S3 bucket to store the following types of files:
++ AWS CloudTrail logs for the trail created by RDS Custom
++ Support perimeter artifacts \(see [Support perimeter](#custom-concept.workflow.automation.support-perimeter)\)
++ Database redo log files \(RDS Custom for Oracle only\)
++ Transaction logs \(RDS Custom for SQL Server only\)
++ Custom engine version artifacts \(RDS Custom for Oracle only\)
+
+RDS Custom creates the `do-not-delete-rds-custom-` S3 bucket when you create either of the following resources:
++ Your first CEV for RDS Custom for Oracle
++ Your first DB instance for RDS Custom for SQL Server
+
+RDS Custom creates one bucket for each combination of the following:
++ AWS account ID
++ Engine type \(either RDS Custom for Oracle or RDS Custom for SQL Server\)
++ AWS Region
+
+For example, if you create RDS Custom for Oracle CEVs in a single AWS Region, one `do-not-delete-rds-custom-` bucket exists\. If you create multiple RDS Custom for SQL Server instances, and they reside in different AWS Regions, one `do-not-delete-rds-custom-` bucket exists in each AWS Region\. If you create one RDS Custom for Oracle instance and two RDS Custom for SQL Server instances in a single AWS Region, two `do-not-delete-rds-custom-` buckets exist\. 
+
+### AWS CloudTrail<a name="custom-concept.components.CloudTrail"></a>
+
+RDS Custom automatically creates an AWS CloudTrail trail whose name begins with `do-not-delete-rds-custom-`\. The RDS Custom support perimeter relies on the events from CloudTrail to determine whether your actions affect RDS Custom automation\. For more information, see [Support perimeter](#custom-concept.workflow.automation.support-perimeter)\.
+
+RDS Custom creates the trail when you create your first DB instance\. RDS Custom creates one trail for each combination of the following:
++ AWS account ID
++ Engine type \(either RDS Custom for Oracle or RDS Custom for SQL Server\)
++ AWS Region
 
 ## RDS Custom for Oracle workflow<a name="custom-concept.workflow"></a>
 
-A typical workflow is as follows:
+The following diagram shows the typical workflow for RDS Custom for Oracle\.
+
+![\[RDS Custom for Oracle architecture components\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/RDS_Custom_architecture_v2.png)
+
+The steps are as follows:
 
 1. Upload your database software to your Amazon S3 bucket\.
 
@@ -53,7 +88,7 @@ A typical workflow is as follows:
 
 1. \(Optional\) Access the host to customize your software\.
 
-RDS Custom monitors the DB instance and notifies you of any problems\.
+1. Monitor notifications and messages generated by RDS Custom automation\.
 
 ### Database installation files<a name="custom-concept.workflow.db-files"></a>
 
@@ -85,33 +120,25 @@ Like an Amazon RDS DB instance, your RDS Custom DB instance resides in a VPC\. Y
 
 You can access the RDS Custom host to install or customize software\. To avoid conflicts between your changes and the RDS Custom automation, you can pause the automation for a specified period\. During this period, RDS Custom doesn't perform monitoring or instance recovery\. At the end of the period, RDS Custom resumes full automation\. For more information, see [Pausing and resuming RDS Custom automation](custom-managing.md#custom-managing.pausing)\.
 
-## RDS Custom for SQL Server components<a name="custom-sqlserver.components"></a>
+## RDS Custom for SQL Server workflow<a name="custom-sqlserver.workflow"></a>
 
-The following diagram shows the most important components of the RDS Custom for SQL Server architecture, listed and described after the diagram\.
+The following diagram shows the typical workflow for RDS Custom for SQL Server\.
 
 ![\[RDS Custom for SQL Server architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/custom_sqlserver_architecture_v2.png)
 
-As in Amazon RDS, the RDS Custom for SQL Server DB instance resides in a virtual private cloud \(VPC\)\. The DB instance consists of the following main components:
-+ Amazon EC2 instance
-+ Operating system installed on the Amazon EC2 instance
-+ Amazon EBS storage, which contains any additional file systems
-+ Instance endpoint
+The steps are as follows:
 
-## RDS Custom for SQL Server workflow<a name="custom-sqlserver.workflow"></a>
-
-A typical workflow is as follows:
-
-1. You create an RDS Custom for SQL Server DB instance from an engine version offered by RDS Custom\.
+1. Create an RDS Custom for SQL Server DB instance from an engine version offered by RDS Custom\.
 
    For more information, see [Creating an RDS Custom for SQL Server DB instance](custom-creating-sqlserver.md#custom-creating-sqlserver.create)\.
 
-1. You connect your application to the RDS Custom DB instance endpoint\.
+1. Connect your application to the RDS Custom DB instance endpoint\.
 
    For more information, see [Connecting to your RDS Custom DB instance using AWS Systems Manager](custom-creating-sqlserver.md#custom-creating-sqlserver.ssm) and [Connecting to your RDS Custom DB instance using RDP](custom-creating-sqlserver.md#custom-creating-sqlserver.rdp)\.
 
-1. \(Optional\) You access the host to customize your software\.
+1. \(Optional\) Access the host to customize your software\.
 
-RDS Custom monitors the DB instance and notifies you of any problems\.
+1. Monitor notifications and messages generated by RDS Custom automation\.
 
 ### Creating a DB instance for RDS Custom<a name="custom-sqlserver.workflow.instance"></a>
 

@@ -77,7 +77,7 @@ DB instances in the Database Preview Environment are similar to DB instances in 
 + You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
 + You can only create M6g, M5, T3, R6g, and R5 instance types\. For more information about RDS instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 + You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
-+ You can't get help from AWS Support with DB instances\. You can post your questions in the [ RDS database preview environment forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
++ You can't get help from AWS Support with DB instances\. Instead, you can post your questions to the AWS‐managed Q&A community, [AWS re:Post](https://repost.aws/tags/TAsibBK6ZeQYihN9as4S_psg/amazon-relational-database-service)\.
 + You can't copy a snapshot of a DB instance to a production environment\.
 + You can use both single\-AZ and multi\-AZ deployments\.
 + You can use standard PostgreSQL dump and load functions to export databases from or import databases to the Database Preview Environment\.
@@ -141,8 +141,6 @@ On March 31, 2022, Amazon RDS plans to deprecate PostgreSQL 9\.6 using the follo
 |  Start upgrading RDS for PostgreSQL 9\.6 DB instances to PostgreSQL 12 or higher as soon as possible\. Although you can continue to restore PostgreSQL 9\.6 snapshots and create read replicas with version 9\.6, be aware of the other critical dates in this deprecation schedule and their impact\.   |  Now – March 31, 2022  | 
 |  After this date, you can't create new Amazon RDS instances with PostgreSQL major version 9\.6 from either the AWS Management Console or the AWS CLI\.   |  March 31, 2022  | 
 |  Amazon RDS automatically upgrades PostgreSQL 9\.6 instances to version 12\. If you restore a PostgreSQL 9\.6 database snapshot, Amazon RDS automatically upgrades the restored database to PostgreSQL 12\.   |  April 26, 2022  | 
-
-For more information about RDS for PostgreSQL 9\.6 deprecation, see [ Announcement: Extending end\-of\-life process for Amazon RDS for PostgreSQL 9\.6](http://forums.aws.amazon.com/ann.jspa?annID=9092)\.
 
 ## Deprecated versions for Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.DeprecatedVersions"></a>
 

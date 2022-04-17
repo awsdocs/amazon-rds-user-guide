@@ -51,6 +51,8 @@ The example policy includes a single statement with the following elements:
     ```
     aws rds describe-db-instances --query "DBInstances[*].[DBInstanceIdentifier,DbiResourceId]"
     ```
+
+    If you are using Amazon Aurora, specify a `DbClusterResourceId` instead of a `DbiResourceId`\. For more information, see [ Creating and using an IAM policy for IAM database access](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html) in the *Amazon Aurora User Guide*\.
 **Note**  
 If you are connecting to a database through RDS Proxy, specify the proxy resource ID, such as `prx-ABCDEFGHIJKL01234`\. For information about using IAM database authentication with RDS Proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.
   + `db-user-name` is the name of the database account to associate with IAM authentication\. In the example policy, the database account is `db_user`\.

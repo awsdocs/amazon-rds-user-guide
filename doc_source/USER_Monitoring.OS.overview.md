@@ -1,6 +1,6 @@
 # Overview of Enhanced Monitoring<a name="USER_Monitoring.OS.overview"></a>
 
-Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view all the system metrics and process information for your RDS DB instances on the console\. You can manage which metrics you want to monitor for each instance and customize the dashboard according to your requirements\.
+Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view all the system metrics and process information for your RDS DB instances on the console\. You can manage which metrics you want to monitor for each instance and customize the dashboard according to your requirements\. For descriptions of the Enhanced Monitoring metrics, see [OS metrics in Enhanced Monitoring](USER_Monitoring-Available-OS-Metrics.md)\.
 
 RDS delivers the metrics from Enhanced Monitoring into your Amazon CloudWatch Logs account\. You can create metrics filters in CloudWatch from CloudWatch Logs and display the graphs on the CloudWatch dashboard\. You can consume the Enhanced Monitoring JSON output from CloudWatch Logs in a monitoring system of your choice\. For more information, see [Enhanced Monitoring](https://aws.amazon.com/rds/faqs/#Enhanced_Monitoring) in the Amazon RDS FAQs\.
 
@@ -26,6 +26,8 @@ Enhanced Monitoring is available for all DB instance classes except for the db\.
 A *hypervisor* creates and runs virtual machines \(VMs\)\. Using a hypervisor, an instance can support multiple guest VMs by virtually sharing memory and CPU\. CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB instance\. In contrast, Enhanced Monitoring gathers its metrics from an agent on the DB instance\.
 
 You might find differences between the CloudWatch and Enhanced Monitoring measurements, because the hypervisor layer performs a small amount of work\. The differences can be greater if your DB instances use smaller instance classes\. In this scenario, more virtual machines \(VMs\) are probably managed by the hypervisor layer on a single physical instance\.
+
+For descriptions of the Enhanced Monitoring metrics, see [OS metrics in Enhanced Monitoring](USER_Monitoring-Available-OS-Metrics.md)\. For more information about CloudWatch metrics, see the *[Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html)*\.
 
 ## Retention of Enhanced Monitoring metrics<a name="USER_Monitoring.OS.retention"></a>
 

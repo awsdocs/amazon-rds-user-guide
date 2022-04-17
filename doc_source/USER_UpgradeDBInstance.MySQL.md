@@ -112,20 +112,11 @@ If your DB instance runs a version before MySQL version 5\.6\.4, or was upgraded
 To find all tables in your database that have `datetime`, `time`, or `timestamp` columns and create an `ALTER TABLE <table_name> FORCE;` command for each table, use the following query\.
 
 ```
-SELECT DISTINCT CONCAT('ALTER TABLE `',
-      REPLACE(is_tables.TABLE_SCHEMA, '`', '``'), '`.`',
-      REPLACE(is_tables.TABLE_NAME, '`', '``'), '` FORCE;')
-    FROM information_schema.TABLES is_tables
-      INNER JOIN information_schema.COLUMNS col ON col.TABLE_SCHEMA = is_tables.TABLE_SCHEMA
-        AND col.TABLE_NAME = is_tables.TABLE_NAME
-      LEFT OUTER JOIN information_schema.INNODB_SYS_TABLES systables ON
-        SUBSTRING_INDEX(systables.NAME, '#', 1) = CONCAT(is_tables.TABLE_SCHEMA,'/',is_tables.TABLE_NAME)
-      LEFT OUTER JOIN information_schema.INNODB_SYS_COLUMNS syscolumns ON
-        syscolumns.TABLE_ID = systables.TABLE_ID AND syscolumns.NAME = col.COLUMN_NAME
-    WHERE col.COLUMN_TYPE IN ('time','timestamp','datetime')
-      AND is_tables.TABLE_TYPE = 'BASE TABLE'
-      AND is_tables.TABLE_SCHEMA NOT IN ('mysql','information_schema','performance_schema')
-      AND (is_tables.ENGINE = 'InnoDB' AND syscolumns.MTYPE = 6);
+SET show_old_temporals = ON;
+   SELECT table_schema, table_name,column_name, column_type
+   FROM information_schema.columns
+   WHERE column_type LIKE '%/* 5.5 binary format */';
+   SET show_old_temporals = OFF;
 ```
 
 ### Prechecks for upgrades from MySQL 5\.7 to 8\.0<a name="USER_UpgradeDBInstance.MySQL.57to80Prechecks"></a>

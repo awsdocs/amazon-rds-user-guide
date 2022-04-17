@@ -4,31 +4,62 @@ PostGIS is an extension to PostgreSQL for storing and managing spatial informati
 
 Starting with version 10\.5, PostgreSQL supports the libprotobuf 1\.3\.0 library used by PostGIS for working with map box vector tile data\.
 
-Before you can use the PostGIS extension, you need to perform some setup\. The following list shows what you need to do\. Each step is described in greater detail later in this section\.
+Setting up the PostGIS extension requires `rds_superuser` privileges\. We recommend that you create a user \(role\) and a separate database in which to install the extension and manage your spatial data\. The following steps show you how by using an example role named *gis\_admin* and a database named *lab\_gis*\. 
 
 **Topics**
-+ [Step 1: Connect to the DB instance using the user name used to create the DB instance](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect)
++ [Step 1: Create a user \(role\) to manage the PostGIS extension](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect)
 + [Step 2: Load the PostGIS extensions](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions)
-+ [Step 3: Transfer ownership of the extensions to the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership)
-+ [Step 4: Transfer ownership of the objects to the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects)
++ [Step 3: Transfer ownership of the extensions](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership)
++ [Step 4: Transfer ownership of the PostGIS objects](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects)
 + [Step 5: Test the extensions](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Test)
 + [Step 6: Update the PostGIS extension](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update)
 + [PostGIS extension versions](#CHAP_PostgreSQL.Extensions.PostGIS)
 
-## Step 1: Connect to the DB instance using the user name used to create the DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
+## Step 1: Create a user \(role\) to manage the PostGIS extension<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
 
-First, you connect to the DB instance using the user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role to do the remaining steps\.
-
-The following example uses `SELECT` to show you the current user\. In this case, the current user should be the user name you chose when creating the DB instance\.
+First, you connect to your RDS for PostgreSQL DB instance as a user that has `rds_superuser` privileges\. If you kept the default name when you set up your instance, you connect as `postgres`: 
 
 ```
-SELECT CURRENT_USER;
-
- current_user
- -------------
-  myawsuser
- (1 row)
+psql=> psql --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password
 ```
+
+Create a separate role \(user\) to administer the PostGIS extension:
+
+```
+postgres=>  CREATE ROLE gis_admin LOGIN PASSWORD 'change_me';
+CREATE ROLE
+```
+
+Grant this role `rds_superuser` privileges, to allow the role to install the extension:
+
+```
+postgres=> GRANT rds_superuser TO gis_admin;
+GRANT
+```
+
+Create a database to use for your PostGIS artifacts:
+
+```
+postgres=> CREATE DATABASE lab_gis;
+CREATE DATABASE
+```
+
+Give the `gis_admin` all privileges on the `lab_gis` database\.
+
+```
+postgres=> GRANT ALL PRIVILEGES ON DATABASE lab_gis TO gis_admin;
+GRANT
+```
+
+Exit the session and re\-connect to your RDS for PostgreSQL DB instance as `gis_admin`:
+
+```
+postgres=> --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=gis_admin --password --dbname=lab_gis
+Password for user gis_admin:...
+lab_gis=>
+```
+
+Continue setting up the extension as detailed in the next steps\.
 
 ## Step 2: Load the PostGIS extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions"></a>
 
@@ -56,32 +87,30 @@ SELECT n.nspname AS "Name",
 List of schemas
      Name     |   Owner
 --------------+-----------
- public       | myawsuser
+ public       | postgres
  tiger        | rdsadmin
  tiger_data   | rdsadmin
  topology     | rdsadmin
 (4 rows)
 ```
 
-If you use the psql command line, you can get the same information by running the `\dn` metacommand\. 
-
 **Note**  
-Extra extensions aren't required for some use cases\.
+Some use cases don't require all the extensions created in this step\.
 
-## Step 3: Transfer ownership of the extensions to the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership"></a>
+## Step 3: Transfer ownership of the extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership"></a>
 
-Use the ALTER SCHEMA statements to transfer ownership of the schemas to the `rds_superuser` role\.
+Use the ALTER SCHEMA statements to transfer ownership of the schemas to the `gis_admin` role\.
 
 ```
-ALTER SCHEMA tiger OWNER TO rds_superuser;
+ALTER SCHEMA tiger OWNER TO gis_admin;
 ALTER SCHEMA
-ALTER SCHEMA tiger_data OWNER TO rds_superuser; 
+ALTER SCHEMA tiger_data OWNER TO gis_admin; 
 ALTER SCHEMA
-ALTER SCHEMA topology OWNER TO rds_superuser;
+ALTER SCHEMA topology OWNER TO gis_admin;
 ALTER SCHEMA
 ```
 
-If you want to confirm the ownership change, you can run the following SQL query\. Or you can use the `\dn` metacommand from the psql command line\. 
+You can confirm the ownership change by running the following SQL query\. Or you can use the `\dn` metacommand from the psql command line\. 
 
 ```
 SELECT n.nspname AS "Name",
@@ -93,25 +122,26 @@ SELECT n.nspname AS "Name",
        List of schemas
      Name     |     Owner
 --------------+---------------
- public       | myawsuser
- tiger        | rds_superuser
- tiger_data   | rds_superuser
- topology     | rds_superuser
+ public       | postgres
+ tiger        | gis_admin
+ tiger_data   | gis_admin
+ topology     | gis_admin
 (4 rows)
 ```
 
-## Step 4: Transfer ownership of the objects to the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects"></a>
+## Step 4: Transfer ownership of the PostGIS objects<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects"></a>
 
-Use the following function to transfer ownership of the PostGIS objects to the `rds_superuser` role\. Run the following statement from the psql prompt to create the function\.
+Use the following function to transfer ownership of the PostGIS objects to the `gis_admin` role\. Run the following statement from the psql prompt to create the function\.
 
 ```
 CREATE FUNCTION exec(text) returns text language plpgsql volatile AS $f$ BEGIN EXECUTE $1; RETURN $1; END; $f$;
+CREATE FUNCTION
 ```
 
 Next, run the following query to run the `exec` function that in turn runs the statements and alters the permissions\.
 
 ```
-SELECT exec('ALTER TABLE ' || quote_ident(s.nspname) || '.' || quote_ident(s.relname) || ' OWNER TO rds_superuser;')
+SELECT exec('ALTER TABLE ' || quote_ident(s.nspname) || '.' || quote_ident(s.relname) || ' OWNER TO gis_admin;')
   FROM (
     SELECT nspname, relname
     FROM pg_class c JOIN pg_namespace n ON (c.relnamespace = n.oid) 
@@ -126,13 +156,14 @@ Add `tiger` to your search path using the following command\.
 
 ```
 SET search_path=public,tiger;
+SET
 ```
 
 Test `tiger` by using the following SELECT statement\.
 
 ```
 SELECT na.address, na.streetname, na.streettypeabbrev, na.zip
-FROM normalize_address('1 Devonshire Place, Boston, MA 02109') AS na;
+ FROM normalize_address('1 Devonshire Place, Boston, MA 02109') AS na;
 address | streetname | streettypeabbrev |  zip
 ---------+------------+------------------+-------
        1 | Devonshire | Pl               | 02109
@@ -176,12 +207,13 @@ ALTER EXTENSION postgis UPDATE TO "2.5.5"
 You can list the versions that are available in your release by using the following command\.
 
 ```
-SELECT * from pg_available_extension_versions where name='postgis';
+SELECT * FROM pg_available_extension_versions WHERE name='postgis';
 ```
 
 You can also find version information in the following sections in the *Amazon RDS for PostgreSQL Release Notes*:
++ [ PostgreSQL version 14 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-14x)
 + [ PostgreSQL version 13 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-13x)
 + [ PostgreSQL version 12 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-12x)
-+ [ PostgreSQL version 11\.x extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-11x)
-+ [ PostgreSQL version 10\.x extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-101x)
++ [ PostgreSQL version 11 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-11x)
++ [ PostgreSQL version 10 extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-101x)
 + [ PostgreSQL version 9\.6\.x extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html#postgresql-extensions-96x)

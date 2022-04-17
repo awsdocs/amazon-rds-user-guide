@@ -32,7 +32,7 @@ There are two types of RDS for PostgreSQL DB parameters\.
 **Note**  
 If your RDS for PostgreSQL DB instance is using your own custom DB parameter group, you can change the values of dynamic parameters on the running DB instance\. You can do this by using the AWS Management Console, the AWS CLI, or the Amazon RDS API\. 
 
-If you have privileges to do so, you can also change parameter values by using the `ALTER DATABASE`, `ALTER ROLE`, and `SET` commands\.  
+If you have privileges to do so, you can also change parameter values by using the `ALTER DATABASE`, `ALTER ROLE`, and `SET` commands\. 
 
 ## RDS for PostgreSQL DB instance parameter list<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters.parameters-list"></a>
 
@@ -149,9 +149,9 @@ The following table lists some of the parameters available in an RDS for Postgre
 | max\_wal\_size | Dynamic | Sets the WAL size that triggers the checkpoint\. For PostgreSQL version 9\.6 and earlier, max\_wal\_size is in units of 16 MB\. For PostgreSQL version 10 and later, max\_wal\_size is in units of 1 MB\.  | 
 | min\_wal\_size | Dynamic | Sets the minimum size to shrink the WAL to\. For PostgreSQL version 9\.6 and earlier, min\_wal\_size is in units of 16 MB\. For PostgreSQL version 10 and later, min\_wal\_size is in units of 1 MB\.  | 
 |  `quote_all_identifiers`  | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
-|  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. | 
+|  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. This parameter has no value unless query plan management \(QPM\) is turned on\. When QPM is on, the default value for this parameter 4\.  | 
 | rds\.adaptive\_autovacuum | Dynamic | Automatically tunes the autovacuum parameters whenever the transaction ID thresholds are exceeded\. | 
-|  `rds.log_retention_period`  | Dynamic | Sets log retention such that Amazon RDS deletes PostgreSQL logs that are older than N minutes\. | 
+|  `rds.log_retention_period`  | Dynamic | Sets log retention such that Amazon RDS deletes PostgreSQL logs that are older than n minutes\. | 
 | rds\.restrict\_password\_commands | Static | Restricts who can manage passwords to users with the rds\_password role\. Set this parameter to 1 to enable password restriction\. The default is 0\.  | 
 |  `search_path`  | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 
 |  `seq_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a sequentially fetched disk page\. | 
