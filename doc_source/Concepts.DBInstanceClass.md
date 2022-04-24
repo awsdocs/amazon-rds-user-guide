@@ -1,6 +1,6 @@
 # DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
-The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class you need depends on your processing power and memory requirements\. 
+The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. A DB instance class consists of both the DB instance type and the size\. The DB instance class that you need depends on your processing power and memory requirements\. 
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -29,7 +29,7 @@ The following are the general\-purpose DB instance types available:
 + **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\.
 + **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\.
 
-The following are the memory\-optimized DB instance types available:
+The following are the memory optimized DB instance types available:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.

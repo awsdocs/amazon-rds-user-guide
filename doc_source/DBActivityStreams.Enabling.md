@@ -4,9 +4,9 @@ When you start an activity stream for an Oracle DB instance, each database activ
 
 **Important**  
 Turning on an activity stream for an Oracle DB instance clears existing audit data\. It also revokes audit trail privileges\. When the stream is enabled, RDS for Oracle can no longer do the following:  
-Purge unified audit trail records
-Add, delete, or modify the unified audit policy
-Update the last archived time stamp
+Purge unified audit trail records\.
+Add, delete, or modify the unified audit policy\.
+Update the last archived time stamp\.
 
 ## Console<a name="DBActivityStreams.Enabling-collapsible-section-E1"></a>
 

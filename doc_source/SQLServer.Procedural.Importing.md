@@ -36,7 +36,7 @@ The following are some limitations to using native backup and restore:
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in the full recovery model\.
 + Restoring from differential backups on Multi\-AZ instances isn't supported\.
 + Calling the RDS procedures for native backup and restore within a transaction isn't supported\.
-+ Use a symmetric AWS KMS key to encrypt your backups\. Amazon RDS doesn't support asymmetric KMS keys\. For more information, see [Using symmetric and asymmetric keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
++ Use a symmetric encryption AWS KMS key to encrypt your backups\. Amazon RDS doesn't support asymmetric KMS keys\. For more information, see [Using symmetric and asymmetric keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
 + Native backup files are encrypted with the specified KMS key using the "Encryption\-Only" crypto mode\. When you are restoring encrypted backup files, be aware that they were encrypted with the "Encryption\-Only" crypto mode\.
 + You can't restore a database that contains a FILESTREAM file group\.
 + You can create native backups of Transparent Data Encryption \(TDE\)\-enabled databases, but you can't restore those backups to on\-premises databases\. You can't restore native backups of TDE\-enabled, on\-premises databases\.
@@ -153,7 +153,7 @@ The following example uses an ARN to specify a resource\. For more information o
 
 **Example permissions policy for native backup and restore with encryption support**  
 If you want to encrypt your backup files, include an encryption key in your permissions policy\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide*\.  
-You must use a symmetric KMS key to encrypt your backups\. Amazon RDS doesn't support asymmetric KMS keys\. For more information, see [Using symmetric and asymmetric keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.  
+You must use a symmetric encryption KMS key to encrypt your backups\. Amazon RDS doesn't support asymmetric KMS keys\. For more information, see [Using symmetric and asymmetric keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.  
 The IAM role must also be a key user and key administrator for the KMS key, that is, it must be specified in the key policy\. For more information, see [Creating symmetric KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
 
 ```
@@ -242,7 +242,7 @@ The following parameters are required:
   The file can have any extension, but `.bak` is usually used\. 
 
 The following parameters are optional:
-+ `@kms_master_key_arn` – The ARN for the symmetric KMS key to use to encrypt the item\.
++ `@kms_master_key_arn` – The ARN for the symmetric encryption KMS key to use to encrypt the item\.
   + You can't use the default encryption key\. If you use the default key, the database won't be backed up\.
   +  If you don't specify a KMS key identifier, the backup file won't be encrypted\. For more information, see [Encrypting Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
   + When you specify a KMS key, client\-side encryption is used\.

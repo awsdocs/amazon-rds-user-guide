@@ -59,26 +59,37 @@ To terminate a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kil
 | --- | --- | --- | --- | --- | 
 |  `sid`  |  number  |  —  |  Yes  |  The session identifier\.  | 
 |  `serial`  |  number  |  —  |  Yes  |  The serial number of the session\.  | 
-|  `method`  |  varchar  |  null  |  No  |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\.   | 
+|  `method`  |  varchar  |  null  |  No  |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\. If you specify `IMMEDIATE`, it has the same effect as running the following statement: <pre>ALTER SYSTEM KILL SESSION 'sid,serial#' IMMEDIATE</pre> If you specify `PROCESS`, you terminate the processes associated with a session\. Only specify `PROCESS` if terminating the session using `IMMEDIATE` was unsuccessful\.  | 
 
-The following example terminates a session\.
-
-```
-begin
-    rdsadmin.rdsadmin_util.kill(
-        sid    => sid, 
-        serial => serial_number);
-end;
-/
-```
-
-To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`\.
+To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user *AWSUSER*\.
 
 ```
 SELECT SID, SERIAL#, STATUS FROM V$SESSION WHERE USERNAME = 'AWSUSER';
 ```
 
-You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. By specifying `PROCESS` as the `method` value, you can terminate the processes associated with a session\. Do this only if terminating the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
+The following example terminates a session\.
+
+```
+BEGIN
+    rdsadmin.rdsadmin_util.kill(
+        sid    => sid, 
+        serial => serial_number,
+        method => 'IMMEDIATE');
+END;
+/
+```
+
+The following example terminates the processes associated with a session\.
+
+```
+BEGIN
+    rdsadmin.rdsadmin_util.kill(
+        sid    => sid, 
+        serial => serial_number,
+        method => 'PROCESS');
+END;
+/
+```
 
 ## Canceling a SQL statement in a session<a name="Appendix.Oracle.CommonDBATasks.CancellingSQL"></a>
 

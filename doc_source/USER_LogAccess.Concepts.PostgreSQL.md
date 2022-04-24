@@ -6,8 +6,6 @@ To view, download, and watch file\-based database logs, see [Monitoring Amazon R
 
 **Topics**
 + [Overview of PostgreSQL logs](#USER_LogAccess.Concepts.PostgreSQL.overview)
-+ [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)
-+ [Setting the message format](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)
 + [Enabling query logging](#USER_LogAccess.Concepts.PostgreSQL.Query_Logging)
 + [Publishing PostgreSQL logs to Amazon CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)
 
@@ -23,9 +21,9 @@ The default logging level captures errors that affect your server\. By default, 
 + Fatal server errors
 + Deadlocks
 
-To identify application issues, you can use the preceding error messages\. For example, if you converted a legacy application from Oracle to Amazon RDS PostgreSQL, some queries may not convert correctly\. These incorrectly formatted queries generate error messages in the logs, which you can use to identify the problematic code\.
+To identify application issues, you can look for query failures, login failures, deadlocks, and fatal server errors in the log\. For example, if you converted a legacy application from Oracle to Amazon RDS PostgreSQL, some queries may not convert correctly\. These incorrectly formatted queries generate error messages in the logs, which you can use to identify the problematic code\.
 
-You can modify PostgreSQL logging parameters to capture additional information, including the following:
+You can modify PostgreSQL logging parameters to capture additional information based on the following categories:
 + Connections and disconnections
 + Checkpoints
 + Schema modification queries
@@ -33,33 +31,52 @@ You can modify PostgreSQL logging parameters to capture additional information, 
 + Queries consuming temporary disk storage
 + Backend autovacuum process consuming resources
 
-The preceding log information can help troubleshoot potential performance and auditing issues\. For more information, see [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\. For a useful AWS blog about PostgreSQL logging, see [Working with RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/) and [ Working with RDS and Aurora PostgreSQL logs: Part 2](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-2/)\.
+By logging information for various categories such as shown in the list, you can troubleshoot potential performance and auditing issues\. For more information, see [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\. For a useful AWS blog about PostgreSQL logging, see [Working with RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/) and [ Working with RDS and Aurora PostgreSQL logs: Part 2](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-2/)\.
 
-### Parameter groups<a name="USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups"></a>
+### Parameters that affect logging behavior<a name="USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups"></a>
 
-Each Amazon RDS PostgreSQL instance is associated with a *parameter group* that contains the engine specific configurations\. The engine configurations also include several parameters that control PostgreSQL logging behavior\. AWS provides the parameter groups with default configuration settings to use for your instances\. However, to change the default settings, you must create a clone of the default parameter group, modify it, and attach it to your instance\.
+Each Amazon RDS PostgreSQL instance has a *parameter group* that specifies its configuration, including various aspects of logging\. The default parameter group settings apply to every RDS for PostgreSQL DB instance in a given AWS Region\. You can't change the defaults because they apply to all instances of a given engine, even those that aren't yours\. To modify any parameter values, you create a custom parameter group and modify its settings\. For example, to set or change logging parameters, you make changes in the custom parameter group associated with your RDS for PostgreSQL DB instance\. To learn how, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+For an RDS for PostgreSQL DB instance, the parameters that affect logging behavior include the following:
++ `rds.log_retention_period` – PostgreSQL logs that are older than the specified number of minutes are deleted\. The default value of 4320 minutes deletes log files after 3 days\. For more information, see [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)\. 
++ `log_rotation_age` – Specifies number of minutes after which Amazon RDS automatically rotates the logs\. The default is 60 minutes, but you can specify anywhere from 1 to 1440 minutes\. For more information, see [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)\. 
++ `log_rotation_size` – Sets the size, in kilobytes, at which the Amazon RDS should automatically rotate the logs\. There is no value by default because the logs are rotated based on age alone, as specified by the `log_rotation_age` parameter\. For more information, see [Setting log file rotation](#USER_LogAccess.Concepts.PostgreSQL.log_rotation)\.
++ `log_line_prefix` – Specifies the information that gets prefixed in front of each line that gets logged\. The default string for this parameter is `%t:%r:%u@%d:[%p]:`, which notes the time \(%t\) and other distinguishing characteristics such as the database name \(%d\) for the log entry\. You can't change this parameter\. It applies to the `stderr` messages that get logged\. 
++ `log_destination` – Sets the output format for server logs\. The default value for this parameter is standard error \(stderr\), but csvlog \(comma\-separated value log files\) is also supported\. For more information, see [Setting the log destination](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)\. 
 
-## Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
+### Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
 
-To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
+To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance \. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance needs enough allocated storage to contain the retained log files\.
 
-To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to Amazon CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.  
+We recommend that you have your logs routinely published to Amazon CloudWatch Logs, so you can view and analyze system data long after the logs have been removed from your RDS for PostgreSQL DB instance\. For more information, see [Publishing PostgreSQL logs to Amazon CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.  
 
-## Setting the message format<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
+### Setting log file rotation<a name="USER_LogAccess.Concepts.PostgreSQL.log_rotation"></a>
 
-By default, Amazon RDS PostgreSQL generates logs in standard error \(stderr\) format\. In this format, each log message is prefixed with the information specified by the parameter `log_line_prefix`\. Amazon RDS only allows the following value for `log_line_prefix`:
+New log files are created by Amazon RDS every hour by default\. The timing is controlled by the `log_rotation_age` parameter\. This parameter has a default value of 60 \(minutes\), but you can set to anywhere from 1 minute to 24 hours \(1,440 minutes\)\. When it's time for rotation, a new distinct log file is created\. The file is named according to the pattern specified by the `log_filename` parameter\. 
+
+Log files can also be rotated according to their size, as specified in the `log_rotation_size` parameter\. This parameter specifies that the log should be rotated when it reaches the size \(in kilobytes\)\. For an RDS for PostgreSQL DB instance, `log_rotation_size` is unset, that is, there is no value specified\. However, the parameter allows setting from 0\-2097151 kB \(kilobytes\)\.  
+
+The log file names are based on the file name pattern of the [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME) parameter\. You can specify file names per hour or per minute, as follows:
++ `postgresql.log.%Y-%m-%d-%H%M` – Minute format for log file name\. Sets the granularity of the log to less than an hour\. Supported by PostgreSQL version and higher only\. 
++ `postgresql.log.%Y-%m-%d-%H` – Hour format for log file name\. Sets the granularity of log to hours\.
+
+If you set `log_rotation_age` parameter to less than 60 minutes, be sure to also set the `log_filename` parameter to the minute format\.
+
+For more information, see [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) in the *PostgreSQL documentation*\.
+
+### Setting the log destination<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
+
+By default, Amazon RDS PostgreSQL generates logs in standard error \(stderr\) format\. This is the default setting for the `log_destination` parameter\. This format prefixes each log message with the time, database, and other details specified by the `log_line_prefix` parameter\. The `log_line_prefix` is set to the following text string, which can't be changed:
 
 ```
 %t:%r:%u@%d:[%p]:t
 ```
 
-The preceding value maps to the following code:
-
-```
-log-time : remote-host : user-name @ db-name : [ process-id ]
-```
+This parameter specifies the following details for each log entry:
++ `%t` – Time of log entry\. 
++  `%r` – Remote host address\. 
++  `%u@%d` – User name @ database name\. 
++  `[%p]` – Process ID if available\. 
 
 For example, the following error message results from querying a column using the wrong name\.
 
@@ -67,7 +84,15 @@ For example, the following error message results from querying a column using th
 2019-03-10 03:54:59 UTC:10.0.0.123(52834):postgres@tstdb:[20175]:ERROR: column "wrong" does not exist at character 8
 ```
 
-To specify the format for output logs, use the parameter `log_destination`\. To make the instance generate both standard and CSV output files, set `log_destination` to `csvlog` in your instance parameter group\. For a discussion of PostgreSQL logs, see [ Working with RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/)\.
+RDS for PostgreSQL can generate the logs in `csvlog` format in addition to the default `stderr` specified by the `log_destination` parameter\. The `csvlog` is useful for analyzing the log data as CSV data\. For example, say that you use the `log_fdw` extension to work with your logs as foreign tables\. The foreign table created on `stderr` log files contains a single column with log event data\. For the CSV formatted log file, the foreign table has multiple columns, so you can sort and analyze your logs much more easily\. To learn how to use the `log_fdw` with `csvlog`, see [Using the log\_fdw extension to access the DB log using SQL](Appendix.PostgreSQL.CommonDBATasks.Extensions.foreign-data-wrappers.md#CHAP_PostgreSQL.Extensions.log_fdw)\.
+
+You must be using a custom parameter group so that you change the `log_destination` setting\. The `log_destination` parameter is dynamic, that is, the change takes effect immediately, without rebooting\. 
+
+If you do change this parameter, you need to be aware that `csvlog` files are generated in addition to the `stderr` logs\. We recommend that you pay attention to the storage consumed by the logs, taking into account the `rds.log_retention_period` and other settings that affect log storage and turnover\. Using both `stderr` and `csvlog` more than doubles the storage consumed by the logs\. 
+
+If you do set the `log_destination` to include `csvlog` and you later decide that you want to revert to the default only \(`stderr`\), you can open the custom parameter group for your instance using the AWS Management Console, choose the `log_destination` parameter from the list, choose **Edit parameter** and then choose **Reset**\. This reverts the `log_destination` parameter to its default setting, `stderr`\. 
+
+For more information about configuring logging, see [ Working with Amazon RDS and Aurora PostgreSQL logs: Part 1](http://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/)\.
 
 ## Enabling query logging<a name="USER_LogAccess.Concepts.PostgreSQL.Query_Logging"></a>
 
@@ -140,7 +165,7 @@ To store your PostgreSQL log records in highly durable storage, you can use Amaz
 To work with CloudWatch Logs, configure your RDS for PostgreSQL DB instance to publish log data to a log group\.
 
 **Note**  
-Publishing log files to CloudWatch Logs is supported only for PostgreSQL versions 9\.6\.6 and later and 10\.4 and later\.
+Publishing log files to CloudWatch Logs is supported for PostgreSQL version 9\.6\.6 and higher, PostgreSQL 10\.4 and higher, and for all higher releases\.
 
 You can publish the following log types to CloudWatch Logs for RDS for PostgreSQL: 
 + Postgresql log

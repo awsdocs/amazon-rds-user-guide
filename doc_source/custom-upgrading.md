@@ -14,7 +14,7 @@ For general information on upgrading DB instances, see [Upgrading a DB instance 
 + [Viewing valid upgrade targets for RDS Custom for Oracle DB instances](#custom-upgrading-target)
 + [Upgrading an RDS Custom DB instance](#custom-upgrading-modify)
 + [Viewing pending upgrades for RDS Custom DB instances](#custom-upgrading-pending)
-+ [Upgrade failure for an RDS Custom DB instance](#custom-upgrading-failure)
++ [Troubleshooting an upgrade failure for an RDS Custom DB instance](#custom-upgrading-failure)
 
 ## Viewing valid upgrade targets for RDS Custom for Oracle DB instances<a name="custom-upgrading-target"></a>
 
@@ -159,7 +159,7 @@ The output resembles the following\.
 }
 ```
 
-## Upgrade failure for an RDS Custom DB instance<a name="custom-upgrading-failure"></a>
+## Troubleshooting an upgrade failure for an RDS Custom DB instance<a name="custom-upgrading-failure"></a>
 
 If an RDS Custom DB instance upgrade fails, an RDS event is generated and the DB instance status becomes `upgrade-failed`\.
 

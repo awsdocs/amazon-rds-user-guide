@@ -85,7 +85,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 1. Install a SQL client that you can use to connect to the DB instance\.
 
-   You can connect to a MySQL DB instance by using tools like the mysql command line utility\. For more information on using the MySQL client, see[mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application that you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
+   You can connect to a MySQL DB instance by using tools such as the mysql command line utility\. For more information on using the MySQL client, see [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application that you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
 
    For more information on using MySQL, see the [MySQL documentation](http://dev.mysql.com/doc/)\. For information about installing MySQL \(including the MySQL client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\.
 
@@ -94,6 +94,8 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 1. Make sure that your DB instance is associated with a security group that provides access to it\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
    If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
 
 1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 

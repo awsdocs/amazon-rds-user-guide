@@ -4,7 +4,7 @@ Amazon RDS on AWS Outposts extends RDS for SQL Server, RDS for MySQL, and RDS fo
 
 You use the same AWS Management Console, AWS CLI, and RDS API to provision and manage on\-premises RDS on Outposts DB instances as you do for RDS DB instances running in the AWS Cloud\. RDS on Outposts automates tasks, such as database provisioning, operating system and database patching, backup, and long\-term archival in Amazon S3\.
 
-RDS on Outposts supports automated backups of DB instances\. Network connectivity between your Outpost and your AWS Region is required to back up and restore DB instances\. DB snapshots and transaction logs from an Outpost can be stored in your AWS Region or on your Outpost if you have Amazon S3 on Outposts configured\. From your AWS Region, you can restore a DB instance from a DB snapshot to a different Outpost\. For more information, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
+RDS on Outposts supports automated backups of DB instances\. Network connectivity between your Outpost and your AWS Region is required to back up and restore DB instances\. All DB snapshots and transaction logs from an Outpost are stored in your AWS Region\. From your AWS Region, you can restore a DB instance from a DB snapshot to a different Outpost\. For more information, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
 RDS on Outposts supports automated maintenance and upgrades of DB instances\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
@@ -18,9 +18,10 @@ When network connectivity to the AWS Region isn't available, your DB instance co
 + [Prerequisites for Amazon RDS on AWS Outposts](#rds-on-outposts.prerequisites)
 + [Amazon RDS on AWS Outposts support for Amazon RDS features](rds-on-outposts.features.md)
 + [Supported DB instance classes for Amazon RDS on AWS Outposts](rds-on-outposts.db-instance-classes.md)
-+ [Customer\-owned IP addresses for RDS on Outposts](rds-on-outposts.coip.md)
++ [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)
++ [Working with Multi\-AZ deployments for Amazon RDS on AWS Outposts](rds-on-outposts.maz.md)
 + [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md)
-+ [Considerations for restoring DB instances](rds-on-outposts.restoring.md)
++ [Considerations for restoring DB instances on Amazon RDS on AWS Outposts](rds-on-outposts.restoring.md)
 
 ## Prerequisites for Amazon RDS on AWS Outposts<a name="rds-on-outposts.prerequisites"></a>
 

@@ -66,22 +66,24 @@ By default, an activity stream doesn't include engine\-native audit fields\. You
 
 ### DB parameter group override<a name="DBActivityStreams.Overview.unified-auditing.parameter-group"></a>
 
-Typically, you turn on unified auditing in RDS for Oracle by attaching a parameter group\. However, Database Activity Streams would require additional configuration\. To improve your customer experience, Amazon RDS does the following
+Typically, you turn on unified auditing in RDS for Oracle by attaching a parameter group\. However, Database Activity Streams would require additional configuration\. To improve your customer experience, Amazon RDS does the following:
 + If you enable an activity stream, RDS for Oracle ignores the auditing parameters in the parameter group\. 
 + If you disable an activity stream, RDS for Oracle stops ignoring the auditing parameters\.
 
 ## Asynchronous mode for database activity streams<a name="DBActivityStreams.Overview.sync-mode"></a>
 
-Activity streams in RDS for Oracle are always asynchronous\. When a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, the activity stream event is made a durable record\. If an error occurs in the background task, Amazon RDS generates an event\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\. Asynchronous mode favors database performance over the accuracy of the activity stream\.
+Activity streams in RDS for Oracle are always asynchronous\. When a database session generates an activity stream event, the session returns to normal activities immediately\. In the background, RDS for Oracle makes the activity stream event into a durable record\.
+
+If an error occurs in the background task, Amazon RDS generates an event\. This event indicates the beginning and end of any time windows where activity stream event records might have been lost\. Asynchronous mode favors database performance over the accuracy of the activity stream\.
 
 ## Requirements for database activity streams<a name="DBActivityStreams.Overview.requirements"></a>
 
-In RDS for Oracle, database activity streams have the following requirements and limitations\.
+In RDS for Oracle, database activity streams have the following requirements and limitations:
 + Amazon Kinesis is required for database activity streams\.
 + AWS Key Management Service \(AWS KMS\) is required for database activity streams because they are always encrypted\.
 + Applying additional encryption to your Amazon Kinesis data stream is incompatible with database activity streams, which are already encrypted with your AWS KMS key\.
-+ In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
-+ In a Multi\-AZ deployment, start the database activity stream on only the primary DB instance\. The activity stream audits both the primary and standby instances automatically\. No additional steps are required during a failover\.
++ You create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
++ In a Multi\-AZ deployment, start the database activity stream on only the primary DB instance\. The activity stream audits both the primary and standby DB instances automatically\. No additional steps are required during a failover\.
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
 
@@ -97,7 +99,7 @@ You can use database activity streams with the following DB instance classes:
 + db\.r4
 + db\.r5\.\*
 + db\.z1d
-+ 
+
 **Note**  
 The memory optimized db\.r5 classes, which use the naming pattern db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*, aren't supported\.
 

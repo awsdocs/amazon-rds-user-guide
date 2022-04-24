@@ -1,20 +1,20 @@
 # Working with MariaDB read replicas<a name="USER_MariaDB.Replication.ReadReplicas"></a>
 
-This section contains specific information about working with read replicas on Amazon RDS for MariaDB\. For general information about read replicas and instructions for using them, see [Working with read replicas](USER_ReadRepl.md)\.
+Following, you can find specific information about working with read replicas on Amazon RDS for MariaDB\. For general information about read replicas and instructions for using them, see [Working with read replicas](USER_ReadRepl.md)\.
 
 **Topics**
-+ [Read replica configuration with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Configuration)
++ [Configuring read replicas with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Configuration)
 + [Configuring replication filters with MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters)
 + [Configuring delayed replication with MariaDB](#USER_MariaDB.Replication.ReadReplicas.DelayReplication)
-+ [Read replica updates with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Updates)
-+ [Multi\-AZ read replica deployments with MariaDB](#USER_MariaDB.Replication.ReadReplicas.MultiAZ)
++ [Updating read replicas with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Updates)
++ [Working with Multi\-AZ read replica deployments with MariaDB](#USER_MariaDB.Replication.ReadReplicas.MultiAZ)
 + [Monitoring MariaDB read replicas](#USER_MariaDB.Replication.ReadReplicas.Monitor)
 + [Starting and stopping replication with MariaDB read replicas](#USER_MariaDB.Replication.ReadReplicas.StartStop)
 + [Troubleshooting a MariaDB read replica problem](#USER_ReadRepl.Troubleshooting.MariaDB)
 
-## Read replica configuration with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Configuration"></a>
+## Configuring read replicas with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Configuration"></a>
 
-Before a MariaDB DB instance can serve as a replication source, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. 
+Before a MariaDB DB instance can serve as a replication source, make sure to turn on automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. 
 
 You can create up to five read replicas from one DB instance\. For replication to operate effectively, each read replica should have as the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
@@ -22,7 +22,7 @@ If a read replica is running any version of MariaDB, you can specify it as the s
 
 If you promote a MariaDB read replica that is in turn replicating to other read replicas, those read replicas remain active\. Consider an example where MyDBInstance1 replicates to MyDBInstance2, and MyDBInstance2 replicates to MyDBInstance3\. If you promote MyDBInstance2, replication from MyDBInstance1 to MyDBInstance2 no longer occurs, but MyDBInstance2 still replicates to MyDBInstance3\. 
 
-To enable automatic backups on a read replica for Amazon RDS for MariaDB, first create the read replica, then modify the read replica to enable automatic backups\. 
+To enable automatic backups on a read replica for RDS for MariaDB, first create the read replica, then modify the read replica to enable automatic backups\. 
 
 You can run multiple concurrent read replica create or delete actions that reference the same source DB instance, as long as you stay within the limit of five read replicas for the source instance\. 
 
@@ -37,15 +37,15 @@ The following are some use cases for replication filters:
 + For a DB instance that has read replicas in different AWS Regions, to replicate different databases or tables in different AWS Regions\.
 
 **Note**  
-You can also use replication filters to specify which databases and tables are replicated with a primary MariaDB DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
+You can also use replication filters to specify which databases and tables are replicated with a primary MariaDB DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Configuring binary log file position replication with an external source instance](MySQL.Procedural.Importing.External.Repl.md)\.
 
 **Topics**
-+ [Replication filtering parameters for Amazon RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Configuring)
-+ [Replication filtering limitations for Amazon RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Limitations)
-+ [Replication filtering examples for Amazon RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples)
++ [Setting replication filtering parameters for RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Configuring)
++ [Replication filtering limitations for RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Limitations)
++ [Replication filtering examples for RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples)
 + [Viewing the replication filters for a read replica](#USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Viewing)
 
-### Replication filtering parameters for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Configuring"></a>
+### Setting replication filtering parameters for RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Configuring"></a>
 
 To configure replication filters, set the following replication filtering parameters on the read replica:
 + `replicate-do-db` – Replicate changes to the specified databases\. When you set this parameter for a read replica, only the databases specified in the parameter are replicated\.
@@ -66,19 +66,19 @@ The binary logging format of the source DB instance is important for replication
 **Note**  
 All data definition language \(DDL\) statements are replicated as statements, regardless of the `binlog_format` setting on the source DB instance\. 
 
-### Replication filtering limitations for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Limitations"></a>
+### Replication filtering limitations for RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Limitations"></a>
 
-The following limitations apply to replication filtering for Amazon RDS for MariaDB:
+The following limitations apply to replication filtering for RDS for MariaDB:
 + Each replication filtering parameter has a 2,000\-character limit\.
 + Commas aren't supported in replication filters\.
 + The MariaDB `binlog_do_db` and `binlog_ignore_db` options for binary log filtering aren't supported\.
 + Replication filtering doesn't support XA transactions\.
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
-+ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, all 10\.4 versions, all 10\.5 versions, and all 10\.6 versions\.
-+ Replication filtering isn't supported for Amazon RDS for MariaDB version 10\.2\.
++ Replication filtering is supported for RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, all 10\.4 versions, all 10\.5 versions, and all 10\.6 versions\.
++ Replication filtering isn't supported for RDS for MariaDB version 10\.2\.
 
-### Replication filtering examples for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
+### Replication filtering examples for RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 
 To configure replication filtering for a read replica, modify the replication filtering parameters in the parameter group associated with the read replica\.
 
@@ -298,11 +298,11 @@ To modify delayed replication for an existing read replica, run the [mysql\.rds\
 
 After replication is stopped, in a disaster recovery scenario, you can promote a read replica to be the new source DB instance\. For information about promoting a read replica, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
-## Read replica updates with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Updates"></a>
+## Updating read replicas with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Updates"></a>
 
 Read replicas are designed to support read queries, but you might need occasional updates\. For example, you might need to add an index to speed the specific types of queries accessing the replica\. You can enable updates by setting the `read_only` parameter to **0** in the DB parameter group for the read replica\. 
 
-## Multi\-AZ read replica deployments with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.MultiAZ"></a>
+## Working with Multi\-AZ read replica deployments with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.MultiAZ"></a>
 
 You can create a read replica from either single\-AZ or Multi\-AZ DB instance deployments\. You use Multi\-AZ deployments to improve the durability and availability of critical data, but you can't use the Multi\-AZ secondary to serve read\-only queries\. Instead, you can create read replicas from high\-traffic Multi\-AZ DB instances to offload read\-only queries\. If the source instance of a Multi\-AZ deployment fails over to the secondary, any associated read replicas automatically switch to use the secondary \(now primary\) as their replication source\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
@@ -347,6 +347,6 @@ Other common situations that can cause replication errors include the following:
 + Using a non\-transactional storage engine such as MyISAM\. read replicas require a transactional storage engine\. Replication is only supported for the InnoDB storage engine on MariaDB\.
 + Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of safe and unsafe statements in binary logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html)\. 
 
-If you decide that you can safely skip an error, you can follow the steps described in the section [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Otherwise, you can delete the read replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old read replica\. If a replication error is fixed, the `Replication State` changes to *replicating*\.
+If you decide that you can safely skip an error, you can follow the steps described in [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Otherwise, you can delete the read replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old read replica\. If a replication error is fixed, the `Replication State` changes to *replicating*\.
 
-For MariaDB DB instances, in some cases read replicas can't be switched to the secondary if some binlog events aren't flushed during the failure\. In these cases, you must manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\.
+For MariaDB DB instances, in some cases read replicas can't be switched to the secondary if some binary log \(binlog\) events aren't flushed during the failure\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\.

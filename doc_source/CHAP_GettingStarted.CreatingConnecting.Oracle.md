@@ -89,6 +89,8 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
+   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
+
 1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
    1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 

@@ -17,7 +17,7 @@ Create a DB subnet group with one subnet that is associated with your Outpost\.
 You can also create a new DB subnet group for the Outpost when you create your DB instance\. If you want to do so, then skip this procedure\.
 
 **Note**  
-To create a DB subnet group for the AWS Cloud, specify at least two subnets\. However, for an Outpost DB subnet group, specify only one subnet\.
+To create a DB subnet group for the AWS Cloud, specify at least two subnets\.
 
 **To create a DB subnet group for your Outpost**
 
@@ -40,8 +40,6 @@ To create a DB subnet group for the AWS Cloud, specify at least two subnets\. Ho
 
 1. For **Subnets**, choose the subnet for use by RDS on Outposts\.
 
-   Your DB subnet group can have only one subnet\.
-
 1. Choose **Create** to create the DB subnet group\.
 
 ### Creating the RDS on Outposts DB instance<a name="rds-on-outposts.creating.console.DB"></a>
@@ -52,7 +50,7 @@ Create the DB instance, and choose the Outpost for your DB instance\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where you want to create the DB instance\.
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where the Outpost on which you want to create the DB instance is attached\.
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -74,9 +72,14 @@ If you haven't configured any Outposts, either the **Database location** section
 
    1. For **Subnet group**, choose the DB subnet group for your DB instance\.
 
-      You can choose an existing DB subnet group that is associated with the Outpost—for example, if you performed the procedure in [Creating a DB subnet group](#rds-on-outposts.creating.console.subnet)\.
+      You can choose an existing DB subnet group that's associated with the Outpost—for example, if you performed the procedure in [Creating a DB subnet group](#rds-on-outposts.creating.console.subnet)\.
 
-      You can also create a new DB subnet group for the Outpost\. Only one subnet is allowed in this DB subnet group\.
+      You can also create a new DB subnet group for the Outpost\.
+
+1. For **Multi\-AZ deployment**, choose **Create a standby instance \(recommended for production usage\)** to create a standby DB instance in another Outpost\.
+**Note**  
+This option isn't available for Microsoft SQL Server\.  
+If you choose to create a Multi\-AZ deployment, you can't store backups on your Outpost\.
 
 1. Under **Backup**, do the following:
 
@@ -84,11 +87,12 @@ If you haven't configured any Outposts, either the **Database location** section
       + **AWS Cloud** to store automated backups and manual snapshots in the parent AWS Region\.
       + **Outposts \(on\-premises\)** to create local backups\.
 **Note**  
-To store backups on your Outpost, make sure that you have Amazon S3 on Outposts configured\. For more information, see [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/)\.
+To store backups on your Outpost, your Outpost must have Amazon S3 capability\. For more information, see [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/)\.  
+Local backups aren't supported for Multi\-AZ deployments\.
 
    1. Choose **Enable automated backups** to create point\-in\-time snapshots of your DB instance\.
 
-      If you enable automated backups, then you can choose the **Backup retention period** and **Backup window**, or leave the default values\.\.
+      If you turn on automated backups, then you can choose values for **Backup retention period** and **Backup window**, or leave the default values\.
 
 1. Specify other DB instance settings as needed\.
 
@@ -150,17 +154,22 @@ Before you create a new DB instance in an Outpost with the AWS CLI, first create
   + `--engine` – The database engine\. Use one of the following values:
     + MySQL – Specify `mysql`\.
     + PostgreSQL – Specify `postgres`\.
-    + Microsoft SQL Server – Specify `sqlserver-ee`, `sqlserver-se`, `sqlserver-ex`, or `sqlserver-web`\.
+    + Microsoft SQL Server – Specify `sqlserver-ee`, `sqlserver-se`, or `sqlserver-web`\.
   + `--availability-zone`
   + `--vpc-security-group-ids`
   + `--db-subnet-group-name`
   + `--allocated-storage`
   + `--master-username`
   + `--master-user-password`
+  + `--multi-az | --no-multi-az` – \(Optional\) Whether to create a standby DB instance in a different Availability Zone\. The default is `--no-multi-az`\.
+
+    The `--multi-az` option isn't available for SQL Server\.
   + `--backup-retention-period`
   + `--backup-target` – \(Optional\) Where to store automated backups and manual snapshots\. Use one of the following values:
     + `outposts` – Store them locally on your Outpost\.
     + `region` – Store them in the parent AWS Region\. This is the default value\.
+
+    If you use the `--multi-az` option, you can't use `outposts` for `--backup-target`\.
   + `--storage-encrypted`
   + `--kms-key-id`
 
@@ -178,8 +187,8 @@ For Linux, macOS, or Unix:
  7.     --vpc-security-group-ids outpost-sg \
  8.     --db-subnet-group-name myoutpostdbsubnetgr \
  9.     --allocated-storage 100 \
-10.     --master-username masterawsuser \
-11.     --master-user-password masteruserpassword \
+10.     --master-username myawsuser \
+11.     --master-user-password mypassword \
 12.     --backup-retention-period 3 \
 13.     --backup-target outposts \
 14.     --storage-encrypted \
@@ -197,8 +206,8 @@ For Windows:
  7.     --vpc-security-group-ids outpost-sg ^
  8.     --db-subnet-group-name myoutpostdbsubnetgr ^
  9.     --allocated-storage 100 ^
-10.     --master-username masterawsuser ^
-11.     --master-user-password masteruserpassword ^
+10.     --master-username myawsuser ^
+11.     --master-user-password mypassword ^
 12.     --backup-retention-period 3 ^
 13.     --backup-target outposts ^
 14.     --storage-encrypted ^
@@ -224,6 +233,7 @@ Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/A
 + `EngineVersion`
 + `MasterUsername`
 + `MasterUserPassword`
++ `MultiAZ` \(optional\)
 + `StorageEncrypted`
 + `KmsKeyID`
 

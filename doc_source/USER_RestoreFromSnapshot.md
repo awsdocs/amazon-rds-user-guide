@@ -1,4 +1,4 @@
-# Restoring from a DB snapshot<a name="USER_RestoreFromSnapshot"></a>
+# Restoring from a DB snapshot<a name="USER_RestoreFromSnapshot"></a><a name="restore_snapshot"></a>
 
 Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. You can create a new DB instance by restoring from a DB snapshot\. You provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore\. You can't restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore\. 
 

@@ -4,7 +4,7 @@ Before you create a DB instance based on Amazon RDS Custom for Oracle, perform t
 
 **Topics**
 + [Prerequisites for creating an RDS Custom for Oracle instance](#custom-setup-orcl.review)
-+ [Make sure that you have a symmetric AWS KMS key](#custom-setup-orcl.cmk)
++ [Make sure that you have a symmetric encryption AWS KMS key](#custom-setup-orcl.cmk)
 + [Download and install the AWS CLI](#custom-setup-orcl.cli)
 + [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)
 + [Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)
@@ -25,19 +25,20 @@ Before creating an RDS Custom for Oracle DB instance, make sure that you meet th
 
   For more information, see [Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)\.
 
-For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 6\. For general requirements that apply to RDS Custom, see [Requirements and limitations for Amazon RDS Custom](custom-reqs-limits.md)\.
+For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 6\. For general requirements that apply to RDS Custom, see [Requirements and limitations for Amazon RDS Custom for Oracle](custom-reqs-limits.md)\.
 
-## Make sure that you have a symmetric AWS KMS key<a name="custom-setup-orcl.cmk"></a>
+## Make sure that you have a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
 
-A symmetric AWS KMS key is required for RDS Custom\. When you create an RDS Custom DB instance, you supply the KMS key identifier\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
+A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for Oracle DB instance, you supply the KMS key identifier\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
 You have the following options:
-+ If you have an existing symmetric KMS key in your account, you can use it with RDS Custom\. No further action is necessary\.
-+ If you don't already have a symmetric KMS key in your account, create one by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
++ If you have an existing KMS key in your account, you can use it with RDS Custom\. No further action is necessary\.
++ If you have already created a symmetric encryption KMS key for a different RDS Custom engine, you can reuse the same KMS key\. No further action is necessary\.
++ If you don't have an existing symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
 
-You can choose the same symmetric key when you create a CEV and a DB instance, or choose different keys\. RDS Custom doesn't support AWS\-managed KMS keys\.
+RDS Custom doesn't support AWS\-managed KMS keys\.
 
-The symmetric key you wish to use must provide the IAM role in your IAM instance profile for RDS Custom with access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have created a new symmetric key in your account, no changes are required\. Otherwise, make sure that your symmetric key's policy can provide access to these operations\.
+The symmetric encryption key that you use must provide the AWS Identity and Access Management \(IAM\) role in your IAM instance profile with access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy can provide access to these operations\.
 
 For more information on configuring IAM for RDS Custom for Oracle, see [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 
@@ -49,7 +50,7 @@ For information on downloading and installing the AWS CLI, see [Installing or up
 
 If you plan to access RDS Custom only from the AWS Management Console, skip this step\.
 
-If you have already downloaded the AWS CLI for Amazon RDS or RDS Custom for SQL Server, skip this step\.
+If you have already downloaded the AWS CLI for Amazon RDS or a different RDS Custom engine, skip this step\.
 
 ## Configuring IAM and your VPC<a name="custom-setup-orcl.iam-vpc"></a>
 
@@ -105,7 +106,7 @@ To simplify setup, you can use the AWS CloudFormation template files to create C
 
 This procedure assumes that you've already used CloudFormation to create your IAM roles\.
 
-If you've already configured your VPC for RDS Custom for SQL Server, you can skip this step\.
+If you've already configured your VPC for a different RDS Custom engine, skip this step\.
 
 1. Open the CloudFormation console at [https://console\.aws\.amazon\.com/cloudformation](https://console.aws.amazon.com/cloudformation/)\.
 
@@ -384,7 +385,7 @@ Your RDS Custom DB instance is in a VPC, just like an Amazon EC2 instance or Ama
 
 RDS Custom sends communication from your DB instance to other AWS services\. To make sure that RDS Custom can communicate, it validates network connectivity to these services\.
 
-If you have already configured a VPC for RDS Custom for SQL Server, you can reuse that VPC and skip this process\.
+If you have already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
 
 **Topics**
 + [Configure your instance security group](#custom-setup-orcl.vpc.sg)
@@ -421,7 +422,7 @@ Make sure that your VPC allows outbound traffic to the following AWS services:
 + AWS Secrets Manager
 + AWS Systems Manager
 
-We recommend that you add endpoints for every service to your VPC using the following instructions\. However, you can use any solution that makes it possible for your VPC to communicate with AWS service endpoints\. For example, you can use Network Address Translation \(NAT\) or AWS Direct Connect\.
+We recommend that you add endpoints for every service to your VPC using the following instructions\. However, you can use any solution that lets your VPC communicate with AWS service endpoints\. For example, you can use Network Address Translation \(NAT\) or AWS Direct Connect\.
 
 **To configure endpoints for AWS services with which RDS Custom works**
 
@@ -443,11 +444,11 @@ We recommend that you add endpoints for every service to your VPC using the foll
 
 1. For **Security group**, choose or create a security group\.
 
-   You can use [security groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) to control access to your endpoint, much as you use a firewall\.
+   You can use security groups to control access to your endpoint, much as you use a firewall\. For more information about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\. 
 
 1. Choose **Create endpoint**\.
 
-The following table explains how to find the list of endpoints that your VPC needs to use for outbound communications\.
+The following table explains how to find the list of endpoints that your VPC needs for outbound communications\.
 
 
 | Service | Endpoint format | Notes and links | 
@@ -465,7 +466,7 @@ Make sure that your instance can do the following:
 + Allow outbound communications through port 80 \(HTTP\) to the IMDS link IP address\.
 + Request instance metadata from `http://169.254.169.254`, the IMDSv2 link\.
 
-For more information on IMDSv2, see [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+For more information, see [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 RDS Custom for Oracle automation uses IMDSv2 by default, by setting `HttpTokens=enabled` on the underlying Amazon EC2 instance\. However, you can use IMDSv1 if you want\. For more information, see [Configure the instance metadata options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 

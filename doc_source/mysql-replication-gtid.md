@@ -1,6 +1,6 @@
-# Using GTID\-based replication for RDS for MySQL<a name="mysql-replication-gtid"></a>
+# Using GTID\-based replication for Amazon RDS for MySQL<a name="mysql-replication-gtid"></a>
 
- Following, you can learn how to use global transaction identifiers \(GTIDs\) with binary log \(binlog\) replication among RDS for MySQL DB instances\. 
+Following, you can learn how to use global transaction identifiers \(GTIDs\) with binary log \(binlog\) replication among Amazon RDS for MySQL DB instances\. 
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with global transaction identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 
@@ -14,7 +14,7 @@ GTID\-based replication is supported for RDS for MySQL version 5\.7\.23 and high
 + [Disabling GTID\-based replication for a MySQL DB instance with read replicas](#mysql-replication-gtid.disabling)
 
 **Note**  
-For information about configuring GTID\-based replication with an external database, see [Replication with a MariaDB or MySQL instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
+For information about configuring GTID\-based replication with an external database, see [Configuring GTID\-based replication with an external source instance](MySQL.Procedural.Importing.External.Repl.GTIDProcedure.md)\.
 
 ## Overview of global transaction identifiers \(GTIDs\)<a name="mysql-replication-gtid.overview"></a>
 
@@ -26,7 +26,7 @@ MySQL uses two different types of transactions for binlog replication:
 
 In a replication configuration, GTIDs are unique across all DB instances\. GTIDs simplify replication configuration because when you use them, you don't have to refer to log file positions\. GTIDs also make it easier to track replicated transactions and determine whether the source instance and replicas are consistent\.
 
-You can use GTID\-based replication to replicate data with Amazon RDS MySQL read replicas or with an external MySQL database\. For RDS for MySQL read replicas, you can configure GTID\-based replication when you are creating new read replicas, or you can convert existing read replicas to use GTID\-based replication\.
+You can use GTID\-based replication to replicate data with RDS for MySQL read replicas\. You can configure GTID\-based replication when you are creating new read replicas, or you can convert existing read replicas to use GTID\-based replication\.
 
 You can also use GTID\-based replication in a delayed replication configuration with RDS for MySQL\. For more information, see [Configuring delayed replication with MySQL](USER_MySQL.Replication.ReadReplicas.md#USER_MySQL.Replication.ReadReplicas.DelayReplication)\.
 
@@ -45,10 +45,10 @@ Use the following parameters to configure GTID\-based replication\.
 **Note**  
 In the AWS Management Console, the `gtid_mode` parameter appears as `gtid-mode`\.
 
-For GTID\-based replication, use these settings for the parameter group for your DB instance or read replica: 
-+ `ON` and `ON_PERMISSIVE` apply only to outgoing replication from an RDS DB instance or Aurora MySQL cluster\. Both of these values cause your RDS DB instance or Aurora DB cluster to use GTIDs for transactions that are replicated to an external database\. `ON` requires that the external database also use GTID\-based replication\. `ON_PERMISSIVE` makes GTID\-based replication optional on the external database\. 
-+ `OFF_PERMISSIVE`, if set, means that your RDS DB instances or Aurora DB cluster can accept incoming replication from an external database\. It can do this whether the external database uses GTID\-based replication or not\. 
-+  `OFF`, if set, means that your RDS DB instances or Aurora DB cluster only accept incoming replication from external databases that don't use GTID\-based replication\. 
+For GTID\-based replication, use these settings for the parameter group for your DB instance or read replica:
++ `ON` and `ON_PERMISSIVE` apply only to outgoing replication from an RDS DB instance\. Both of these values cause your RDS DB instance to use GTIDs for transactions that are replicated\. `ON` requires that the target database also use GTID\-based replication\. `ON_PERMISSIVE` makes GTID\-based replication optional on the target database\. 
++ `OFF_PERMISSIVE`, if set, means that your RDS DB instances can accept incoming replication from a source database\. They can do this regardless of whether the source database uses GTID\-based replication\.
++ `OFF`, if set, means that your RDS DB instance only accepts incoming replication from source databases that don't use GTID\-based replication\. 
 
 For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 

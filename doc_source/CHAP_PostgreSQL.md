@@ -125,7 +125,7 @@ Amazon RDS supports DB instances running several editions of PostgreSQL\. You ca
 To see a list of available versions, as well as defaults for newly created DB instances, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example, to display the default PostgreSQL engine version, use the following command:
 
 ```
-aws rds describe-db-engine-versions ––default-only ––engine postgres
+aws rds describe-db-engine-versions --default-only --engine postgres
 ```
 
 For details about the PostgreSQL versions that are supported on Amazon RDS, see the [https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/Welcome.html)\.

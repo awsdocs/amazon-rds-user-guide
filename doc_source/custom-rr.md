@@ -1,6 +1,6 @@
 # Working with read replicas for RDS Custom for Oracle<a name="custom-rr"></a>
 
-You can create read replicas for RDS Custom for Oracle DB instances\. Read replica creation is similar to that in Amazon RDS, but with some important differences\. For general information on creating and managing read replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
+You can create read replicas for RDS Custom for Oracle DB instances\. Read replica creation is similar to the process in Amazon RDS, but with some important differences\. For general information on creating and managing read replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
 
 Not all options are supported when you create RDS Custom for Oracle read replicas\. For example, you must specify the replica mode as mounted when you create the replica, which you can then change to read\-only\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
 
@@ -8,7 +8,7 @@ As with RDS for Oracle, you can have up to six managed read replicas\. You can c
 
 Read replicas are named after the database unique name, with letters appended sequentially: `DB_UNIQUE_NAME_X`, for example `ORCL_A`\. The first six letters, A–F, are reserved for RDS Custom\. Database parameters are copied from the primary DB instance to the replicas\. For more information, see [DB\_UNIQUE\_NAME](https://docs.oracle.com/database/121/REFRN/GUID-3547C937-5DDA-49FF-A9F9-14FF306545D8.htm#REFRN10242) in the Oracle documentation\.
 
-RDS Custom read replicas use the same backup retention period as the primary DB instance by default\. You can modify the backup retention period\. Backing up, restoring, and point\-in\-time recovery \(PITR\) are supported\. For more information on backing up and restoring RDS Custom DB instances, see [Backing up and restoring an Amazon RDS Custom DB instance](custom-backup.md)\.
+RDS Custom read replicas use the same backup retention period as the primary DB instance by default\. You can modify the backup retention period\. Backing up, restoring, and point\-in\-time recovery \(PITR\) are supported\. For more information on backing up and restoring RDS Custom DB instances, see [Backing up and restoring an Amazon RDS Custom for Oracle DB instance](custom-backup.md)\.
 
 ## Network considerations<a name="custom-rr.network"></a>
 
