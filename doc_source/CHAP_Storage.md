@@ -25,11 +25,13 @@ General Purpose SSD storage offers cost\-effective storage that is acceptable fo
 
 Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(5\.34 TiB and greater\) is 16,000 IOPS\.
 
-Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\.
+Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. 
+
+Volumes equal to 1 TiB or greater in size have the ability to burst to 16,000 IOPS for extended periods of time\. 
+
+Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\.
 
 Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
-
-For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\.
 
 **Note**  
 DB instances that use General Purpose SSD storage can experience much longer latency after read replica creation, Multi\-AZ conversion, and DB snapshot restoration than instances that use Provisioned IOPS storage\. If you need a DB instance with minimum latency after these operations, we recommend using Provisioned IOPS storage\.
