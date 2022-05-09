@@ -42,7 +42,7 @@ For information about creating DB instances with **Standard create**, see [Creat
 
 1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name\.
 
-1. For **Master username**, enter a name for the master user, or leave the default name\.
+1. For **Master username**, enter a name for the master user, or leave the default name \(**postgres**\)\.
 
    The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-postgresql.png)

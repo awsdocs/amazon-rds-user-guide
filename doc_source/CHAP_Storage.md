@@ -2,6 +2,8 @@
 
 DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\. 
 
+For more information about instance storage pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
+
 ## Amazon RDS storage types<a name="Concepts.Storage"></a>
 
 Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic \(also known as standard\)\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, Oracle, and PostgreSQL RDS DB instances with up to 64 tebibytes \(TiB\) of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\.

@@ -27,6 +27,8 @@ The following diagram shows a Multi\-AZ DB cluster\.
 
 Multi\-AZ DB clusters typically have lower write latency when compared to Multi\-AZ DB instance deployments\. They also allow read\-only workloads to run on reader DB instances\. The RDS console shows the Availability Zone of the writer DB instance and the Availability Zones of the reader DB instances\. You can also use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI command or the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API operation to find this information\. 
 
+Currently, Multi\-AZ DB clusters are available only in some AWS Regions\. For information about AWS Region support for Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](#multi-az-db-clusters-concepts.Limitations)\.
+
 ## Creating and managing a Multi\-AZ DB cluster<a name="multi-az-db-clusters-creating-managing"></a>
 
 You can create a Multi\-AZ DB cluster directly or by restoring from a snapshot\. For instructions, see these topics:
@@ -264,7 +266,7 @@ To fail over a Multi\-AZ DB cluster manually, call the Amazon RDS API [FailoverD
 ### Determining whether a Multi\-AZ DB cluster has failed over<a name="multi-az-db-clusters-concepts-failover-determining"></a>
 
 To determine if your Multi\-AZ DB cluster has failed over, you can do the following:
-+ Set up DB event subscriptions to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS event notification](USER_Events.md)\.
++ Set up DB event subscriptions to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 + View your DB events by using the Amazon RDS console or API operations\.
 + View the current state of your Multi\-AZ DB cluster by using the Amazon RDS console, the AWS CLI, and the RDS API\.
 
@@ -303,8 +305,10 @@ The following limitations apply to Multi\-AZ DB clusters:
   + US East \(Ohio\)
   + US East \(N\. Virginia\)
   + US West \(Oregon\)
-  + Europe \(Ireland\)
+  + Asia Pacific \(Singapore\)
+  + Asia Pacific \(Sydney\)
   + Asia Pacific \(Tokyo\)
+  + Europe \(Ireland\)
 + Multi\-AZ DB clusters only support Provisioned IOPS storage\.
 + You can't change a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
 + You can't restore a Multi\-AZ DB cluster snapshot to a Multi\-AZ DB instance deployment or single\-AZ deployment\.

@@ -10,7 +10,7 @@ This tutorial works with Amazon Linux and might not work for other versions of L
 
 In the tutorial that follows, you specify the VPC, subnets, and security groups when you create the DB instance\. You also specify them when you create the EC2 instance to host your web server\. The VPC, subnets, and security groups are required for the DB instance and the web server to communicate\. After the VPC is set up, this tutorial shows you how to create the DB instance and install the web server\. You connect your web server to your DB instance in the VPC using the DB instance endpoint endpoint\.
 
-1. Complete the tasks in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+1. Complete the tasks in [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
    Before you begin this tutorial, make sure that you have a VPC with both public and private subnets, and corresponding security groups\. If you don't have these, complete the following tasks in the tutorial: 
 

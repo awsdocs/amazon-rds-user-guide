@@ -19,7 +19,7 @@ For information about setting the `binlog_format` parameter, see [Configuring My
 ## Configuring binary log file position replication with an external source instance<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
 
 Follow these guidelines when you set up an external source instance and a replica on Amazon RDS: 
-+ Monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
++ Monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 + Maintain the binlogs on your source instance until you have verified that they have been applied to the replica\. This maintenance makes sure that you can restore your source instance in the event of a failure\.
 + Turn on automated backups on your Amazon RDS DB instance\. Turning on automated backups makes sure that you can restore your replica to a particular point in time if you need to re\-synchronize your source instance and replica\. For information on backups and point\-in\-time restore, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
 

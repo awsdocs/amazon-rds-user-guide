@@ -1,14 +1,13 @@
-# Analyzing running queries in MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
+# SQL statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
 
 MariaDB and MySQL collect SQL statistics only at the digest level\. No statistics are shown at the statement level\.
 
 **Topics**
-+ [Digest table in MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation)
++ [Digest statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation)
 + [Per\-second statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second)
 + [Per\-call statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call)
-+ [Viewing SQL statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevelMariaDBMySQL)
 
-## Digest table in MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation"></a>
+### Digest statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation"></a>
 
 Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. The `events_statements_summary_by_digest` table is managed by your database\. 
 
@@ -21,13 +20,13 @@ Please truncate events_statements_summary_by_digest table to clear the issue. Ch
 
 In this situation, MariaDB and MySQL don't track SQL queries\. To address this issue, Performance Insights automatically truncates the digest table when both of the following conditions are met:
 + The table is full\.
-+ Performance Insights manages the Performance Schema automatically\. For automatic management, the `performance_schema` parameter must be set to `0` and the **Source** must not be set to `user`\.
++ Performance Insights manages the Performance Schema automatically\.
 
-If Performance Insights isn't managing the Performance Schema automatically, see [Turning on the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
+  For automatic management, the `performance_schema` parameter must be set to `0` and the **Source** must not be set to `user`\. If Performance Insights isn't managing the Performance Schema automatically, see [Turning on the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
 
 In the AWS CLI, check the source of a parameter value by running the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
 
-## Per\-second statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second"></a>
+### Per\-second statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second"></a>
 
 The following SQL statistics are available for MariaDB and MySQL DB instances\.
 
@@ -50,7 +49,7 @@ The following SQL statistics are available for MariaDB and MySQL DB instances\.
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_sec | Created temporary tables per second | 
 | db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_sec | Lock time per second \(in ms\) | 
 
-## Per\-call statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call"></a>
+### Per\-call statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call"></a>
 
 The following metrics provide per call statistics for a SQL statement\.
 
@@ -71,22 +70,3 @@ The following metrics provide per call statistics for a SQL statement\.
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_disk\_tables\_per\_call | Created temporary disk tables per call | 
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_call | Created temporary tables per call | 
 | db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_call | Lock time per call \(in ms\) | 
-
-## Viewing SQL statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevelMariaDBMySQL"></a>
-
-The statistics are available in the **Top SQL** tab of the **Database load** chart\.
-
-**To view the SQL statistics**
-
-1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. Go to the Performance Insights dashboard\.
-
-1. Choose the **SQL** tab and expand a query\.  
-![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_digest.png)
-
-Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
-
-The following screenshot shows the preferences for MariaDB and MySQL DB instances\.
-
-![\[Preferences for metrics for running queries for MariaDB and MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_pref_ams.png)

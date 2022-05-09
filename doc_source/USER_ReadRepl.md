@@ -25,7 +25,7 @@ Read replicas are supported by the MariaDB, Microsoft SQL Server, MySQL, Oracle,
 + [Working with read replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
 + [Working with MySQL read replicas](USER_MySQL.Replication.ReadReplicas.md)
 + [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)
-+ [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
++ [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md)
 
 ## Overview of Amazon RDS read replicas<a name="USER_ReadRepl.Overview"></a>
 
@@ -42,7 +42,7 @@ By default, a read replica is created with the same storage type as the source D
 **Note**  
 When you increase the allocated storage of a read replica, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\.
 
-Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new read replica from an existing DB instance\. For example, if **MyDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MyDBInstance**\. For MariaDB and MySQL you can create a read replica from an existing read replica\. For example, from **ReadReplica1**, you can create a new read replica, such as **ReadReplica2**\. For Oracle, PostgreSQL, and SQL Server, you can't create a read replica from an existing read replica\.
+Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new read replica from an existing DB instance\. For example, if **MyDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MyDBInstance**\. For MariaDB and MySQL, and for certain versions of PostgreSQL, you can create a read replica from an existing read replica\. For example, from **ReadReplica1**, you can create a new read replica, such as **ReadReplica2**\. For Oracle and SQL Server, you can't create a read replica from an existing read replica\. 
 
 If you no longer need read replicas, you can explicitly delete them using the same mechanisms for deleting a DB instance\. If you delete a source DB instance without deleting its read replicas in the same AWS Region, each read replica is promoted to a standalone DB instance\. For information about deleting a DB instance, see [Deleting a DB instance](USER_DeleteInstance.md)\. For information about read replica promotion, see [Promoting a read replica to be a standalone DB instance](#USER_ReadRepl.Promote)\.
 
@@ -107,7 +107,9 @@ Creating your read replica as a Multi\-AZ DB instance is independent of whether 
 **Note**  
  The source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
-1. Choose other options, such as storage autoscaling\.
+1. Specify other settings, such as storage autoscaling\.
+
+   For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
 1. Choose **Create read replica**\.
 
@@ -116,6 +118,8 @@ After the read replica is created, you can see it on the **Databases** page in t
 ### AWS CLI<a name="USER_ReadRepl.Create.CLI"></a>
 
 To create a read replica from a source DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also enables storage autoscaling\.
+
+You can specify other settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
 **Example**  
 For Linux, macOS, or Unix:  

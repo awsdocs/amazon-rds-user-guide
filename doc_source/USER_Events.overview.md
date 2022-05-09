@@ -2,6 +2,12 @@
 
 Amazon RDS groups events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. Amazon RDS event notification is only available for unencrypted SNS topics\. If you specify an encrypted SNS topic, event notifications aren't sent for the topic\.
 
+**Topics**
++ [RDS resources eligible for event subscription](#USER_Events.overview.resources)
++ [Basic process for subscribing to Amazon RDS event notifications](#USER_Events.overview.process)
++ [Delivery of RDS event notifications](#USER_Events.overview.subscriptions)
++ [Billing for Amazon RDS event notifications](#USER_Events.overview.billing)
+
 ## RDS resources eligible for event subscription<a name="USER_Events.overview.resources"></a>
 
 You can subscribe to an event category for the following resources:
@@ -10,6 +16,7 @@ You can subscribe to an event category for the following resources:
 + DB parameter group
 + DB security group
 + RDS Proxy
++ Custom engine version
 
 For example, if you subscribe to the backup category for a given DB instance, you're notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you're notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
 

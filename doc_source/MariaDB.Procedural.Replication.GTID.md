@@ -1,7 +1,7 @@
 # Configuring GTID\-based replication with an external source instance<a name="MariaDB.Procedural.Replication.GTID"></a>
 
 You can set up replication based on global transaction identifiers \(GTIDs\) from an external MariaDB instance of version 10\.0\.24 or higher into an RDS for MariaDB DB instance\. Follow these guidelines when you set up an external source instance and a replica on Amazon RDS:
-+ Monitor failover events for the RDS for MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
++ Monitor failover events for the RDS for MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 + Maintain the binary logs \(binlogs\) on your source instance until you have verified that they have been applied to the replica\. This maintenance ensures that you can restore your source instance in the event of a failure\.
 + Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to resynchronize your source instance and replica\. For information on backups and Point\-In\-Time Restore, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
 

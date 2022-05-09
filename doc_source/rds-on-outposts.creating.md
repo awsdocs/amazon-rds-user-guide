@@ -159,6 +159,7 @@ Before you create a new DB instance in an Outpost with the AWS CLI, first create
   + `--vpc-security-group-ids`
   + `--db-subnet-group-name`
   + `--allocated-storage`
+  + `--max-allocated-storage`
   + `--master-username`
   + `--master-user-password`
   + `--multi-az | --no-multi-az` – \(Optional\) Whether to create a standby DB instance in a different Availability Zone\. The default is `--no-multi-az`\.
@@ -187,12 +188,13 @@ For Linux, macOS, or Unix:
  7.     --vpc-security-group-ids outpost-sg \
  8.     --db-subnet-group-name myoutpostdbsubnetgr \
  9.     --allocated-storage 100 \
-10.     --master-username myawsuser \
-11.     --master-user-password mypassword \
-12.     --backup-retention-period 3 \
-13.     --backup-target outposts \
-14.     --storage-encrypted \
-15.     --kms-key-id mykey
+10.     --max-allocated-storage 1000 \
+11.     --master-username masterawsuser \
+12.     --master-user-password masteruserpassword \
+13.     --backup-retention-period 3 \
+14.     --backup-target outposts \
+15.     --storage-encrypted \
+16.     --kms-key-id mykey
 ```
 For Windows:  
 
@@ -206,12 +208,13 @@ For Windows:
  7.     --vpc-security-group-ids outpost-sg ^
  8.     --db-subnet-group-name myoutpostdbsubnetgr ^
  9.     --allocated-storage 100 ^
-10.     --master-username myawsuser ^
-11.     --master-user-password mypassword ^
-12.     --backup-retention-period 3 ^
-13.     --backup-target outposts ^
-14.     --storage-encrypted ^
-15.     --kms-key-id mykey
+10.     --max-allocated-storage 1000 ^
+11.     --master-username masterawsuser ^
+12.     --master-user-password masteruserpassword ^
+13.     --backup-retention-period 3 ^
+14.     --backup-target outposts ^
+15.     --storage-encrypted ^
+16.     --kms-key-id mykey
 ```
 
 For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
@@ -220,7 +223,7 @@ For information about each setting when creating a DB instance, see [Settings fo
 
 To create a new DB instance in an Outpost with the RDS API, first create a DB subnet group for use by RDS on Outposts by calling the [CreateDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSubnetGroup.html) operation\. For `SubnetIds`, specify the subnet group in the Outpost for use by RDS on Outposts\. 
 
-Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the parameters following\. Specify an Availability Zone for the Outpost, an Amazon VPC security group associated with the Outpost, and the DB subnet group you created for the Outpost\. 
+Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the following parameters\. Specify an Availability Zone for the Outpost, an Amazon VPC security group associated with the Outpost, and the DB subnet group you created for the Outpost\. 
 + `AllocatedStorage`
 + `AvailabilityZone`
 + `BackupRetentionPeriod`
@@ -233,6 +236,7 @@ Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/A
 + `EngineVersion`
 + `MasterUsername`
 + `MasterUserPassword`
++ `MaxAllocatedStorage` \(optional\)
 + `MultiAZ` \(optional\)
 + `StorageEncrypted`
 + `KmsKeyID`

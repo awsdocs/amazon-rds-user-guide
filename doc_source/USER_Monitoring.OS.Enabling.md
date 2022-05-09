@@ -148,7 +148,7 @@ The confused deputy problem is a security issue where an entity that doesn't hav
 
 To limit the permissions to the resource that Amazon RDS can give another service, we recommend using the `aws:SourceArn` and `aws:SourceAccount` global condition context keys in a trust policy for your Enhanced Monitoring role\. If you use both global condition context keys, they must use the same account ID\.
 
-The most effective way to protect against the confused deputy problem is to use the `aws:SourceArn` global condition context key with the full ARN of the resource\. For Amazon RDS, set `aws:SourceArn` to `arn:aws:rds:Region:my-account-id:db/dbname`\.
+The most effective way to protect against the confused deputy problem is to use the `aws:SourceArn` global condition context key with the full ARN of the resource\. For Amazon RDS, set `aws:SourceArn` to `arn:aws:rds:Region:my-account-id:db:dbname`\.
 
 The following example uses the `aws:SourceArn` and `aws:SourceAccount` global condition context keys in a trust policy to prevent the confused deputy problem\.
 

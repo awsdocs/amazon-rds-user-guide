@@ -30,6 +30,25 @@ To view all events generated in the last hour, call [describe\-events](https://d
 aws rds describe-events
 ```
 
+The following sample output shows that a DB instance has been stopped\.
+
+```
+{
+    "Events": [
+        {
+            "EventCategories": [
+                "notification"
+            ], 
+            "SourceType": "db-instance", 
+            "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:testinst", 
+            "Date": "2022-04-22T21:31:00.681Z", 
+            "Message": "DB instance stopped", 
+            "SourceIdentifier": "testinst"
+        }
+    ]
+}
+```
+
 To view all Amazon RDS events for the past 10080 minutes \(7 days\), call the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command and set the `--duration` parameter to `10080`\.
 
 ```

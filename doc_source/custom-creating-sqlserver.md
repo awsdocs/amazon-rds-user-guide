@@ -55,7 +55,7 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
 1. In the **DB instance size** section, choose a value for **DB instance class**\.
 
-   For supported classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+   For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 
 1. Choose **Storage** settings\.
 
@@ -107,7 +107,7 @@ You create an RDS Custom DB instance by using the [create\-db\-instance](https:/
 
 The following options are required:
 + `--db-instance-identifier`
-+ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\)
++ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\)
 + `--engine` \(`custom-sqlserver-ee`, `custom-sqlserver-se`, or `custom-sqlserver-web`\)
 + `--kms-key-id`
 + `--custom-iam-instance-profile`

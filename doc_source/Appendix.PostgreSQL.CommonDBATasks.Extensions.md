@@ -1,13 +1,24 @@
 # Using PostgreSQL extensions with Amazon RDS for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Extensions"></a>
 
-You can install and configure various PostgreSQL extensions to add more functionality to your RDS for PostgreSQL DB instance\. For example, to work with spatial data you can install and use the PostGIS extension\. For more information, see [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)\. As another example, if you want to improve data entry for very large tables, you can consider partitioning your data by using the `pg_partman` extension\. To learn more, see [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)\.
+You can extend the functionality of PostgreSQL by installing a variety of extensions and modules\. For example, to work with spatial data you can install and use the PostGIS extension\. For more information, see [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)\. As another example, if you want to improve data entry for very large tables, you can consider partitioning your data by using the `pg_partman` extension\. To learn more, see [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)\.
 
-Following are some of the PostgreSQL extensions that you can install and use with your Amazon RDS for PostgreSQL DB instance\. 
+Depending on your version of RDS for PostgreSQL, installing an extension might require `rds_superuser` permissions, as follows: 
++ For RDS for PostgreSQL versions 12 and earlier versions, installing extensions requires `rds_superuser` privileges\.
++ For RDS for PostgreSQL version 13 and higher versions, users \(roles\) with create permissions on a given database instance can install and use any *trusted extensions*\. For a list of trusted extensions, see [PostgreSQL trusted extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.Extensions.Trusted)\. 
+
+You can also specify precisely which extensions can be installed on your RDS for PostgreSQL DB instance, by listing them in the `rds.allowed_extensions` parameter\. By default, this parameter isn't set, so any supported extension can be added if the user has permissions to do so\. By adding a list of extensions to this parameter, you explicitly identify the extensions that your RDS for PostgreSQL DB instance can use\. Any extensions not listed can't be installed\. This capability is available for the following versions:
++ RDS for PostgreSQL 14\.1 and all higher versions
++ RDS for PostgreSQL 13\.2 and higher minor versions 
++ RDS for PostgreSQL 12\.6 and higher minor versions 
+
+For more information, see [Restricting installation of PostgreSQL extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.Restriction)\. 
+
+To learn more about the `rds_superuser` role, see [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles)\.
 
 **Topics**
 + [Using functions from the orafce extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)
 + [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)
-+ [Logging at the session and object level with the pgaudit extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
++ [Logging at the session and object level with the pgAudit extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
 + [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)
 + [Reducing bloat in tables and indexes with the pg\_repack extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
 + [Upgrading and using the PLV8 extension](#PostgreSQL.Concepts.General.UpgradingPLv8)
@@ -40,11 +51,11 @@ RDS for PostgreSQL doesn't support the `utl_file` package that is part of the or
 
    If you want to see the list of owners for the oracle schema, use the `\dn` psql command\.
 
-## Logging at the session and object level with the pgaudit extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
+## Logging at the session and object level with the pgAudit extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
 
-You can log activity at the session level or at the object level by installing the pgaudit extension on your RDS for PostgreSQL DB instance\. This extension is supported for all available RDS for PostgreSQL versions\. It uses the underlying native PostgreSQL logging mechanism\. 
+You can log activity at the session level or at the object level by installing the PostgreSQL Audit \(pgAudit\) extension on your RDS for PostgreSQL DB instance\. This extension is supported for all available RDS for PostgreSQL versions\. It uses the underlying native PostgreSQL logging mechanism\. 
 
-To learn more about the pgaudit extension, see [pgAudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) on GitHub\.
+To learn more about the pgAudit extension, see [pgAudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) on GitHub\.
 
 With *session auditing*, you can log audit events from various sources and include the fully qualified command text when available\. Modify the custom parameter group that is associated with your DB instance so that `shared_preload_libraries` contains pgaudit\. Then set the `pgaudit.log` parameter to log any of the following types of events:
 + `READ` – Logs `SELECT` and `COPY` when the source is a relation or a query\.
@@ -58,9 +69,9 @@ To log multiple event types with session auditing, use a comma\-separated list\.
 
 With *object auditing*, you can refine audit logging to work with specific relations\. For example, you can specify that you want audit logging for `READ` operations on a specific number of tables\. 
 
-To use the pgaudit extension, add it to the `shared_preload_libraries` parameter on the RDS for PostgreSQL DB instance\. You can't edit values in the default DB parameter groups, so that means you need to use a custom DB parameter group for the DB instance\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+To use the pgAudit extension, add `pgaudit` to the `shared_preload_libraries` parameter on the RDS for PostgreSQL DB instance\. You can't edit values in the default DB parameter groups, so that means you need to use a custom DB parameter group for the DB instance\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-**To use object auditing with the pgaudit extension**
+**To use object auditing with the pgAudit extension**
 
 1. Create a database role called `rds_pgaudit` using the following command\.
 
@@ -70,7 +81,7 @@ To use the pgaudit extension, add it to the `shared_preload_libraries` parameter
 
 1. Modify the DB custom parameter group that is associated with your DB instance as follows:
 
-   1. Add pgaudit to the `shared_preload_libraries` parameter list\. Using the AWS CLI, run the following\.
+   1. Add `pgaudit` to the `shared_preload_libraries` parameter list\. Using the AWS CLI, run the following\.
 
       ```
       aws rds modify-db-parameter-group \
@@ -96,7 +107,7 @@ To use the pgaudit extension, add it to the `shared_preload_libraries` parameter
        --region aws-region
    ```
 
-1. Run the following command to confirm that pgaudit has been initialized\.
+1. Run the following command to confirm that `pgaudit` has been initialized\.
 
    ```
    SHOW shared_preload_libraries;
@@ -106,7 +117,7 @@ To use the pgaudit extension, add it to the `shared_preload_libraries` parameter
    (1 row)
    ```
 
-1. Run the following command to create the pgaudit extension\.
+1. Run the following command to create the `pgaudit` extension\.
 
    ```
    CREATE EXTENSION pgaudit;
@@ -121,7 +132,7 @@ To use the pgaudit extension, add it to the `shared_preload_libraries` parameter
    rds_pgaudit
    ```
 
-To test the pgaudit logging, you can run several example commands that you want to audit\. For example, you might run the following commands\.
+To test pgAudit logging, you can run several example commands that you want to audit\. For example, you might run the following commands\.
 
 ```
 CREATE TABLE t1 (id int);

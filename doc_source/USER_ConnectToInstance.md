@@ -123,7 +123,7 @@ To find the connection information for a DB instance by using the Amazon RDS API
 **Important**  
 Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)\.
 
-To connect to a DB instance using the MySQL command\-line client, enter the following command at a command prompt to connect to a DB instance using the MySQL command\-line client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\. 
+To connect to a DB instance using the MySQL command\-line client, enter the following command at the command prompt\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\. 
 
 ```
 mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p

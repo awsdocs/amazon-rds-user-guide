@@ -1,4 +1,4 @@
-# Viewing DB instance metrics in the CloudWatch console and CLI<a name="metrics_dimensions"></a>
+# Viewing DB instance metrics in the CloudWatch console and AWS CLI<a name="metrics_dimensions"></a>
 
 Following, you can find details about how to view metrics for your DB instance using CloudWatch\. For information on monitoring metrics for your DB instance's operating system in real time using CloudWatch Logs, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
@@ -11,6 +11,9 @@ When you use Amazon RDS resources, Amazon RDS sends metrics and dimensions to Am
 Metrics are grouped first by the service namespace, and then by the various dimension combinations within each namespace\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+
+   The CloudWatch overview home page appears\.  
+![\[CloudWatch overview page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/monitoring-overviewpage-console2.png)
 
 1. If necessary, change the AWS Region\. From the navigation bar, choose the AWS Region where your AWS resources are\. For more information, see [Regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)\.
 

@@ -237,7 +237,7 @@ The following limitations apply to modifying an RDS Custom for SQL Server DB ins
 
    1. For **DB engine version**, choose the new version\.
 
-   1. Change the value for **DB instance class**\. For supported classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+   1. Change the value for **DB instance class**\. For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 
    1. Change the value for **Backup retention period**\.
 
@@ -254,7 +254,7 @@ The following limitations apply to modifying an RDS Custom for SQL Server DB ins
 ### AWS CLI<a name="custom-managing.modify-sqlserver.CLI"></a>
 
 To modify an RDS Custom for SQL Server DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
-+ `--db-instance-class` – For supported classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
++ `--db-instance-class` – For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 + `--engine-version` – The version number of the database engine to which you're upgrading\.
 + `--backup-retention-period` – How long to retain automated backups, from 0–35 days\.
 + `--preferred-backup-window` – The daily time range during which automated backups are created\.

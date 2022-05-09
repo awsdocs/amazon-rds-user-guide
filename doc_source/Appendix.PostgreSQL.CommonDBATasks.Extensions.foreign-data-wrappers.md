@@ -274,13 +274,13 @@ For more information about the `mysql_fdw` extension, see the [mysql\_fdw](https
 
 To access an Oracle database from your RDS for PostgreSQL DB instance you can install and use the `oracle_fdw` extension\. This extension is a foreign data wrapper for Oracle databases\. To learn more about this extension, see the [oracle\_fdw](https://github.com/laurenz/oracle_fdw) documentation\.
 
-The `oracle_fdw` extension is supported on Amazon RDS for PostgreSQL versions 12\.7, 13\.3, and higher\.
+The `oracle_fdw` extension is supported on RDS for PostgreSQL 12\.7, 13\.3, and higher versions\.
 
 **Topics**
 + [Turning on the oracle\_fdw extension](#postgresql-oracle-fdw.enabling)
 + [Example: Using a foreign server linked to an Amazon RDS for Oracle database](#postgresql-oracle-fdw.example)
 + [Working with encryption in transit](#postgresql-oracle-fdw.encryption)
-+ [pg\_user\_mapping and pg\_user\_mappings permissions](#postgresql-oracle-fdw.permissions)
++ [Understanding the pg\_user\_mappings view and permissions](#postgresql-oracle-fdw.permissions)
 
 ### Turning on the oracle\_fdw extension<a name="postgresql-oracle-fdw.enabling"></a>
 
@@ -355,9 +355,11 @@ PostgreSQL\-to\-Oracle encryption in transit is based on a combination of client
 
 If your database is on RDS for Oracle, see [Oracle native network encryption](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html) to configure the encryption\.
 
-### pg\_user\_mapping and pg\_user\_mappings permissions<a name="postgresql-oracle-fdw.permissions"></a>
+### Understanding the pg\_user\_mappings view and permissions<a name="postgresql-oracle-fdw.permissions"></a>
 
-In the following output, you can find roles and permissions mapped to three different example users\. Users `rdssu1` and `rdssu2` are members of the `rds_superuser` role, and `user1` isn't\. The example shows how you can use the `psql` metacommand `\du` to list existing roles\.
+The PostgreSQL catalog `pg_user_mapping` stores the mapping from an RDS for PostgreSQL user to the user on a foreign data \(remote\) server\. Access to the catalog is restricted, but you use the `pg_user_mappings` view to see the mappings\. In the following, you can find an example that shows how permissions apply with an example Oracle database, but this information applies more generally to any foreign data wrapper\.
+
+In the following output, you can find roles and permissions mapped to three different example users\. Users `rdssu1` and `rdssu2` are members of the `rds_superuser` role, and `user1` isn't\. The example uses the `psql` metacommand `\du` to list existing roles\.
 
 ```
 test=>  \du

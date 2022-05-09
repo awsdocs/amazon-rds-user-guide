@@ -312,7 +312,7 @@ The 2020 AWS re:Invent conference included a presentation on new features and be
 ## Best practices for working with SQL Server<a name="CHAP_BestPractices.SQLServer"></a>
 
 Best practices for a Multi\-AZ deployment with a SQL Server DB instance include the following:
-+ Use Amazon RDS DB events to monitor failovers\. For example, you can be notified by text message or email when a DB instance fails over\. For more information about Amazon RDS events, see [Using Amazon RDS event notification](USER_Events.md)\.
++ Use Amazon RDS DB events to monitor failovers\. For example, you can be notified by text message or email when a DB instance fails over\. For more information about Amazon RDS events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 + If your application caches DNS values, set time to live \(TTL\) to less than 30 seconds\. Setting TTL as so is a good practice in case there is a failover, where the IP address might change and the cached value might no longer be in service\.
 + We recommend that you *do not* enable the following modes because they turn off transaction logging, which is required for Multi\-AZ: 
   + Simple recover mode

@@ -475,7 +475,7 @@ To display information about a specific snapshot export, include the `--export-t
 
 To display information about DB snapshot exports using the Amazon RDS API, use the [DescribeExportTasks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeExportTasks.html) operation\.
 
-To track completion of the export workflow or to trigger another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Using Amazon RDS event notification](USER_Events.md)\.
+To track completion of the export workflow or to trigger another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 ## Canceling a snapshot export task<a name="USER_ExportSnapshot.Canceling"></a>
 

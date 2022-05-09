@@ -2,14 +2,22 @@
 
 The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API operations\. For information on creating an SNS topic and subscribing to it, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
-You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. For example, **SourceType** might be `SourceType = db-instance`, whereas **SourceIdentifier** might be `SourceIdentifier = myDBInstance1`\. The following table shows possible combinations\.
+You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the following: 
+
+**SourceType**  
+The type of source\. For example, **SourceType** might be **Instances**\.
+
+**SourceIdentifier**  
+The Amazon RDS resource that is generating the event\. For example, **SourceIdentifier** might be **myDBInstance1**\. 
+
+The following table explains the result when you specify or don't specify **SourceType** and **SourceIdentifier**\.
 
 
 |  SourceType  |  SourceIdentifier  |  Description  | 
 | --- | --- | --- | 
-|  Specified  |  Specified  |  You receive notice of all DB instance events for the specified source\.  | 
-|  Specified  |  Not specified  |  You receive notice of the events for that source type for all your Amazon RDS sources\.  | 
-|  Not specified  |  Not specified  |  You receive notice of all events from all Amazon RDS sources belonging to your customer account\.  | 
+|  Specified  |  Specified  |  You receive notice of all events for the specified resource\.  | 
+|  Specified  |  Not specified  |  You receive notice of the events for the specified source type for all your Amazon RDS resources\.  | 
+|  Not specified  |  Not specified  |  You receive notice of all events from all Amazon RDS resources belonging to your AWS account\.  | 
 
 ## Console<a name="USER_Events.Subscribing.Console"></a>
 
@@ -33,6 +41,9 @@ You can specify the type of source you want to be notified of and the Amazon RDS
 
    1. Depending on the source type you selected, choose the event categories and sources that you want to receive event notifications for\.
 
+      The following example configures event notifications for the DB instance named `testinst`\.  
+![\[Enter source type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/event-source.png)
+
    1. Choose **Create**\.
 
 The Amazon RDS console indicates that the subscription is being created\.
@@ -53,7 +64,7 @@ For Linux, macOS, or Unix:
 ```
 aws rds create-event-subscription \
     --subscription-name myeventsubscription \
-    --sns-topic-arn arn:aws:sns:us-east-1:802#########:myawsuser-RDS \
+    --sns-topic-arn arn:aws:sns:us-east-1:123456789012:myawsuser-RDS \
     --enabled
 ```
 For Windows:  
@@ -61,7 +72,7 @@ For Windows:
 ```
 aws rds create-event-subscription ^
     --subscription-name myeventsubscription ^
-    --sns-topic-arn arn:aws:sns:us-east-1:802#########:myawsuser-RDS ^
+    --sns-topic-arn arn:aws:sns:us-east-1:123456789012:myawsuser-RDS ^
     --enabled
 ```
 

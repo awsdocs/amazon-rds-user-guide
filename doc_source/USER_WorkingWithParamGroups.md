@@ -5,7 +5,7 @@
  You manage your database configuration by associating your DB instances and Multi\-AZ DB clusters with parameter groups\. Amazon RDS defines parameter groups with default settings\. 
 
 **Important**  
-You can define your own parameter groups with customized settings\. Then you can modify your DB instances Multi\-AZ DB clusters to use your own parameter groups\.  
+You can define your own parameter groups with customized settings\. Then you can modify your DB instances and Multi\-AZ DB clusters to use your own parameter groups\.  
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. For information about modifying a Multi\-AZ DB clusters, see [Modifying a Multi\-AZ DB cluster](modify-multi-az-db-cluster.md)\.
 
 **Note**  
@@ -22,18 +22,28 @@ Some DB engines offer additional features that you can add to your database as o
  You can copy an existing DB parameter group with the AWS CLI [copy\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command\. You can copy an existing DB cluster parameter group with the AWS CLI [copy\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-parameter-group.html) command\. Copying a parameter group can be convenient when you want to include most of an existing DB parameter group's custom parameters and values in a new DB parameter group\. 
 
 Here are some important points about working with parameters in a parameter group:
-+ Database parameters are either *static* or *dynamic*\. When you change a static parameter and save the DB parameter group, the parameter change takes effect after you manually reboot the DB instance\. You can reboot a DB instance using the RDS console, by calling the `reboot-db-instance` CLI command, or by calling the `RebootDBInstance` API operation\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class or scale storage\.
++ DB instance parameters are either *static* or *dynamic*\. When you change a static parameter and save the DB parameter group, the parameter change takes effect after you manually reboot the associated DB instances\.
 
-  When you change a dynamic parameter and save the DB parameter group, the change is applied to the parameter group immediately regardless of the **Apply Immediately** setting\. If you use the `pending-reboot` setting in the AWS CLI or RDS API, the change is still applied to the parameter group immediately\. However, applying the parameter change to DB instances that use the parameter group requires a reboot\.
+  When you change a dynamic parameter, by default the parameter change is applied to your DB instance immediately, without requiring a reboot\. To defer the parameter change until after an associated DB instance is rebooted, use the AWS CLI or RDS API, and set the `ApplyMethod` to `pending-reboot` for the parameter change\.
+
+  When you use the AWS Management Console to change DB instance parameter values, it always uses `immediate` for the `ApplyMethod` for dynamic parameters\. For static parameters, the AWS Management Console always uses `pending-reboot` for the `ApplyMethod`\.
+
+  For more information about using the AWS CLI to change a parameter value, see [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html)\. For more information about using the RDS API to change a parameter value, see [ModifyDBParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html)\.
 **Note**  
 Using `pending-reboot` with dynamic parameters in the AWS CLI or RDS API on RDS for SQL Server DB instances generates an error\. Use `apply-immediately` on RDS for SQL Server\.
++ DB cluster parameters are either *static* or *dynamic*\. When you change a static parameter and save the DB cluster parameter group, the parameter change takes effect after you manually reboot the associated DB clusters\.
 
-  If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
+  When you change a dynamic parameter, by default the parameter change is applied to your DB cluster immediately, without requiring a reboot\. To defer the parameter change until after the an associated DB cluster is rebooted, use the AWS CLI or RDS API, and set the `ApplyMethod` to `pending-reboot` for the parameter change\.
+
+  When you use the AWS Management Console to change DB cluster parameter values, it always uses `immediate` for the `ApplyMethod` for dynamic parameters\. For static parameters, the AWS Management Console always uses `pending-reboot` for the `ApplyMethod`\.
+
+  For more information about using the AWS CLI to change a parameter value, see [modify\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster-parameter-group.html)\. For more information about using the RDS API to change a parameter value, see [ModifyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterParameterGroup.html)\.
++ If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 + When you associate a new DB parameter group with a DB instance, the modified static and dynamic parameters are applied only after the DB instance is rebooted\. However, if you modify dynamic parameters in the newly associated DB parameter group, these changes are applied immediately without a reboot\. For more information about changing the DB parameter group, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 + After you change the DB cluster parameter group associated with a Multi\-AZ DB cluster, reboot the DB cluster to apply the changes to all of the DB instances in the DB cluster\.
 
   For information about rebooting a Multi\-AZ DB cluster, see [Rebooting Multi\-AZ DB clusters and reader DB instances](multi-az-db-clusters-concepts-rebooting.md)\.
-+ You can specify integer and Boolean parameters using expressions, formulas, and functions\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](USER_ParamValuesRef.md)\.
++ In many cases, you can specify integer and Boolean parameter values using expressions, formulas, and functions\. Functions can include a mathematical log expression\. However, not all parameters support expressions, formulas, and functions for parameter values\. For more information, see [Specifying DB parameters](USER_ParamValuesRef.md)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance or Multi\-AZ DB cluster and before you create a database in it\. This ensures that the default database and new databases use the character set and collation values that you specify\. If you change character set or collation parameters, the parameter changes aren't applied to existing databases\.
 
   For some DB engines, you can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:

@@ -4,7 +4,7 @@ Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS serv
 
 **Topics**
 + [Creating rules to send Amazon RDS events to CloudWatch Events](#rds-cloudwatch-events.sending-to-cloudwatch-events)
-+ [Tutorial: Log DB instance stage changes using Amazon EventBridge](#log-rds-instance-state)
++ [Tutorial: Log DB instance state changes using Amazon EventBridge](#log-rds-instance-state)
 
 ## Creating rules to send Amazon RDS events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
 
@@ -46,7 +46,7 @@ Use the following steps to create a CloudWatch Events rule that triggers on an e
 
 For more information, see [Creating a CloudWatch Events Rule That Triggers on an Event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) in the *Amazon CloudWatch User Guide*\.
 
-## Tutorial: Log DB instance stage changes using Amazon EventBridge<a name="log-rds-instance-state"></a>
+## Tutorial: Log DB instance state changes using Amazon EventBridge<a name="log-rds-instance-state"></a>
 
 In this tutorial, you create an AWS Lambda function that logs the state changes for an Amazon RDS instance\. You then create a rule that runs the function whenever there is a state change of an existing RDS DB instance\. The tutorial assumes that you have a small running test instance that you can shut down temporarily\.
 

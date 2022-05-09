@@ -114,7 +114,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 ## Supported storage engines for RDS for MySQL<a name="MySQL.Concepts.Storage"></a>
 
-While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. You must be running an instance of MySQL 5\.6 or later to use the InnoDB `memcached` interface\. For more information, see [MySQL memcached support](Appendix.MySQL.Options.memcached.md)\. 
+While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. You must be running an instance of MySQL 5\.6 or higher to use the InnoDB `memcached` interface\. For more information, see [MySQL memcached support](Appendix.MySQL.Options.memcached.md)\. 
 
 The Federated Storage Engine is currently not supported by Amazon RDS for MySQL\. 
 
@@ -176,7 +176,7 @@ Security for MySQL DB instances is managed at three levels:
 + `process`
 + `references`
 + `replication client`
-+ `replication slave (MySQL 5.6 and later) `
++ `replication slave (MySQL 5.6 and higher) `
 + `select`
 + `show databases`
 + `show view`
@@ -216,7 +216,7 @@ Amazon RDS doesn't validate passwords\. The MySQL DB instance performs password 
 "RDS-EVENT-0067" - An attempt to reset the master password for the DB instance has failed.            
 ```
 
-For more information about Amazon RDS events, see [Using Amazon RDS event notification](USER_Events.md)\.
+For more information about Amazon RDS events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 ## Using SSL with a MySQL DB instance<a name="MySQL.Concepts.SSLSupport"></a>
 
@@ -234,8 +234,8 @@ MySQL uses yaSSL for secure connections in the following versions:
 
 MySQL uses OpenSSL for secure connections in the following versions:
 + MySQL version 8\.0
-+ MySQL version 5\.7\.21 and later 5\.7 versions
-+ MySQL version 5\.6\.39 and later 5\.6 versions
++ MySQL version 5\.7\.21 and higher 5\.7 versions
++ MySQL version 5\.6\.39 and higher 5\.6 versions
 
 Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
 
@@ -244,13 +244,13 @@ Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\
 
 | MySQL version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
 | --- | --- | --- | --- | 
-|  MySQL 8\.0  |  Supported  |  Supported  |  Supported  | 
-|  MySQL 5\.7  |  Supported  |  Supported  |  Supported for MySQL 5\.7\.21 and later  | 
-|  MySQL 5\.6  |  Supported  |  Supported for MySQL 5\.6\.46 and later  |  Supported for MySQL 5\.6\.46 and later  | 
+|  MySQL 8\.0  |  Supported for MySQL 8\.0\.27 and lower  |  Supported for MySQL 8\.0\.27 and lower  |  Supported  | 
+|  MySQL 5\.7  |  Supported  |  Supported  |  Supported for MySQL 5\.7\.21 and higher  | 
+|  MySQL 5\.6  |  Supported  |  Supported for MySQL 5\.6\.46 and higher  |  Supported for MySQL 5\.6\.46 and higher  | 
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, as shown in the examples following\. 
 
-The following example shows how to launch the client using the `--ssl-ca` parameter for MySQL 5\.7 and later\.
+The following example shows how to launch the client using the `--ssl-ca` parameter for MySQL 5\.7 and higher\.
 
 ```
 mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
@@ -268,7 +268,7 @@ For information about downloading certificate bundles, see [Using SSL/TLS to enc
 
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
 
-For MySQL 5\.7 and later, use the following statement\.
+For MySQL 5\.7 and higher, use the following statement\.
 
 ```
 ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
@@ -284,18 +284,18 @@ For more information on SSL connections with MySQL, see the [ Using encrypted co
 
 ## Using memcached and other options with MySQL<a name="MySQL.Concepts.General.Options"></a>
 
-Most Amazon RDS DB engines support option groups that allow you to select additional features for your DB instance\. DB instances on MySQL version 5\.6 and later support the `memcached` option, a simple, key\-based cache\. For more information about `memcached` and other options, see [Options for MySQL DB instances](Appendix.MySQL.Options.md)\. For more information about working with option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
+Most Amazon RDS DB engines support option groups that allow you to select additional features for your DB instance\. DB instances on MySQL version 5\.6 and higher support the `memcached` option, a simple, key\-based cache\. For more information about `memcached` and other options, see [Options for MySQL DB instances](Appendix.MySQL.Options.md)\. For more information about working with option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
 
 ## InnoDB cache warming<a name="MySQL.Concepts.InnoDBCacheWarming"></a>
 
 InnoDB cache warming can provide performance gains for your MySQL DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. The file that stores the saved buffer pool information only stores metadata for the pages that are in the buffer pool, and not the pages themselves\. As a result, the file does not require much storage space\. The file size is about 0\.2 percent of the cache size\. For example, for a 64 GiB cache, the cache warming file size is 128 MiB\. For more information on InnoDB cache warming, see [Saving and restoring the buffer pool state](https://dev.mysql.com/doc/refman/8.0/en/innodb-preload-buffer-pool.html) in the MySQL documentation\. 
 
-MySQL on Amazon RDS supports InnoDB cache warming for MySQL version 5\.6 and later\. To enable InnoDB cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group will affect all MySQL DB instances that use that parameter group\. To enable InnoDB cache warming for specific MySQL DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
+MySQL on Amazon RDS supports InnoDB cache warming for MySQL version 5\.6 and higher\. To enable InnoDB cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group will affect all MySQL DB instances that use that parameter group\. To enable InnoDB cache warming for specific MySQL DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 InnoDB cache warming primarily provides a performance benefit for DB instances that use standard storage\. If you use PIOPS storage, you do not commonly see a significant performance benefit\. 
 
 **Important**  
-If your MySQL DB instance does not shut down normally, such as during a failover, then the buffer pool state will not be saved to disk\. In this case, MySQL loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the InnoDB cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand if your DB instance is running MySQL version 5\.6\.19 or later\.  
+If your MySQL DB instance does not shut down normally, such as during a failover, then the buffer pool state will not be saved to disk\. In this case, MySQL loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the InnoDB cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand if your DB instance is running MySQL version 5\.6\.19 or higher\.  
 You can create an event to dump the buffer pool automatically and on a regular interval\. For example, the following statement creates an event named `periodic_buffer_pool_dump` that dumps the buffer pool every hour\.   
 
 ```
@@ -307,7 +307,7 @@ For more information on MySQL events, see [Event syntax](https://dev.mysql.com/d
 
 ### Dumping and loading the buffer pool on demand<a name="MySQL.Concepts.InnoDBCacheWarming.OnDemand"></a>
 
-For MySQL version 5\.6\.19 and later, you can save and load the InnoDB cache "on demand\."
+For MySQL version 5\.6\.19 and higher, you can save and load the InnoDB cache "on demand\."
 + To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql_rds_innodb_buffer_pool_dump_now.md) stored procedure\.
 + To load the saved state of the buffer pool from disk, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_now](mysql_rds_innodb_buffer_pool_load_now.md) stored procedure\.
 + To cancel a load operation in progress, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_abort](mysql_rds_innodb_buffer_pool_load_abort.md) stored procedure\.

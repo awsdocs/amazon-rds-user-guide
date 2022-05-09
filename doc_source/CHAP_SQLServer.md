@@ -3,9 +3,9 @@
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. Following, you can find the most recent supported version of each major version\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
 
 
-+ SQL Server 2019 CU12 15\.00\.4153\.1, released per [KB5004524](https://support.microsoft.com/en-us/topic/kb5004524-cumulative-update-12-for-sql-server-2019-45b2d82a-c7d0-4eb8-aa17-d4bad4059987) on August 4, 2021\.
-+ SQL Server 2017 CU25 14\.00\.3401\.7, released per [KB5003830](https://support.microsoft.com/en-us/topic/kb5003830-cumulative-update-25-for-sql-server-2017-357b80dc-43b5-447c-b544-7503eee189e9) on July 12, 2021\.
-+ SQL Server 2016 SP2 CU16 13\.00\.5882\.1, released per [KB5000645](https://support.microsoft.com/en-us/help/5000645) on February 11, 2021\.
++ SQL Server 2019 CU15 15\.00\.4198\.2, released per [KB5008996](https://support.microsoft.com/en-us/topic/kb5008996-cumulative-update-15-for-sql-server-2019-4b6a8ee9-1c61-482d-914f-36e429901fb6) on January 27, 2022\.
++ SQL Server 2017 CU27 14\.00\.3421\.10, released per [KB5006944](https://support.microsoft.com/en-us/topic/kb5006944-cumulative-update-27-for-sql-server-2017-79117c8f-9d54-42f8-9727-5870fe475187) on October 27, 2021\.
++ SQL Server 2016 SP3 13\.00\.6300\.2, released per [KB5003279](https://support.microsoft.com/en-us/topic/kb5003279-sql-server-2016-service-pack-3-release-information-46ab9543-5cf9-464d-bd63-796279591c31) on September 15, 2021\.
 + SQL Server 2014 SP3 CU4 12\.00\.6329\.1, released per [KB4500181](https://support.microsoft.com/en-us/help/4500181/cumulative-update-4-for-sql-server-2014-sp3) on July 29, 2019\.
 + SQL Server 2012 SP4 GDR 11\.0\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
 + SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
@@ -99,7 +99,9 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
 
 The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 
-The following list of DB instance classes supported for Microsoft SQL Server is provided here for your convenience\. For the most current list, see the RDS console: [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
+The following list of DB instance classes supported for Microsoft SQL Server is provided here for your convenience\. For the most current list, see the RDS console: [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+Not all DB instance classes are available on all supported SQL Server minor versions\. For example, some newer DB instance classes such as db\.r6i aren't available on older minor versions\. You can use the [describe\-orderable\-db\-instance\-options](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/describe-orderable-db-instance-options.html) AWS CLI command to find out which DB instance classes are available for your SQL Server edition and version\.
 
 
 ****  
@@ -186,9 +188,9 @@ The following table shows the supported versions for all editions and all AWS Re
 
 | Major version | Minor version | RDS API `EngineVersion` and CLI `engine-version` | 
 | --- | --- | --- | 
-| SQL Server 2019 |  15\.00\.4153\.1 \(CU12\) 15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |  `15.00.4153.1.v1` `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
-| SQL Server 2017 |  14\.00\.3401\.7 \(CU25\) 14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\)  |  `14.00.3401.7.v1` `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1`  | 
-| SQL Server 2016 |  13\.00\.5882\.1 \(SP2 CU16\) 13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\)  |  `13.00.5882.1.v1` `13.00.5850.14.v1` `13.00.5820.21.v1`  | 
+| SQL Server 2019 |  15\.00\.4198\.2 \(CU15\) 15\.00\.4153\.1 \(CU12\) 15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |  `15.00.4198.2.v1` `15.00.4153.1.v1` `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
+| SQL Server 2017 |  14\.00\.3421\.10 \(CU27\) 14\.00\.3401\.7 \(CU25\) 14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\)  |  `14.00.3421.10.v1` `14.00.3401.7.v1` `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1`  | 
+| SQL Server 2016 |  13\.00\.6300\.2 \(SP3\) 13\.00\.5882\.1 \(SP2 CU16\) 13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\)  |  `13.00.6300.2.v1` `13.00.5882.1.v1` `13.00.5850.14.v1` `13.00.5820.21.v1`  | 
 | SQL Server 2014 |  12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\)  |  `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1`  | 
 | SQL Server 2012 |  11\.00\.7493\.4 \(SP4 GDR\) 11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\)  |  `11.00.7493.4.v1` `11.00.7462.6.v1` `11.00.6594.0.v1`  | 
 

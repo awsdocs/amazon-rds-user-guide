@@ -1,6 +1,6 @@
 # Configuring GTID\-based replication with an external source instance<a name="MySQL.Procedural.Importing.External.Repl.GTIDProcedure"></a>
 
-You can set up replication based on global transaction identifiers \(GTIDs\) from an external MySQL instance into an RDS for MySQL DB instance\. When you set up an external source instance and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
+You can set up replication based on global transaction identifiers \(GTIDs\) from an external MySQL instance into an RDS for MySQL DB instance\. When you set up an external source instance and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 **Important**  
 GTID\-based replication is supported only on RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\. GTID\-based replication isn't supported on RDS for MySQL 5\.6\.

@@ -105,7 +105,7 @@ Sensitive information such as passwords can be exposed if you set the `log_state
 Encrypt the sensitive information on the client side and use the `ENCRYPTED` and `UNENCRYPTED` options of the `CREATE` and `ALTER` statements\.
 Restrict access to the CloudWatch logs\.
 Use stronger authentication mechanisms such as IAM\. 
-For auditing, you can use the PostgreSQL `pgAudit` extension because it redacts the sensitive information for CREATE and ALTER commands\.
+For auditing, you can use the PostgreSQL Auditing \(pgAudit\) extension because it redacts the sensitive information for CREATE and ALTER commands\.
 
 The `log_min_duration_statement` parameter sets the limit in milliseconds of a statement to be logged\. All SQL statements that run longer than the parameter setting are logged\. This parameter is disabled and set to \-1 by default\. Enabling this parameter can help you find unoptimized queries\. 
 

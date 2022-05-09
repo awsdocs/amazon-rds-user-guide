@@ -84,7 +84,7 @@ The additional storage is in increments of whichever of the following is greater
 + Storage growth prediction for 7 hours based on the `FreeStorageSpace` metrics change in the past hour\. For more information on metrics, see [Monitoring with Amazon CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MonitoringOverview.html#monitoring-cloudwatch)\.
 
 The maximum storage threshold is the limit that you set for autoscaling the DB instance\. It has the following constraints:
-+ You must set the maximum storage threshold to at least 10% more than the current allocated storage\.
++ You must set the maximum storage threshold to at least 10% more than the current allocated storage\. We recommend setting it to at least 20% more\.
 
   For example, if you have DB instance with 1000 GiB of allocated storage, then set the maximum storage threshold to at least 1100 GiB\. If you don't, you get an error such as Invalid max storage size for *engine\_name*\.
 + For a DB instance that uses Provisioned IOPS storage, the ratio of IOPS to maximum storage threshold \(in GiB\) must be from 1–50 on RDS for SQL Server, and 0\.5–50 on other RDS DB engines\.
@@ -99,6 +99,7 @@ We recommend that you carefully choose the maximum storage threshold based on us
 
 The following limitations apply to storage autoscaling:
 + Autoscaling doesn't occur if the maximum storage threshold would be equaled or exceeded by the storage increment\.
++ When autoscaling, RDS predicts the storage size for subsequent autoscaling operations\. If a subsequent operation is predicted to exceed the maximum storage threshold, then RDS autoscales to 1 GiB less than the maximum storage threshold\.
 + Autoscaling can't completely prevent storage\-full situations for large data loads\. This is because further storage modifications can't be made for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.
 
    If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.
@@ -234,7 +235,7 @@ For more information about storage, see [Amazon RDS DB instance storage](CHAP_St
 
 You can modify the settings for a DB instance that uses Provisioned IOPS SSD storage by using the Amazon RDS console, AWS CLI, or Amazon RDS API\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose from a range between 1,000 IOPS and 100 GiB of storage up to 80,000 IOPS and 64 TiB \(64,000 GiB\) of storage\. The range depends on your database engine and instance type\. 
 
-Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
+Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the storage size\.
 
 In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage IOPS for a DB instance, the status of the DB instance is **storage\-optimization**\.
 

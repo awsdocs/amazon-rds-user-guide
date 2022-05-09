@@ -28,7 +28,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Using a custom DNS server for outbound network access](Appendix.PostgreSQL.CommonDBATasks.CustomDNS.md)
 + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Upgrading a PostgreSQL DB snapshot engine version](USER_UpgradeDBSnapshot.PostgreSQL.md)
-+ [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
++ [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md)
 + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
 + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)
 + [Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance](PostgreSQL-Lambda.md)
@@ -50,7 +50,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. In some cases, your account might not have a default VPC, and you might want the DB instance in a VPC\. In these cases, create the VPC and subnet groups before you create the DB instance\.    |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Importing data into Amazon RDS PostgreSQL** You can use several different tools to import data into your PostgreSQL DB instance on Amazon RDS\.   |  [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)  | 
-|  **Setting up read\-only read replicas \(primary and standbys\)** RDS for PostgreSQL supports read replicas in both the same AWS Region and in a different AWS Region from the primary instance\.  |  [Working with read replicas](USER_ReadRepl.md) [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)  | 
+|  **Setting up read\-only read replicas \(primary and standbys\)** RDS for PostgreSQL supports read replicas in both the same AWS Region and in a different AWS Region from the primary instance\.  |  [Working with read replicas](USER_ReadRepl.md) [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)  | 
 |  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. To provide access through that firewall, you edit the inbound rules for the security group associated with the VPC hosting the DB instance\.  In general, if your DB instance is on the EC2\-Classic platform, you need to create a DB security group\. If your DB instance is on the EC2\-VPC platform, you need to create a VPC security group\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Controlling access with security groups](Overview.RDSSecurityGroups.md)  | 
 |  **Setting up parameter groups and features** To change the default parameters for your DB instance, create a custom DB parameter group and change settings to that\. If you do this before creating your DB instance, you can choose your custom DB parameter group when you create the instance\.   |  [Working with parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  **Connecting to your PostgreSQL DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as `psql` or `pgAdmin`\.  |  [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md) [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)  | 
@@ -61,7 +61,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Understanding the best practices for PostgreSQL DB instances** Find some of the best practices for working with PostgreSQL on Amazon RDS\.   |  [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)  | 
 
 Following is a list of other sections in this guide that can help you understand and use important features of RDS for PostgreSQL: 
-+  [Understanding the rds\_superuser role](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles) 
++  [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles) 
 +  [Controlling user access to the PostgreSQL databaseControlling user access to PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Access) 
 +  [Working with parameters on your RDS for PostgreSQL DB instance](Appendix.PostgreSQL.CommonDBATasks.Parameters.md) 
 +  [Understanding logging mechanisms supported by RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Auditing) 
@@ -397,7 +397,7 @@ You can use the RDS for PostgreSQL parameter `rds.pg_stat_ramdisk_size` to speci
 
 Under certain workloads, setting this parameter can improve performance and decrease I/O requirements\. For more information about the `stats_temp_directory`, see [ the PostgreSQL documentation\.](https://www.postgresql.org/docs/current/static/runtime-config-statistics.html#GUC-STATS-TEMP-DIRECTORY)\.
 
-To set up a RAM disk for your `stats_temp_directory`, set the `rds.pg_stat_ramdisk_size` parameter to a nonzero value in the parameter group used by your DB instance\. The parameter value is in MB\. You must reboot the DB instance before the change takes effect\. For information about setting parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+To set up a RAM disk for your `stats_temp_directory`, set the `rds.pg_stat_ramdisk_size` parameter to an integer literal value in the parameter group used by your DB instance\. This parameter denotes MB, so you must use an integer value\. Expressions, formulas, and functions aren't valid for the `rds.pg_stat_ramdisk_size` parameter\. Be sure to reboot the DB instance so that the change takes effect\. For information about setting parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 For example, the following AWS CLI command sets the RAM disk parameter to 256 MB\.
 
@@ -426,7 +426,7 @@ stats_temp_directory
 
 RDS for PostgreSQL supports tablespaces for compatibility\. Because all storage is on a single logical volume, you can't use tablespaces for I/O splitting or isolation\. Our benchmarks and experience indicate that a single logical volume is the best setup for most use cases\. 
 
-To create and use tablespaces with your RDS for PostgreSQL DB instance requires the `rds_superuser` role\. Your RDS for PostgreSQL DB instance's main user account \(default name, `postgres`\) is a member of this role\. For more information, see [Understanding the rds\_superuser role](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles)\. 
+To create and use tablespaces with your RDS for PostgreSQL DB instance requires the `rds_superuser` role\. Your RDS for PostgreSQL DB instance's main user account \(default name, `postgres`\) is a member of this role\. For more information, see [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles)\. 
 
 If you specify a file name when you create a tablespace, the path prefix is `/rdsdbdata/db/base/tablespace`\. The following example places tablespace files in `/rdsdbdata/db/base/tablespace/data`\. This example assumes that a `dbadmin` user \(role\) exists and that it's been granted the `rds_superuser` role needed to work with tablespaces\.
 

@@ -6,15 +6,18 @@ Your default VPC has three subnets you can use to isolate resources inside the V
 
 For a list of scenarios involving Amazon RDS DB instances in a VPC  and outside of a VPC, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
 
-For a tutorial that shows you how to create a VPC that you can use with a common Amazon RDS scenario, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
-
 To learn how to work with DB instances inside a VPC, see the following:
 
 **Topics**
 + [Working with a DB instance in a VPC](#Overview.RDSVPC.Create)
 + [Working with DB subnet groups](#USER_VPC.Subnets)
++ [Amazon RDS IP addressing](#USER_VPC.IP_addressing)
 + [Hiding a DB instance in a VPC from the internet](#USER_VPC.Hiding)
 + [Creating a DB instance in a VPC](#USER_VPC.InstanceInVPC)
+
+In the following tutorials, you can learn to create a VPC that you can use for a common Amazon RDS scenario:
++ [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)
++ [Tutorial: Create a virtual private cloud \(VPC\) for use with a DB instance \(dual\-stack mode\)](CHAP_Tutorials.CreateVPCDualStack.md)
 
 ## Working with a DB instance in a VPC<a name="Overview.RDSVPC.Create"></a>
 
@@ -40,19 +43,190 @@ When you set the instance tenancy attribute to dedicated for an Amazon RDS DB in
 
 ## Working with DB subnet groups<a name="USER_VPC.Subnets"></a>
 
-Subnets are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances using the CLI or API; if you use the console, you can just choose the VPC and subnets you want to use\. 
+*Subnets* are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. By using a DB subnet group, you can specify a particular VPC when creating DB instances using the CLI or API\. If you use the console, you can just choose the VPC and subnets you want to use\. 
 
-Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, you must choose a DB subnet group\. From the DB subnet group, Amazon RDS chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\.
+Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, make sure to choose a DB subnet group\. From the DB subnet group, Amazon RDS chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and later create a new standby using an IP address of the subnet in one of the other Availability Zones\.
 
-The subnets in a DB subnet group are either public or private\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\. For a DB instance to be publicly accessible, all of the subnets in its DB subnet group must be public\. If a subnet that is associated with a publicly accessible DB instance changes from public to private, it can affect DB instance availability\.
+The subnets in a DB subnet group are either public or private\. The subnets are public or private, depending on the configuration that you set for their network access control lists \(network ACLs\) and routing tables\. For a DB instance to be publicly accessible, all of the subnets in its DB subnet group must be public\. If a subnet that's associated with a publicly accessible DB instance changes from public to private, it can affect DB instance availability\.
+
+To create a DB subnet group that supports dual\-stack mode, make sure that each subnet that you add to the DB subnet group has an Internet Protocol version 6 \(IPv6\) CIDR block associated with it\. For more information, see [Amazon RDS IP addressing](#USER_VPC.IP_addressing) and [Migrating to IPv6](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html) in the *Amazon VPC User Guide\.*
 
 **Note**  
 The DB subnet group for a Local Zone can have only one subnet\.
 
-When Amazon RDS creates a DB instance in a VPC, it assigns a network interface to your DB instance by using an IP address from your DB subnet group\. However, we strongly recommend that you use the DNS name to connect to your DB instance because the underlying IP address changes during failover\. 
+When Amazon RDS creates a DB instance in a VPC, it assigns a network interface to your DB instance by using an IP address from your DB subnet group\. However, we strongly recommend that you use the Domain Name System \(DNS\) name to connect to your DB instance because the underlying IP address changes during failover\. 
 
 **Note**  
 For each DB instance that you run in a VPC, make sure to reserve at least one address in each subnet in the DB subnet group for use by Amazon RDS for recovery actions\. 
+
+## Amazon RDS IP addressing<a name="USER_VPC.IP_addressing"></a>
+
+IP addresses enable resources in your VPC to communicate with each other, and with resources over the internet\. Amazon RDS support both the Internet Protocol version 4 \(IPv4\) and IPv6 addressing protocols\. By default, Amazon RDS and Amazon VPC use the IPv4 addressing protocol\. You can't turn off this behavior\. When you create a VPC, make sure to specify an IPv4 CIDR block \(a range of private IPv4 addresses\)\. You can optionally assign an IPv6 CIDR block to your VPC and subnets, and assign IPv6 addresses from that block to DB instances in your subnet\.
+
+Support for the IPv6 protocol expands the number of supported IP addresses\. By using the IPv6 protocol, you ensure that you have sufficient available addresses for the future growth of the internet\. New and existing RDS resources can use IPv4 and IPv6 addresses within your Amazon VPC\. Configuring, securing, and translating network traffic between the two protocols used in different parts of an application can cause operational overhead\. You can standardize on the IPv6 protocol for Amazon RDS resources to simplify your network configuration\.
+
+**Topics**
++ [IPv4 addresses](#USER_VPC.IP_addressing.IPv4)
++ [IPv6 addresses](#USER_VPC.IP_addressing.IPv6)
++ [Dual\-stack mode](#USER_VPC.IP_addressing.dual-stack-mode)
+
+### IPv4 addresses<a name="USER_VPC.IP_addressing.IPv4"></a>
+
+When you create a VPC, you must specify a range of IPv4 addresses for the VPC in the form of a CIDR block, such as `10.0.0.0/16`\. A DB subnet group defines the range of IP addresses in this CIDR block that a DB instance can use\. These IP addresses can be private or public\.
+
+A private IPv4 address is an IP address that's not reachable over the internet\. You can use private IPv4 addresses for communication between your DB instance and other resources, such as Amazon EC2 instances, in the same VPC\. Each DB instance has a private IP address for communication in the VPC\.
+
+A public IP address is an IPv4 address that's reachable from the internet\. You can use public addresses for communication between your DB instance and resources on the internet, such as a SQL client\. You control whether your DB instance receives a public IP address\.
+
+For a tutorial that shows you how to create a VPC with only private IPv4 addresses that you can use for a common Amazon RDS scenario, see [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
+
+### IPv6 addresses<a name="USER_VPC.IP_addressing.IPv6"></a>
+
+You can optionally associate an IPv6 CIDR block with your VPC and subnets, and assign IPv6 addresses from that block to the resources in your VPC\. Each IPv6 addresses is globally unique\. 
+
+The IPv6 CIDR block for your VPC is automatically assigned from Amazon's pool of IPv6 addresses\. You can't choose the range yourself\.
+
+When connecting to an IPv6 address, make sure that the following conditions are met:
++ The client is configured so that client to database traffic over IPv6 is allowed\.
++ RDS security groups used by the DB instance are configured correctly so that client to database traffic over IPv6 is allowed\.
++ The client operating system stack allows traffic on the IPv6 address, and operating system drivers and libraries are configured to choose the correct default DB instance endpoint \(either IPv4 or IPv6\)\.
+
+For more information about IPv6, see [ IP Addressing](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html#vpc-ip-addressing) in the *Amazon VPC User Guide*\.
+
+### Dual\-stack mode<a name="USER_VPC.IP_addressing.dual-stack-mode"></a>
+
+When a DB instance can communicate over both the IPv4 and IPv6 addressing protocols, it's running in dual\-stack mode\. So, resources can communicate with the DB instance over IPv4, IPv6, or both\. RDS disables Internet Gateway access for IPv6 endpoints of private dual\-stack mode DB instances to ensure that your IPv6 endpoints are private, and can only be accessed from within your VPC\.
+
+**Topics**
++ [Dual\-stack mode and DB subnet groups](#USER_VPC.IP_addressing.dual-stack-db-subnet-groups)
++ [Working with dual\-stack mode DB instances](#USER_VPC.IP_addressing.dual-stack-working-with)
++ [Modifying IPv4\-only DB instances to use dual\-stack mode](#USER_VPC.IP_addressing.dual-stack-modifying-ipv4)
++ [Availability of dual\-stack network DB instances](#USER_VPC.IP_addressing.dual-stack-availability)
++ [Limitations for dual\-stack network DB instances](#USER_VPC.IP_addressing.dual-stack-limitations)
+
+For a tutorial that shows you how to create a VPC with both IPv4 and IPv6 addresses that you can use for a common Amazon RDS scenario, see [Tutorial: Create a virtual private cloud \(VPC\) for use with a DB instance \(dual\-stack mode\)](CHAP_Tutorials.CreateVPCDualStack.md)\. 
+
+#### Dual\-stack mode and DB subnet groups<a name="USER_VPC.IP_addressing.dual-stack-db-subnet-groups"></a>
+
+To use dual\-stack mode, make sure that each subnet in the DB subnet group that you associate with the DB instance has an IPv6 CIDR block associated with it\. You can create a new DB subnet group or modify an existing DB subnet group to meet this requirement\. After a DB instance is in dual\-stack mode, clients can connect to it normally\. Make sure that client security firewalls and RDS DB instance security groups are accurately configured to allow traffic over IPv6\. To connect, clients use the DB instance's endpoint \. Client applications can specify which protocol is preferred when connecting to a database\. In dual\-stack mode, the DB instance detects the client's preferred network protocol, either IPv4 or IPv6, and uses that protocol for the connection\.
+
+If a DB subnet group stops supporting dual\-stack mode because of subnet deletion or CIDR disassociation, there's a risk of an incompatible network state for DB instances that are associated with the DB subnet group\. Also, you can't use the DB subnet group when you create new dual\-stack mode DB instance\.
+
+To determine whether a DB subnet group supports dual\-stack mode by using the AWS Management Console, view the **Network type** on the details page of the DB subnet group\. To determine whether a DB subnet group supports dual\-stack mode by using the AWS CLI, call the [describe\-db\-subnet\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-subnet-groups.html) command and view `SupportedNetworkTypes` in the output\.
+
+Read replicas are treated as independent DB instances and can have a network type that's different from the primary DB instance\. If you change the network type of a read replica's primary DB instance, the read replica isn't affected\. When you are restoring a DB instance, you can restore it to any network type that's supported\.
+
+#### Working with dual\-stack mode DB instances<a name="USER_VPC.IP_addressing.dual-stack-working-with"></a>
+
+When you create or modify a DB instance, you can specify *dual\-stack mode* to allow your resources to communicate with your DB instance over IPv4, IPv6, or both\.
+
+When you use the AWS Management Console to create or modify a DB instance, you can specify dual\-stack mode in the **Network type** section\. The following image shows the **Network type** section in the AWS Management Console\.
+
+![\[Network type section in the console with Dual-stack mode selected\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/dual-stack-mode.png)
+
+When you use the AWS CLI to create or modify a DB instance, set the `--network-type` option to `DUAL` to use dual\-stack mode\. When you use the RDS API to create or modify a DB instance, set the `NetworkType` parameter to `DUAL` to use dual\-stack mode\. When you are modifying the network type of a DB instance, downtime is possible\. If dual\-stack mode isn't supported by the specified DB engine version or DB subnet group, the `NetworkTypeNotSupported` error is returned\.
+
+For more information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+To determine whether a DB instance is in dual\-stack mode by using the AWS Management Console, view the **Network type** on the **Connectivity & security** tab for the DB instance\.
+
+#### Modifying IPv4\-only DB instances to use dual\-stack mode<a name="USER_VPC.IP_addressing.dual-stack-modifying-ipv4"></a>
+
+You can modify an IPv4\-only DB instance to use dual\-stack mode\. To do so, change the network type of the DB instance\. The modification might result in downtime\.
+
+Before modifying a DB instance to use dual\-stack mode, make sure that its DB subnet group supports dual\-stack mode\. If the DB subnet group associated with the DB instance doesn't support dual\-stack mode, specify a different DB subnet group that supports it when you modify the DB instance\. If you modify the DB subnet group of a DB instance before you change the DB instance to use dual\-stack mode, make sure that the DB subnet group is valid for the DB instance before and after the change\.
+
+If you can't connect to the DB instance after the change, make sure that the client and database security firewalls and route tables are accurately configured to allow cross traffic to the database on the selected network \(either IPv4 or IPv6\)\. You might also need to modify operating system parameter, libraries, or drivers to connect using an IPv6 address\.
+
+The following limitations apply to modifying a DB instance to use dual\-stack mode:
++ Dual\-stack mode DB instances can't be publicly accessible\.
++ DB instances can't have an IPv6\-only endpoint\.
++ There can't be a pending change from a Single\-AZ deployment to a Multi\-AZ deployment, or from a Multi\-AZ deployment to a Single\-AZ deployment\.
+
+**To modify an IPv4\-only DB instance to use dual\-stack mode**
+
+1. Modify a DB subnet group to support dual\-stack mode, or create a DB subnet group that supports dual\-stack mode:
+
+   1. Associate an IPv6 CIDR block with your VPC\.
+
+      For instructions, see [ Associate an IPv6 CIDR block with your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#vpc-associate-ipv6-cidr) in the *Amazon VPC User Guide*\.
+
+   1. Attach the IPv6 CIDR block to all of the subnets in your the DB subnet group\.
+
+      For instructions, see [ Associate an IPv6 CIDR block with your subnet](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-subnets.html#subnet-associate-ipv6-cidr) in the *Amazon VPC User Guide*\.
+
+   1. Confirm that the DB subnet group supports dual\-stack mode\.
+
+      If you are using the AWS Management Console, select the DB subnet group, and make sure that the **Supported network types** value is **Dual, IPv4**\.
+
+      If you are using the AWS CLI, call the [describe\-db\-subnet\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, and make sure that the `SupportedNetworkType` value for the DB instance is `Dual, IPv4`\.
+
+1. Modify the security group associated with the DB instance to allow IPv6 connections to the database, or create a new security group that allows IPv6 connections\.
+
+   For instructions, see [ Security group rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules) in the *Amazon VPC User Guide*\.
+
+1. Modify the DB instance to support dual\-stack mode\. and set the **Network type** to **Dual\-stack mode**\.
+
+   If you are using the AWS Management Console, make sure that the following settings are correct:
+   + **Network type** – **Dual\-stack mode**  
+![\[Network type section in the console with Dual-stack mode selected\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/dual-stack-mode.png)
+   + **Subnet group** – The DB subnet group that you configured in a previous step
+   + **Security group** – The security that you configured in a previous step
+
+   If you are using the AWS CLI, make sure that the following settings are correct:
+   + `--network-type` – `dual`
+   + `--db-subnet-group-name` – The DB subnet group that you configured in a previous step
+   + `--vpc-security-group-ids` – The DB security group that you configured in a previous step
+
+1. Confirm that the DB instance supports dual\-stack mode\.
+
+   If you are using the AWS Management Console, go to the **Connectivity & security** tab for the DB instance, and make sure that the **Network type** value is **Dual\-stack mode**\.
+
+   If you are using the AWS CLI, call the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, and make sure that the `NetworkType` value for the DB instance is `dual`\.
+
+   Run the `dig` command on the DB instance endpoint to identify the IPv6 address associated with it\.
+
+   ```
+   dig db-instance-endpoint AAAA
+   ```
+
+   Use the DB instance endpoint, not the IPv6 address, to connect to the DB instance\.
+
+#### Availability of dual\-stack network DB instances<a name="USER_VPC.IP_addressing.dual-stack-availability"></a>
+
+The following DB engine versions support dual\-stack network DB instances:
++ RDS for MariaDB versions:
+  + 10\.5\.7 and higher 10\.5 versions
+  + 10\.4\.8 and higher 10\.4 versions
+  + 10\.3\.20 and higher 10\.3 versions
+  + 10\.2\.21 and higher 10\.2 versions
++ RDS for MySQL versions:
+  + 8\.0\.21 and higher 8\.0 versions
+  + 5\.7\.31 and higher 5\.7 versions
++ All RDS for Oracle versions
++ RDS for PostgreSQL versions:
+  + All 14 versions
+  + 13\.3 and higher 13 versions
+  + 12\.7 and higher 12 versions
+  + 11\.12 and higher 11 versions
+  + 10\.17 and higher 10 versions
++ RDS for SQL Server versions:
+  + 15\.00\.4043\.16\.v1 and higher 15 versions
+  + 14\.00\.3294\.2\.v1 and higher 14 versions
+  + 13\.00\.5820\.21\.v1 and higher 13 versions
+
+#### Limitations for dual\-stack network DB instances<a name="USER_VPC.IP_addressing.dual-stack-limitations"></a>
+
+The following limitations apply to dual\-stack network DB instances:
++ DB instances can't use the IPv6 protocol exclusively\. They can use IPv4 exclusively, or they can use the IPv4 and IPv6 protocol \(dual\-stack mode\)\.
++ Amazon RDS doesn't support native IPv6 subnets\.
++ DB instances that use dual\-stack mode must be private\. They can't be publicly accessible\.
++ Dual\-stack mode isn't supported in the China \(Beijing\) and China \(Ningxia\) AWS Regions\.
++ Dual\-stack mode doesn't support db\.m3 and db\.r3 DB instance classes\.
++ For RDS for SQL Server, dual\-stack mode DB instances that use Always On AGs availability group listener endpoints only present IPv4 addresses\.
++ You can't use RDS Proxy with dual\-stack mode DB instances\.
++ You can't use dual\-stack mode with RDS on AWS Outposts DB instances\.
++ You can't use dual\-stack mode with DB instances in a Local Zone\.
 
 ## Hiding a DB instance in a VPC from the internet<a name="USER_VPC.Hiding"></a>
 

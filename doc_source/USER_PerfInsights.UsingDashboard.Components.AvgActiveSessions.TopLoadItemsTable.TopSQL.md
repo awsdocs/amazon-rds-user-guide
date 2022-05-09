@@ -3,33 +3,53 @@
 By default, the **Top SQL** tab shows the SQL queries that are contributing the most to DB load\. To help tune your queries, you can analyze information such as the query text, statistics, and Support SQL ID\. You can also choose the statistics that you want to appear in the **Top SQL** tab\.
 
 **Topics**
++ [SQL text](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.text)
 + [SQL statistics](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.statistics)
 + [Load by waits \(AAS\)](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.Load-by-waits)
 + [SQL information](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.SQL-information)
 + [Preferences](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.Preferences)
 
-## SQL statistics<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.statistics"></a>
+## SQL text<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.text"></a>
 
-*SQL statistics* are performance\-related metrics about SQL queries\. For example, Performance Insights might show executions per second or rows processed per second\. Performance Insights collects statistics for only the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\. 
+By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. 
+
+![\[SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/sql-text-oracle.png)
+
+To learn how to see more than the default 500 bytes of SQL text, see [Accessing more SQL text in the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.SQLTextSize.md)\.
 
 A *SQL digest* is a composite of multiple actual queries that are structurally similar but might have different literal values\. The digest replaces hardcoded values with a question mark\. For example, a digest might be `SELECT * FROM emp WHERE lname= ?`\. This digest might include the following child queries:
 
 ```
-SELECT * FROM emp WHERE lname = 'Miller'
+SELECT * FROM emp WHERE lname = 'Sanchez'
 SELECT * FROM emp WHERE lname = 'Olagappan'
 SELECT * FROM emp WHERE lname = 'Wu'
 ```
+
+To see the literal SQL statements in a digest, select the query, and then choose the plus symbol \(\+\)\. In the following example, the selected query is a digest\.
+
+![\[Selected SQL digest\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_4b.png)
+
+**Note**  
+A SQL digest groups similar SQL statements, but doesn't redact sensitive information\.
+
+Performance Insights can show Oracle SQL text as **Unknown**\. This occurs in the following situations:
++ An Oracle database user other than `SYS` is active but not currently issuing SQL\. For example, when a parallel query completes, the query coordinator waits for helper processes to send their session statistics\. For the duration of the wait, the query text shows **Unknown**\.
++ For an RDS for Oracle instance on Standard Edition, Resource Manager limits the number of parallel threads\. The background process doing this work causes the query text to show as **Unknown**\.
+
+## SQL statistics<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.statistics"></a>
+
+*SQL statistics* are performance\-related metrics about SQL queries\. For example, Performance Insights might show executions per second or rows processed per second\. Performance Insights collects statistics for only the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\. 
 
 Every line in the **Top SQL** table shows relevant statistics for the SQL statement or digest, as shown in the following example\.
 
 ![\[Top SQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_4.png)
 
-To see the literal SQL statements in a digest, select the query, and then choose the plus symbol \(\+\)\. In the following screenshot, the selected query is a digest\. 
+Performance Insights can report `0.00` and `-` \(unknown\) for SQL statistics\. This situation occurs under the following conditions:
++ Only one sample exists\. For example, Performance Insights calculates rates of change for RDS PostgreSQL queries based on multiple samples from the `pg_stats_statements` view\. When a workload runs for a short time, Performance Insights might collect only one sample, which means that it can't calculate a rate of change\. The unknown value is represented with a dash \(`-`\)\.
++ Two samples have the same values\. Performance Insights can't calculate a rate of change because no change has occurred, so it reports the rate as `0.00`\.
++ An RDS PostgreSQL statement lacks a valid identifier\. PostgreSQL creates a identifier for a statement only after parsing and analysis\. Thus, a statement can exist in the PostgreSQL internal in\-memory structures with no identifier\. Because Performance Insights samples internal in\-memory structures once per second, low\-latency queries might appear for only a single sample\. If the query identifier isn't available for this sample, Performance Insights can't associate this statement with its statistics\. The unknown value is represented with a dash \(`-`\)\.
 
-![\[Selected SQL digest\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_4b.png)
-
-**Note**  
-A SQL digest groups similar SQL statements, but does not redact sensitive information\.
+For a description of the SQL statistics for the Amazon RDS engines, see [SQL statistics for Performance Insights](metrics-reference.md#sql-statistics)\.
 
 ## Load by waits \(AAS\)<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.Load-by-waits"></a>
 

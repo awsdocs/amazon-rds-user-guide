@@ -29,7 +29,7 @@ To use Management Agent, ensure that you meet the following prerequisites\.
 
 Following are general prerequisites for using Management Agent: 
 + You need an Oracle Management Service \(OMS\) that is configured to connect to your Amazon RDS DB instance\. 
-+ In most cases, you must configure your VPC to allow connections from OMS to your DB instance\. If you aren't familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
++ In most cases, you must configure your VPC to allow connections from OMS to your DB instance\. If you aren't familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
 + Management Agent version 13\.5\.0\.0\.v1 requires OMS version 13\.5\.0\.0 or later\.
 + Management Agent version 13\.4\.0\.9\.v1 requires OMS version 13\.4\.0\.9 or later and patch 32198287\.
 + Ensure that you have sufficient storage space for your OEM release:
@@ -79,7 +79,7 @@ Make sure that your OMS host and your Amazon RDS DB instance can communicate\. D
 + To connect from the Management Agent to your OMS, if your OMS is behind a firewall, add the IP addresses of your DB instances to your OMS\. 
 
   Make sure the firewall for the OMS allows traffic from both the DB listener port \(default 1521\) and the OEM Agent port \(default 3872\), originating from the IP address of the DB instance\.
-+ To connect from your OMS to the Management Agent, if your OMS has a publicly resolvable host name, add the OMS address to a security group\. Your security group must have inbound rules that allow access to the DB listener port and the Management Agent port\. For an example of creating a security and adding inbound rules, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
++ To connect from your OMS to the Management Agent, if your OMS has a publicly resolvable host name, add the OMS address to a security group\. Your security group must have inbound rules that allow access to the DB listener port and the Management Agent port\. For an example of creating a security and adding inbound rules, see [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
 + To connect from your OMS to the Management Agent, if your OMS doesn't have a publicly resolvable host name, use one of the following: 
   + If your OMS is hosted on an Amazon Elastic Compute Cloud \(Amazon EC2\) instance in a private VPC, you can set up VPC peering to connect from OMS to Management Agent\. For more information, see [A DB instance in a VPC accessed by an EC2 instance in a different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\. 
   + If your OMS is hosted on\-premises, you can set up a VPN connection to allow access from OMS to Management Agent\. For more information, see [A DB instance in a VPC accessed by a client application through the internet](USER_VPC.Scenarios.md#USER_VPC.Scenario4) or [VPN connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html)\. 

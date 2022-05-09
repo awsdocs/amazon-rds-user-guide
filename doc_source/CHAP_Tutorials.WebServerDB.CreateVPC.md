@@ -1,4 +1,4 @@
-# Tutorial: Create an Amazon VPC for use with a DB instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
+# Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
 
 A common scenario includes a DB instance in an Amazon VPC, that shares data with a web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
 
@@ -124,7 +124,7 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your public instan
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your EC2 instance\. If you do this, you can connect to your EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
+   1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your Amazon EC2 instance\. If you do this, you can connect to your Amazon EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
       + **Type:** `SSH`
       + **Source:** The IP address or range from Step a, for example: `203.0.113.25/32`\.
 
@@ -157,7 +157,7 @@ To keep your DB instance private, create a second security group for private acc
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your EC2 instance\. If you do this, you can connect from your web server to your DB instance to store and retrieve data from your web application to your database\. 
+   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your web server to your DB instance to store and retrieve data from your web application to your database\. 
       + **Type:** `MySQL/Aurora`
       + **Source:** The identifier of the `tutorial-securitygroup` security group that you created previously in this tutorial, for example: `sg-9edd5cfb`\.
 
@@ -268,7 +268,7 @@ If you added resources in the Amazon VPC you created for this tutorial, such as 
 
    1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-   1. Choose **EC2 Dashboard**, and then choose **Elastic IPs**\.
+   1. Choose **Amazon EC2 Dashboard**, and then choose **Elastic IPs**\.
 
    1. Select the Elastic IP address you want to release\.
 

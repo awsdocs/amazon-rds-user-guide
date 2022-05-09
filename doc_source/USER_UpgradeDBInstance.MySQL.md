@@ -150,7 +150,7 @@ These prechecks are mandatory\. You can't choose to skip them\. The prechecks pr
 
 The prechecks include some that are included with MySQL and some that were created specifically by the Amazon RDS team\. For information about the prechecks provided by MySQL, see [Upgrade checker utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-upgrade.html)\.
 
-The prechecks run before the DB instance is stopped for the upgrade, meaning that they don't cause any downtime when they run\. If the prechecks find an incompatibility, Amazon RDS automatically cancels the upgrade before the DB instance is stopped\. Amazon RDS also generates an event for the incompatibility\. For more information about Amazon RDS events, see [Using Amazon RDS event notification](USER_Events.md)\.
+The prechecks run before the DB instance is stopped for the upgrade, meaning that they don't cause any downtime when they run\. If the prechecks find an incompatibility, Amazon RDS automatically cancels the upgrade before the DB instance is stopped\. Amazon RDS also generates an event for the incompatibility\. For more information about Amazon RDS events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 Amazon RDS records detailed information about each incompatibility in the log file `PrePatchCompatibility.log`\. In most cases, the log entry includes a link to the MySQL documentation for correcting the incompatibility\. For more information about viewing log files, see [Viewing and listing database log files](USER_LogAccess.Procedural.Viewing.md)\.
 

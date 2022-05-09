@@ -19,7 +19,7 @@ Similarly, if **Supported platforms** indicates *only* `VPC`, as shown following
 
 ![\[EC2-VPC platform\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2-GSG-VPC.png)
 
-In both the RDS and EC2 console, the name of the default VPC is shown below the supported platform\. To provide access to a DB instance created on the *EC2\-VPC* platform, you must create a VPC security group\. For information about creating a VPC security group, see [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+In both the RDS and EC2 console, the name of the default VPC is shown below the supported platform\. To provide access to a DB instance created on the *EC2\-VPC* platform, you must create a VPC security group\. For information about creating a VPC security group, see [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
 ## EC2\-Classic platform in the console<a name="USER_VPC.FindDefaultVPC.EC2-Classic-Platform"></a>
 

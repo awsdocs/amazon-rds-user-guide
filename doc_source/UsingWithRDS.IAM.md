@@ -8,6 +8,7 @@ AWS Identity and Access Management \(IAM\) is an AWS service that helps an admin
 + [Managing access using policies](#security_iam_access-manage)
 + [How Amazon RDS works with IAM](security_iam_service-with-iam.md)
 + [Amazon RDS identity\-based policy examples](security_iam_id-based-policy-examples.md)
++ [AWS managed policies for Amazon RDS](rds-security-iam-awsmanpol.md)
 + [Amazon RDS updates to AWS managed policies](rds-manpol-updates.md)
 + [Preventing cross\-service confused deputy problems](cross-service-confused-deputy-prevention.md)
 + [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)

@@ -13,9 +13,12 @@ You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blo
 ## Tutorials in this guide<a name="CHAP_Tutorials.ThisGuide"></a>
 
 The following tutorials in this guide show you how to perform common tasks with Amazon RDS:
-+ [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
++ [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 
   Learn how to include a DB instance in an Amazon virtual private cloud \(VPC\) that shares data with a web server that is running on an Amazon EC2 instance in the same VPC\.
++ [Tutorial: Create a virtual private cloud \(VPC\) for use with a DB instance \(dual\-stack mode\)](CHAP_Tutorials.CreateVPCDualStack.md)
+
+  Learn how to include a DB instance in an Amazon virtual private cloud \(VPC\) that shares data with an Amazon EC2 instance in the same VPC\. In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\. 
 + [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)
 
   Learn how to install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is a MySQL DB instance\. Both the Amazon EC2 instance and the DB instance run in an Amazon VPC\.
@@ -25,7 +28,7 @@ The following tutorials in this guide show you how to perform common tasks with 
 + [Tutorial: Use tags to specify which DB instances to stop](USER_Tagging.md#Tagging.RDS.Autostop)
 
   Learn how to use tags to specify which DB instances to stop\.
-+ [Tutorial: Log DB instance stage changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
++ [Tutorial: Log DB instance state changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)
 
   Learn how to log a DB instance state change using Amazon EventBridge and AWS Lambda\.
 + [Tutorial: Creating an Amazon CloudWatch alarm for Multi\-AZ DB cluster replica lag](multi-az-db-cluster-cloudwatch-alarm.md)

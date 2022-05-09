@@ -25,7 +25,7 @@ For information about modifying a DB instance, see [Modifying an Amazon RDS DB i
 This action avoids downtime when you convert from Single\-AZ to Multi\-AZ, but you can experience a performance impact during and after converting to Multi\-AZ\. This impact can be significant for workloads that are sensitive to write latency\.  
 To turn on Multi\-AZ for a DB instance, RDS takes a snapshot of the primary DB instance's Amazon EBS volume and restores it on the newly created standby replica\. RDS then synchronizes both volumes\. New volumes created from existing EBS snapshots load lazily in the background\. This capability lets large volumes be restored from a snapshot quickly, but it can add latency during the modification and after it's complete\. For more information, see [ Restoring an Amazon EBS volume from a snapshot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html) in the Amazon EC2 documentation\. 
 
-After the modification is complete, Amazon RDS triggers an event \(RDS\-EVENT\-0025\) that indicates the process is complete\. You can monitor Amazon RDS events\. For more information about events, see [Using Amazon RDS event notification](USER_Events.md)\.
+After the modification is complete, Amazon RDS triggers an event \(RDS\-EVENT\-0025\) that indicates the process is complete\. You can monitor Amazon RDS events\. For more information about events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 ## Failover process for Amazon RDS<a name="Concepts.MultiAZ.Failover"></a>
 
@@ -48,7 +48,7 @@ Amazon RDS handles failovers automatically so you can resume database operations
 | The user requested a failover of the DB instance\. |  You rebooted the DB instance and chose **Reboot with failover**\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.  | 
 
 To determine if your Multi\-AZ DB instance has failed over, you can do the following:
-+ Set up DB event subscriptions to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS event notification](USER_Events.md)\.
++ Set up DB event subscriptions to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 + View your DB events by using the RDS console or API operations\.
 + View the current state of your Multi\-AZ DB instance deployment by using the RDS console or API operations\.
 

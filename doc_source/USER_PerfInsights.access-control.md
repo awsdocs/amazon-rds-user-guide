@@ -1,10 +1,10 @@
 # Configuring access policies for Performance Insights<a name="USER_PerfInsights.access-control"></a>
 
-To access Performance Insights, you must have the appropriate permissions from AWS Identity and Access Management \(IAM\)\. You can grant access in the following ways:
+To access Performance Insights, a principal must have the appropriate permissions from AWS Identity and Access Management \(IAM\)\. You can grant access in the following ways:
 + Attach the `AmazonRDSPerformanceInsightsReadOnly` managed policy to an IAM user or role\.
 + Create a custom IAM policy and attach it to an IAM user or role\.
 
-Also, if you specified a customer managed key when you turned on Performance Insights, make sure that users in your account have the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the KMS key\.
+If you specified a customer managed key when you turned on Performance Insights, make sure that users in your account have the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the KMS key\.
 
 
 

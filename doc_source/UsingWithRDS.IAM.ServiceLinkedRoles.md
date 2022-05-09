@@ -125,7 +125,8 @@ This service\-linked role has a permissions policy attached to it called `Amazon
                     "cloudwatch:namespace": [
                         "AWS/DocDB",
                         "AWS/Neptune",
-                        "AWS/RDS"
+                        "AWS/RDS",
+                        "AWS/Usage"
                     ]
                 }
             }

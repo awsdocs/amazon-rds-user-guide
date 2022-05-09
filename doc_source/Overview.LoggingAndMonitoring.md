@@ -21,7 +21,7 @@ You can view, download, and watch database logs using the AWS Management Console
 Amazon RDS provides automated recommendations for database resources\. These recommendations provide best practice guidance by analyzing DB instance configuration, usage, and performance data\. For more information, see [Viewing Amazon RDS recommendations](accessing-monitoring.md#USER_Recommendations)\.
 
 **Amazon RDS Event Notification**  
-Amazon RDS uses the Amazon Simple Notification Service \(Amazon SNS\) to provide notification when an Amazon RDS event occurs\. These notifications can be in any notification form supported by Amazon SNS for an AWS Region, such as an email, a text message, or a call to an HTTP endpoint\. For more information, see [Using Amazon RDS event notification](USER_Events.md)\.
+Amazon RDS uses the Amazon Simple Notification Service \(Amazon SNS\) to provide notification when an Amazon RDS event occurs\. These notifications can be in any notification form supported by Amazon SNS for an AWS Region, such as an email, a text message, or a call to an HTTP endpoint\. For more information, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 **AWS Trusted Advisor**  
 Trusted Advisor draws upon best practices learned from serving hundreds of thousands of AWS customers\. Trusted Advisor inspects your AWS environment and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps\. All AWS customers have access to five Trusted Advisor checks\. Customers with a Business or Enterprise support plan can view all Trusted Advisor checks\.   

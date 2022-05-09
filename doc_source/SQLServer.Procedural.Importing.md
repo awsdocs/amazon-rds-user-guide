@@ -23,7 +23,7 @@ Using native \.bak files to back up and restore databases is usually the fastest
 The following are some limitations to using native backup and restore: 
 + You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region from your Amazon RDS DB instance\.
 + You can't restore a database with the same name as an existing database\. Database names are unique\.
-+ We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.  
++ We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.
 + Amazon S3 has a size limit of 5 TB per file\. For native backups of larger databases, you can use multifile backup\.
 + The maximum database size that can be backed up to S3 depends on the available memory, CPU, I/O, and network resources on the DB instance\. The larger the database, the more memory the backup agent consumes\. Our testing shows that you can make a compressed backup of a 16\-TB database on our newest\-generation instance types from `2xlarge` instance sizes and larger, given sufficient system resources\.
 + You can't back up to or restore from more than 10 backup files at the same time\.
@@ -70,20 +70,6 @@ To set up for native backup and restore, you need three components:
 If you want to manually create a new IAM role to use with native backup and restore, you can do so\. In this case, you create a role to delegate permissions from the Amazon RDS service to your Amazon S3 bucket\. When you create an IAM role, you attach a trust relationship and a permissions policy\. The trust relationship allows RDS to assume this role\. The permissions policy defines the actions this role can perform\. For more information about creating the role, see [ Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\.
 
 For the native backup and restore feature, use trust relationships and permissions policies similar to the examples in this section\. In the following example, we use the service principal name `rds.amazonaws.com` as an alias for all service accounts\. In the other examples, we specify an Amazon Resource Name \(ARN\) to identify another account, user, or role that we're granting access to in the trust policy\.
-
-**Example trust relationship for native backup and restore**  
-
-```
-1. {
-2.     "Version": "2012-10-17",
-3.     "Statement":
-4.     [{
-5.         "Effect": "Allow",
-6.         "Principal": {"Service":  "rds.amazonaws.com"},
-7.         "Action": "sts:AssumeRole"
-8.     }]
-9. }
-```
 
 We recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource\-based trust relationships to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
 
@@ -140,15 +126,16 @@ The following example uses an ARN to specify a resource\. For more information o
 15.         "Effect": "Allow",
 16.         "Action":
 17.             [
-18.                 "s3:GetObject",
-19.                 "s3:PutObject",
-20.                 "s3:ListMultipartUploadParts",
-21.                 "s3:AbortMultipartUpload"
-22.             ],
-23.         "Resource": "arn:aws:s3:::bucket_name/*"
-24.         }
-25.     ]
-26. }
+18.                 "s3:GetObjectMetaData",
+19.                 "s3:GetObject",
+20.                 "s3:PutObject",
+21.                 "s3:ListMultipartUploadParts",
+22.                 "s3:AbortMultipartUpload"
+23.             ],
+24.         "Resource": "arn:aws:s3:::bucket_name/*"
+25.         }
+26.     ]
+27. }
 ```
 
 **Example permissions policy for native backup and restore with encryption support**  
@@ -185,15 +172,16 @@ The IAM role must also be a key user and key administrator for the KMS key, that
 26.         "Effect": "Allow",
 27.         "Action":
 28.             [
-29.                 "s3:GetObject",
-30.                 "s3:PutObject",
-31.                 "s3:ListMultipartUploadParts",
-32.                 "s3:AbortMultipartUpload"
-33.             ],
-34.         "Resource": "arn:aws:s3:::bucket_name/*"
-35.         }
-36.     ]
-37. }
+29.                 "s3:GetObjectMetaData",
+30.                 "s3:GetObject",
+31.                 "s3:PutObject",
+32.                 "s3:ListMultipartUploadParts",
+33.                 "s3:AbortMultipartUpload"
+34.             ],
+35.         "Resource": "arn:aws:s3:::bucket_name/*"
+36.         }
+37.     ]
+38. }
 ```
 
 ## Using native backup and restore<a name="SQLServer.Procedural.Importing.Native.Using"></a>
@@ -723,5 +711,3 @@ The following are issues you might encounter when you use native backup and rest
 |  User <ARN> is not authorized to perform <kms action> on resource <ARN>  |  You requested an encrypted operation, but didn't provide correct AWS KMS permissions\. Verify that you have the correct permissions, or add them\.  For more information, see [Setting up for native backup and restore](#SQLServer.Procedural.Importing.Native.Enabling)\.  | 
 |  The Restore task is unable to restore from more than 10 backup file\(s\)\. Please reduce the number of files matched and try again\.  |  Reduce the number of files that you're trying to restore from\. You can make each individual file larger if necessary\.   | 
 |  Database '*database\_name*' already exists\. Two databases that differ only by case or accent are not allowed\. Choose a different database name\.  |  You can't restore a database with the same name as an existing database\. Database names are unique\.  | 
-
-## <a name="SQLServer.Procedural.Importing.Native.Related"></a>

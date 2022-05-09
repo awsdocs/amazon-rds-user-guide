@@ -1,4 +1,4 @@
-# Accessing the text of SQL statements<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
+# Accessing more SQL text in the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
 By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement exceeds 500 bytes, you can view more text by opening the statement in the Performance Insights dashboard\. In this case, the maximum length for the displayed query is 4 KB\. This limit is introduced by the console and is subject to the limits set by the database engine\. If you view a child SQL statement, you can also choose **Download**\.
 

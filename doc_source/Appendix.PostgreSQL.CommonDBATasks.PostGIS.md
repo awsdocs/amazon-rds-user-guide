@@ -4,7 +4,7 @@ PostGIS is an extension to PostgreSQL for storing and managing spatial informati
 
 Starting with version 10\.5, PostgreSQL supports the libprotobuf 1\.3\.0 library used by PostGIS for working with map box vector tile data\.
 
-Setting up the PostGIS extension requires `rds_superuser` privileges\. We recommend that you create a user \(role\) and a separate database in which to install the extension and manage your spatial data\. The following steps show you how by using an example role named *gis\_admin* and a database named *lab\_gis*\. 
+Setting up the PostGIS extension requires `rds_superuser` privileges\. We recommend that you create a user \(role\) to manage the PostGIS extension and your spatial data\. The PostGIS extension and its related components add thousands of functions to PostgreSQL\. Consider creating the PostGIS extension in its own schema if that makes sense for your use case\. The following example shows how to install the extension in its own separate database, but this isn't required\.
 
 **Topics**
 + [Step 1: Create a user \(role\) to manage the PostGIS extension](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect)

@@ -25,8 +25,8 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Automatic minor version upgrade  |  Yes  |  —  |  [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)  | 
 |  Modifying the backup window  |  Yes  |  —  |  [Working with backups](USER_WorkingWithAutomatedBackups.md) [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
 |  Changing the DB instance class  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
-|  Changing the allocated storage  |  No  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
-|  Storage autoscaling  |  No  |  —  |  [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)  | 
+|  Changing the allocated storage  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Storage autoscaling  |  Yes  |  —  |  [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)  | 
 |  Manual and automatic DB instance snapshots  |  Yes  |  You can store automated backups and manual snapshots in your AWS Region or locally on your Outpost\. Local backups are supported on MySQL and PostgreSQL DB instances\. To store backups on your Outpost, make sure that you have Amazon S3 on Outposts configured\.  |  [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md) [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/) [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
 |  Restoring from a DB snapshot  |  Yes  |  You can store automated backups and manual snapshots for the restored DB instance in the parent AWS Region or locally on your Outpost\.  |  [Considerations for restoring DB instances on Amazon RDS on AWS Outposts](rds-on-outposts.restoring.md) [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
 |  Restoring a DB instance from Amazon S3  |   No   |   —    |    [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
@@ -35,7 +35,7 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Enhanced monitoring  |  No  |  —  |  [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Amazon CloudWatch monitoring  |  Yes  |  You can view the same set of metrics that are available for your databases in the AWS Region\.  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
 |  Publishing database engine logs to CloudWatch Logs  |  Yes  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.Procedural.UploadtoCloudWatch.md)  | 
-|  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
+|  Event notification  |  Yes  |  —  |  [Working with Amazon RDS event notification](USER_Events.md)  | 
 |  Amazon RDS Performance Insights  |  No  |  —  |  [Monitoring DB load with Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
 |  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the AWS CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the AWS CLI or RDS API\.  |  [Monitoring Amazon RDS log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 

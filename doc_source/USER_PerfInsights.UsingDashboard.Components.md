@@ -1,21 +1,24 @@
 # Overview of the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.Components"></a>
 
-The dashboard is the easiest way to interact with Performance Insights\. The following example shows the dashboard for a MySQL DB instance\. By default, the Performance Insights dashboard shows data for the last hour\.
+The dashboard is the easiest way to interact with Performance Insights\. The following example shows the dashboard for a MySQL DB instance\.
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_0b.png)
 
-The dashboard is divided into the following parts:
-
-1. **Counter Metrics** – Shows data for specific performance counter metrics\.
-
-1. **DB Load Chart** – Shows how the DB load compares to DB instance capacity as represented by the **Max vCPU** line\.
-
-1.  **Top *items*** – Shows the top dimensions contributing to DB load\.
-
 **Topics**
++ [Time range filter](#USER_PerfInsights.UsingDashboard.Components.time-range)
 + [Counter metrics chart](#USER_PerfInsights.UsingDashboard.Components.Countermetrics)
 + [Database load chart](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions)
 + [Top dimensions table](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable)
+
+## Time range filter<a name="USER_PerfInsights.UsingDashboard.Components.time-range"></a>
+
+By default, the Performance Insights dashboard shows DB load for the last hour\. You can adjust this range to be as short as 5 minutes or as long as 2 years\. You can also select a custom relative range\.
+
+![\[Performance Insights relative time\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-relative-time.png)
+
+You can select an absolute range with a beginning and ending date and time\. The following example shows the time range beginning at midnight on 4/11/22 and ending at 11:59 PM on 4/14/22\.
+
+![\[Performance Insights absolute time\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-absolute-time.png)
 
 ## Counter metrics chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 

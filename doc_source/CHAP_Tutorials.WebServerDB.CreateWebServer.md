@@ -96,7 +96,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 
    You can test that your web server is properly installed and started\. To do this, enter the public Domain Name System \(DNS\) name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. 
 
-   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
+   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
