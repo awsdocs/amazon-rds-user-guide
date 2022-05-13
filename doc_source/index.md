@@ -225,7 +225,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
    + [Upgrading the Microsoft SQL Server DB engine](USER_UpgradeDBInstance.SQLServer.md)
-   + [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)
+   + [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)
       + [Importing and exporting SQL Server data using other methods](SQLServer.Procedural.Importing.Snapshots.md)
    + [Working with read replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
    + [Multi-AZ deployments for Amazon RDS for Microsoft SQL Server](USER_SQLServerMultiAZ.md)

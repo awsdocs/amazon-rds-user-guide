@@ -34,7 +34,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Parameter groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  **Option groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)  | 
 |  **Connecting to your DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\.   |  [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)  | 
-|  **Backup and restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md) [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
+|  **Backup and restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md) [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)  | 
 |  **Monitoring** You can monitor your SQL Server DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing metrics in the Amazon RDS console](USER_Monitoring.md) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
 |  **Log files** You can access the log files for your SQL Server DB instance\.   |  [Monitoring Amazon RDS log files](USER_LogAccess.md) [Microsoft SQL Server database log files](USER_LogAccess.Concepts.SQLServer.md)  | 
 
@@ -392,7 +392,7 @@ When you request a point\-in\-time restore, you specify the time to restore to\.
 The following are limitations to setting the local time zone on your DB instance:
 + You can't modify the time zone of an existing SQL Server DB instance\. 
 + You can't restore a snapshot from a DB instance in one time zone to a DB instance in a different time zone\. 
-+ We strongly recommend that you don't restore a backup file from one time zone to a different time zone\. If you restore a backup file from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\. 
++ We strongly recommend that you don't restore a backup file from one time zone to a different time zone\. If you restore a backup file from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\. For more information, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\. 
 
 ### Supported time zones<a name="SQLServer.Concepts.General.TimeZone.Zones"></a>
 

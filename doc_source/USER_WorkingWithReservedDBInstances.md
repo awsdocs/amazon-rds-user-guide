@@ -29,9 +29,9 @@ If you are using consolidated billing, all the accounts in the organization are 
 
 ### Size\-flexible reserved DB instances<a name="USER_WorkingWithReservedDBInstances.SizeFlexible"></a>
 
-When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.m4\.large\. For more information about instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
+When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.r5\.large\. For more information about instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 
-If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.m4\.large can apply to a db\.m4\.xlarge, but not to a db\.m5\.large, because db\.m4 and db\.m5 are different instance class types\.
+If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.r5\.large can apply to a db\.r5\.xlarge, but not to a db\.r6g\.large, because db\.r5 and db\.r6g are different instance class types\.
 
 Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. Flexibility means that you can move freely between configurations within the same DB instance class type\. For example, you can move from a Single\-AZ deployment running on one large DB instance \(four normalized units\) to a Multi\-AZ deployment running on two small DB instances \(2\*2 = 4 normalized units\)\.
 
@@ -43,7 +43,7 @@ Size\-flexible reserved DB instances are available for the following Amazon RDS 
 
 For details about using size\-flexible reserved instances with Aurora, see [Reserved DB instances for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithReservedDBInstances.html)\. 
 
-You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.m3\.large DB instances is equivalent to eight normalized units of usage on one db\.m3\.small\. The following table shows the number of normalized units for each DB instance size\. 
+You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\. 
 
 
 ****  
@@ -186,15 +186,15 @@ This call returns output similar to the following:
 
 ```
  1. OFFERING  OfferingId                            Class         Multi-AZ  Duration  Fixed Price  Usage Price  Description  Offering Type
- 2. OFFERING  438012d3-4052-4cc7-b2e3-8d3372e0e706  db.m1.large   y         1y        1820.00 USD  0.368 USD    mysql        Partial  Upfront
- 3. OFFERING  649fd0c8-cf6d-47a0-bfa6-060f8e75e95f  db.m1.small   n         1y         227.50 USD  0.046 USD    mysql        Partial  Upfront
- 4. OFFERING  123456cd-ab1c-47a0-bfa6-12345667232f  db.m1.small   n         1y         162.00 USD   0.00 USD    mysql        All      Upfront
+ 2. OFFERING  438012d3-4052-4cc7-b2e3-8d3372e0e706  db.r3.large   y         1y        1820.00 USD  0.368 USD    mysql        Partial  Upfront
+ 3. OFFERING  649fd0c8-cf6d-47a0-bfa6-060f8e75e95f  db.r3.small   n         1y         227.50 USD  0.046 USD    mysql        Partial  Upfront
+ 4. OFFERING  123456cd-ab1c-47a0-bfa6-12345667232f  db.r3.small   n         1y         162.00 USD   0.00 USD    mysql        All      Upfront
  5.     Recurring Charges:   Amount  Currency  Frequency        
  6.     Recurring Charges:   0.123   USD       Hourly
- 7. OFFERING  123456cd-ab1c-37a0-bfa6-12345667232d  db.m1.large   y         1y         700.00 USD   0.00 USD    mysql        All      Upfront
+ 7. OFFERING  123456cd-ab1c-37a0-bfa6-12345667232d  db.r3.large   y         1y         700.00 USD   0.00 USD    mysql        All      Upfront
  8.     Recurring Charges:   Amount  Currency  Frequency
  9.     Recurring Charges:   1.25    USD       Hourly
-10. OFFERING  123456cd-ab1c-17d0-bfa6-12345667234e  db.m1.xlarge  n         1y        4242.00 USD   2.42 USD    mysql        No       Upfront
+10. OFFERING  123456cd-ab1c-17d0-bfa6-12345667234e  db.r3.xlarge  n         1y        4242.00 USD   2.42 USD    mysql        No       Upfront
 ```
 
 After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering\.
@@ -223,7 +223,7 @@ The command returns output similar to the following:
 
 ```
 1. RESERVATION  ReservationId      Class        Multi-AZ  Start Time                Duration  Fixed Price  Usage Price  Count  State            Description  Offering Type
-2. RESERVATION  MyReservation      db.m1.small  y         2011-12-19T00:30:23.247Z  1y        455.00 USD   0.092 USD    1      payment-pending  mysql        Partial  Upfront
+2. RESERVATION  MyReservation      db.r3.small  y         2011-12-19T00:30:23.247Z  1y        455.00 USD   0.092 USD    1      payment-pending  mysql        Partial  Upfront
 ```
 
 After you have purchased reserved DB instances, you can get information about your reserved DB instances\.
@@ -239,7 +239,7 @@ The command returns output similar to the following:
 
 ```
 1. RESERVATION  ReservationId     Class        Multi-AZ  Start Time                Duration  Fixed Price  Usage Price  Count  State    Description  Offering Type
-2. RESERVATION  MyReservation     db.m1.small  y         2011-12-09T23:37:44.720Z  1y        455.00 USD   0.092 USD    1      retired  mysql        Partial  Upfront
+2. RESERVATION  MyReservation     db.r3.small  y         2011-12-09T23:37:44.720Z  1y        455.00 USD   0.092 USD    1      retired  mysql        Partial  Upfront
 ```
 
 ### RDS API<a name="USER_WorkingWithReservedDBInstances.API"></a>

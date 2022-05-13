@@ -9,6 +9,25 @@ RDS supports SSRS for SQL Server Standard and Enterprise Editions on the followi
 + SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
 + SQL Server 2016, version 13\.00\.5820\.21\.v1 and later
 
+**Contents**
++ [Limitations and recommendations](#SSRS.Limitations)
++ [Enabling SSRS](#SSRS.Enabling)
+  + [Creating an option group for SSRS](#SSRS.OptionGroup)
+  + [Adding the SSRS option to your option group](#Appendix.SQLServer.Options.SSAS.Add)
+  + [Associating your option group with your DB instance](#SSRS.Apply)
+  + [Allowing inbound access to your VPC security group](#SSRS.Inbound)
++ [Report server databases](#SSRS.DBs)
++ [SSRS log files](#SSRS.Logs)
++ [Accessing the SSRS web portal](#SSRS.Access)
+  + [Enabling SSL on RDS](#SSRS.Access.SSL)
+  + [Granting access to domain users](#SSRS.Access.Grant)
+  + [Accessing the web portal](#SSRS.Access)
++ [Deploying reports to SSRS](#SSRS.Deploy)
++ [Revoking system\-level permissions](#SSRS.Access.Revoke)
++ [Monitoring the status of a task](#SSRS.Monitor)
++ [Disabling SSRS](#SSRS.Disable)
++ [Deleting the SSRS databases](#SSRS.Drop)
+
 ## Limitations and recommendations<a name="SSRS.Limitations"></a>
 
 The following limitations and recommendations apply to running SSRS on RDS for SQL Server:
@@ -254,7 +273,17 @@ To allow inbound access to the VPC security group associated with your DB instan
 
 ## Report server databases<a name="SSRS.DBs"></a>
 
-When your DB instance is associated with the SSRS option, two new databases are created on your DB instance: rdsadmin\_ReportServer and rdsadmin\_ReportServerTempDB\. These databases act as the ReportServer and ReportServerTempDB databases\. SSRS stores its data in the ReportServer database and caches its data in the ReportServerTempDB database\. RDS owns and manages these databases, so database operations on them such as ALTER and DROP aren't permitted\.
+When your DB instance is associated with the SSRS option, two new databases are created on your DB instance: rdsadmin\_ReportServer and rdsadmin\_ReportServerTempDB\. These databases act as the ReportServer and ReportServerTempDB databases\. SSRS stores its data in the ReportServer database and caches its data in the ReportServerTempDB database\.
+
+RDS owns and manages these databases, so database operations on them such as ALTER and DROP aren't permitted\. However, you can perform read operations on the rdsadmin\_ReportServer database\.
+
+## SSRS log files<a name="SSRS.Logs"></a>
+
+You can access ReportServerService\_*timestamp*\.log files\. These report server logs can be found in the `D:\rdsdbdata\Log\SSRS` directory\. \(The `D:\rdsdbdata\Log` directory is also the parent directory for error logs and SQL Server Agent logs\.\)
+
+For existing SSRS instances, restarting the SSRS service might be necessary to access report server logs\. You can restart the service by updating the `SSRS` option\.
+
+For more information, see [Working with Microsoft SQL Server logs](Appendix.SQLServer.CommonDBATasks.Logs.md)\.
 
 ## Accessing the SSRS web portal<a name="SSRS.Access"></a>
 

@@ -17,6 +17,7 @@ Why do you want to run a relational database in the AWS Cloud? Because AWS takes
 + [Amazon EC2 and on\-premises databases](#Welcome.Concepts.on-prem)
 + [Amazon RDS and Amazon EC2](#Welcome.Concepts.RDS)
 + [Amazon RDS Custom for Oracle and Microsoft SQL Server](#Welcome.Concepts.Custom)
++ [Amazon RDS on AWS Outposts](#Welcome.Concepts.Outposts)
 
 ### Amazon EC2 and on\-premises databases<a name="Welcome.Concepts.on-prem"></a>
 
@@ -84,6 +85,10 @@ In this deployment model, you can install applications and change configuration 
 For Oracle Database and Microsoft SQL Server, RDS Custom combines the automation of Amazon RDS with the flexibility of Amazon EC2\. For more information on RDS Custom, see [Working with Amazon RDS Custom](rds-custom.md)\.
 
 With the shared responsibility model of RDS Custom, you get more control than in Amazon RDS, but also more responsibility\. For more information, see [Shared responsibility model](rds-custom.md#custom-intro.solution.shared)\.
+
+### Amazon RDS on AWS Outposts<a name="Welcome.Concepts.Outposts"></a>
+
+Amazon RDS on AWS Outposts extends RDS for SQL Server, RDS for MySQL, and RDS for PostgreSQL databases to AWS Outposts environments\. AWS Outposts uses the same hardware as in public AWS Regions to bring AWS services, infrastructure, and operation models on\-premises\. With RDS on Outposts, you can provision managed DB instances close to the business applications that must run on\-premises\. For more information, see [Working with Amazon RDS on AWS Outposts](rds-on-outposts.md)\.
 
 ## DB instances<a name="Welcome.Concepts.DBInstance"></a>
 

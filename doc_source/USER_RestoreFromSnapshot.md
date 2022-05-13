@@ -62,7 +62,7 @@ When you restore an RDS for Microsoft SQL Server DB snapshot to a new instance, 
   + From Web Edition to Standard Edition or Enterprise Edition
   + From Express Edition to Web Edition, Standard Edition, or Enterprise Edition
 
-If you want to change from one edition to a new edition that isn't supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\.
+If you want to change from one edition to a new edition that isn't supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\.
 
 ## Oracle Database considerations<a name="USER_RestoreFromSnapshot.Oracle"></a>
 

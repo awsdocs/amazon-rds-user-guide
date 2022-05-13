@@ -11,6 +11,27 @@ RDS supports SSIS for SQL Server Standard and Enterprise Editions on the followi
 + SQL Server 2017, version 14\.00\.3223\.3\.v1 and higher
 + SQL Server 2016, version 13\.00\.5426\.0\.v1 and higher
 
+**Contents**
++ [Limitations and recommendations](#SSIS.Limitations)
++ [Enabling SSIS](#SSIS.Enabling)
+  + [Creating the option group for SSIS](#SSIS.OptionGroup)
+  + [Adding the SSIS option to the option group](#SSIS.Add)
+  + [Creating the parameter group for SSIS](#SSIS.CreateParamGroup)
+  + [Modifying the parameter for SSIS](#SSIS.ModifyParam)
+  + [Associating the option group and parameter group with your DB instance](#SSIS.Apply)
+  + [Enabling S3 integration](#SSIS.EnableS3)
++ [Administrative permissions on SSISDB](#SSIS.Permissions)
+  + [Setting up a Windows\-authenticated user for SSIS](#SSIS.Use.Auth)
++ [Deploying an SSIS project](#SSIS.Deploy)
++ [Monitoring the status of a deployment task](#SSIS.Monitor)
++ [Using SSIS](#SSIS.Use)
+  + [Setting database connection managers for SSIS projects](#SSIS.Use.ConnMgrs)
+  + [Creating an SSIS proxy](#SSIS.Use.Proxy)
+  + [Scheduling an SSIS package using SQL Server Agent](#SSIS.Use.Schedule)
+  + [Revoking SSIS access from the proxy](#SSIS.Use.Revoke)
++ [Disabling SSIS](#SSIS.Disable)
++ [Dropping the SSISDB database](#SSIS.Drop)
+
 ## Limitations and recommendations<a name="SSIS.Limitations"></a>
 
 The following limitations and recommendations apply to running SSIS on RDS for SQL Server:

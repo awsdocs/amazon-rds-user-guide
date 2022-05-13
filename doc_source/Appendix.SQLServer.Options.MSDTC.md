@@ -8,6 +8,21 @@ A *distributed transaction* is a database transaction in which two or more netwo
 
 In RDS, starting with SQL Server 2012 \(version 11\.00\.5058\.0\.v1 and later\), all editions of RDS for SQL Server support distributed transactions\. The support is provided using Microsoft Distributed Transaction Coordinator \(MSDTC\)\. For in\-depth information about MSDTC, see [Distributed Transaction Coordinator](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms684146(v=vs.85)) in the Microsoft documentation\.
 
+**Contents**
++ [Limitations](#Appendix.SQLServer.Options.MSDTC.Limitations)
++ [Enabling MSDTC](#Appendix.SQLServer.Options.MSDTC.Enabling)
+  + [Creating the option group for MSDTC](#Appendix.SQLServer.Options.MSDTC.OptionGroup)
+  + [Adding the MSDTC option to the option group](#Appendix.SQLServer.Options.MSDTC.Add)
+  + [Creating the parameter group for MSDTC](#MSDTC.CreateParamGroup)
+  + [Modifying the parameter for MSDTC](#ModifyParam.MSDTC)
+  + [Associating the option group and parameter group with the DB instance](#MSDTC.Apply)
++ [Using distributed transactions](#Appendix.SQLServer.Options.MSDTC.Using)
++ [Using XA transactions](#MSDTC.XA)
++ [Using transaction tracing](#MSDTC.Tracing)
++ [Modifying the MSDTC option](#Appendix.SQLServer.Options.MSDTC.Modify)
++ [Disabling MSDTC](#Appendix.SQLServer.Options.MSDTC.Disable)
++ [Troubleshooting MSDTC for RDS for SQL Server](#Appendix.SQLServer.Options.MSDTC.Troubleshooting)
+
 ## Limitations<a name="Appendix.SQLServer.Options.MSDTC.Limitations"></a>
 
 The following limitations apply to using MSDTC on RDS for SQL Server:

@@ -103,6 +103,7 @@ Amazon RDS doesn't currently support the following MySQL features:
 + InnoDB Tablespace Encryption
 + Password Strength Plugin
 + Persisted system variables
++ Rewriter Query Rewrite Plugin
 + Semisynchronous replication
 + Transportable tablespace
 + X Plugin

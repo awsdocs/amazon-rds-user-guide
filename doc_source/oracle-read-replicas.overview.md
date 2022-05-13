@@ -2,7 +2,7 @@
 
 An *Oracle replica* database is a physical copy of your primary database\. An Oracle replica in read\-only mode is called a *read replica*\. An Oracle replica in mounted mode is called a *mounted replica*\. Oracle Database doesn't permit writes in a replica, but you can promote a replica to make it writable\. The promoted read replica has the replicated data to the point when the request was made to promote it\. 
 
-The following video provides a helpful overview of Oracle disaster recovery\. For more information, see the blog post [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/) and [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/)\.
+The following video provides a helpful overview of Oracle disaster recovery\. For more information, see the blog post [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups \- Part 1](http://aws.amazon.com/blogs/database/managed-disaster-recovery-with-amazon-rds-for-oracle-cross-region-automated-backups-part-1/) and [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups \- Part 2](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/)\.
 
 [![AWS Videos](http://img.youtube.com/vi/-XpzhIevwVg/0.jpg)](http://www.youtube.com/watch?v=-XpzhIevwVg)
 

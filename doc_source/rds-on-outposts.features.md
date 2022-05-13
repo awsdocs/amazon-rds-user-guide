@@ -41,4 +41,4 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
 |  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Configuring binary log file position replication with an external source instance](MySQL.Procedural.Importing.External.Repl.md)  | 
-|  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
+|  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)  | 

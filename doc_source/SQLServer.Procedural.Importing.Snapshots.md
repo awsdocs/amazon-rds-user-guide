@@ -2,12 +2,12 @@
 
 Following, you can find information about using snapshots to import your Microsoft SQL Server data to Amazon RDS\. You can also find information about using snapshots to export your data from an RDS DB instance running SQL Server\. 
 
-If your scenario supports it, it's easier to move data in and out of Amazon RDS by using the native backup and restore functionality\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\. 
+If your scenario supports it, it's easier to move data in and out of Amazon RDS by using the native backup and restore functionality\. For more information, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\. 
 
 **Note**  
-Amazon RDS for Microsoft SQL Server does not support importing data into the `msdb` database\. 
+Amazon RDS for Microsoft SQL Server doesn't support importing data into the `msdb` database\. 
 
-## Importing data into SQL Server on Amazon RDS by using a snapshot<a name="SQLServer.Procedural.Importing.Procedure"></a>
+## Importing data into RDS for SQL Server by using a snapshot<a name="SQLServer.Procedural.Importing.Procedure"></a>
 
 **To import data into a SQL Server DB instance by using a snapshot**
 
@@ -265,10 +265,10 @@ To continue the previous example, suppose that the master user name is `admin`, 
 bcp store.dbo.customers in C:\customers.txt -n -S rds.ckz2kqd4qsn1.us-east-1.rds.amazonaws.com,4080 -U admin -P insecure -b 10000 
 ```
 
-## Exporting data from SQL Server on Amazon RDS<a name="SQLServer.Procedural.Exporting"></a>
+## Exporting data from RDS for SQL Server<a name="SQLServer.Procedural.Exporting"></a>
 
-You can choose one of the following options to export data from an RDS for SQL Server DB instance: 
-+ **Native database backup using a full backup file \(\.bak\)** – Using \.bak files to backup databases is heavily optimized, and is usually the fastest way to export data\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\. 
+You can choose one of the following options to export data from an RDS for SQL Server DB instance:
++ **Native database backup using a full backup file \(\.bak\)** – Using \.bak files to backup databases is heavily optimized, and is usually the fastest way to export data\. For more information, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\. 
 + **SQL Server Import and Export Wizard** – For more information, see [SQL Server Import and Export Wizard](#SQLServer.Procedural.Exporting.SSIEW)\. 
 + **SQL Server Generate and Publish Scripts Wizard and bcp utility** – For more information, see [SQL Server Generate and Publish Scripts Wizard and bcp utility](#SQLServer.Procedural.Exporting.SSGPSW)\. 
 

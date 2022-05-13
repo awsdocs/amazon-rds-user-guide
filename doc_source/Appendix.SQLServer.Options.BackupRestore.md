@@ -1,6 +1,6 @@
 # Support for native backup and restore in SQL Server<a name="Appendix.SQLServer.Options.BackupRestore"></a>
 
-By using native backup and restore for SQL Server databases, you can create a differential or full backup of your on\-premises database and store the backup files on Amazon S3\. You can then restore to an existing Amazon RDS DB instance running SQL Server\. You can also back up an RDS for SQL Server database, store it on Amazon S3, and restore it in other locations\. In addition, you can restore the backup to an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\.
+By using native backup and restore for SQL Server databases, you can create a differential or full backup of your on\-premises database and store the backup files on Amazon S3\. You can then restore to an existing Amazon RDS DB instance running SQL Server\. You can also back up an RDS for SQL Server database, store it on Amazon S3, and restore it in other locations\. In addition, you can restore the backup to an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. For more information, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\.
 
 Amazon RDS supports native backup and restore for Microsoft SQL Server databases by using differential and full backup files \(\.bak files\)\.
 

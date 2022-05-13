@@ -1,6 +1,8 @@
 # Working with Microsoft SQL Server logs<a name="Appendix.SQLServer.CommonDBATasks.Logs"></a>
 
-You can use the Amazon RDS console to view, watch, and download SQL Server Agent logs and Microsoft SQL Server error logs\.
+You can use the Amazon RDS console to view, watch, and download SQL Server Agent logs, Microsoft SQL Server error logs, and SQL Server Reporting Services \(SSRS\) logs\.
+
+\.
 
 ## Watching log files<a name="Appendix.SQLServer.CommonDBATasks.Logs.Watch"></a>
 

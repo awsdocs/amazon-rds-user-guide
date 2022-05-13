@@ -13,14 +13,25 @@ Amazon RDS supports SSAS for SQL Server Standard and Enterprise Editions on the 
   + SQL Server 2017, version 14\.00\.3381\.3\.v1 and higher
   + SQL Server 2016, version 13\.00\.5882\.1\.v1 and higher
 
-**Topics**
+**Contents**
 + [Limitations](#SSAS.Limitations)
 + [Turning on SSAS](#SSAS.Enabling)
+  + [Creating an option group for SSAS](#SSAS.OptionGroup)
+  + [Adding the SSAS option to the option group](#SSAS.Add)
+  + [Associating the option group with your DB instance](#SSAS.Apply)
+  + [Allowing inbound access to your VPC security group](#SSAS.InboundRule)
+  + [Enabling Amazon S3 integration](#SSAS.EnableS3)
 + [Deploying SSAS projects on Amazon RDS](#SSAS.Deploy)
 + [Monitoring the status of a deployment task](#SSAS.Monitor)
 + [Using SSAS on Amazon RDS](#SSAS.Use)
+  + [Setting up a Windows\-authenticated user for SSAS](#SSAS.Use.Auth)
+  + [Adding a domain user as a database administrator](#SSAS.Admin)
+  + [Creating an SSAS proxy](#SSAS.Use.Proxy)
+  + [Scheduling SSAS database processing using SQL Server Agent](#SSAS.Use.Schedule)
+  + [Revoking SSAS access from the proxy](#SSAS.Use.Revoke)
 + [Backing up an SSAS database](#SSAS.Backup)
 + [Restoring an SSAS database](#SSAS.Restore)
+  + [Restoring a DB instance to a specified time](#SSAS.PITR)
 + [Changing the SSAS mode](#SSAS.ChangeMode)
 + [Turning off SSAS](#SSAS.Disable)
 + [Troubleshooting SSAS issues](#SSAS.Trouble)

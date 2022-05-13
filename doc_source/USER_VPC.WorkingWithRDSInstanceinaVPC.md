@@ -221,7 +221,6 @@ The following limitations apply to dual\-stack network DB instances:
 + DB instances can't use the IPv6 protocol exclusively\. They can use IPv4 exclusively, or they can use the IPv4 and IPv6 protocol \(dual\-stack mode\)\.
 + Amazon RDS doesn't support native IPv6 subnets\.
 + DB instances that use dual\-stack mode must be private\. They can't be publicly accessible\.
-+ Dual\-stack mode isn't supported in the China \(Beijing\) and China \(Ningxia\) AWS Regions\.
 + Dual\-stack mode doesn't support db\.m3 and db\.r3 DB instance classes\.
 + For RDS for SQL Server, dual\-stack mode DB instances that use Always On AGs availability group listener endpoints only present IPv4 addresses\.
 + You can't use RDS Proxy with dual\-stack mode DB instances\.
