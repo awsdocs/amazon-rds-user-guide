@@ -53,7 +53,7 @@
 1.  Choose new settings for the properties that you can modify: 
    +  **Database** – Choose a different RDS DB instance or Aurora cluster\. 
    +  **Connection pool maximum connections** – Adjust what percentage of the maximum available connections the proxy can use\. 
-   +  **Session pinning filters** – \(Optional\) Choose a session pinning filter\. Doing this can help reduce performance issues due to insufficient transaction\-level reuse for connections\. Using this setting requires understanding of application behavior and the circumstances under which RDS Proxy pins a session to a database connection\. 
+   +  **Session pinning filters** – \(Optional\) Choose a session pinning filter\. Doing this can help reduce performance issues due to insufficient transaction\-level reuse for connections\. Using this setting requires understanding of application behavior and the circumstances under which RDS Proxy pins a session to a database connection\. Currently, the setting isn't supported for PostgreSQL and the only choice is `EXCLUDE_VARIABLE_SETS`\.
    +  **Connection borrow timeout** – Adjust the connection borrow timeout interval\. This setting applies when the maximum number of connections is already being used for the proxy\. The setting determines how long the proxy waits for a connection to become available before returning a timeout error\. 
    + **Initialization query** – \(Optional\) Add an initialization query, or modify the current one\. You can specify one or more SQL statements for the proxy to run when opening each new database connection\. The setting is typically used with `SET` statements to make sure that each connection has identical settings such as time zone and character set\. For multiple statements, use semicolons as the separator\. You can also include multiple variables in a single `SET` statement, such as `SET x=1, y=2`\. Initialization query is not currently supported for PostgreSQL\.
 
@@ -286,32 +286,72 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 
  For example, if your application changes a session variable or configuration parameter, later statements can rely on the new variable or parameter to be in effect\. Thus, when RDS Proxy processes requests to change session variables or configuration settings, it pins that session to the DB connection\. That way, the session state remains in effect for all later transactions in the same session\. 
 
- This rule doesn't apply to all parameters you can set\. RDS Proxy tracks changes to the character set, collation, time zone, autocommit, current database, SQL mode, and `session_track_schema` settings\. Thus RDS Proxy doesn't pin the session when you modify these\. In this case, RDS Proxy only reuses the connection for other sessions that have the same values for those settings\. 
+ For MySQL engine family databases, this rule doesn't apply to all parameters that you can set\. RDS Proxy tracks certain statements and variables\. Thus RDS Proxy doesn't pin the session when you modify them\. In this case, RDS Proxy only reuses the connection for other sessions that have the same values for those settings\. 
+
+Following are the MySQL statements that RDS Proxy tracks:
++ DROP DATABASE
++ DROP SCHEMA
++ USE
+
+Following are the MySQL variables that RDS Proxy tracks:
++ `AUTOCOMMIT`
++ `AUTO_INCREMENT_INCREMENT`
++ `CHARACTER SET (or CHAR SET)`
++ `CHARACTER_SET_CLIENT`
++ `CHARACTER_SET_DATABASE`
++ `CHARACTER_SET_FILESYSTEM`
++ `CHARACTER_SET_CONNECTION`
++ `CHARACTER_SET_RESULTS`
++ `CHARACTER_SET_SERVER`
++ `COLLATION_CONNECTION`
++ `COLLATION_DATABASE`
++ `COLLATION_SERVER`
++ `INTERACTIVE_TIMEOUT`
++ `NAMES`
++ `NET_WRITE_TIMEOUT`
++ `QUERY_CACHE_TYPE`
++ `SESSION_TRACK_SCHEMA`
++ `SQL_MODE`
++ `TIME_ZONE`
++ `TRANSACTION_ISOLATION (or TX_ISOLATION)`
++ `TRANSACTION_READ_ONLY (or TX_READ_ONLY)`
++ `WAIT_TIMEOUT`
 
  Performance tuning for RDS Proxy involves trying to maximize transaction\-level connection reuse \(multiplexing\) by minimizing pinning\. You can do so by doing the following: 
 +  Avoid unnecessary database requests that might cause pinning\. 
 +  Set variables and configuration settings consistently across all connections\. That way, later sessions are more likely to reuse connections that have those particular settings\. 
 
    However, for PostgreSQL setting a variable leads to session pinning\. 
-+  Apply a session pinning filter to the proxy\. You can exempt certain kinds of operations from pinning the session if you know that doing so doesn't affect the correct operation of your application\. 
++  For a MySQL engine family database, apply a session pinning filter to the proxy\. You can exempt certain kinds of operations from pinning the session if you know that doing so doesn't affect the correct operation of your application\. 
 +  See how frequently pinning occurs by monitoring the CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 +  If you use `SET` statements to perform identical initialization for each client connection, you can do so while preserving transaction\-level multiplexing\. In this case, you move the statements that set up the initial session state into the initialization query used by a proxy\. This property is a string containing one or more SQL statements, separated by semicolons\. 
 
    For example, you can define an initialization query for a proxy that sets certain configuration parameters\. Then, RDS Proxy applies those settings whenever it sets up a new connection for that proxy\. You can remove the corresponding `SET` statements from your application code, so that they don't interfere with transaction\-level multiplexing\. 
-**Important**  
- For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
+
+   For metrics about how often pinning occurs for a proxy, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
+
+### Conditions that cause pinning for all engine families<a name="rds-proxy-pinning.all"></a>
 
  The proxy pins the session to the current connection in the following situations where multiplexing might cause unexpected behavior: 
-+  Any statement with a text size greater than 16 KB causes the proxy to pin the session\. 
++ Any statement with a text size greater than 16 KB causes the proxy to pin the session\.
 +  Prepared statements cause the proxy to pin the session\. This rule applies whether the prepared statement uses SQL text or the binary protocol\. 
-+  Explicit MySQL statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
-+  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the `SessionPinningFilters` property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating)\. 
+
+### Conditions that cause pinning for MySQL<a name="rds-proxy-pinning.mysql"></a>
+
+ For MySQL, the following interactions also cause pinning: 
++  Explicit  table lock statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
++  Creating named locks by using `GET_LOCK` causes the proxy to pin the session\.  
++  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the `SessionPinningFilters` property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
 +  Creating a temporary table causes the proxy to pin the session\. That way, the contents of the temporary table are preserved throughout the session regardless of transaction boundaries\. 
-+  Calling the MySQL functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
++  Calling the functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
 
    The exact circumstances where these functions cause pinning might differ between Aurora MySQL versions that are compatible with MySQL 5\.6 and MySQL 5\.7\. 
 
- Calling MySQL stored procedures and stored functions doesn't cause pinning\. RDS Proxy doesn't detect any session state changes resulting from such calls\. Therefore, make sure that your application doesn't change session state inside stored routines and rely on that session state to persist across transactions\. For example, if a stored procedure creates a temporary table that is intended to persist across transactions, that application currently isn't compatible with RDS Proxy\. 
+ Calling stored procedures and stored functions doesn't cause pinning\. RDS Proxy doesn't detect any session state changes resulting from such calls\. Therefore, make sure that your application doesn't change session state inside stored routines and rely on that session state to persist across transactions\. For example, if a stored procedure creates a temporary table that is intended to persist across transactions, that application currently isn't compatible with RDS Proxy\. 
+
+ If you have expert knowledge about your application behavior, you can skip the pinning behavior for certain application statements\. To do so, choose the **Session pinning filters** option when creating the proxy\. Currently, you can opt out of session pinning for setting session variables and configuration settings\. 
+
+### Conditions that cause pinning for PostgreSQL<a name="rds-proxy-pinning.postgres"></a>
 
  For PostgreSQL, the following interactions also cause pinning: 
 +  Using SET commands 
@@ -324,10 +364,6 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 +  Manipulating sequences using functions such as `nextval` and `setval` 
 +  Interacting with locks using functions such as `pg_advisory_lock` and `pg_try_advisory_lock`
 +  Using prepared statements, setting parameters, or resetting a parameter to its default 
-
- If you have expert knowledge about your application behavior, you can skip the pinning behavior for certain application statements\. To do so, choose the **Session pinning filters** option when creating the proxy\. Currently, you can opt out of session pinning for setting session variables and configuration settings\. 
-
- For metrics about how often pinning occurs for a proxy, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 
 ## Deleting an RDS Proxy<a name="rds-proxy-deleting"></a>
 

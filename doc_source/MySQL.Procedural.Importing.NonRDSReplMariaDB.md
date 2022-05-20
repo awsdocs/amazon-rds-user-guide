@@ -229,11 +229,10 @@ By creating a MariaDB or MySQL DB instance in the same AWS Region as your Amazon
    1. In the **Engine options** section, choose **MySQL** or **MariaDB**, as appropriate\.
 
    1. For **Version**, choose the version that is compatible with your source MySQL instance, as follows:
-      + If your source instance is MySQL 5\.5\.x, the Amazon RDS DB instance must be MySQL 5\.5\.x or greater\.
-      + If your source instance is MySQL 5\.6\.x, the Amazon RDS DB instance must be MySQL 5\.6\.x or MariaDB\.
-      + If your source instance is MySQL 5\.7\.x, the Amazon RDS DB instance must be MySQL 5\.7\.x, 5\.6\.x, or MariaDB\.
+      + If your source instance is MySQL 5\.5\.x, the Amazon RDS DB instance must be MySQL\.
+      + If your source instance is MySQL 5\.6\.x or 5\.7\.x, the Amazon RDS DB instance must be MySQL or MariaDB\.
       + If your source instance is MySQL 8\.0\.x, the Amazon RDS DB instance must be MySQL 8\.0\.x\.
-      + If your source instance is MariaDB 5\.5 or greater, the Amazon RDS DB instance must be MariaDB\.
+      + If your source instance is MariaDB 5\.5 or higher, the Amazon RDS DB instance must be MariaDB\.
 
    1. In the **Templates** section, choose **Dev/Test** to skip configuring Multi\-AZ deployment and provisioned IOPS storage\.
 

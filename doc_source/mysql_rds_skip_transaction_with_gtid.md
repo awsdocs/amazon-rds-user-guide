@@ -23,7 +23,7 @@ The GTID of the replication transaction to skip\.
 
 The master user must run the `mysql.rds_skip_transaction_with_gtid` procedure\.
 
-This procedure is supported for RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\. This procedure isn't supported for RDS for MySQL 5\.6\.
+This procedure is supported for RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
 
 ## Examples<a name="mysql_rds_skip_transaction_with_gtid-examples"></a>
 

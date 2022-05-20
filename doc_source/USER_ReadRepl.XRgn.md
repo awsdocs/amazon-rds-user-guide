@@ -182,7 +182,7 @@ Amazon RDS uses the following process to create a cross\-Region read replica\. D
 All of the considerations for performing replication within an AWS Region apply to cross\-Region replication\. The following extra considerations apply when replicating between AWS Regions:
 + You can only replicate between AWS Regions when using the following Amazon RDS DB instances:
   + MariaDB \(all versions\)
-  + MySQL version 5\.6 and higher
+  + MySQL \(all versions\)
   + Oracle Enterprise Edition \(EE\) of Oracle Database 12c Release 1 \(12\.1\) using 12\.1\.0\.2\.v10 and higher, Oracle Database 12c Release 2 \(12\.2\), and Oracle Database 19c using the non\-CDB architecture
 **Note**  
 Oracle DB instances that you create using the CDB architecture aren't supported\.
@@ -195,7 +195,9 @@ Oracle DB instances that you create using the CDB architecture aren't supported\
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-Region read replica instances\. 
-+ The read replica uses the default DB parameter group and DB option group for the specified DB engine\.
++ In most cases, the read replica uses the default DB parameter group and DB option group for the specified DB engine\.
+
+  For the MySQL and Oracle DB engines, you can specify a custom parameter group for the read replica in the `--db-parameter-group-name` option of the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. You can't specify a custom parameter group when you use the AWS Management Console\.
 + The read replica uses the default security group\.
 + For MariaDB, MySQL, and Oracle DB instances, when the source DB instance for a cross\-Region read replica is deleted, the read replica is promoted\.
 + For PostgreSQL DB instances, when the source DB instance for a cross\-Region read replica is deleted, the replication status of the read replica is set to `terminated`\. The read replica isn't promoted\.

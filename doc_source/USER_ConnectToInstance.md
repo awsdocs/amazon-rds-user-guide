@@ -133,8 +133,8 @@ After you enter the password for the user, you should see output similar to the 
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 350
-Server version: 5.6.40-log MySQL Community Server (GPL)
+Your MySQL connection id is 9738
+Server version: 8.0.23 Source distribution
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 
@@ -159,16 +159,8 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 
 1. You can require that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. 
 
-   For MySQL 5\.7 and later:
-
    ```
    mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem --ssl-mode=VERIFY_IDENTITY -P 3306 -u mymasteruser -p
-   ```
-
-   For MySQL 5\.6 and earlier:
-
-   ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem --ssl-verify-server-cert -P 3306 -u mymasteruser -p
    ```
 
 1. Enter the master user password when prompted\.
@@ -177,8 +169,8 @@ You will see output similar to the following\.
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 350
-Server version: 5.6.40-log MySQL Community Server (GPL)
+Your MySQL connection id is 9738
+Server version: 8.0.23 Source distribution
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 

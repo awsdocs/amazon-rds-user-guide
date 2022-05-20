@@ -10,7 +10,7 @@ You can also back up your DB instance manually, by manually creating a DB snapsh
 
 The first snapshot of a DB instance contains the data for the full DB instance\. Subsequent snapshots of the same DB instance are incremental, which means that only the data that has changed after your most recent snapshot is saved\.
 
-You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
+You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a DB snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
 
 **Topics**
 + [Backup storage](#USER_WorkingWithAutomatedBackups.BackupStorage)

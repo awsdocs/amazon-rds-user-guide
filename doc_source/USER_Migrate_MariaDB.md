@@ -1,6 +1,6 @@
 # Migrating data from a MySQL DB snapshot to a MariaDB DB instance<a name="USER_Migrate_MariaDB"></a>
 
-You can migrate an RDS for MySQL DB snapshot to a new DB instance running MariaDB using the AWS Management Console, the AWS CLI, or Amazon RDS API\. You must create the DB snapshot from an Amazon RDS DB instance running MySQL 5\.6 or 5\.7\. To learn how to create an RDS for MySQL DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
+You can migrate an RDS for MySQL DB snapshot to a new DB instance running MariaDB using the AWS Management Console, the AWS CLI, or Amazon RDS API\. You must use a DB snapshot that was created from an Amazon RDS DB instance running MySQL 5\.6 or 5\.7\. To learn how to create an RDS for MySQL DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
 Migrating the snapshot doesn't affect the original DB instance from which the snapshot was taken\. You can test and validate the new DB instance before diverting traffic to it as a replacement for the original DB instance\.
 
@@ -72,4 +72,4 @@ Incompatibilities between MySQL and MariaDB include the following:
   FLUSH PRIVILEGES;
   ```
 + If your RDS master user account uses the SHA\-256 password hash, make sure to reset the password using the AWS Management Console, the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-+ MariaDB doesn't support the Memcached plugin\. However, the data used by the Memcached plugin is stored as InnoDB tables\. After you migrate a MySQL DB snapshot, you can access the data used by the Memcached plugin using SQL\. For more information about the innodb\_memcache database, see [InnoDB memcached plugin internals](https://dev.mysql.com/doc/refman/5.6/en/innodb-memcached-internals.html)\.
++ MariaDB doesn't support the Memcached plugin\. However, the data used by the Memcached plugin is stored as InnoDB tables\. After you migrate a MySQL DB snapshot, you can access the data used by the Memcached plugin using SQL\. For more information about the innodb\_memcache database, see [InnoDB memcached Plugin Internals](https://dev.mysql.com/doc/refman/8.0/en/innodb-memcached-internals.html)\.

@@ -1,8 +1,8 @@
 # Exporting data from a MySQL DB instance by using replication<a name="MySQL.Procedural.Exporting.NonRDSRepl"></a>
 
-To export data from a MySQL 5\.6 or later DB instance to a MySQL instance running external to Amazon RDS, you can use replication\. In this scenario, the MySQL DB instance is the *source MySQL DB instance*, and the MySQL instance running external to Amazon RDS is the *external MySQL database*\.
+To export data from an RDS for MySQL DB instance to a MySQL instance running external to Amazon RDS, you can use replication\. In this scenario, the MySQL DB instance is the *source MySQL DB instance*, and the MySQL instance running external to Amazon RDS is the *external MySQL database*\.
 
-The source MySQL DB instance must be running version 5\.6\.13 or later\. The external MySQL database can run either on\-premises in your data center, or on an Amazon EC2 instance\. The external MySQL database must run the same version as the source MySQL DB instance, or a later version\.
+The external MySQL database can run either on\-premises in your data center, or on an Amazon EC2 instance\. The external MySQL database must run the same version as the source MySQL DB instance, or a later version\.
 
 Replication to an external MySQL database is only supported during the time it takes to export a database from the source MySQL DB instance\. The replication should be terminated when the data has been exported and applications can start accessing the external MySQL instance\.
 

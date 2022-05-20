@@ -39,7 +39,6 @@ When the `replication_stop_point ` parameter specifies a stop location that is i
 The `mysql.rds_start_replication_until` procedure is available in these versions of RDS for MySQL:
 + MySQL 8\.0\.26 and higher 8\.0 versions
 + MySQL 5\.7\.22 and higher 5\.7 versions
-+ MySQL 5\.6\.40 and higher 5\.6 versions
 
 ## Examples<a name="mysql_rds_start_replication_until-examples"></a>
 

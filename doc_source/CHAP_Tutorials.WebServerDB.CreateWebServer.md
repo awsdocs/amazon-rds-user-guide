@@ -13,6 +13,10 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown following\.  
 ![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
 
+1. Make sure you have not opted into the new launch experience\.
+
+   This tutorial uses the old launch experience\.
+
 1. Choose the **Amazon Linux 2 AMI**\.  
 ![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
 

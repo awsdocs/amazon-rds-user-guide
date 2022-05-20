@@ -9,5 +9,5 @@ Amazon RDS supports the following options for MySQL:
 
 | Option | Option ID | Engine versions | 
 | --- | --- | --- | 
-|  [MariaDB Audit Plugin support](Appendix.MySQL.Options.AuditPlugin.md)  |  `MARIADB_AUDIT_PLUGIN`  |  MySQL 8\.0\.25 and higher 8\.0 versions MySQL 5\.7\.16 and higher 5\.7 versions All MySQL 5\.6 versions  | 
-|  [MySQL memcached support](Appendix.MySQL.Options.memcached.md)  |  `MEMCACHED`  |  All MySQL 5\.6, 5\.7, and 8\.0 versions  | 
+|  [MariaDB Audit Plugin support](Appendix.MySQL.Options.AuditPlugin.md)  |  `MARIADB_AUDIT_PLUGIN`  |  MySQL 8\.0\.25 and higher 8\.0 versions All MySQL 5\.7 versions  | 
+|  [MySQL memcached support](Appendix.MySQL.Options.memcached.md)  |  `MEMCACHED`  |  All MySQL 5\.7 and 8\.0 versions  | 

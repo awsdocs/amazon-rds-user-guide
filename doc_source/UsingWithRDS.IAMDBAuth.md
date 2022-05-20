@@ -24,7 +24,6 @@ IAM database authentication is available for the following database engines:
 + MariaDB 10\.6, all minor versions
 + MySQL 8\.0, minor version 8\.0\.16 or higher
 + MySQL 5\.7, minor version 5\.7\.16 or higher
-+ MySQL 5\.6, minor version 5\.6\.34 or higher
 + PostgreSQL 14, 13, 12, and 11, all minor versions
 + PostgreSQL 10, minor version 10\.6 or higher
 + PostgreSQL 9\.6, minor version 9\.6\.11 or higher

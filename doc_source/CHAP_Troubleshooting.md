@@ -290,7 +290,7 @@ When a DB instance is restarted for the third time in one hour or for the fifth 
   + `innodb_buffer_pool_size`
   + `innodb_log_buffer_size`
   + `key_buffer_size`
-  + `query_cache_size` \(MySQL version 5\.6 and 5\.7 only\)
+  + `query_cache_size` \(MySQL version 5\.7 only\)
   + `tmp_table_size`
 + **Value 2** – The `max_connections` parameter multiplied by the sum of the following parameters:
   + `binlog_cache_size`

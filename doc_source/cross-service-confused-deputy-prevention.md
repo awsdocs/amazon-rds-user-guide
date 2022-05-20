@@ -41,6 +41,6 @@ For more examples of policies that use the `aws:SourceArn` and `aws:SourceAccoun
 + [Setting up Windows Authentication for SQL Server DB instances](USER_SQLServerWinAuth.md#USER_SQLServerWinAuth.SettingUp)
 + [Prerequisites for integrating RDS for SQL Server with S3](User.SQLServer.Options.S3-integration.md#Appendix.SQLServer.Options.S3-integration.preparing)
 + [Manually creating an IAM role for SQL Server Audit](Appendix.SQLServer.Options.Audit.md#Appendix.SQLServer.Options.Audit.IAM)
-+ [Configuring IAM permissions for Amazon RDS for Oracle integration with Amazon S3](oracle-s3-integration.md#oracle-s3-integration.preparing)
++ [Configuring IAM permissions for RDS for Oracle integration with Amazon S3](oracle-s3-integration.md#oracle-s3-integration.preparing)
 + [Setting up access to an Amazon S3 bucket](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.AccessPermission) \(PostgreSQL import\)
 + [Setting up access to an Amazon S3 bucket](postgresql-s3-export.md#postgresql-s3-export-access-bucket) \(PostgreSQL export\)

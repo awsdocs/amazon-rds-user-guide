@@ -56,8 +56,8 @@ To set up Kerberos authentication for a PostgreSQL DB instance, take the followi
 1. If you plan to locate the directory and the DB instance in different AWS accounts or virtual private clouds \(VPCs\), configure VPC peering\. For more information, see [What is VPC peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\.
 
 1. Create or modify a PostgreSQL DB instance either from the console, CLI, or RDS API using one of the following methods:
-   +  [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) 
-   +  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) 
+   + [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) 
+   + [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) 
    + [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)
    + [Restoring a DB instance to a specified time](USER_PIT.md)
 

@@ -41,14 +41,14 @@ aws rds describe-db-engine-versions ^
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
-For example, to identify the valid upgrade targets for a MySQL version 5\.6\.43 DB instance, run the following AWS CLI command:
+For example, to identify the valid upgrade targets for a MySQL version 8\.0\.23 DB instance, run the following AWS CLI command:
 
 For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-engine-versions \
   --engine mysql \
-  --engine-version 5.6.43 \
+  --engine-version 8.0.23 \
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
@@ -57,7 +57,7 @@ For Windows:
 ```
 aws rds describe-db-engine-versions ^
   --engine mysql ^
-  --engine-version 5.6.43 ^
+  --engine-version 8.0.23 ^
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
@@ -82,8 +82,7 @@ Amazon RDS supports the following in\-place upgrades for major versions of the M
 
 **Note**  
 You can only create MySQL version 5\.7 and 8\.0 DB instances with latest\-generation and current\-generation DB instance classes, in addition to the db\.m3 previous\-generation DB instance class\.   
-In some cases, you want to upgrade a MySQL version 5\.6 DB instance running on a previous\-generation DB instance class \(other than db\.m3\) to a MySQL version 5\.7 DB instance\. In these cases, first modify the DB instance to use a latest\-generation or current\-generation DB instance class\. After you do this, you can then modify the DB instance to use the MySQL version 5\.7 database engine\. For information on Amazon RDS DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.  
-On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6\. Automatic upgrades of MySQL 5\.6 DB instances to MySQL 5\.7 begin on March 1, 2022\. For more information, see [Deprecation of MySQL version 5\.6](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt.Deprecation56)\.
+In some cases, you want to upgrade a MySQL version 5\.6 DB instance running on a previous\-generation DB instance class \(other than db\.m3\) to a MySQL version 5\.7 DB instance\. In these cases, first modify the DB instance to use a latest\-generation or current\-generation DB instance class\. After you do this, you can then modify the DB instance to use the MySQL version 5\.7 database engine\. For information on Amazon RDS DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 **Topics**
 + [Overview of MySQL major version upgrades](#USER_UpgradeDBInstance.MySQL.Major.Overview)

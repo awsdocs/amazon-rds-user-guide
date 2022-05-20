@@ -3,7 +3,6 @@
 Amazon RDS supports DB instances running several versions of MySQL\. You can use the following major versions:
 + MySQL 8\.0
 + MySQL 5\.7
-+ MySQL 5\.6 \(Deprecation scheduled for February 1, 2022\)
 
 For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
@@ -55,7 +54,6 @@ Amazon RDS currently supports the following versions of MySQL:
 | --- | --- | 
 | MySQL 8\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
 | MySQL 5\.7 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
-| MySQL 5\.6 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
 
 You can specify any currently supported MySQL version when creating a new DB instance\. You can specify the major version \(such as MySQL 5\.7\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
@@ -81,19 +79,6 @@ Amazon RDS currently supports the major version upgrades from MySQL version 5\.6
 
 You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
 
-### Deprecation of MySQL version 5\.6<a name="MySQL.Concepts.VersionMgmt.Deprecation56"></a>
-
-On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6 using the following schedule, which includes upgrade recommendations\. We recommend that you upgrade all MySQL 5\.6 DB instances to MySQL 5\.7 or higher as soon as possible\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
-
-
-| Action or recommendation | Dates | 
-| --- | --- | 
-|  We recommend that you upgrade MySQL 5\.6 DB instances manually to the version of your choice\.   |  Now–February 1, 2022  | 
-|  We recommend that you upgrade MySQL 5\.6 snapshots manually to the version of your choice\.  |  Now–February 1, 2022  | 
-|  You can no longer create new MySQL 5\.6 DB instances\. You can still create read replicas of existing MySQL 5\.6 DB instances and change them from Single\-AZ deployments to Multi\-AZ deployments\.  |  February 1, 2022  | 
-|  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  March 1, 2022  | 
-|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  March 1, 2022  | 
-
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
 Amazon RDS doesn't currently support the following MySQL features: 
@@ -109,13 +94,13 @@ Amazon RDS doesn't currently support the following MySQL features:
 + X Plugin
 
 **Note**  
-Global transaction IDs are supported for RDS for MySQL 5\.7\.23 and higher 5\.7 versions, and for MySQL 8\.0\.26 and higher 8\.0 versions\. Global transaction IDs are not supported for RDS for MySQL 5\.6\.
+Global transaction IDs are supported for RDS for MySQL 5\.7\.23 and higher 5\.7 versions, and for MySQL 8\.0\.26 and higher 8\.0 versions\.
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, you are assigned to the *db\_owner* role for all databases on that instance, and you have all database\-level permissions except for those used for backups\. Amazon RDS manages backups for you\. 
 
 ## Supported storage engines for RDS for MySQL<a name="MySQL.Concepts.Storage"></a>
 
-While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. You must be running an instance of MySQL 5\.6 or higher to use the InnoDB `memcached` interface\. For more information, see [MySQL memcached support](Appendix.MySQL.Options.memcached.md)\. 
+While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. For more information, see [MySQL memcached support](Appendix.MySQL.Options.memcached.md)\. 
 
 The Federated Storage Engine is currently not supported by Amazon RDS for MySQL\. 
 
@@ -126,7 +111,7 @@ System tables in the `mysql` schema can be in MyISAM storage\.
 
 If you want to convert existing MyISAM tables to InnoDB tables, you can use the `ALTER TABLE` command \(for example, `alter table TABLE_NAME engine=innodb;`\)\. Bear in mind that MyISAM and InnoDB have different strengths and weaknesses, so you should fully evaluate the impact of making this switch on your applications before doing so\. 
 
-MySQL 5\.1 and 5\.5 are no longer supported in Amazon RDS\. However, you can restore existing MySQL 5\.1 and 5\.5 snapshots\. When you restore a MySQL 5\.1 or 5\.5 snapshot, the DB instance is automatically upgraded to MySQL 5\.6\. 
+MySQL 5\.1, 5\.5, and 5\.6 are no longer supported in Amazon RDS\. However, you can restore existing MySQL 5\.1, 5\.5, and 5\.6 snapshots\. When you restore a MySQL 5\.1, 5\.5, or 5\.6 snapshot, the DB instance is automatically upgraded to MySQL 5\.7\. 
 
 ## Storage\-full behavior for Amazon RDS for MySQL<a name="MySQL.Concepts.StorageFullBehavior"></a>
 
@@ -177,7 +162,7 @@ Security for MySQL DB instances is managed at three levels:
 + `process`
 + `references`
 + `replication client`
-+ `replication slave (MySQL 5.6 and higher) `
++ `replication slave`
 + `select`
 + `show databases`
 + `show view`
@@ -193,7 +178,7 @@ To allow management of the DB instance, the standard `kill` and `kill_query` com
 
 ## Using the Password Validation Plugin<a name="MySQL.Concepts.PasswordValidationPlugin"></a>
 
-MySQL provides the `validate_password` plugin for improved security\. The plugin enforces password policies using parameters in the DB parameter group for your MySQL DB instance\. The plugin is supported for DB instances running MySQL version 5\.6, 5\.7, and 8\.0\. For more information about the `validate_password` plugin, see [The Password Validation Plugin](https://dev.mysql.com/doc/refman/8.0/en/validate-password.html) in the MySQL documentation\.
+MySQL provides the `validate_password` plugin for improved security\. The plugin enforces password policies using parameters in the DB parameter group for your MySQL DB instance\. The plugin is supported for DB instances running MySQL version 5\.7 and 8\.0\. For more information about the `validate_password` plugin, see [The Password Validation Plugin](https://dev.mysql.com/doc/refman/8.0/en/validate-password.html) in the MySQL documentation\.
 
 **To enable the validate\_password plugin for a MySQL DB instance**
 
@@ -229,16 +214,7 @@ An SSL certificate created by Amazon RDS is the trusted root entity and should w
 
 For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For more information about using SSL with MySQL, see [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)\.
 
-MySQL uses yaSSL for secure connections in the following versions:
-+ MySQL version 5\.7\.19 and earlier 5\.7 versions
-+ MySQL version 5\.6\.37 and earlier 5\.6 versions
-
-MySQL uses OpenSSL for secure connections in the following versions:
-+ MySQL version 8\.0
-+ MySQL version 5\.7\.21 and higher 5\.7 versions
-+ MySQL version 5\.6\.39 and higher 5\.6 versions
-
-Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
+MySQL uses OpenSSL for secure connections\. Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
 
 
 ****  
@@ -246,57 +222,43 @@ Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\
 | MySQL version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
 | --- | --- | --- | --- | 
 |  MySQL 8\.0  |  Supported for MySQL 8\.0\.27 and lower  |  Supported for MySQL 8\.0\.27 and lower  |  Supported  | 
-|  MySQL 5\.7  |  Supported  |  Supported  |  Supported for MySQL 5\.7\.21 and higher  | 
-|  MySQL 5\.6  |  Supported  |  Supported for MySQL 5\.6\.46 and higher  |  Supported for MySQL 5\.6\.46 and higher  | 
+|  MySQL 5\.7  |  Supported  |  Supported  |  Supported  | 
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, as shown in the examples following\. 
 
-The following example shows how to launch the client using the `--ssl-ca` parameter for MySQL 5\.7 and higher\.
+The following example shows how to launch the client using the `--ssl-ca` parameter for MySQL\.
 
 ```
 mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
 --ssl-ca=[full path]global-bundle.pem --ssl-mode=VERIFY_IDENTITY
 ```
 
-The following example shows how to launch the client using the `--ssl-ca` parameter for MySQL 5\.6 and earlier\.
-
-```
-mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]global-bundle.pem --ssl-verify-server-cert
-```
-
 For information about downloading certificate bundles, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
 
-For MySQL 5\.7 and higher, use the following statement\.
+To do so, use the following statement\.
 
 ```
 ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
-```
-
-For MySQL 5\.6 and earlier, use the following statement\.
-
-```
-GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
 For more information on SSL connections with MySQL, see the [ Using encrypted connections](https://dev.mysql.com/doc/refman/8.0/en/encrypted-connections.html) in the MySQL documentation\.
 
 ## Using memcached and other options with MySQL<a name="MySQL.Concepts.General.Options"></a>
 
-Most Amazon RDS DB engines support option groups that allow you to select additional features for your DB instance\. DB instances on MySQL version 5\.6 and higher support the `memcached` option, a simple, key\-based cache\. For more information about `memcached` and other options, see [Options for MySQL DB instances](Appendix.MySQL.Options.md)\. For more information about working with option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
+Most Amazon RDS DB engines support option groups that allow you to select additional features for your DB instance\. RDS for MySQL DB instances support the `memcached` option, a simple, key\-based cache\. For more information about `memcached` and other options, see [Options for MySQL DB instances](Appendix.MySQL.Options.md)\. For more information about working with option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
 
 ## InnoDB cache warming<a name="MySQL.Concepts.InnoDBCacheWarming"></a>
 
 InnoDB cache warming can provide performance gains for your MySQL DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. The file that stores the saved buffer pool information only stores metadata for the pages that are in the buffer pool, and not the pages themselves\. As a result, the file does not require much storage space\. The file size is about 0\.2 percent of the cache size\. For example, for a 64 GiB cache, the cache warming file size is 128 MiB\. For more information on InnoDB cache warming, see [Saving and restoring the buffer pool state](https://dev.mysql.com/doc/refman/8.0/en/innodb-preload-buffer-pool.html) in the MySQL documentation\. 
 
-MySQL on Amazon RDS supports InnoDB cache warming for MySQL version 5\.6 and higher\. To enable InnoDB cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group will affect all MySQL DB instances that use that parameter group\. To enable InnoDB cache warming for specific MySQL DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
+RDS for MySQL DB instances support InnoDB cache warming\. To enable InnoDB cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group will affect all MySQL DB instances that use that parameter group\. To enable InnoDB cache warming for specific MySQL DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. 
 
 InnoDB cache warming primarily provides a performance benefit for DB instances that use standard storage\. If you use PIOPS storage, you do not commonly see a significant performance benefit\. 
 
 **Important**  
-If your MySQL DB instance does not shut down normally, such as during a failover, then the buffer pool state will not be saved to disk\. In this case, MySQL loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the InnoDB cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand if your DB instance is running MySQL version 5\.6\.19 or higher\.  
+If your MySQL DB instance does not shut down normally, such as during a failover, then the buffer pool state will not be saved to disk\. In this case, MySQL loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the InnoDB cache on startup, we recommend that you periodically dump the buffer pool "on demand\."  
 You can create an event to dump the buffer pool automatically and on a regular interval\. For example, the following statement creates an event named `periodic_buffer_pool_dump` that dumps the buffer pool every hour\.   
 
 ```
@@ -308,7 +270,7 @@ For more information on MySQL events, see [Event syntax](https://dev.mysql.com/d
 
 ### Dumping and loading the buffer pool on demand<a name="MySQL.Concepts.InnoDBCacheWarming.OnDemand"></a>
 
-For MySQL version 5\.6\.19 and higher, you can save and load the InnoDB cache "on demand\."
+You can save and load the InnoDB cache "on demand\."
 + To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql_rds_innodb_buffer_pool_dump_now.md) stored procedure\.
 + To load the saved state of the buffer pool from disk, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_now](mysql_rds_innodb_buffer_pool_load_now.md) stored procedure\.
 + To cancel a load operation in progress, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_abort](mysql_rds_innodb_buffer_pool_load_abort.md) stored procedure\.
@@ -384,6 +346,6 @@ There are some known issues and limitations for working with MySQL on Amazon RDS
 
 ## Deprecated versions for Amazon RDS for MySQL<a name="MySQL.Concepts.DeprecatedVersions"></a>
 
-Amazon RDS for MySQL version 5\.1 and 5\.5 are deprecated\.
+Amazon RDS for MySQL version 5\.1, 5\.5, and 5\.6 are deprecated\.
 
 For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.

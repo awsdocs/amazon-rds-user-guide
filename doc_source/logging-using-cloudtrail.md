@@ -76,17 +76,17 @@ The following example shows a CloudTrail log entry that demonstrates the `Create
         "backupRetentionPeriod": 1,
         "allocatedStorage": 20,
         "storageType": "standard",
-        "engineVersion": "5.6.39",
+        "engineVersion": "8.0.28",
         "dbInstancePort": 0,
         "optionGroupMemberships": [
             {
                 "status": "in-sync",
-                "optionGroupName": "default:mysql-5-6"
+                "optionGroupName": "default:mysql-8-0"
             }
         ],
         "dBParameterGroups": [
             {
-                "dBParameterGroupName": "default.mysql5.6",
+                "dBParameterGroupName": "default.mysql8.0",
                 "parameterApplyStatus": "in-sync"
             }
         ],

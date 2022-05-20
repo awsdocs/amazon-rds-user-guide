@@ -6,7 +6,7 @@ When you export a DB snapshot, Amazon RDS extracts data from the snapshot and st
 
 You can export all types of DB snapshots—including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
 
-After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the Amazon Redshift Database Developer Guide\.
+After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the *Amazon Redshift Database Developer Guide*\.
 
 Amazon RDS supports exporting snapshots in all AWS Regions except the following:
 + Asia Pacific \(Jakarta\)
@@ -20,7 +20,7 @@ The following table shows the engine versions that are supported for exporting s
 
 | MariaDB | MySQL | PostgreSQL | 
 | --- | --- | --- | 
-|  10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  All 12 and 13 versions 11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
+|  10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  All 14, 13, and 12 versions 11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
 
 For complete lists of engine versions supported by Amazon RDS, see the following:
 + [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)
@@ -322,7 +322,7 @@ The **Export to Amazon S3** console option appears only for snapshots that can b
      mydatabase mydatabase2.myschema1 mydatabase2.myschema2.mytable1 mydatabase2.myschema2.mytable2
      ```
 
-1. For **S3 bucket**, choose the bucket to export to\. 
+1. For **S3 bucket**, choose the bucket to export to\.
 
    To assign the exported data to a folder path in the S3 bucket, enter the optional path for **S3 prefix**\.
 

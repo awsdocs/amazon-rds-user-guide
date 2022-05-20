@@ -2,14 +2,13 @@
 
  By using Amazon RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. By using RDS Proxy, you can also enforce AWS Identity and Access Management \(IAM\) authentication for databases, and securely store credentials in AWS Secrets Manager\. 
 
-**Note**  
- RDS Proxy is fully compatible with MySQL and PostgreSQL\. You can enable RDS Proxy for most applications with no code changes\. 
-
  Using RDS Proxy, you can handle unpredictable surges in database traffic that otherwise might cause issues due to oversubscribing connections or creating new connections at a fast rate\. RDS Proxy establishes a database connection pool and reuses connections in this pool without the memory and CPU overhead of opening a new database connection each time\. To protect the database against oversubscription, you can control the number of database connections that are created\. 
 
  RDS Proxy queues or throttles application connections that can't be served immediately from the pool of connections\. Although latencies might increase, your application can continue to scale without abruptly failing or overwhelming the database\. If connection requests exceed the limits you specify, RDS Proxy rejects application connections \(that is, it sheds load\)\. At the same time, it maintains predictable performance for the load that can be served with the available capacity\. 
 
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
+
+ RDS Proxy is fully compatible with the engine versions that it supports\. You can enable RDS Proxy for most applications with no code changes\. For a list of supported engine versions, see [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)\. 
 
 **Topics**
 + [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)
@@ -28,7 +27,7 @@
 ## Supported engines and Region availability for RDS Proxy<a name="rds-proxy.support"></a>
 
 RDS Proxy supports the following database engine versions:
-+ RDS for MySQL – MySQL 5\.6, 5\.7, and 8\.0
++ RDS for MySQL – MySQL 5\.7 and 8\.0
 + RDS for PostgreSQL – version 10\.10 and higher minor versions, version 11\.5 and higher minor versions, version 12\.5 and higher minor versions, and version 13\.1 and higher minor versions
 
 RDS Proxy is available in the following AWS Regions:
@@ -71,18 +70,22 @@ RDS Proxy is available in the following AWS Regions:
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 
 +  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, make sure that all users who connect through a proxy authenticate through user names and passwords\. See [Setting up AWS Identity and Access Management \(IAM\) policies](rds-proxy-setup.md#rds-proxy-iam-setup) for details about IAM support in RDS Proxy\. 
 +  You can't use RDS Proxy with custom DNS\. 
-+  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
++ Any statement with a text size greater than 16 KB causes the proxy to pin the session to the current connection\.
 
  The following RDS Proxy limitations apply to MySQL:
 + RDS Proxy doesn't support the MySQL `sha256_password` and `caching_sha2_password` authentication plugins\. These plugins implement SHA\-256 hashing for user account passwords\.
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\.
 +  You can't use RDS Proxy with an RDS for MySQL DB instance that has the `read_only` parameter in its DB parameter group set to `1`\.
-+  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\.
++ RDS Proxy doesn't support MySQL compressed mode\. For example, it doesn't support the compression used by the `--compress` or `-C` options of the `mysql` command\.
 +  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\.
 
+**Important**  
+ For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
+
  The following RDS Proxy limitations apply to PostgreSQL:
++ RDS Proxy doesn't support session pinning filters for PostgreSQL\.
 + RDS Proxy doesn't support PostgreSQL SCRAM\-SHA\-256 authentication\.
 +  Currently, all proxies listen on port 5432 for PostgreSQL\.
 + For PostgreSQL, RDS Proxy doesn't currently support canceling a query from a client by issuing a `CancelRequest`\. This is the case for example, when you cancel a long\-running query in an interactive psql session by using Ctrl\+C\. 

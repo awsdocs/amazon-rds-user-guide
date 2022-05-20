@@ -6,19 +6,9 @@ This topic can help you to determine whether any client applications use SSL/TLS
 
 **Note**  
 Some applications are configured to connect to MySQL DB instances only if they can successfully verify the certificate on the server\. For such applications, you must update your client application trust stores to include the new CA certificates\.   
-You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use the `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the following behavior applies:  
-We recommend avoiding `preferred` mode\. In `preferred` mode, if the connection encounters an invalid certificate, it stops using encryption and proceeds unencrypted\.
-For newer MySQL minor versions, the connection falls back to not using SSL and connects without encryption\.  
+You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use the `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the connection falls back to not using SSL and connects without encryption\.  
 Because these later versions use the OpenSSL protocol, an expired server certificate doesn't prevent successful connections unless the `required` SSL mode is specified\.  
-The following MySQL minor versions use the OpenSSL protocol:  
-All MySQL 8\.0 versions
-MySQL 5\.7\.21 and later MySQL 5\.7 versions
-MySQL 5\.6\.39 and later MySQL 5\.6 versions
-For older MySQL minor versions, an error is returned\.  
-Because these older versions use the yaSSL protocol, certificate verification is strictly enforced and the connection is unsuccessful\.  
-The following MySQL minor versions use the yaSSL protocol:  
-MySQL 5\.7\.19 and earlier MySQL 5\.7 versions
-MySQL 5\.6\.37 and earlier MySQL 5\.6 versions
+We recommend avoiding `preferred` mode\. In `preferred` mode, if the connection encounters an invalid certificate, it stops using encryption and proceeds unencrypted\.
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
@@ -53,8 +43,6 @@ In this sample output, you can see both your own session \(`admin`\) and an appl
 +----+-----------------+------------------+-----------------+
 3 rows in set (0.00 sec)
 ```
-
-If you are using Amazon RDS for MySQL version 5\.6, then you can't determine from the server side whether applications are connecting with or without SSL\. For those versions, you can determine whether SSL is used by examining the application's connection method\. In the following section, you can find more information on examining the client connection configuration\.
 
 ## Determining whether a client requires certificate verification to connect<a name="ssl-certificate-rotation-mysql.determining-client"></a>
 

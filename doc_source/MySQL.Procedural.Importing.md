@@ -8,7 +8,7 @@ You can find the supported scenario in the following diagram\.
 
 ![\[MySQL importing backup files from S3 architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-bak-file.png)
 
-Importing backup files from Amazon S3 is supported for MySQL version 5\.6, 5\.7, and 8\.0\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
+Importing backup files from Amazon S3 is supported for MySQL in all AWS Regions\. 
 
 We recommend that you import your database to Amazon RDS by using backup files if your on\-premises database can be offline while the backup file is created, copied, and restored\. If your database can't be offline, you can use binary log \(binlog\) replication to update your database after you have migrated to Amazon RDS through Amazon S3 as explained in this topic\. For more information, see [Configuring binary log file position replication with an external source instance](MySQL.Procedural.Importing.External.Repl.md)\. You can also use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [What is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
 
@@ -18,10 +18,10 @@ The following are some limitations and recommendations for importing backup file
 + You can only import your data to a new DB instance, not an existing DB instance\. 
 + You must use Percona XtraBackup to create the backup of your on\-premises database\.
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
-+ You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 5\.6, and the default minor version for your AWS Region is 5\.6\.51, then you must import your data into a MySQL version 5\.6\.51 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)\.
-+ Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 5\.7 to version 5\.6, and you can't migrate from version 5\.6\.39 to version 5\.6\.37\.
-+ You can't import a MySQL 5\.5 database\. 
-+ You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. Similarly, you can't import a MySQL 5\.7 database to an RDS for MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
++ You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 8\.0, and the default minor version for your AWS Region is 8\.0\.28, then you must import your data into a MySQL version 8\.0\.28 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)\.
++ Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 8\.0 to version 5\.7, and you can't migrate from version 8\.0\.28 to version 8\.0\.27\.
++ You can't import a MySQL 5\.5 or 5\.6 database\. 
++ You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.7 database to an RDS for MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
 + You can't restore from an encrypted backup in the Amazon S3 bucket\. 
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
@@ -284,7 +284,7 @@ For Linux, macOS, or Unix:
  9.     --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename \
 10.     --s3-prefix bucketprefix \
 11.     --source-engine mysql \
-12.     --source-engine-version 5.6.51 \
+12.     --source-engine-version 8.0.28 \
 13.     --max-allocated-storage 1000
 ```
 For Windows:  
@@ -301,7 +301,7 @@ For Windows:
  9.     --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename ^
 10.     --s3-prefix bucketprefix ^
 11.     --source-engine mysql ^
-12.     --source-engine-version 5.6.51 ^
+12.     --source-engine-version 8.0.28 ^
 13.     --max-allocated-storage 1000
 ```
 

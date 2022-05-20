@@ -14,9 +14,6 @@ The error log is enabled by default\. The following table summarizes the require
 |  Slow query log  |  The DB instance must use a custom parameter group with the parameter setting `slow_query_log = 1` to enable the slow query log\.  | 
 |  Log output  |  The DB instance must use a custom parameter group with the parameter setting `log_output = FILE` to write logs to the file system and publish them to CloudWatch Logs\.  | 
 
-**Note**  
-Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6, 5\.7, and 8\.0\.
-
 ## Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish MySQL logs to CloudWatch Logs using the console**

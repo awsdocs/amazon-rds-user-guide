@@ -46,6 +46,8 @@ Use the following procedure to create a VPC with both public and private subnets
 
 1. In the upper\-right corner of the AWS Management Console, choose the Region to create your VPC in\. This example uses the US East \(Ohio\) Region\.
 
+1. In the upper\-left corner, make sure **New VPC Experience** is turned off\.
+
 1. In the upper\-left corner, choose **VPC Dashboard**\. To begin creating a VPC, choose **Launch VPC Wizard**\.
 
 1. On the **Step 1: Select a VPC Configuration** page, choose **VPC with Public and Private Subnets**, and then choose **Select**\.

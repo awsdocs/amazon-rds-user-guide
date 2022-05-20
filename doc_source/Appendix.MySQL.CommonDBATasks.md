@@ -98,7 +98,7 @@ ALTER TABLE table_name ENGINE = InnoDB, ALGORITHM=COPY;
 
 For example, the following query returns an `ALTER TABLE` statement for every InnoDB table that is not in the shared tablespace\.
 
-**For MySQL 5\.6 and 5\.7 DB instances:**
+**For MySQL 5\.7 DB instances:**
 
 ```
 SELECT CONCAT('ALTER TABLE `', 

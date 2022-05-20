@@ -122,7 +122,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions, 10\.4 & higher versions, and 9\.6\.9 & higher versions  | 
 | db\.m5\.large | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions, 10\.4 & higher versions, and 9\.6\.9 & higher versions  | 
 | db\.m4 – general\-purpose instance classes | 
-| db\.m4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.m4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
 | db\.m4\.10xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
 | db\.m4\.4xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
 | db\.m4\.2xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
@@ -225,12 +225,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions, 10\.4 & higher versions, and 9\.6\.9 & higher versions  | 
 | db\.r5\.large | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions, 10\.4 & higher versions, and 9\.6\.9 & higher versions  | 
 | db\.r4 – memory\-optimized instance classes | 
-| db\.r4\.16xlarge | Yes | Yes | All MySQL 8\.0, 5\.7, and 5\.6 versions | Yes | Lower than PostgreSQL 13 | 
-| db\.r4\.8xlarge | Yes | Yes | All MySQL 8\.0, 5\.7, and 5\.6 versions | Yes | Lower than PostgreSQL 13 | 
-| db\.r4\.4xlarge | Yes | Yes | All MySQL 8\.0, 5\.7, and 5\.6 versions | Yes | Lower than PostgreSQL 13 | 
-| db\.r4\.2xlarge | Yes | Yes | All MySQL 8\.0, 5\.7, and 5\.6 versions | Yes | Lower than PostgreSQL 13 | 
-| db\.r4\.xlarge | Yes | Yes | All MySQL 8\.0, 5\.7, and 5\.6 versions | Yes | Lower than PostgreSQL 13 | 
-| db\.r4\.large | Yes | Yes | All MySQL 8\.0, 5\.7, and 5\.6 versions | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.16xlarge | Yes | Yes | All MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.8xlarge | Yes | Yes | All MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.4xlarge | Yes | Yes | All MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.2xlarge | Yes | Yes | All MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.xlarge | Yes | Yes | All MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.large | Yes | Yes | All MySQL 8\.0, 5\.7 | Yes | Lower than PostgreSQL 13 | 
 | db\.r3 – memory\-optimized instance classes | 
 | db\.r3\.8xlarge\*\* | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
@@ -252,8 +252,8 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.t3\.small | Yes | Yes | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t3\.micro | Yes | No | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t2 – burstable\-performance instance classes | 
-| db\.t2\.2xlarge | Yes | No | All MySQL 8\.0, 5\.7, and 5\.6 versions | Deprecated | Lower than PostgreSQL 13 | 
-| db\.t2\.xlarge | Yes | No | All MySQL 8\.0, 5\.7, and 5\.6 versions | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.2xlarge | Yes | No | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.xlarge | Yes | No | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
 | db\.t2\.large | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.t2\.medium | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.t2\.small | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
@@ -336,12 +336,12 @@ aws rds describe-orderable-db-instance-options --engine engine --engine-version 
     --region region
 ```
 
-For example, the following command lists the supported DB instance classes for version 12\.4 of the RDS for PostgreSQL DB engine in US East \(N\. Virginia\)\.
+For example, the following command lists the supported DB instance classes for version 13\.6 of the RDS for PostgreSQL DB engine in US East \(N\. Virginia\)\.
 
 For Linux, macOS, or Unix:
 
 ```
-aws rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 \
+aws rds describe-orderable-db-instance-options --engine postgres --engine-version 13.6 \
     --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" \
     --output text \
     --region us-east-1
@@ -350,7 +350,7 @@ aws rds describe-orderable-db-instance-options --engine postgres --engine-versio
 For Windows:
 
 ```
-aws rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 ^
+aws rds describe-orderable-db-instance-options --engine postgres --engine-version 13.6 ^
     --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" ^
     --output text ^
     --region us-east-1

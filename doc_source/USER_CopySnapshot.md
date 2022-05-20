@@ -1,4 +1,4 @@
-# Copying a snapshot<a name="USER_CopySnapshot"></a>
+# Copying a DB snapshot<a name="USER_CopySnapshot"></a>
 
 With Amazon RDS, you can copy automated backups or manual DB snapshots\. After you copy a snapshot, the copy is a manual snapshot\. You can make multiple copies of an automated backup or manual snapshot, but each copy must have a unique identifier\.
 
@@ -45,8 +45,6 @@ The source snapshot remains encrypted throughout the copy process\. For more inf
 You can also encrypt a copy of an unencrypted snapshot\. This way, you can quickly add encryption to a previously unencrypted DB instance\. To do this, you create a snapshot of your DB instance when you are ready to encrypt it\. You then create a copy of that snapshot and specify a KMS key to encrypt that snapshot copy\. You can then restore an encrypted DB instance from the encrypted snapshot\.
 
 ## Incremental snapshot copying<a name="USER_CopySnapshot.Incremental"></a>
-
-### <a name="incremental-nonaurora"></a>
 
 An *incremental* snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\.
 
@@ -240,21 +238,21 @@ When you copy a snapshot across Regions, you can specify a new option group for 
 
 In some cases, you might copy a snapshot and not specify a new option group for the snapshot\. In these cases, when you restore the snapshot the DB instance gets the default option group\. To give the new DB instance the same options as the original, do the following:
 
-1. In the destination AWS Region, create an option group with the same settings as the original DB instance \. If one already exists in the new AWS Region, you can use that one\.
+1. In the destination AWS Region, create an option group with the same settings as the original DB instance\. If one already exists in the new AWS Region, you can use that one\.
 
 1. After you restore the snapshot in the destination AWS Region, modify the new DB instance and add the new or existing option group from the previous step\.
 
 ## Parameter group considerations<a name="USER_CopySnapshot.Parameters"></a>
 
-When you copy a snapshot across Regions, the copy doesn't include the parameter group used by the original DB instance \. When you restore a snapshot to create a new DB instance , that DB instance gets the default parameter group for the AWS Region it is created in\. To give the new DB instance the same parameters as the original, do the following:
+When you copy a snapshot across Regions, the copy doesn't include the parameter group used by the original DB instance\. When you restore a snapshot to create a new DB instance, that DB instance gets the default parameter group for the AWS Region it is created in\. To give the new DB instance the same parameters as the original, do the following:
 
-1. In the destination AWS Region, create a DB parameter group with the same settings as the original DB instance \. If one already exists in the new AWS Region, you can use that one\. 
+1. In the destination AWS Region, create a DB parameter group with the same settings as the original DB instance\. If one already exists in the new AWS Region, you can use that one\. 
 
 1. After you restore the snapshot in the destination AWS Region, modify the new DB instance and add the new or existing parameter group from the previous step\. 
 
 ## Copying a DB snapshot<a name="USER_CopyDBSnapshot"></a>
 
-Use the procedures in this topic to copy a DB snapshot\. For an overview of copying a snapshot, see [Copying a snapshot](#USER_CopySnapshot) 
+Use the procedures in this topic to copy a DB snapshot\. For an overview of copying a snapshot, see [Copying a DB snapshot](#USER_CopySnapshot) 
 
 For each AWS account, you can copy up to five DB snapshots at a time from one AWS Region to another\. If you copy a DB snapshot to another AWS Region, you create a manual DB snapshot that is retained in that AWS Region\. Copying a DB snapshot out of the source AWS Region incurs Amazon RDS data transfer charges\. 
 

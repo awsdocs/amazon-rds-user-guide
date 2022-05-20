@@ -59,7 +59,7 @@ The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set 
 
 1. Using the MySQL client of your choice, connect to the external instance of MySQL and create a user account to be used for replication\. The following is an example\.
 
-   **MySQL 5\.6 and 5\.7**
+   **MySQL 5\.7**
 
    ```
    CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
@@ -73,7 +73,7 @@ The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set 
 
 1. On the external instance of MySQL, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. The following example grants `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the 'repl\_user' user for your domain\.
 
-   **MySQL 5\.6 and 5\.7**
+   **MySQL 5\.7**
 
    ```
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';

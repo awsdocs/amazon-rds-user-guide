@@ -12,4 +12,4 @@ You can use the AWS Management Console to view the differences between two param
 
 1. For **Parameter group actions**, choose **Compare**\.
 **Note**  
-If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.6 and a MySQL 5\.7 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.
+If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.7 and a MySQL 8\.0 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.

@@ -39,7 +39,7 @@ You can create a new DB parameter group using the AWS Management Console, the AW
 
 ### AWS CLI<a name="USER_WorkingWithParamGroups.Creating.CLI"></a>
 
-To create a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-parameter-group.html) command\. The following example creates a DB parameter group named *mydbparametergroup* for MySQL version 5\.6 with a description of "*My new parameter group*\."
+To create a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-parameter-group.html) command\. The following example creates a DB parameter group named *mydbparametergroup* for MySQL version 8\.0 with a description of "*My new parameter group*\."
 
 Include the following required parameters:
 + `--db-parameter-group-name`
@@ -61,7 +61,7 @@ For Linux, macOS, or Unix:
 ```
 aws rds create-db-parameter-group \
     --db-parameter-group-name mydbparametergroup \
-    --db-parameter-group-family MySQL5.6 \
+    --db-parameter-group-family MySQL8.0 \
     --description "My new parameter group"
 ```
 For Windows:  
@@ -69,13 +69,13 @@ For Windows:
 ```
 aws rds create-db-parameter-group ^
     --db-parameter-group-name mydbparametergroup ^
-    --db-parameter-group-family MySQL5.6 ^
+    --db-parameter-group-family MySQL8.0 ^
     --description "My new parameter group"
 ```
 This command produces output similar to the following:  
 
 ```
-DBPARAMETERGROUP  mydbparametergroup  mysql5.6  My new parameter group
+DBPARAMETERGROUP  mydbparametergroup  mysql8.0  My new parameter group
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Creating.API"></a>
@@ -389,8 +389,8 @@ aws rds describe-db-parameter-groups
 The command returns a response like the following:  
 
 ```
-DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
-DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
+DBPARAMETERGROUP  default.mysql8.0     mysql8.0  Default parameter group for MySQL8.0
+DBPARAMETERGROUP  mydbparametergroup   mysql8.0  My new parameter group
 ```
 The following example describes the *mydbparamgroup1* parameter group\.  
 For Linux, macOS, or Unix:  
@@ -408,7 +408,7 @@ aws rds describe-db-parameter-groups ^
 The command returns a response like the following:  
 
 ```
-DBPARAMETERGROUP  mydbparametergroup1  mysql5.6  My new parameter group
+DBPARAMETERGROUP  mydbparametergroup1  mysql8.0  My new parameter group
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Listing.API"></a>

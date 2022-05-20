@@ -13,7 +13,7 @@ You can restore a DB instance and use a different storage type than the source D
 You can use AWS CloudFormation to restore a DB instance from a DB instance snapshot\. For more information, see [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html) in the *AWS CloudFormation User Guide*\.
 
 **Note**  
-You can't restore a DB instance from a DB snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB snapshot and restore the DB instance from the copy\. For more information, see [Copying a snapshot](USER_CopySnapshot.md)\.
+You can't restore a DB instance from a DB snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB snapshot and restore the DB instance from the copy\. For more information, see [Copying a DB snapshot](USER_CopySnapshot.md)\.
 
 ## Parameter group considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
 
@@ -23,7 +23,7 @@ The default DB parameter group is associated with the restored instance, unless 
 
 You can specify the parameter group when you restore the DB instance\.
 
-For more information about DB parameter groups and DB cluster parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+For more information about DB parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Security group considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
@@ -66,7 +66,7 @@ If you want to change from one edition to a new edition that isn't supported by 
 
 ## Oracle Database considerations<a name="USER_RestoreFromSnapshot.Oracle"></a>
 
-If you use Oracle GoldenGate, always retain the parameter group with the `compatible` parameter\. When you restore a DB instance from a DB snapshot, specify a parameter group that has a matching or greater `compatible` value\. 
+If you use Oracle GoldenGate, always retain the parameter group with the `compatible` parameter\. When you restore a DB instance from a DB snapshot, specify a parameter group that has a matching or greater `compatible` value\.
 
 If you restore a snapshot of a CDB instance, you can change the PDB name\. You can't change the CDB name, which is always `RDSCDB`\. This CDB name is the same for all RDS instances that use a single\-tenant architecture\. For more information, see [Snapshots in a single\-tenant architecture](Oracle.Concepts.single-tenant.md#Oracle.Concepts.single-tenant.snapshots)\.
 
@@ -78,7 +78,7 @@ You can restore a DB instance from a DB snapshot using the AWS Management Consol
 
 ### Console<a name="USER_RestoreFromSnapshot.CON"></a>
 
-**To restore a DB instance from a DB snapshot**
+**To restore a DB instancefrom a DB snapshot**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -124,7 +124,7 @@ For Windows:
 This command returns output similar to the following:  
 
 ```
-1. DBINSTANCE  mynewdbinstance  db.m3.large  MySQL     50       sa              creating  3  n  5.6.40  general-public-license
+1. DBINSTANCE  mynewdbinstance  db.t3.small  MySQL     50       sa              creating  3  n  8.0.28  general-public-license
 ```
 
 ### RDS API<a name="USER_RestoreFromSnapshot.API"></a>

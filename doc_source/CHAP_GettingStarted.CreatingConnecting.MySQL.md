@@ -116,8 +116,8 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    ```
    Welcome to the MySQL monitor.  Commands end with ; or \g.
-   Your MySQL connection id is 350
-   Server version: 5.6.40-log MySQL Community Server (GPL)
+   Your MySQL connection id is 9738
+   Server version: 8.0.23 Source distribution
    
    Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
    

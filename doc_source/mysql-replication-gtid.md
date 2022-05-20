@@ -4,7 +4,7 @@ Following, you can learn how to use global transaction identifiers \(GTIDs\) wit
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with global transaction identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 
-GTID\-based replication is supported for RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL version 8\.0\.26 and higher MySQL 8\.0 versions\. All MySQL DB instances in a replication configuration must meet this requirement\. GTID\-based replication isn't supported for RDS for MySQL 5\.6\.
+GTID\-based replication is supported for RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL version 8\.0\.26 and higher MySQL 8\.0 versions\. All MySQL DB instances in a replication configuration must meet this requirement\.
 
 **Topics**
 + [Overview of global transaction identifiers \(GTIDs\)](#mysql-replication-gtid.overview)

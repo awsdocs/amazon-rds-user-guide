@@ -12,9 +12,4 @@ CALL mysql.rds_innodb_buffer_pool_dump_now();
 
 ## Usage notes<a name="mysql_rds_innodb_buffer_pool_dump_now-usage"></a>
 
-The master user must run the `mysql.rds_innodb_buffer_pool_dump_now` procedure\. 
-
-The `mysql.rds_innodb_buffer_pool_dump_now` procedure is available in these versions of RDS for MySQL:
-+ MySQL 5\.6
-+ MySQL 5\.7
-+ MySQL 8\.0
+The master user must run the `mysql.rds_innodb_buffer_pool_dump_now` procedure\.

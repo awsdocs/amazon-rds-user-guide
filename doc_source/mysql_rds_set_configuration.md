@@ -20,11 +20,6 @@ The value of the configuration parameter\.
 
 ## Usage notes<a name="mysql_rds_set_configuration-usage-notes"></a>
 
-The `mysql.rds_set_configuration` stored procedure is available in these versions of RDS for MySQL:
-+ MySQL 5\.6
-+ MySQL 5\.7
-+ MySQL 8\.0
-
 The `mysql.rds_set_configuration` procedure supports the following configuration parameters:
 + [Binlog retention hours](#mysql_rds_set_configuration-usage-notes.binlog-retention-hours)
 + [Target delay](#mysql_rds_set_configuration-usage-notes.target-delay)

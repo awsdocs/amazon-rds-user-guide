@@ -44,7 +44,7 @@ In this case, the search engine will search both indexes\. However, due to the b
 
 To resolve this issue, you can do one of the following: 
 + Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
-+ Upgrade your MySQL DB instance to MySQL version 5\.6, 5\.7, or 8\.0\. For more information, see [Upgrading a MySQL DB snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
++ Upgrade your MySQL DB instance to MySQL version 5\.7 or 8\.0\. For more information, see [Upgrading a MySQL DB snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```
@@ -57,7 +57,7 @@ For more information, go to [Index merge optimization](https://dev.mysql.com/doc
 
 ## Log file size<a name="MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize"></a>
 
-For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](https://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\. 
+For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, see [Changes in MySQL 5\.6\.20](https://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\. 
 
 ## MySQL parameter exceptions for Amazon RDS DB instances<a name="MySQL.Concepts.ParameterNotes"></a>
 
@@ -67,7 +67,7 @@ Some MySQL parameters require special considerations when used with an Amazon RD
 
 Because Amazon RDS uses a case\-sensitive file system, setting the value of the `lower_case_table_names` server parameter to 2 \("names stored as given but compared in lowercase"\) is not supported\. The following are the supported values for Amazon RDS for MySQL DB instances:
 + 0 \("names stored as given and comparisons are case\-sensitive"\) is supported for all Amazon RDS for MySQL versions\.
-+ 1 \("names stored in lowercase and comparisons are not case\-sensitive"\) is supported for Amazon RDS for MySQL version 5\.6, version 5\.7, and version 8\.0\.19 and higher 8\.0 versions\.
++ 1 \("names stored in lowercase and comparisons are not case\-sensitive"\) is supported for RDS for MySQL version version 5\.7 and version 8\.0\.19 and higher 8\.0 versions\.
 
 Set the `lower_case_table_names` parameter in a custom DB parameter group before creating a DB instance\. Then, specify the custom DB parameter group when you create the DB instance\.
 
