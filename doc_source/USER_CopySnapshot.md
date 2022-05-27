@@ -327,7 +327,6 @@ The following options are used to copy a DB snapshot\. Not all options are requi
   + If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter\. 
   + If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted\. 
   + If you copy an encrypted snapshot to a different AWS Region, then you must specify a KMS key for the destination AWS Region\. KMS keys are specific to the AWS Region that they are created in, and you cannot use encryption keys from one AWS Region in another AWS Region\. 
-+ `--source-region` – The ID of the AWS Region of the source DB snapshot\. If you copy an encrypted snapshot to a different AWS Region, then you must specify this option\. 
 
 **Example from unencrypted, to the same Region**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.   
@@ -373,7 +372,6 @@ For Linux, macOS, or Unix:
 aws rds copy-db-snapshot \
 	--source-db-snapshot-identifier arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115 \
 	--target-db-snapshot-identifier mydbsnapshotcopy \
-	--source-region us-west-2 \	
 	--kms-key-id my-us-east-1-key \ 
     --option-group-name	custom-option-group-name
 ```
@@ -383,10 +381,13 @@ For Windows:
 aws rds copy-db-snapshot ^
 	--source-db-snapshot-identifier arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115 ^
 	--target-db-snapshot-identifier mydbsnapshotcopy ^
-	--source-region us-west-2 ^	
 	--kms-key-id my-us-east-1-key ^
     --option-group-name	custom-option-group-name
 ```
+
+The `--source-region` parameter is required when you're copying an encrypted snapshot between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions\. For `--source-region`, specify the AWS Region of the source DB instance\.
+
+If `--source-region` isn't specified, specify a `--pre-signed-url` value\. A *presigned URL* is a URL that contains a Signature Version 4 signed request for the `copy-db-snapshot` command that's called in the source AWS Region\. To learn more about the `pre-signed-url` option, see [ copy\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-snapshot.html) in the *AWS CLI Command Reference*\.
 
 ### RDS API<a name="USER_CopySnapshot.API"></a>
 

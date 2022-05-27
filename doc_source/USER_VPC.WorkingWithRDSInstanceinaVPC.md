@@ -195,11 +195,7 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
 #### Availability of dual\-stack network DB instances<a name="USER_VPC.IP_addressing.dual-stack-availability"></a>
 
 The following DB engine versions support dual\-stack network DB instances:
-+ RDS for MariaDB versions:
-  + 10\.5\.7 and higher 10\.5 versions
-  + 10\.4\.8 and higher 10\.4 versions
-  + 10\.3\.20 and higher 10\.3 versions
-  + 10\.2\.21 and higher 10\.2 versions
++ All RDS for MariaDB versions
 + RDS for MySQL versions:
   + 8\.0\.21 and higher 8\.0 versions
   + 5\.7\.31 and higher 5\.7 versions

@@ -113,7 +113,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
    ```
    Welcome to the MariaDB monitor.  Commands end with ; or \g.
    Your MariaDB connection id is 31
-   Server version: 10.5.8-MariaDB-log Source distribution
+   Server version: 10.5.15-MariaDB-log Source distribution
     
    Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
      

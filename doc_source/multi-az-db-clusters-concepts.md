@@ -332,6 +332,7 @@ The following limitations apply to Multi\-AZ DB clusters:
 
     As an alternative, you can scale storage manually\.
   + Stopping and starting the DB cluster
+  + Cross\-account DB instance and DB cluster snapshots
 + RDS for MySQL Multi\-AZ DB clusters don't support replication to an external target database\.
 + RDS for MySQL Multi\-AZ DB clusters support only the following system stored procedures:
   + `mysql.rds_rotate_general_log`

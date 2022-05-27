@@ -95,10 +95,6 @@ Enable backup replication by using the [https://docs.aws.amazon.com/cli/latest/r
 
 The following CLI example replicates automated backups from a DB instance in the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. It also encrypts the replicated backups, using an AWS KMS key in the destination Region\.
 
-**Note**  
-If you encrypt the backups, you must also include the `--source-region` option\. Specifying the source AWS Region autogenerates a presigned URL that is a valid request for the operation that can be executed in the source Region\.  
-For more information on presigned URLs, see [Authenticating Requests: Using Query Parameters \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the *Amazon Simple Storage Service API Reference* and [Signature Version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference*\.
-
 **To enable backup replication**
 + Run one of the following commands\.
 
@@ -109,7 +105,6 @@ For more information on presigned URLs, see [Authenticating Requests: Using Quer
   --region us-east-1 \
   --source-db-instance-arn "arn:aws:rds:us-west-2:123456789012:db:mydatabase" \
   --kms-key-id "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE" \
-  --source-region us-west-2 \
   --backup-retention-period 7
   ```
 
@@ -120,9 +115,12 @@ For more information on presigned URLs, see [Authenticating Requests: Using Quer
   --region us-east-1 ^
   --source-db-instance-arn "arn:aws:rds:us-west-2:123456789012:db:mydatabase" ^
   --kms-key-id "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE" ^
-  --source-region us-west-2 ^
   --backup-retention-period 7
   ```
+
+  The `--source-region` option is required when you encrypt backups between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions\. For `--source-region`, specify the AWS Region of the source DB instance\.
+
+  If `--source-region` isn't specified, make sure to specify a `--pre-signed-url` value\. A *presigned URL* is a URL that contains a Signature Version 4 signed request for the `start-db-instance-automated-backups-replication` command that is called in the source AWS Region\. To learn more about the `pre-signed-url` option, see [ start\-db\-instance\-automated\-backups\-replication](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance-automated-backups-replication.html) in the *AWS CLI Command Reference*\.
 
 ### RDS API<a name="AutomatedBackups.Replicating.Enable.API"></a>
 

@@ -44,7 +44,7 @@ There are also advanced administrative tasks for working with DB instances runni
 
 ## MariaDB on Amazon RDS versions<a name="MariaDB.Concepts.VersionMgmt"></a>
 
-For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.4 to 10\.5\. A version change is considered minor if only the minor version number changes, for example going from version 10\.3\.20 to 10\.3\.23\. 
+For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.5 to 10\.6\. A version change is considered minor if only the minor version number changes, for example going from version 10\.6\.5 to 10\.6\.7\. 
 
 Amazon RDS currently supports the following versions of MariaDB: 
 
@@ -370,7 +370,7 @@ To find out which version you have, run the `mysql` command with the `--version`
 
 ```
 $ mysql --version
-mysql  Ver 15.1 Distrib 10.5.9-MariaDB, for osx10.15 (x86_64) using readline 5.1
+mysql  Ver 15.1 Distrib 10.5.15-MariaDB, for osx10.15 (x86_64) using readline 5.1
 ```
 Most Linux distributions, such as Amazon Linux, CentOS, SUSE, and Debian have replaced MySQL with MariaDB, and the `mysql` version in them is from MariaDB\.
 

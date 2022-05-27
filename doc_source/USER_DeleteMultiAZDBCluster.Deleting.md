@@ -43,7 +43,7 @@ aws rds delete-db-cluster \
 For Windows:  
 
 ```
-aws rds delete-db-instance ^
+aws rds delete-db-cluster ^
     --db-cluster-identifier mymultiazdbcluster ^
     --final-db-snapshot-identifier mymultiazdbclusterfinalsnapshot
 ```
@@ -52,14 +52,14 @@ aws rds delete-db-instance ^
 For Linux, macOS, or Unix:  
 
 ```
-aws rds delete-db-instance \
+aws rds delete-db-cluster \
     --db-cluster-identifier mymultiazdbcluster \
     --skip-final-snapshot
 ```
 For Windows:  
 
 ```
-aws rds delete-db-instance ^
+aws rds delete-db-cluster ^
     --db-cluster-identifier mymultiazdbcluster ^
     --skip-final-snapshot
 ```

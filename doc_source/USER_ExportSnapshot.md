@@ -20,7 +20,7 @@ The following table shows the engine versions that are supported for exporting s
 
 | MariaDB | MySQL | PostgreSQL | 
 | --- | --- | --- | 
-|  10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  All 14, 13, and 12 versions 11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
+|  10\.6 10\.5 10\.4 10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  All 14, 13, and 12 versions 11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
 
 For complete lists of engine versions supported by Amazon RDS, see the following:
 + [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)

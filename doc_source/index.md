@@ -92,7 +92,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Overview of Performance Insights on Amazon RDS](USER_PerfInsights.Overview.md)
          + [Database load](USER_PerfInsights.Overview.ActiveSessions.md)
          + [Maximum CPU](USER_PerfInsights.Overview.MaxCPU.md)
-         + [Amazon RDS DB engine support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
+         + [Amazon RDS DB engine and instance class support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
          + [AWS Region support for Performance Insights](USER_PerfInsights.Overview.Regions.md)
          + [Cost of Performance Insights](USER_PerfInsights.Overview.cost.md)
       + [Turning Performance Insights on and off](USER_PerfInsights.Enabling.md)

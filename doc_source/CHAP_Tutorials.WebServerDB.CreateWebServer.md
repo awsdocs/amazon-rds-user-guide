@@ -56,7 +56,7 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 
 1. Wait until **Instance Status** for your instance reads as **Running** before continuing\. 
 
-## Install an Apache web server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
+## Install an Apache web server with PHP and MariaDB<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
 
 Next, you connect to your EC2 instance and install the web server\.
 
@@ -75,7 +75,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 1. After the updates complete, install the PHP software using the `amazon-linux-extras install` command\. This command installs multiple software packages and related dependencies at the same time\.
 
    ```
-   sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+   sudo amazon-linux-extras install php8.0 mariadb10.5
    ```
 
    If you receive an error stating `sudo: amazon-linux-extras: command not found`, then your instance was not launched with an Amazon Linux 2 AMI \(perhaps you are using the Amazon Linux AMI instead\)\. You can view your version of Amazon Linux using the following command\.

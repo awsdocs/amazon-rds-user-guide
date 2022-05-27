@@ -1,6 +1,6 @@
 # Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
 
-Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. Following, you can find the most recent supported version of each major version\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
+Amazon RDS supports several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is listed here\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
 
 
 + SQL Server 2019 CU15 15\.00\.4198\.2, released per [KB5008996](https://support.microsoft.com/en-us/topic/kb5008996-cumulative-update-15-for-sql-server-2019-4b6a8ee9-1c61-482d-914f-36e429901fb6) on January 27, 2022\.
@@ -17,6 +17,33 @@ With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time r
 To deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\. Amazon RDS does not allow direct host access to a DB instance via Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, the master user is assigned to the *db\_owner* role for all user databases on that instance, and has all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\. 
 
 Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting up for Amazon RDS](CHAP_SettingUp.md)\. 
+
+**Topics**
++ [Common management tasks for Microsoft SQL Server on Amazon RDS](#SQLServer.Concepts.General)
++ [Limitations for Microsoft SQL Server DB instances](#SQLServer.Concepts.General.FeatureSupport.Limits)
++ [DB instance class support for Microsoft SQL Server](#SQLServer.Concepts.General.InstanceClasses)
++ [Microsoft SQL Server security](#SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles)
++ [Compliance program support for Microsoft SQL Server DB instances](#SQLServer.Concepts.General.Compliance)
++ [SSL support for Microsoft SQL Server DB instances](#SQLServer.Concepts.General.SSL)
++ [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)
++ [Version management in Amazon RDS](#SQLServer.Concepts.General.Version-Management)
++ [Microsoft SQL Server features on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport)
++ [Change data capture support for Microsoft SQL Server DB instances](#SQLServer.Concepts.General.CDC)
++ [Features not supported and features with limited support](#SQLServer.Concepts.General.FeatureNonSupport)
++ [Multi\-AZ deployments using Microsoft SQL Server Database Mirroring or Always On availability groups](#SQLServer.Concepts.General.Mirroring)
++ [Using Transparent Data Encryption to encrypt data at rest](#SQLServer.Concepts.General.Options)
++ [Functions and stored procedures for Amazon RDS for Microsoft SQL Server](#SQLServer.Concepts.General.StoredProcedures)
++ [Local time zone for Microsoft SQL Server DB instances](#SQLServer.Concepts.General.TimeZone)
++ [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)
++ [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)
++ [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
++ [Upgrading the Microsoft SQL Server DB engine](USER_UpgradeDBInstance.SQLServer.md)
++ [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)
++ [Working with read replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
++ [Multi\-AZ deployments for Amazon RDS for Microsoft SQL Server](USER_SQLServerMultiAZ.md)
++ [Additional features for Microsoft SQL Server on Amazon RDS](User.SQLServer.AdditionalFeatures.md)
++ [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)
++ [Common DBA tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)
 
 ## Common management tasks for Microsoft SQL Server on Amazon RDS<a name="SQLServer.Concepts.General"></a>
 

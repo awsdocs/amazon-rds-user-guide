@@ -109,7 +109,7 @@ Each DB engine has its own supported features, and each version of a DB engine m
 
 ### DB instance classes<a name="Welcome.Concepts.DBInstance.instance-class"></a>
 
-A *DB instance class* determines the computation and memory capacity of a DB instance\. A DB instance class consists of both the DB instance type and the size\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors, while db\.m6g\.2xlarge is a DB instance class\.
+A *DB instance class* determines the computation and memory capacity of a DB instance\. A DB instance class consists of both the DB instance type and the size\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors, while db\.m6g\.2xlarge is a DB instance class within the db\.m6g instance type\.
 
 You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 

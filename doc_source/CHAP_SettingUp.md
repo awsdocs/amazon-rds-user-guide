@@ -1,28 +1,22 @@
 # Setting up for Amazon RDS<a name="CHAP_SettingUp"></a>
 
-Before you use Amazon Relational Database Service for the first time, complete the following tasks:
+Before you use Amazon Relational Database Service for the first time, complete the following tasks\.
 
-1. [Sign up for AWS](#CHAP_SettingUp.SignUp)
-
-1. [Create an IAM user](#CHAP_SettingUp.IAM)
-
-1. [Determine requirements](#CHAP_SettingUp.Requirements)
-
-1. [Provide access to your DB instance in your VPC by creating a security group](#CHAP_SettingUp.SecurityGroup)
+**Topics**
++ [Get an AWS account and your root user credentials](#getting-started-signup)
++ [Create an IAM user](#CHAP_SettingUp.IAM)
++ [Sign in as an IAM user](#getting-started-signin-iam-user)
++ [Create IAM user access keys](#getting-started-iam-user-access-keys)
++ [Determine requirements](#CHAP_SettingUp.Requirements)
++ [Provide access to your DB instance in your VPC by creating a security group](#CHAP_SettingUp.SecurityGroup)
 
 If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting started with Amazon RDS](CHAP_GettingStarted.md)\. 
 
-## Sign up for AWS<a name="CHAP_SettingUp.SignUp"></a>
+## Get an AWS account and your root user credentials<a name="getting-started-signup"></a>
 
-When you sign up for AWS, your AWS account is automatically signed up for all services in AWS, including Amazon RDS\. You are charged only for the services that you use\.
+To access AWS, you must sign up for an AWS account\.
 
-With Amazon RDS, you pay only for the resources you use\. The Amazon RDS DB instances that you create are live \(not running in a sandbox\)\. You incur the standard Amazon RDS usage fees for each DB instance until you terminate it\. For more information about Amazon RDS usage rates, see the [Amazon RDS product page](http://aws.amazon.com/rds)\. If you are a new AWS customer, you can get started with Amazon RDS for free; for more information, see [AWS free tier](http://aws.amazon.com/free/)\.
-
-If you have an AWS account already, skip to the next section, [Create an IAM user](#CHAP_SettingUp.IAM)\. 
-
-If you don't have an AWS account, you can use the following procedure to create one\.
-
-**To create a new AWS account**
+**To sign up for an AWS account**
 
 1. Open [https://portal\.aws\.amazon\.com/billing/signup](https://portal.aws.amazon.com/billing/signup)\.
 
@@ -30,15 +24,16 @@ If you don't have an AWS account, you can use the following procedure to create 
 
    Part of the sign\-up procedure involves receiving a phone call and entering a verification code on the phone keypad\.
 
-Note your AWS account number, because you'll need it for the next task\.
+ AWS sends you a confirmation email after the sign\-up process is complete\. At any time, you can view your current account activity and manage your account by going to [https://aws\.amazon\.com/](https://aws.amazon.com/) and choosing **My Account**\.
 
 ## Create an IAM user<a name="CHAP_SettingUp.IAM"></a>
 
-After you create an AWS account and successfully connect to the AWS Management Console, you can create an AWS Identity and Access Management \(IAM\) user\. Instead of signing in with your AWS root account, we recommend that you use an IAM administrative user with Amazon RDS\. 
+If your account already includes an IAM user with full AWS administrative permissions, you can skip this section\.
 
-One way to do this is to create a new IAM user and grant it administrator permissions\. Alternatively, you can add an existing IAM user to an IAM group with Amazon RDS administrative permissions\. You can then access AWS from a special URL using the credentials for the IAM user\. 
+When you first create an Amazon Web Services \(AWS\) account, you begin with a single sign\-in identity\. That identity has complete access to all AWS services and resources in the account\. This identity is called the AWS account *root user*\. When you sign in, enter the email address and password that you used to create the account\.
 
-If you signed up for AWS but haven't created an IAM user for yourself, you can create one using the IAM console\.
+**Important**  
+We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones\. Instead, adhere to the [best practice of using the root user only to create your first IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users)\. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks\. To view the tasks that require you to sign in as the root user, see [Tasks that require root user credentials](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
 **To create an administrator user for yourself and add the user to an administrators group \(console\)**
 
@@ -78,23 +73,42 @@ You must activate IAM user and role access to Billing before you can use the `Ad
 
 You can use this same process to create more groups and users and to give your users access to your AWS account resources\. To learn about using policies that restrict user permissions to specific AWS resources, see [Access management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) and [Example policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)\.
 
-To sign in as the new IAM user, first sign out of the AWS Management Console\. Then use the following URL, where **your\_aws\_account\_id** is your AWS account number without the hyphens\. For example, if your AWS account number is `1234-5678-9012`, your AWS account ID is `123456789012`\.
+## Sign in as an IAM user<a name="getting-started-signin-iam-user"></a>
 
-```
-https://your_aws_account_id.signin.aws.amazon.com/console/
-```
+ Sign in to the [IAM console](https://console.aws.amazon.com/iam) by choosing **IAM user** and entering your AWS account ID or account alias\. On the next page, enter your IAM user name and your password\.
 
-Type the IAM user name and password that you just created\. When you're signed in, the navigation bar displays "*your\_user\_name* @ *your\_aws\_account\_id*"\.
+**Note**  
+For your convenience, the AWS sign\-in page uses a browser cookie to remember your IAM user name and account information\. If you previously signed in as a different user, choose the sign\-in link beneath the button to return to the main sign\-in page\. From there, you can enter your AWS account ID or account alias to be redirected to the IAM user sign\-in page for your account\.
 
-If you don't want the URL for your sign\-in page to contain your AWS account ID, you can create an account alias\. From the IAM dashboard, choose **Customize** and type an alias, such as your company name\. To sign in after you create an account alias, use the following URL\.
+## Create IAM user access keys<a name="getting-started-iam-user-access-keys"></a>
 
-```
-https://your_account_alias.signin.aws.amazon.com/console/
-```
+Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. If you don't have access keys, you can create them from the AWS Management Console\. As a best practice, do not use the AWS account root user access keys for any task where it's not required\. Instead, [create a new administrator IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) with access keys for yourself\.
 
-To verify the sign\-in link for IAM users for your account, open the IAM console and check under **AWS Account Alias** on the dashboard\.
+The only time that you can view or download the secret access key is when you create the keys\. You cannot recover them later\. However, you can create new access keys at any time\. You must also have permissions to perform the required IAM actions\. For more information, see [Permissions required to access IAM resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_permissions-required.html) in the *IAM User Guide*\.
 
-You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Programmatic access](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing, updating, and uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the *[Amazon RDS API reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
+**To create access keys for an IAM user**
+
+1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+
+1. In the navigation pane, choose **Users**\.
+
+1. Choose the name of the user whose access keys you want to create, and then choose the **Security credentials** tab\.
+
+1. In the **Access keys** section, choose **Create access key**\.
+
+1. To view the new access key pair, choose **Show**\. You will not have access to the secret access key again after this dialog box closes\. Your credentials will look something like this:
+   + Access key ID: AKIAIOSFODNN7EXAMPLE
+   + Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+1. To download the key pair, choose **Download \.csv file**\. Store the keys in a secure location\. You will not have access to the secret access key again after this dialog box closes\.
+
+   Keep the keys confidential in order to protect your AWS account and never email them\. Do not share them outside your organization, even if an inquiry appears to come from AWS or Amazon\.com\. No one who legitimately represents Amazon will ever ask you for your secret key\.
+
+1. After you download the `.csv` file, choose **Close**\. When you create an access key, the key pair is active by default, and you can use the pair right away\.
+
+**Related topics**
++ [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*
++ [AWS security credentials](https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html) in *AWS General Reference* 
 
 ## Determine requirements<a name="CHAP_SettingUp.Requirements"></a>
 
