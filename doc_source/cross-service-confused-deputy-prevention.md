@@ -37,6 +37,7 @@ The following example shows how you can use the `aws:SourceArn` and `aws:SourceA
 ```
 
 For more examples of policies that use the `aws:SourceArn` and `aws:SourceAccount` global condition context keys, see the following sections:
++ [Granting permissions to publish notifications to an Amazon SNS topic](USER_Events.GrantingPermissions.md)
 + [Manually creating an IAM role for native backup and restore](SQLServer.Procedural.Importing.md#SQLServer.Procedural.Importing.Native.Enabling.IAM)
 + [Setting up Windows Authentication for SQL Server DB instances](USER_SQLServerWinAuth.md#USER_SQLServerWinAuth.SettingUp)
 + [Prerequisites for integrating RDS for SQL Server with S3](User.SQLServer.Options.S3-integration.md#Appendix.SQLServer.Options.S3-integration.preparing)

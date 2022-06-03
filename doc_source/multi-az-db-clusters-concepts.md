@@ -320,7 +320,6 @@ The following limitations apply to Multi\-AZ DB clusters:
   + Exporting Multi\-AZ DB cluster snapshot data to an Amazon S3 bucket
   + IAM DB authentication
   + Kerberos authentication
-  + Integration with AWS Secrets Manager
   + Modifying the port
 
     As an alternative, you can restore a Multi\-AZ DB cluster to a point in time and specify a different port\.

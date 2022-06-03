@@ -130,7 +130,7 @@ The latest restorable time for an RDS Custom for Oracle DB instance depends on s
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for each DB instance, choose **Automated backups** in the Amazon RDS console\.
 
-For general information on PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
+For general information about PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
 **Topics**
 + [PITR considerations for RDS Custom for Oracle](#custom-backup.pitr.oracle)
@@ -141,7 +141,7 @@ In RDS Custom for Oracle, PITR differs in the following important ways from PITR
 + The restored database has the same name as in the source DB instance\. You can't specify a different name\. The default is `ORCL`\.
 + `AWSRDSCustomIamRolePolicy` requires new permissions\. For more information, see [Add an access policy to AWSRDSCustomInstanceRoleForRdsCustomInstance](custom-setup-orcl.md#custom-setup-orcl.iam.add-policy)\.
 + All RDS Custom for Oracle DB instances must have backup retention set to a nonzero value\.
-+ If you change the operating system or DB instance time zone, PITR might not work\. For information on changing time zones, see [Changing the time zone of an RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.timezone)\.
++ If you change the operating system or DB instance time zone, PITR might not work\. For information about changing time zones, see [Changing the time zone of an RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.timezone)\.
 + If you set automation to `ALL_PAUSED`, RDS Custom pauses the upload of archived redo logs, including logs created before the latest restorable time \(LRT\)\. We recommend that you pause automation for a brief period\.
 
   To illustrate, assume that your LRT is 10 minutes ago\. You pause automation\. During the pause, RDS Custom doesn't upload archived redo logs\. If your DB instance crashes, you can only recover to a time before the LRT that existed when you paused\. When you resume automation, RDS Custom resumes uploading logs\. The LRT advances\. Normal PITR rules apply\. 

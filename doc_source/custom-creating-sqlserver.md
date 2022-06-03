@@ -4,7 +4,7 @@ You can create an RDS Custom DB instance, and then connect to it using AWS Syste
 
 **Important**  
 Before you can create or connect to an RDS Custom for SQL Server DB instance, make sure to complete the tasks in [Setting up your environment for Amazon RDS Custom for SQL Server](custom-setup-sqlserver.md)\.  
-You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom for Oracle resources](custom-managing.md#custom-managing.tagging)\.  
+You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom for SQL Server resources](custom-managing-sqlserver.md#custom-managing-sqlserver.tagging)\.  
 The first time that you create an RDS Custom for SQL Server DB instance, you might receive the following error: The service\-linked role is in the process of being created\. Try again later\. If you do, wait a few minutes and then try again to create the DB instance\.
 
 **Topics**
@@ -55,7 +55,7 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
 1. In the **DB instance size** section, choose a value for **DB instance class**\.
 
-   For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+   For supported classes, see [DB instance class support for RDS Custom for SQL Server](custom-reqs-limits-MS.md#custom-reqs-limits.instancesMS)\.
 
 1. Choose **Storage** settings\.
 
@@ -90,7 +90,7 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the RDS Custom DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Managing an Amazon RDS Custom for Oracle DB instance](custom-managing.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the RDS Custom DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Managing an Amazon RDS Custom for SQL Server DB instance](custom-managing-sqlserver.md)\.
 
 1. Choose **Databases** to view the list of RDS Custom DB instances\.
 
@@ -294,7 +294,7 @@ Make sure that the VPC security group associated with your DB instance permits i
 
 To permit inbound connections on port 3389 for TCP, set a firewall rule on the host\. The following examples show how to do this\.
 
-We recommend that you use the specific `-Profile` value: `Public`, `Private`, or `Domain`\. Using `Any` refers to all three values\. You can also specify a combination of values separated by a comma\. For more information on setting firewall rules, see [Set\-NetFirewallRule](https://docs.microsoft.com/en-us/powershell/module/netsecurity/set-netfirewallrule?view=windowsserver2019-ps) in the Microsoft documentation\.
+We recommend that you use the specific `-Profile` value: `Public`, `Private`, or `Domain`\. Using `Any` refers to all three values\. You can also specify a combination of values separated by a comma\. For more information about setting firewall rules, see [Set\-NetFirewallRule](https://docs.microsoft.com/en-us/powershell/module/netsecurity/set-netfirewallrule?view=windowsserver2019-ps) in the Microsoft documentation\.
 
 **To use Systems Manager Session Manager to set a firewall rule**
 

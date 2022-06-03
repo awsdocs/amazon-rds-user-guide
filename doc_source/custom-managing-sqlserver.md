@@ -276,7 +276,7 @@ You can tag RDS Custom resources as with Amazon RDS resources, but with some imp
 + Tags added to RDS Custom DB instances during creation are propagated to all other related RDS Custom resources\.
 + Tags aren't propagated when you add them to RDS Custom resources after DB instance creation\.
 
-For general information on resource tagging, see [Tagging Amazon RDS resources](USER_Tagging.md)\.
+For general information about resource tagging, see [Tagging Amazon RDS resources](USER_Tagging.md)\.
 
 ## Deleting an RDS Custom for SQL Server DB instance<a name="custom-managing-sqlserver.deleting"></a>
 

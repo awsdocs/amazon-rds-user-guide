@@ -8,7 +8,7 @@ Read replicas are upgraded after the primary DB instance is upgraded\. You don't
 
 When you upgrade a CEV, data in the `bin` volume of your DB instance is deleted\.
 
-For general information on upgrading DB instances, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+For general information about upgrading DB instances, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
 
 **Topics**
 + [Viewing valid upgrade targets for RDS Custom for Oracle DB instances](#custom-upgrading-target)

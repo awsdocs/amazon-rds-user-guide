@@ -220,7 +220,7 @@ The following limitations apply to modifying the storage for an RDS Custom for O
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-For general information on storage modification, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)\. The following procedures are specific to RDS Custom\.
+For general information about storage modification, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)\. The following procedures are specific to RDS Custom\.
 
 ### Console<a name="custom-managing.storage-modify.CON"></a>
 
@@ -269,10 +269,10 @@ If you don't follow these recommendations, cleaning up redo logs might remove mo
 Changing the time zone of an RDS Custom for Oracle DB instance has the following limitations:
 + PITR is supported for recovery times before RDS Custom automation is paused, and after automation is resumed\.
 
-  For more information on PITR, see [Restoring an RDS Custom for Oracle instance to a point in time](custom-backup.md#custom-backup.pitr)\.
+  For more information about PITR, see [Restoring an RDS Custom for Oracle instance to a point in time](custom-backup.md#custom-backup.pitr)\.
 + Changing the time zone of an existing read replica causes downtime\. We recommend changing the time zone of the DB instance before creating read replicas\.
 
-  You can create a read replica from a DB instance with a modified time zone\. For more information on read replicas, see [Working with read replicas for RDS Custom for Oracle](custom-rr.md)\.
+  You can create a read replica from a DB instance with a modified time zone\. For more information about read replicas, see [Working with read replicas for RDS Custom for Oracle](custom-rr.md)\.
 
 Use the following procedures to change the time zone of an RDS Custom for Oracle DB instance\.
 
@@ -338,7 +338,7 @@ You can tag RDS Custom resources as with Amazon RDS resources, but with some imp
 + Tags added to RDS Custom DB instances during creation are propagated to all other related RDS Custom resources\.
 + Tags aren't propagated when you add them to RDS Custom resources after DB instance creation\.
 
-For general information on resource tagging, see [Tagging Amazon RDS resources](USER_Tagging.md)\.
+For general information about resource tagging, see [Tagging Amazon RDS resources](USER_Tagging.md)\.
 
 ## Deleting an RDS Custom for Oracle DB instance<a name="custom-managing.deleting"></a>
 

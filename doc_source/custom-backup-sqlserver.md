@@ -130,7 +130,7 @@ The latest restorable time for an RDS Custom for SQL Server DB instance depends 
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for each DB instance, choose **Automated backups** in the Amazon RDS console\.
 
-For general information on PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
+For general information about PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
 **Topics**
 + [PITR considerations for RDS Custom for SQL Server](#custom-backup.pitr.sqlserver)

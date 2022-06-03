@@ -56,7 +56,7 @@ The Amazon RDS console might display metrics in units that are different from th
 
 The `AWS/Usage` namespace in Amazon CloudWatch includes account\-level usage metrics for your Amazon RDS service quotas\. CloudWatch collects usage metrics automatically for all AWS Regions except Asia Pacific \(Jakarta\)\. 
 
-For more information, see [CloudWatch usage metrics](https://docs.aws.amazon.com/https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Usage-Metrics.html) in the *Amazon CloudWatch User Guide*\. For more information about quotas, see [Quotas and constraints for Amazon RDS](CHAP_Limits.md) and [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) in the *Service Quotas User Guide*\.
+For more information, see [CloudWatch usage metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Usage-Metrics.html) in the *Amazon CloudWatch User Guide*\. For more information about quotas, see [Quotas and constraints for Amazon RDS](CHAP_Limits.md) and [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) in the *Service Quotas User Guide*\.
 
 
 | Metric | Description | Units\* | 

@@ -35,6 +35,8 @@ The following table explains the result when you specify or don't specify **Sour
 
    1. For **Send notifications to**, choose an existing Amazon SNS ARN for an Amazon SNS topic, or choose **create topic** to enter the name of a topic and a list of recipients\.
 
+      If you want to use a topic that has been enabled for server\-side encryption \(SSE\), grant Amazon RDS the necessary permissions to access the AWS KMS key\. For more information, see [ Enable compatibility between event sources from AWS services and encrypted topics](https://docs.aws.amazon.com/sns/latest/dg/sns-key-management.html#compatibility-with-aws-services) in the *Amazon Simple Notification Service Developer Guide*\.
+
    1. For **Source type**, choose a source type\.
 
    1. Choose **Yes** to enable the subscription\. If you want to create the subscription but to not have notifications sent yet, choose **No**\.

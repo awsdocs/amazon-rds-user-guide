@@ -28,7 +28,7 @@ The following are limitations for PostgreSQL read replicas:
 
 ## Read replica configuration with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Configuration"></a>
 
-RDS for PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source DB instance\. This read replica DB instance is an asynchronously created physical replica of the source DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data from the source DB instance to the read replica\. For more information, see [Streaming Replication](https://https://www.postgresql.org/docs/14/warm-standby.html#STREAMING-REPLICATION) in the PostgreSQL documentation\. 
+RDS for PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source DB instance\. This read replica DB instance is an asynchronously created physical replica of the source DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data from the source DB instance to the read replica\. For more information, see [Streaming Replication](https://www.postgresql.org/docs/14/warm-standby.html#STREAMING-REPLICATION) in the PostgreSQL documentation\. 
 
 PostgreSQL asynchronously streams database changes to this secure connection as they're made on the source DB instance\. You can encrypt communications from your client applications to the source DB instance or any read replicas by setting the `ssl` parameter to `1`\. For more information, see [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md) \.
 

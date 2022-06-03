@@ -6,18 +6,18 @@ With IAM database authentication, you don't need to assign database passwords to
 The user name used for IAM authentication must match the case of the user name in the database\.
 
 **Topics**
-+ [Using IAM authentication with MariaDB or MySQL](#UsingWithRDS.IAMDBAuth.DBAccounts.MySQL)
++ [Using IAM authentication with MariaDB and MySQL](#UsingWithRDS.IAMDBAuth.DBAccounts.MySQL)
 + [Using IAM authentication with PostgreSQL](#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL)
 
-## Using IAM authentication with MariaDB or MySQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.MySQL"></a>
+## Using IAM authentication with MariaDB and MySQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.MySQL"></a>
 
-With MariaDB or MySQL, authentication is handled by `AWSAuthenticationPlugin`—an AWS\-provided plugin that works seamlessly with IAM to authenticate your IAM users\. Connect to the DB instance and issue the `CREATE USER` statement, as shown in the following example\.
+With MariaDB and MySQL, authentication is handled by `AWSAuthenticationPlugin`—an AWS\-provided plugin that works seamlessly with IAM to authenticate your IAM users\. Connect to the DB instance and issue the `CREATE USER` statement, as shown in the following example\.
 
 ```
 CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS'; 
 ```
 
-The `IDENTIFIED WITH` clause allows MariaDB or MySQL to use the `AWSAuthenticationPlugin` to authenticate the database account \(`jane_doe`\)\. The `AS 'RDS'` clause refers to the authentication method\. Make sure the specified database user name is the same as a resource in the IAM policy for IAM database access\. For more information, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
+The `IDENTIFIED WITH` clause allows MariaDB and MySQL to use the `AWSAuthenticationPlugin` to authenticate the database account \(`jane_doe`\)\. The `AS 'RDS'` clause refers to the authentication method\. Make sure the specified database user name is the same as a resource in the IAM policy for IAM database access\. For more information, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
 
 **Note**  
 If you see the following message, it means that the AWS\-provided plugin is not available for the current DB instance\.  

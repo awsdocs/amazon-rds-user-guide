@@ -39,6 +39,9 @@ You can run the stored procedure on all SQL Server versions supported by Amazon 
 
 Only jobs that use T\-SQL job steps are replicated\. Jobs with step types such as SQL Server Integration Services \(SSIS\), SQL Server Reporting Services \(SSRS\), Replication, and PowerShell aren't replicated\. Jobs that use Database Mail and server\-level objects aren't replicated\.
 
+**Important**  
+The primary host is the source of truth for replication\. Before turning on job replication, make sure that your SQL Server Agent jobs are on the primary\. If you don't do this, it could lead to the deletion of your SQL Server Agent jobs if you turn on the feature when newer jobs are on the secondary host\.
+
 You can use the following function to confirm whether replication is turned on\.
 
 ```

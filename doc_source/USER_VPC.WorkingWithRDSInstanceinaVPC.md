@@ -159,7 +159,7 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
 
       If you are using the AWS Management Console, select the DB subnet group, and make sure that the **Supported network types** value is **Dual, IPv4**\.
 
-      If you are using the AWS CLI, call the [describe\-db\-subnet\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, and make sure that the `SupportedNetworkType` value for the DB instance is `Dual, IPv4`\.
+      If you are using the AWS CLI, call the [describe\-db\-subnet\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-subnet-groups.html) command, and make sure that the `SupportedNetworkType` value for the DB instance is `Dual, IPv4`\.
 
 1. Modify the security group associated with the DB instance to allow IPv6 connections to the database, or create a new security group that allows IPv6 connections\.
 

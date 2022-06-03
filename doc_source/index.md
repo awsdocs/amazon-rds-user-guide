@@ -127,6 +127,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Viewing Amazon RDS events](USER_ListEvents.md)
       + [Working with Amazon RDS event notification](USER_Events.md)
          + [Overview of Amazon RDS event notification](USER_Events.overview.md)
+         + [Granting permissions to publish notifications to an Amazon SNS topic](USER_Events.GrantingPermissions.md)
          + [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)
          + [Listing Amazon RDS event notification subscriptions](USER_Events.ListSubscription.md)
          + [Modifying an Amazon RDS event notification subscription](USER_Events.Modifying.md)

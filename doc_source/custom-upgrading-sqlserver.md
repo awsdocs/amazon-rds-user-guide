@@ -4,4 +4,4 @@ You can upgrade an Amazon RDS Custom for SQL Server DB instance by modifying it 
 
 The same limitations for upgrading an RDS Custom for SQL Server DB instance apply as for modifying an RDS Custom for SQL Server DB instance in general\. For more information, see [Modifying an RDS Custom for SQL Server DB instance](custom-managing-sqlserver.md#custom-managing.modify-sqlserver)\.
 
-For general information on upgrading DB instances, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+For general information about upgrading DB instances, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.

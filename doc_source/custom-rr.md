@@ -1,14 +1,14 @@
 # Working with read replicas for RDS Custom for Oracle<a name="custom-rr"></a>
 
-You can create read replicas for RDS Custom for Oracle DB instances\. Read replica creation is similar to the process in Amazon RDS, but with some important differences\. For general information on creating and managing read replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
+You can create read replicas for RDS Custom for Oracle DB instances\. Read replica creation is similar to the process in Amazon RDS, but with some important differences\. For general information about creating and managing read replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
 
 Not all options are supported when you create RDS Custom for Oracle read replicas\. For example, you must specify the replica mode as mounted when you create the replica, which you can then change to read\-only\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
 
-As with RDS for Oracle, you can have up to six managed read replicas\. You can create your own manually configured \(external\) RDS Custom for Oracle read replicas, which don't count toward the limit, but they're outside the support perimeter\. For more information on the support perimeter, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+As with RDS for Oracle, you can have up to five managed read replicas\. You can create your own manually configured \(external\) RDS Custom for Oracle read replicas, which don't count toward the limit, but they're outside the support perimeter\. For more information on the support perimeter, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 
 Read replicas are named after the database unique name, with letters appended sequentially: `DB_UNIQUE_NAME_X`, for example `ORCL_A`\. The first six letters, A–F, are reserved for RDS Custom\. Database parameters are copied from the primary DB instance to the replicas\. For more information, see [DB\_UNIQUE\_NAME](https://docs.oracle.com/database/121/REFRN/GUID-3547C937-5DDA-49FF-A9F9-14FF306545D8.htm#REFRN10242) in the Oracle documentation\.
 
-RDS Custom read replicas use the same backup retention period as the primary DB instance by default\. You can modify the backup retention period\. Backing up, restoring, and point\-in\-time recovery \(PITR\) are supported\. For more information on backing up and restoring RDS Custom DB instances, see [Backing up and restoring an Amazon RDS Custom for Oracle DB instance](custom-backup.md)\.
+RDS Custom read replicas use the same backup retention period as the primary DB instance by default\. You can modify the backup retention period\. Backing up, restoring, and point\-in\-time recovery \(PITR\) are supported\. For more information about backing up and restoring RDS Custom DB instances, see [Backing up and restoring an Amazon RDS Custom for Oracle DB instance](custom-backup.md)\.
 
 ## Network considerations<a name="custom-rr.network"></a>
 
@@ -37,7 +37,7 @@ RDS Custom for Oracle read replicas have the following limitations:
 + Deleting the primary DB instance for a read replica isn't supported\. Delete the read replicas first, then delete the primary\.
 + Promoting a read replica using the [promote\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html) AWS CLI command isn't supported, but you can promote a read replica manually\.
 
-  For information on promoting read replicas manually, see the white paper [Enabling high availability with Data Guard on Amazon RDS Custom for Oracle](https://d1.awsstatic.com/whitepapers/enabling-high-availability-with-data-guard-on-amazon-rds-custom-for-oracle.pdf)\.
+  For information about promoting read replicas manually, see the white paper [Enabling high availability with Data Guard on Amazon RDS Custom for Oracle](https://d1.awsstatic.com/whitepapers/enabling-high-availability-with-data-guard-on-amazon-rds-custom-for-oracle.pdf)\.
 + RDS Custom uses the `RDS_DATAGUARD` database user to administer the Oracle Data Guard configuration for the DB instance\. This user is reserved for RDS Custom automation\.
 
   Don't modify the `RDS_DATAGUARD` user\. Doing so can result in undesired outcomes, such as not being able to create read replicas for your RDS Custom DB instance\.

@@ -45,11 +45,11 @@ CREATE ROLE postgres WITH LOGIN NOSUPERUSER INHERIT CREATEDB CREATEROLE NOREPLIC
 
 The properties `NOSUPERUSER`, `NOREPLICATION`, `INHERIT`, and `VALID UNTIL 'infinity'` are the default options for CREATE ROLE, unless otherwise specified\. 
 
-By default, `postgres` has privileges granted to the the `rds_superuser` role\. The `rds_superuser` role allows the `postgres` user to do the following: 
+By default, `postgres` has privileges granted to the `rds_superuser` role\. The `rds_superuser` role allows the `postgres` user to do the following: 
 + Add extensions that are available for use with Amazon RDS\. For more information, see [Working with PostgreSQL features supported by Amazon RDS for PostgreSQL](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) 
 + Create roles for users and grant privileges to users\. For more information, see [CREATE ROLE](https://www.postgresql.org/docs/current/sql-createrole.html) and [GRANT](https://www.postgresql.org/docs/14/sql-grant.html) in the PostgreSQL documentation\. 
 + Create databases\. For more information, see [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html) in the PostgreSQL documentation\.
-+ Grant `rds_superuser` privileges to other user roles that don't have these privileges, and revoke such privileges as needed\. We recommend that can grant this role to others only as needed\. In other words, don't grant this role to users unless they are DBAs or system administrators\. 
++ Grant `rds_superuser` privileges to user roles that don't have these privileges, and revoke privileges as needed\. We recommend that you grant this role only to those users who perform superuser tasks\. In other words, you can grant this role to database administrators \(DBAs\) or system administrators\.
 + Grant \(and revoke\) the `rds_replication` role to database users that don't have the `rds_superuser` role\. 
 + Grant \(and revoke\) the `rds_password` role to database users that don't have the `rds_superuser` role\. 
 + Obtain status information about all database connections by using the `pg_stat_activity` view\. When needed, `rds_superuser` can stop any connections by using `pg_terminate_backend` or `pg_cancel_backend`\. 
@@ -64,8 +64,8 @@ The `rds_superuser` role is one of several *predefined* roles in an RDS for Post
 In PostgreSQL 13 and earlier releases, *predefined* roles are known as *default* roles\.
 
 In the following list, you find some of the other predefined roles that are created automatically for a new RDS for PostgreSQL DB instance\. Predefined roles and their privileges can't be changed\. You can't drop, rename, or modify privileges for these predefined roles\. Attempting to do so results in an error\. 
-+ **rds\_password** – A role that can change passwords and set up password constraints for databaes users\. The `rds_superuser` role is granted this role by default, and can grant the role to database users\. `For more information, see [Controlling user access to the PostgreSQL databaseControlling user access to PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Access)\. 
-+ **rdsadmin** – A role that's created to handle many of the management tasks that the adminstrator with `superuser` privileges would perform on a standalone PostgreSQL database\. This role is used internally by RDS for PostgreSQL for many management tasks\. 
++ **rds\_password** – A role that can change passwords and set up password constraints for database users\. The `rds_superuser` role is granted this role by default, and can grant the role to database users\. `For more information, see [Controlling user access to the PostgreSQL databaseControlling user access to PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Access)\. 
++ **rdsadmin** – A role that's created to handle many of the management tasks that the administrator with `superuser` privileges would perform on a standalone PostgreSQL database\. This role is used internally by RDS for PostgreSQL for many management tasks\. 
 + **rdstopmgr** – A role that's used internally by Amazon RDS to support Multi\-AZ deployments\. 
 
 To see all predefined roles, you can connect to your RDS for PostgreSQL DB instance and use the `psq1 \du` metacommand\. The output looks as follows: 

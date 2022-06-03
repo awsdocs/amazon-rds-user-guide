@@ -412,7 +412,7 @@ The following partial output shows the engine, parameter groups, and other infor
 
 If the process to create a CEV fails, RDS Custom issues `RDS-EVENT-0198` with the message `Creation failed for custom engine version major-engine-version.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
 
-You can't modify a failed CEV\. You can only delete it, then try again to create a CEV after fixing the causes of the failure\. For information on troubleshooting the reasons for CEV creation failure, see [Troubleshooting custom engine version creation for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting.cev)\.
+You can't modify a failed CEV\. You can only delete it, then try again to create a CEV after fixing the causes of the failure\. For information about troubleshooting the reasons for CEV creation failure, see [Troubleshooting custom engine version creation for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting.cev)\.
 
 ## Modifying CEV status<a name="custom-cev.modify"></a>
 

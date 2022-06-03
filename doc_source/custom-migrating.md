@@ -12,7 +12,7 @@ You can use the following process to migrate an on\-premises Microsoft SQL Serve
 
 This process explains the migration of a database from on\-premises to RDS Custom for SQL Server, using native full backup and restore\. To reduce the cutover time during the migration process, you might also consider using differential or log backups\.
 
-For general information on native backup and restore for RDS for SQL Server, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\.
+For general information about native backup and restore for RDS for SQL Server, see [Importing and exporting SQL Server databases using native backup and restore](SQLServer.Procedural.Importing.md)\.
 
 **Topics**
 + [Prerequisites](#custom-migrating.prereqs)

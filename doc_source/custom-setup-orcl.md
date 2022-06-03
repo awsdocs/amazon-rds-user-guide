@@ -33,20 +33,20 @@ A symmetric encryption AWS KMS key is required for RDS Custom\. When you create 
 
 You have the following options:
 + If you have an existing KMS key in your account, you can use it with RDS Custom\. No further action is necessary\.
-+ If you have already created a symmetric encryption KMS key for a different RDS Custom engine, you can reuse the same KMS key\. No further action is necessary\.
++ If you already created a symmetric encryption KMS key for a different RDS Custom engine, you can reuse the same KMS key\. No further action is necessary\.
 + If you don't have an existing symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
 
 RDS Custom doesn't support AWS\-managed KMS keys\.
 
-The symmetric encryption key that you use must provide the AWS Identity and Access Management \(IAM\) role in your IAM instance profile with access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy can provide access to these operations\.
+Make sure that the symmetric encryption key that you use gives the AWS Identity and Access Management \(IAM\) role in your IAM instance profile access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy can give access to these operations\.
 
-For more information on configuring IAM for RDS Custom for Oracle, see [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
+For more information about configuring IAM for RDS Custom for Oracle, see [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 
 ## Download and install the AWS CLI<a name="custom-setup-orcl.cli"></a>
 
 AWS provides you with a command\-line interface to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI\.
 
-For information on downloading and installing the AWS CLI, see [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)\.
+For information about downloading and installing the AWS CLI, see [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)\.
 
 If you plan to access RDS Custom only from the AWS Management Console, skip this step\.
 
@@ -381,11 +381,26 @@ aws iam add-role-to-instance-profile \
 
 ### Configuring your VPC manually<a name="custom-setup-orcl.vpc"></a>
 
-Your RDS Custom DB instance is in a VPC, just like an Amazon EC2 instance or Amazon RDS instance\. You provide and configure your own VPC\. Thus, you have full control over your instance networking setup\.
+Your RDS Custom DB instance is in a virtual private cloud \(VPC\) based on the Amazon VPC service, just like an Amazon EC2 instance or Amazon RDS instance\. You provide and configure your own VPC\. Thus, you have full control over your instance networking setup\.
 
 RDS Custom sends communication from your DB instance to other AWS services\. To make sure that RDS Custom can communicate, it validates network connectivity to these services\.
 
-If you have already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
+Your DB instance communicates with the following AWS services:
++ Amazon CloudWatch
++ Amazon CloudWatch Logs
++ Amazon CloudWatch Events
++ Amazon EC2
++ Amazon EventBridge
++ Amazon S3
++ AWS Secrets Manager
++ AWS Systems Manager
+
+Make sure that VPC components involved in communication between the DB instance and AWS services are configured with the following requirements:
++ The DB instance can make outbound connections on port 443 to other AWS services\.
++ The VPC allows incoming responses to requests originating from your DB instance\.
++ Correctly resolve the domain names of endpoints for each AWS service\.
+
+If you already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
 
 **Topics**
 + [Configure your instance security group](#custom-setup-orcl.vpc.sg)
@@ -400,19 +415,21 @@ A *security group* acts as a virtual firewall for a VPC instance, controlling bo
 
 1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc](https://console.aws.amazon.com/vpc)\. 
 
-1. Allow RDS Custom to use the default security group, or create your own security group\. 
+1. Allow RDS Custom to use the default security group, or create your own security group\.
 
    For detailed instructions, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
-1. If you have a private VPC and use VPC endpoints, make sure that your security group permits both inbound and outbound connections on port 443\. 
+1. Make sure that your security group permits outbound connections on port 443\. RDS Custom needs this port to communicate with dependent AWS services\.
 
-   RDS Custom needs port 443 to communicate with dependent AWS services\. If incoming connections aren't allowed, the RDS Custom instance can't connect to the AWS Systems Manager and Amazon EC2 endpoints\. For more information, see [Create a Virtual Private Cloud endpoint](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html)\.
+1. If you have a private VPC and use VPC endpoints, make sure that the security group associated with the DB instance allows outbound connections on port 443 to VPC endpoints\. Also make sure that the security group associated with the VPC endpoint allows inbound connections on port 443 from the DB Instance\.
 
-For more information about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in *Amazon VPC Developer Guide*\.
+   If incoming connections aren't allowed, the RDS Custom instance can't connect to the AWS Systems Manager and Amazon EC2 endpoints\. For more information, see [Create a Virtual Private Cloud endpoint](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html) in the *AWS Systems Manager User Guide*\.
+
+For more information about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC Developer Guide*\.
 
 #### Configure endpoints for dependent AWS services<a name="custom-setup-orcl.vpc.endpoints"></a>
 
-Make sure that your VPC allows outbound traffic to the following AWS services:
+Make sure that your VPC allows outbound traffic to the following AWS services with which the DB instance communicates:
 + Amazon CloudWatch
 + Amazon CloudWatch Logs
 + Amazon CloudWatch Events
@@ -445,6 +462,8 @@ We recommend that you add endpoints for every service to your VPC using the foll
 1. For **Security group**, choose or create a security group\.
 
    You can use security groups to control access to your endpoint, much as you use a firewall\. For more information about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\. 
+
+1. Optionally, you can attach a policy to the VPC endpoint\. Endpoint policies can control access to the AWS service to which you are connecting\. The default policy allows all requests to pass through the endpoint\. If you're using a custom policy, make sure that requests from the DB instance are allowed in the policy\.
 
 1. Choose **Create endpoint**\.
 
@@ -510,7 +529,7 @@ To create CEVs or RDS Custom for Oracle DB instances, the IAM principal needs to
 }
 ```
 
-For more information on the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.
+For more information about the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.
 
 ### Permissions required for creating a CEV<a name="custom-setup-orcl.cev"></a>
 

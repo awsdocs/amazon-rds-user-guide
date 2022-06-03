@@ -1,6 +1,6 @@
 # Overview of Amazon RDS event notification<a name="USER_Events.overview"></a>
 
-Amazon RDS groups events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. Amazon RDS event notification is only available for unencrypted SNS topics\. If you specify an encrypted SNS topic, event notifications aren't sent for the topic\.
+Amazon RDS groups events into categories that you can subscribe to so that you can be notified when an event in that category occurs\.
 
 **Topics**
 + [RDS resources eligible for event subscription](#USER_Events.overview.resources)
@@ -20,7 +20,7 @@ You can subscribe to an event category for the following resources:
 
 For example, if you subscribe to the backup category for a given DB instance, you're notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you're notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
 
-You might want to create several different subscriptions\. For example, you might create one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\.
+You might want to create several different subscriptions\. For example, you might create one subscription that receives all event notifications for all DB instances and another subscription that includes only critical events for a subset of the DB instances\. For the second subscription, specify one or more DB instances in the filter\.
 
 ## Basic process for subscribing to Amazon RDS event notifications<a name="USER_Events.overview.process"></a>
 
