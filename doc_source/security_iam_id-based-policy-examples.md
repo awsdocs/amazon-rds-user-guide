@@ -1,4 +1,4 @@
-# Amazon RDS identity\-based policy examples<a name="security_iam_id-based-policy-examples"></a>
+# Identity\-based policy examples for Amazon RDS<a name="security_iam_id-based-policy-examples"></a>
 
 By default, IAM users and roles don't have permission to create or modify Amazon RDS resources\. They also can't perform tasks using the AWS Management Console, AWS CLI, or AWS API\. An IAM administrator must create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the IAM users or groups that require those permissions\.
 
@@ -21,22 +21,24 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 ## Policy best practices<a name="security_iam_service-with-iam-policy-best-practices"></a>
 
 Identity\-based policies are very powerful\. They determine whether someone can create, access, or delete Amazon RDS resources in your account\. These actions can incur costs for your AWS account\. When you create or edit identity\-based policies, follow these guidelines and recommendations:
-+ **Get Started Using AWS Managed Policies** – To start using Amazon RDS quickly, use AWS managed policies to give your employees the permissions they need\. These policies are already available in your account and are maintained and updated by AWS\. For more information, see [Get started using permissions with AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-use-aws-defined-policies) in the *IAM User Guide*\.
-+ **Grant Least Privilege** – When you create custom policies, grant only the permissions required to perform a task\. Start with a minimum set of permissions and grant additional permissions as necessary\. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them later\. For more information, see [Grant least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) in the *IAM User Guide*\.
-+ **Enable MFA for Sensitive Operations** – For extra security, require IAM users to use multi\-factor authentication \(MFA\) to access sensitive resources or API operations\. For more information, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
-+ **Use Policy Conditions for Extra Security** – To the extent that it's practical, define the conditions under which your identity\-based policies allow access to a resource\. For example, you can write conditions to specify a range of allowable IP addresses that a request must come from\. You can also write conditions to allow requests only within a specified date or time range, or to require the use of SSL or MFA\. For more information, see [IAM JSON policy elements: Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
++ **Get started using AWS managed policies** – To start using Amazon RDS quickly, use AWS managed policies to give your employees the permissions they need\. These policies are already available in your account and are maintained and updated by AWS\. For more information, see [Get started using permissions with AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-use-aws-defined-policies) in the *IAM User Guide*\.
++ **Grant least privilege** – When you create custom policies, grant only the permissions required to perform a task\. Start with a minimum set of permissions and grant additional permissions as necessary\. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them later\. For more information, see [Grant least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) in the *IAM User Guide*\.
++ **Enable MFA for sensitive operations** – For extra security, require IAM users to use multi\-factor authentication \(MFA\) to access sensitive resources or API operations\. For more information, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
++ **Use policy conditions for extra security** – To the extent that it's practical, define the conditions under which your identity\-based policies allow access to a resource\. For example, you can write conditions to specify a range of allowable IP addresses that a request must come from\. You can also write conditions to allow requests only within a specified date or time range, or to require the use of SSL or MFA\. For more information, see [IAM JSON policy elements: Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
 
 ## Using the Amazon RDS console<a name="security_iam_id-based-policy-examples-console"></a>
 
-To access the Amazon RDS console, you must have a minimum set of permissions\. These permissions must enable you to list and view details about the Amazon RDS resources in your AWS account\. You can create an identity\-based policy that is more restrictive than the minimum required permissions\. However, if you do, the console doesn't function as intended for entities \(IAM users or roles\) with that policy\.
+To access the Amazon RDS console, you must have a minimum set of permissions\. These permissions must allow you to list and view details about the Amazon RDS resources in your AWS account\. If you create an identity\-based policy that is more restrictive than the minimum required permissions, the console won't function as intended for entities \(IAM users or roles\) with that policy\.
 
-To ensure that those entities can still use the Amazon RDS console, also attach the following AWS managed policy to the entities\. For more information, see [Adding permissions to a user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console) in the *IAM User Guide*\.
+You don't need to allow minimum console permissions for users that are making calls only to the AWS CLI or the AWS API\. Instead, allow access to only the actions that match the API operation that you're trying to perform\.
+
+To ensure that those entities can still use the Amazon RDS console, also attach the following AWS managed policy to the entities\.
 
 ```
 AmazonRDSReadOnlyAccess
 ```
 
-You don't need to allow minimum console permissions for users that are making calls only to the AWS CLI or the AWS API\. Instead, allow access to only the actions that match the API operation that you're trying to perform\.
+For more information, see [Adding permissions to a user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console) in the *IAM User Guide*\.
 
 ## Allow users to view their own permissions<a name="security_iam_id-based-policy-examples-view-own-permissions"></a>
 
@@ -44,38 +46,36 @@ This example shows how you might create a policy that allows IAM users to view t
 
 ```
 {
-   "Version": "2012-10-17",
-   "Statement": [
-      {
-         "Sid": "ViewOwnUserInfo",
-         "Effect": "Allow",
-         "Action": [
-            "iam:GetUserPolicy",
-            "iam:ListGroupsForUser",
-            "iam:ListAttachedUserPolicies",
-            "iam:ListUserPolicies",
-            "iam:GetUser"
-         ],
-         "Resource": [
-            "arn:aws:iam::*:user/${aws:username}"
-         ]
-      },
-      {
-         "Sid": "NavigateInConsole",
-         "Effect": "Allow",
-         "Action": [
-            "iam:GetGroupPolicy",
-            "iam:GetPolicyVersion",
-            "iam:GetPolicy",
-            "iam:ListAttachedGroupPolicies",
-            "iam:ListGroupPolicies",
-            "iam:ListPolicyVersions",
-            "iam:ListPolicies",
-            "iam:ListUsers"
-         ],
-         "Resource": "*"
-      }
-   ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ViewOwnUserInfo",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetUserPolicy",
+                "iam:ListGroupsForUser",
+                "iam:ListAttachedUserPolicies",
+                "iam:ListUserPolicies",
+                "iam:GetUser"
+            ],
+            "Resource": ["arn:aws:iam::*:user/${aws:username}"]
+        },
+        {
+            "Sid": "NavigateInConsole",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetGroupPolicy",
+                "iam:GetPolicyVersion",
+                "iam:GetPolicy",
+                "iam:ListAttachedGroupPolicies",
+                "iam:ListGroupPolicies",
+                "iam:ListPolicyVersions",
+                "iam:ListPolicies",
+                "iam:ListUsers"
+            ],
+            "Resource": "*"
+        }
+    ]
 }
 ```
 
@@ -119,7 +119,7 @@ The policy includes a single statement that specifies the following permissions 
   + The option group for the new DB instance must begin with `default`\.
   + The DB parameter group for the new DB instance must begin with `default`\.
   + The subnet group for the new DB instance must be the `default` subnet group\.
-+ The `Condition` element specifies that the DB engine must be MySQL and the DB instance class must be `db.t2.micro`\. The `Condition` element specifies the conditions when a policy should take effect\. You can add additional permissions or restrictions by using the `Condition` element\. For more information about specifying conditions, see [Condition keys](security_iam_service-with-iam.md#UsingWithRDS.IAM.Conditions)\. This example specifies the `rds:DatabaseEngine` and `rds:DatabaseClass` conditions\. For information about the valid condition values for `rds:DatabaseEngine`, see the list under the `Engine` parameter in [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. For information about the valid condition values for `rds:DatabaseClass`, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support) \. 
++ The `Condition` element specifies that the DB engine must be MySQL and the DB instance class must be `db.t2.micro`\. The `Condition` element specifies the conditions when a policy should take effect\. You can add additional permissions or restrictions by using the `Condition` element\. For more information about specifying conditions, see [Policy condition keys for Amazon RDS](security_iam_service-with-iam.md#UsingWithRDS.IAM.Conditions)\. This example specifies the `rds:DatabaseEngine` and `rds:DatabaseClass` conditions\. For information about the valid condition values for `rds:DatabaseEngine`, see the list under the `Engine` parameter in [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. For information about the valid condition values for `rds:DatabaseClass`, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support) \. 
 
 The policy doesn't specify the `Principal` element because in an identity\-based policy you don't specify the principal who gets the permission\. When you attach policy to a user, the user is the implicit principal\. When you attach a permission policy to an IAM role, the principal identified in the role's trust policy gets the permissions\.
 
@@ -180,7 +180,7 @@ The following permissions policy grants permissions to allow a user to only crea
 
 ## Grant permission for actions on a resource with a specific tag with two different values<a name="security_iam_id-based-policy-examples-grant-permissions-tags"></a>
 
-You can use conditions in your identity\-based policy to control access to Amazon RDS resources based on tags\. The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` APIs on DB instances with either the `stage` tag set to `development` or `test`\. 
+You can use conditions in your identity\-based policy to control access to Amazon RDS resources based on tags\. The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` API operations on DB instances with either the `stage` tag set to `development` or `test`\. 
 
 ```
  1. {
@@ -246,7 +246,7 @@ You can explicitly deny access to a resource\. Deny policies take precedence ove
 
 Following are examples of how you can use condition keys in Amazon RDS IAM permissions policies\. 
 
-### Example 1: Grant permission to create a DB instance that uses a specific DB engine and isn't MultiAZ<a name="w808aac46c38c43c33b4"></a>
+### Example 1: Grant permission to create a DB instance that uses a specific DB engine and isn't MultiAZ<a name="w814aac46c38c33c31b4"></a>
 
 The following policy uses an RDS condition key and allows a user to create only DB instances that use the MySQL database engine and don't use MultiAZ\. The `Condition` element indicates the requirement that the database engine is MySQL\. 
 
@@ -272,7 +272,7 @@ The following policy uses an RDS condition key and allows a user to create only 
 19. }
 ```
 
-### Example 2: Explicitly deny permission to create DB instances for certain DB instance classes and create DB instances that use Provisioned IOPS<a name="w808aac46c38c43c33b6"></a>
+### Example 2: Explicitly deny permission to create DB instances for certain DB instance classes and create DB instances that use Provisioned IOPS<a name="w814aac46c38c33c31b6"></a>
 
 The following policy explicitly denies permission to create DB instances that use the DB instance classes `r3.8xlarge` and `m4.10xlarge`, which are the largest and most expensive DB instance classes\. This policy also prevents users from creating DB instances that use Provisioned IOPS, which incurs an additional cost\. 
 
@@ -311,7 +311,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 30. }
 ```
 
-### Example 3: Limit the set of tag keys and values that can be used to tag a resource<a name="w808aac46c38c43c33b8"></a>
+### Example 3: Limit the set of tag keys and values that can be used to tag a resource<a name="w814aac46c38c33c31b8"></a>
 
 The following policy uses an RDS condition key and allows the addition of a tag with the key `stage` to be added to a resource with the values `test`, `qa`, and `production`\.
 
@@ -392,9 +392,9 @@ Following are examples of how you can use custom tags in Amazon RDS IAM permissi
 **Note**  
 All examples use the us\-west\-2 region and contain fictitious account IDs\.
 
-#### Example 1: Grant permission for actions on a resource with a specific tag with two different values<a name="w808aac46c38c43c35c28b6"></a>
+#### Example 1: Grant permission for actions on a resource with a specific tag with two different values<a name="w814aac46c38c33c33c28b6"></a>
 
-The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` APIs on DB instances with either the `stage` tag set to `development` or `test`\. 
+The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` API operations on DB instances with either the `stage` tag set to `development` or `test`\. 
 
 ```
  1. {
@@ -421,7 +421,7 @@ The following policy allows permission to perform the `ModifyDBInstance` and `Cr
 22. }
 ```
 
-#### Example 2: Explicitly deny permission to create a DB instance that uses specified DB parameter groups<a name="w808aac46c38c43c35c28b8"></a>
+#### Example 2: Explicitly deny permission to create a DB instance that uses specified DB parameter groups<a name="w814aac46c38c33c33c28b8"></a>
 
 The following policy explicitly denies permission to create a DB instance that uses DB parameter groups with specific tag values\. You might apply this policy if you require that a specific customer\-created DB parameter group always be used when creating DB instances\. Policies that use `Deny` are most often used to restrict access that was granted by a broader policy\.
 
@@ -446,7 +446,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 16. }
 ```
 
-#### Example 3: Grant permission for actions on a DB instance with an instance name that is prefixed with a user name<a name="w808aac46c38c43c35c28c10"></a>
+#### Example 3: Grant permission for actions on a DB instance with an instance name that is prefixed with a user name<a name="w814aac46c38c33c33c28c10"></a>
 
 The following policy allows permission to call any API \(except to `AddTagsToResource` or `RemoveTagsFromResource`\) on a DB instance that has a DB instance name that is prefixed with the user's name and that has a tag called `stage` equal to `devo` or that has no tag called `stage`\.
 

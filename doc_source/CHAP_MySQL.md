@@ -135,7 +135,7 @@ After you make one of these changes, the DB instance is restarted automatically\
 ## MySQL security on Amazon RDS<a name="MySQL.Concepts.UsersAndPrivileges"></a>
 
 Security for MySQL DB instances is managed at three levels:
-+ AWS Identity and Access Management controls who can perform Amazon RDS management actions on DB instances\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\. 
++ AWS Identity and Access Management controls who can perform Amazon RDS management actions on DB instances\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\. 
 + When you create a DB instance, you use either a VPC security group or a DB security group to control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance\. These connections can be made using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to the DB instance\. 
 + To authenticate login and permissions for a MySQL DB instance, you can take either of the following approaches, or a combination of them\. 
 

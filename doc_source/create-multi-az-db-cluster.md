@@ -28,7 +28,7 @@ For information about limitations that apply to Multi\-AZ DB clusters, see [Limi
 
 ### Additional prerequisites<a name="create-multi-az-db-cluster-prerequisites.Additional"></a>
 
-If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\.
+If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\.
 
 If you are using IAM to access the Amazon RDS console, first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

@@ -6,8 +6,8 @@ Amazon RDS supports several versions and editions of Microsoft SQL Server\. The 
 + SQL Server 2019 CU15 15\.00\.4198\.2, released per [KB5008996](https://support.microsoft.com/en-us/topic/kb5008996-cumulative-update-15-for-sql-server-2019-4b6a8ee9-1c61-482d-914f-36e429901fb6) on January 27, 2022\.
 + SQL Server 2017 CU27 14\.00\.3421\.10, released per [KB5006944](https://support.microsoft.com/en-us/topic/kb5006944-cumulative-update-27-for-sql-server-2017-79117c8f-9d54-42f8-9727-5870fe475187) on October 27, 2021\.
 + SQL Server 2016 SP3 13\.00\.6300\.2, released per [KB5003279](https://support.microsoft.com/en-us/topic/kb5003279-sql-server-2016-service-pack-3-release-information-46ab9543-5cf9-464d-bd63-796279591c31) on September 15, 2021\.
-+ SQL Server 2014 SP3 CU4 12\.00\.6329\.1, released per [KB4500181](https://support.microsoft.com/en-us/help/4500181/cumulative-update-4-for-sql-server-2014-sp3) on July 29, 2019\.
-+ SQL Server 2012 SP4 GDR 11\.0\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
++ SQL Server 2014 SP3 CU4 SU 12\.00\.6433\.1, released per [KB4583462](https://support.microsoft.com/en-us/topic/kb4583462-description-of-the-security-update-for-sql-server-2014-sp3-cu4-january-12-2021-a791987a-d823-4a86-d573-6f11f646267f) on January 12, 2021\.
++ SQL Server 2012 SP4 GDR 11\.00\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
 + SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
 
 For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
@@ -16,7 +16,7 @@ With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time r
 
 To deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\. Amazon RDS does not allow direct host access to a DB instance via Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, the master user is assigned to the *db\_owner* role for all user databases on that instance, and has all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\. 
 
-Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting up for Amazon RDS](CHAP_SettingUp.md)\. 
+Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
 **Topics**
 + [Common management tasks for Microsoft SQL Server on Amazon RDS](#SQLServer.Concepts.General)
@@ -218,7 +218,7 @@ The following table shows the supported versions for all editions and all AWS Re
 | SQL Server 2019 |  15\.00\.4198\.2 \(CU15\) 15\.00\.4153\.1 \(CU12\) 15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |  `15.00.4198.2.v1` `15.00.4153.1.v1` `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
 | SQL Server 2017 |  14\.00\.3421\.10 \(CU27\) 14\.00\.3401\.7 \(CU25\) 14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\)  |  `14.00.3421.10.v1` `14.00.3401.7.v1` `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1`  | 
 | SQL Server 2016 |  13\.00\.6300\.2 \(SP3\) 13\.00\.5882\.1 \(SP2 CU16\) 13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\)  |  `13.00.6300.2.v1` `13.00.5882.1.v1` `13.00.5850.14.v1` `13.00.5820.21.v1`  | 
-| SQL Server 2014 |  12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\)  |  `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1`  | 
+| SQL Server 2014 |  12\.00\.6433\.1 \(SP3 CU4 SU\) 12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\)  |  `12.00.6433.1.v1` `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1`  | 
 | SQL Server 2012 |  11\.00\.7493\.4 \(SP4 GDR\) 11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\)  |  `11.00.7493.4.v1` `11.00.7462.6.v1` `11.00.6594.0.v1`  | 
 
 ## Version management in Amazon RDS<a name="SQLServer.Concepts.General.Version-Management"></a>

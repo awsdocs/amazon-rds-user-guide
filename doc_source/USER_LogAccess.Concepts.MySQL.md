@@ -5,7 +5,7 @@ You can monitor the MySQL logs directly through the Amazon RDS console, Amazon R
 For more information about viewing, downloading, and watching file\-based database logs, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\.
 
 **Topics**
-+ [Overview of MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md)
++ [Overview of RDS for MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md)
 + [Publishing MySQL logs to Amazon CloudWatch Logs](USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs.md)
 + [Managing table\-based MySQL logs](Appendix.MySQL.CommonDBATasks.Logs.md)
 + [Configuring MySQL binary logging](USER_LogAccess.MySQL.BinaryFormat.md)

@@ -8,7 +8,7 @@ If the ID is `0` at the digest level, Oracle Database has determined that this s
 + [Per\-second statistics for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-second)
 + [Per\-call statistics for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-call)
 
-### Per\-second statistics for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-second"></a>
+## Per\-second statistics for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-second"></a>
 
 The following metrics provide per\-second statistics for an Oracle SQL query\.
 
@@ -38,7 +38,7 @@ The following metrics provide per\-call statistics for an Oracle SQL digest quer
 | db\.sql\_tokenized\.stats\.total\_sharable\_mem\_per\_sec | Total shareable memory per second \(in bytes\)  | 
 | db\.sql\_tokenized\.stats\.cpu\_time\_per\_sec | CPU time per second \(in ms\) | 
 
-### Per\-call statistics for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-call"></a>
+## Per\-call statistics for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle.per-call"></a>
 
 The following metrics provide per\-call statistics for an Oracle SQL statement\.
 

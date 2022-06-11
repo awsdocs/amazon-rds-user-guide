@@ -13,7 +13,7 @@
 + [Viewing proxy endpoints](#rds-proxy-endpoints.DescribingEndpoint)
 + [Modifying a proxy endpoint](#rds-proxy-endpoints.ModifyingEndpoint)
 + [Deleting a proxy endpoint](#rds-proxy-endpoints.DeletingEndpoint)
-+ [Limits for proxy endpoints](#rds-proxy-endpoints-limits)
++ [Limitations for proxy endpoints](#rds-proxy-endpoints-limits)
 
 ## Overview of proxy endpoints<a name="rds-proxy-endpoints-overview"></a>
 
@@ -25,7 +25,7 @@
 
  For a proxy endpoint that you create, you can also associate the endpoint with a different virtual private cloud \(VPC\) than the proxy itself uses\. By doing so, you can connect to the proxy from a different VPC, for example a VPC used by a different application within your organization\.  
 
- For information about limits associated with proxy endpoints, see [Limits for proxy endpoints](#rds-proxy-endpoints-limits)\. 
+ For information about limits associated with proxy endpoints, see [Limitations for proxy endpoints](#rds-proxy-endpoints-limits)\. 
 
  In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. 
 
@@ -292,7 +292,7 @@ aws rds delete-db-proxy-endpoint ^
 
  To delete a proxy endpoint with the RDS API, run the [DeleteDBProxyEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBProxyEndpoint.html) operation\. Specify the name of the proxy endpoint for the `DBProxyEndpointName` parameter\. 
 
-## Limits for proxy endpoints<a name="rds-proxy-endpoints-limits"></a>
+## Limitations for proxy endpoints<a name="rds-proxy-endpoints-limits"></a>
 
  Each proxy has a default endpoint that you can modify but not create or delete\. 
 
@@ -303,5 +303,3 @@ aws rds delete-db-proxy-endpoint ^
  
 
  Reader endpoints aren't available for Aurora multi\-writer clusters\. 
-
- You can connect to proxy endpoints that you create using the SSL modes `REQUIRED` and `VERIFY_CA`\. You can't connect to an endpoint that you create using the SSL mode `VERIFY_IDENTITY`\. 

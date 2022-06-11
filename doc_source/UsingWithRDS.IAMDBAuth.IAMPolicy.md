@@ -3,7 +3,7 @@
 To allow an IAM user or role to connect to your DB instance, you must create an IAM policy\. After that, you attach the policy to an IAM user or role\.
 
 **Note**  
-To learn more about IAM policies, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\.
+To learn more about IAM policies, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\.
 
 The following example policy allows an IAM user to connect to a DB instance using IAM database authentication\.
 
@@ -117,7 +117,7 @@ The following policy matches all of the DB instances for a particular AWS accoun
 
 The IAM user or role has access to only those databases that the database user does\. For example, suppose that your DB instance has a database named *dev*, and another database named *test*\. If the database user `jane_doe` has access only to *dev*, any IAM users or roles that access that DB instance with the `jane_doe` user also have access only to *dev*\. This access restriction is also true for other database objects, such as tables, views, and so on\.
 
-An IAM administrator must create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the IAM users or groups that require those permissions\. For examples of policies, see [Amazon RDS identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
+An IAM administrator must create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the IAM users or groups that require those permissions\. For examples of policies, see [Identity\-based policy examples for Amazon RDS](security_iam_id-based-policy-examples.md)\.
 
 ## Attaching an IAM policy to an IAM user or role<a name="UsingWithRDS.IAMDBAuth.IAMPolicy.Attaching"></a>
 

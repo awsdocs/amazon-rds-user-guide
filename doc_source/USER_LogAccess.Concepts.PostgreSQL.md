@@ -56,13 +56,11 @@ New log files are created by Amazon RDS every hour by default\. The timing is co
 
 Log files can also be rotated according to their size, as specified in the `log_rotation_size` parameter\. This parameter specifies that the log should be rotated when it reaches the size \(in kilobytes\)\. For an RDS for PostgreSQL DB instance, `log_rotation_size` is unset, that is, there is no value specified\. However, the parameter allows setting from 0\-2097151 kB \(kilobytes\)\.  
 
-The log file names are based on the file name pattern of the [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-FILENAME) parameter\. You can specify file names per hour or per minute, as follows:
-+ `postgresql.log.%Y-%m-%d-%H%M` – Minute format for log file name\. Sets the granularity of the log to less than an hour\. Supported by PostgreSQL version and higher only\. 
+The log file names are based on the file name pattern specified in the `log_filename` parameter\. The available settings for this parameter are as follows:
++ `postgresql.log.%Y-%m-%d` – Default format for the log file name\. Includes the year, month, and date\.
 + `postgresql.log.%Y-%m-%d-%H` – Hour format for log file name\. Sets the granularity of log to hours\.
 
-If you set `log_rotation_age` parameter to less than 60 minutes, be sure to also set the `log_filename` parameter to the minute format\.
-
-For more information, see [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) in the *PostgreSQL documentation*\.
+For more information, see [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-AGE) and [https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE](https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-LOG-ROTATION-SIZE) in the PostgreSQL documentation\.
 
 ### Setting the log destination<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
 

@@ -49,7 +49,7 @@ Performance Insights can report `0.00` and `-` \(unknown\) for SQL statistics\. 
 + Two samples have the same values\. Performance Insights can't calculate a rate of change because no change has occurred, so it reports the rate as `0.00`\.
 + An RDS PostgreSQL statement lacks a valid identifier\. PostgreSQL creates a identifier for a statement only after parsing and analysis\. Thus, a statement can exist in the PostgreSQL internal in\-memory structures with no identifier\. Because Performance Insights samples internal in\-memory structures once per second, low\-latency queries might appear for only a single sample\. If the query identifier isn't available for this sample, Performance Insights can't associate this statement with its statistics\. The unknown value is represented with a dash \(`-`\)\.
 
-For a description of the SQL statistics for the Amazon RDS engines, see [SQL statistics for Performance Insights](metrics-reference.md#sql-statistics)\.
+For a description of the SQL statistics for the Amazon RDS engines, see [SQL statistics for Performance Insights](sql-statistics.md)\.
 
 ## Load by waits \(AAS\)<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.Load-by-waits"></a>
 

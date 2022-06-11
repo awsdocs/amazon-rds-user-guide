@@ -5,6 +5,8 @@ You can view database log files for your Amazon RDS DB engine by using the AWS M
 **Note**  
  If you can't view the list of log files for an existing RDS for Oracle DB instance, reboot the instance to view the list\. 
 
+**Note**  
+
 ## Console<a name="USER_LogAccess.CON"></a>
 
 **To view a database log file**

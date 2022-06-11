@@ -81,8 +81,7 @@
  Enforce SSL and verify the certificate authority \(CA\)\. 
 
 **VERIFY\_IDENTITY**  
- Enforce SSL and verify the CA and CA hostname\.   
- You can use the SSL mode `VERIFY_IDENTITY` when connecting to the default proxy endpoint\. You can't use that SSL mode when you connect to proxy endpoints that you create\. 
+ Enforce SSL and verify the CA and CA hostname\. 
 
  When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in `.pem` format\. For the `.pem` file to use, download all root CA PEMs from [Amazon Trust Services ](https://www.amazontrust.com/repository/) and place them into a single `.pem` file\.
 

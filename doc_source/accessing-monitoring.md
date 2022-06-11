@@ -45,7 +45,7 @@ Find the possible status values for DB instances in the following table\. This t
 |  **stopped**  | Billed for storage |  The DB instance is stopped\.  | 
 |  **stopping**  | Billed for storage |  The DB instance is being stopped\.  | 
 |  **storage\-full**  | Billed |  The DB instance has reached its storage capacity allocation\. This is a critical status, and we recommend that you fix this issue immediately\. To do so, scale up your storage by modifying the DB instance\. To avoid this situation, set Amazon CloudWatch alarms to warn you when storage space is getting low\.   | 
-|  **storage\-optimization**  | Billed |  Your DB instance is being modified to change the storage size or type\. The DB instance is fully operational\. However, while the status of your DB instance is **storage\-optimization**, you can't request any changes to the storage of your DB instance\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.   | 
+|  **storage\-optimization**  | Billed |  Amazon RDS is optimizing the storage of your DB instance\. The DB instance is fully operational\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
 |  **upgrading**  | Billed |  The database engine version is being upgraded\.   | 
 
 ## Viewing Amazon RDS recommendations<a name="USER_Recommendations"></a>

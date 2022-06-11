@@ -25,7 +25,7 @@ For more information on managing access to Amazon RDS resources and your databas
 **Topics**
 + [Database authentication with Amazon RDS](database-authentication.md)
 + [Data protection in Amazon RDS](DataDurability.md)
-+ [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)
++ [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)
 + [Logging and monitoring in Amazon RDS](Overview.LoggingAndMonitoring.md)
 + [Compliance validation for Amazon RDS](RDS-compliance.md)
 + [Resilience in Amazon RDS](disaster-recovery-resiliency.md)

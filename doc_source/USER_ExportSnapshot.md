@@ -32,7 +32,7 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Overview of exporting snapshot data](#USER_ExportSnapshot.Overview)
 + [Setting up access to an Amazon S3 bucket](#USER_ExportSnapshot.Setup)
 + [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)
-+ [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
++ [Exporting a DB snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
 + [Monitoring snapshot exports](#USER_ExportSnapshot.Monitoring)
 + [Canceling a snapshot export task](#USER_ExportSnapshot.Canceling)
 + [Failure messages for Amazon S3 export tasks](#USER_ExportSnapshot.failure-msg)
@@ -65,6 +65,7 @@ Exporting DB snapshot data to Amazon S3 has the following limitations:
 + We strongly recommend that you use a unique name for each export task\. If you don't use a unique task name, you might receive the following error message:
 
   ExportTaskAlreadyExistsFault: An error occurred \(ExportTaskAlreadyExists\) when calling the StartExportTask operation: The export task with the ID *xxxxx* already exists\.
++ You can delete a snapshot while you're exporting its data to S3, but you're still charged for the storage costs for that snapshot until the export task has completed\.
 
 ## Overview of exporting snapshot data<a name="USER_ExportSnapshot.Overview"></a>
 
@@ -88,7 +89,7 @@ You use the following process to export DB snapshot data to an Amazon S3 bucket\
 
    You can use a KMS key within your AWS account, or you can use a cross\-account KMS key\. For more information, see [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)\.
 
-1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\. 
+1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a DB snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\. 
 
 1. To access your exported data in the Amazon S3 bucket, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service User Guide*\.
 
@@ -120,7 +121,7 @@ Before you export DB snapshot data to Amazon S3, give the snapshot export tasks 
 To do this, create an IAM policy that provides access to the bucket\. Then create an IAM role and attach the policy to the role\. You later assign the IAM role to your snapshot export task\.
 
 **Important**  
-If you plan to use the AWS Management Console to export your snapshot, you can choose to create the IAM policy and the role automatically when you export the snapshot\. For instructions, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\.
+If you plan to use the AWS Management Console to export your snapshot, you can choose to create the IAM policy and the role automatically when you export the snapshot\. For instructions, see [Exporting a DB snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\.
 
 **To give DB snapshot tasks access to Amazon S3**
 
@@ -277,7 +278,7 @@ You can use a cross\-account AWS KMS key to encrypt Amazon S3 exports\. First, y
    }
    ```
 
-## Exporting a snapshot to an Amazon S3 bucket<a name="USER_ExportSnapshot.Exporting"></a>
+## Exporting a DB snapshot to an Amazon S3 bucket<a name="USER_ExportSnapshot.Exporting"></a>
 
 You can have up to five concurrent DB snapshot export tasks in progress per account\. 
 

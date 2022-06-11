@@ -421,7 +421,7 @@ A *security group* acts as a virtual firewall for a VPC instance, controlling bo
 
 1. Make sure that your security group permits outbound connections on port 443\. RDS Custom needs this port to communicate with dependent AWS services\.
 
-1. If you have a private VPC and use VPC endpoints, make sure that the security group associated with the DB instance allows outbound connections on port 443 to VPC endpoints\. Also make sure that the security group associated with the VPC endpoint allows inbound connections on port 443 from the DB Instance\.
+1. If you have a private VPC and use VPC endpoints, make sure that the security group associated with the DB instance allows outbound connections on port 443 to VPC endpoints\. Also make sure that the security group associated with the VPC endpoint allows inbound connections on port 443 from the DB instance\.
 
    If incoming connections aren't allowed, the RDS Custom instance can't connect to the AWS Systems Manager and Amazon EC2 endpoints\. For more information, see [Create a Virtual Private Cloud endpoint](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html) in the *AWS Systems Manager User Guide*\.
 

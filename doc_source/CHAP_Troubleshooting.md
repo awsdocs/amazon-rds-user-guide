@@ -1,6 +1,6 @@
 # Troubleshooting for Amazon RDS<a name="CHAP_Troubleshooting"></a>
 
-Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Aurora\.
+Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Amazon Aurora\.
 
 **Topics**
 + [Can't connect to Amazon RDS DB instance](#CHAP_Troubleshooting.Connecting)
@@ -10,6 +10,7 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Amazon RDS DB parameter changes not taking effect](#CHAP_Troubleshooting.Parameters)
 + [Amazon RDS DB instance running out of storage](#CHAP_Troubleshooting.Storage)
 + [Amazon RDS insufficient DB instance capacity](#CHAP_Troubleshooting.Capacity)
++ [Freeable memory issues in Amazon RDS](#Troubleshooting.FreeableMemory)
 + [MySQL and MariaDB issues](#CHAP_Troubleshooting.MySQL)
 + [Can't set backup retention period to 0](#CHAP_Troubleshooting.Backup.Retention)
 
@@ -245,6 +246,16 @@ The `InsufficientDBInstanceCapacity` error can be returned when you try to creat
 + The DB instance is on the EC2\-Classic platform and therefore isn't in a VPC\. Some DB instance classes require a VPC\. For example, if you're on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon EC2 instance types that are only available in a VPC, see [Instance types available in EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html#ec2-classic-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\. To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\.
 
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+## Freeable memory issues in Amazon RDS<a name="Troubleshooting.FreeableMemory"></a>
+
+*Freeable memory* is the total random access memory \(RAM\) on a DB instance that can be made available to the database engine\. It's the sum of the free operating\-system \(OS\) memory and the available buffer and page cache memory\. The database engine uses most of the memory on the host, but OS processes also use some RAM\. Memory currently allocated to the database engine or used by OS processes isn't included in freeable memory\. When the database engine is running out of memory, the DB instance can use the temporary space that is normally used for buffering and caching\. As previously mentioned, this temporary space is included in freeable memory\.
+
+You use the `FreeableMemory` metric in Amazon CloudWatch to monitor the freeable memory\. For more information, see [Overview of monitoring metrics in Amazon RDS](MonitoringOverview.md)\.
+
+If your DB instance consistently runs low on freeable memory or uses swap space, you might need to scale up to a larger DB instance class\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+
+You can also change the memory settings\. For example, on RDS for MySQL, you might adjust the size of the `innodb_buffer_pool_size` parameter\. This parameter is set by default to 75 percent of physical memory\. For more MySQL troubleshooting tips, see [How can I troubleshoot low freeable memory in an Amazon RDS for MySQL database?](https://aws.amazon.com/premiumsupport/knowledge-center/low-freeable-memory-rds-mysql-mariadb/)
 
 ## MySQL and MariaDB issues<a name="CHAP_Troubleshooting.MySQL"></a>
 

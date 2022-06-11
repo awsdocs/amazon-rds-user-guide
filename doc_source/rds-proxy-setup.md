@@ -120,7 +120,7 @@ aws secretsmanager get-secret-value --secret-id your_secret_name
 
 ## Setting up AWS Identity and Access Management \(IAM\) policies<a name="rds-proxy-iam-setup"></a>
 
- After you create the secrets in Secrets Manager, you create an IAM policy that can access those secrets\. For general information about using IAM with RDS and Aurora, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\. 
+ After you create the secrets in Secrets Manager, you create an IAM policy that can access those secrets\. For general information about using IAM with RDS and Aurora, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\. 
 
 **Tip**  
  The following procedure applies if you use the IAM console\. If you use the AWS Management Console for RDS, RDS can create the IAM policy for you automatically\. In that case, you can skip the following procedure\. 

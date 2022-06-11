@@ -122,7 +122,7 @@ WHERE c.relkind = 'r' and nspname <> 'pg_catalog'
 AND (age(relfrozenxid) >= coalesce(cfma.value::float, autovacuum_freeze_max_age::float)
 OR coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) + 
 coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-c.reltuples <= n_dead_tup -- or 1 = 1)
+c.reltuples <= n_dead_tup)
 ORDER BY age(relfrozenxid) DESC LIMIT 50;
 ```
 

@@ -7,7 +7,7 @@ MariaDB and MySQL collect SQL statistics only at the digest level\. No statistic
 + [Per\-second statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second)
 + [Per\-call statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call)
 
-### Digest statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation"></a>
+## Digest statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation"></a>
 
 Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. The `events_statements_summary_by_digest` table is managed by your database\. 
 
@@ -26,7 +26,7 @@ In this situation, MariaDB and MySQL don't track SQL queries\. To address this i
 
 In the AWS CLI, check the source of a parameter value by running the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
 
-### Per\-second statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second"></a>
+## Per\-second statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second"></a>
 
 The following SQL statistics are available for MariaDB and MySQL DB instances\.
 
@@ -49,7 +49,7 @@ The following SQL statistics are available for MariaDB and MySQL DB instances\.
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_sec | Created temporary tables per second | 
 | db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_sec | Lock time per second \(in ms\) | 
 
-### Per\-call statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call"></a>
+## Per\-call statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call"></a>
 
 The following metrics provide per call statistics for a SQL statement\.
 

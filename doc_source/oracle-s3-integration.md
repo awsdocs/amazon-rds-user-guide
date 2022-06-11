@@ -285,13 +285,13 @@ This step assumes that you have created the IAM policy in [Step 1: Create an IAM
 
 1. For **Select your use case**, choose **RDS – Add Role to Database**\.
 
-1. Choose **Next: Permissions**\.
+1. Choose **Next**\.
 
-1. For **Search** under **Attach permissions policies**, enter the name of the IAM policy you created, and choose the policy when it appears in the list\.
+1. For **Search** under **Permissions policies**, enter the name of the IAM policy you created, and choose the policy when it appears in the list\.
 
-1. Choose **Next: Tags** and then **Next: Review**\.
+1. Choose **Next**\.
 
-1. Set **Role name** to a name for your IAM role, for example `rds-s3-integration-role`\. You can also add an optional **Role description** value\.
+1. Set **Role name** to a name for your IAM role, for example `rds-s3-integration-role`\. You can also add an optional **Description** value\.
 
 1. Choose **Create role**\.
 
@@ -522,8 +522,8 @@ The `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure has the following parame
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to upload files from\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   You can only upload files from the specified directory\. You can't upload files in subdirectories in the specified directory\.   | 
 |  `p_s3_prefix`  |  VARCHAR2  |  –  |  required  |  An Amazon S3 file name prefix that files are uploaded to\. An empty prefix uploads all files to the top level in the specified Amazon S3 bucket and doesn't add a prefix to the file names\.  For example, if the prefix is `folder_1/oradb`, files are uploaded to `folder_1`\. In this case, the `oradb` prefix is added to each file\.   | 
 |  `p_prefix`  |  VARCHAR2  |  –  |  required  |  A file name prefix that file names must match to be uploaded\. An empty prefix uploads all files in the specified directory\.   | 
-|  `p_bucket_owner_full_control`  |  VARCHAR2  |  –  |  optional  |  The access control setting for the bucket\. The only valid values are null or `FULL_CONTROL`\. This setting is required only if you upload files from one account \(account A\) into a bucket owned by a different account \(account B\), and account B needs full control of the files\.  | 
 |  `p_compression_level`  |  NUMBER  |  `0`   |  optional  |  The level of GZIP compression\. Valid values range from `0` to `9`: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-s3-integration.html)  | 
+|  `p_bucket_owner_full_control`  |  VARCHAR2  |  –  |  optional  |  The access control setting for the bucket\. The only valid values are null or `FULL_CONTROL`\. This setting is required only if you upload files from one account \(account A\) into a bucket owned by a different account \(account B\), and account B needs full control of the files\.  | 
 
 The return value for the `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure is a task ID\.
 
@@ -610,7 +610,7 @@ To download files from an Amazon S3 bucket to an Oracle DB instance, use the Ama
 | --- | --- | --- | --- | --- | 
 |  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to download files from\.   | 
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
-|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  optional  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. Suppose also that you specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
+|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  required  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. Suppose also that you specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
 |  `p_decompression_format`  |  VARCHAR2  |  `NONE`  |  optional  |  The decompression format\. Valid values are `NONE` for no decompression and `GZIP` for decompression\.  | 
 
 The return value for the `rdsadmin.rdsadmin_s3_tasks.download_from_s3` procedure is a task ID\.

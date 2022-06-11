@@ -55,7 +55,7 @@ Tags are cached for authorization purposes\. Because of this, additions and upda
 
  You can use tags with IAM policies to manage access to Amazon RDS resources and to control what actions can be applied to the Amazon RDS resources\. 
 
-For information on managing access to tagged resources with IAM policies, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\. 
+For information on managing access to tagged resources with IAM policies, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\. 
 
 ## Using tags to produce detailed billing reports<a name="Tagging.Billing"></a>
 

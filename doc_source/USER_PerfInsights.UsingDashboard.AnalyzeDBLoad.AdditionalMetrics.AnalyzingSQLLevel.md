@@ -15,7 +15,7 @@ In the Performance Insights dashboard, SQL statistics are available in the **Top
 1. Choose an individual statement or digest query\.  
 ![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_sql.png)
 
-1. Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\. For descriptions of the SQL statistics for the Amazon RDS engines, see [SQL statistics for Performance Insights](metrics-reference.md#sql-statistics)\.
+1. Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\. For descriptions of the SQL statistics for the Amazon RDS engines, see [SQL statistics for Performance Insights](sql-statistics.md)\.
 
    The following example shows the statistics preferences for Oracle DB instances\.  
 ![\[Preferences for metrics for running queries for Oracle DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_per_sql_pref_oracle.png)

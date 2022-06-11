@@ -15,6 +15,7 @@ To create a CEV, access the installation files and patches for Oracle Database 1
 **Topics**
 + [Downloading your database installation files and patches from Oracle](#custom-cev.preparing.download)
 + [Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)
++ [Sharing your installation media in S3 across AWS accounts](#custom-cev.preparing.accounts)
 + [Creating the CEV manifest](#custom-cev.preparing.manifest)
 + [Validating the CEV manifest](#custom-cev.preparing.validating)
 + [Adding necessary IAM permissions](#custom-cev.preparing.iam)
@@ -94,7 +95,7 @@ Examples in this section use the following placeholders:
 + `123456789012/cev1` – An optional prefix in your Amazon S3 bucket\.
 + `source-bucket` – An Amazon S3 bucket where you can optionally stage files\.
 
-The following example uploads `install-or-patch-file.zip` to the `123456789012/cev1` folder in the RDS Custom Amazon S3 bucket\. Run a separate `aws s3` command for each \.zip that you want to upload\.
+The following example uploads `install-or-patch-file.zip` to the `123456789012/cev1` folder in the RDS Custom Amazon S3 bucket\. Run a separate `aws s3` command for each \.zip file that you want to upload\.
 
 For Linux, macOS, or Unix:
 
@@ -154,6 +155,87 @@ For Windows:
 aws s3 sync s3://source-bucket/ ^
     s3://my-custom-installation-files/123456789012/cev1/
 ```
+
+### Sharing your installation media in S3 across AWS accounts<a name="custom-cev.preparing.accounts"></a>
+
+For the purposes of this section, the Amazon S3 bucket that contains your uploaded Oracle installation files is your *media bucket*\. Your organization might use multiple AWS accounts in an AWS Region\. If so, you might want to use one AWS account to populate your media bucket and a different AWS account to create CEVs\. If you don't intend to share your media bucket, skip to the next section\.
+
+This section assumes the following: 
++ You can access the account that created your media bucket and a different account in which you intend to create CEVs\.
++ You intend to create CEVs in only one AWS Region\. If you intend to use multiple Regions, create a media bucket in each Region\.
++ You're using the CLI\. If you're using the Amazon S3 console, adapt the following steps\.
+
+**To configure your media bucket for sharing across AWS accounts**
+
+1. Log in to the AWS account that contains the S3 bucket into which you uploaded your installation media\.
+
+1. Start with either a blank JSON policy template or an existing policy that you can adapt\.
+
+   The following command retrieves an existing policy and saves it as *my\-policy\.json*\. iIn this example, the S3 bucket containing your installation files is named *oracle\-media\-bucket*\.
+
+   ```
+   aws s3api get-bucket-policy \ 
+       --bucket oracle-media-bucket \
+       --query Policy \
+       --output text > my-policy.json
+   ```
+
+1. Edit the media bucket permissions as follows:
+   + In the `Resource` element of your template, specify the S3 bucket into which you uploaded your Oracle Database installation files\.
+   + In the `Principal` element, specify the ARNs for all AWS accounts that you intend to use to create CEVs\. You can add the root, a user, or a role to the S3 bucket allow list\. For more information, see [IAM identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *AWS Identity and Access Management User Guide*\.
+
+   ```
+   {
+       "Version": "2008-10-17",
+       "Statement": [
+           {
+               "Sid": "GrantAccountsAccess",
+               "Effect": "Allow",
+               "Principal": {
+                   "AWS": [
+                       "arn:aws:iam::account-1:root",
+                       "arn:aws:iam::account-2:user/user-name-with-path",
+                       "arn:aws:iam::account-3:role/role-name-with-path",
+                       ...
+                   ]
+               },
+               "Action": [
+                   "s3:GetObject",
+                   "s3:GetObjectAcl",
+                   "s3:GetObjectTagging",
+                   "s3:ListBucket",
+                   "s3:GetBucketLocation"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::oracle-media-bucket",
+                   "arn:aws:s3:::oracle-media-bucket/*"
+               ]
+           }
+       ]
+   }
+   ```
+
+1. Attach the policy to your media bucket\.
+
+   In the following example, *oracle\-media\-bucket* is the name of the S3 bucket that contains your installation files, and *my\-policy\.json* is the name of your JSON file\.
+
+   ```
+   aws s3api put-bucket-policy \
+       --bucket oracle-media-bucket \
+       --policy file://my-policy.json
+   ```
+
+1. Log in to an AWS account in which you intend to create CEVs\.
+
+1. Verify that this account can access the media bucket in the AWS account that created it\.
+
+   ```
+   aws s3 ls --query "Buckets[].Name"
+   ```
+
+   For more information, see [aws s3 ls](https://docs.aws.amazon.com/cli/latest/reference/s3/ls.html) in the *AWS CLI Command Reference*\.
+
+1. Create a CEV by following the steps in [Creating a CEV](#custom-cev.create)\.
 
 ### Creating the CEV manifest<a name="custom-cev.preparing.manifest"></a>
 

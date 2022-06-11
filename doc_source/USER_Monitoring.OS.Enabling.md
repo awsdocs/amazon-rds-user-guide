@@ -41,13 +41,11 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 
 1. Choose the **AWS service** tab, and then choose **RDS** from the list of services\.
 
-1. Choose **RDS \- Enhanced Monitoring**, and then choose **Next: Permissions**\.
+1. Choose **RDS \- Enhanced Monitoring**, and then choose **Next**\.
 
-1. Ensure that the **Attached permissions policy** page shows **AmazonRDSEnhancedMonitoringRole**, and then choose **Next: Tags**\.
+1. Ensure that the **Permissions policies** shows **AmazonRDSEnhancedMonitoringRole**, and then choose **Next**\.
 
-1. On the **Add tags** page, choose **Next: Review**\.
-
-1. For **Role Name**, enter a name for your role\. For example, enter **emaccess**\.
+1. For **Role name**, enter a name for your role\. For example, enter **emaccess**\.
 
    The trusted entity for your role is the AWS service **monitoring\.rds\.amazonaws\.com**\.
 
