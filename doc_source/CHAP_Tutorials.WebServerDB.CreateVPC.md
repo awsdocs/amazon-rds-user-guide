@@ -117,16 +117,16 @@ Next you create a security group for public access\. To connect to public instan
 
 1. Add inbound rules to the security group\.
 
-   1. Determine the IP address to use to connect to instances in your VPC\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
+   1. Determine the IP address to use to connect to instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
 
       If you are connecting through an Internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
 **Warning**  
   
-If you use `0.0.0.0/0`, you enable all IP addresses to access your public instances\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your instances\.
+If you use `0.0.0.0/0` for SSH access, you enable all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your instances using SSH\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your Amazon EC2 instance\. If you do this, you can connect to your Amazon EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
+   1. Set the following values for your new inbound rule to allow SSH access to your Amazon EC2 instance\. If you do this, you can connect to your Amazon EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
       + **Type:** `SSH`
       + **Source:** The IP address or range from Step a, for example: `203.0.113.25/32`\.
 

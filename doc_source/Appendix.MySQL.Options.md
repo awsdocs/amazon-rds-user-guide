@@ -1,6 +1,6 @@
 # Options for MySQL DB instances<a name="Appendix.MySQL.Options"></a>
 
-This appendix describes options, or additional features, that are available for Amazon RDS instances running the MySQL DB engine\. To enable these options, you can add them to a custom option group, and then associate the option group with your DB instance\. For more information about working with option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
+Following, you can find a description of options, or additional features, that are available for Amazon RDS instances running the MySQL DB engine\. To enable these options, you can add them to a custom option group, and then associate the option group with your DB instance\. For more information about working with option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
 
 Amazon RDS supports the following options for MySQL: 
 

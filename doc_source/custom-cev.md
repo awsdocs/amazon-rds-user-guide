@@ -114,7 +114,7 @@ For Windows:
 Verify that your S3 bucket is in the AWS Region where you plan to run the `create-custom-db-engine-version` command\.
 
 ```
-aws s3 get-bucket-location --bucket my-custom-installation-files
+aws s3api get-bucket-location --bucket my-custom-installation-files
 ```
 
 List the files in your RDS Custom Amazon S3 bucket as follows\.

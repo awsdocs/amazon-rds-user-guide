@@ -18,7 +18,7 @@ The following are some limitations and recommendations for importing backup file
 + You can only import your data to a new DB instance, not an existing DB instance\. 
 + You must use Percona XtraBackup to create the backup of your on\-premises database\.
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
-+ You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 8\.0, and the default minor version for your AWS Region is 8\.0\.28, then you must import your data into a MySQL version 8\.0\.28 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)\.
++ You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 8\.0, and the default minor version for your AWS Region is 8\.0\.28, then you must import your data into a MySQL version 8\.0\.28 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
 + Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 8\.0 to version 5\.7, and you can't migrate from version 8\.0\.28 to version 8\.0\.27\.
 + You can't import a MySQL 5\.5 or 5\.6 database\. 
 + You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.7 database to an RDS for MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
@@ -32,7 +32,7 @@ The following are some limitations and recommendations for importing backup file
 + User accounts are not imported automatically\. Save your user accounts from your source database and add them to your new DB instance later\. 
 + Functions are not imported automatically\. Save your functions from your source database and add them to your new DB instance later\. 
 + Stored procedures are not imported automatically\. Save your stored procedures from your source database and add them to your new DB instance later\. 
-+ Time zone information is not imported automatically\. Record the time zone information for your source database, and set the time zone of your new DB instance later\. For more information, see [Local time zone for MySQL DB instances](CHAP_MySQL.md#MySQL.Concepts.LocalTimeZone)\. 
++ Time zone information is not imported automatically\. Record the time zone information for your source database, and set the time zone of your new DB instance later\. For more information, see [Local time zone for MySQL DB instances](MySQL.Concepts.LocalTimeZone.md)\. 
 + The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1:12M:autoextend"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
 
   The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.

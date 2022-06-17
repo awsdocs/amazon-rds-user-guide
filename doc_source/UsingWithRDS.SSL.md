@@ -5,9 +5,9 @@ You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from
 SSL/TLS connections provide one layer of security by encrypting data that moves between your client and a DB instance\. Using a server certificate provides an extra layer of security by validating that the connection is being made to an Amazon RDS DB instance\. It does so by checking the server certificate that is automatically installed on all DB instances that you provision\.
 
 Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB instance, use the link following that corresponds to your DB engine: 
-+ [Using SSL with a MariaDB DB instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
++ [Using SSL/TLS with a MariaDB DB instance](mariadb-ssl-connections.md#MariaDB.Concepts.SSLSupport)
 + [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)
-+ [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
++ [Using SSL/TLS with a MySQL DB instance](mysql-ssl-connections.md#MySQL.Concepts.SSLSupport)
 + [Encrypting client connections with SSL](Oracle.Concepts.SSL.md)
 + [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)
 

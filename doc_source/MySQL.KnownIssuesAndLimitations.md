@@ -4,8 +4,9 @@ Known issues and limitations for working with Amazon RDS for MySQL are as follow
 
 **Topics**
 + [InnoDB reserved word](#MySQL.Concepts.KnownIssuesAndLimitations.InnodbDatabaseName)
++ [Storage\-full behavior for Amazon RDS for MySQL](#MySQL.Concepts.StorageFullBehavior)
 + [Inconsistent InnoDB buffer pool size](#MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize)
-+ [Index merge optimization returns wrong results](#MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization)
++ [Index merge optimization returns incorrect results](#MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization)
 + [Log file size](#MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize)
 + [MySQL parameter exceptions for Amazon RDS DB instances](#MySQL.Concepts.ParameterNotes)
 + [MySQL file size limits in Amazon RDS](#MySQL.Concepts.Limits.FileSize)
@@ -14,6 +15,25 @@ Known issues and limitations for working with Amazon RDS for MySQL are as follow
 ## InnoDB reserved word<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbDatabaseName"></a>
 
 `InnoDB` is a reserved word for RDS for MySQL\. You can't use this name for a MySQL database\.
+
+## Storage\-full behavior for Amazon RDS for MySQL<a name="MySQL.Concepts.StorageFullBehavior"></a>
+
+When storage becomes full for a MySQL DB instance, there can be metadata inconsistencies, dictionary mismatches, and orphan tables\. To prevent these issues, Amazon RDS automatically stops a DB instance that reaches the `storage-full` state\.
+
+A MySQL DB instance reaches the `storage-full` state in the following cases:
++ The DB instance has less than 20,000 MiB of storage, and available storage reaches 200 MiB or less\.
++ The DB instance has more than 102,400 MiB of storage, and available storage reaches 1024 MiB or less\.
++ The DB instance has between 20,000 MiB and 102,400 MiB of storage, and has less than 1% of storage available\.
+
+After Amazon RDS stops a DB instance automatically because it reached the `storage-full` state, you can still modify it\. To restart the DB instance, complete at least one of the following:
++ Modify the DB instance to enable storage autoscaling\.
+
+  For more information about storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
++ Modify the DB instance to increase its storage capacity\.
+
+  For more information about increasing storage capacity, see [Increasing DB instance storage capacity](USER_PIOPS.StorageTypes.md#USER_PIOPS.ModifyingExisting)\.
+
+After you make one of these changes, the DB instance is restarted automatically\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ## Inconsistent InnoDB buffer pool size<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize"></a>
 
@@ -27,11 +47,11 @@ innodb_buffer_pool_instances = 4
 innodb_buffer_pool_size = (536870912 * 4) * 8 = 17179869184
 ```
 
-For details on this MySQL 5\.7 bug, go to [https://bugs\.mysql\.com/bug\.php?id=79379](https://bugs.mysql.com/bug.php?id=79379) in the MySQL documentation\. 
+For details on this MySQL 5\.7 bug, see [https://bugs\.mysql\.com/bug\.php?id=79379](https://bugs.mysql.com/bug.php?id=79379) in the MySQL documentation\. 
 
-## Index merge optimization returns wrong results<a name="MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization"></a>
+## Index merge optimization returns incorrect results<a name="MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization"></a>
 
-Queries that use index merge optimization might return wrong results due to a bug in the MySQL query optimizer that was introduced in MySQL 5\.5\.37\. When you issue a query against a table with multiple indexes the optimizer scans ranges of rows based on the multiple indexes, but does not merge the results together correctly\. For more information on the query optimizer bug, go to [http://bugs\.mysql\.com/bug\.php?id=72745](https://bugs.mysql.com/bug.php?id=72745) and [http://bugs\.mysql\.com/bug\.php?id=68194](https://bugs.mysql.com/bug.php?id=68194) in the MySQL bug database\. 
+Queries that use index merge optimization might return incorrect results due to a bug in the MySQL query optimizer that was introduced in MySQL 5\.5\.37\. When you issue a query against a table with multiple indexes the optimizer scans ranges of rows based on the multiple indexes, but does not merge the results together correctly\. For more information on the query optimizer bug, see [http://bugs\.mysql\.com/bug\.php?id=72745](https://bugs.mysql.com/bug.php?id=72745) and [http://bugs\.mysql\.com/bug\.php?id=68194](https://bugs.mysql.com/bug.php?id=68194) in the MySQL bug database\. 
 
 For example, consider a query on a table with two indexes where the search arguments reference the indexed columns\. 
 
@@ -53,7 +73,7 @@ To resolve this issue, you can do one of the following:
   3. WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
   ```
 
-For more information, go to [Index merge optimization](https://dev.mysql.com/doc/refman/8.0/en/index-merge-optimization.html)\. 
+For more information, see [Index merge optimization](https://dev.mysql.com/doc/refman/8.0/en/index-merge-optimization.html) in the MySQL documentation\. 
 
 ## Log file size<a name="MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize"></a>
 
@@ -67,7 +87,7 @@ Some MySQL parameters require special considerations when used with an Amazon RD
 
 Because Amazon RDS uses a case\-sensitive file system, setting the value of the `lower_case_table_names` server parameter to 2 \("names stored as given but compared in lowercase"\) is not supported\. The following are the supported values for Amazon RDS for MySQL DB instances:
 + 0 \("names stored as given and comparisons are case\-sensitive"\) is supported for all Amazon RDS for MySQL versions\.
-+ 1 \("names stored in lowercase and comparisons are not case\-sensitive"\) is supported for RDS for MySQL version version 5\.7 and version 8\.0\.19 and higher 8\.0 versions\.
++ 1 \("names stored in lowercase and comparisons are not case\-sensitive"\) is supported for RDS for MySQL version 5\.7 and version 8\.0\.19 and higher 8\.0 versions\.
 
 Set the `lower_case_table_names` parameter in a custom DB parameter group before creating a DB instance\. Then, specify the custom DB parameter group when you create the DB instance\.
 
@@ -88,11 +108,11 @@ For MySQL DB instances, the maximum provisioned storage limit constrains the siz
 **Note**  
 Some existing DB instances have a lower limit\. For example, MySQL DB instances created before April 2014 have a file and table size limit of 2 TB\. This 2 TB file size limit also applies to DB instances or read replicas created from DB snapshots taken before April 2014, regardless of when the DB instance was created\.
 
-There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, go to [File\-per\-table tablespaces](https://dev.mysql.com/doc/refman/8.0/en/innodb-file-per-table-tablespaces.html) in the MySQL documentation\. 
+There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, see [File\-per\-table tablespaces](https://dev.mysql.com/doc/refman/8.0/en/innodb-file-per-table-tablespaces.html) in the MySQL documentation\. 
 
 We don't recommend allowing tables to grow to the maximum file size\. In general, a better practice is to partition data into smaller tables, which can improve performance and recovery times\. 
 
-One option that you can use for breaking a large table up into smaller tables is partitioning\. Partitioning distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, go to [Partitioning](https://dev.mysql.com/doc/refman/8.0/en/partitioning.html) in the MySQL documentation\. 
+One option that you can use for breaking a large table up into smaller tables is partitioning\. Partitioning distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, see [Partitioning](https://dev.mysql.com/doc/refman/8.0/en/partitioning.html) in the MySQL documentation\. 
 
 **To determine the file size of a table**
 + Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\.

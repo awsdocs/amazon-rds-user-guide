@@ -1,4 +1,4 @@
-# Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates<a name="ssl-certificate-rotation-mariadb"></a>
+# Using new SSL/TLS certificates for MariaDB DB instances<a name="ssl-certificate-rotation-mariadb"></a>
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
@@ -11,7 +11,7 @@ We recommend avoiding `preferred` mode\. In `preferred` mode, if the connection 
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MariaDB DB instances, see [Using SSL with a MariaDB DB instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
+For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MariaDB DB instances, see [Using SSL/TLS with a MariaDB DB instance](mariadb-ssl-connections.md#MariaDB.Concepts.SSLSupport)\.
 
 **Topics**
 + [Determining whether a client requires certificate verification in order to connect](#ssl-certificate-rotation-mariadb.determining)

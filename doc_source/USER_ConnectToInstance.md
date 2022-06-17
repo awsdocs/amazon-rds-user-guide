@@ -34,7 +34,7 @@ man mysql
 
 To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
-You can use Secure Sockets Layer \(SSL\) encryption on connections to a MySQL DB instance\. For information, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\. If you are using AWS Identity and Access Management \(IAM\) database authentication, make sure to use an SSL connection\. For information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
+You can use Secure Sockets Layer \(SSL\) or Transport Layer Security \(TLS\) encryption on connections to a MySQL DB instance\. For information, see [Using SSL/TLS with a MySQL DB instance](mysql-ssl-connections.md#MySQL.Concepts.SSLSupport)\. If you are using AWS Identity and Access Management \(IAM\) database authentication, make sure to use an SSL/TLS connection\. For information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
 
 You can also connect to a DB instance from a web server\. For more information, see [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)\.
 
@@ -44,7 +44,6 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 **Topics**
 + [Finding the connection information for a MySQL DB instance](#USER_ConnectToInstance.EndpointAndPort)
 + [Connecting from the MySQL command\-line client \(unencrypted\)](#USER_ConnectToInstance.CLI)
-+ [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)
 + [Connecting from MySQL Workbench](#USER_ConnectToInstance.MySQLWorkbench)
 + [Connecting with the Amazon Web Services JDBC Driver for MySQL](#USER_ConnectToInstance.JDBCDriverMySQL)
 + [Troubleshooting connections to your MySQL DB instance](#USER_ConnectToInstance.Troubleshooting)
@@ -121,7 +120,7 @@ To find the connection information for a DB instance by using the Amazon RDS API
 ## Connecting from the MySQL command\-line client \(unencrypted\)<a name="USER_ConnectToInstance.CLI"></a>
 
 **Important**  
-Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)\.
+Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting from the MySQL command\-line client with SSL/TLS \(encrypted\)](mysql-ssl-connections.md#USER_ConnectToInstanceSSL.CLI)\.
 
 To connect to a DB instance using the MySQL command\-line client, enter the following command at the command prompt\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\. 
 
@@ -130,42 +129,6 @@ mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u m
 ```
 
 After you enter the password for the user, you should see output similar to the following\.
-
-```
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 9738
-Server version: 8.0.23 Source distribution
-
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
-
-mysql>
-```
-
-## Connecting from the MySQL command\-line client with SSL \(encrypted\)<a name="USER_ConnectToInstanceSSL.CLI"></a>
-
-Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication\. To connect to your DB instance using IAM database authentication, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. To connect to your DB instance using native password authentication, you can follow these steps: 
-
-**To connect to a DB instance with SSL using the MySQL command\-line client**
-
-1. Download a root certificate that works for all AWS Regions\.
-
-   For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
-
-1. Enter the following command at a command prompt to connect to a DB instance with SSL using the MySQL command\-line client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\.
-
-   ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem -P 3306 -u mymasteruser -p
-   ```
-
-1. You can require that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. 
-
-   ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem --ssl-mode=VERIFY_IDENTITY -P 3306 -u mymasteruser -p
-   ```
-
-1. Enter the master user password when prompted\.
-
-You will see output similar to the following\.
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -200,7 +163,7 @@ mysql>
    The window looks similar to the following:  
 ![\[MySQL Workbench Connection window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/mysql-workbench-connect.png)
 
-   You can use the features of MySQL Workbench to customize connections\. For example, you can use the **SSL** tab to configure SSL connections\. For information about using MySQL Workbench, see the [MySQL Workbench documentation](https://dev.mysql.com/doc/workbench/en/)\.
+   You can use the features of MySQL Workbench to customize connections\. For example, you can use the **SSL** tab to configure SSL/TLS connections\. For information about using MySQL Workbench, see the [MySQL Workbench documentation](https://dev.mysql.com/doc/workbench/en/)\. Encrypting client connections to MySQL DB instances with SSL/TLS, see [Encrypting client connections to MySQL DB instances with SSL/TLS](mysql-ssl-connections.md)\.
 
 1. Optionally, choose **Test Connection** to confirm that the connection to the DB instance is successful\.
 

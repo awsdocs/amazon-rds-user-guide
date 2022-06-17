@@ -1,4 +1,4 @@
-# Updating applications to connect to MySQL DB instances using new SSL/TLS certificates<a name="ssl-certificate-rotation-mysql"></a>
+# Using new SSL/TLS certificates for MySQL DB instances<a name="ssl-certificate-rotation-mysql"></a>
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
@@ -12,7 +12,7 @@ We recommend avoiding `preferred` mode\. In `preferred` mode, if the connection 
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MySQL DB instances, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
+For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MySQL DB instances, see [Using SSL/TLS with a MySQL DB instance](mysql-ssl-connections.md#MySQL.Concepts.SSLSupport)\.
 
 **Topics**
 + [Determining whether any applications are connecting to your MySQL DB instance using SSL](#ssl-certificate-rotation-mysql.determining-server)

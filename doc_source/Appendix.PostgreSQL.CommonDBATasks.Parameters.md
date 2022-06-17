@@ -42,6 +42,7 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  Parameter name  |  Apply\_Type  |  Description  | 
 | --- | --- | --- | 
 |  `application_name`  | Dynamic | Sets the application name to be reported in statistics and logs\. | 
+|  `archive_command`  | Dynamic | Sets the shell command that will be called to archive a WAL file\. | 
 |  `array_nulls`  | Dynamic | Enables input of NULL elements in arrays\. | 
 |  `authentication_timeout`  | Dynamic | Sets the maximum allowed time to complete client authentication\. | 
 |  `autovacuum`  | Dynamic | Starts the autovacuum subprocess\. | 
@@ -126,6 +127,7 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  `log_executor_stats`  | Dynamic | Writes executor performance statistics to the server log\. | 
 |  `log_filename`  | Dynamic | Sets the file name pattern for log files\. | 
 |  `log_hostname`  | Dynamic | Logs the host name in the connection logs\. | 
+|  `log_line_prefix `  | Dynamic | Controls information prefixed to each log line\. | 
 |  `log_lock_waits`  | Dynamic | Logs long lock waits\. | 
 |  `log_min_duration_statement`  | Dynamic | Sets the minimum running time above which statements will be logged\. | 
 |  `log_min_error_statement`  | Dynamic | Causes all statements generating an error at or above this level to be logged\. | 
@@ -137,6 +139,8 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  `log_statement`  | Dynamic | Sets the type of statements logged\. | 
 |  `log_statement_stats`  | Dynamic | Writes cumulative performance statistics to the server log\. | 
 |  `log_temp_files`  | Dynamic | Logs the use of temporary files larger than this number of kilobytes\. | 
+|  `log_timezone`  | Dynamic | Sets the time zone to use in log messages\. | 
+|  `log_truncate_on_rotation`  | Dynamic | Truncate existing log files of same name during log rotation\. | 
 |  `maintenance_work_mem`  | Dynamic | Sets the maximum memory to be used for maintenance operations\. | 
 |  `max_connections`  | Static | Sets the maximum number of concurrent connections\. | 
 |  `max_files_per_process`  | Static | Sets the maximum number of simultaneously open files for each server process\. | 
@@ -157,6 +161,7 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  `seq_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a sequentially fetched disk page\. | 
 |  `session_replication_role`  | Dynamic | Sets the sessions behavior for triggers and rewrite rules\. | 
 |  `shared_buffers`  | Static | Sets the number of shared memory buffers used by the server\. | 
+|  `shared_preload_libraries `  | Static | Lists the shared libraries to preload into the RDS for PostgreSQL DB instance\. Supported values include auto\_explain, orafce, pgaudit, pglogical, pg\_bigm, pg\_cron, pg\_hint\_plan, pg\_prewarm, pg\_similarity, pg\_stat\_statements, pg\_transport, and plprofiler\. | 
 |  `ssl`  | Static | Enables SSL connections\. | 
 |  `sql_inheritance`  | Dynamic | Causes subtables to be included by default in various commands\. | 
 |  `ssl_renegotiation_limit`  | Dynamic | Sets the amount of traffic to send and receive before renegotiating the encryption keys\. | 

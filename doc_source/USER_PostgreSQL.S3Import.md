@@ -3,7 +3,7 @@
 You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL\. 
 
 **Note**  
-Importing data from Amazon S3 isn't supported for Aurora Serverless v1\. 
+Importing data from Amazon S3 isn't supported for Aurora Serverless v1\. It is supported for Aurora Serverless v2\.
 
 For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 

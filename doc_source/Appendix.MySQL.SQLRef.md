@@ -1,6 +1,6 @@
 # MySQL on Amazon RDS SQL reference<a name="Appendix.MySQL.SQLRef"></a>
 
-This appendix describes system stored procedures that are available for Amazon RDS instances running the MySQL DB engine\.
+Following, you can find a description of system stored procedures that are available for Amazon RDS instances running the MySQL DB engine\.
 
 ## Overview<a name="Appendix.MySQL.SQLRef.Overview"></a>
 

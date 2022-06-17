@@ -7,6 +7,8 @@ Currently, the MariaDB Audit Plugin is only supported for the following RDS for 
 MySQL 8\.0\.25 and higher 8\.0 versions
 All MySQL 5\.7 versions
 
+An open source version of this plugin is available, so that you can use it with any MySQL database\. For more information, see the [ Audit Plugin for MySQL Server GitHub repository](https://github.com/aws/audit-plugin-for-mysql)\.
+
 ## Audit Plugin option settings<a name="Appendix.MySQL.Options.AuditPlugin.Options"></a>
 
 Amazon RDS supports the following settings for the MariaDB Audit Plugin option\.

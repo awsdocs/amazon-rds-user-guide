@@ -30,9 +30,9 @@ Complete the following steps to update your CA certificate\.
    The methods for updating applications for new SSL/TLS certificates depend on your specific applications\. Work with your application developers to update the SSL/TLS certificates for your applications\.
 
    For information about checking for SSL/TLS connections and updating applications for each DB engine, see the following topics:
-   + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
+   + [Using new SSL/TLS certificates for MariaDB DB instances](ssl-certificate-rotation-mariadb.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
-   + [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)
+   + [Using new SSL/TLS certificates for MySQL DB instances](ssl-certificate-rotation-mysql.md)
    + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
    + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
@@ -118,9 +118,9 @@ Complete the following steps to update your CA certificate by applying DB instan
    The methods for updating applications for new SSL/TLS certificates depend on your specific applications\. Work with your application developers to update the SSL/TLS certificates for your applications\.
 
    For information about checking for SSL/TLS connections and updating applications for each DB engine, see the following topics:
-   + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
+   + [Using new SSL/TLS certificates for MariaDB DB instances](ssl-certificate-rotation-mariadb.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
-   + [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)
+   + [Using new SSL/TLS certificates for MySQL DB instances](ssl-certificate-rotation-mysql.md)
    + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
    + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 

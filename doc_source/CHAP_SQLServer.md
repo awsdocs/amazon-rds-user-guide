@@ -402,7 +402,7 @@ Amazon RDS supports Microsoft SQL Server Transparent Data Encryption \(TDE\), wh
 
 ## Functions and stored procedures for Amazon RDS for Microsoft SQL Server<a name="SQLServer.Concepts.General.StoredProcedures"></a>
 
-The following table lists Amazon RDS functions and stored procedures that help automate SQL Server tasks\.
+Following, you can find a list of the Amazon RDS functions and stored procedures that help automate SQL Server tasks\. 
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)
 

@@ -4,7 +4,7 @@ By default, a MariaDB DB instance uses a DB parameter group that is specific to 
 
 ## Viewing MariaDB parameters<a name="Appendix.MariaDB.Parameters.Viewing"></a>
 
-RDS for MariaDB parameters are set to the default values of the storage engine that you have selected\. For more information about MariaDB parameters, see the [MariaDB documentation](http://mariadb.com/kb/en/mariadb/documentation/)\. For more information about MariaDB storage engines, see [Supported storage engines for MariaDB on Amazon RDS](CHAP_MariaDB.md#MariaDB.Concepts.Storage)\.
+RDS for MariaDB parameters are set to the default values of the storage engine that you have selected\. For more information about MariaDB parameters, see the [MariaDB documentation](http://mariadb.com/kb/en/mariadb/documentation/)\. For more information about MariaDB storage engines, see [Supported storage engines for MariaDB on Amazon RDS](MariaDB.Concepts.FeatureSupport.md#MariaDB.Concepts.Storage)\.
 
 You can view the parameters available for a specific RDS for MariaDB version using the RDS console or the AWS CLI\. For information about viewing the parameters in a MariaDB parameter group in the RDS console, see [Viewing parameter values for a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
 

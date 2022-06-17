@@ -51,7 +51,7 @@ import (
 
      "github.com/aws/aws-sdk-go-v2/config"
      "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
-     _ "github.com/lib/pq"
+     _ "github.com/go-sql-driver/mysql"
 )
 
 func main() {

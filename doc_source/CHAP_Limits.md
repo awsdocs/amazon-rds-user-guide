@@ -70,6 +70,6 @@ You might see fewer than the maximum number of DB connections\. This is to avoid
 ## File size limits in Amazon RDS<a name="RDS_Limits.FileSize"></a>
 
 File size limits apply to certain Amazon RDS DB instances\. For more information, see the following engine\-specific limits:
-+ [MariaDB file size limits in Amazon RDS](CHAP_MariaDB.md#RDS_Limits.FileSize.MariaDB)
++ [MariaDB file size limits in Amazon RDS](CHAP_MariaDB.Limitations.md#RDS_Limits.FileSize.MariaDB)
 + [MySQL file size limits in Amazon RDS](MySQL.KnownIssuesAndLimitations.md#MySQL.Concepts.Limits.FileSize)
 + [Oracle file size limits in Amazon RDS](Oracle.Concepts.limitations.md#Oracle.Concepts.file-size-limits)

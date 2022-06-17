@@ -120,7 +120,7 @@ When a DB instance is created using the AWS Management Console and the console u
 For more information about creating IAM roles for a service, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
 **Note**  
-The IAM role used for Windows Authentication for RDS for Microsoft SQL Server can't be used for RDS for MySQL\.
+The IAM role used for Windows Authentication for RDS for SQL Server can't be used for RDS for MySQL\.
 
 Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the IAM role must have the following IAM trust policy\.
 
@@ -241,7 +241,7 @@ We strongly recommended that clients use SSL/TLS connections when using PAM auth
 UPDATE mysql.user SET ssl_type = 'any' WHERE ssl_type = '' AND PLUGIN = 'auth_pam' and USER = 'testuser';
 FLUSH PRIVILEGES;
 ```
-For more information, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
+For more information, see [Using SSL/TLS with a MySQL DB instance](mysql-ssl-connections.md#MySQL.Concepts.SSLSupport)\.
 
 ## Managing a DB instance in a domain<a name="mysql-kerberos-managing"></a>
 

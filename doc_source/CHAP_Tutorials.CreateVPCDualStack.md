@@ -122,13 +122,13 @@ Next, you create a security group for public access\. To connect to public insta
 
 1. Add inbound rules to the security group\.
 
-   1. Determine the IP address to use to connect to instances in your VPC\. 
+   1. Determine the IP address to use to connect to instances in your VPC using Secure Shell \(SSH\)\. 
 
       To determine your public IP address, in a different browser window or tab use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IPv4 IP address is `203.0.113.25/32`\. An example of an IPv6 IP address is `2001:DB8::/32`\.
 
       If you are connecting through an internet service provider \(ISP\) or from behind your firewall without a static IP address, find out the range of IP addresses used by client computers\.
 **Warning**  
-If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you enable all IP addresses to access your public instances\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances\.
+If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you enable all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 

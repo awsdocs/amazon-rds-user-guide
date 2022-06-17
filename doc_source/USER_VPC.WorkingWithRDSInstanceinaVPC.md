@@ -43,7 +43,7 @@ When you set the instance tenancy attribute to dedicated for an Amazon RDS DB in
 
 ## Working with DB subnet groups<a name="USER_VPC.Subnets"></a>
 
-*Subnets* are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. By using a DB subnet group, you can specify a particular VPC when creating DB instances using the CLI or API\. If you use the console, you can just choose the VPC and subnets you want to use\. 
+*Subnets* are segments of a VPC's IP address range that you designate to group your resources based on security and operational needs\. A DB subnet group is a collection of subnets \(typically private\) that you create in a VPC and that you then designate for your DB instances\. By using a DB subnet group, you can specify a particular VPC when creating DB instances using the CLI or API\. If you use the console, you can choose the VPC and subnet groups you want to use\. 
 
 Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, make sure to choose a DB subnet group\. From the DB subnet group, Amazon RDS chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and later create a new standby using an IP address of the subnet in one of the other Availability Zones\.
 

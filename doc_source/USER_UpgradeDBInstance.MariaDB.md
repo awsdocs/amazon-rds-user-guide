@@ -8,7 +8,7 @@ In contrast, *minor version upgrades* include only changes that are backward\-co
 
 If your MariaDB DB instance is using read replicas, you must upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, both the writer and standby replicas are upgraded\. Your DB instance might not be available until the upgrade is complete\. 
 
-For more information about MariaDB supported versions and version management, see [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)\. 
+For more information about MariaDB supported versions and version management, see [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)\. 
 
 **Note**  
 Database engine upgrades require downtime\. The duration of the downtime varies based on the size of your DB instance\.

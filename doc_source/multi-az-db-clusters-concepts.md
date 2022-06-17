@@ -317,6 +317,7 @@ The following limitations apply to Multi\-AZ DB clusters:
   + Amazon RDS Proxy
   + AWS Backup
   + AWS CloudFormation
+  + Support for IPv6 connections \(dual\-stack mode\)
   + Exporting Multi\-AZ DB cluster snapshot data to an Amazon S3 bucket
   + IAM DB authentication
   + Kerberos authentication
