@@ -13,7 +13,7 @@ You can also specify precisely which extensions can be installed on your RDS for
 
 For more information, see [Restricting installation of PostgreSQL extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.Restriction)\. 
 
-To learn more about the `rds_superuser` role, see [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles)\.
+To learn more about the `rds_superuser` role, see [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.Roles.md)\.
 
 **Topics**
 + [Using functions from the orafce extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)

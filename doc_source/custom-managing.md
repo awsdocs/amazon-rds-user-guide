@@ -7,6 +7,7 @@ Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS
 + [Pausing and resuming RDS Custom automation](#custom-managing.pausing)
 + [Modifying the storage for an RDS Custom for Oracle DB instance](#custom-managing.storage-modify)
 + [Changing the time zone of an RDS Custom for Oracle DB instance](#custom-managing.timezone)
++ [Changing the character set of an RDS Custom for Oracle DB instance](#custom-managing.character-set)
 + [Support for Transparent Data Encryption](#custom-managing.tde)
 + [Tagging RDS Custom for Oracle resources](#custom-managing.tagging)
 + [Deleting an RDS Custom for Oracle DB instance](#custom-managing.deleting)
@@ -260,11 +261,11 @@ To modify the storage for an RDS Custom for Oracle DB instance, use the [modify\
 
 ## Changing the time zone of an RDS Custom for Oracle DB instance<a name="custom-managing.timezone"></a>
 
-You change the time zone of an RDS Custom for Oracle DB instance manually, unlike RDS for Oracle where you use the `TIME_ZONE` option in a custom DB option group\.
+You change the time zone of an RDS Custom for Oracle DB instance manually\. This approach contrasts with RDS for Oracle, where you use the `TIME_ZONE` option in a custom DB option group\.
 
-You can change time zones for RDS Custom for Oracle DB instances multiple times, but we recommend not changing them more than once every 48 hours\. We also recommend changing them only when the latest restorable time is within the last 30 minutes\.
+You can change time zones for RDS Custom for Oracle DB instances multiple times\. However, we recommend not changing them more than once every 48 hours\. We also recommend changing them only when the latest restorable time is within the last 30 minutes\.
 
-If you don't follow these recommendations, cleaning up redo logs might remove more logs than intended\. Redo log timestamps might also be converted incorrectly to UTC, which can prevent the redo logs from being downloaded and replayed correctly\. This in turn can prevent point\-in\-time recovery \(PITR\) from performing correctly\.
+If you don't follow these recommendations, cleaning up redo logs might remove more logs than intended\. Redo log timestamps might also be converted incorrectly to UTC, which can prevent the redo log files from being downloaded and replayed correctly\. This in turn can prevent point\-in\-time recovery \(PITR\) from performing correctly\.
 
 Changing the time zone of an RDS Custom for Oracle DB instance has the following limitations:
 + PITR is supported for recovery times before RDS Custom automation is paused, and after automation is resumed\.
@@ -324,6 +325,43 @@ Make sure to follow these procedures\. If they aren't followed, it can result in
 1. Start the primary DB instance\.
 
 1. Resume RDS Custom automation on the primary DB instance and then on the read replicas\.
+
+## Changing the character set of an RDS Custom for Oracle DB instance<a name="custom-managing.character-set"></a>
+
+RDS Custom for Oracle defaults to the character set US7ASCII\. You might want to specify different character sets to meet language or multibyte character requirements\. When you use RDS Custom for Oracle, you can pause automation and then change the character set of your database manually\.
+
+Changing the character set of an RDS Custom for Oracle DB instance has the following requirements:
++ You can only change the character on a newly provisioned RDS Custom instance that has an empty or starter database with no application data\. For all other scenarios, change the character set using DMU \(Database Migration Assistant for Unicode\)\.
++ You can only change to a character set supported by RDS for Oracle\. For more information, see [Supported DB character sets](Appendix.OracleCharacterSets.md#Appendix.OracleCharacterSets.db-character-set.supported)\.
+
+**To change the character set of an RDS Custom for Oracle DB instance**
+
+1. Pause RDS Custom automation\. For more information, see [Pausing and resuming RDS Custom automation](#custom-managing.pausing)\.
+
+1. Log in to your database as a user with `SYSDBA` privileges\.
+
+1. Restart the database in restricted mode, change the character set, and then restart the database in normal mode\.
+
+   Run the following script in your SQL client:
+
+   ```
+   SHUTDOWN IMMEDIATE;
+   STARTUP RESTRICT;
+   ALTER DATABASE CHARACTER SET INTERNAL_CONVERT AL32UTF8;
+   SHUTDOWN IMMEDIATE;
+   STARTUP;
+   SELECT VALUE FROM NLS_DATABASE_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET';
+   ```
+
+   Verify that the output shows the correct character set:
+
+   ```
+   VALUE
+   --------
+   AL32UTF8
+   ```
+
+1. Resume RDS Custom automation\. For more information, see [Pausing and resuming RDS Custom automation](#custom-managing.pausing)\.
 
 ## Support for Transparent Data Encryption<a name="custom-managing.tde"></a>
 

@@ -12,14 +12,18 @@ Before you create a DB instance based on Amazon RDS Custom for Oracle, perform t
 ## Prerequisites for creating an RDS Custom for Oracle instance<a name="custom-setup-orcl.review"></a>
 
 Before creating an RDS Custom for Oracle DB instance, make sure that you meet the following prerequisites:
-+ You have access to [My Oracle Support](https://support.oracle.com/portal/) and [Oracle Software Delivery Cloud](https://edelivery.oracle.com/osdc/faces/Home.jspx) to download the supported list of installation files and patches for Oracle Database 12\.1 or 19c Enterprise Edition\. For example, you can use the April 2021 RU/RUR for 19c\.
++ You have access to [My Oracle Support](https://support.oracle.com/portal/) and [Oracle Software Delivery Cloud](https://edelivery.oracle.com/osdc/faces/Home.jspx) to download the supported list of installation files and patches for the Enterprise Edition of any of the following Oracle Database releases:
+  + Oracle Database 12c Release 1 \(12\.1\)
+  + Oracle Database 12c Release 2 \(12\.2\)
+  + Oracle Database 18c
+  + Oracle Database 19c
 
   If you use an unknown patch, custom engine version \(CEV\) creation fails\. In this case, contact the RDS Custom support team and ask it to add the missing patch\.
 
-  For more information, see [Downloading your database installation files and patches from Oracle](custom-cev.md#custom-cev.preparing.download)\.
+  For more information, see [Downloading your database installation files and patches from Oracle Software Delivery Cloud](custom-cev.preparing.md#custom-cev.preparing.download)\.
 + You have access to Amazon S3 so that you can upload your Oracle installation files\. You use the installation files when you create your RDS Custom CEV\.
 
-  For more information, see [Uploading your installation files to Amazon S3](custom-cev.md#custom-cev.preparing.s3) and [Creating a CEV](custom-cev.md#custom-cev.create)\.
+  For more information, see [Uploading your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3) and [Creating a CEV](custom-cev.create.md)\.
 + You supply your own virtual private cloud \(VPC\) and security group configuration\. For more information, see [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 + The AWS Identity and Access Management \(IAM\) user that creates a CEV or RDS Custom DB instance has the required permissions for IAM, CloudTrail, and Amazon S3\.
 

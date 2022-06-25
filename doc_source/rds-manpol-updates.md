@@ -3,6 +3,8 @@
 View details about updates to AWS managed policies for Amazon RDS since this service began tracking these changes\. For automatic alerts about changes to this page, subscribe to the RSS feed on the Amazon RDS [Document history](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/WhatsNew.html) page\.
 
 
+
+
 | Change | Description | Date | 
 | --- | --- | --- | 
 |  [Service\-linked role permissions for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md#service-linked-role-permissions) – Update to an existing policy  |  Amazon RDS added a new Amazon CloudWatch namespace to `AmazonRDSPreviewServiceRolePolicy` for `PutMetricData`\. This namespace is required for Amazon RDS to publish resource usage metrics\. For more information, see [Using condition keys to limit access to CloudWatch namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-namespace.html) in the *Amazon CloudWatch User Guide*\.  |  June 7, 2022  | 

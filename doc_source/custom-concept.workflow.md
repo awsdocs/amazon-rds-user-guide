@@ -8,11 +8,11 @@ The steps are as follows:
 
 1. Upload your database software to your Amazon S3 bucket\.
 
-   For more information, see [Uploading your installation files to Amazon S3](custom-cev.md#custom-cev.preparing.s3)\.
+   For more information, see [Uploading your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3)\.
 
 1. Create an RDS Custom custom engine version \(CEV\) from your media\.
 
-   For more information, see [Creating a CEV](custom-cev.md#custom-cev.create)\.
+   For more information, see [Creating a CEV](custom-cev.create.md)\.
 
 1. Create an RDS Custom DB instance from a CEV\.
 
@@ -36,8 +36,10 @@ For RDS Custom, you supply your own media\. When you create a custom engine vers
 
 An RDS Custom custom engine version \(CEV\) is a binary volume snapshot of a database version and AMI\. You store your database installation files in Amazon S3\. When you create your CEV, you specify the files in a JSON document called a CEV manifest\.
 
-Name your CEV using a customer\-specified string\. The name format is the following, depending on your Oracle Database version:
+Name your CEV using a customer\-specified string\. The name format is the following, depending on your Oracle Database release:
 + `12.1.customized_string`
++ `12.2.customized_string`
++ `18.customized_string`
 + `19.customized_string`
 
 You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might name your CEV `19.my_cev1`\. To learn how to create a CEV, see [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)\.

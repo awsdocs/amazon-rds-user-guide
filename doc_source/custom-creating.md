@@ -113,7 +113,7 @@ The following options are required:
 + `--db-instance-identifier`
 + `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\)
 + `--engine custom-oracle-ee`
-+ `--engine-version cev` \(where *`cev`* is the name of the custom engine version that you specified in [Creating a CEV](custom-cev.md#custom-cev.create)\)
++ `--engine-version cev` \(where *`cev`* is the name of the custom engine version that you specified in [Creating a CEV](custom-cev.create.md)\)
 + `--kms-key-id`
 + `--no-auto-minor-version-upgrade`
 + `--custom-iam-instance-profile`

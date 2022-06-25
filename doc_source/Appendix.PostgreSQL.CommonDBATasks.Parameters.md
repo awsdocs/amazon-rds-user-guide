@@ -8,8 +8,8 @@ You can track the settings on your RDS for PostgreSQL DB instance in several dif
 
 ```
 SELECT name, setting, boot_val, reset_val, unit
-FROM pg_settings
-ORDER BY name;
+ FROM pg_settings
+ ORDER BY name;
 ```
 
 To learn more about the values returned from this query, see [https://www.postgresql.org/docs/current/view-pg-settings.html](https://www.postgresql.org/docs/current/view-pg-settings.html) in the PostgreSQL documentation\.
@@ -126,6 +126,7 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  `log_error_verbosity`  | Dynamic | Sets the verbosity of logged messages\. | 
 |  `log_executor_stats`  | Dynamic | Writes executor performance statistics to the server log\. | 
 |  `log_filename`  | Dynamic | Sets the file name pattern for log files\. | 
+|  `log_file_mode`  | Dynamic | Sets file permissions for log files\. Default value is 0644\. | 
 |  `log_hostname`  | Dynamic | Logs the host name in the connection logs\. | 
 |  `log_line_prefix `  | Dynamic | Controls information prefixed to each log line\. | 
 |  `log_lock_waits`  | Dynamic | Logs long lock waits\. | 
@@ -141,6 +142,7 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  `log_temp_files`  | Dynamic | Logs the use of temporary files larger than this number of kilobytes\. | 
 |  `log_timezone`  | Dynamic | Sets the time zone to use in log messages\. | 
 |  `log_truncate_on_rotation`  | Dynamic | Truncate existing log files of same name during log rotation\. | 
+|  `logging_collector`  | Static | Start a subprocess to capture stderr output and/or csvlogs into log files\. | 
 |  `maintenance_work_mem`  | Dynamic | Sets the maximum memory to be used for maintenance operations\. | 
 |  `max_connections`  | Static | Sets the maximum number of concurrent connections\. | 
 |  `max_files_per_process`  | Static | Sets the maximum number of simultaneously open files for each server process\. | 

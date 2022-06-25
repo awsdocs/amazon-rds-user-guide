@@ -309,6 +309,8 @@ The following limitations apply to Multi\-AZ DB clusters:
   + Asia Pacific \(Sydney\)
   + Asia Pacific \(Tokyo\)
   + Europe \(Ireland\)
+  + Europe \(Frankfurt\)
+  + Europe \(Stockholm\)
 + Multi\-AZ DB clusters only support Provisioned IOPS storage\.
 + You can't change a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
 + You can't restore a Multi\-AZ DB cluster snapshot to a Multi\-AZ DB instance deployment or single\-AZ deployment\.

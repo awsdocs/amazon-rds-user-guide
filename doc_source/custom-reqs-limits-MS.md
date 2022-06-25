@@ -32,10 +32,12 @@ RDS Custom for SQL Server supports the DB instance classes shown in the followin
 ## AWS Region support for RDS Custom for SQL Server<a name="custom-reqs-limits.regionsMS"></a>
 
 RDS Custom is supported in the following AWS Regions:
++ Asia Pacific \(Mumbai\)
 + Asia Pacific \(Tokyo\)
 + Asia Pacific \(Singapore\)
 + Asia Pacific \(Sydney\)
 + Europe \(Frankfurt\)
++ Europe \(London\)
 + Europe \(Stockholm\)
 + Europe \(Ireland\)
 + US East \(N\. Virginia\)
