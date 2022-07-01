@@ -118,7 +118,8 @@ The following table shows the event category and a list of events when a DB para
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
-|  configuration change  | RDS\-EVENT\-0037 |  The parameter group was modified\.  | 
+|  configuration change  | RDS\-EVENT\-0011 |  Updated to use DBParameterGroup *name*\.  | 
+|  configuration change  | RDS\-EVENT\-0092 |  Finished updating DB parameter group\.  | 
 
 ## DB security group events<a name="USER_Events.Messages.security-group"></a>
 

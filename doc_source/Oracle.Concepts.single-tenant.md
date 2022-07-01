@@ -25,6 +25,7 @@ The following sections explain the principal differences between the non\-multit
 + [User accounts and privileges in a single\-tenant architecture](#Oracle.Concepts.single-tenant.users)
 + [Parameters in a single\-tenant architecture](#Oracle.Concepts.single-tenant.parameters)
 + [Snapshots in a single\-tenant architecture](#Oracle.Concepts.single-tenant.snapshots)
++ [Data migration in a single\-tenant architecture](#Oracle.Concepts.single-tenant.migration)
 
 ## Database creation and connections in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.creation"></a>
 
@@ -61,3 +62,7 @@ You specify parameters at the CDB level rather than the PDB level\. The PDB inhe
 ## Snapshots in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.snapshots"></a>
 
 Snapshots work the same in a single\-tenant and non\-multitenant architecture\. The only difference is that when you restore a snapshot, you can only rename the PDB, not the CDB\. The CDB is always named `RDSCDB`\. For more information, see [Oracle Database considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Oracle)\.
+
+## Data migration in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.migration"></a>
+
+RDS for Oracle doesn't support unplugging and plugging in PDBs\. For more information about migrating data, see [Importing data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)\.

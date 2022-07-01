@@ -137,7 +137,7 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
    The query returns the version information for your DB instance, similar to the following\.
 
    ```
-   Microsoft SQL Server 2012 - 11.0.2100.60 (X64)
+   Microsoft SQL Server 2017 (RTM-CU22) (KB4577467) - 14.0.3356.20 (X64)
    ```
 
 ## Security group considerations<a name="USER_ConnectToMicrosoftSQLServerInstance.Security"></a>

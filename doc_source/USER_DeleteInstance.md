@@ -5,7 +5,7 @@ To delete a DB instance, you must do the following:
 + Enable or disable the option to take a final DB snapshot of the instance
 + Enable or disable the option to retain automated backups
 
-If you delete a DB instance that has read replicas in the same AWS Region, each read replica is promoted to a standalone DB instance\. For more information, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. If your DB instance has read replicas in different AWS Regions, see [Cross\-Region replication considerations](USER_ReadRepl.XRgn.md#USER_ReadRepl.XRgn.Cnsdr) for information related to deleting the source DB instance for a cross\-Region read replica\.
+If you delete a DB instance that has read replicas in the same AWS Region, each read replica is promoted to a standalone DB instance\. For more information, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. If your DB instance has read replicas in different AWS Regions, see [Cross\-Region replication considerations](USER_ReadRepl.md#USER_ReadRepl.XRgn.Cnsdr) for information related to deleting the source DB instance for a cross\-Region read replica\.
 
 **Note**  
 When the status for a DB instance is `deleting`, its CA certificate value doesn't appear in the RDS console or in output for AWS CLI commands or RDS API operations\. For more information about CA certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.

@@ -10,9 +10,7 @@ Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS serv
 
 You can write simple rules to indicate which Amazon RDS events interest you and which automated actions to take when an event matches a rule\. You can set a variety of targets, such as an AWS Lambda function or an Amazon SNS topic, which receive events in JSON format\. For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
 
-Use the following steps to create a CloudWatch Events rule that triggers on an event emitted by an AWS service\.
-
-**To create a rule that triggers on an event:**
+**To create a rule that triggers on an RDS event:**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
@@ -74,17 +72,19 @@ Create a Lambda function to log the state change events\. You specify this funct
 
    1. Enter a name and description for the Lambda function\. For example, name the function **RDSInstanceStateChange**\. 
 
-   1. In **Runtime**, select **Node\.js 14x**\. 
+   1. In **Runtime**, select **Node\.js 16x**\. 
 
-   1. In **Execution role**, choose **Create a new role with basic Lambda permissions**\. For **Existing role**, select your basic execution role\. Otherwise, create a basic execution role\.
+   1. For **Architecture**, choose **x86\_64**\.
+
+   1. For **Execution role**, do either of the following:
+      + Choose **Create a new role with basic Lambda permissions**\.
+      + For **Existing role**, choose **Use an existing role**\. Choose the role that you want to use\. 
 
    1. Choose **Create function**\.
 
 1. On the **RDSInstanceStateChange** page, do the following:
 
    1. In **Code source**, select **index\.js**\. 
-
-   1. Right\-click **index\.js**, and choose **Open**\.
 
    1. In the **index\.js** pane, delete the existing code\.
 
@@ -114,25 +114,29 @@ Create a rule to run your Lambda function whenever you launch an Amazon RDS inst
 
 1. Enter a name and description for the rule\. For example, enter **RDSInstanceStateChangeRule**\.
 
-1. For **Define pattern**, do the following:
+1. Choose **Rule with an event pattern**, and then choose **Next**\.
 
-   1. Choose **Event pattern**\.
+1. For **Event source**, choose **AWS events or EventBridge partner events**\.
 
-   1. Choose **Pre\-defined pattern by service**\.
+1. Scroll down to the **Event pattern** section\.
 
-   1. For **Service provider**, choose **AWS**\.
+1. For **Event source**, choose **AWS services**\.
 
-   1. For **Service Name**, choose **Relational Database Service \(RDS\)**\.
+1. For **AWS service**, choose **Relational Database Service \(RDS\)**\.
 
-   1. For **Event type**, choose **RDS DB Instance Event**\.
+1. For **Event type**, choose **RDS DB Instance Event**\.
 
-1. For **Select event bus**, choose **AWS default event bus**\. When an AWS service in your account emits an event, it always goes to your account’s default event bus\. 
+1. Leave the default event pattern\. Then choose **Next**\.
 
-1. For **Target**, choose **Lambda function**\.
+1. For **Target types**, choose **AWS service**\.
 
-1. For **Function**, select the Lambda function that you created\.
+1. For **Select a target**, choose **Lambda function**\.
 
-1. Choose **Create**\.
+1. For **Function**, choose the Lambda function that you created\. Then choose **Next**\.
+
+1. In **Configure tags**, choose **Next**\.
+
+1. Review the steps in your rule\. Then choose **Create rule**\.
 
 ### Step 3: Test the rule<a name="rds-test-rule"></a>
 

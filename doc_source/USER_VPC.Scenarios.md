@@ -22,6 +22,8 @@ The simplest way to manage access between EC2 instances and DB instances in the 
 + Create a VPC security group for your EC2 instances \(web servers and clients\) to be in\. This security group can, if needed, allow access to the EC2 instance from the internet by using the VPC's routing table\. For example, you can set rules on this security group to allow TCP access to the EC2 instance over port 22\.
 + Create custom rules in the security group for your DB instances that allow connections from the security group you created for your EC2 instances\. This would allow any member of the security group to access the DB instances\.
 
+There is an additional public and private subnet in a separate Availability Zone\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\.
+
 For a tutorial that shows you how to create a VPC with both public and private subnets for this scenario, see [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
 
 **To create a rule in a VPC security group that allows connections from another security group, do the following:**

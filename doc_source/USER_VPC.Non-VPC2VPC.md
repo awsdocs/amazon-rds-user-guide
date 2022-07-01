@@ -7,9 +7,8 @@ If you are a new Amazon RDS customer, if you have never created a DB instance be
 
 Follow these steps to create a VPC for your DB instance\. 
 + [Step 1: Create a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreatingVPC)
-+ [Step 2: Add subnets to the VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.AddingSubnets)
-+  [Step 3: Create a DB subnet group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateDBSubnetGroup)
-+  [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)
++  [Step 2: Create a DB subnet group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateDBSubnetGroup)
++  [Step 3: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)
 
 Each DB subnet group must include at least the Availability Zones in which the DB instance is located\.
 

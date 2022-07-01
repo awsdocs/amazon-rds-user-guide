@@ -1,10 +1,10 @@
 # Preparing to create a CEV<a name="custom-cev.preparing"></a>
 
 To create a CEV, access the installation files and patches that are stored in your Amazon S3 bucket for any of the following releases:
-+ Oracle Database 12c Release 1 \(12\.1\)
-+ Oracle Database 12c Release 2 \(12\.2\)
-+ Oracle Database 18c
 + Oracle Database 19c
++ Oracle Database 18c
++ Oracle Database 12c Release 2 \(12\.2\)
++ Oracle Database 12c Release 1 \(12\.1\)
 
 For example, you can use the April 2021 RU/RUR for Oracle Database 19c, or any valid combination of installation files and patches\.
 
@@ -20,55 +20,27 @@ For example, you can use the April 2021 RU/RUR for Oracle Database 19c, or any v
 
 The Oracle Database installation files and patches are hosted on Oracle Software Delivery Cloud\.
 
-**To download the database installation files for Oracle Database 12c Release 1 \(12\.1\)**
+**To download the database installation files for Oracle Database 19c**
 
 1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
 
 1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
 
-1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.1\.0\.2\.0 \( Oracle Database Enterprise Edition \)**\.
+1. Choose **DLP: Oracle Database Enterprise Edition 19\.3\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
 
 1. Choose **Continue**\.
 
 1. Clear the **Download Queue** check box\.
 
-1. Choose **Oracle Database 12\.1\.0\.2\.0**\.
+1. Choose **Oracle Database 19\.3\.0\.0\.0 \- Long Term Release**\.
 
 1. Choose **Linux x86\-64** in **Platform/Languages**\.
 
 1. Choose **Continue**, and then sign the waiver\.
 
-1. Choose **V46095\-01\_1of2\.zip** and **V46095\-01\_2of2\.zip**, choose **Download**, and then save the files\.
-
-   
+1. Choose **V982063\-01\.zip**, choose **Download**, and then save the file\.
 **Note**  
-The SHA\-256 hash for `V46095-01_1of2.zip` is `31FDC2AF41687B4E547A3A18F796424D8C1AF36406D2160F65B0AF6A9CD47355`\.  
-The SHA\-256 hash for `V46095-01_2of2.zip` is `03DA14F5E875304B28F0F3BB02AF0EC33227885B99C9865DF70749D1E220ACCD`\.
-
-1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
-
-**To download the database installation files for Oracle Database 12c Release 2 \(12\.2\)**
-
-1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
-
-1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
-
-1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.2\.0\.1\.0 \( Oracle Database Enterprise Edition \)**\.
-
-1. Choose **Continue**\.
-
-1. Clear the **Download Queue** check box\.
-
-1. Choose **Oracle Database 12\.2\.0\.1\.0**\.
-
-1. Choose **Linux x86\-64** in **Platform/Languages**\.
-
-1. Choose **Continue**, and then sign the waiver\.
-
-1. Choose **V839960\-01\.zip**, choose **Download**, and then save the file\.
-**Note**  
-The SHA\-256 hash is `96ED97D21F15C1AC0CCE3749DA6C3DAC7059BB60672D76B008103FC754D22DDE`\.
+The SHA\-256 hash is `BA8329C757133DA313ED3B6D7F86C5AC42CD9970A28BF2E6233F3235233AA8D8`\.
 
 1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
@@ -98,27 +70,55 @@ The SHA\-256 hash is `C96A4FD768787AF98272008833FE10B172691CF84E42816B138C12D4DE
 1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
 
-**To download the database installation files for Oracle Database 19c**
+**To download the database installation files for Oracle Database 12c Release 2 \(12\.2\)**
 
 1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
 
 1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
 
-1. Choose **DLP: Oracle Database Enterprise Edition 19\.3\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
+1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.2\.0\.1\.0 \( Oracle Database Enterprise Edition \)**\.
 
 1. Choose **Continue**\.
 
 1. Clear the **Download Queue** check box\.
 
-1. Choose **Oracle Database 19\.3\.0\.0\.0 \- Long Term Release**\.
+1. Choose **Oracle Database 12\.2\.0\.1\.0**\.
 
 1. Choose **Linux x86\-64** in **Platform/Languages**\.
 
 1. Choose **Continue**, and then sign the waiver\.
 
-1. Choose **V982063\-01\.zip**, choose **Download**, and then save the file\.
+1. Choose **V839960\-01\.zip**, choose **Download**, and then save the file\.
 **Note**  
-The SHA\-256 hash is `BA8329C757133DA313ED3B6D7F86C5AC42CD9970A28BF2E6233F3235233AA8D8`\.
+The SHA\-256 hash is `96ED97D21F15C1AC0CCE3749DA6C3DAC7059BB60672D76B008103FC754D22DDE`\.
+
+1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
+
+**To download the database installation files for Oracle Database 12c Release 1 \(12\.1\)**
+
+1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
+
+1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
+
+1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.1\.0\.2\.0 \( Oracle Database Enterprise Edition \)**\.
+
+1. Choose **Continue**\.
+
+1. Clear the **Download Queue** check box\.
+
+1. Choose **Oracle Database 12\.1\.0\.2\.0**\.
+
+1. Choose **Linux x86\-64** in **Platform/Languages**\.
+
+1. Choose **Continue**, and then sign the waiver\.
+
+1. Choose **V46095\-01\_1of2\.zip** and **V46095\-01\_2of2\.zip**, choose **Download**, and then save the files\.
+
+   
+**Note**  
+The SHA\-256 hash for `V46095-01_1of2.zip` is `31FDC2AF41687B4E547A3A18F796424D8C1AF36406D2160F65B0AF6A9CD47355`\.  
+The SHA\-256 hash for `V46095-01_2of2.zip` is `03DA14F5E875304B28F0F3BB02AF0EC33227885B99C9865DF70749D1E220ACCD`\.
 
 1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)

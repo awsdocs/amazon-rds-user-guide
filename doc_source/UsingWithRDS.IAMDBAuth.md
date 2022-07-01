@@ -55,7 +55,6 @@ When using IAM database authentication, the following limitations apply:
 
 We recommend the following when using IAM database authentication:
 + Use IAM database authentication as a mechanism for temporary, personal access to databases\.
-+ Use IAM database authentication only for workloads that can be easily retried\.
 + Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.
 
   The database engines that work with Amazon RDS don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB instance\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. 

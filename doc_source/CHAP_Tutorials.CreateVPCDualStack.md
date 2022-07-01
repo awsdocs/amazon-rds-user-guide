@@ -12,6 +12,8 @@ For information about other scenarios, see [Scenarios for accessing a DB instanc
 
 Because your DB instance needs to be available only to your Amazon EC2 instance, and not to the public internet, you create a VPC with both public and private subnets\. The Amazon EC2 instance is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The Amazon EC2 instance can connect to the DB instance because it's hosted within the same VPC\. However, the DB instance is not available to the public internet, providing greater security\.
 
+This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\.
+
 To create a DB instance that uses dual\-stack mode, specify **Dual\-stack mode** for the **Network type** setting\. You can also modify a DB instance with the same setting\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 This tutorial describes configuring a VPC for Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\. 
@@ -22,88 +24,32 @@ Use the following procedure to create a VPC with both public and private subnets
 
 **To create a VPC and subnets**
 
-1. If you don't have an Elastic IP address to associate with a network address translation \(NAT\) gateway, allocate one now\. A NAT gateway is required for this tutorial\. If you have an available Elastic IP address, move on to the next step\.
-
-   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
-
-   1. In the upper\-right corner of the AWS Management Console, choose the AWS Region to allocate your Elastic IP address in\. The Region of your Elastic IP address should be the same as the Region where you want to create your VPC\. This example uses the US East \(Ohio\) Region\.
-
-   1. In the navigation pane, choose **Elastic IPs**\.
-
-   1. Choose **Allocate Elastic IP address**\.
-
-   1. If the console shows the **Network Border Group** field, keep the default value for it\.
-
-   1. For **Public IPv4 address pool**, choose **Amazon's pool of IPv4 addresses**\.
-
-   1. Choose **Allocate**\.
-
-      Note the allocation ID of the new Elastic IP address because you need this information when you create your VPC\.
-
-   For more information about Elastic IP addresses, see [Elastic IP addresses](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) in the *Amazon EC2 User Guide*\. For more information about NAT gateways, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
-
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
 1. In the upper\-right corner of the AWS Management Console, choose the Region to create your VPC in\. This example uses the US East \(Ohio\) Region\.
 
-1. In the upper\-left corner, make sure **New VPC Experience** is turned off\.
+1. In the upper\-left corner, choose **VPC dashboard**\. To begin creating a VPC, choose **Create VPC**\.
 
-1. In the upper\-left corner, choose **VPC Dashboard**\. To begin creating a VPC, choose **Launch VPC Wizard**\.
+1. For **Resources to create** under **VPC settings**, choose **VPC and more**\.
 
-1. On the **Step 1: Select a VPC Configuration** page, choose **VPC with Public and Private Subnets**, and then choose **Select**\.
-
-1. On the **Step 2: VPC with Public and Private Subnets** page, set these values:
-   + **IPv4 CIDR block:** **10\.0\.0\.0/16**
-   + **IPv6 CIDR block:** **Amazon\-provided IPv6 CIDR block**
-   + **VPC name:** **tutorial\-dual\-stack\-vpc**
-   + **Public subnet's IPv4 CIDR:** **10\.0\.0\.0/24**
-   + **Public subnet's IPv6 CIDR:** Choose **Specify a custom IPv6 CIDR** and then enter **00** for the end of the custom IPv6 CIDR
-   + **Availability Zone:** **us\-east\-2a**
-   + **Public subnet name:** **Tutorial dual\-stack public**
-   + **Private subnet's IPv4 CIDR:** **10\.0\.1\.0/24**
-   + **Private subnet's IPv6 CIDR:** Choose **Specify a custom IPv6 CIDR** and then enter **01** for the end of the custom IPv6 CIDR
-   + **Availability Zone:** **us\-east\-2b**
-   + **Private subnet name:** **Tutorial dual\-stack private 1** 
-   + **Elastic IP Allocation ID:** An Elastic IP address to associate with the NAT gateway
-   + **Service endpoints:** Skip this field
-   + **Enable DNS hostnames:** **Yes**
-   + **Hardware tenancy:** **Default**
+1. For the remaining **VPC settings**, set these values:
+   + **Name tag auto\-generation** – **tutorial\-dual\-stack**
+   + **IPv4 CIDR block** – **10\.0\.0\.0/16**
+   + **IPv6 CIDR block** – **Amazon\-provided IPv6 CIDR block**
+   + **Tenancy** – **Default**
+   + **Number of Availability Zones \(AZs\)** – **2**
+   + **Customize AZs** – Keep the default values\.
+   + **Number of public subnet** – **2**
+   + **Number of private subnets** – **2**
+   + **Customize subnets CIDR blocks** – Keep the default values\.
+   + **NAT gateways \($\)** – **None**
+   + **Egress only internet gateway** – **No**
+   + **VPC endpoints** – **None**
+   + **DNS options** – Keep the default values\.
+**Note**  
+Amazon RDS requires at least two subnets in two different Availability Zones to support Multi\-AZ DB instance deployments\. This tutorial creates a Single\-AZ deployment, but the requirement makes it easy to convert to a Multi\-AZ DB instance deployment in the future\.
 
 1. Choose **Create VPC**\.
-
-## Create additional subnets<a name="CHAP_Tutorials.CreateVPCDualStack.AdditionalSubnets"></a>
-
-You must have either two private subnets or two public subnets available to create a DB subnet group for a DB instance to use in a VPC\. Because the DB instance for this tutorial is private, add a second private subnet to the VPC\. 
-
-**To create an additional subnet**
-
-1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
-
-1. Choose **VPC Dashboard**, choose **Subnets**, and then choose **Create subnet** to add the second private subnet to your VPC\.
-
-1. On the **Create subnet** page, set these values: 
-   + **VPC ID:** Choose the VPC that you created in the previous step, for example **vpc\-*identifier* \(tutorial\-dual\-stack\-vpc\)**
-   + **Subnet name:** **Tutorial dual\-stack private 2**
-   + **Availability Zone:** **us\-east\-2c** 
-**Note**  
-Choose an Availability Zone that is different from the one that you chose for the first private subnet\.
-   + **IPv6\-only:** Keep this clear
-   + **IPv4 CIDR block:** **10\.0\.2\.0/24**
-   + **IPv6 CIDR block:** Choose **Custom IPv6** and then enter **02** for the end of the custom IPv6 CIDR 
-
-1. Choose **Create subnet**\.
-
-1. Do the following to make sure that the second private subnet that you created uses the same route table as the first private subnet:
-
-   1. Choose **VPC Dashboard**, choose **Subnets**, and then choose the first private subnet that you created for the VPC, **Tutorial dual\-stack private 1**\. 
-
-   1. Below the list of subnets, choose the **Route table** tab, and note the value for **Route Table**, for example **rtb\-98b613fd**\. 
-
-   1. In the list of subnets, clear the option for the first private subnet\.
-
-   1. In the list of subnets, choose the second private subnet **Tutorial private 2**, and choose the **Route table** tab\. 
-
-   1. If the current route table isn't the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route table ID**, choose the route table that you noted earlier, for example **rtb\-98b613fd**\. To save your selection, choose **Save**\.
 
 ## Create a VPC security group for a public Amazon EC2 instance<a name="CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2"></a>
 
@@ -133,8 +79,8 @@ If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you enable all IP addresses t
    1. In the **Inbound rules** section, choose **Add rule**\.
 
    1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your Amazon EC2 instance\. If you do this, you can connect to your EC2 instance to install SQL clients and other applications\. Specify an IP address to allow to access your EC2 instance:
-      + **Type:** `SSH`
-      + **Source:** The IP address or range from step a\. An example of an IPv4 IP address is `203.0.113.25/32`\. An example of an IPv6 IP address is `2001:DB8::/32`\.
+      + **Type:** **SSH**
+      + **Source:** The IP address or range from step a\. An example of an IPv4 IP address is **203\.0\.113\.25/32**\. An example of an IPv6 IP address is **2001:DB8::/32**\.
 
 1. Choose **Create security group** to create the security group\.
 
@@ -161,7 +107,7 @@ To keep your DB instance private, create a second security group for private acc
 
    1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your EC2 instance to your DB instance to store and retrieve data from your EC2 instance to your database\. 
       + **Type:** **MySQL/Aurora**
-      + **Source:** The identifier of the `tutorial-dual-stack-securitygroup` security group that you created previously in this tutorial, for example **sg\-9edd5cfb**\.
+      + **Source:** The identifier of the **tutorial\-dual\-stack\-securitygroup** security group that you created previously in this tutorial, for example **sg\-9edd5cfb**\.
 
 1. To create the security group, choose **Create security group**\.
 
@@ -170,6 +116,16 @@ To keep your DB instance private, create a second security group for private acc
 A *DB subnet group* is a collection of subnets that you create in a VPC and that you then designate for your DB instances\. By using a DB subnet group, you can specify a particular VPC when creating DB instances\. To create a DB subnet group that is `DUAL` compatible, all subnets must be `DUAL` compatible\. To be `DUAL` compatible, a subnet must have an IPv6 CIDR associated with it\.
 
 **To create a DB subnet group**
+
+1. Identify the private subnets for your database in the VPC\.
+
+   1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+   1. Choose **VPC Dashboard**, and then choose **Subnets**\.
+
+   1. Note the subnet IDs of the subnets named **tutorial\-dual\-stack\-subnet\-private1\-us\-west\-2a** and **tutorial\-dual\-stack\-subnet\-private2\-us\-west\-2b**\.
+
+      You will need the subnet IDs when you create your DB subnet group\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -186,9 +142,7 @@ A *DB subnet group* is a collection of subnets that you create in a VPC and that
 
 1. In the **Add subnets** section, choose values for the **Availability Zones** and **Subnets** options\.
 
-   For this tutorial, choose **us\-east\-2b** and **us\-east\-2c** for the **Availability Zones**\. For **Subnets**, choose the subnets that have IPv4 and IPv6 CIDR blocks associated with them\. For this tutorial, choose the subnets for IPv4 CIDR block 10\.0\.1\.0/24 and 10\.0\.2\.0/24\.
-**Note**  
-If you have enabled a Local Zone, you can choose an Availability Zone group on the **Create DB subnet group** page\. In this case, choose values for the **Availability Zone group**, **Availability Zones**, and **Subnets** options\.
+   For this tutorial, choose **us\-east\-2a** and **us\-east\-2b** for the **Availability Zones**\. For **Subnets**, choose the private subnets you identified in the previous step\.
 
 1. Choose **Create**\. 
 
@@ -196,14 +150,15 @@ Your new DB subnet group appears in the DB subnet groups list on the RDS console
 
 ## Create an Amazon EC2 instance in dual\-stack mode<a name="CHAP_Tutorials.CreateVPCDualStack.CreateEC2Instance"></a>
 
-To create an Amazon EC2 instance, follow the instructions in [Launch an instance using the Launch Instance Wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+To create an Amazon EC2 instance, follow the instructions in [Launch an instance using the new launch instance wizard](https://docs.aws.amazon.com/ec2-launch-instance-wizard.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 On the **Configure Instance Details** page, shown following, set these values and keep the other values as their defaults:
-+ **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as **vpc\-*identifier* \| tutorial\-dual\-stack\-vpc** created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)\.
-+ **Subnet:** Choose an existing public subnet, such as **subnet\-*identifier* \| Tutorial dual\-stack public \| us\-east\-2a** created in [ Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\.
-+ **Auto\-assign Public IP:** Choose **Enable**\.
-
-On the **Configure Security Group** page, shown following, choose **Select an existing security group**\. Then choose an existing security group, such as **tutorial\-dual\-stack\-securitygroup** created in [ Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\)\. 
++ **Network** – Choose the VPC with both public and private subnets that you chose for the DB instance, such as **vpc\-*identifier* \| tutorial\-dual\-stack\-vpc** created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)\.
++ **Subnet** – Choose an existing public subnet, such as **subnet\-*identifier* \| tutorial\-dual\-stack\-subnet\-public1\-us\-east\-2a \| us\-east\-2a** created in [ Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\.
++ **Auto\-assign Public IP** – Choose **Enable**\.
++ **Auto\-assign IPv6 IP** – Choose **Enable**\.
++ **Firewall \(security groups\)** – Choose **Select an existing security group**\.
++ **Common security groups** – Choose choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.
 
 ## Create a DB instance in dual\-stack mode<a name="CHAP_Tutorials.CreateVPCDualStack.CreateDBInstance"></a>
 
@@ -222,18 +177,20 @@ In this step, you create an Amazon RDS DB instance that runs in dual\-stack mode
 1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\. 
 
 1. In the **Connectivity** section, set these values:
-   + **Network type** – Choose **Dual\-stack mode**  
+   + **Network type** – Choose **Dual\-stack mode**\.  
 ![\[Network type section in the console with Dual-stack mode selected\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/dual-stack-mode.png)
-   + **Virtual private cloud \(VPC\)** – Choose an existing VPC with both public and private subnets, such as **tutorial\-dual\-stack\-vpc** \(vpc\-*identifier*\) created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)
+   + **Virtual private cloud \(VPC\)** – Choose an existing VPC with both public and private subnets, such as **tutorial\-dual\-stack\-vpc** \(vpc\-*identifier*\) created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)\.
 
      The VPC must have subnets in different Availability Zones\.
-   + **Subnet group** – The DB subnet group for the VPC, such as **tutorial\-dual\-stack\-db\-subnet\-group** created in [Create a DB subnet group](#CHAP_Tutorials.CreateVPCDualStack.DBSubnetGroup)
-   + **Public access** – **No**
-   + **VPC security group** – **Choose existing**
+   + **Subnet group** – Choose a DB subnet group for the VPC, such as **tutorial\-dual\-stack\-db\-subnet\-group** created in [Create a DB subnet group](#CHAP_Tutorials.CreateVPCDualStack.DBSubnetGroup)\.
+   + **Public access** – Choose **No**\.
+   + **VPC security group** – Select **Choose existing**\.
    + **Existing VPC security groups** – Choose an existing VPC security group that is configured for private access, such as **tutorial\-dual\-stack\-db\-securitygroup** created in [ Create a VPC security group for a private DB instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupDB)\.
 
      Remove other security groups, such as the default security group, by choosing the **X** associated with each\.
-   + **Availability Zone** – **No preference**
+   + **Availability Zone** – Choose **us\-west\-2a**\.
+
+     To avoid cross\-AZ traffic, make sure the DB instance and the EC2 instance are in the same Availability Zone\.
    + Open **Additional configuration**, and make sure **Database port** uses the default value **3306**\.
 
 1. For the remaining sections, specify your DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 

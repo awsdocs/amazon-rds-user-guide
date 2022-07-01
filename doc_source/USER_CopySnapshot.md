@@ -10,7 +10,7 @@ The following are some limitations when you copy snapshots:
 + You can't copy a snapshot to or from the China \(Beijing\) or China \(Ningxia\) Regions\.
 + You can copy a snapshot between AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)\. However, you can't copy a snapshot between these AWS GovCloud \(US\) Regions and commercial AWS Regions\.
 + If you delete a source snapshot before the target snapshot becomes available, the snapshot copy might fail\. Verify that the target snapshot has a status of `AVAILABLE` before you delete a source snapshot\. 
-+ You can have up to five snapshot copy requests in progress to a single destination Region per account\.
++ You can have up to 20 snapshot copy requests in progress to a single destination Region per account\.
 + When you request multiple snapshot copies for the same source DB instance, they're queued internally\. The copies requested later won't start until the previous snapshot copies are completed\. For more information, see [ Why is my EC2 AMI or EBS snapshot creation slow?](https://aws.amazon.com/premiumsupport/knowledge-center/ebs-snapshot-ec2-ami-creation-slow/) in the AWS Knowledge Center\.
 + Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source Region\. In such cases, Amazon RDS might put new cross\-Region copy requests from that source Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\.
 

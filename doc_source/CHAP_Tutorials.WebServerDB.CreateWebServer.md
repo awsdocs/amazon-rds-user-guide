@@ -13,48 +13,40 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown following\.  
 ![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
 
-1. Make sure you have not opted into the new launch experience\.
+1. Make sure you have opted into the new launch experience\.
 
-   This tutorial uses the old launch experience\.
+1. Under **Name and tags**, for **Name**, enter **tutorial\-web\-server**\.
 
-1. Choose the **Amazon Linux 2 AMI**\.  
+1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Amazon Linux**, and then choose the **Amazon Linux 2 AMI**\. Keep the defaults for the other choices\.  
 ![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
 
-1. Choose the **t2\.micro** instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
-![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
+1. Under **Instance type**, choose **t2\.micro**\.
 
-1. On the **Configure Instance Details** page, shown following, set these values and keep the other values as their defaults:
-   + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `vpc-identifier | tutorial-vpc` created in [Create a VPC with private and public subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
-   + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
-   + **Auto\-assign Public IP:** Choose **Enable**\.  
+1. Under **Key pair \(login\)**, choose a **Key pair name** to use an existing key pair\. To create a new key pair for the Amazon EC2 instance, choose **Create new key pair** and then use the **Create key pair** window to create it\.
+
+   For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-key-pair) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+1. For **Network settings**, choose **Edit**\.
+
+1. Under **Network settings**, set these values and keep the other values as their defaults:
+   + **VPC \(required\)** – Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `vpc-identifier | tutorial-vpc` created in [Create a VPC with private and public subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
+   + **Subnet** – Choose an existing public subnet, such as `subnet-identifier tutorial-subnet-public1-us-west-2a` created in [Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
+   + **Auto\-assign public IP** – Choose **Enable**\.
+   + **Firewall \(security groups\)** – Choose **Select an existing security group**\.
+   + **Common security groups** – Choose choose an existing security group, such as the `tutorial-securitygroup` created in [Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.
+   + **Advanced network configuration** – Leave the default values\.  
 ![\[Configure Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_14.png)
 
-1. Choose **Next: Add Storage**\.
+1. Leave the default values for the remaining sections\.
 
-1. On the **Add Storage** page, keep the default values and choose **Next: Add Tags**\.
+1. Review a summary of your instance configuration in the **Summary** panel, and when you're ready, choose **Launch instance**\.
 
-1. On the **Add Tags** page, shown following, choose **Add Tag**, then enter **Name** for **Key** and enter **tutorial\-web\-server** for **Value**\.  
-![\[Tag Instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_15.png)
-
-1. Choose **Next: Configure Security Group**\.
-
-1. On the **Configure Security Group** page, shown following, choose **Select an existing security group**\. Then choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.   
-![\[Configure Security Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_16.png)
-
-1. Choose **Review and Launch**\.
-
-1. On the **Review Instance Launch** page, shown following, verify your settings and then choose **Launch**\.  
-![\[Review Instance Launch\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_17.png)
-
-1. On the **Select an existing key pair or create a new key pair** page, shown following, choose **Create a new key pair** and set **Key pair name** to `tutorial-key-pair`\. Choose **Download Key Pair**, and then save the key pair file on your local machine\. You use this key pair file to connect to your EC2 instance\.  
-![\[Select an Existing Key Pair or Create a New Key Pair\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_18.png)
-
-1. To launch your EC2 instance, choose **Launch Instances**\. On the **Launch Status** page, shown following, note the identifier for your new EC2 instance, for example: `i-0288d65fd4470b6a9`\.  
+1. On the **Launch Status** page, shown following, note the identifier for your new EC2 instance, for example: `i-0288d65fd4470b6a9`\.  
 ![\[Launch Status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_19.png)
 
-1. Choose **View Instances** to find your instance\. 
+1. Choose **View all instances** to find your instance\. 
 
-1. Wait until **Instance Status** for your instance reads as **Running** before continuing\. 
+1. Wait until **Instance State** for your instance is **running** before continuing\.
 
 ## Install an Apache web server with PHP and MariaDB<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
 

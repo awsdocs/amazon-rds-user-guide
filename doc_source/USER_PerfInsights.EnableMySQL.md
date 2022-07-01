@@ -4,6 +4,7 @@ The Performance Schema is an optional feature for monitoring Amazon RDS for Mari
 
 **Topics**
 + [Overview of the Performance Schema](#USER_PerfInsights.EnableMySQL.overview)
++ [Performance Insights and the Performance Schema](#USER_PerfInsights.effect-of-pfs)
 + [Automatic management of the Performance Schema by Performance Insights](#USER_PerfInsights.EnableMySQL.options)
 + [Effect of a reboot on the Performance Schema](#USER_PerfInsights.EnableMySQL.reboot)
 + [Determining whether Performance Insights is managing the Performance Schema](#USER_PerfInsights.EnableMySQL.determining-status)
@@ -19,19 +20,16 @@ The Performance Schema monitors events in MariaDB and MySQL databases\. An *even
 
 The `PERFORMANCE_SCHEMA` storage engine is a mechanism for implementing the Performance Schema feature\. This engine collects event data using instrumentation in the database source code\. The engine stores events in memory\-only tables in the `performance_schema` database\. You can query `performance_schema` just as you can query any other tables\. For more information, see [MySQL Performance Schema](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html) in the *MySQL Reference Manual*\.
 
-### Effect of turning on the Performance Schema<a name="USER_PerfInsights.effect-of-pfs"></a>
+## Performance Insights and the Performance Schema<a name="USER_PerfInsights.effect-of-pfs"></a>
 
-Performance Insights and the Performance Schema are separate features, but they are connected\. When the Performance Schema is turned on for Amazon RDS for MariaDB or MySQL, Performance Insights does the following:
-+ Collects detailed, low\-level monitoring information 
-+ Collects active session metrics every second
-+ Displays DB load categorized by detailed wait events, which you can use to identify bottlenecks
+Performance Insights and the Performance Schema are separate features, but they are connected\. The behavior of Performance Insights for Amazon RDS for MariaDB or MySQL depends on whether the Performance Schema is turned on, and if so, whether Performance Insights manages the Performance Schema automatically\. The following table describes the behavior\.
 
-### Effect of not turning on the Performance Schema<a name="USER_PerfInsights.effect-of-no-pfs"></a>
 
-When the Performance Schema is not turned on for Amazon RDS for MariaDB or MySQL, Performance Insights does the following:
-+ Doesn't collect wait events, per\-SQL metrics, or other detailed, low\-level monitoring information
-+ Collects active session metrics every five seconds instead of every second
-+ Reports user states such as inserting and sending, which don't help you identify bottlenecks
+| Performance Schema turned on | Performance Insights management mode | Performance Insights behavior | 
+| --- | --- | --- | 
+|  Yes  |  Automatic  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.EnableMySQL.html)  | 
+|  Yes  |  Manual  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.EnableMySQL.html)  | 
+|  No  |  N/A  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.EnableMySQL.html)  | 
 
 ## Automatic management of the Performance Schema by Performance Insights<a name="USER_PerfInsights.EnableMySQL.options"></a>
 

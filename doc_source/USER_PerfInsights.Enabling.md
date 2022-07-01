@@ -22,7 +22,7 @@ The following screenshot shows the **Performance Insights** section\.
 ![\[Turn on Performance Insights during DB instance or Multi-AZ DB cluster creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf_insights_enabling.png)
 
 If you choose **Enable Performance Insights**, you have the following options:
-+ **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
++ **Retention** – The amount of time to retain Performance Insights data\. The retention setting in the free tier is **Default \(7 days\)**\. To retain your performance data for longer, specify 1–24 months\. For more information about retention periods, see [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)\.
 + **AWS KMS key** – Specify your AWS KMS key\. Performance Insights encrypts all potentially sensitive data using your KMS key\. Data is encrypted in flight and at rest\. For more information, see [Configuring an AWS KMS policy for Performance Insights](USER_PerfInsights.access-control.md#USER_PerfInsights.access-control.cmk-policy)\.
 
 ### Turning Performance Insights on or off when modifying a DB instance or Multi\-AZ DB cluster<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
@@ -40,7 +40,7 @@ In the console, you can modify a DB instance or Multi\-AZ DB cluster to turn Per
 1. In the **Performance Insights** section, choose either **Enable Performance Insights** or **Disable Performance Insights**\.
 
    If you choose **Enable Performance Insights**, you have the following options:
-   + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\. If you chose Long Term Retention \(2 years\) when you turn on Performance Insights, All displays 2 years of data\. If you chose Default \(7 days\) instead, All displays only the past week\.
+   + **Retention** – The amount of time to retain Performance Insights data\. The retention setting in the free tier is **Default \(7 days\)**\. To retain your performance data for longer, specify 1–24 months\. For more information about retention periods, see [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)\.
    + **AWS KMS key** – Specify your KMS key\. Performance Insights encrypts all potentially sensitive data using your KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 1. Choose **Continue**\.
@@ -85,9 +85,9 @@ The following procedure describes how to turn Performance Insights on or off for
       --enable-performance-insights
   ```
 
-When you turn on Performance Insights, you can optionally specify the number of days to retain Performance Insights data with the `--performance-insights-retention-period` option\. Valid values are 7 \(the default\) or 731 \(2 years\)\.
+When you turn on Performance Insights in the CLI, you can optionally specify the number of days to retain Performance Insights data with the `--performance-insights-retention-period` option\. You can specify `7`, *month* \* 31 \(where *month* is a number from 1–23\), or `731`\. For example, if you want to retain your performance data for 3 months, specify `93`, which is 3 \* 31\. The default is `7` days\. For more information about retention periods, see [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)\.
 
-The following example turns on Performance Insights for `sample-db-instance` and specifies that Performance Insights data is retained for two years\.
+The following example turns on Performance Insights for `sample-db-instance` and specifies that Performance Insights data is retained for 93 days \(3 months\)\.
 
 For Linux, macOS, or Unix:
 
@@ -95,7 +95,7 @@ For Linux, macOS, or Unix:
 aws rds modify-db-instance \
     --db-instance-identifier sample-db-instance \
     --enable-performance-insights \
-    --performance-insights-retention-period 731
+    --performance-insights-retention-period 93
 ```
 
 For Windows:
@@ -104,7 +104,15 @@ For Windows:
 aws rds modify-db-instance ^
     --db-instance-identifier sample-db-instance ^
     --enable-performance-insights ^
-    --performance-insights-retention-period 731
+    --performance-insights-retention-period 93
+```
+
+If you specify a retention period such as 94 days, which isn't a valid value, RDS issues an error\.
+
+```
+An error occurred (InvalidParameterValue) when calling the CreateDBInstance operation: 
+Invalid Performance Insights retention period. Valid values are: [7, 31, 62, 93, 124, 155, 186, 217, 
+248, 279, 310, 341, 372, 403, 434, 465, 496, 527, 558, 589, 620, 651, 682, 713, 731]
 ```
 
 ## RDS API<a name="USER_PerfInsights.Enabling.API"></a>
@@ -118,4 +126,4 @@ You can also specify the `EnablePerformanceInsights` value using the following A
 +  [CreateDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) \(Multi\-AZ DB cluster\) 
 +  [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) \(Multi\-AZ DB cluster\) 
 
-When you turn on Performance Insights, you can optionally specify the amount of time, in days, to retain Performance Insights data with the `PerformanceInsightsRetentionPeriod` parameter\. Valid values are 7 \(the default\) or 731 \(2 years\)\.
+When you turn on Performance Insights, you can optionally specify the amount of time, in days, to retain Performance Insights data with the `PerformanceInsightsRetentionPeriod` parameter\. You can specify `7`, *month* \* 31 \(where *month* is a number from 1–23\), or `731`\. For example, if you want to retain your performance data for 3 months, specify `93`, which is 3 \* 31\. The default is `7` days\. For more information about retention periods, see [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)\.

@@ -56,7 +56,7 @@ When you tune a database, you often try to find out the resources that sessions 
 Consider the analogy of a warehouse worker\. An order comes in for a book\. The worker might be delayed in fulfilling the order\. For example, a different worker might be currently restocking the shelves, a trolley might not be available\. Or the system used to enter the order status might be slow\. The longer the worker waits, the longer it takes to fulfill the order\. Waiting is a natural part of the warehouse workflow, but if wait time becomes excessive, productivity decreases\. In the same way, repeated or lengthy session waits can degrade database performance\. For more information, see [Tuning with wait events for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Tuning.html) and [Tuning with wait events for Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Tuning.wait-events.html) in the *Amazon Aurora User Guide*\. 
 
 Wait events vary by DB engine: 
-+ For information about all MariaDB and MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
++ For information about all MariaDB and MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-wait-summary-tables.html) in the MySQL documentation\.
 + For information about all PostgreSQL wait events, see [The Statistics Collector > Wait Event tables](https://www.postgresql.org/docs/current/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
 + For information about all Oracle wait events, see [ Descriptions of Wait Events](https://docs.oracle.com/database/121/REFRN/GUID-2FDDFAA4-24D0-4B80-A157-A907AF5C68E2.htm#REFRN-GUID-2FDDFAA4-24D0-4B80-A157-A907AF5C68E2) in the Oracle documentation\.
 + For information about all SQL Server wait events, see [ Types of Waits](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql?view=sql-server-2017#WaitTypes) in the SQL Server documentation\.
@@ -86,7 +86,7 @@ Every five minutes, Performance Insights identifies the most resource\-intensive
 **Note**  
 Performance Insights doesn't capture plans for queries whose text exceeds the maximum collectable query text limit\. For more information, see [Accessing more SQL text in the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.SQLTextSize.md)\.
 
-The retention period for execution plans is the same as for all your Performance Insights data\. The default is seven days in the free tier or two years for the long retention tier\.
+The retention period for execution plans is the same as for your Performance Insights data\. The retention setting in the free tier is **Default \(7 days\)**\. To retain your performance data for longer, specify 1–24 months\. For more information about retention periods, see [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)\.
 
 #### Digest queries<a name="USER_PerfInsights.Overview.ActiveSessions.plans.digest"></a>
 

@@ -7,6 +7,7 @@ Amazon RDS groups events into categories that you can subscribe to so that you c
 + [Basic process for subscribing to Amazon RDS event notifications](#USER_Events.overview.process)
 + [Delivery of RDS event notifications](#USER_Events.overview.subscriptions)
 + [Billing for Amazon RDS event notifications](#USER_Events.overview.billing)
++ [Examples of Amazon RDS events](#events-examples)
 
 ## RDS resources eligible for event subscription<a name="USER_Events.overview.resources"></a>
 
@@ -56,3 +57,102 @@ To turn off notifications without deleting a subscription, choose **No** for **E
 ## Billing for Amazon RDS event notifications<a name="USER_Events.overview.billing"></a>
 
 Billing for Amazon RDS event notification is through Amazon SNS\. Amazon SNS fees apply when using event notification\. For more information about Amazon SNS billing, see [ Amazon Simple Notification Service pricing](http://aws.amazon.com/sns/#pricing)\.
+
+## Examples of Amazon RDS events<a name="events-examples"></a>
+
+The following examples illustrate different types of Amazon RDS events in JSON format\. For a tutorial that shows you how to capture and view events in JSON format, see [Tutorial: Log DB instance state changes using Amazon EventBridge](rds-cloud-watch-events.md#log-rds-instance-state)\.
+
+**Topics**
++ [Example of a DB instance event](#rds-cloudwatch-events.db-instances)
++ [Example of a DB parameter group event](#rds-cloudwatch-events.db-parameter-groups)
++ [Example of a DB snapshot event](#rds-cloudwatch-events.db-snapshots)
+
+### Example of a DB instance event<a name="rds-cloudwatch-events.db-instances"></a>
+
+The following is an example of a DB instance event in JSON format\. The event shows that RDS performed a multi\-AZ failover for the instance named `my-db-instance`\. The event ID is RDS\-EVENT\-0049\.
+
+```
+{
+  "version": "0",
+  "id": "68f6e973-1a0c-d37b-f2f2-94a7f62ffd4e",
+  "detail-type": "RDS DB Instance Event",
+  "source": "aws.rds",
+  "account": "123456789012",
+  "time": "2018-09-27T22:36:43Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:rds:us-east-1:123456789012:db:my-db-instance"
+  ],
+  "detail": {
+    "EventCategories": [
+      "failover"
+    ],
+    "SourceType": "DB_INSTANCE",
+    "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:my-db-instance",
+    "Date": "2018-09-27T22:36:43.292Z",
+    "Message": "A Multi-AZ failover has completed.",
+    "SourceIdentifier": "rds:my-db-instance",
+    "EventID": "RDS-EVENT-0049"
+  }
+}
+```
+
+### Example of a DB parameter group event<a name="rds-cloudwatch-events.db-parameter-groups"></a>
+
+The following is an example of a DB parameter group event in JSON format\. The event shows that the parameter `time_zone` was updated in parameter group `my-db-param-group`\. The event ID is RDS\-EVENT\-0037\.
+
+```
+{
+  "version": "0",
+  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+  "detail-type": "RDS DB Parameter Group Event",
+  "source": "aws.rds",
+  "account": "123456789012",
+  "time": "2018-10-06T12:26:13Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:rds:us-east-1:123456789012:pg:my-db-param-group"
+  ],
+  "detail": {
+    "EventCategories": [
+      "configuration change"
+    ],
+    "SourceType": "DB_PARAM",
+    "SourceArn": "arn:aws:rds:us-east-1:123456789012:pg:my-db-param-group",
+    "Date": "2018-10-06T12:26:13.882Z",
+    "Message": "Updated parameter time_zone to UTC with apply method immediate",
+    "SourceIdentifier": "rds:my-db-param-group",
+    "EventID": "RDS-EVENT-0037"
+  }
+}
+```
+
+### Example of a DB snapshot event<a name="rds-cloudwatch-events.db-snapshots"></a>
+
+The following is an example of a DB snapshot event in JSON format\. The event shows the deletion of the snapshot named `my-db-snapshot`\. The event ID is RDS\-EVENT\-0041\.
+
+```
+{
+  "version": "0",
+  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+  "detail-type": "RDS DB Snapshot Event",
+  "source": "aws.rds",
+  "account": "123456789012",
+  "time": "2018-10-06T12:26:13Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:rds:us-east-1:123456789012:snapshot:rds:my-db-snapshot"
+  ],
+  "detail": {
+    "EventCategories": [
+      "deletion"
+    ],
+    "SourceType": "SNAPSHOT",
+    "SourceArn": "arn:aws:rds:us-east-1:123456789012:snapshot:rds:my-db-snapshot",
+    "Date": "2018-10-06T12:26:13.882Z",
+    "Message": "Deleted manual snapshot",
+    "SourceIdentifier": "rds:my-db-snapshot",
+    "EventID": "RDS-EVENT-0041"
+  }
+}
+```
