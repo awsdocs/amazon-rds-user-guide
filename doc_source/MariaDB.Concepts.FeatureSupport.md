@@ -8,12 +8,12 @@ You can filter new Amazon RDS features on the [What's New with Database?](http:/
 The following lists are not exhaustive\.
 
 **Topics**
-+ [MariaDB feature support on Amazon RDS](#MariaDB.Concepts.FeatureSupport)
++ [MariaDB feature support on Amazon RDS for MariaDB major versions](#MariaDB.Concepts.FeatureSupport.MajorVersions)
 + [Supported storage engines for MariaDB on Amazon RDS](#MariaDB.Concepts.Storage)
 + [Cache warming for MariaDB on Amazon RDS](#MariaDB.Concepts.XtraDBCacheWarming)
 + [MariaDB features not supported by Amazon RDS](#MariaDB.Concepts.FeatureNonSupport)
 
-## MariaDB feature support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
+## MariaDB feature support on Amazon RDS for MariaDB major versions<a name="MariaDB.Concepts.FeatureSupport.MajorVersions"></a>
 
 In the following sections, find information about MariaDB feature support on Amazon RDS for MariaDB major versions:
 

@@ -1,6 +1,6 @@
 # Connecting to PostgreSQL with Kerberos authentication<a name="postgresql-kerberos-connecting"></a>
 
-You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command\-line interface such as psql\. For more information about connecting, see  [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)  \. 
+You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command\-line interface such as psql\. For more information about connecting, see  [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)  \. For information about obtaining the endpoint, port number, and other details needed for connection, see [Using pgAdmin to connect to a PostgreSQL DB instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)\. 
 
 ## pgAdmin<a name="collapsible-section-pgAdmin"></a>
 
@@ -12,13 +12,19 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
 
 1. In the **Create \- Server** dialog box, enter a name on the **General** tab to identify the server in pgAdmin\.
 
-1. On the **Connection** tab, enter the following information from your RDS for PostgreSQL database:
-   + For **Host**, enter the endpoint\. Use a format such as `PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com`\.
+1. On the **Connection** tab, enter the following information from your RDS for PostgreSQL database\. 
+   + For **Host**, enter the endpoint for the RDS for PostgreSQL DB instance\. An endpoint looks similar to the following:
 
-     If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a specialized endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\. 
+     ```
+     RDS-DB-instance.111122223333.aws-region.rds.amazonaws.com
+     ```
 
-     For example, suppose that the domain name for the AWS Managed Active Directory is `corp.example.com`\. Then for **Host**, use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com.`
-   + For **Port**, enter the assigned port\.
+     To connect to an on\-premises Microsoft Active Directory from a Windows client, you use the domain name of the AWS Managed Active Directory instead of `rds.amazonaws.com` in the host endpoint\. For example, suppose that the domain name for the AWS Managed Active Directory is `corp.example.com`\. Then for **Host**, the endpoint would be specified as follows: 
+
+     ```
+     RDS-DB-instance.111122223333.aws-region.corp.example.com
+     ```
+   + For **Port**, enter the assigned port\. 
    + For **Maintenance database**, enter the name of the initial database to which the client will connect\.
    + For **Username**, enter the user name that you entered for Kerberos authentication in [ Step 7: Create Kerberos authentication PostgreSQL logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
 
