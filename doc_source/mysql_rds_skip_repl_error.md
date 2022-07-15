@@ -21,7 +21,7 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 
 For more information about addressing replication errors with Amazon RDS, see [Troubleshooting a MySQL read replica problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
 
-### Replication stopped error<a name="w839aac39c91c39b7c11"></a>
+### Replication stopped error<a name="w840aac39c91c39b7c11"></a>
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive an error message stating that the replica is down or disabled\.
 

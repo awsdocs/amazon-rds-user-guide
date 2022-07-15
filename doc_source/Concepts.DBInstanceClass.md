@@ -808,31 +808,31 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | Instance class | vCPU | ECU | Memory \(GiB\) | VPC only | EBS optimized | Max\. bandwidth \(mbps\) | Network performance | 
 | --- | --- | --- | --- | --- | --- | --- | --- | 
 | db\.m6g – general\-purpose instance classes powered by AWS Graviton2 processors | 
-| db\.m6g\.16xlarge | 64 | – | 256 | Yes | Yes | 19,000 | 25 Gbps | 
-| db\.m6g\.12xlarge | 48 | – | 192 | Yes | Yes | 13,500 | 20 Gbps | 
-| db\.m6g\.8xlarge | 32 | – | 128 | Yes | Yes | 9,500 | 12 Gbps | 
-| db\.m6g\.4xlarge | 16 | – | 64 | Yes | Yes | 6,800 | Up to 10 Gbps | 
-| db\.m6g\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m6g\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m6g\.large\* | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6g\.16xlarge | 64 | — | 256 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.m6g\.12xlarge | 48 | — | 192 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.m6g\.8xlarge | 32 | — | 128 | Yes | Yes | 9,500 | 12 Gbps | 
+| db\.m6g\.4xlarge | 16 | — | 64 | Yes | Yes | 6,800 | Up to 10 Gbps | 
+| db\.m6g\.2xlarge\* | 8 | — | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6g\.xlarge\* | 4 | — | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6g\.large\* | 2 | — | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6gd | 
-| db\.m6gd\.16xlarge | 64 | – | 256 | Yes | Yes | 19,000 | 25 Gbps | 
-| db\.m6gd\.12xlarge | 48 | – | 192 | Yes | Yes | 13,500 | 20 Gbps | 
-| db\.m6gd\.8xlarge | 32 | – | 128 | Yes | Yes | 9,000 | 12 Gbps | 
-| db\.m6gd\.4xlarge | 16 | – | 64 | Yes | Yes | 4,750 | Up to 10 Gbps | 
-| db\.m6gd\.2xlarge | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m6gd\.xlarge | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m6gd\.large | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.16xlarge | 64 | — | 256 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.m6gd\.12xlarge | 48 | — | 192 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.m6gd\.8xlarge | 32 | — | 128 | Yes | Yes | 9,000 | 12 Gbps | 
+| db\.m6gd\.4xlarge | 16 | — | 64 | Yes | Yes | 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.2xlarge | 8 | — | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.xlarge | 4 | — | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6gd\.large | 2 | — | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6i – general\-purpose instance classes | 
-| db\.m6i\.32xlarge | 128 | – | 512 | Yes | Yes | 50,000 | 40 Gbps | 
-| db\.m6i\.24xlarge | 96 | – | 384 | Yes | Yes | 37,500 | 30 Gbps | 
-| db\.m6i\.16xlarge | 64 | – | 256 | Yes | Yes | 25,000 | 20 Gbps | 
-| db\.m6i\.12xlarge | 48 | – | 192 | Yes | Yes | 18,750 | 15 Gbps | 
-| db\.m6i\.8xlarge | 32 | – | 128 | Yes | Yes | 12,500 | 10 Gbps | 
-| db\.m6i\.4xlarge\* | 16 | – | 64 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
-| db\.m6i\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
-| db\.m6i\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
-| db\.m6i\.large\* | 2 | – | 8 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
+| db\.m6i\.32xlarge | 128 | — | 512 | Yes | Yes | 50,000 | 40 Gbps | 
+| db\.m6i\.24xlarge | 96 | — | 384 | Yes | Yes | 37,500 | 30 Gbps | 
+| db\.m6i\.16xlarge | 64 | — | 256 | Yes | Yes | 25,000 | 20 Gbps | 
+| db\.m6i\.12xlarge | 48 | — | 192 | Yes | Yes | 18,750 | 15 Gbps | 
+| db\.m6i\.8xlarge | 32 | — | 128 | Yes | Yes | 12,500 | 10 Gbps | 
+| db\.m6i\.4xlarge\* | 16 | — | 64 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
+| db\.m6i\.2xlarge\* | 8 | — | 32 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
+| db\.m6i\.xlarge\* | 4 | — | 16 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
+| db\.m6i\.large\* | 2 | — | 8 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
 | db\.m5d – general\-purpose instance classes | 
 | db\.m5d\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m5d\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -894,31 +894,31 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | 64 | – | 512 | Yes | Yes | 19,000 | 25 Gbps | 
-| db\.r6g\.12xlarge | 48 | – | 384 | Yes | Yes | 13,500 | 20 Gbps | 
-| db\.r6g\.8xlarge | 32 | – | 256 | Yes | Yes | 9,000 | 12 Gbps | 
-| db\.r6g\.4xlarge | 16 | – | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
-| db\.r6g\.2xlarge\* | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r6g\.xlarge\* | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r6g\.large\* | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.16xlarge | 64 | — | 512 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.r6g\.12xlarge | 48 | — | 384 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.r6g\.8xlarge | 32 | — | 256 | Yes | Yes | 9,000 | 12 Gbps | 
+| db\.r6g\.4xlarge | 16 | — | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.2xlarge\* | 8 | — | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.xlarge\* | 4 | — | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.large\* | 2 | — | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6gd | 
-| db\.r6gd\.16xlarge | 64 | – | 512 | Yes | Yes | 19,000 | 25 Gbps | 
-| db\.r6gd\.12xlarge | 48 | – | 384 | Yes | Yes | 13,500 | 20 Gbps | 
-| db\.r6gd\.8xlarge | 32 | – | 256 | Yes | Yes | 9,000 | 12 Gbps | 
-| db\.r6gd\.4xlarge | 16 | – | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
-| db\.r6gd\.2xlarge | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r6gd\.xlarge | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r6gd\.large | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.16xlarge | 64 | — | 512 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.r6gd\.12xlarge | 48 | — | 384 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.r6gd\.8xlarge | 32 | — | 256 | Yes | Yes | 9,000 | 12 Gbps | 
+| db\.r6gd\.4xlarge | 16 | — | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.2xlarge | 8 | — | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.xlarge | 4 | — | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6gd\.large | 2 | — | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | 128 | – | 1,024 | Yes | Yes | 50,000 | 40 Gbps | 
-| db\.r6i\.24xlarge | 96 | – | 768 | Yes | Yes | 37,500 | 30 Gbps | 
-| db\.r6i\.16xlarge | 64 | – | 512 | Yes | Yes | 25,000 | 20 Gbps | 
-| db\.r6i\.12xlarge | 48 | – | 384 | Yes | Yes | 18,750 | 15 Gbps | 
-| db\.r6i\.8xlarge | 32 | – | 256 | Yes | Yes | 12,500 | 10 Gbps | 
-| db\.r6i\.4xlarge\* | 16 | – | 128 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
-| db\.r6i\.2xlarge\* | 8 | – | 64 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
-| db\.r6i\.xlarge\* | 4 | – | 32 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
-| db\.r6i\.large\* | 2 | – | 16 | Yes | Yes | Up to 12,500 | Up to 10 Gbps | 
+| db\.r6i\.32xlarge | 128 | — | 1,024 | Yes | Yes | 40,000 | 50 Gbps | 
+| db\.r6i\.24xlarge | 96 | — | 768 | Yes | Yes | 30,000 | 37\.5 Gbps | 
+| db\.r6i\.16xlarge | 64 | — | 512 | Yes | Yes | 20,000 | 25 Gbps | 
+| db\.r6i\.12xlarge | 48 | — | 384 | Yes | Yes | 15,000 | 18\.75 Gbps | 
+| db\.r6i\.8xlarge | 32 | — | 256 | Yes | Yes | 10,000 | 12\.5 Gbps | 
+| db\.r6i\.4xlarge\* | 16 | — | 128 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.2xlarge\* | 8 | — | 64 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.xlarge\* | 4 | — | 32 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.large\* | 2 | — | 16 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
 | db\.r5d – memory\-optimized instance classes | 
 | db\.r5d\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5d\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -960,12 +960,12 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | No | Yes | 500 | Moderate | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | No | No | — | Moderate | 
 | db\.t4g – burstable\-performance instance classes | 
-| db\.t4g\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 2,780 | Up to 5 Gbps | 
-| db\.t4g\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 2,780 | Up to 5 Gbps | 
-| db\.t4g\.large\* | 2 | – | 8 | Yes | Yes | Up to 2,780 | Up to 5 Gbps | 
-| db\.t4g\.medium\* | 2 | – | 4 | Yes | Yes | Up to 2,085 | Up to 5 Gbps | 
-| db\.t4g\.small\* | 2 | – | 2 | Yes | Yes | Up to 2,085 | Up to 5 Gbps | 
-| db\.t4g\.micro\* | 2 | – | 1 | Yes | Yes | Up to 2,085 | Up to 5 Gbps | 
+| db\.t4g\.2xlarge\* | 8 | — | 32 | Yes | Yes | Up to 2,780 | Up to 5 Gbps | 
+| db\.t4g\.xlarge\* | 4 | — | 16 | Yes | Yes | Up to 2,780 | Up to 5 Gbps | 
+| db\.t4g\.large\* | 2 | — | 8 | Yes | Yes | Up to 2,780 | Up to 5 Gbps | 
+| db\.t4g\.medium\* | 2 | — | 4 | Yes | Yes | Up to 2,085 | Up to 5 Gbps | 
+| db\.t4g\.small\* | 2 | — | 2 | Yes | Yes | Up to 2,085 | Up to 5 Gbps | 
+| db\.t4g\.micro\* | 2 | — | 1 | Yes | Yes | Up to 2,085 | Up to 5 Gbps | 
 | db\.t3 – burstable\-performance instance classes | 
 | db\.t3\.2xlarge\* | 8 | Variable | 32 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.xlarge\* | 4 | Variable | 16 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 

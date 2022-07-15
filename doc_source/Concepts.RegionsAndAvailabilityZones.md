@@ -3,7 +3,7 @@
 Amazon cloud computing resources are hosted in multiple locations world\-wide\. These locations are composed of AWS Regions, Availability Zones, and Local Zones\. Each *AWS Region* is a separate geographic area\. Each AWS Region has multiple, isolated locations known as *Availability Zones*\.
 
 **Note**  
-For information about finding the Availability Zones for an AWS Region, see [Describe Your Availability Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#using-regions-availability-zones-describe#availability-zones-describe) in the Amazon EC2 documentation\.
+For information about finding the Availability Zones for an AWS Region, see [Describe your Availability Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#availability-zones-describe) in the Amazon EC2 documentation\.
 
 By using Local Zones, you can place resources, such as compute and storage, in multiple locations closer to your users\. Amazon RDS enables you to place resources, such as DB instances, and data in multiple locations\. Resources aren't replicated across AWS Regions unless you do so specifically\.
 

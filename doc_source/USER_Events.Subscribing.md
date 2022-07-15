@@ -10,7 +10,13 @@ The type of source\. For example, **Source type** might be **Instances**\. You m
 ***Resources* to include**  
 The Amazon RDS resources that are generating the events\. For example, you might choose **Select specific instances** and then **myDBInstance1**\. 
 
-The following table explains the result when you specify or don't specify **SourceIdentifier**\.
+The following table explains the result when you specify or don't specify ***Resources* to include**\.
+
+
+|  Resources to include  |  Description  |  Example  | 
+| --- | --- | --- | 
+|  Specified  |  RDS notifies you about all events for the specified resource only\.  | If your Source type is Instances and your resource is myDBInstance1, RDS notifies you about all events for myDBInstance1 only\. | 
+|  Not specified  |  RDS notifies you about the events for the specified source type for all your Amazon RDS resources\.   |  If your **Source type** is **Instances**, RDS notifies you about all instance\-related events in your account\.  | 
 
 ## Console<a name="USER_Events.Subscribing.Console"></a>
 

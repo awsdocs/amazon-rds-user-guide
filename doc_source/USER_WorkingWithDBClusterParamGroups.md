@@ -14,6 +14,8 @@ Multi\-AZ DB clusters use DB cluster parameter groups\. The following sections d
 
 You can create a new DB cluster parameter group using the AWS Management Console, the AWS CLI, or the RDS API\.
 
+After you create a DB cluster parameter group, wait at least 5 minutes before creating a DB cluster that uses that DB cluster parameter group\. Doing this allows Amazon RDS to fully create the parameter group before it is used by the new DB cluster\. You can use the **Parameter groups** page in the [Amazon RDS console](https://console.aws.amazon.com/rds/) or the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) command to verify that your DB cluster parameter group is created\.
+
 ### Console<a name="USER_WorkingWithParamGroups.CreatingCluster.CON"></a>
 
 **To create a DB cluster parameter group**
@@ -242,7 +244,7 @@ To reset all of the parameters in the DB cluster parameter group, set the `Reset
 
 You can copy custom DB cluster parameter groups that you create\. Copying a parameter group is a convenient solution when you have already created a DB cluster parameter group and you want to include most of the custom parameters and values from that group in a new DB cluster parameter group\. You can copy a DB cluster parameter group by using the AWS CLI [copy\-db\-cluster\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-cluster-parameter-group.html) command or the RDS API [CopyDBClusterParameterGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBParameterGroup.html) operation\.
 
-After you copy a DB cluster parameter group, wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group\. Doing this allows Amazon RDS to fully complete the copy action before the parameter group is used as the default for a new DB cluster\. You can use the **Parameter Groups** option of the [Amazon RDS console](https://console.aws.amazon.com/rds/) or the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) command to verify that your DB cluster parameter group is created\.
+After you copy a DB cluster parameter group, wait at least 5 minutes before creating a DB cluster that uses that DB cluster parameter group\. Doing this allows Amazon RDS to fully copy the parameter group before it is used by the new DB cluster\. You can use the **Parameter groups** page in the [Amazon RDS console](https://console.aws.amazon.com/rds/) or the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) command to verify that your DB cluster parameter group is created\.
 
 **Note**  
 You can't copy a default parameter group\. However, you can create a new parameter group that is based on a default parameter group\.

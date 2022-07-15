@@ -18,7 +18,7 @@ Oracle Transparent Data Encryption supports two encryption modes: TDE tablespace
 **Note**  
 Amazon RDS manages the Oracle Wallet and TDE master key for the DB instance\. You do not need to set the encryption key using the command `ALTER SYSTEM set encryption key`\. 
 
-For information about TDE best practices, see [Oracle advanced security Transparent Data Encryption best practices](http://www.oracle.com/technetwork/database/security/twp-transparent-data-encryption-bes-130696.pdf?ssSourceSiteId=ocomen)\. 
+For information about TDE best practices, see [Oracle advanced security Transparent Data Encryption best practices](https://www.oracle.com/br/a/tech/docs/technical-resources/twp-transparent-data-encryption-bestpractices.pdf)\. 
 
 Once the option is enabled, you can check the status of the Oracle Wallet by using the following command: 
 

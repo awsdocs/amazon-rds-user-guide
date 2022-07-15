@@ -31,11 +31,13 @@ The process for subscribing to Amazon RDS event notification is as follows:
 
    Amazon RDS uses the ARN of an Amazon SNS topic to identify each subscription\. The Amazon RDS console creates the ARN for you when you create the subscription\. Create the ARN by using the Amazon SNS console, the AWS CLI, or the Amazon SNS API\.
 
-1. Amazon RDS sends an approval email or SMS message to the addresses you submitted with your subscription\. To confirm your subscription, choose the link in the notification you were sent\.
+1. Amazon RDS sends an approval email or SMS message to the addresses you submitted with your subscription\.
 
-1. When you have confirmed the subscription, the status of your subscription is updated in the Amazon RDS console's **My Event Subscriptions** section\.
+1. You confirm your subscription by choosing the link in the notification you received\.
 
-1. You then begin to receive event notifications\.
+1. The Amazon RDS console updates the **My Event Subscriptions** section with the status of your subscription\.
+
+1. Amazon RDS begins sending the notifications to the addresses that you provided when you created the subscription\.
 
 To learn about identity and access management when using Amazon SNS, see [Identity and access management in Amazon SNS](https://docs.aws.amazon.com/dg/sns-authentication-and-access-control.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
