@@ -66,8 +66,8 @@ You can upgrade your existing DB instance to SQL Server 2017 or 2019 from any ve
 |  SQL Server 2017  |  SQL Server 2019  | 
 |  SQL Server 2016  |  SQL Server 2019 SQL Server 2017  | 
 | SQL Server 2014 |  SQL Server 2019 SQL Server 2017 SQL Server 2016  | 
-|  SQL Server 2012  |  SQL Server 2019 SQL Server 2017 SQL Server 2016 SQL Server 2014  | 
-|  SQL Server 2008 R2 \(Deprecated\)  |  SQL Server 2016 SQL Server 2014 SQL Server 2012  | 
+| SQL Server 2012 \(end of support\) |  SQL Server 2019 SQL Server 2017 SQL Server 2016 SQL Server 2014  | 
+| SQL Server 2008 R2 \(end of support\)  |  SQL Server 2016 SQL Server 2014 SQL Server 2012  | 
 
 You can use an AWS CLI query, such as the following example, to find the available upgrades for a particular database engine version\.
 
@@ -110,7 +110,7 @@ The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL 
 
 You can use Microsoft SQL Server database compatibility levels to adjust some database behaviors to mimic previous versions of SQL Server\. For more information, see [Compatibility level](https://msdn.microsoft.com/en-us/library/bb510680.aspx) in the Microsoft documentation\. 
 
-When you upgrade your DB instance, all existing databases remain at their original compatibility level\. For example, if you upgrade from SQL Server 2012 to SQL Server 2014, all existing databases have a compatibility level of 110\. Any new database created after the upgrade have compatibility level 120\. 
+When you upgrade your DB instance, all existing databases remain at their original compatibility level\. For example, if you upgrade from SQL Server 2014 to SQL Server 2016, all existing databases have a compatibility level of 120\. Any new database created after the upgrade have compatibility level 130\. 
 
 You can change the compatibility level of a database by using the ALTER DATABASE command\. For example, to change a database named `customeracct` to be compatible with SQL Server 2014, issue the following command: 
 

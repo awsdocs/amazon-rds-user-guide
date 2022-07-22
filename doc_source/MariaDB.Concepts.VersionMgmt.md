@@ -4,6 +4,7 @@ For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS te
 
 **Topics**
 + [Supported MariaDB versions on Amazon RDS](#MariaDB.Concepts.VersionMgmt.Supported)
++ [RDS for MariaDB release calendar](#MariaDB.Concepts.VersionMgmt.ReleaseCalendar)
 + [MariaDB 10\.2 end of life](#MariaDB.Concepts.VersionMgmt.EndOfLife102)
 + [Deprecated versions for Amazon RDS for MariaDB](#MariaDB.Concepts.DeprecatedVersions)
 
@@ -35,6 +36,24 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 ```
 aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.5 --region us-west-2 --query "*[].{Engine:Engine,EngineVersion:EngineVersion}" --output text
 ```
+
+## RDS for MariaDB release calendar<a name="MariaDB.Concepts.VersionMgmt.ReleaseCalendar"></a>
+
+RDS for MariaDB major versions remain available at least until community end of life for the corresponding community version\. You can use the following dates to plan your testing and upgrade cycles\. If Amazon extends support for an RDS for MariaDB version for longer than originally stated, we plan to update this table to reflect the later date\. 
+
+**Note**  
+Dates with only a month and a year are approximate and are updated with an exact date when it’s known\.
+
+
+****  
+
+| MariaDB major version | Community release date | RDS release date | Community end of life date | RDS end of standard support date | 
+| --- | --- | --- | --- | --- | 
+|  MariaDB 10\.6 Current minor version: 10\.6\.8  | 6 July 2021 | 3 February 2022 | 6 July 2026 | July 2026 | 
+|  MariaDB 10\.5 Current minor version: 10\.5\.16  | 24 June 2020 | 21 January 2021 | 24 June 2025 | June 2025 | 
+|  MariaDB 10\.4 Current minor version: 10\.4\.25  | 18 June 2019 | 6 April 2020 | 18 June 2024 | June 2024 | 
+|  MariaDB 10\.3 Current minor version: 10\.3\.35  | 25 May 2018 | 23 October 2018 | 25 May 2023 | October 2023 | 
+|  MariaDB 10\.2 Current minor version: 10\.2\.44  | 23 May 2017 | 5 Jan 2018 | 23 May 2022 | 15 Oct 2022 | 
 
 ## MariaDB 10\.2 end of life<a name="MariaDB.Concepts.VersionMgmt.EndOfLife102"></a>
 

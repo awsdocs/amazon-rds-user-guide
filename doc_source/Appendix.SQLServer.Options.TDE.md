@@ -7,7 +7,6 @@ Amazon RDS supports TDE for the following SQL Server versions and editions:
 + SQL Server 2017 Enterprise Edition
 + SQL Server 2016 Enterprise Edition
 + SQL Server 2014 Enterprise Edition
-+ SQL Server 2012 Enterprise Edition
 
 Transparent Data Encryption for SQL Server provides encryption key management by using a two\-tier key architecture\. A certificate, which is generated from the database master key, is used to protect the data encryption keys\. The database encryption key performs the actual encryption and decryption of data on the user database\. Amazon RDS backs up and manages the database master key and the TDE certificate\.
 

@@ -159,20 +159,22 @@ Use the mysqlimport utility to load the flat files into Amazon RDS\. The followi
 
 Use the \-\-compress option to minimize network traffic\. The \-\-fields\-terminated\-by=',' option is used for CSV files, and the \-\-local option specifies that the incoming data is located on the client\. Without the \-\-local option, the Amazon RDS DB instance looks for the data on the database host, so always specify the \-\-local option\. For the \-\-host option, specify the DB instance endpoint of the RDS for MySQL DB instance\.
 
+In the following examples, replace `master_user` with the master username for your DB instance\.
+
+Replace `hostname` with the endpoint for your DB instance\. An example of a DB instance endpoint is `my-db-instance.123456789012.us-west-2.rds.amazonaws.com`\.
+
 For RDS for MySQL version 8\.0\.15 and higher, run the following statement before using the mysqlimport utility\.
 
 ```
 GRANT SESSION_VARIABLES_ADMIN ON *.* TO master_user;
 ```
 
-Replace `master_user` with the master username for your DB instance\.
-
 For Linux, macOS, or Unix:
 
 ```
 mysqlimport --local \
     --compress \
-    --user=username \
+    --user=master_user \
     --password \
     --host=hostname \
     --fields-terminated-by=',' Acme sales.part_*
@@ -183,7 +185,7 @@ For Windows:
 ```
 mysqlimport --local ^
     --compress ^
-    --user=username ^
+    --user=master_user ^
     --password ^
     --host=hostname ^
     --fields-terminated-by="," Acme sales.part_*

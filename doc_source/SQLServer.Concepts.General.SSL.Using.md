@@ -88,8 +88,6 @@ You can use the following procedure to import your certificate into the Microsof
 1. In the MMC console, expand **Certificates**, expand **Trusted Root Certification Authorities**, and then choose **Certificates**\. Locate the certificate to confirm it exists, as shown here\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds_sql_ssl_cert.png)
 
-1. Restart your computer\.
-
 ### Encrypting connections to an Amazon RDS DB instance running Microsoft SQL Server<a name="SQLServer.Concepts.General.SSL.Encrypting"></a>
 
 After you have imported a certificate into your client computer, you can encrypt connections from the client computer to an Amazon RDS DB instance running Microsoft SQL Server\. 

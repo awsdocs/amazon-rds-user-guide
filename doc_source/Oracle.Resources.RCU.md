@@ -5,14 +5,18 @@ You can use Amazon RDS to host an RDS for Oracle DB instance that holds the sche
 ## Supported versions and licensing options for RCU<a name="Oracle.Resources.RCU.Versions"></a>
 
 Amazon RDS supports Oracle Repository Creation Utility \(RCU\) version 12c only\. You can use the RCU in the following configurations: 
-+ RCU 12c with Oracle database 12\.2\.0\.1
-+ RCU 12c with Oracle database 12\.1\.0\.2\.v4 or later
++ RCU 12c with Oracle Database 21c
++ RCU 12c with Oracle Database 19c
++ RCU 12c with Oracle Database 12c Release 2 \(12\.2\)
++ RCU 12c with Oracle Database 12c Release 1 \(12\.1\) using 12\.1\.0\.2\.v4 or higher
 
-Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle fusion middleware licensing information user manual ](https://docs.oracle.com/en/middleware/fusion-middleware/fmwlc/) in the Oracle documentation\. 
+Before you can use RCU, make sure that you do the following:
++ Obtain a license for Oracle Fusion Middleware\.
++ Follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle Fusion Middleware Licensing Information User Manual](https://docs.oracle.com/en/middleware/fusion-middleware/fmwlc/) in the Oracle documentation\.
 
-Fusion MiddleWare supports repositories on Oracle Database Enterprise Edition and Standard Editions \(SE, SE One, or SE Two\)\. Oracle recommends Enterprise Edition for production installations that require partitioning and installations that require online index rebuild\. 
+Fusion MiddleWare supports repositories on Oracle Database Enterprise Edition and Standard Edition Two\. Oracle recommends Enterprise Edition for production installations that require partitioning and installations that require online index rebuild\.
 
-Before you create your RDS for Oracle instance, confirm the Oracle database version that you need to support the components that you want to deploy\. You can use the Certification Matrix to find the requirements for the Fusion Middleware components and versions you want to deploy\. For more information, see [ Oracle fusion middleware supported system configurations](http://www.oracle.com/technetwork/middleware/ias/downloads/fusion-certification-100350.html) in the Oracle documentation\. 
+Before you create your RDS for Oracle instance, confirm the Oracle database version that you need to support the components that you want to deploy\. To find the requirements for the Fusion Middleware components and versions you want to deploy, use the Certification Matrix\. For more information, see [Oracle Fusion Middleware Supported System Configurations](http://www.oracle.com/technetwork/middleware/ias/downloads/fusion-certification-100350.html) in the Oracle documentation\. 
 
 Amazon RDS supports Oracle database version upgrades as needed\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\. 
 
@@ -183,9 +187,41 @@ ${ORACLE_HOME}/oracle_common/bin/rcu \
 
 ## Troubleshooting RCU<a name="Oracle.Resources.RCU.KnownIssues"></a>
 
-The following are some known issues for working with RCU, with some troubleshooting suggestions: 
-+ Oracle Managed Files \(OMF\) — Amazon RDS uses OMF data files to simplify storage management\. You can customize tablespace attributes, such as size and extent management\. However, specifying a data file name when you run RCU causes tablespace code to fail with `ORA-20900`\. You can use RCU with OMF in the following ways: 
-  + In RCU 12\.2\.1\.0 and later, use the `-honorOMF` command\-line parameter\. 
-  + In RCU 12\.1\.0\.3 and later, use multiple steps and edit the generated script\. For more information, see [Running RCU using the command line in multiple steps](#Oracle.Resources.RCU.SilentMulti)\. 
-+ SYSDBA — Because Amazon RDS is a managed service, you don't have full `SYSDBA` access to your RDS for Oracle instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant `SYS` object privileges\. You can retry and run the `RDSADMIN_UTIL.GRANT_SYS_OBJECT` stored procedure, or contact AWS Support\. 
-+ Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
+Be mindful of the following issues\.
+
+**Topics**
++ [Oracle Managed Files \(OMF\)](#Oracle.Resources.RCU.KnownIssues.OMF)
++ [Object privileges](#Oracle.Resources.RCU.KnownIssues.object-privs)
++ [Enterprise Scheduler Service](#Oracle.Resources.RCU.KnownIssues.Scheduler)
+
+### Oracle Managed Files \(OMF\)<a name="Oracle.Resources.RCU.KnownIssues.OMF"></a>
+
+Amazon RDS uses OMF data files to simplify storage management\. You can customize tablespace attributes, such as size and extent management\. However, if you specify a data file name when you run RCU, the tablespace code fails with `ORA-20900`\. You can use RCU with OMF in the following ways: 
++ In RCU 12\.2\.1\.0 and later, use the `-honorOMF` command\-line parameter\. 
++ In RCU 12\.1\.0\.3 and later, use multiple steps and edit the generated script\. For more information, see [Running RCU using the command line in multiple steps](#Oracle.Resources.RCU.SilentMulti)\. 
+
+### Object privileges<a name="Oracle.Resources.RCU.KnownIssues.object-privs"></a>
+
+Because Amazon RDS is a managed service, you don't have full `SYSDBA` access to your RDS for Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. 
+
+The master account can directly grant privileges that it has already been granted `WITH GRANT OPTION`\. In some cases, when you attempt to grant `SYS` object privileges, the RCU might fail with `ORA-01031`\. You can retry and run the `rdsadmin_util.grant_sys_object` stored procedure, as shown in the following example:
+
+```
+BEGIN
+  rdsadmin.rdsadmin_util.grant_sys_object('GV_$SESSION','MY_DBA','SELECT');
+END;
+/
+```
+
+If you attempt to grant `SYS` privileges on the object `SCHEMA_VERSION_REGISTRY`, the operation might fail with `ORA-20199: Error in rdsadmin_util.grant_sys_object`\. You can qualify the table `SCHEMA_VERSION_REGISTRY$` and the view `SCHEMA_VERSION_REGISTRY` with the schema owner name, which is `SYSTEM`, and retry the operation\. Or, you can create a synonym\. Log in as the master user and run the following statements:
+
+```
+CREATE OR REPLACE VIEW SYSTEM.SCHEMA_VERSION_REGISTRY 
+  AS SELECT * FROM SYSTEM.SCHEMA_VERSION_REGISTRY$;
+CREATE OR REPLACE PUBLIC SYNONYM SCHEMA_VERSION_REGISTRY FOR SYSTEM.SCHEMA_VERSION_REGISTRY;
+CREATE OR REPLACE PUBLIC SYNONYM SCHEMA_VERSION_REGISTRY$ FOR SCHEMA_VERSION_REGISTRY;
+```
+
+### Enterprise Scheduler Service<a name="Oracle.Resources.RCU.KnownIssues.Scheduler"></a>
+
+When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\.

@@ -20,9 +20,8 @@ Amazon RDS supports Multi\-AZ with DBM for the following SQL Server versions and
 + SQL Server 2017: Standard and Enterprise Editions
 + SQL Server 2016: Standard and Enterprise Editions 
 + SQL Server 2014: Standard and Enterprise Editions
-+ SQL Server 2012: Standard and Enterprise Editions
 
-You can use the following SQL query to determine whether your SQL Server DB instance is Single\-AZ, Multi\-AZ with DBM, or Multi\-AZ with Always On AGs:
+You can use the following SQL query to determine whether your SQL Server DB instance is Single\-AZ, Multi\-AZ with DBM, or Multi\-AZ with Always On AGs\.
 
 ```
 SELECT CASE WHEN dm.mirroring_state_desc IS NOT NULL THEN 'Multi-AZ (Mirroring)'
@@ -46,15 +45,19 @@ Multi-AZ (AlwaysOn)
 
 When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment** on the **Modify DB instance** page\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+When you modify an existing SQL Server DB instance using the console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment** on the **Modify DB instance** page\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 **Note**  
 If your DB instance is running Database Mirroring \(DBM\)—not Always On Availability Groups \(AGs\)—you might need to disable in\-memory optimization before you add Multi\-AZ\. Disable in\-memory optimization with DBM before you add Multi\-AZ if your DB instance runs SQL Server 2014, 2016, or 2017 Enterprise Edition and has in\-memory optimization enabled\.   
 If your DB instance is running AGs, it doesn't require this step\. 
 
+## Removing Multi\-AZ from a Microsoft SQL Server DB instance<a name="USER_SQLServerMultiAZ.Removing"></a>
+
+When you modify an existing SQL Server DB instance using the AWS Management Console, you can remove Multi\-AZ with DBM or AGs\. You can do this by choosing **No \(Mirroring / Always On\)** from **Multi\-AZ deployment** on the **Modify DB instance** page\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
 ## Microsoft SQL Server Multi\-AZ deployment limitations, notes, and recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
 
-The following are some limitations when working with Multi\-AZ deployments on RDS for Microsoft SQL Server DB instances:
+The following are some limitations when working with Multi\-AZ deployments on RDS for SQL Server DB instances:
 + Cross\-Region Multi\-AZ isn't supported\.
 + You can't configure the secondary DB instance to accept database read activity\.
 + Multi\-AZ with Always On Availability Groups \(AGs\) supports in\-memory optimization\.
@@ -65,14 +68,14 @@ The following are some limitations when working with Multi\-AZ deployments on RD
 
   If you need a higher limit, request an increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
 
-The following are some notes about working with Multi\-AZ deployments on RDS for Microsoft SQL Server DB instances:
-+ Amazon RDS exposes the Always On AGs [availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API as an entry in the endpoints field\.
+The following are some notes about working with Multi\-AZ deployments on RDS for SQL Server DB instances:
++ Amazon RDS exposes the Always On AGs [availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API operation as an entry in the endpoints field\.
 + Amazon RDS supports [availability group multisubnet failovers](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\.
-+ To use SQL Server Multi\-AZ with a SQL Server DB instance in a VPC, first create a DB subnet group that has subnets in at least two distinct Availability Zones\. Then assign the DB subnet group to the primary replica of the SQL Server DB instance\. 
++ To use SQL Server Multi\-AZ with a SQL Server DB instance in a virtual private cloud \(VPC\), first create a DB subnet group that has subnets in at least two distinct Availability Zones\. Then assign the DB subnet group to the primary replica of the SQL Server DB instance\. 
 + When a DB instance is modified to be a Multi\-AZ deployment, during the modification it has a status of **modifying**\. Amazon RDS creates the standby, and makes a backup of the primary DB instance\. After the process is complete, the status of the primary DB instance becomes **available**\.
 + Multi\-AZ deployments maintain all databases on the same node\. If a database on the primary host fails over, all your SQL Server databases fail over as one atomic unit to your standby host\. Amazon RDS provisions a new healthy host, and replaces the unhealthy host\.
 + Multi\-AZ with DBM or AGs supports a single standby replica\.
-+ Users, logins, and permissions are automatically replicated for you on the secondary\. You don't need to recreate them\. User\-defined server roles \(a SQL Server 2012 feature\) are only replicated in Multi\-AZ instances for AGs instances\.
++ Users, logins, and permissions are automatically replicated for you on the secondary\. You don't need to recreate them\. User\-defined server roles are only replicated in DB instances that use Always On AGs for Multi\-AZ deployments\. 
 + In Multi\-AZ deployments, SQL Server Agent jobs are replicated from the primary host to the secondary host when the job replication feature is turned on\. For more information, see [Turning on SQL Server Agent job replication](Appendix.SQLServer.CommonDBATasks.Agent.md#SQLServerAgent.Replicate)\.
 + You might observe elevated latencies compared to a standard DB instance deployment \(in a single Availability Zone\) because of the synchronous data replication\.
 + Failover times are affected by the time it takes to complete the recovery process\. Large transactions increase the failover time\.

@@ -39,7 +39,7 @@ The process for subscribing to Amazon RDS event notification is as follows:
 
 1. Amazon RDS begins sending the notifications to the addresses that you provided when you created the subscription\.
 
-To learn about identity and access management when using Amazon SNS, see [Identity and access management in Amazon SNS](https://docs.aws.amazon.com/dg/sns-authentication-and-access-control.html) in the *Amazon Simple Notification Service Developer Guide*\.
+To learn about identity and access management when using Amazon SNS, see [Identity and access management in Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/sns-authentication-and-access-control.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 You can use AWS Lambda to process event notifications from a DB instance\. For more information, see [Using AWS Lambda with Amazon RDS](https://docs.aws.amazon.com/lambda/latest/dg/services-rds.html) in the *AWS Lambda Developer Guide*\.
 

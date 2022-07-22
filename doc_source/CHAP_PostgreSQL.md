@@ -18,9 +18,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 **Topics**
 + [Common management tasks for Amazon RDS for PostgreSQL](#CHAP_PostgreSQL.CommonTasks)
 + [Working with the database preview environment](#working-with-the-database-preview-environment)
-+ [Limitations for PostgreSQL DB instances](#PostgreSQL.Concepts.General.Limits)
 + [Available PostgreSQL database versions](#PostgreSQL.Concepts.General.DBVersions)
-+ [Deprecated versions for Amazon RDS for PostgreSQL](#PostgreSQL.Concepts.General.DeprecatedVersions)
 + [Supported PostgreSQL extension versions](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
 + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
 + [Securing connections to RDS for PostgreSQL with SSL/TLS](PostgreSQL.Concepts.General.Security.md)
@@ -82,10 +80,6 @@ DB instances in the Database Preview Environment are similar to DB instances in 
 + You can use both single\-AZ and multi\-AZ deployments\.
 + You can use standard PostgreSQL dump and load functions to export databases from or import databases to the Database Preview Environment\.
 
-**Topics**
-+ [Features not supported in the preview environment](#preview-environment-exclusions)
-+ [Creating a new DB instance in the preview environment](#create-db-instance-in-preview-environment)
-
 ### Features not supported in the preview environment<a name="preview-environment-exclusions"></a>
 
 The following features are not available in the preview environment:
@@ -109,14 +103,7 @@ Use the following procedure to create a DB instance in the preview environment\.
 **Note**  
 If you want to create an instance in the Database Preview Environment with the API or CLI, the endpoint is `rds-preview.us-east-2.amazonaws.com`\.
 
-1. Continue with the procedure as described in [Console](USER_CreateDBInstance.md#USER_CreateDBInstance.CON)\.
-
-## Limitations for PostgreSQL DB instances<a name="PostgreSQL.Concepts.General.Limits"></a>
-
-The following is a list of limitations for RDS for PostgreSQL:
-+ You can have up to 40 PostgreSQL DB instances\.
-+ For storage limits, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
-+ Amazon RDS reserves up to 3 connections for system maintenance\. If you specify a value for the user connections parameter, add 3 to the number of connections that you expect to use\. 
+1. Continue with the procedure as described in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md#USER_CreateDBInstance.CON), [Console](USER_CreateDBInstance.md#USER_CreateDBInstance.CON)\.
 
 ## Available PostgreSQL database versions<a name="PostgreSQL.Concepts.General.DBVersions"></a>
 
@@ -142,7 +129,7 @@ On March 31, 2022, Amazon RDS plans to deprecate PostgreSQL 9\.6 using the follo
 |  After this date, you can't create new Amazon RDS instances with PostgreSQL major version 9\.6 from either the AWS Management Console or the AWS CLI\.   |  March 31, 2022  | 
 |  After this date, Amazon RDS automatically upgrades PostgreSQL 9\.6 instances to version 12\. If you restore a PostgreSQL 9\.6 database snapshot, Amazon RDS automatically upgrades the restored database to PostgreSQL 12\.   |  April 26, 2022  | 
 
-## Deprecated versions for Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.DeprecatedVersions"></a>
+### Deprecated versions for Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.DeprecatedVersions"></a>
 
 RDS for PostgreSQL 9\.5 is deprecated as of March, 2021\. For more information about RDS for PostgreSQL 9\.5 deprecation, see [ Upgrading from Amazon RDS for PostgreSQL version 9\.5](http://aws.amazon.com/blogs/database/upgrading-from-amazon-rds-for-postgresql-version-9-5/)\.
 
@@ -159,11 +146,11 @@ SHOW rds.extensions;
 **Note**  
 Parameters added in a minor version release might display inaccurately when using the `rds.extensions` parameter in `psql`\. 
 
-For details about the PostgreSQL extensions that are supported on Amazon RDS, see [PostgreSQL extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html) in *Amazon RDS for PostgreSQL Release Notes*\.
+As of RDS for PostgreSQL 13, certain extensions can be installed by database users other than the `rds_superuser`\. These are known as *trusted extensions*\. To learn more, see [PostgreSQL trusted extensions](#PostgreSQL.Concepts.General.Extensions.Trusted)\. 
 
-**Contents**
-+ [Restricting installation of PostgreSQL extensions](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.Restriction)
-+ [PostgreSQL trusted extensions](#PostgreSQL.Concepts.General.Extensions.Trusted)
+Certain versions of RDS for PostgreSQL support the `rds.allowed_extensions` parameter\. This parameter lets an `rds_superuser` limit the extensions that can be installed in the RDS for PostgreSQL DB instance\. For more information, see [Restricting installation of PostgreSQL extensions](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.Restriction)\. 
+
+For lists of PostgreSQL extensions and versions that are supported by each available RDS for PostgreSQL version, see [PostgreSQL extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html) in *Amazon RDS for PostgreSQL Release Notes*\. 
 
 ### Restricting installation of PostgreSQL extensions<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.Restriction"></a>
 
@@ -223,6 +210,8 @@ The following lists the extensions that can be installed by a user who has the `
 + [tsm\_system\_time](https://www.postgresql.org/docs/current/tsm-system-time.html)
 + [unaccent](http://www.postgresql.org/docs/current/unaccent.html)
 + [uuid\-ossp](http://www.postgresql.org/docs/current/uuid-ossp.html)
+
+For lists of PostgreSQL extensions and versions that are supported by each available RDS for PostgreSQL version, see [PostgreSQL extensions supported on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-extensions.html) in *Amazon RDS for PostgreSQL Release Notes*\. 
 
 ## Working with PostgreSQL features supported by Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport"></a>
 

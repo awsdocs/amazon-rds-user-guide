@@ -317,7 +317,6 @@ The following limitations apply to Multi\-AZ DB clusters:
 + Multi\-AZ DB clusters don't support modifications at the DB instance level because all modifications are done at the DB cluster level\.
 + Multi\-AZ DB clusters don't support the following features:
   + Amazon RDS Proxy
-  + AWS Backup
   + AWS CloudFormation
   + Support for IPv6 connections \(dual\-stack mode\)
   + Exporting Multi\-AZ DB cluster snapshot data to an Amazon S3 bucket
@@ -334,7 +333,8 @@ The following limitations apply to Multi\-AZ DB clusters:
 
     As an alternative, you can scale storage manually\.
   + Stopping and starting the DB cluster
-  + Cross\-account DB instance and DB cluster snapshots
+  + Copying a snapshot of a Multi\-AZ DB cluster
+  + Encrypting an unencrypted Multi\-AZ DB cluster
 + RDS for MySQL Multi\-AZ DB clusters don't support replication to an external target database\.
 + RDS for MySQL Multi\-AZ DB clusters support only the following system stored procedures:
   + `mysql.rds_rotate_general_log`

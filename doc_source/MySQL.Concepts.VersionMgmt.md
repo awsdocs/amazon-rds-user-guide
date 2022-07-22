@@ -4,6 +4,7 @@ For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS te
 
 **Topics**
 + [Supported MySQL versions on Amazon RDS](#MySQL.Concepts.VersionMgmt.Supported)
++ [RDS for MySQL release calendar](#MySQL.Concepts.VersionMgmt.ReleaseCalendar)
 + [Deprecated versions for Amazon RDS for MySQL](#MySQL.Concepts.DeprecatedVersions)
 
 ## Supported MySQL versions on Amazon RDS<a name="MySQL.Concepts.VersionMgmt.Supported"></a>
@@ -41,6 +42,22 @@ If you opt out of automatically scheduled upgrades, you can manually upgrade to 
 Amazon RDS currently supports the major version upgrades from MySQL version 5\.6 to version 5\.7, and from MySQL version 5\.7 to version 8\.0\. Because major version upgrades involve some compatibility risk, they do not occur automatically; you must make a request to modify the DB instance\. You should thoroughly test any upgrade before upgrading your production instances\. For information about upgrading a MySQL DB instance, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\. 
 
 You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
+
+## RDS for MySQL release calendar<a name="MySQL.Concepts.VersionMgmt.ReleaseCalendar"></a>
+
+RDS for MySQL major versions remain available at least until community end of life for the corresponding community version\. You can use the following dates to plan your testing and upgrade cycles\. If Amazon extends support for an RDS for MySQL version for longer than originally stated, we plan to update this table to reflect the later date\. 
+
+**Note**  
+Dates with only a month and a year are approximate and are updated with an exact date when it’s known\.
+
+
+****  
+
+| MySQL major version | Community release date | RDS release date | Community end of life date | RDS end of standard support date | 
+| --- | --- | --- | --- | --- | 
+|  MySQL 8\.0 Current minor version: 8\.0\.28  | 19 April 2018 | 23 October 2018 | April 2026 | April 2026 | 
+|  MySQL 5\.7 Current minor version: 5\.7\.38  | 21 October 2015 | 22 February 2016 | October 2023 | October 2023 | 
+|  MySQL 5\.6 Current minor version: N/A  | 5 February 2013 | 1 July 2013 | 5 February 2021 | 1 March 2022 | 
 
 ## Deprecated versions for Amazon RDS for MySQL<a name="MySQL.Concepts.DeprecatedVersions"></a>
 

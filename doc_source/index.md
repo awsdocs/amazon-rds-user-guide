@@ -161,6 +161,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Overview of Database Activity Streams](DBActivityStreams.Overview.md)
       + [Configuring unified auditing for Oracle Database](DBActivityStreams.configuring-auditing.md)
       + [Starting a database activity stream](DBActivityStreams.Enabling.md)
+      + [Modifying a database activity stream](DBActivityStreams.Modifying.md)
       + [Getting the status of a database activity stream](DBActivityStreams.Status.md)
       + [Stopping a database activity stream](DBActivityStreams.Disabling.md)
       + [Monitoring database activity streams](DBActivityStreams.Monitoring.md)

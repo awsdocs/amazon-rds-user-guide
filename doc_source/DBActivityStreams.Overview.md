@@ -15,12 +15,10 @@ Security threats are both external and internal\. To protect against internal th
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
-In Amazon Aurora, you start a database activity stream at the cluster level\. All DB instances within your cluster have database activity streams enabled\.
-
 Amazon RDS for Oracle pushes activities to an Amazon Kinesis data stream in near real time\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
 
 **Important**  
-Use of the Database Activity Streams feature in Amazon Aurora and Amazon RDS is free, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
+Use of the Database Activity Streams feature in Amazon RDS for Oracle is free, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.
 
 You can configure applications for compliance management to consume database activity streams\. These applications can use the stream to generate alerts and audit activity on your Oracle database\.
 

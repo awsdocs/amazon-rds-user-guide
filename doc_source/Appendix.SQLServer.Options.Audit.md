@@ -17,7 +17,7 @@ For more information, see [SQL Server Audit \(database engine\)](https://docs.mi
 
 ## Support for SQL Server Audit<a name="Appendix.SQLServer.Options.Audit.Support"></a>
 
-In Amazon RDS, starting with SQL Server 2012, all editions of SQL Server support server\-level audits, and the Enterprise edition also supports database\-level audits\. Starting with SQL Server 2016 \(13\.x\) SP1, all editions support both server\-level and database\-level audits\. For more information, see [SQL Server Audit \(database engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the SQL Server documentation\.
+In Amazon RDS, starting with SQL Server 2014, all editions of SQL Server support server\-level audits, and the Enterprise edition also supports database\-level audits\. Starting with SQL Server 2016 \(13\.x\) SP1, all editions support both server\-level and database\-level audits\. For more information, see [SQL Server Audit \(database engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the SQL Server documentation\.
 
 RDS supports configuring the following option settings for SQL Server Audit\. 
 

@@ -2,7 +2,7 @@
 
 You can monitor the contents of a log file by using the AWS Management Console\.
 
-## Console<a name="USER_LogAccess.Procedural.Watching.CON"></a>
+## <a name="USER_LogAccess.Procedural.Watching.CON"></a>
 
 **To watch a database log file**
 
@@ -12,6 +12,8 @@ You can monitor the contents of a log file by using the AWS Management Console\.
 
 1. Choose the name of the DB instance that has the log file that you want to view\.
 
-1. Choose the **Logs & events** tab\.
+1. Choose the **Logs & events** tab\.  
+![\[alt_text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Monitoring_logsEvents.png)
 
-1. In the **Logs** section, choose a log file, and then choose **Watch**\.
+1. In the **Logs** section, choose a log file, and then choose **Watch**\.  
+![\[alt_text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Monitoring_LogsEvents_watch.png)

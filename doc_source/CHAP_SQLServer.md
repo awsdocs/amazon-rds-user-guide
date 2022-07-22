@@ -7,7 +7,7 @@ Amazon RDS supports several versions and editions of Microsoft SQL Server\. The 
 + SQL Server 2017 CU27 14\.00\.3421\.10, released per [KB5006944](https://support.microsoft.com/en-us/topic/kb5006944-cumulative-update-27-for-sql-server-2017-79117c8f-9d54-42f8-9727-5870fe475187) on October 27, 2021\.
 + SQL Server 2016 SP3 13\.00\.6300\.2, released per [KB5003279](https://support.microsoft.com/en-us/topic/kb5003279-sql-server-2016-service-pack-3-release-information-46ab9543-5cf9-464d-bd63-796279591c31) on September 15, 2021\.
 + SQL Server 2014 SP3 CU4 SU 12\.00\.6433\.1, released per [KB4583462](https://support.microsoft.com/en-us/topic/kb4583462-description-of-the-security-update-for-sql-server-2014-sp3-cu4-january-12-2021-a791987a-d823-4a86-d573-6f11f646267f) on January 12, 2021\.
-+ SQL Server 2012 SP4 GDR 11\.00\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
++ SQL Server 2012: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
 + SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
 
 For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
@@ -133,7 +133,7 @@ Not all DB instance classes are available on all supported SQL Server minor vers
 
 ****  
 
-| SQL Server edition | 2019 support range | 2017 and 2016 support range | 2014 and 2012 support range | 
+| SQL Server edition | 2019 support range | 2017 and 2016 support range | 2014 support range | 
 | --- | --- | --- | --- | 
 |  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.r6i.xlarge`–`db.r6i.32xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.m6i.xlarge`–`db.m6i.32xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.r6i.xlarge`–`db.r6i.32xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.m6i.xlarge`–`db.m6i.32xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.r5d.xlarge`–`db.r5d.24xlarge` `db.r6i.xlarge`–`db.r6i.32xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.m5d.xlarge`–`db.m5d.24xlarge` `db.m6i.xlarge`–`db.m6i.32xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
 |  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.r6i.large`–`db.r6i.8xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge`  `db.m6i.large`–`db.m6i.8xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.r6i.large`–`db.r6i.8xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.m6i.large`–`db.m6i.8xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.r5d.large`–`db.r5d.24xlarge` `db.r6i.large`–`db.r6i.8xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.m5d.large`–`db.m5d.24xlarge` `db.m6i.large`–`db.m6i.8xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
@@ -169,8 +169,8 @@ The following server\-level permissions aren't available on RDS for SQL Server D
 + EXTERNAL ACCESS ASSEMBLY
 + SHUTDOWN \(You can use the RDS reboot option instead\)
 + UNSAFE ASSEMBLY
-+ ALTER ANY AVAILABILITY GROUP \(SQL Server 2012 only\)
-+ CREATE ANY AVAILABILITY GROUP \(SQL Server 2012 only\)
++ ALTER ANY AVAILABILITY GROUP
++ CREATE ANY AVAILABILITY GROUP
 
 ## Compliance program support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.Compliance"></a>
 
@@ -185,7 +185,6 @@ Amazon RDS for SQL Server supports HIPAA for the following versions and editions
 + SQL Server 2017 Enterprise, Standard, and Web Editions
 + SQL Server 2016 Enterprise, Standard, and Web Editions
 + SQL Server 2014 Enterprise, Standard, and Web Editions
-+ SQL Server 2012 Enterprise, Standard, and Web Editions
 
 To enable HIPAA support on your DB instance, set up the following three components\.
 
@@ -219,7 +218,6 @@ The following table shows the supported versions for all editions and all AWS Re
 | SQL Server 2017 |  14\.00\.3421\.10 \(CU27\) 14\.00\.3401\.7 \(CU25\) 14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\)  |  `14.00.3421.10.v1` `14.00.3401.7.v1` `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1`  | 
 | SQL Server 2016 |  13\.00\.6300\.2 \(SP3\) 13\.00\.5882\.1 \(SP2 CU16\) 13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\)  |  `13.00.6300.2.v1` `13.00.5882.1.v1` `13.00.5850.14.v1` `13.00.5820.21.v1`  | 
 | SQL Server 2014 |  12\.00\.6433\.1 \(SP3 CU4 SU\) 12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\)  |  `12.00.6433.1.v1` `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1`  | 
-| SQL Server 2012 |  11\.00\.7493\.4 \(SP4 GDR\) 11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\)  |  `11.00.7493.4.v1` `11.00.7462.6.v1` `11.00.6594.0.v1`  | 
 
 ## Version management in Amazon RDS<a name="SQLServer.Concepts.General.Version-Management"></a>
 
@@ -256,8 +254,8 @@ The supported SQL Server versions on Amazon RDS include the following features\.
 + [Microsoft SQL Server 2017 features](#SQLServer.Concepts.General.FeatureSupport.2017)
 + [Microsoft SQL Server 2016 features](#SQLServer.Concepts.General.FeatureSupport.2016)
 + [Microsoft SQL Server 2014 features](#SQLServer.Concepts.General.FeatureSupport.2014)
-+ [Microsoft SQL Server 2012 features](#SQLServer.Concepts.General.FeatureSupport.2012)
-+ [Microsoft SQL Server 2008 R2 deprecated on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport.2008)
++ [Microsoft SQL Server 2012 end of support on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport.2012)
++ [Microsoft SQL Server 2008 R2 end of support on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport.2008)
 
 ### Microsoft SQL Server 2019 features<a name="SQLServer.Concepts.General.FeatureSupport.2019"></a>
 
@@ -313,35 +311,17 @@ For a list of unsupported features, see [Features not supported and features wit
 
 SQL Server 2014 supports all the parameters from SQL Server 2012 and uses the same default values\. SQL Server 2014 includes one new parameter, backup checksum default\. For more information, see [How to enable the CHECKSUM option if backup utilities do not expose the option](https://support.microsoft.com/en-us/kb/2656988) in the Microsoft documentation\. 
 
-### Microsoft SQL Server 2012 features<a name="SQLServer.Concepts.General.FeatureSupport.2012"></a>
+### Microsoft SQL Server 2012 end of support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2012"></a>
 
-In addition to supported features of SQL Server 2008 R2, Amazon RDS supports the following SQL Server 2012 features: 
-+ Columnstore indexes \(Enterprise Edition\)
-+ Online Index Create, Rebuild and Drop for XML, varchar\(max\), nvarchar\(max\), and varbinary\(max\) data types \(Enterprise Edition\)
-+ Flexible Server Roles
-+ Service Broker is supported\. Service Broker endpoints aren't supported\.
-+ Partially Contained Databases
-+ Sequences
-+ Transparent Data Encryption \(Enterprise Edition only\)
-+ THROW statement
-+ New and enhanced spatial types
-+ UTF\-16 Support
-+ ALTER ANY SERVER ROLE server\-level permission
-+ Secondary \(user\-defined\) filegroups
+SQL Server 2012 has reached its end of support on Amazon RDS\.
 
-For more information about SQL Server 2012, see [Features supported by the editions of SQL Server 2012](https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.110%29.aspx) in the Microsoft documentation\. 
+RDS is upgrading all existing DB instances that are still using SQL Server 2012 to the latest minor version of SQL Server 2014\. For more information, see [Version management in Amazon RDS](#SQLServer.Concepts.General.Version-Management)\.
 
-For a list of unsupported features, see [Features not supported and features with limited support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+### Microsoft SQL Server 2008 R2 end of support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2008"></a>
 
-Some SQL Server parameters have changed in SQL Server 2012\.
-+ The following parameters have been removed from SQL Server 2012: `awe enabled`, `precompute rank`, and `sql mail xps`\. These parameters were not modifiable in SQL Server DB Instances and their removal should have no impact on your SQL Server use\. 
-+ A new `contained database authentication` parameter in SQL Server 2012 supports partially contained databases\. When you enable this parameter and then create a partially contained database, an authorized user's user name and password is stored within the partially contained database instead of in the primary database\. For more information about partially contained databases, see [Contained databases](http://msdn.microsoft.com/en-us/library/ff929071.aspx) in the Microsoft documentation\. 
+SQL Server 2008 R2 has reached its end of support on Amazon RDS\.
 
-### Microsoft SQL Server 2008 R2 deprecated on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2008"></a>
-
-We are upgrading all existing instances that are still using SQL Server 2008 R2 to the latest minor version of SQL Server 2012\. For more information, see [Version management in Amazon RDS](#SQLServer.Concepts.General.Version-Management)\. 
-
-For more information about SQL Server 2008 R2, see [Features supported by the editions of SQL Server 2008 R2](https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.105%29.aspx) in the Microsoft documentation\. 
+RDS is upgrading all existing DB instances that are still using SQL Server 2008 R2 to the latest minor version of SQL Server 2012\. For more information, see [Version management in Amazon RDS](#SQLServer.Concepts.General.Version-Management)\.
 
 ## Change data capture support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.CDC"></a>
 
@@ -351,6 +331,7 @@ Amazon RDS supports CDC for the following SQL Server editions and versions:
 + Microsoft SQL Server Enterprise Edition \(All versions\) 
 + Microsoft SQL Server Standard Edition: 
   + 2019
+  + ea 
   + 2017
   + 2016 version 13\.00\.4422\.0 SP1 CU2 and later
 

@@ -37,22 +37,20 @@ Update the last archived time stamp\.
 
 ## AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 
-To start database activity streams for an Oracle database, configure the database using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\.
-+ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS key\.
+To start database activity streams for an Oracle DB instance, configure the database using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\.
 + `--resource-arn arn` – Specifies the Amazon Resource Name \(ARN\) of the DB instance\.
-+ `--region` – Identifies the AWS Region for the DB instance\.
++ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS key\.
 + `--engine-native-audit-fields-included` – Includes engine\-specific unified auditing fields in the data stream\. To exclude these fields, specify `--no-engine-native-audit-fields-included` \(default\)\.
-+ `--mode async` – Specifies asynchronous mode\.
-+ `--apply-immediately` – Applies the change immediately\. This parameter is optional\. If you don't specify this parameter, the database activity stream starts at the next maintenance interval\.
+
+The following example starts a database activity stream for an Oracle DB instance in asynchronous mode\.
 
 For Linux, macOS, or Unix:
 
 ```
-aws rds --region MY_REGION \
-    start-activity-stream \
+aws rds start-activity-stream \
     --mode async \
-    --kms-key-id MY_KMS_KEY_ARN \
-    --resource-arn MY_DB_ARN \
+    --kms-key-id my-kms-key-arn \
+    --resource-arn my-instance-arn \
     --engine-native-audit-fields-included \
     --apply-immediately
 ```
@@ -60,23 +58,21 @@ aws rds --region MY_REGION \
 For Windows:
 
 ```
-aws rds --region MY_REGION ^
-    start-activity-stream ^
+aws rds start-activity-stream ^
     --mode async ^
-    --kms-key-id MY_KMS_KEY_ARN ^
-    --resource-arn MY_DB_ARN ^
+    --kms-key-id my-kms-key-arn ^
+    --resource-arn my-instance-arn ^
     --engine-native-audit-fields-included ^
     --apply-immediately
 ```
 
 ## RDS API<a name="DBActivityStreams.Enabling-collapsible-section-E3"></a>
 
-To start database activity streams for an Oracle database, configure the database using the [StartActivityStream](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartActivityStream.html) operation\.
+To start database activity streams for an Oracle DB instance, configure the instance using the [StartActivityStream](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartActivityStream.html) operation\.
 
 Call the action with the parameters below:
 + `Region`
-+ `EngineNativeAuditFieldsIncluded`
 + `KmsKeyId`
 + `ResourceArn`
 + `Mode`
-+ `ApplyImmediately`
++ `EngineNativeAuditFieldsIncluded`
