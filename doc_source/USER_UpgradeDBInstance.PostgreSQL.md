@@ -166,7 +166,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
    
 
-1. **Handle logical replication slots** – An upgrade can't occur if the instance has any logical replication slots\. Logical replication slots are typically used for AWS DMS migration and for replicating tables from the database to data lakes, BI tools, and other targets\. Before upgrading, make sure you know the purpose of any logical replication slots that are in use, and confirm that it's okay to delete them\. If the logical replication slots are still being used, you shouldn't delete them, and you can't proceed with the upgrade\. 
+1. **Handle logical replication slots** – An upgrade can't occur if the instance has any logical replication slots\. Logical replication slots are typically used for AWS DMS migration and for replicating tables from the database to data lakes, BI tools, and other targets\. Before upgrading, make sure that you know the purpose of any logical replication slots that are in use, and confirm that it's okay to delete them\. If the logical replication slots are still being used, you shouldn't delete them, and you can't proceed with the upgrade\. 
 
    If the logical replication slots aren't needed, you can delete them using the following SQL:
 

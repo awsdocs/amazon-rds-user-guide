@@ -288,12 +288,12 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 
  For MySQL engine family databases, this rule doesn't apply to all parameters that you can set\. RDS Proxy tracks certain statements and variables\. Thus RDS Proxy doesn't pin the session when you modify them\. In this case, RDS Proxy only reuses the connection for other sessions that have the same values for those settings\. 
 
-Following are the MySQL statements that RDS Proxy tracks:
+Following are the MySQL and MariaDB statements that RDS Proxy tracks:
 + DROP DATABASE
 + DROP SCHEMA
 + USE
 
-Following are the MySQL variables that RDS Proxy tracks:
+Following are the MySQL and MariaDB variables that RDS Proxy tracks:
 + `AUTOCOMMIT`
 + `AUTO_INCREMENT_INCREMENT`
 + `CHARACTER SET (or CHAR SET)`
@@ -336,16 +336,14 @@ Following are the MySQL variables that RDS Proxy tracks:
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session\.
 +  Prepared statements cause the proxy to pin the session\. This rule applies whether the prepared statement uses SQL text or the binary protocol\. 
 
-### Conditions that cause pinning for MySQL<a name="rds-proxy-pinning.mysql"></a>
+### Conditions that cause pinning for MySQL and MariaDB<a name="rds-proxy-pinning.mysql"></a>
 
- For MySQL, the following interactions also cause pinning: 
+ For MySQL and MariaDB, the following interactions also cause pinning: 
 +  Explicit  table lock statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
 +  Creating named locks by using `GET_LOCK` causes the proxy to pin the session\.  
-+  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the `SessionPinningFilters` property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
++  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the session pinning filters property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
 +  Creating a temporary table causes the proxy to pin the session\. That way, the contents of the temporary table are preserved throughout the session regardless of transaction boundaries\. 
 +  Calling the functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
-
-   The exact circumstances where these functions cause pinning might differ between Aurora MySQL versions that are compatible with MySQL 5\.6 and MySQL 5\.7\. 
 
  Calling stored procedures and stored functions doesn't cause pinning\. RDS Proxy doesn't detect any session state changes resulting from such calls\. Therefore, make sure that your application doesn't change session state inside stored routines and rely on that session state to persist across transactions\. For example, if a stored procedure creates a temporary table that is intended to persist across transactions, that application currently isn't compatible with RDS Proxy\. 
 

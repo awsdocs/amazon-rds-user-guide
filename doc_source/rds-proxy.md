@@ -28,6 +28,7 @@
 
 RDS Proxy supports the following database engine versions:
 + RDS for MySQL – MySQL 5\.7 and 8\.0
++ RDS for MariaDB – MariaDB 10\.2, 10\.3, 10\.4, and 10\.5
 + RDS for PostgreSQL – version 10\.10 and higher minor versions, version 11\.5 and higher minor versions, version 12\.5 and higher minor versions, and version 13\.1 and higher minor versions
 
 RDS Proxy is available in the following AWS Regions:
@@ -83,6 +84,20 @@ RDS Proxy is available in the following AWS Regions:
 
 **Important**  
  For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
+
+ The following RDS Proxy limitations apply to MariaDB:
+
+
++  Currently, all proxies listen on port 3306 for MariaDB\. The proxies still connect to your database using the port that you specified in the database settings\. 
++ You can't use RDS Proxy with self\-managed MariaDB databases in EC2 instances\.
++ You can't use RDS Proxy with an RDS for MariaDB DB instance that has the `read_only` parameter in its DB parameter group set to `1`\.
++ RDS Proxy doesn't support compressed mode\. For example, it doesn't support the compression used by the `--compress` or `-C` options of the `mysql` command\.
++ Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\.
++ RDS Proxy doesn't support the MariaDB `auth_ed25519` plugin\.
++ RDS Proxy doesn't support Transport Layer Security \(TLS\) version 1\.3 for MariaDB databases\.
+
+**Important**  
+ For proxies associated with MariaDB databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
 
  The following RDS Proxy limitations apply to PostgreSQL:
 + RDS Proxy doesn't support session pinning filters for PostgreSQL\.

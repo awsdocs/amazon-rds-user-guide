@@ -31,7 +31,7 @@ Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extende
 
 Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
 
-For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\.
+For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is often irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\. However, for DB instances larger than 1 TiB where the storage is *striped* across four Amazon EBS volumes, burst performance of up to 12,000 IOPS can be seen\. This applies to RDS database engines other than Microsoft SQL Server, which doesn't support volume striping\.
 
 **Note**  
 DB instances that use General Purpose SSD storage can experience much longer latency after read replica creation, Multi\-AZ conversion, and DB snapshot restoration than instances that use Provisioned IOPS storage\. If you need a DB instance with minimum latency after these operations, we recommend using Provisioned IOPS storage\.

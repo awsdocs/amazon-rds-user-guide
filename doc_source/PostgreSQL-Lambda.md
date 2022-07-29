@@ -25,32 +25,17 @@ For more information about Lambda functions, see [Getting started with Lambda](h
 
 ## Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda<a name="PostgreSQL-Lambda-network"></a>
 
-Lambda functions always run inside an Amazon VPC owned by the AWS Lambda service\. Lambda applies network access and security rules to this VPC and it maintains and monitors the VPC automatically\. Your RDS for PostgreSQL DB instance needs to send network traffic to the Lambda service's VPC\. How you configure this depends on whether your DB instance is public or private\.
-+ If your RDS for PostgreSQL DB instance is public, you need only configure your security group to allow outbound traffic from your VPC\. Your DB instance is public if it's located in a public subnet on your VPC, and if the instance's "PubliclyAccessible" property is `true`\.
+Lambda functions always run inside an Amazon VPC that's owned by the AWS Lambda service\. Lambda applies network access and security rules to this VPC and it maintains and monitors the VPC automatically\. Your RDS for PostgreSQL DB instance sends network traffic to the Lambda service's VPC\. How you configure this depends on whether your DB instance is public or private\.
++ **Public RDS for PostgreSQL DB instance** – A DB instance is public if it's located in a public subnet on your VPC, and if the instance's "PubliclyAccessible" property is `true`\. To find the value of this property, you can use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command\. Or, you can use the AWS Management Console to open the **Connectivity & security** tab and check that **Publicly accessible** is **Yes**\. To verify that the instance is in the public subnet of your VPC, you can use the AWS Management Console or the AWS CLI\. 
 
-  To find the value of this property, you can use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command\. Or, you can use the AWS Management Console to open the **Connectivity & security** tab and check that **Publicly accessible** is **Yes**\. You can also use the AWS Management Console and the AWS CLI to check that the instance is in a public subnet in your VPC\. 
-+ If your RDS for PostgreSQL DB instance is private, you have a couple of choices\. You can use a Network Address Translation\) NAT gateway or you can use a VPC endpoint\. For information about NAT gateways, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)\. The summary of steps for using a VPC endpoint follow\. 
+  To set up access to Lambda, you use the AWS Management Console or the AWS CLI to create an outbound rule on your VPC's security group\. The outbound rule specifies that TCP can use port 443 to send packets to any IPv4 addresses \(0\.0\.0\.0/0\)\.
++ **Private RDS for PostgreSQL DB instance** – In this case, the instance's "PubliclyAccessible" property is `false` or it's in a private subnet\. To allow the instance to work with Lambda, you can use a Network Address Translation\) NAT gateway\. For more information, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)\. Or, you can configure your VPC with a VPC endpoint for Lambda\. For more information, see [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*\. The endpoint responds to calls made by your RDS for PostgreSQL DB instance to your Lambda functions\. The VPC endpoint uses its own private DNS resolution\. RDS for PostgreSQL can't use the Lambda VPC endpoint until you change the value of the `rds.custom_dns_resolution` from its default value of 0 \(not enabled\) to 1\. To do so:
+  + Create a custom DB parameter group\.
+  + Change the value of the `rds.custom_dns_resolution` parameter from its default of `0` to `1`\. 
+  + Modify your DB instance to use your custom DB parameter group\.
+  + Reboot the instance to have the modified parameter take effect\.
 
-**To configure connectivity to AWS Lambda for a **public** DB instance**
-+ Configure the VPC in which your RDS for PostgreSQL DB instance is running to allow outbound connections\. You do so by creating an outbound rule on your VPC's security group that allows TCP traffic to port 443 and to any IPv4 addresses \(0\.0\.0\.0/0\)\.
-
-**To configure connectivity to AWS Lambda for a **private** DB instance**
-
-1. Configure your VPC with a VPC endpoint for AWS Lambda\. For details, see [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*\. The endpoint returns responses to calls made by your RDS for PostgreSQL DB instance to your Lambda functions\. 
-
-1. Add the endpoint to your VPC's route table\. For more information, see [Work with route tables](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the *Amazon VPC User Guide*\. 
-
-1. The VPC endpoint uses its own private DNS resolution\. RDS for PostgreSQL can't use the Lambda VPC endpoint until you change the value of the `rds.custom_dns_resolution` from its default value of 0 \(not enabled\) to 1\. 
-
-   1. Create a custom DB parameter group\.
-
-   1. Change the value of the `rds.custom_dns_resolution` parameter from its default of `0` to `1`\. 
-
-   1. Modify your DB instance to use your custom DB parameter group\.
-
-   1. Reboot the instance to have the modified parameter take effect\.
-
-Your VPC can now interact with the AWS Lambda VPC at the network level\. However, you still need to configure the permissions using IAM\.  
+Your VPC can now interact with the AWS Lambda VPC at the network level\. Next, you configure the permissions using IAM\. 
 
 ## Step 2: Configure IAM for your RDS for PostgreSQL DB instance and AWS Lambda<a name="PostgreSQL-Lambda-access"></a>
 

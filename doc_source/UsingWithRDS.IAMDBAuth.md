@@ -11,6 +11,8 @@ IAM database authentication provides the following benefits:
 
 In general, consider using IAM database authentication when your applications create fewer than 200 connections per second, and you don't want to manage usernames and passwords directly in your application code\.
 
+The AWS JDBC Driver for MySQL supports IAM database authentication\. For more information, see [AWS IAM Database Authentication](https://github.com/awslabs/aws-mysql-jdbc#aws-iam-database-authentication) in the AWS JDBC Driver for MySQL GitHub repository\.
+
 **Topics**
 + [Availability for IAM database authentication](#UsingWithRDS.IAMDBAuth.Availability)
 + [Limitations for IAM database authentication](#UsingWithRDS.IAMDBAuth.Limitations)

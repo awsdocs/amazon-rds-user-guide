@@ -94,7 +94,8 @@ For more information, see [Internetwork traffic privacy](inter-network-traffic-p
 You can communicate between an Amazon RDS DB instance that is in a VPC and an EC2 instance that is not in an Amazon VPC by using *ClassicLink*\. When you use ClassicLink, an application on the EC2 instance can connect to the DB instance by using the endpoint for the DB instance\. ClassicLink is available at no charge\. 
 
 **Important**  
-If your EC2 instance was created after 2013, it is probably in a VPC\.
+If your EC2 instance was created after 2013, it is probably in a VPC\.  
+EC2\-Classic networking is retiring\. The end of life is planned for August 15, 2022\.
 
 The following diagram shows this scenario\. 
 

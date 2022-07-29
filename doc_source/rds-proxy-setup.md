@@ -243,7 +243,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
 
 ## Creating an RDS Proxy<a name="rds-proxy-creating"></a>
 
- To manage connections for a specified set of DB instances, you can create a proxy\. You can associate a proxy with an RDS for MySQL DB instance, PostgreSQL DB instance, or an Aurora DB cluster\. 
+ To manage connections for a specified set of DB instances, you can create a proxy\. You can associate a proxy with an RDS for MariaDB, RDS for MySQL, or RDS for PostgreSQL DB instance\. 
 
 ### AWS Management Console<a name="rds-proxy-creating.console"></a>
 
@@ -259,7 +259,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
 
     For **Proxy configuration**, provide information for the following: 
    +  **Proxy identifier**\. Specify a name of your choosing, unique within your AWS account ID and current AWS Region\. 
-   +  **Engine compatibility**\. Choose either **MySQL** or **POSTGRESQL**\. 
+   +  **Engine family**\. This setting determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database\. For RDS for MariaDB or RDS for MySQL, choose **MySQL**\. For RDS for PostgreSQL, choose **PostgreSQL**\. 
    +  **Require Transport Layer Security**\. Choose this setting if you want the proxy to enforce TLS/SSL for all client connections\. When you use an encrypted or unencrypted connection to a proxy, the proxy uses the same encryption setting when it makes a connection to the underlying database\. 
    +  **Idle client connection timeout**\. Choose a time period that a client connection can be idle before the proxy can close it\. The default is 1,800 seconds \(30 minutes\)\. A client connection is considered idle when the application doesn't submit a new request within the specified time after the previous request completed\. The underlying database connection stays open and is returned to the connection pool\. Thus, it's available to be reused for new client connections\. 
 
@@ -371,7 +371,7 @@ aws rds register-db-proxy-targets
 
 1.  Choose the name of an RDS proxy to display its details\. 
 
-1.  On the details page, the **Target groups** section shows how the proxy is associated with a specific RDS DB instance or Aurora DB cluster\. You can follow the link to the **default** target group page to see more details about the association between the proxy and the database\. This page is where you see settings that you specified when creating the proxy, such as maximum connection percentage, connection borrow timeout, engine compatibility, and session pinning filters\. 
+1.  On the details page, the **Target groups** section shows how the proxy is associated with a specific RDS DB instance or Aurora DB cluster\. You can follow the link to the **default** target group page to see more details about the association between the proxy and the database\. This page is where you see settings that you specified when creating the proxy, such as maximum connection percentage, connection borrow timeout, engine family, and session pinning filters\. 
 
 ### CLI<a name="rds-proxy-viewing.cli"></a>
 

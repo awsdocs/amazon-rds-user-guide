@@ -177,11 +177,11 @@ mysql>
 
 ## Connecting with the Amazon Web Services JDBC Driver for MySQL<a name="USER_ConnectToInstance.JDBCDriverMySQL"></a>
 
-The AWS JDBC Driver for MySQL is a client driver designed for RDS for MySQL\. By default, the AWS JDBC Driver for MySQL has optimized settings for use with RDS for MySQL\.
+The AWS JDBC Driver for MySQL is a client driver designed for RDS for MySQL\. By default, the driver has settings that are optimized for use with RDS for MySQL\. For more information about the driver and complete instructions for using it, see [the AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
 
-The AWS JDBC Driver for MySQL is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
+The driver is drop\-in compatible with the MySQL Connector/J driver\. To install or upgrade your connector, replace the MySQL connector \.jar file \(located in the application CLASSPATH\) with the AWS JDBC Driver for MySQL \.jar file, and update the connection URL prefix from `jdbc:mysql://` to `jdbc:mysql:aws://`\.
 
-For more information about the AWS JDBC Driver for MySQL and complete instructions for using it, see [the AWS JDBC Driver for MySQL GitHub repository](https://awslabs.github.io/aws-mysql-jdbc/)\.
+The AWS JDBC Driver for MySQL supports IAM database authentication\. For more information, see [AWS IAM Database Authentication](https://github.com/awslabs/aws-mysql-jdbc#aws-iam-database-authentication) in the AWS JDBC Driver for MySQL GitHub repository\. For more information about IAM database authentication, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
 ## Troubleshooting connections to your MySQL DB instance<a name="USER_ConnectToInstance.Troubleshooting"></a>
 

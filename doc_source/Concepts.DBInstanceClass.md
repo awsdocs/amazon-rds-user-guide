@@ -200,14 +200,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r5b – memory\-optimized instance classes | 
-| db\.r5b\.24xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.16xlarge | No | Yes | MySQL 8\.0\.25 & higher |  Yes  | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.12xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.8xlarge | No | Yes | MySQL 8\.0\.25 & higher |  Yes  | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.4xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.2xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.large | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.24xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.16xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.12xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.8xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | >Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.4xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.2xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.large | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.5 & higher 12 versions | 
 | db\.r5 – memory\-optimized instance classes preconfigured for high memory, storage, and I/O | 
 | db\.r5\.12xlarge\.tpc2\.mem2x | No | No | No | Yes | No | 
 | db\.r5\.8xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 

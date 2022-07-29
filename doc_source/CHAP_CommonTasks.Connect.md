@@ -118,7 +118,6 @@ Before attempting to connect to your DB instance, configure your VPC for your us
 
   To connect to a DB instance from outside of its VPC, the DB instance must be publicly accessible\. Also, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 + **A DB instance in a VPC accessed by a private network** – If your DB instance isn't publicly accessible, you can use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\.
-+ **A DB instance in a VPC accessed by an EC2 instance not in a VPC** – You can communicate between a DB instance that is in a VPC and an EC2 instance that is not in a VPC by using ClassicLink\.
 
 For more information, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
 
@@ -133,5 +132,5 @@ For information about connecting to a DB instance that is running a specific DB 
 
 ## Managing connections with RDS Proxy<a name="CHAP_CommonTasks.Connect.RDSProxy"></a>
 
-You can also use Amazon RDS Proxy to manage connections to MySQL and PostgreSQL DB instances\. RDS Proxy allows applications to pool and share database connections to improve scalability\. 
+You can also use Amazon RDS Proxy to manage connections to RDS for MariaDB, RDS for MySQL, or RDS for PostgreSQL DB instances\. RDS Proxy allows applications to pool and share database connections to improve scalability\. 
 + [Using Amazon RDS Proxy](rds-proxy.md)
