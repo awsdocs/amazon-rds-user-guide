@@ -1,6 +1,6 @@
 # RDS for Oracle limitations<a name="Oracle.Concepts.limitations"></a>
 
-Following are important limitations of using Amazon RDS for Oracle\.
+Following are important limitations of using RDS for Oracle\.
 
 **Note**  
 This list is not exhaustive\.
@@ -15,7 +15,7 @@ This list is not exhaustive\.
 
 ## Oracle file size limits in Amazon RDS<a name="Oracle.Concepts.file-size-limits"></a>
 
-The maximum size of a single file on Amazon RDS Oracle DB instances is 16 TiB \(tebibytes\)\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following\.
+The maximum size of a single file on RDS for Oracle DB instances is 16 TiB \(tebibytes\)\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following\.
 
 ```
 ORA-01237: cannot extend datafile 6

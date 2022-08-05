@@ -1,12 +1,6 @@
-# Major version upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
+# Oracle major version upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 
 To perform a major version upgrade, modify the DB instance manually\. Major version upgrades don't occur automatically\. 
-
-**Topics**
-+ [Supported versions for major upgrades](#USER_UpgradeDBInstance.Oracle.Major.supported-versions)
-+ [Supported instance classes for major upgrades](#USER_UpgradeDBInstance.Oracle.Major.instance-classes)
-+ [Gathering statistics before major upgrades](#USER_UpgradeDBInstance.Oracle.Major.gathering-stats)
-+ [Allowing major upgrades](#USER_UpgradeDBInstance.Oracle.Major.allowing-upgrades)
 
 ## Supported versions for major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.supported-versions"></a>
 
@@ -17,10 +11,9 @@ Amazon RDS supports the following major version upgrades\.
 
 | Current version | Upgrade supported | 
 | --- | --- | 
-|  12\.2\.0\.1  |  19\.0\.0\.0  | 
-|  12\.1\.0\.2  |  19\.0\.0\.0 12\.2\.0\.1  | 
+|  19\.0\.0\.0 using the CDB architecture  |  21\.0\.0\.0  | 
 
-A major version upgrade of Oracle Database must upgrade to a Release Update \(RU\) that was released in the same month or later\. Major version downgrades aren't supported for any Oracle versions\.
+A major version upgrade of Oracle Database must upgrade to a Release Update \(RU\) that was released in the same month or later\. Major version downgrades aren't supported for any Oracle Database versions\.
 
 ## Supported instance classes for major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.instance-classes"></a>
 

@@ -73,6 +73,6 @@ Amazon RDS doesn't currently support the following MySQL features:
 + X Plugin
 
 **Note**  
-Global transaction IDs are supported for RDS for MySQL 5\.7\.23 and higher 5\.7 versions, and for MySQL 8\.0\.26 and higher 8\.0 versions\.
+Global transaction IDs are supported for all RDS for MySQL 5\.7 versions, and for RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, you are assigned to the *db\_owner* role for all databases on that instance, and you have all database\-level permissions except for those used for backups\. Amazon RDS manages backups for you\. 

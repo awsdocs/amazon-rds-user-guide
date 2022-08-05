@@ -1,20 +1,30 @@
-# Oracle Export/Import utilities<a name="Oracle.Procedural.Importing.ExportImport"></a>
+# Importing using Oracle Export/Import<a name="Oracle.Procedural.Importing.ExportImport"></a>
 
-The Oracle Export/Import utilities are best suited for migrations where the data size is small and data types such as binary float and double are not required\. The import process creates the schema objects so you do not need to run a script to create them beforehand, making this process well suited for databases with small tables\. The following example demonstrates how these utilities can be used to export and import specific tables\. 
+You might consider Oracle Export/Import utilities for migrations in the following conditions:
++ Your data size is small\.
++ Data types such as binary float and double aren't required\.
 
-To download Oracle export and import utilities, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\. 
+The import process creates the necessary schema objects, so you don't need to run a script to create the objects beforehand\. To download Oracle export and import utilities, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\.
 
-Export the tables from the source database using the command below\. Substitute username/password as appropriate\. 
+**To export tables and then import them**
 
-```
-exp cust_dba@ORCL FILE=exp_file.dmp TABLES=(tab1,tab2,tab3) LOG=exp_file.log
-```
+1. Export the tables from the source database using the `exp` command\.
 
-The export process creates a binary dump file that contains both the schema and data for the specified tables\. Now this schema and data can be imported into a target database using the command: 
+   The following command exports the tables named `tab1`, `tab2`, and `tab3`\. The dump file is `exp_file.dmp`\.
 
-```
-imp cust_dba@targetdb FROMUSER=cust_schema TOUSER=cust_schema \  
-TABLES=(tab1,tab2,tab3) FILE=exp_file.dmp LOG=imp_file.log
-```
+   ```
+   exp cust_dba@ORCL FILE=exp_file.dmp TABLES=(tab1,tab2,tab3) LOG=exp_file.log
+   ```
 
-There are other variations of the Export and Import commands that might be better suited to your needs\. See Oracle's documentation for full details\. 
+   The export creates a binary dump file that contains both the schema and data for the specified tables\. 
+
+1. Import the schema and data into a target database using the `imp` command\.
+
+   The following command imports the tables `tab1`, `tab2`, and `tab3` from dump file `exp_file.dmp`\.
+
+   ```
+   imp cust_dba@targetdb FROMUSER=cust_schema TOUSER=cust_schema \  
+   TABLES=(tab1,tab2,tab3) FILE=exp_file.dmp LOG=imp_file.log
+   ```
+
+Export and Import have other variations that might be better suited to your requirements\. See the Oracle Database documentation for full details\.

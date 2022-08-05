@@ -1,6 +1,8 @@
 # Monitoring Amazon RDS log files<a name="USER_LogAccess"></a>
 
-You can view, download, and watch database logs using the AWS Management Console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. Viewing, downloading, or watching transaction logs isn't supported\. 
+Every RDS database engine generates logs that you can access for auditing and troubleshooting\. The type of logs depends on your database engine\.
+
+You can access database logs using the AWS Management Console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. You can't view, watch, or download transaction logs\.
 
 **Topics**
 + [Viewing and listing database log files](USER_LogAccess.Procedural.Viewing.md)

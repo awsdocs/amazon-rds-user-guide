@@ -11,7 +11,16 @@ Using the Amazon RDS console, you can quickly access the status of your DB insta
 The status of a DB instance indicates the health of the DB instance\. You can view the status of a DB instance by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
 
 **Note**  
-Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information about maintenance status, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+
+**To view the status of a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+   The **Databases page** appears with the list of DB instances\. For each DB instance , the status value is displayed\.   
+![\[View the status of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDS_instance_status.png)
 
 Find the possible status values for DB instances in the following table\. This table also shows whether you will be billed for the DB instance and storage, billed only for storage, or not billed\. For all DB instance statuses, you are always billed for backup usage\.
 
@@ -73,11 +82,9 @@ You can find examples of these recommendations in the following table\.
 
 Amazon RDS generates recommendations for a resource when the resource is created or modified\. Amazon RDS also periodically scans your resources and generates recommendations\.
 
-### Responding to Amazon RDS recommendations<a name="USER_Recommendations.Responding"></a>
+### <a name="USER_Recommendations.Responding"></a>
 
-You can find recommendations in the AWS Management Console\. You can perform the recommended action immediately, schedule it for the next maintenance window, or dismiss it\.
-
-**To respond to Amazon RDS recommendations**
+**To view Amazon RDS recommendations**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -101,7 +108,7 @@ You can find recommendations in the AWS Management Console\. You can perform the
 
    From the **Preferences** window that appears, you can set display options\. These options include the visible columns and the number of recommendations to display on the page\.
 
-1. Manage your active recommendations:
+1. \(optional\) Respond to your active recommendations as follows:
 
    1. Choose **Active** and open one or more sections to view the recommendations in them\.
 

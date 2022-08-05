@@ -1,6 +1,6 @@
 # MySQL on Amazon RDS versions<a name="MySQL.Concepts.VersionMgmt"></a>
 
-For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.7 to 8\.0\. A version change is considered minor if only the minor version number changes—for example, going from version 5\.7\.16 to 5\.7\.21\. 
+For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.7 to 8\.0\. A version change is considered minor if only the minor version number changes—for example, going from version 8\.0\.27 to 8\.0\.28\. 
 
 **Topics**
 + [Supported MySQL versions on Amazon RDS](#MySQL.Concepts.VersionMgmt.Supported)

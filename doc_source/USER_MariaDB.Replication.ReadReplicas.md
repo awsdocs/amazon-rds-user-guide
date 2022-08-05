@@ -75,7 +75,6 @@ The following limitations apply to replication filtering for RDS for MariaDB:
 + Replication filtering doesn't support XA transactions\.
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
-+ Replication filtering is supported for all RDS for MariaDB versions, all 10\.4 versions, all 10\.5 versions, and all 10\.6 versions\.
 + Replication filtering isn't supported for RDS for MariaDB version 10\.2\.
 
 ### Replication filtering examples for RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>

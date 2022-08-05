@@ -29,7 +29,7 @@ In the following example, the CLI command returns a response indicating that upg
 ...
 ```
 
-For more information about performing upgrades, see [Upgrading a SQL Server DB instance](#USER_UpgradeDBInstance.SQLServer.Upgrading)\. For information about what SQL Server versions are available on Amazon RDS, see [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)\.
+For more information about performing upgrades, see [Upgrading a SQL Server DB instance](#USER_UpgradeDBInstance.SQLServer.Upgrading)\. For information about what SQL Server versions are available on Amazon RDS, see [Amazon RDS for Microsoft SQL Server](CHAP_SQLServer.md)\.
 
 **Topics**
 + [Overview of upgrading](#USER_UpgradeDBInstance.SQLServer.Overview)

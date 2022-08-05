@@ -43,7 +43,7 @@ The following table describes naming constraints in Amazon RDS\.
 | DB instance identifier |  Identifiers have these naming constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
 |  Database name  |  Database name constraints differ for each database engine \. For more information, see the available settings when creating each DB instance\.  This approach doesn't apply to SQL Server\. For SQL Server, you create your databases after you create your DB instance\.   | 
 |  Master user name  |  Master user name constraints differ for each database engine\. For more information, see the available settings when creating each DB instance\.  | 
-|  Master password  |  The password for the database master user can include any printable ASCII character except `/`, `"`, `@`, or a space\. Master password length constraints differ for each database engine\. For more information, see the available settings when creating each DB instance\.  | 
+|  Master password  |  The password for the database master user can include any printable ASCII character except `/`, `'`, `"`, `@`, or a space\. Master password length constraints differ for each database engine\. For more information, see the available settings when creating each DB instance\.  | 
 | DB parameter group name |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
 

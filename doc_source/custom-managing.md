@@ -273,7 +273,7 @@ Changing the time zone of an RDS Custom for Oracle DB instance has the following
   For more information about PITR, see [Restoring an RDS Custom for Oracle instance to a point in time](custom-backup.md#custom-backup.pitr)\.
 + Changing the time zone of an existing read replica causes downtime\. We recommend changing the time zone of the DB instance before creating read replicas\.
 
-  You can create a read replica from a DB instance with a modified time zone\. For more information about read replicas, see [Working with read replicas for RDS Custom for Oracle](custom-rr.md)\.
+  You can create a read replica from a DB instance with a modified time zone\. For more information about read replicas, see [Working with Oracle replicas for RDS Custom for Oracle](custom-rr.md)\.
 
 Use the following procedures to change the time zone of an RDS Custom for Oracle DB instance\.
 

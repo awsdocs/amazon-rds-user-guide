@@ -14,7 +14,7 @@ The following lists are not exhaustive\.
 
 ## New features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.new"></a>
 
-To see new Oracle features, use the following techniques:
+To see new RDS for Oracle features, use the following techniques:
 + Search [Document history](WhatsNew.md) for the keyword **Oracle**\.
 + You can filter new Amazon RDS features on the [What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products**, choose **Amazon RDS**\. Then search for **Oracle *YYYY***, where *YYYY* is a year such as **2022**\.
 
@@ -24,7 +24,7 @@ The following video shows a recent video from re:Invent about Oracle new feature
 
 ## Supported features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.supported"></a>
 
-Amazon RDS Oracle supports the following Oracle Database features:
+Amazon RDS for Oracle supports the following Oracle Database features:
 + Advanced Compression
 + Application Express \(APEX\)
 
@@ -113,7 +113,7 @@ This feature changes to Continuous Query Notification in Oracle Database 12c Rel
 
 ## Unsupported features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.unsupported"></a>
 
-Amazon RDS Oracle doesn't support the following Oracle Database features:
+Amazon RDS for Oracle doesn't support the following Oracle Database features:
 + Automatic Storage Management \(ASM\)
 + Database Vault
 + Flashback Database
@@ -129,4 +129,4 @@ Amazon RDS Oracle doesn't support the following Oracle Database features:
 The preceding list is not exhaustive\.
 
 **Warning**  
-In general, Amazon RDS doesn't prevent you from creating schemas for unsupported features\. However, if you create schemas for Oracle features and components that require SYS privileges, you can damage the data dictionary and affect the availability of your instance\. Use only supported features and schemas that are available in [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)\.
+In general, Amazon RDS doesn't prevent you from creating schemas for unsupported features\. However, if you create schemas for Oracle features and components that require SYSDBA privileges, you can damage the data dictionary and affect the availability of your DB instance\. Use only supported features and schemas that are available in [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)\.

@@ -1,9 +1,10 @@
-# Overview of Oracle DB engine upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
+# Overview of RDS for Oracle engine upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
 
-Before upgrading your Oracle DB instance, familiarize yourself with the following concepts\. 
+Before upgrading your RDS for Oracle DB instance, familiarize yourself with the following concepts\. 
 
 **Topics**
 + [Major and minor version upgrades](#USER_UpgradeDBInstance.Oracle.Overview.versions)
++ [Expected support dates for RDS for Oracle major releases](#Aurora.VersionPolicy.MajorVersionLifetime)
 + [Oracle engine version management](#Oracle.Concepts.Patching)
 + [Automatic snapshots during engine upgrades](#USER_UpgradeDBInstance.Oracle.Overview.snapshots)
 + [Oracle upgrades in a Multi\-AZ deployment](#USER_UpgradeDBInstance.Oracle.Overview.multi-az)
@@ -22,9 +23,23 @@ Before upgrading your Oracle DB instance, familiarize yourself with the followin
 
 When you upgrade the DB engine, an outage occurs\. The duration of the outage depends on your engine version and instance size\. 
 
+## Expected support dates for RDS for Oracle major releases<a name="Aurora.VersionPolicy.MajorVersionLifetime"></a>
+
+RDS for Oracle major versions remain available at least until the end of support date for the corresponding Oracle Database release version\. You can use the following dates to plan your testing and upgrade cycles\. These dates represent the earliest date that an upgrade to a newer version might be required\. If Amazon extends support for an RDS for Oracle version for longer than originally stated, we plan to update this table to reflect the later date\. 
+
+
+| Oracle Database major release version  | Expected date for upgrading to a newer version | 
+| --- | --- | 
+|  Oracle Database 19c  |  April 30, 2024 without Extended Support or an Unlimited License Agreement April 30, 2027 with Extended Support or an Unlimited License Agreement  | 
+|  Oracle Database 21c  | April 30, 2024 | 
+
+Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB instances, and the actions that we recommend that you take\. We recommend that you thoroughly test your applications with new RDS for Oracle versions before performing a major version upgrade\.
+
+After this advance notification period, an automatic upgrade to the subsequent major version might be applied to any RDS for Oracle DB instance still running the older version\. If so, the upgrade is started during scheduled maintenance windows\. 
+
 ## Oracle engine version management<a name="Oracle.Concepts.Patching"></a>
 
-With DB engine version management, you control when and how the database engine is patched and upgraded\. You get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions to ensure they work with your application before deploying them in production\. In addition, you upgrade the versions on your own terms and timelines\.
+With DB engine version management, you control when and how the database engine is patched and upgraded\. You get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions of RDS for Oracle to ensure they work with your application before deploying them in production\. In addition, you upgrade the versions on your own terms and timelines\.
 
 **Note**  
 Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\.

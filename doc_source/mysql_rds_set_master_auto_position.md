@@ -23,4 +23,4 @@ A value that indicates whether to use log file position replication or GTID\-bas
 
 The master user must run the `mysql.rds_set_master_auto_position` procedure\.
 
-This procedure is supported for MySQL 5\.7\.23 and higher 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
+This procedure is supported for all RDS for MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.

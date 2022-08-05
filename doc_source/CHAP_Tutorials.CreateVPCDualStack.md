@@ -174,7 +174,7 @@ In this step, you create an Amazon RDS DB instance that runs in dual\-stack mode
 
 1. Choose **Create database**\.
 
-1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\. 
+1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\.
 
 1. In the **Connectivity** section, set these values:
    + **Network type** – Choose **Dual\-stack mode**\.  

@@ -1,6 +1,6 @@
 # Troubleshooting DB issues for Amazon RDS Custom<a name="custom-troubleshooting"></a>
 
-You can learn how to troubleshoot issues with Amazon RDS Custom DB instances\.
+The shared responsibility model of RDS Custom provides OS shell–level access and database administrator access\. RDS Custom runs resources in your account, unlike Amazon RDS, which runs resources in a system account\. With greater access comes greater responsibility\. In the following sections, you can learn how to troubleshoot issues with Amazon RDS Custom DB instances\.
 
 **Topics**
 + [Viewing RDS Custom events](#custom-troubleshooting.support-perimeter.viewing-events)
@@ -9,7 +9,8 @@ You can learn how to troubleshoot issues with Amazon RDS Custom DB instances\.
 + [RDS Custom support perimeter and unsupported configurations](#custom-troubleshooting.support-perimeter)
 + [Fixing unsupported configurations](#custom-troubleshooting.fix-unsupported)
 + [How Amazon RDS Custom replaces an impaired host](#custom-troubleshooting.host-problems)
-+ [Troubleshooting upgrade issues for RDS Custom for Oracle DB instances](#custom-troubleshooting-upgrade)
++ [Troubleshooting upgrades for RDS Custom for Oracle](#custom-troubleshooting-upgrade)
++ [Troubleshooting replica promotion for RDS Custom for Oracle](#custom-troubleshooting-promote)
 
 ## Viewing RDS Custom events<a name="custom-troubleshooting.support-perimeter.viewing-events"></a>
 
@@ -165,13 +166,11 @@ The Amazon EC2 host replacement feature covers the majority of Amazon EC2 impair
 + Don't manually stop or terminate the physical Amazon EC2 host\. Both actions result in the instance being put outside the RDS Custom support perimeter\.
 + \(RDS Custom for SQL Server\) If you attach additional volumes to the Amazon EC2 host, configure them to remount upon restart\. If the host is impaired, RDS Custom might stop and start the host automatically\.
 
-## Troubleshooting upgrade issues for RDS Custom for Oracle DB instances<a name="custom-troubleshooting-upgrade"></a>
+## Troubleshooting upgrades for RDS Custom for Oracle<a name="custom-troubleshooting-upgrade"></a>
 
-The shared responsibility model of RDS Custom provides OS shell–level access and database administrator access\. RDS Custom runs resources in your account, unlike Amazon RDS, which runs resources in a system account\. With greater access comes greater responsibility\. Therefore, you might have to intervene if certain events occur, such as upgrade failure\. 
-
-Following, you can find some important techniques, files, and commands that you can use during upgrades of RDS Custom DB for Oracle DB instances:
+Your upgrade of an RDS Custom for Oracle instance might fail\. Following, you can find techniques that you can use during upgrades of RDS Custom DB for Oracle DB instances:
 + Examine the following log files:
-  + All upgrade output log files are kept in the `/tmp` directory on the DB instance\.
+  + All upgrade output log files reside in the `/tmp` directory on the DB instance\.
   + These log files are named `catupg*.log`\.
   + A master output file named `/tmp/catupgrd0.log` reports all errors, and the steps performed\.
   + The `alert.log` file for the DB instance is located in the `/rdsdbdata/log/trace` directory\. Examine this file regularly as a best practice\.
@@ -225,3 +224,26 @@ Following, you can find some important techniques, files, and commands that you 
   from
          dba_objects where status <>'VALID' and owner in ('SYS','SYSTEM','RDSADMIN','XDB');
   ```
+
+## Troubleshooting replica promotion for RDS Custom for Oracle<a name="custom-troubleshooting-promote"></a>
+
+You can promote managed Oracle replicas in RDS Custom for Oracle using the console, `promote-read-replica` AWS CLI command, or `PromoteReadReplica` API\. If you delete your primary DB instance, and all replicas are healthy, RDS Custom for Oracle promotes your managed replicas to standalone instances automatically\. If a replica has paused automation or is outside the support perimeter, you must fix the replica before RDS Custom can promote it automatically\. For more information, see [Replica promotion requirements and limitations](custom-rr.md#custom-rr.promotion-reqs)\.
+
+The replica promotion workflow might become stuck in the following situation:
++ The primary DB instance is in the state `STORAGE_FULL`\.
++ The primary DB can't archive all of its online redo logs\.
++ A gap exists between the archived redo log files on your Oracle replica and the primary database\.
+
+To respond to the stuck workflow, complete the following steps:
+
+1. Synchronize the redo log gap on your Oracle replica DB instance\.
+
+1. Force the promotion of your read replica to the latest applied redo log\. Run the following commands in SQL\*Plus:
+
+   ```
+   ALTER DATABASE ACTIVATE STANDBY DATABASE;
+   SHUTDOWN IMMEDIATE
+   STARTUP
+   ```
+
+1. Contact AWS Support and request it to move your DB instance to available status\.

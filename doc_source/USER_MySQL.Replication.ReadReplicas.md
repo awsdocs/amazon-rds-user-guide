@@ -94,7 +94,6 @@ The following limitations apply to replication filtering for RDS for MySQL:
 + Replication filtering doesn't support XA transactions\.
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
-+ Replication filtering is supported for RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
 
 ### Replication filtering examples for RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 

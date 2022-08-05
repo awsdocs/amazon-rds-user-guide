@@ -68,7 +68,7 @@ In the following table, you can find a comparison of the management models in Am
 |  Power, network, and cooling  |  AWS  |  AWS  | 
 
 Amazon RDS provides the following specific advantages over database deployments that aren't fully managed:
-+ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\.
++ You can use the database products you are already familiar with: MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL\.
 + Amazon RDS manages backups, software patching, automatic failure detection, and recovery\.
 + You can turn on automated backups, or manually create your own backup snapshots\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\.
 + You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use read replicas to increase read scaling\.
@@ -99,11 +99,11 @@ Your DB instance can contain one or more user\-created databases\. You can acces
 ### DB engines<a name="Welcome.Concepts.DBInstance.engine"></a>
 
 A *DB engine* is the specific relational database software that runs on your DB instance\. Amazon RDS currently supports the following engines:
-+ MySQL
 + MariaDB
-+ PostgreSQL
-+ Oracle
 + Microsoft SQL Server
++ MySQL
++ Oracle
++ PostgreSQL
 
 Each DB engine has its own supported features, and each version of a DB engine may include specific features\. Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\.
 
@@ -188,8 +188,8 @@ Create a DB instance using instructions in [Getting started with Amazon RDS](CHA
 ### Topics specific to database engines<a name="Welcome.WhatsNext.DBTopics"></a>
 
 You can review information specific to a particular DB engine in the following sections: 
-+ [MariaDB on Amazon RDS](CHAP_MariaDB.md)
-+ [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-+ [MySQL on Amazon RDS](CHAP_MySQL.md)
-+ [Oracle on Amazon RDS](CHAP_Oracle.md)
-+ [PostgreSQL on Amazon RDS](CHAP_PostgreSQL.md)
++ [Amazon RDS for MariaDB](CHAP_MariaDB.md)
++ [Amazon RDS for Microsoft SQL Server](CHAP_SQLServer.md)
++ [Amazon RDS for MySQL](CHAP_MySQL.md)
++ [Amazon RDS for Oracle](CHAP_Oracle.md)
++ [Amazon RDS for PostgreSQL](CHAP_PostgreSQL.md)

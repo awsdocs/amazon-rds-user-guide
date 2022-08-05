@@ -24,7 +24,7 @@ The `memcached` interface is a simple, key\-based cache\. Applications use `memc
 
 You turn off the `memcached` support for an instance by modifying the instance and specifying the default option group for your MySQL version\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-## MySQL memcached security considerations<a name="w862aac39c71c15c11"></a>
+## MySQL memcached security considerations<a name="w913aac39c71c15c11"></a>
 
 The `memcached` protocol does not support user authentication\. For more information about MySQL `memcached` security considerations, see [memcached deployment](http://dev.mysql.com/doc/refman/5.6/en/ha-memcached-using-deployment.html) and [Using memcached as a MySQL caching layer](http://dev.mysql.com/doc/refman/5.6/en/ha-memcached-mysql-frontend.html)\.
 
@@ -32,7 +32,7 @@ You can take the following actions to help increase the security of the `memcach
 + Specify a different port than the default of 11211 when adding the `MEMCACHED` option to the option group\.
 + Ensure that you associate the `memcached` interface with either a VPC or DB security group that limits access to known, trusted client addresses or EC2 instances\. For more information about managing security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
 
-## MySQL memcached connection information<a name="w862aac39c71c15c13"></a>
+## MySQL memcached connection information<a name="w913aac39c71c15c13"></a>
 
 To access the `memcached` interface, an application must specify both the DNS name of the Amazon RDS instance and the `memcached` port number\. For example, if an instance has a DNS name of `my-cache-instance.cg034hpkmmjt.region.rds.amazonaws.com` and the memcached interface is using port 11212, the connection information specified in PHP would be:
 
@@ -64,11 +64,11 @@ To access the `memcached` interface, an application must specify both the DNS na
 
 1. Choose the name of the option group used by the MySQL DB instance to show the option group details\. In the **Options** section, note the value of the **Port** setting for the **MEMCACHED** option\.
 
-## MySQL memcached option settings<a name="w862aac39c71c15c15"></a>
+## MySQL memcached option settings<a name="w913aac39c71c15c15"></a>
 
 Amazon RDS exposes the MySQL `memcached` parameters as option settings in the Amazon RDS `MEMCACHED` option\.
 
-### MySQL memcached parameters<a name="w862aac39c71c15c15b4"></a>
+### MySQL memcached parameters<a name="w913aac39c71c15c15b4"></a>
 +  `DAEMON_MEMCACHED_R_BATCH_SIZE` – an integer that specifies how many `memcached` read operations \(get\) to perform before doing a COMMIT to start a new transaction\. The allowed values are 1 to 4294967295; the default is 1\. The option does not take effect until the instance is restarted\.
 +  `DAEMON_MEMCACHED_W_BATCH_SIZE` – an integer that specifies how many `memcached` write operations, such as add, set, or incr, to perform before doing a COMMIT to start a new transaction\. The allowed values are 1 to 4294967295; the default is 1\. The option does not take effect until the instance is restarted\.
 +  `INNODB_API_BK_COMMIT_INTERVAL` – an integer that specifies how often to auto\-commit idle connections that use the InnoDB `memcached` interface\. The allowed values are 1 to 1073741824; the default is 5\. The option takes effect immediately, without requiring that you restart the instance\.
@@ -78,7 +78,7 @@ Amazon RDS exposes the MySQL `memcached` parameters as option settings in the Am
 
 Amazon RDS configures these MySQL `memcached` parameters, and they cannot be modified: `DAEMON_MEMCACHED_LIB_NAME`, `DAEMON_MEMCACHED_LIB_PATH`, and `INNODB_API_ENABLE_BINLOG`\. The parameters that MySQL administrators set by using `daemon_memcached_options` are available as individual `MEMCACHED` option settings in Amazon RDS\.
 
-### MySQL daemon\_memcached\_options parameters<a name="w862aac39c71c15c15b6"></a>
+### MySQL daemon\_memcached\_options parameters<a name="w913aac39c71c15c15b6"></a>
 +  `BINDING_PROTOCOL` – a string that specifies the binding protocol to use\. The allowed values are `auto`, `ascii`, or `binary`\. The default is `auto`, which means the server automatically negotiates the protocol with the client\. The option does not take effect until the instance is restarted\.
 +  `BACKLOG_QUEUE_LIMIT` – an integer that specifies how many network connections can be waiting to be processed by `memcached`\. Increasing this limit may reduce errors received by a client that is not able to connect to the `memcached` instance, but does not improve the performance of the server\. The allowed values are 1 to 2048; the default is 1024\. The option does not take effect until the instance is restarted\.
 +  `CAS_DISABLED` – a Boolean that enables \(1 \(true\)\) or disables \(0 \(false\)\) the use of compare and swap \(CAS\), which reduces the per\-item size by 8 bytes\. The default is 0 \(false\)\. The option does not take effect until the instance is restarted\.

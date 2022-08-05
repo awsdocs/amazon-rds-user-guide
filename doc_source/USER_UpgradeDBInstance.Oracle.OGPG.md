@@ -7,6 +7,7 @@ Before you upgrade your Oracle instance, review the following information\.
 + [Option group considerations](#USER_UpgradeDBInstance.Oracle.OGPG.OG)
 + [Parameter group considerations](#USER_UpgradeDBInstance.Oracle.OGPG.PG)
 + [Time zone considerations](#USER_UpgradeDBInstance.Oracle.OGPG.DST)
++ [Oracle Database 12c upgrade considerations](#USER_UpgradeDBInstance.Oracle.auto-upgrade)
 
 ## Oracle Multitenant considerations<a name="USER_UpgradeDBInstance.Oracle.multi"></a>
 
@@ -68,3 +69,15 @@ After upgrading the time zone file, migrate the data from your current instance 
 When you migrate data using Oracle Data Pump, the utility raises the error ORA\-39405 when the target time zone version is lower than the source time zone version\.
 
 For more information, see [TIMESTAMP WITH TIMEZONE restrictions](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-9B6C92EE-860E-43DD-9728-735B17B9DA89) in the Oracle documentation\. 
+
+## Oracle Database 12c upgrade considerations<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade"></a>
+
+Amazon RDS has deprecated support for Oracle Database 12c on both Oracle Enterprise Edition and Oracle Standard Edition 2\. As explained in [Oracle Database 12c with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12c), Amazon RDS began automatically upgrading Oracle Database 12c DB instances to Oracle Database 19c\. You can no longer upgrade manually\. The automatic upgrades began on the following dates:
++ April 1, 2022 for Oracle Database 12c Release 2 \(12\.2\.0\.1\)
++ August 1, 2022 for Oracle Database 12c Release 1 \(12\.1\.0\.2\)
+
+The automatic upgrades are not guaranteed to occur in your maintenance window\. All Oracle Database 12c DB instances, including reserved instances, will move to the latest available Release Update \(RU\)\.
+
+After your Oracle Database 12c DB instance is upgraded to Oracle Database 19c, consider the following:
++ Your SQL statements might perform differently after the upgrade\. If so, you can use the `OPTIMIZER_FEATURES_ENABLE` parameter to retain the behavior of the Oracle Database 12c optimizer\. For more information, see [Influencing the Optimizer](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgsql/influencing-the-optimizer.html#GUID-8758EF88-1CC6-41BD-8581-246702414D1D) in the Oracle Database documentation\.
++ If you have Extended Support for Oracle Database 12c on the BYOL model, consider the implications\. In this case, you must have Extended Support agreements from Oracle Support for Oracle Database 19c\. For details on licensing and support requirements for BYOL, see [Amazon RDS for Oracle FAQs](https://aws.amazon.com/rds/oracle/faqs/)\.

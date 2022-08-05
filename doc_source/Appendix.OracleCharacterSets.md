@@ -1,6 +1,6 @@
 # RDS for Oracle character sets<a name="Appendix.OracleCharacterSets"></a>
 
-Amazon RDS for Oracle supports two types of character sets: the DB character set and national character set\. 
+RDS for Oracle supports two types of character sets: the DB character set and national character set\.
 
 ## DB character set<a name="Appendix.OracleCharacterSets.db-character-set"></a>
 

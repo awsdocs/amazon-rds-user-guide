@@ -15,7 +15,7 @@ You must create the instance as a non\-CDB\.
 
 For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-Currently, RDS for Oracle supports a subset of multitenant architecture called the single\-tenant architecture\. In this case, your CDB contains only one PDB\. The single\-tenant architecture uses the same RDS APIs as the non\-CDB architecture\. Your experience with a non\-CDB is mostly identical to your experience with a PDB\. You can't access the CDB itself\.
+Currently, Amazon RDS supports a subset of multitenant architecture called the single\-tenant architecture\. In this case, your CDB contains only one PDB\. The single\-tenant architecture uses the same RDS APIs as the non\-CDB architecture\. Your experience with a non\-CDB is mostly identical to your experience with a PDB\. You can't access the CDB itself\.
 
 The following sections explain the principal differences between the non\-multitenant and single\-tenant architectures\. For more information, see [Limitations of a single\-tenant CDB](Oracle.Concepts.limitations.md#Oracle.Concepts.single-tenant-limitations)\.
 

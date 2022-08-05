@@ -1,14 +1,14 @@
-# Oracle licensing options<a name="Oracle.Concepts.Licensing"></a>
+# RDS for Oracle licensing options<a name="Oracle.Concepts.Licensing"></a>
 
-Amazon RDS for Oracle has two licensing options: License Included \(LI\) and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+Amazon RDS for Oracle has two licensing options: License Included \(LI\) and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ## License Included<a name="Oracle.Concepts.Licensing.LicenseIncluded"></a>
 
-In the License Included model, you don't need to purchase Oracle licenses separately\. AWS holds the license for the Oracle database software\. In this model, if you have an AWS Support account with case support, contact AWS Support for both Amazon RDS and Oracle Database service requests\. The License Included model is only supported on Amazon RDS for Oracle Database Standard Edition Two \(SE2\)\.
+In the License Included model, you don't need to purchase Oracle Database licenses separately\. AWS holds the license for the Oracle database software\. In this model, if you have an AWS Support account with case support, contact AWS Support for both Amazon RDS and Oracle Database service requests\. The License Included model is only supported on Amazon RDS for Oracle Database Standard Edition Two \(SE2\)\.
 
 ## Bring Your Own License \(BYOL\)<a name="Oracle.Concepts.Licensing.BYOL"></a>
 
-In the BYOL model, you can use your existing Oracle Database licenses to run Oracle deployments on Amazon RDS\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition you wish to run\. You must also follow Oracle's policies for licensing Oracle Database software in the cloud computing environment\. For more information on Oracle's licensing policy for Amazon EC2, see [ Licensing Oracle software in the cloud computing environment](http://www.oracle.com/us/corporate/pricing/cloud-licensing-070579.pdf)\. 
+In the BYOL model, you can use your existing Oracle Database licenses to deploy databases on Amazon RDS\. Make sure that you have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition you wish to run\. You must also follow Oracle's policies for licensing Oracle Database software in the cloud computing environment\. For more information on Oracle's licensing policy for Amazon EC2, see [ Licensing Oracle software in the cloud computing environment](http://www.oracle.com/us/corporate/pricing/cloud-licensing-070579.pdf)\.
 
 In this model, you continue to use your active Oracle support account, and you contact Oracle directly for Oracle Database service requests\. If you have an AWS Support account with case support, you can contact AWS Support for Amazon RDS issues\. Amazon Web Services and Oracle have a multi\-vendor support process for cases that require assistance from both organizations\. 
 

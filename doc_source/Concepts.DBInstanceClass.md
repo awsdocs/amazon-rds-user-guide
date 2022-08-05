@@ -74,7 +74,7 @@ The following are DB engine–specific considerations for DB instance classes:
 DB instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB instance class support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
 
 **Oracle**  
-DB instance class support varies according to the Oracle Database version and edition\. RDS for Oracle supports additional memory\-optimized instance classes\. These classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For the vCPU count and memory allocation for each optimized class, see [Supported Oracle DB instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
+DB instance class support varies according to the Oracle Database version and edition\. RDS for Oracle supports additional memory\-optimized instance classes\. These classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For the vCPU count and memory allocation for each optimized class, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\.
 
@@ -84,13 +84,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
 | db\.m6g – general\-purpose instance classes powered by AWS Graviton2 processors | 
-| db\.m6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.8xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.4xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.m6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.8xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.4xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.m6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | PostgreSQL 14 and 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.m6gd – general\-purpose instance classes powered by AWS Graviton2 processors | 
 | db\.m6gd\.16xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.m6gd\.12xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
@@ -165,13 +165,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.8xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.4xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
-| db\.r6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.8xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.4xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.2xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
+| db\.r6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 & 13 versions, and PostgreSQL 12\.3 & higher 12 versions | 
 | db\.r6gd – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6gd\.16xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r6gd\.12xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
@@ -256,7 +256,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.t3\.large | Yes | Yes | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t3\.medium | Yes | Yes | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t3\.small | Yes | Yes | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
-| db\.t3\.micro | Yes | No | Yes | Yes | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
+| db\.t3\.micro | Yes | No | Yes | Only on Oracle Database 12c Release 1 \(12\.1\.0\.2\), which is deprecated | All PostgreSQL 14, 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t2 – burstable\-performance instance classes | 
 | db\.t2\.2xlarge | Yes | No | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
 | db\.t2\.xlarge | Yes | No | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
@@ -440,8 +440,8 @@ There is no additional or reduced charge for specifying processor features on an
 
 You can configure the number of CPU cores and threads per core only when the following conditions are met:
 + You're configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\.
-+ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\.
-+ Your instance isn't one of the db\.r5 instance classes that have predefined processor configurations\. These instance classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported Oracle DB instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
++ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [RDS for Oracle licensing options](Oracle.Concepts.Licensing.md)\.
++ Your instance isn't one of the db\.r5 instance classes that have predefined processor configurations\. These instance classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 In the following table, you can find the DB instance classes that support setting a number of CPU cores and CPU threads per core\. You can also find the default value and the valid values for the number of CPU cores and CPU threads per core for each DB instance class\.
 

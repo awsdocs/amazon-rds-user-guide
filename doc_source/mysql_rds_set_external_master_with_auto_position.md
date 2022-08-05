@@ -46,7 +46,7 @@ The limit for this parameter is one day \(86,400 seconds\)\.
 
 The master user must run the `mysql.rds_set_external_master_with_auto_position` procedure\. This procedure must be run on the MySQL DB instance to be configured as the read replica of a MySQL instance running external to Amazon RDS\. 
 
-This procedure is supported for MySQL 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
+This procedure is supported for all RDS for MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
 
 Before you run `mysql.rds_set_external_master_with_auto_position`, you must configure the instance of MySQL running external to Amazon RDS to be a source database instance\. To connect to the MySQL instance running external to Amazon RDS, you must specify values for `replication_user_name` and `replication_user_password`\. These values must indicate a replication user that has `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the external instance of MySQL\. 
 

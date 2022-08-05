@@ -1,4 +1,4 @@
-# Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
+# Amazon RDS for Oracle<a name="CHAP_Oracle"></a>
 
 Amazon RDS supports DB instances that run the following versions and editions of Oracle Database:
 + Oracle Database 21c \(21\.0\.0\.0\)
@@ -32,6 +32,6 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 + [Importing data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)
 + [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)
 + [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)
-+ [Upgrading the Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)
++ [Upgrading the RDS for Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)
 + [Using third\-party software with your RDS for Oracle DB instance](Oracle.Resources.md)
 + [Oracle Database engine release notes](USER_Oracle_Releases.md)

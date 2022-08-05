@@ -12,7 +12,7 @@ Before creating an Oracle replica, check the following requirements\.
 Before creating an Oracle replica, check the following version and licensing requirements:
 + If the replica is in read\-only mode, make sure that you have an Active Data Guard license\. If you place the replica in mounted mode, you don't need an Active Data Guard license\. Only the Oracle DB engine supports mounted replicas\.
 + Oracle replicas are only available on the Oracle Enterprise Edition \(EE\) engine\.
-+ Oracle replicas are available for instances created using version Oracle Database 12c Release 1 \(12\.1\.0\.2\.v10\) and higher 12c releases, and for non\-CDB instances of Oracle Database 19c\. Replicas of CDBs aren't supported\.
++ Oracle replicas are available for Oracle version 12\.1\.0\.2\.v10 and higher versions of Oracle Database 12c Release 1 \(12\.1\), for all Oracle Database 12c Release 2 \(12\.2\) versions, and for all Oracle Database 19c versions\.
 + Oracle replicas are available for DB instances only on the EC2\-VPC platform\.
 + Oracle replicas are available for DB instances running only on DB instance classes with two or more vCPUs\. A source DB instance can't use the db\.t3\.micro or db\.t3\.small instance classes\.
 + The Oracle DB engine version of the source DB instance and all of its replicas must be the same\. Amazon RDS upgrades the replicas immediately after upgrading the source DB instance, regardless of a replica's maintenance window\. For major version upgrades of cross\-Region replicas, Amazon RDS automatically does the following:
@@ -20,7 +20,7 @@ Before creating an Oracle replica, check the following version and licensing req
   + Copies all options and option settings from the original option group to the new option group\.
   + Associates the upgraded cross\-Region replica with the new option group\.
 
-  For more information about upgrading the DB engine version, see [Upgrading the Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)\.
+  For more information about upgrading the DB engine version, see [Upgrading the RDS for Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)\.
 
 ## Option requirements and restrictions for Oracle replicas<a name="oracle-read-replicas.limitations.options"></a>
 

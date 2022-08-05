@@ -14,7 +14,7 @@ Most database security controls access at the object level\. Oracle Label Securi
 ## Prerequisites for Oracle Label Security<a name="Oracle.Options.OLS.PreReqs"></a>
 
 Familiarize yourself with the following prerequisites for Oracle Label Security: 
-+ Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
++ Your DB instance must use the Bring Your Own License model\. For more information, see [RDS for Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 + You must have a valid license for Oracle Enterprise Edition with Software Update License and Support\. 
 + Your Oracle license must include the Label Security option\. 
 + You must be using the non\-multitenant database architecture rather than the single\-tenant architecture\. For more information, see [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)\.

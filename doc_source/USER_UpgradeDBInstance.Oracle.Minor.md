@@ -6,18 +6,7 @@ An Amazon RDS for Oracle DB instance is scheduled to be upgraded automatically d
 + The DB instance has the **Auto minor version upgrade** option enabled\.
 + The DB instance is not running the latest minor DB engine version\.
 
-The DB instance is upgraded to the latest quarterly PSU or RU four to six weeks after it is made available by Amazon RDS for Oracle, although this time interval can sometimes vary\. For more information about PSUs and RUs, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\. 
-
-The minor version upgrades shown in the following table aren't supported\. 
-
-
-****  
-
-| Current version | Upgrade not supported | 
-| --- | --- | 
-| 12\.1\.0\.2\.v6 | 12\.1\.0\.2\.v7 | 
-| 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v7 | 
-| 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v6 | 
+Amazon RDS for Oracle upgrades your DB instance to the latest quarterly RU or RUR four to six weeks after it is made available\. For more information about RUs and RURs, see [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\. 
 
 **Note**  
-Minor version downgrades aren't supported\.
+RDS for Oracle doesn't support minor version downgrades\.

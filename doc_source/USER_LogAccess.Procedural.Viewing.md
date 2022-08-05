@@ -3,9 +3,7 @@
 You can view database log files for your Amazon RDS DB engine by using the AWS Management Console\. You can list what log files are available for download or monitoring by using the AWS CLI or Amazon RDS API\. 
 
 **Note**  
- If you can't view the list of log files for an existing RDS for Oracle DB instance, reboot the instance to view the list\. 
-
-**Note**  
+If you can't view the list of log files for an existing RDS for Oracle DB instance, reboot the instance to view the list\. 
 
 ## Console<a name="USER_LogAccess.CON"></a>
 
@@ -19,7 +17,7 @@ You can view database log files for your Amazon RDS DB engine by using the AWS M
 
 1. Choose the **Logs & events** tab\.
 
-1. Scroll down to the **Logs** section\. 
+1. Scroll down to the **Logs** section\.
 
 1. \(Optional\) Enter a search term to filter your results\.
 

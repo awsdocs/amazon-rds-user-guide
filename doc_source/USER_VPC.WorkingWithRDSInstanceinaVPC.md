@@ -199,8 +199,8 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
 The following DB engine versions support dual\-stack network DB instances:
 + All RDS for MariaDB versions
 + RDS for MySQL versions:
-  + 8\.0\.21 and higher 8\.0 versions
-  + 5\.7\.31 and higher 5\.7 versions
+  + 8\.0\.23 and higher 8\.0 versions
+  + 5\.7\.33 and higher 5\.7 versions
 + All RDS for Oracle versions
 + RDS for PostgreSQL versions:
   + All 14 versions

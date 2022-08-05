@@ -1,6 +1,6 @@
 # Downloading a database log file<a name="USER_LogAccess.Procedural.Downloading"></a>
 
-You can use the AWS Management Console, AWS CLI or API to download a database log file\. 
+You can use the AWS Management Console, AWS CLI, or API to download a database log file\. 
 
 ## Console<a name="USER_LogAccess.Procedural.Downloading.CON"></a>
 
@@ -32,17 +32,17 @@ For Linux, macOS, or Unix:
 
 ```
 1. aws rds download-db-log-file-portion \
-2. 						--db-instance-identifier myexampledb \
-3. 						--starting-token 0 --output text \
-4. 						--log-file-name log/ERROR.4 > errorlog.txt
+2.     --db-instance-identifier myexampledb \
+3.     --starting-token 0 --output text \
+4.     --log-file-name log/ERROR.4 > errorlog.txt
 ```
 For Windows:  
 
 ```
 1. aws rds download-db-log-file-portion ^
-2. 						--db-instance-identifier myexampledb ^
-3. 						--starting-token 0 --output text ^
-4. 						--log-file-name log/ERROR.4 > errorlog.txt
+2.     --db-instance-identifier myexampledb ^
+3.     --starting-token 0 --output text ^
+4.     --log-file-name log/ERROR.4 > errorlog.txt
 ```
 
 ## RDS API<a name="USER_LogAccess.Procedural.Downloading.API"></a>

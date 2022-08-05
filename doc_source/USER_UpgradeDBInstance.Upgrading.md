@@ -13,7 +13,7 @@ For more information about major and minor version upgrades for a specific DB en
 + [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)
 + [Upgrading the Microsoft SQL Server DB engine](USER_UpgradeDBInstance.SQLServer.md)
 + [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)
-+ [Upgrading the Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)
++ [Upgrading the RDS for Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)
 + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 
 For major version upgrades, you must manually modify the DB engine version through the AWS Management Console, AWS CLI, or RDS API\. For minor version upgrades, you can manually modify the engine version, or you can choose to enable auto minor version upgrades\.

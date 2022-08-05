@@ -198,4 +198,4 @@ After an upgrade failure, all database actions are blocked except for modifying 
 If automation has been paused for the RDS Custom DB instance, you can't retry the upgrade until you resume automation\.  
 The same actions apply to an upgrade failure for an RDS\-managed read replica as for the primary\.
 
-For more information, see [Troubleshooting upgrade issues for RDS Custom for Oracle DB instances](custom-troubleshooting.md#custom-troubleshooting-upgrade)\.
+For more information, see [Troubleshooting upgrades for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting-upgrade)\.

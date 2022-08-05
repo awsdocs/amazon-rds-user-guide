@@ -87,7 +87,7 @@ To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based r
 
 The `mysql.rds_set_external_master_with_delay` procedure is available in these versions of RDS for MySQL:
 + MySQL 8\.0\.26 and higher 8\.0 versions
-+ MySQL 5\.7\.22 and higher 5\.7 versions
++ All 5\.7 versions
 
 ## Examples<a name="mysql_rds_set_external_master_with_delay-examples"></a>
 

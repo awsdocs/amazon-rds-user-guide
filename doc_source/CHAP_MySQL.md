@@ -1,4 +1,4 @@
-# MySQL on Amazon RDS<a name="CHAP_MySQL"></a>
+# Amazon RDS for MySQL<a name="CHAP_MySQL"></a>
 
 Amazon RDS supports DB instances that run the following versions of MySQL:
 + MySQL 8\.0

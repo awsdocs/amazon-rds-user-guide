@@ -15,7 +15,7 @@ Before you begin this step, make sure that you have a VPC with both public and p
 
 1. Choose **Create database**\.
 
-1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\.   
+1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\.  
 ![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
 
 1. In the **Templates** section, choose **Free tier**\.

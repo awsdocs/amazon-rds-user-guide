@@ -158,12 +158,12 @@ Amazon RDS publishes each Oracle database log as a separate database stream in t
 + Listener log
 + Oracle Management Agent log
 
-This Oracle Management Agent log consists of the log streams shown in the following table\.
+This Oracle Management Agent log consists of the log groups shown in the following table\.
 
 
 ****  
 
-| Log name | CloudWatch log stream | 
+| Log name | CloudWatch log group | 
 | --- | --- | 
 | emctl\.log | oemagent\-emctl | 
 | emdctlj\.log | oemagent\-emdctlj | 

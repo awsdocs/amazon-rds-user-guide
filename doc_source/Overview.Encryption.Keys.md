@@ -19,9 +19,9 @@ If you disable or revoke permissions to a KMS key used by an RDS database, RDS p
 
 When RDS uses a customer managed key in cryptographic operations, it acts on behalf of the user who is creating or changing the RDS resource\.
 
-To use the customer managed key for an RDS resource on your behalf, a user must have permissions to call the following operations on the customer managed key:
-+ kms:GenerateDataKey
-+ kms:Decrypt
+To create an RDS resource using a customer managed key, a user must have permissions to call the following operations on the customer managed key:
++ kms:CreateGrant
++ kms:DescribeKey
 
 You can specify these required permissions in a key policy, or in an IAM policy if the key policy allows it\.
 

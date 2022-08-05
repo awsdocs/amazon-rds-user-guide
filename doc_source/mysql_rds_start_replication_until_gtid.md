@@ -21,7 +21,7 @@ The GTID after which replication is to stop\.
 
 The master user must run the `mysql.rds_start_replication_until_gtid` procedure\.
 
-This procedure is supported for MySQL 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
+This procedure is supported for all RDS for MySQL 5\.7 versions, and RDS for MySQL 8\.0\.26 and higher 8\.0 versions\.
 
 You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 

@@ -17,7 +17,7 @@ Typically, CMAN resides on a host separate from the database server and client h
 
 ## Supported versions and licensing options for CMAN<a name="oracle-cman.Versions"></a>
 
-CMAN supports the Enterprise Edition of all versions of Oracle Database that Amazon RDS supports\. For more information, see [Oracle versions on Amazon RDS](Oracle.Concepts.database-versions.md)\.
+CMAN supports the Enterprise Edition of all versions of Oracle Database that Amazon RDS supports\. For more information, see [RDS for Oracle releases](Oracle.Concepts.database-versions.md)\.
 
 You can install Oracle Connection Manager on a separate host from the host where Oracle Database is installed\. You don't need a separate license for the host that runs CMAN\.
 

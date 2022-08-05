@@ -87,7 +87,7 @@ Some MySQL parameters require special considerations when used with an Amazon RD
 
 Because Amazon RDS uses a case\-sensitive file system, setting the value of the `lower_case_table_names` server parameter to 2 \("names stored as given but compared in lowercase"\) is not supported\. The following are the supported values for Amazon RDS for MySQL DB instances:
 + 0 \("names stored as given and comparisons are case\-sensitive"\) is supported for all Amazon RDS for MySQL versions\.
-+ 1 \("names stored in lowercase and comparisons are not case\-sensitive"\) is supported for RDS for MySQL version 5\.7 and version 8\.0\.19 and higher 8\.0 versions\.
++ 1 \("names stored in lowercase and comparisons are not case\-sensitive"\) is supported for RDS for MySQL version 5\.7 and version 8\.0\.23 and higher 8\.0 versions\.
 
 Set the `lower_case_table_names` parameter in a custom DB parameter group before creating a DB instance\. Then, specify the custom DB parameter group when you create the DB instance\.
 

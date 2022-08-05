@@ -4,6 +4,7 @@ Secure Sockets Layer \(SSL\) is an industry\-standard protocol for securing netw
 
 **Topics**
 + [Using SSL/TLS with a MySQL DB instance](#MySQL.Concepts.SSLSupport)
++ [Requiring SSL/TLS for all connections to a MySQL DB instance](#mysql-ssl-connections.require-ssl)
 + [Connecting from the MySQL command\-line client with SSL/TLS \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)
 
 ## Using SSL/TLS with a MySQL DB instance<a name="MySQL.Concepts.SSLSupport"></a>
@@ -33,6 +34,22 @@ ALTER USER 'encrypted_user'@'%' REQUIRE SSL;
 ```
 
 For more information on SSL/TLS connections with MySQL, see the [ Using encrypted connections](https://dev.mysql.com/doc/refman/8.0/en/encrypted-connections.html) in the MySQL documentation\.
+
+## Requiring SSL/TLS for all connections to a MySQL DB instance<a name="mysql-ssl-connections.require-ssl"></a>
+
+You can require that all user connections to your MySQL DB instance use SSL/TLS by using the `require_secure_transport` parameter\. By default, the `require_secure_transport` parameter is set to `OFF`\. You can set the `require_secure_transport` parameter to `ON` to require SSL/TLS for connections to your DB instance\.
+
+You can set the `require_secure_transport` parameter value by updating the DB parameter group for your DB instance\. You don't need to reboot your DB instance for the change to take effect\.
+
+When the `require_secure_transport` parameter is set to `ON` for a DB instance, a database client can connect to it if it can establish an encrypted connection\. Otherwise, an error message similar to the following is returned to the client:
+
+```
+MySQL Error 3159 (HY000): Connections using insecure transport are prohibited while --require_secure_transport=ON.
+```
+
+For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+For more information about the `require_secure_transport` parameter, see the [ MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_require_secure_transport)\.
 
 ## Connecting from the MySQL command\-line client with SSL/TLS \(encrypted\)<a name="USER_ConnectToInstanceSSL.CLI"></a>
 

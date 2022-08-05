@@ -1,4 +1,4 @@
-# Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
+# Amazon RDS for Microsoft SQL Server<a name="CHAP_SQLServer"></a>
 
 Amazon RDS supports several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is listed here\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
 

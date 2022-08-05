@@ -1,17 +1,17 @@
 # Overview of Oracle replicas<a name="oracle-read-replicas.overview"></a>
 
-An *Oracle replica* database is a physical copy of your primary database\. An Oracle replica in read\-only mode is called a *read replica*\. An Oracle replica in mounted mode is called a *mounted replica*\. Oracle Database doesn't permit writes in a replica, but you can promote a replica to make it writable\. The promoted read replica has the replicated data to the point when the request was made to promote it\. 
+An *Oracle replica* database is a physical copy of your primary database\. An Oracle replica in read\-only mode is called a *read replica*\. An Oracle replica in mounted mode is called a *mounted replica*\. Oracle Database doesn't permit writes in a replica, but you can promote a replica to make it writable\. The promoted read replica has the replicated data to the point when the request was made to promote it\.
 
-The following video provides a helpful overview of Oracle disaster recovery\. For more information, see the blog post [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups \- Part 1](http://aws.amazon.com/blogs/database/managed-disaster-recovery-with-amazon-rds-for-oracle-cross-region-automated-backups-part-1/) and [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups \- Part 2](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/)\.
+The following video provides a helpful overview of Oracle disaster recovery\. For more information, see the blog post [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/) and [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/)\.
 
 [![AWS Videos](http://img.youtube.com/vi/-XpzhIevwVg/0.jpg)](http://www.youtube.com/watch?v=-XpzhIevwVg)
 
 **Topics**
-+ [Archived log retention](#oracle-read-replicas.overview.log-retention)
++ [Archived redo log retention](#oracle-read-replicas.overview.log-retention)
 + [Read\-only and mounted replicas](#oracle-read-replicas.overview.modes)
 + [Outages during replication](#oracle-read-replicas.overview.outages)
 
-## Archived log retention<a name="oracle-read-replicas.overview.log-retention"></a>
+## Archived redo log retention<a name="oracle-read-replicas.overview.log-retention"></a>
 
 If a primary DB instance has no cross\-Region read replicas, Amazon RDS for Oracle keeps a minimum of two hours of transaction logs on the source DB instance\. This is true regardless of the setting for `archivelog retention hours` in `rdsadmin.rdsadmin_util.set_configuration`\. RDS purges logs from the source DB instance after two hours or after the archive log retention hours setting has passed, whichever is longer\. RDS purges logs from the read replica after the archive log retention hours setting has passed only if they have been successfully applied to the database\.
 
