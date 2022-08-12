@@ -135,9 +135,7 @@ The shorter format connection string \(Easy connect or EZCONNECT\), such as `sql
 
 ## Considerations for security groups<a name="USER_ConnectToOracleInstance.Security"></a>
 
-For you to connect to your DB instance, it must be associated with a security group that contains the necessary IP addresses and network configuration\. Your DB instance might use the default security group\. If you assigned a default, nonconfigured security group when you created the DB instance, the firewall prevents connections\.
-
-To create a new security group, security group that you create depends on the Amazon EC2 platform for your DB instance\. To determine your platform, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. In general, if your DB instance is on the *EC2\-Classic* platform, you create a DB security group; if your DB instance is on the *VPC* platform, you create a VPC security group\. For information about creating a new security group, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. 
+For you to connect to your DB instance, it must be associated with a security group that contains the necessary IP addresses and network configuration\. Your DB instance might use the default security group\. If you assigned a default, nonconfigured security group when you created the DB instance, the firewall prevents connections\. For information about creating a new security group, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. 
 
 After you create the new security group, you modify your DB instance to associate it with the security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 

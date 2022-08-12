@@ -236,14 +236,12 @@ aws rds describe-events --source-type db-instance --source-identifier mydbinstan
 
 ## Amazon RDS insufficient DB instance capacity<a name="CHAP_Troubleshooting.Capacity"></a>
 
-The `InsufficientDBInstanceCapacity` error can be returned when you try to create, start or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, the following are common causes:
-+ The specific DB instance class isn't available in the requested Availability Zone\. You can try one of the following to solve the problem:
-  + Retry the request with a different DB instance class\.
-  + Retry the request with a different Availability Zone\.
-  + Retry the request without specifying an explicit Availability Zone\.
+The `InsufficientDBInstanceCapacity` error can be returned when you try to create, start, or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, a common cause is that the specific DB instance class isn't available in the requested Availability Zone\. You can try one of the following to solve the problem:
++ Retry the request with a different DB instance class\.
++ Retry the request with a different Availability Zone\.
++ Retry the request without specifying an explicit Availability Zone\.
 
-  For information about troubleshooting instance capacity issues for Amazon EC2, see [Insufficient instance capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity) in the *Amazon Elastic Compute Cloud User Guide*\.
-+ The DB instance is on the EC2\-Classic platform and therefore isn't in a VPC\. Some DB instance classes require a VPC\. For example, if you're on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon EC2 instance types that are only available in a VPC, see [Instance types available in EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html#ec2-classic-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\. To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\.
+For information about troubleshooting instance capacity issues for Amazon EC2, see [Insufficient instance capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity) in the *Amazon EC2 User Guide*\.
 
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 

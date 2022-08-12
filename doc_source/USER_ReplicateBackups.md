@@ -4,24 +4,22 @@ For added disaster recovery capability, you can configure your Amazon RDS databa
 
 DB snapshot copy charges apply to the data transfer\. After the DB snapshot is copied, standard charges apply to storage in the destination Region\. For more details, see [RDS Pricing](http://aws.amazon.com/rds/oracle/pricing/)\.
 
-Backup replication is available for RDS DB instances running the following database engines:
-+ Oracle Database version 12\.1\.0\.2\.v10 and higher
-+ PostgreSQL version 9\.6 and higher
-+ Microsoft SQL Server version 2012 and higher
-
-  Backup replication isn't supported for encrypted SQL Server DB instances\. Make sure to clear the **Enable encryption** check box when you create a SQL Server DB instance for which you want to use backup replication\.
-
 For an example of using backup replication, see the AWS online tech talk [Managed Disaster Recovery with Amazon RDS for Oracle Cross\-Region Automated Backups](https://pages.awscloud.com/Managed-Disaster-Recovery-with-Amazon-RDS-for-Oracle-Cross-Region-Automated-Backups_2021_0908-DAT_OD.html)\.
 
 **Topics**
-+ [AWS Region support](#USER_ReplicateBackups.Regions)
++ [Region and version availability](#USER_ReplicateBackups.RegionVersionAvailability)
++ [Source and destination AWS Region support](#USER_ReplicateBackups.Regions)
 + [Enabling cross\-Region automated backups](#AutomatedBackups.Replicating.Enable)
 + [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)
 + [Restoring to a specified time from a replicated backup](#AutomatedBackups.PiTR)
 + [Stopping automated backup replication](#AutomatedBackups.StopReplicating)
 + [Deleting replicated backups](#AutomatedBackups.Delete)
 
-## AWS Region support<a name="USER_ReplicateBackups.Regions"></a>
+## Region and version availability<a name="USER_ReplicateBackups.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with cross\-Region automated backups, see [Cross\-Region automated backups](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups)\. 
+
+## Source and destination AWS Region support<a name="USER_ReplicateBackups.Regions"></a>
 
 Backup replication is supported between the following AWS Regions\.
 

@@ -1,6 +1,10 @@
 # Accessing more SQL text in the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
-By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement exceeds 500 bytes, you can view more text by opening the statement in the Performance Insights dashboard\. In this case, the maximum length for the displayed query is 4 KB\. This limit is introduced by the console and is subject to the limits set by the database engine\. If you view a child SQL statement, you can also choose **Download**\.
+By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\.
+
+![\[500 bytes of SQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-top-sql-bytes.png)
+
+When a SQL statement exceeds 500 bytes, you can view more text in the **SQL text** section below the **Top SQL** table\. In this case, the maximum length for the text displayed in **SQL text** is 4 KB\. This limit is introduced by the console and is subject to the limits set by the database engine\. To save the text shown in **SQL text**, choose **Download**\.
 
 **Topics**
 + [Text size limits for Amazon RDS engines](#sql-text-engine-limits)
@@ -9,12 +13,16 @@ By default, each row in the **Top SQL** table shows 500 bytes of SQL text for ea
 
 ## Text size limits for Amazon RDS engines<a name="sql-text-engine-limits"></a>
 
-When you download a SQL statement, the database engine determines the maximum length of the text\. You can download text up to the following per\-engine limits:
-+ Amazon RDS for MySQL and MariaDB – 1,024 bytes
-+ Amazon RDS for Microsoft SQL Server – 4,096 characters
-+ Amazon RDS for Oracle – 1,000 bytes
+When you download SQL text, the database engine determines its maximum length\. You can download SQL text up to the following per\-engine limits\.
 
-The Performance Insights console displays up to the maximum that the engine returns\. For example, if MySQL returns at most 1 KB to Performance Insights, it can only collect and show 1 KB, even if the original query is larger\. Thus, when you view or download the query, Performance Insights returns the same number of bytes\.
+
+| DB engine | Maximum length of downloaded text | 
+| --- | --- | 
+| Amazon RDS for MySQL and MariaDB | 1,024 bytes | 
+| Amazon RDS for Microsoft SQL Server | 4,096 characters | 
+| Amazon RDS for Oracle | 1,000 bytes | 
+
+The **SQL text** section of the Performance Insights console displays up to the maximum that the engine returns\. For example, if MySQL returns at most 1 KB to Performance Insights, it can only collect and show 1 KB, even if the original query is larger\. Thus, when you view the query in **SQL text** or download it, Performance Insights returns the same number of bytes\.
 
 If you use the AWS CLI or API, Performance Insights doesn't have the 4 KB limit enforced by the console\. `DescribeDimensionKeys` and `GetResourceMetrics` return at most 500 bytes\. `GetDimensionKeyDetails` returns the full query, but the size is subject to the engine limit\. 
 

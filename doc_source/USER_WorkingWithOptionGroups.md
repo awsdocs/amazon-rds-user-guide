@@ -41,13 +41,11 @@ Permanent options, such as the TDE option for Oracle Advanced Security TDE, can 
 
 For Oracle DB instances, you can copy shared DB snapshots that have the options `Timezone` or `OLS` \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
 
-### VPC and platform considerations<a name="Overview.OptionGroups.Platform"></a>
+### VPC considerations<a name="Overview.OptionGroups.Platform"></a>
 
-When an option group is assigned to a DB instance, it is linked to the platform that the DB instance is on\. That platform can either be a VPC supported by the Amazon VPC service, or EC2\-Classic \(non\-VPC\) supported by the Amazon EC2 service\. For details on these two platforms, see [Amazon EC2 and Amazon Virtual Private Cloud](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html)\. 
-
-If a DB instance is in a VPC, the option group associated with the instance is linked to that VPC\. This means that you can't use the option group assigned to a DB instance if you try to restore the instance to a different VPC or a different platform\. If you restore a DB instance to a different VPC or a different platform, you can do one of the following: 
+The option group associated with the DB instance is linked to the DB instance's VPC\. This means that you can't use the option group assigned to a DB instance if you try to restore the instance to a different VPC\. If you restore a DB instance to a different VPC, you can do one of the following: 
 + Assign the default option group to the DB instance\.
-+ Assign an option group that is linked to that VPC or platform\.
++ Assign an option group that is linked to that VPC\.
 + Create a new option group and assign it to the DB instance\.
 
 With persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.

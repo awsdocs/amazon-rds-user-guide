@@ -8,26 +8,8 @@ You can export all types of DB snapshots—including manual snapshots, automated
 
 After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the *Amazon Redshift Database Developer Guide*\.
 
-Amazon RDS supports exporting snapshots in all AWS Regions except the following:
-+ Asia Pacific \(Jakarta\)
-+ AWS GovCloud \(US\-East\)
-+ AWS GovCloud \(US\-West\)
-
-The following table shows the engine versions that are supported for exporting snapshot data to Amazon S3\.
-
-
-****  
-
-| MariaDB | MySQL | PostgreSQL | 
-| --- | --- | --- | 
-|  10\.6 10\.5 10\.4 10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  All 14, 13, and 12 versions 11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
-
-For complete lists of engine versions supported by Amazon RDS, see the following:
-+ [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)
-+ [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)
-+ [Available PostgreSQL database versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions)
-
 **Topics**
++ [Region and version availability](#USER_ExportSnapshot.RegionVersionAvailability)
 + [Limitations](#USER_ExportSnapshot.Limits)
 + [Overview of exporting snapshot data](#USER_ExportSnapshot.Overview)
 + [Setting up access to an Amazon S3 bucket](#USER_ExportSnapshot.Setup)
@@ -39,6 +21,10 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Troubleshooting PostgreSQL permissions errors](#USER_ExportSnapshot.postgres-permissions)
 + [File naming convention](#USER_ExportSnapshot.FileNames)
 + [Data conversion when exporting to an Amazon S3 bucket](#USER_ExportSnapshot.data-types)
+
+## Region and version availability<a name="USER_ExportSnapshot.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with exporting snapshots to S3, see [Export snapshots to S3](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3)\.
 
 ## Limitations<a name="USER_ExportSnapshot.Limits"></a>
 

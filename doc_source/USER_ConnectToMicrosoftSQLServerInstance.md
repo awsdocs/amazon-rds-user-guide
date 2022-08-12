@@ -144,9 +144,7 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
 
 To connect to your DB instance, your DB instance must be associated with a security group\. This security group contains the IP addresses and network configuration that you use to access the DB instance\. You might have associated your DB instance with an appropriate security group when you created your DB instance\. If you assigned a default, no\-configured security group when you created your DB instance, your DB instance firewall prevents connections\.
 
-In some cases, you might need to create a new security group to enable access\. If so, the type of security group to create depends on what Amazon EC2 platform your DB instance is on\. To determine your platform, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. In general, if your DB instance is on the EC2\-Classic platform, you create a DB security group\. If your DB instance is on the VPC platform, you create a VPC security group\.
-
-For instructions on creating a new security group, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. For a topic that walks you through the process of setting up rules for your VPC security group, see [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+In some cases, you might need to create a new security group to make access possible\. For instructions on creating a new security group, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. For a topic that walks you through the process of setting up rules for your VPC security group, see [Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
 
 After you have created the new security group, modify your DB instance to associate it with the security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 

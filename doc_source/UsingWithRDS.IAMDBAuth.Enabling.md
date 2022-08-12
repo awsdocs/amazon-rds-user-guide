@@ -22,7 +22,7 @@ Each creation or modification workflow has a **Database authentication** section
 
 1. Choose the DB instance that you want to modify\.
 **Note**  
- Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
+ Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Region and version availability](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
 
 1. Choose **Modify**\.
 
@@ -52,7 +52,7 @@ aws rds create-db-instance \
 To update an existing DB instance to have or not have IAM authentication, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. Specify either the `--enable-iam-database-authentication` or `--no-enable-iam-database-authentication` option, as appropriate\.
 
 **Note**  
- Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
+ Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Region and version availability](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
 
 By default, Amazon RDS performs the modification during the next maintenance window\. If you want to override this and enable IAM DB authentication as soon as possible, use the `--apply-immediately` parameter\. 
 
@@ -78,7 +78,7 @@ To create a new DB instance with IAM authentication by using the API, use the AP
 To update an existing DB instance to have IAM authentication, use the API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the `EnableIAMDatabaseAuthentication` parameter to `true` to enable IAM authentication, or `false` to disable it\.
 
 **Note**  
- Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
+ Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Region and version availability](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
 
 If you are restoring a DB instance, use one of the following API operations:
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)

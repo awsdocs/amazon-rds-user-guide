@@ -3,15 +3,18 @@
 Following, you can find a summary of the Amazon RDS Custom for SQL Server requirements and limitations for quick reference\. Requirements and limitations also appear in the relevant sections\.
 
 **Topics**
++ [Region and version availability](#custom-reqs-limits-MS.RegionVersionAvailability)
 + [General requirements for RDS Custom for SQL Server](#custom-reqs-limits.reqsMS)
 + [DB instance class support for RDS Custom for SQL Server](#custom-reqs-limits.instancesMS)
-+ [AWS Region support for RDS Custom for SQL Server](#custom-reqs-limits.regionsMS)
 + [Limitations for RDS Custom for SQL Server](#custom-reqs-limits.limitsMS)
+
+## Region and version availability<a name="custom-reqs-limits-MS.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Amazon RDS Custom for SQL Server, see [RDS Custom](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom)\. 
 
 ## General requirements for RDS Custom for SQL Server<a name="custom-reqs-limits.reqsMS"></a>
 
 Make sure to follow these requirements for Amazon RDS Custom for SQL Server:
-+ Use SQL Server 2019 Enterprise, Standard, or Web Edition\.
 + Use the instance classes shown in [DB instance class support for RDS Custom for SQL Server](#custom-reqs-limits.instancesMS)\. The only storage types supported are solid state drives \(SSD\) of types gp2 and io1\. The maximum storage limit is 16 TiB\.
 + Make sure that you have a symmetric encryption AWS KMS key to create an RDS Custom DB instance\. For more information, see [Make sure that you have a symmetric encryption AWS KMS key](custom-setup-sqlserver.md#custom-setup-sqlserver.cmk)\.
 + Make sure that you create an AWS Identity and Access Management \(IAM\) role and instance profile\. For more information, see [Creating your IAM role and instance profile manually](custom-setup-sqlserver.md#custom-setup-sqlserver.iam)\.
@@ -28,21 +31,6 @@ RDS Custom for SQL Server supports the DB instance classes shown in the followin
 |  Enterprise Edition  |   db\.r5\.xlarge–db\.r5\.24xlarge db\.m5\.xlarge–db\.m5\.24xlarge  | 
 |  Standard Edition  |   db\.r5\.large–db\.r5\.24xlarge db\.m5\.large–db\.m5\.24xlarge  | 
 |  Web Edition  |   db\.r5\.large–db\.r5\.4xlarge db\.m5\.large–db\.m5\.4xlarge  | 
-
-## AWS Region support for RDS Custom for SQL Server<a name="custom-reqs-limits.regionsMS"></a>
-
-RDS Custom is supported in the following AWS Regions:
-+ Asia Pacific \(Mumbai\)
-+ Asia Pacific \(Tokyo\)
-+ Asia Pacific \(Singapore\)
-+ Asia Pacific \(Sydney\)
-+ Europe \(Frankfurt\)
-+ Europe \(London\)
-+ Europe \(Stockholm\)
-+ Europe \(Ireland\)
-+ US East \(N\. Virginia\)
-+ US East \(Ohio\)
-+ US West \(Oregon\)
 
 ## Limitations for RDS Custom for SQL Server<a name="custom-reqs-limits.limitsMS"></a>
 

@@ -15,7 +15,6 @@ You can tag the following Amazon RDS resources:
 + DB option groups
 + DB parameter groups
 + DB cluster parameter groups
-+ DB security groups
 + DB subnet groups
 + RDS Proxies
 + RDS Proxy endpoints

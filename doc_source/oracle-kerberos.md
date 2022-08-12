@@ -4,29 +4,15 @@ You can use Kerberos authentication to authenticate users when they connect to y
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple database instances\. A directory can also improve your overall security profile\.
 
-Amazon RDS supports Kerberos authentication for all major and minor versions of RDS for Oracle in the following AWS Regions: 
-+ US East \(Ohio\)
-+ US East \(N\. Virginia\)
-+ US West \(N\. California\)
-+ US West \(Oregon\)
-+ Asia Pacific \(Mumbai\)
-+ Asia Pacific \(Seoul\)
-+ Asia Pacific \(Singapore\)
-+ Asia Pacific \(Sydney\)
-+ Asia Pacific \(Tokyo\)
-+ Canada \(Central\)
-+ Europe \(Frankfurt\)
-+ Europe \(Ireland\)
-+ Europe \(London\)
-+ Europe \(Stockholm\)
-+ South America \(São Paulo\)
-+ AWS GovCloud \(US\-East\)
-+ AWS GovCloud \(US\-West\)
+## Region and version availability<a name="oracle-kerberos-setting-up.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of RDS for Oracle with Kerberos authentication, see [Kerberos authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication)\.
 
 **Note**  
 Kerberos authentication isn't supported for DB instance classes that are deprecated for RDS for Oracle DB instances\. For more information, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\.
 
 **Topics**
++ [Region and version availability](#oracle-kerberos-setting-up.RegionVersionAvailability)
 + [Setting up Kerberos authentication for Oracle DB instances](oracle-kerberos-setting-up.md)
 + [Managing a DB instance in a domain](oracle-kerberos-managing.md)
 + [Connecting to Oracle with Kerberos authentication](oracle-kerberos-connecting.md)

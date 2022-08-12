@@ -3,7 +3,7 @@
 Use AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to set up Kerberos authentication for an Oracle DB instance\. To set up Kerberos authentication, complete the following steps:
 + [Step 1: Create a directory using the AWS Managed Microsoft AD](#oracle-kerberos.setting-up.create-directory)
 + [Step 2: Create a trust](#oracle-kerberos.setting-up.create-forest-trust)
-+ [Step 3: Create an IAM role for use by Amazon RDS](#oracle-kerberos.setting-up.CreateIAMRole)
++ [Step 3: Configure IAM permissions for Amazon RDS](#oracle-kerberos.setting-up.CreateIAMRole)
 + [Step 4: Create and configure users](#oracle-kerberos.setting-up.create-users)
 + [Step 5: Enable cross\-VPC traffic between the directory and the DB instance](#oracle-kerberos.setting-up.vpc-peering)
 + [Step 6: Create or modify an Oracle DB instance](#oracle-kerberos.setting-up.create-modify)
@@ -85,25 +85,33 @@ To see information about your directory, choose the directory name in the direct
 
 ## Step 2: Create a trust<a name="oracle-kerberos.setting-up.create-forest-trust"></a>
 
-If you plan to use AWS Managed Microsoft AD only, move on to [Step 3: Create an IAM role for use by Amazon RDS](#oracle-kerberos.setting-up.CreateIAMRole)\.
+If you plan to use AWS Managed Microsoft AD only, move on to [Step 3: Configure IAM permissions for Amazon RDS](#oracle-kerberos.setting-up.CreateIAMRole)\.
 
 To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust or external trust\. The trust can be one\-way or two\-way\. For more information about setting up forest trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
-## Step 3: Create an IAM role for use by Amazon RDS<a name="oracle-kerberos.setting-up.CreateIAMRole"></a>
+## Step 3: Configure IAM permissions for Amazon RDS<a name="oracle-kerberos.setting-up.CreateIAMRole"></a>
 
-For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to the AWS Directory Service\.
+To call AWS Directory Service for you, Amazon RDS requires an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service\.
 
 **Note**  
 For the role to allow access, the AWS Security Token Service \(AWS STS\) endpoint must be activated in the correct AWS Region for your AWS account\. AWS STS endpoints are active by default in all AWS Regions, and you can use them without any further actions\. For more information, see [Activating and deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-activate-deactivate) in the *IAM User Guide*\.
 
-When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, you must create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+### Creating an IAM role<a name="oracle-kerberos.setting-up.CreateIAMRole.create-role"></a>
+
+When you create a DB instance using the AWS Management Console, and the console user has the `iam:CreateRole` permission, the console creates `rds-directoryservice-kerberos-access-role` automatically\. Otherwise, you must create the IAM role manually\. When you create an IAM role manually, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\. 
 
 For more information about creating IAM roles for a service, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
 **Note**  
 The IAM role used for Windows Authentication for RDS for Microsoft SQL Server can't be used for RDS for Oracle\.
 
-Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the IAM role must have the following IAM trust policy\.
+### Creating an IAM trust policy manually<a name="oracle-kerberos.setting-up.CreateIAMRole.trust-policy"></a>
+
+Optionally, you can create resource policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. Specify both `directoryservice.rds.amazonaws.com` and `rds.amazonaws.com` as principals\.
+
+To limit the permissions that Amazon RDS gives another service for a specific resource, we recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource policies\. The most effective way to protect against the confused deputy problem is to use the `aws:SourceArn` global condition context key with the full ARN of an Amazon RDS resource\. For more information, see [Preventing cross\-service confused deputy problems](cross-service-confused-deputy-prevention.md)\.
+
+The following example shows how you can use the `aws:SourceArn` and `aws:SourceAccount` global condition context keys in Amazon RDS to prevent the confused deputy problem\.
 
 ```
 {
@@ -118,13 +126,21 @@ Optionally, you can create policies with the required permissions instead of usi
           "rds.amazonaws.com"
         ]
       },
-      "Action": "sts:AssumeRole"
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mydbinstance"
+        },
+        "StringEquals": {
+          "aws:SourceAccount": "123456789012"
+        }
+      }
     }
   ]
 }
 ```
 
-The role must also have the following IAM role policy\.
+The role must also have the following IAM policy\.
 
 ```
 {

@@ -94,7 +94,7 @@ Amazon RDS on AWS Outposts extends RDS for SQL Server, RDS for MySQL, and RDS fo
 
 A *DB instance* is an isolated database environment in the AWS Cloud\. The basic building block of Amazon RDS is the DB instance\. 
 
-Your DB instance can contain one or more user\-created databases\. You can access your DB instance by using the same tools and applications that you use with a standalone database instance\. You can create and modify a DB instance by using the AWS Command Line Interface, the Amazon RDS API, or the AWS Management Console\.
+Your DB instance can contain one or more user\-created databases\. You can access your DB instance by using the same tools and applications that you use with a standalone database instance\. You can create and modify a DB instance by using the AWS Command Line Interface \(AWS CLI\), the Amazon RDS API, or the AWS Management Console\.
 
 ### DB engines<a name="Welcome.Concepts.DBInstance.engine"></a>
 
@@ -105,7 +105,9 @@ A *DB engine* is the specific relational database software that runs on your DB 
 + Oracle
 + PostgreSQL
 
-Each DB engine has its own supported features, and each version of a DB engine may include specific features\. Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\.
+Each DB engine has its own supported features, and each version of a DB engine can include specific features\. Support for Amazon RDS features varies across AWS Regions and specific versions of each DB engine\. To check feature support in different engine versions and Regions, see [Supported features in Amazon RDS by AWS Region and DB engine](Concepts.RDSFeaturesRegionsDBEngines.grids.md)
+
+Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\.
 
 ### DB instance classes<a name="Welcome.Concepts.DBInstance.instance-class"></a>
 
@@ -149,7 +151,7 @@ For more information about security groups, see [Security in Amazon RDS](UsingWi
 
 ## Monitoring an Amazon RDS DB instance<a name="Welcome.Monitoring"></a>
 
-There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md)\. 
+There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, or DB parameter group\. For more information, see [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md)\. 
 
 ## How to work with Amazon RDS<a name="Welcome.Interfaces"></a>
 

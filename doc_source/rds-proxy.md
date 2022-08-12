@@ -8,10 +8,10 @@
 
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
 
- RDS Proxy is fully compatible with the engine versions that it supports\. You can enable RDS Proxy for most applications with no code changes\. For a list of supported engine versions, see [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)\. 
+ RDS Proxy is fully compatible with the engine versions that it supports\. You can enable RDS Proxy for most applications with no code changes\. 
 
 **Topics**
-+ [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)
++ [Region and version availability](#rds-proxy.RegionVersionAvailability)
 + [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
@@ -24,35 +24,9 @@
 + [Troubleshooting for RDS Proxy](rds-proxy.troubleshooting.md)
 + [Using RDS Proxy with AWS CloudFormation](rds-proxy-cfn.md)
 
-## Supported engines and Region availability for RDS Proxy<a name="rds-proxy.support"></a>
+## Region and version availability<a name="rds-proxy.RegionVersionAvailability"></a>
 
-RDS Proxy supports the following database engine versions:
-+ RDS for MySQL – MySQL 5\.7 and 8\.0
-+ RDS for MariaDB – MariaDB 10\.2, 10\.3, 10\.4, and 10\.5
-+ RDS for PostgreSQL – version 10\.10 and higher minor versions, version 11\.5 and higher minor versions, version 12\.5 and higher minor versions, and version 13\.1 and higher minor versions
-
-RDS Proxy is available in the following AWS Regions:
-+ US East \(Ohio\)
-+ US East \(N\. Virginia\)
-+ US West \(N\. California\)
-+ US West \(Oregon\)
-+ Africa \(Cape Town\)
-+ Asia Pacific \(Hong Kong\)
-+ Asia Pacific \(Mumbai\)
-+ Asia Pacific \(Osaka\)
-+ Asia Pacific \(Seoul\)
-+ Asia Pacific \(Singapore\)
-+ Asia Pacific \(Sydney\)
-+ Asia Pacific \(Tokyo\)
-+ Canada \(Central\)
-+ Europe \(Frankfurt\)
-+ Europe \(Ireland\)
-+ Europe \(London\)
-+ Europe \(Milan\)
-+ Europe \(Paris\)
-+ Europe \(Stockholm\)
-+ Middle East \(Bahrain\)
-+ South America \(São Paulo\)
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with RDS Proxy, see [Amazon RDS Proxy](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy)\.
 
 ## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
 

@@ -5,7 +5,6 @@ Amazon RDS supports the following scenarios for accessing a DB instance in a VPC
 + [An EC2 instance in a different VPC](#USER_VPC.Scenario3)
 + [A client application through the internet](#USER_VPC.Scenario4)
 + [A private network](#USER_VPC.NotPublic)
-+ [An EC2 instance not in a VPC](#USER_VPC.ClassicLink)
 
 ## A DB instance in a VPC accessed by an EC2 instance in the same VPC<a name="USER_VPC.Scenario1"></a>
 
@@ -56,7 +55,7 @@ The following diagram shows this scenario\.
 
 ![\[A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC2EC2VPC.png)
 
-A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see [VPC peering](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+A VPC peering connection is a networking connection between two VPCs that makes it possible for you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see [VPC peering](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
 ## A DB instance in a VPC accessed by a client application through the internet<a name="USER_VPC.Scenario4"></a>
 
@@ -88,36 +87,3 @@ The following diagram shows a scenario with an AWS Site\-to\-Site VPN connection
 ![\[A DB Instance in a VPC Accessed by a private network\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/site-to-site-vpn-connection.png)
 
 For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.
-
-## A DB instance in a VPC accessed by an EC2 instance not in a VPC<a name="USER_VPC.ClassicLink"></a>
-
-You can communicate between an Amazon RDS DB instance that is in a VPC and an EC2 instance that is not in an Amazon VPC by using *ClassicLink*\. When you use ClassicLink, an application on the EC2 instance can connect to the DB instance by using the endpoint for the DB instance\. ClassicLink is available at no charge\. 
-
-**Important**  
-If your EC2 instance was created after 2013, it is probably in a VPC\.  
-EC2\-Classic networking is retiring\. The end of life is planned for August 15, 2022\.
-
-The following diagram shows this scenario\. 
-
-![\[A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ClassicLink.png)
-
-Using ClassicLink, you can connect an EC2 instance to a logically isolated database where you define the IP address range and control the access control lists \(ACLs\) to manage network traffic\. You don't have to use public IP addresses or tunneling to communicate with the DB instance in the VPC\. This arrangement provides you with higher throughput and lower latency connectivity for inter\-instance communications\. 
-
-**To enable ClassicLink between a DB instance in a VPC and an EC2 instance not in a VPC**
-
-1.  Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc](https://console.aws.amazon.com/vpc)\. 
-
-1.  In the navigation pane, choose **Your VPCs**\. 
-
-1.  Choose the VPC used by the DB instance\. 
-
-1.  In **Actions**, choose **Enable ClassicLink**\. In the confirmation dialog box, choose **Yes, Enable**\. 
-
-1.  On the EC2 console, choose the EC2 instance you want to connect to the DB instance in the VPC\. 
-
-1.  In **Actions**, choose **ClassicLink**, and then choose **Link to VPC**\. 
-
-1.  On the **Link to VPC** page, choose the security group you want to use, and then choose **Link to VPC**\. 
-
-**Note**  
- The ClassicLink features are only visible in the consoles for accounts and regions that support EC2\-Classic\. For more information, see [ ClassicLink](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances\.* 

@@ -12,7 +12,6 @@ This package provides TCP/IP client\-side access functionality in PL/SQL\. This 
 This package provides interfaces to the SMTP commands that enable a client to dispatch emails to an SMTP server\. For more information, see [UTL\_SMTP](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_SMTP.html#GUID-F0065C52-D618-4F8A-A361-7B742D44C520) in the Oracle documentation\.
 
 Before configuring your instance for network access, review the following requirements and considerations:
-+ Outbound network access with `UTL_HTTP`, `UTL_TCP`, and `UTL_SMTP` is supported only for Oracle DB instances in a VPC\. To determine whether or not your DB instance is in a VPC, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. To move a DB instance not in a VPC into a VPC, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\. 
 + To use SMTP with the UTL\_MAIL option, see [Oracle UTL\_MAIL](Oracle.Options.UTLMAIL.md)\.
 + The Domain Name Server \(DNS\) name of the remote host can be any of the following: 
   + Publicly resolvable\.

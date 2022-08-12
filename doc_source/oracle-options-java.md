@@ -20,7 +20,6 @@ SELECT * FROM dba_java_policy
 ## Prerequisites for Oracle JVM<a name="oracle-options-java.prerequisites"></a>
 
 The following are prerequisites for using Oracle Java:
-+ Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
 + Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 

@@ -15,7 +15,6 @@ Amazon RDS supports Oracle OLAP for the following editions and versions of Oracl
 
 The following are prerequisites for using Oracle OLAP: 
 + You must have an Oracle OLAP license from Oracle\. For more information, see [Licensing Information](https://docs.oracle.com/en/database/oracle/oracle-database/19/dblic/Licensing-Information.html#GUID-B6113390-9586-46D7-9008-DCC9EDA45AB4) in the Oracle documentation\. 
-+ Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
 + Your DB instance must be of a sufficient instance class\. Oracle OLAP isn't supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\. 
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available and is required for any options that install the Oracle Java Virtual Machine \(JVM\)\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 + Your DB instance must not have a user named `OLAPSYS`\. If it does, the OLAP option installation fails\.

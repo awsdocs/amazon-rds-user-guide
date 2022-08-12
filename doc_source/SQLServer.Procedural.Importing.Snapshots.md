@@ -17,7 +17,7 @@ Amazon RDS for Microsoft SQL Server doesn't support importing data into the `msd
 
    If you prevent access to your DB instance while you are importing data, data transfer is faster\. Additionally, you don't need to worry about conflicts while data is being loaded if other applications cannot write to the DB instance at the same time\. If something goes wrong and you have to roll back to an earlier database snapshot, the only changes that you lose are the imported data\. You can import this data again after you resolve the issue\. 
 
-   For information about controlling access to your DB instance, see [Working with DB security groups \(EC2\-Classic platform\)](USER_WorkingWithSecurityGroups.md)\. 
+   For information about controlling access to your DB instance, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. 
 
 1. Create a snapshot of the target database\. 
 
@@ -118,7 +118,7 @@ When you take a database snapshot, I/O operations to the database are suspended 
 
 1. Grant applications access to the target DB instance\. 
 
-   When your data import is complete, you can grant access to the DB instance to those applications that you blocked during the import\. For information about controlling access to your DB instance, see [Working with DB security groups \(EC2\-Classic platform\)](USER_WorkingWithSecurityGroups.md)\. 
+   When your data import is complete, you can grant access to the DB instance to those applications that you blocked during the import\. For information about controlling access to your DB instance, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. 
 
 1. Enable automated backups on the target DB instance\. 
 

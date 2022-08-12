@@ -4,24 +4,11 @@
 
  Keeping all of your credentials in the same directory can save you time and effort\. With this approach, you have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\. 
 
-Amazon RDS supports Kerberos authentication for MySQL DB instances in the following AWS Regions:
-+ US East \(Ohio\)
-+ US East \(N\. Virginia\)
-+ US West \(N\. California\)
-+ US West \(Oregon\)
-+ Asia Pacific \(Mumbai\)
-+ Asia Pacific \(Seoul\)
-+ Asia Pacific \(Singapore\)
-+ Asia Pacific \(Sydney\)
-+ Asia Pacific \(Tokyo\)
-+ Canada \(Central\)
-+ Europe \(Frankfurt\)
-+ Europe \(Ireland\)
-+ Europe \(London\)
-+ Europe \(Stockholm\)
-+ South America \(São Paulo\)
-+ China \(Beijing\)
-+ China \(Ningxia\)
+## Region and version availability<a name="mysql-kerberos-setting-up.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Kerberos authentication, see [Kerberos authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication)\.
+
+## Overview of Setting up Kerberos authentication for MySQL DB instances<a name="mysql-kerberos-setting-up-overview"></a>
 
  To set up Kerberos authentication for a MySQL DB instance, complete the following general steps, described in more detail later: 
 
@@ -286,14 +273,11 @@ At a command prompt, connect to one of the endpoints associated with your MySQL 
 
  The following limitations apply to Kerberos authentication for MySQL: 
 + Only an AWS Managed Microsoft AD is supported\. However, you can join RDS for MySQL DB instances to shared Managed Microsoft AD domains owned by different accounts in the same AWS Region\.
-+  Kerberos authentication is supported for the following Amazon RDS for MySQL versions: 
-  + Amazon RDS for MySQL version 8\.0\.23 and higher 8\.0 versions
-  + Amazon RDS for MySQL version 5\.7\.33 and higher 5\.7 versions
 +  You must reboot the DB instance after enabling the feature\. 
 +  The domain name length can't be longer than 61 characters\. 
 +  You can't enable Kerberos authentication and IAM authentication at the same time\. Choose one authentication method or the other for your MySQL DB instance\. 
 +  Don't modify the DB instance port after enabling the feature\. 
-+  Don't use Kerberos authentication with read replicas\. 
++  Don't use Kerberos authentication with read replicas\.
 + If you have auto minor version upgrade turned on for a MySQL DB instance that is using Kerberos authentication, you must turn off Kerberos authentication and then turn it back on after an automatic upgrade\. For more information about auto minor version upgrades, see [Automatic minor version upgrades for MySQL](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.Minor)\.
 +  To delete a DB instance with this feature enabled, first disable the feature\. To do this, use the `modify-db-instance` CLI command for the DB instance and specify `none` for the `--domain` parameter\. 
 

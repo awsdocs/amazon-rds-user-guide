@@ -295,7 +295,7 @@ For more information about monitoring a DB instance with CloudWatch, see [Monito
 
 ## Creating a read replica in a different AWS Region<a name="USER_ReadRepl.XRgn"></a>
 
-With Amazon RDS, you can create a MariaDB, MySQL, Oracle, or PostgreSQL read replica in a different AWS Region from the source DB instance\. Creating a cross\-Region read replica isn't supported for SQL Server on Amazon RDS\.
+With Amazon RDS, you can create a read replica in a different AWS Region from the source DB instance\.
 
 ![\[Cross-Region read replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-replica-cross-region.png)
 
@@ -308,6 +308,10 @@ Creating a read replica in a different AWS Region from the source instance is si
 
 **Note**  
 To create an encrypted read replica in a different AWS Region from the source DB instance, the source DB instance must be encrypted\.
+
+### Region and version availability<a name="USER_ReadRepl.XRgn.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with cross\-Region replication, see [Cross\-Region read replicas](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas)\. 
 
 ### Creating a cross\-Region read replica<a name="ReadRepl.XRgn"></a>
 
@@ -474,18 +478,8 @@ Amazon RDS uses the following process to create a cross\-Region read replica\. D
 ### Cross\-Region replication considerations<a name="USER_ReadRepl.XRgn.Cnsdr"></a>
 
 All of the considerations for performing replication within an AWS Region apply to cross\-Region replication\. The following extra considerations apply when replicating between AWS Regions:
-+ You can only replicate between AWS Regions when using the following Amazon RDS DB instances:
-  + MariaDB \(all versions\)
-  + MySQL \(all versions\)
-  + Oracle Enterprise Edition \(EE\) of Oracle Database 12c Release 1 \(12\.1\) using 12\.1\.0\.2\.v10 and higher, Oracle Database 12c Release 2 \(12\.2\), and Oracle Database 19c using the non\-CDB architecture
-**Note**  
-Oracle DB instances that you create using the CDB architecture aren't supported\.
-
-    An Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Replica requirements for Oracle](oracle-read-replicas.limitations.md)\.
-  + PostgreSQL \(all versions\)
 + A source DB instance can have cross\-Region read replicas in multiple AWS Regions\.
 + You can only create a cross\-Region Amazon RDS read replica from a source Amazon RDS DB instance that is not a read replica of another Amazon RDS DB instance\.
-+ You can replicate between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions, but not into or out of AWS GovCloud \(US\)\.
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-Region read replica instances\. 

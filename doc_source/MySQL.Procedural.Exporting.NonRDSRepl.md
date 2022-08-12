@@ -34,7 +34,6 @@ Perform the following steps to prepare the external MySQL database\.
 
    Specify the appropriate egress rules for your environment:
    + If the external MySQL database is running in an Amazon EC2 instance in a virtual private cloud \(VPC\) based on the Amazon VPC service, specify the egress rules in a VPC security group\. For more information, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
-   + If the external MySQL database is running in an Amazon EC2 instance that is not in a VPC, specify the egress rules in an EC2\-Classic security group\.
    + If the external MySQL database is installed on\-premises, specify the egress rules in a firewall\.
 
 1. If the external MySQL database is running in a VPC, configure rules for the VPC access control list \(ACL\) rules in addition to the security group egress rule: 
@@ -59,7 +58,6 @@ Perform the following steps to prepare the source MySQL DB instance as the repli
 
 1. Specify the egress rules:
    + If the source MySQL DB instance is running in a VPC, specify the ingress rules in a VPC security group\. For more information, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
-   + If the source MySQL DB instance isn't running in a VPC, specify the ingress rules in a DB security group\. For more information, see [Authorizing network access to a DB security group from an IP range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
 
 1. If source MySQL DB instance is running in a VPC, configure VPC ACL rules in addition to the security group ingress rule:
    + Configure an ACL ingress rule to allow TCP connections to the port used by the Amazon RDS instance from the IP address of the external MySQL database\.

@@ -114,7 +114,7 @@ The following option settings are required:
 + **Port** – The port that you use to access MSDTC\. Allowed values are 1150–49151 except for 1234, 1434, 3260, 3343, 3389, and 47001\. The default value is 5000\.
 
   Make sure that the port you want to use is enabled in your firewall rules\. Also, make sure as needed that this port is enabled in the inbound and outbound rules for the security group associated with your DB instance\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\. 
-+ **Security groups** – The VPC or DB security group memberships for your RDS DB instance\.
++ **Security groups** – The VPC security group memberships for your RDS DB instance\.
 + **Authentication type** – The authentication mode between hosts\. The following authentication types are supported:
   + Mutual – The RDS instances are mutually authenticated to each other using integrated authentication\. If this option is selected, all instances associated with this option group must be domain\-joined\.
   + None – No authentication is performed between hosts\. We don't recommend using this mode in production environments\.
@@ -144,7 +144,7 @@ The following option settings are optional:
 
    1. For **Port**, enter the port number for accessing MSDTC\. The default is **5000**\.
 
-   1. For **Security groups**, choose the VPC or DB security group to associate with the option\.
+   1. For **Security groups**, choose the VPC security group to associate with the option\.
 
    1. For **Authentication type**, choose **Mutual** or **None**\.
 

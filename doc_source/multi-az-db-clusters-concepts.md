@@ -3,6 +3,7 @@
 A *Multi\-AZ DB cluster deployment* is a high availability deployment mode of Amazon RDS with two readable standby DB instances\. A Multi\-AZ DB cluster has a writer DB instance and two reader DB instances in three separate Availability Zones in the same AWS Region\. Multi\-AZ DB clusters provide high availability, increased capacity for read workloads, and lower write latency when compared to Multi\-AZ DB instance deployments\.
 
 **Topics**
++ [Region and version availability](#multi-az-db-clusters-concepts.RegionVersionAvailability)
 + [Overview of Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-overview)
 + [Creating and managing a Multi\-AZ DB cluster](#multi-az-db-clusters-creating-managing)
 + [Managing connections for Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-connection-management)
@@ -14,6 +15,10 @@ A *Multi\-AZ DB cluster deployment* is a high availability deployment mode of Am
 
 **Important**  
 Multi\-AZ DB clusters aren't the same as Aurora DB clusters\. For information about Aurora DB clusters, see the [Amazon Aurora User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
+
+## Region and version availability<a name="multi-az-db-clusters-concepts.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Multi\-AZ DB clusters, see [Multi\-AZ DB clusters](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters)\. 
 
 ## Overview of Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-overview"></a>
 
@@ -300,17 +305,6 @@ To modify the JVM's TTL, set the [https://docs.oracle.com/javase/7/docs/technote
 ## Limitations for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts.Limitations"></a>
 
 The following limitations apply to Multi\-AZ DB clusters:
-+ You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.28 and higher 8\.0 versions, and PostgreSQL version 13\.4\.
-+ You can create Multi\-AZ DB clusters only in the following AWS Regions:
-  + US East \(Ohio\)
-  + US East \(N\. Virginia\)
-  + US West \(Oregon\)
-  + Asia Pacific \(Singapore\)
-  + Asia Pacific \(Sydney\)
-  + Asia Pacific \(Tokyo\)
-  + Europe \(Ireland\)
-  + Europe \(Frankfurt\)
-  + Europe \(Stockholm\)
 + Multi\-AZ DB clusters only support Provisioned IOPS storage\.
 + You can't change a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
 + You can't restore a Multi\-AZ DB cluster snapshot to a Multi\-AZ DB instance deployment or single\-AZ deployment\.

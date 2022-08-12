@@ -5,7 +5,7 @@ Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS
 **Topics**
 + [Working with high availability features for RDS Custom for Oracle](#custom-managing.ha)
 + [Pausing and resuming RDS Custom automation](#custom-managing.pausing)
-+ [Modifying the storage for an RDS Custom for Oracle DB instance](#custom-managing.storage-modify)
++ [Modifying an RDS Custom for Oracle DB instance](#custom-managing.storage-modify)
 + [Changing the time zone of an RDS Custom for Oracle DB instance](#custom-managing.timezone)
 + [Changing the character set of an RDS Custom for Oracle DB instance](#custom-managing.character-set)
 + [Support for Transparent Data Encryption](#custom-managing.tde)
@@ -203,9 +203,10 @@ In the following partial sample output, the pending `AutomationMode` value is `f
     }
 ```
 
-## Modifying the storage for an RDS Custom for Oracle DB instance<a name="custom-managing.storage-modify"></a>
+## Modifying an RDS Custom for Oracle DB instance<a name="custom-managing.storage-modify"></a>
 
-Modifying the storage for an RDS Custom for Oracle DB instance is similar to doing this for Amazon RDS, but the changes that you can make are limited to the following:
+Modifying an RDS Custom for Oracle DB instance is similar to managing an Amazon RDS instance, but the changes that you can make are limited to the following:
++ Changing the DB instance class
 + Increasing the allocated storage
 + Changing the storage type from io1 to gp2, or gp2 to io1
 + Changing the Provisioned IOPS, if you're using the io1 storage type
@@ -225,7 +226,7 @@ For general information about storage modification, see [Working with storage fo
 
 ### Console<a name="custom-managing.storage-modify.CON"></a>
 
-**To modify the storage for an RDS Custom for Oracle DB instance**
+**To modify an RDS Custom for Oracle DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -236,6 +237,8 @@ For general information about storage modification, see [Working with storage fo
 1. Choose **Modify**\.
 
 1. Make the following changes as needed:
+
+   1. Change the value for **DB instance class**\. For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 
    1. Enter a new value for **Allocated storage**\. It must be greater than the current value, and from 40 GiB–64 TiB\.
 
@@ -252,6 +255,7 @@ For general information about storage modification, see [Working with storage fo
 ### AWS CLI<a name="custom-managing.storage-modify.CLI"></a>
 
 To modify the storage for an RDS Custom for Oracle DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
++ `--db-instance-class` – A new instance class\. For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\. It must be greater than the current value, and from 40–65,536 GiB\.
 + `--storage-type` – The storage type, gp2 or io1\.
 + `--iops` – Provisioned IOPS for the DB instance, if using the io1 storage type\.

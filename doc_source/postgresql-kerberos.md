@@ -9,37 +9,15 @@ Keeping all of your credentials in the same directory can save you time and effo
 You can also access credentials from your own on\-premises Microsoft Active Directory\. To do so you create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL instances with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
 
 **Topics**
-+ [Availability of Kerberos authentication](#postgresql-kerberos-availability)
++ [Region and version availability](#postgresql-kerberos.RegionVersionAvailability)
 + [Overview of Kerberos authentication for PostgreSQL DB instances](#postgresql-kerberos-overview)
 + [Setting up Kerberos authentication for PostgreSQL DB instances](postgresql-kerberos-setting-up.md)
 + [Managing a DB instance in a Domain](postgresql-kerberos-managing.md)
 + [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)
 
-## Availability of Kerberos authentication<a name="postgresql-kerberos-availability"></a>
+## Region and version availability<a name="postgresql-kerberos.RegionVersionAvailability"></a>
 
-Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the following AWS Regions: 
-
-
-| Region name | Region | 
-| --- | --- | 
-| US East \(Ohio\) | us\-east\-2 | 
-| US East \(N\. Virginia\) | us\-east\-1 | 
-| US West \(N\. California\) | us\-west\-1 | 
-| US West \(Oregon\) | us\-west\-2 | 
-| Asia Pacific \(Mumbai\) | ap\-south\-1 | 
-| Asia Pacific \(Seoul\) | ap\-northeast\-2 | 
-| Asia Pacific \(Singapore\) | ap\-southeast\-1 | 
-| Asia Pacific \(Sydney\) | ap\-southeast\-2 | 
-| Asia Pacific \(Tokyo\) | ap\-northeast\-1 | 
-| Canada \(Central\) | ca\-central\-1 | 
-| China \(Beijing\) | cn\-north\-1  | 
-| China \(Ningxia\) | cn\-northwest\-1 | 
-| Europe \(Frankfurt\) | eu\-central\-1 | 
-| Europe \(Ireland\) | eu\-west\-1 | 
-| Europe \(London\) | eu\-west\-2 | 
-|  Europe \(Paris\)  |  eu\-west\-3  | 
-| Europe \(Stockholm\) | eu\-north\-1 | 
-| South America \(São Paulo\) | sa\-east\-1 | 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of RDS for PostgreSQL with Kerberos authentication, see [Kerberos authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication)\.
 
 ## Overview of Kerberos authentication for PostgreSQL DB instances<a name="postgresql-kerberos-overview"></a>
 

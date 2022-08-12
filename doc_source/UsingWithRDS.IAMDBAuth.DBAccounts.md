@@ -22,7 +22,7 @@ The `IDENTIFIED WITH` clause allows MariaDB and MySQL to use the `AWSAuthenticat
 **Note**  
 If you see the following message, it means that the AWS\-provided plugin is not available for the current DB instance\.  
 `ERROR 1524 (HY000): Plugin 'AWSAuthenticationPlugin' is not loaded`  
-To troubleshoot this error, verify that you are using a supported configuration and that you have enabled IAM database authentication on your DB instance\. For more information, see [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability) and [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)\.
+To troubleshoot this error, verify that you are using a supported configuration and that you have enabled IAM database authentication on your DB instance\. For more information, see [Region and version availability](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability) and [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)\.
 
 After you create an account using `AWSAuthenticationPlugin`, you manage it in the same way as other database accounts\. For example, you can modify account privileges with `GRANT` and `REVOKE` statements, or modify various account attributes with the `ALTER USER` statement\. 
 

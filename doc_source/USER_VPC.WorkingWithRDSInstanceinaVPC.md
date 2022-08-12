@@ -40,8 +40,8 @@ The DB subnet group for a Local Zone can have only one subnet\.
   For more information about the instance types that can be in a dedicated instance, see [Amazon EC2 dedicated instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on the EC2 pricing page\. 
 **Note**  
 When you set the instance tenancy attribute to dedicated for an Amazon RDS DB instance, it doesn't guarantee that the DB instance will run on a dedicated host\.
-+ When an option group is assigned to a DB instance, it is linked to the supported platform the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. Furthermore, if a DB instance is in a VPC, the option group associated with the DB instance is linked to that VPC\. This linkage means that you cannot use the option group assigned to a DB instance if you attempt to restore the DB instance into a different VPC or onto a different platform\.
-+ If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the DB instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. With persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.
++ When an option group is assigned to a DB instance, it's associated with the DB instance's VPC\. This linkage means that you can't use the option group assigned to a DB instance if you attempt to restore the DB instance into a different VPC\.
++ If you restore a DB instance into a different VPC, make sure to either assign the default option group to the DB instance, assign an option group that is linked to that VPC, or create a new option group and assign it to the DB instance\. With persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.
 
 ## Working with DB subnet groups<a name="USER_VPC.Subnets"></a>
 
@@ -103,7 +103,7 @@ When a DB instance can communicate over both the IPv4 and IPv6 addressing protoc
 + [Dual\-stack mode and DB subnet groups](#USER_VPC.IP_addressing.dual-stack-db-subnet-groups)
 + [Working with dual\-stack mode DB instances](#USER_VPC.IP_addressing.dual-stack-working-with)
 + [Modifying IPv4\-only DB instances to use dual\-stack mode](#USER_VPC.IP_addressing.dual-stack-modifying-ipv4)
-+ [Availability of dual\-stack network DB instances](#USER_VPC.IP_addressing.dual-stack-availability)
++ [Region and version availability](#USER_VPC.IP_addressing.RegionVersionAvailability)
 + [Limitations for dual\-stack network DB instances](#USER_VPC.IP_addressing.dual-stack-limitations)
 
 For a tutorial that shows you how to create a VPC with both IPv4 and IPv6 addresses that you can use for a common Amazon RDS scenario, see [Tutorial: Create a virtual private cloud \(VPC\) for use with a DB instance \(dual\-stack mode\)](CHAP_Tutorials.CreateVPCDualStack.md)\. 
@@ -178,7 +178,7 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
    If you are using the AWS CLI, make sure that the following settings are correct:
    + `--network-type` – `dual`
    + `--db-subnet-group-name` – The DB subnet group that you configured in a previous step
-   + `--vpc-security-group-ids` – The DB security group that you configured in a previous step
+   + `--vpc-security-group-ids` – The VPC security group that you configured in a previous step
 
 1. Confirm that the DB instance supports dual\-stack mode\.
 
@@ -194,24 +194,9 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
 
    Use the DB instance endpoint, not the IPv6 address, to connect to the DB instance\.
 
-#### Availability of dual\-stack network DB instances<a name="USER_VPC.IP_addressing.dual-stack-availability"></a>
+#### Region and version availability<a name="USER_VPC.IP_addressing.RegionVersionAvailability"></a>
 
-The following DB engine versions support dual\-stack network DB instances:
-+ All RDS for MariaDB versions
-+ RDS for MySQL versions:
-  + 8\.0\.23 and higher 8\.0 versions
-  + 5\.7\.33 and higher 5\.7 versions
-+ All RDS for Oracle versions
-+ RDS for PostgreSQL versions:
-  + All 14 versions
-  + 13\.3 and higher 13 versions
-  + 12\.7 and higher 12 versions
-  + 11\.12 and higher 11 versions
-  + 10\.17 and higher 10 versions
-+ RDS for SQL Server versions:
-  + 15\.00\.4043\.16\.v1 and higher 15 versions
-  + 14\.00\.3294\.2\.v1 and higher 14 versions
-  + 13\.00\.5820\.21\.v1 and higher 13 versions
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with dual stack mode, see [Dual\-stack mode](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode)\. 
 
 #### Limitations for dual\-stack network DB instances<a name="USER_VPC.IP_addressing.dual-stack-limitations"></a>
 
@@ -241,9 +226,7 @@ For information about modifying a DB instance to set the **Public access** optio
 
 ## Creating a DB instance in a VPC<a name="USER_VPC.InstanceInVPC"></a>
 
-The following procedures help you create a DB instance in a VPC\. If your account has a default VPC, you can begin with step 2 because the VPC and DB subnet group have already been created for you\. If your AWS account doesn't have a default VPC, or if you want to create an additional VPC, you can create a new VPC\. 
-
-If you don't know if you have a default VPC, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\.
+The following procedures help you create a DB instance in a VPC\. If your account has a default VPC and you want to use it, you can begin with step 2\. The VPC and DB subnet group have already been created for you in the default VPC\. If you want to create an additional VPC, you can start with step 1 and create a new VPC\. 
 
 **Note**  
 If you want your DB instance in the VPC to be publicly accessible, you must update the DNS information for the VPC by enabling the VPC attributes *DNS hostnames* and *DNS resolution*\. For information about updating the DNS information for a VPC instance, see [Updating DNS support for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 

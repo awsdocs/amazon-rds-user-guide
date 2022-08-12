@@ -14,7 +14,8 @@ In general, consider using IAM database authentication when your applications cr
 The AWS JDBC Driver for MySQL supports IAM database authentication\. For more information, see [AWS IAM Database Authentication](https://github.com/awslabs/aws-mysql-jdbc#aws-iam-database-authentication) in the AWS JDBC Driver for MySQL GitHub repository\.
 
 **Topics**
-+ [Availability for IAM database authentication](#UsingWithRDS.IAMDBAuth.Availability)
++ [Region and version availability](#UsingWithRDS.IAMDBAuth.Availability)
++ [CLI and SDK support](#UsingWithRDS.IAMDBAuth.cli-sdk)
 + [Limitations for IAM database authentication](#UsingWithRDS.IAMDBAuth.Limitations)
 + [Recommendations for IAM database authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
@@ -22,16 +23,11 @@ The AWS JDBC Driver for MySQL supports IAM database authentication\. For more in
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 + [Connecting to your DB instance using IAM authentication](UsingWithRDS.IAMDBAuth.Connecting.md)
 
-## Availability for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
+## Region and version availability<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-IAM database authentication is available for the following database engines:
-+ MariaDB 10\.6, all minor versions
-+ MySQL 8\.0, minor version 8\.0\.23 or higher
-+ MySQL 5\.7, minor version 5\.7\.33 or higher
-+ PostgreSQL 14, 13, 12, and 11, all minor versions
-+ PostgreSQL 10, minor version 10\.6 or higher
-+ PostgreSQL 9\.6, minor version 9\.6\.11 or higher
-+ PostgreSQL 9\.5, minor version 9\.5\.15 or higher
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with Amazon RDS and IAM database authentication, see [IAM database authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication)\.
+
+## CLI and SDK support<a name="UsingWithRDS.IAMDBAuth.cli-sdk"></a>
 
 IAM database authentication is available for the [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/rds/generate-db-auth-token.html) and for the following language\-specific AWS SDKs:
 + [AWS SDK for \.NET](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/RDS/TRDSAuthTokenGenerator.html)

@@ -129,7 +129,7 @@ If you can't connect to the DB instance, the most common error is `Could not con
 
 ### Errors with security group access rules<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting-AccessRules"></a>
 
-By far the most common connection problem is with the security group's access rules assigned to the DB instance\. If you used the default DB security group when you created the DB instance, the security group likely didn't have access rules that allow you to access the instance\. 
+By far the most common connection problem is with the security group's access rules assigned to the DB instance\. If you used the default security group when you created the DB instance, the security group likely didn't have access rules that allow you to access the instance\. 
 
 For the connection to work, the security group you assigned to the DB instance at its creation must allow access to the DB instance\. For example, if the DB instance was created in a VPC, it must have a VPC security group that authorizes connections\. Check if the DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the application is running\.
 

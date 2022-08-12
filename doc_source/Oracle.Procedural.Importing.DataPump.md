@@ -21,7 +21,7 @@ Oracle Data Pump is made up of the following components:
 You can use Oracle Data Pump for the following scenarios:
 + Import data from an Oracle database, either on\-premises or Amazon EC2 instance, to an RDS for Oracle DB instance\.
 + Import data from an RDS for Oracle DB instance to an Oracle database, either on\-premises or Amazon EC2 instance\.
-+ Import data between RDS for Oracle DB instances, for example, to migrate data from EC2\-Classic to VPC\.
++ Import data between RDS for Oracle DB instances\.
 
 To download Oracle Data Pump utilities, see [Oracle database software downloads](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html) on the Oracle Technology Network website\. For compatibility considerations when migrating between versions of Oracle Database, see [ the Oracle documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-BAA3B679-A758-4D55-9820-432D9EB83C68)\.
 

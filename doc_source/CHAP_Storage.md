@@ -168,25 +168,27 @@ The following list shows the maximum storage that most DB instance classes can s
 + Oracle: 64 TiB
 + PostgreSQL: 64 TiB
 
-The following table shows some exceptions\. All RDS for Microsoft SQL Server DB instances have a maximum storage of 16 TiB, so there are no entries for SQL Server\.
+The following table shows some exceptions for maximum storage \(in TiB\)\. All RDS for Microsoft SQL Server DB instances have a maximum storage of 16 TiB, so there are no entries for SQL Server\.
 
 
 ****  
 
 | Instance class | MariaDB | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | 
-| db\.m3 – previous generation standard instance classes | 
+| db\.m3 – standard instance classes | 
 | db\.m3\.2xlarge | N/A | 6 | N/A | 6 | 
 | db\.m3\.xlarge | N/A | 6 | N/A | 6 | 
 | db\.m3\.large | N/A | 6 | N/A | 6 | 
 | db\.m3\.medium | N/A | 32 | N/A | 32 | 
-| db\.t3 – latest generation burstable performance instance classes | 
+| db\.t4g – burstable\-performance instance classes | 
+| db\.t4g\.micro | 6 | 6 | N/A | 6 | 
+| db\.t3 – burstable\-performance instance classes | 
 | db\.t3\.medium | 16 | 16 | 32 | 32 | 
 | db\.t3\.small | 16 | 16 | 32 | 16 | 
-| db\.t3\.micro | 16 | 16 | 32 | 16 | 
-| db\.t2 – current generation burstable performance instance classes | 
+| db\.t3\.micro | 6 | 6 | 32 | 6 | 
+| db\.t2 – burstable\-performance instance classes | 
 | db\.t2\.medium | 32 | 32 | N/A | 32 | 
 | db\.t2\.small | 16 | 16 | N/A | 16 | 
-| db\.t2\.micro | 16 | 16 | N/A | 16 | 
+| db\.t2\.micro | 6 | 6 | N/A | 6 | 
 
 For more details about all instance classes supported, see [Previous generation DB instances](http://aws.amazon.com/rds/previous-generation/)\.

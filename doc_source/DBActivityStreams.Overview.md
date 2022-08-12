@@ -5,13 +5,16 @@ As an RDS for Oracle database administrator, you need to safeguard your database
 Security threats are both external and internal\. To protect against internal threats, you can control administrator access to data streams by configuring the Database Activity Streams feature\. RDS for Oracle DBAs don't have access to the collection, transmission, storage, and processing of the streams\.
 
 **Topics**
++ [Region and version availability](#DBActivityStreams.RegionVersionAvailability)
 + [How database activity streams work](#DBActivityStreams.Overview.how-they-work)
 + [Unified auditing in Oracle Database](#DBActivityStreams.Overview.unified-auditing)
 + [Asynchronous mode for database activity streams](#DBActivityStreams.Overview.sync-mode)
 + [Requirements for database activity streams](#DBActivityStreams.Overview.requirements)
-+ [Supported RDS for Oracle engine versions for database activity streams](#DBActivityStreams.Overview.requirements.version)
 + [Supported DB instance classes for database activity streams](#DBActivityStreams.Overview.requirements.classes)
-+ [Supported AWS Regions for database activity streams](#DBActivityStreams.Overview.requirements.Regions)
+
+## Region and version availability<a name="DBActivityStreams.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with database activity streams, see [Database activity streams](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams)\.
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
@@ -85,10 +88,6 @@ In RDS for Oracle, database activity streams have the following requirements and
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
 
-## Supported RDS for Oracle engine versions for database activity streams<a name="DBActivityStreams.Overview.requirements.version"></a>
-
-Database activity streams are supported for Oracle Database 19c using version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher\. Your database can use either Enterprise Edition or Standard Edition 2 \(SE2\)\.
-
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 
 You can use database activity streams with the following DB instance classes:
@@ -102,11 +101,3 @@ You can use database activity streams with the following DB instance classes:
 The memory optimized db\.r5 classes, which use the naming pattern db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*, aren't supported\.
 
 For more information about instance class types, see [DB instance classes](Concepts.DBInstanceClass.md)\.
-
-## Supported AWS Regions for database activity streams<a name="DBActivityStreams.Overview.requirements.Regions"></a>
-
-Database activity streams are supported in all AWS Regions except the following:
-+ China \(Beijing\) Region, `cn-north-1`
-+ China \(Ningxia\) Region, `cn-northwest-1`
-+ AWS GovCloud \(US\-East\), `us-gov-east-1`
-+ AWS GovCloud \(US\-West\), `us-gov-west-1`
