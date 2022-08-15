@@ -181,6 +181,8 @@ The following table shows some exceptions for maximum storage \(in TiB\)\. All R
 | db\.m3\.large | N/A | 6 | N/A | 6 | 
 | db\.m3\.medium | N/A | 32 | N/A | 32 | 
 | db\.t4g – burstable\-performance instance classes | 
+| db\.t4g\.medium | 16 | 16 | N/A | 32 | 
+| db\.t4g\.small | 16 | 16 | N/A | 16 | 
 | db\.t4g\.micro | 6 | 6 | N/A | 6 | 
 | db\.t3 – burstable\-performance instance classes | 
 | db\.t3\.medium | 16 | 16 | 32 | 32 | 
