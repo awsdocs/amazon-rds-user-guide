@@ -188,20 +188,20 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
 1. **Perform a backup** – We recommend that you perform a backup before performing the major version upgrade so that you have a known restore point for your database\. If your backup retention period is greater than 0, the upgrade process creates DB snapshots of your DB instance before and after upgrading\. To change your backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. To perform a backup manually, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
-1. **Upgrade certain extensions before a major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. Upgrading from versions 9\.5\.x or 9\.6\.x to version 11\.x skips a major version\. The extensions to update include:
+1. **Upgrade certain extensions before a major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. For example, upgrading from versions 9\.5\.x or 9\.6\.x to version 11\.x skips a major version\. The extensions to update include PostGIS and related extensions for processing spatial data\. 
    + `address_standardizer`
    + `address_standardizer_data_us`
-   + `postGIS`
+   + `postgis`
    + `postgis_tiger_geocoder`
    + `postgis_topology`
 
-   Run the following command for each extension you are using\. 
+   Run the following command for each extension that you're using:
 
    ```
    ALTER EXTENSION PostgreSQL-extension UPDATE TO 'new-version'
    ```
 
-   For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\.
+   For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\. To learn more about upgrading PostGIS, see [Step 6: Upgrade the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update)\.
 
 1. **Drop certain extensions before the major version upgrade** – An upgrade that skips a major version to version 11\.x doesn't support updating the `pgRouting` extension\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. It's safe to drop the `pgRouting` extension and then reinstall it to a compatible version after the upgrade\. For the extension versions you can update to, see [Supported PostgreSQL extension versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
 
@@ -386,7 +386,8 @@ A PostgreSQL upgrade doesn't upgrade PostgreSQL extensions\. To upgrade extensio
 A PostgreSQL engine upgrade doesn't upgrade most PostgreSQL extensions\. To update an extension after a version upgrade, use the `ALTER EXTENSION UPDATE` command\. 
 
 **Note**  
-For the `PostGIS` extension, be sure to follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you update the extension\. For the `pg_repack` extension, drop the extension and then create the new version in the upgraded DB instance\. For more information, see [pg\_repack installation](https://reorg.github.io/pg_repack/) in the `pg_repack` documentation\.
+For information about updating the PostGIS extension, see [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md) \([Step 6: Upgrade the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update)\)\.  
+To update the `pg_repack` extension, drop the extension and then create the new version in the upgraded DB instance\. For more information, see [pg\_repack installation](https://reorg.github.io/pg_repack/) in the `pg_repack` documentation\.
 
 To upgrade an extension, use the following command\. 
 

@@ -14,10 +14,11 @@ We recommend that you import your database to Amazon RDS by using backup files i
 
 ## Limitations and recommendations for importing backup files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Limitations"></a>
 
-The following are some limitations and recommendations for importing backup files from Amazon S3: 
-+ You can only import your data to a new DB instance, not an existing DB instance\. 
+The following are some limitations and recommendations for importing backup files from Amazon S3:
++ You can only import your data to a new DB instance, not an existing DB instance\.
 + You must use Percona XtraBackup to create the backup of your on\-premises database\.
-+ You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
++ You can't import data from a DB snapshot export to Amazon S3\.
++ You can't migrate from a source database that has tables defined outside of the default MySQL data directory\.
 + You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 8\.0, and the default minor version for your AWS Region is 8\.0\.28, then you must import your data into a MySQL version 8\.0\.28 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
 + Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 8\.0 to version 5\.7, and you can't migrate from version 8\.0\.28 to version 8\.0\.27\.
 + You can't import a MySQL 5\.5 or 5\.6 database\. 

@@ -2,7 +2,7 @@
 
 You can establish a private connection between your VPC and Amazon RDS API endpoints by creating an *interface VPC endpoint*\. Interface endpoints are powered by [AWS PrivateLink](http://aws.amazon.com/privatelink)\. 
 
-AWS PrivateLink enables you to privately access Amazon RDS API operations without an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. Instances in your VPC don't need public IP addresses to communicate with Amazon RDS API endpoints to launch, modify, or terminate DB instances\. Your instances also don't need public IP addresses to use any of the available RDS API operations\. Traffic between your VPC and Amazon RDS doesn't leave the Amazon network\. 
+AWS PrivateLink enables you to privately access Amazon RDS API operations without an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. DB instances in your VPC don't need public IP addresses to communicate with Amazon RDS API endpoints to launch, modify, or terminate DB instances\. Your DB instances also don't need public IP addresses to use any of the available RDS API operations\. Traffic between your VPC and Amazon RDS doesn't leave the Amazon network\. 
 
 Each interface endpoint is represented by one or more elastic network interfaces in your subnets\. For more information on elastic network interfaces, see [Elastic network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the *Amazon EC2 User Guide\.* 
 

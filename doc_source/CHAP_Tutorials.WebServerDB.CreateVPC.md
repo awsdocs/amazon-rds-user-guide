@@ -1,18 +1,16 @@
-# Tutorial: Create an Amazon VPC for use with a DB instance \(IPv4 only\)<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
+# Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
 
-A common scenario includes a DB instance in an Amazon VPC, that shares data with a web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
+A common scenario includes a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\. This VPC shares data with a web server that is running in the same VPC\. In this tutorial, you create the VPC for this scenario\.
 
 The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
 
- 
+![\[Single VPC scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
-![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
+Because your DB instance needs to be available only to your web server, and not to the public internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The web server can connect to the DB instance because it is hosted within the same VPC\. But the DB instance isn't available to the public internet, providing greater security\.
 
-Because your DB instance only needs to be available to your web server, and not to the public Internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The web server is able to connect to the DB instance because it is hosted within the same VPC, but the DB instance is not available to the public Internet, providing greater security\.
+This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easier to switch to a Multi\-AZ DB instance deployment in the future\. 
 
-This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\.
-
-This tutorial describes configuring a VPC for Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\. 
+This tutorial describes configuring a VPC for Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
 **Note**  
 For a tutorial that shows you how to create a web server for this VPC scenario, see [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)\.
@@ -45,13 +43,13 @@ Use the following procedure to create a VPC with both public and private subnets
    + **VPC endpoints** – **None**
    + **DNS options** – Keep the default values\.
 **Note**  
-Amazon RDS requires at least two subnets in two different Availability Zones to support Multi\-AZ DB instance deployments\. This tutorial creates a Single\-AZ deployment, but the requirement makes it easy to convert to a Multi\-AZ DB instance deployment in the future\.
+Amazon RDS requires at least two subnets in two different Availability Zones to support Multi\-AZ DB instance deployments\. This tutorial creates a Single\-AZ deployment, but the requirement makes it easier to convert to a Multi\-AZ DB instance deployment in the future\.
 
 1. Choose **Create VPC**\.
 
 ## Create a VPC security group for a public web server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
 
-Next you create a security group for public access\. To connect to public instances in your VPC, you add inbound rules to your VPC security group that allow traffic to connect from the internet\. 
+Next, you create a security group for public access\. To connect to public EC2 instances in your VPC, you add inbound rules to your VPC security group that allow traffic to connect from the internet\.
 
 **To create a VPC security group**
 
@@ -66,12 +64,11 @@ Next you create a security group for public access\. To connect to public instan
 
 1. Add inbound rules to the security group\.
 
-   1. Determine the IP address to use to connect to instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
+   1. Determine the IP address to use to connect to EC2 instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
 
-      If you are connecting through an Internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
+      If you are connecting through an internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
 **Warning**  
-  
-If you use `0.0.0.0/0` for SSH access, you enable all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your instances using SSH\.
+If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances using SSH\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
@@ -81,17 +78,17 @@ If you use `0.0.0.0/0` for SSH access, you enable all IP addresses to access you
 
    1. Choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow HTTP access to your web server\. 
+   1. Set the following values for your new inbound rule to allow HTTP access to your web server:
       + **Type:** **HTTP**
       + **Source:** **0\.0\.0\.0/0**
 
-1. To create the security group, choose **Create security group**\.
+1. Choose **Create security group** to create the security group\.
 
    Note the security group ID because you need it later in this tutorial\.
 
 ## Create a VPC security group for a private DB instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
 
-To keep your DB instance private, create a second security group for private access\. To connect to private instances in your VPC, you add inbound rules to your VPC security group that allow traffic from your web server only\. 
+To keep your DB instance private, create a second security group for private access\. To connect to private DB instancesin your VPC, you add inbound rules to your VPC security group that allow traffic from your web server only\.
 
 **To create a VPC security group**
 
@@ -112,11 +109,11 @@ To keep your DB instance private, create a second security group for private acc
       + **Type:** **MySQL/Aurora**
       + **Source:** The identifier of the **tutorial\-securitygroup** security group that you created previously in this tutorial, for example: **sg\-9edd5cfb**\.
 
-1. To create the security group, choose **Create security group**\.
+1. Choose **Create security group** to create the security group\.
 
 ## Create a DB subnet group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
 
-A DB subnet group is a collection of subnets that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances\.
+A *DB subnet group* is a collection of subnets that you create in a VPC and that you then designate for your DB instances\. A DB subnet group makes it possible for you to specify a particular VPC when creating DB instances\.
 
 **To create a DB subnet group**
 
@@ -128,11 +125,11 @@ A DB subnet group is a collection of subnets that you create in a VPC and that y
 
    1. Note the subnet IDs of the subnets named **tutorial\-subnet\-private1\-us\-west\-2a** and **tutorial\-subnet\-private2\-us\-west\-2b**\.
 
-      You will need the subnet IDs when you create your DB subnet group\.
+      You need the subnet IDs when you create your DB subnet group\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-**Note**  
-Make sure you connect to the Amazon RDS console, not to the Amazon VPC console\.
+
+   Make sure that you connect to the Amazon RDS console, not to the Amazon VPC console\.
 
 1. In the navigation pane, choose **Subnet groups**\.
 
@@ -149,7 +146,7 @@ Make sure you connect to the Amazon RDS console, not to the Amazon VPC console\.
 
 1. Choose **Create**\. 
 
-   Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\.
+   Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can choose the DB subnet group to see details in the details pane at the bottom of the window\. These details include all of the subnets associated with the group\.
 
 **Note**  
 If you created this VPC to complete [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\.
@@ -159,7 +156,7 @@ If you created this VPC to complete [Tutorial: Create a web server and an Amazon
 After you create the VPC and other resources for this tutorial, you can delete them if they are no longer needed\.
 
 **Note**  
-If you added resources in the Amazon VPC you created for this tutorial, such as Amazon EC2 instances or Amazon RDS DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
+If you added resources in the VPC that you created for this tutorial, you might need to delete these resources before you can delete the VPC\. For example, these resources might include Amazon EC2 instances or Amazon RDS DB instances\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
 
 **To delete a VPC and related resources**
 
@@ -179,9 +176,9 @@ If you added resources in the Amazon VPC you created for this tutorial, such as 
 
    1. Choose **VPC Dashboard**, and then choose **VPCs**\.
 
-   1. In the list, identify the VPC you created, such as **tutorial\-vpc**\.
+   1. In the list, identify the VPC that you created, such as **tutorial\-vpc**\.
 
-   1. Note the **VPC ID** of the VPC you created\. You will need the VPC ID in subsequent steps\.
+   1. Note the **VPC ID** of the VPC that you created\. You need the VPC ID in later steps\.
 
 1. Delete the security groups\.
 
@@ -191,11 +188,11 @@ If you added resources in the Amazon VPC you created for this tutorial, such as 
 
    1. Select the security group for the Amazon RDS DB instance, such as **tutorial\-db\-securitygroup**\.
 
-   1. From **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
+   1. For **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
 
    1. On the **Security Groups** page, select the security group for the Amazon EC2 instance, such as **tutorial\-securitygroup**\.
 
-   1. From **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
+   1. For **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
 
 1. Delete the NAT gateway\.
 
@@ -203,9 +200,9 @@ If you added resources in the Amazon VPC you created for this tutorial, such as 
 
    1. Choose **VPC Dashboard**, and then choose **NAT Gateways**\.
 
-   1. Select the NAT gateway of the VPC you created\. Use the VPC ID to identify the correct NAT gateway\.
+   1. Select the NAT gateway of the VPC that you created\. Use the VPC ID to identify the correct NAT gateway\.
 
-   1. From **Actions**, choose **Delete NAT gateway**\.
+   1. For **Actions**, choose **Delete NAT gateway**\.
 
    1. On the confirmation page, enter **delete**, and then choose **Delete**\.
 
@@ -217,13 +214,13 @@ If you added resources in the Amazon VPC you created for this tutorial, such as 
 
    1. Select the VPC you want to delete, such as **tutorial\-vpc**\.
 
-   1. From **Actions**, choose **Delete VPC**\.
+   1. For **Actions**, choose **Delete VPC**\.
 
       The confirmation page shows other resources that are associated with the VPC that will also be deleted, including the subnets associated with it\.
 
    1. On the confirmation page, enter **delete**, and then choose **Delete**\.
 
-1. Release the Elastic IP addresses\.
+1. Release the Elastic IP addresses:
 
    1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
@@ -231,6 +228,6 @@ If you added resources in the Amazon VPC you created for this tutorial, such as 
 
    1. Select the Elastic IP address you want to release\.
 
-   1. From **Actions**, choose **Release Elastic IP addresses**\.
+   1. For **Actions**, choose **Release Elastic IP addresses**\.
 
    1. On the confirmation page, choose **Release**\.

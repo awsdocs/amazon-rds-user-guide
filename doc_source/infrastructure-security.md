@@ -16,7 +16,7 @@ For more information, see [Controlling access with security groups](Overview.RDS
 
 ## Public accessibility<a name="infrastructure-security.publicly-accessible"></a>
 
-When you launch a DB instance inside a virtual private cloud \(VPC\) based on the Amazon VPC service, you can turn on or off public accessibility for that instance\. To designate whether the DB instance that you create has a DNS name that resolves to a public IP address, you use the *Public accessibility* parameter\. By using this parameter, you can designate whether there is public access to the DB instance\. You can modify a DB instance to turn on or off public accessibility by modifying the *Public accessibility* parameter\.
+When you launch a DB instance inside a virtual private cloud \(VPC\) based on the Amazon VPC service, you can turn on or off public accessibility for that DB instance\. To designate whether the DB instance that you create has a DNS name that resolves to a public IP address, you use the *Public accessibility* parameter\. By using this parameter, you can designate whether there is public access to the DB instance\. You can modify a DB instance to turn on or off public accessibility by modifying the *Public accessibility* parameter\.
 
 For more information, see [Hiding a DB instance in a VPC from the internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.
 

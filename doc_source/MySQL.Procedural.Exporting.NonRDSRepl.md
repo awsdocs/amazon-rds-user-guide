@@ -104,8 +104,7 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
        --routines \
        --triggers \
        --databases  database database2 \
-       --compress  \
-       --port 3306
+       --compress
    ```
 
    For Windows:
@@ -119,8 +118,7 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
        --routines ^
        --triggers ^
        --databases  database database2 ^
-       --compress  ^
-       --port 3306
+       --compress
    ```
 
    The following example runs `mysqldump` on a client and writes the dump to a file\.

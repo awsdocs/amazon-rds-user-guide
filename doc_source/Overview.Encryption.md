@@ -101,7 +101,7 @@ The following limitations exist for Amazon RDS encrypted DB instances:
 + You can only encrypt an Amazon RDS DB instance when you create it, not after the DB instance is created\.
 
   However, because you can encrypt a copy of an unencrypted snapshot, you can effectively add encryption to an unencrypted DB instance\. That is, you can create a snapshot of your DB instance, and then create an encrypted copy of that snapshot\. You can then restore a DB instance from the encrypted snapshot, and thus you have an encrypted copy of your original DB instance\. For more information, see [Copying a DB snapshot](USER_CopySnapshot.md)\.
-+ You can't disable encryption on an encrypted DB instance\.
++ You can't turn off encryption on an encrypted DB instance\.
 + You can't create an encrypted snapshot of an unencrypted DB instance\.
 + A snapshot of an encrypted DB instance must be encrypted using the same KMS key as the DB instance\.
 + You can't have an encrypted read replica of an unencrypted DB instance or an unencrypted read replica of an encrypted DB instance\.

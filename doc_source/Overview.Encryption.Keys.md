@@ -13,7 +13,7 @@ You can't share a snapshot that has been encrypted using the AWS managed key of 
 You can view audit logs of every action taken with an AWS managed or customer managed key by using [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
 **Important**  
-If you disable or revoke permissions to a KMS key used by an RDS database, RDS puts your database into a terminal state when access to the KMS key is required\. This change could be immediate, or deferred, depending on the use case that required access to the KMS key\. In this state, the DB instance is no longer available, and the current state of the database can't be recovered\. To restore the DB instance, you must re\-enable access to the KMS key for RDS, and then restore the DB instance from the latest available backup\.
+If you turn off or revoke permissions to a KMS key used by an RDS database, RDS puts your database into a terminal state when access to the KMS key is required\. This change could be immediate, or deferred, depending on the use case that required access to the KMS key\. In this state, the DB instance is no longer available, and the current state of the database can't be recovered\. To restore the DB instance, you must re\-enable access to the KMS key for RDS, and then restore the DB instance from the latest available backup\.
 
 ## Authorizing use of a customer managed key<a name="Overview.Encryption.Keys.Authorizing"></a>
 

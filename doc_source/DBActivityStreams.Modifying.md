@@ -32,7 +32,7 @@ The basic steps are as follows:
 **Locked**  
 When you lock your audit policy, it becomes read\-only\. You can't edit your audit policy unless you unlock the policy or stop the activity stream\.  
 **Unlocked**  
-When you lock your audit policy, it becomes read/write\. You can edit your audit policy while the activity stream is started\.
+When you unlock your audit policy, it becomes read/write\. You can edit your audit policy while the activity stream is started\.
 
 1. Choose **Modify DB activity stream**\.
 

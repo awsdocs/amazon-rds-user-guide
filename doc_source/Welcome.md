@@ -131,7 +131,7 @@ Each DB instance has minimum and maximum storage requirements depending on the s
 
 ### Amazon Virtual Private Cloud \(Amazon VPC\)<a name="Welcome.Concepts.DBInstance.VPC"></a>
 
-You can run a DB instance on a virtual private cloud \(VPC\) using the Amazon Virtual Private Cloud \(Amazon VPC\) service\. When you use a VPC, you have control over your virtual networking environment\. You can choose your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether it's running in a VPC or not\. Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There's no additional cost to run your DB instance in a VPC\. For more information on using Amazon VPC with RDS, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\. 
+You can run a DB instance on a virtual private cloud \(VPC\) using the Amazon Virtual Private Cloud \(Amazon VPC\) service\. When you use a VPC, you have control over your virtual networking environment\. You can choose your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether it's running in a VPC or not\. Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There's no additional cost to run your DB instance in a VPC\. For more information on using Amazon VPC with RDS, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\. 
 
 Amazon RDS uses Network Time Protocol \(NTP\) to synchronize the time on DB Instances\. 
 

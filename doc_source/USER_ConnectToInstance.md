@@ -186,7 +186,7 @@ The AWS JDBC Driver for MySQL supports IAM database authentication\. For more in
 ## Troubleshooting connections to your MySQL DB instance<a name="USER_ConnectToInstance.Troubleshooting"></a>
 
 Two common causes of connection failures to a new DB instance are:
-+ The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. The DB instance must have a VPC security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
++ The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. The DB instance must have a VPC security group that authorizes the connections\. For more information, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\.
 
   You can add or edit an inbound rule in the security group\. For **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\.
 + The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.

@@ -41,7 +41,7 @@ The following quick reference table lists each feature and supported RDS DB engi
 | Multi\-AZ DB clusters | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.pg) | \- | 
 | Performance Insights | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | 
 | RDS Custom | \- | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq) | 
-| RDS Proxy | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | \- | 
+| RDS Proxy | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | \- | 
 
 ## Cross\-Region automated backups<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups"></a>
 

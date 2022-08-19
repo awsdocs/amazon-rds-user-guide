@@ -1,4 +1,4 @@
-# Tutorial: Create a virtual private cloud \(VPC\) for use with a DB instance \(dual\-stack mode\)<a name="CHAP_Tutorials.CreateVPCDualStack"></a>
+# Tutorial: Create a VPC for use with a DB instance \(dual\-stack mode\)<a name="CHAP_Tutorials.CreateVPCDualStack"></a>
 
 A common scenario includes a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\. This VPC shares data with a public Amazon EC2 instance that is running in the same VPC\. In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\.
 
@@ -12,7 +12,7 @@ For information about other scenarios, see [Scenarios for accessing a DB instanc
 
 Because your DB instance needs to be available only to your Amazon EC2 instance, and not to the public internet, you create a VPC with both public and private subnets\. The Amazon EC2 instance is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The Amazon EC2 instance can connect to the DB instance because it's hosted within the same VPC\. However, the DB instance is not available to the public internet, providing greater security\.
 
-This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\.
+This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\. 
 
 To create a DB instance that uses dual\-stack mode, specify **Dual\-stack mode** for the **Network type** setting\. You can also modify a DB instance with the same setting\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
@@ -53,7 +53,7 @@ Amazon RDS requires at least two subnets in two different Availability Zones to 
 
 ## Create a VPC security group for a public Amazon EC2 instance<a name="CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2"></a>
 
-Next, you create a security group for public access\. To connect to public instances in your VPC, add inbound rules to your VPC security group that allow traffic to connect from the internet\. 
+Next, you create a security group for public access\. To connect to public EC2 instances in your VPC, add inbound rules to your VPC security group that allow traffic to connect from the internet\.
 
 **To create a VPC security group**
 
@@ -61,20 +61,20 @@ Next, you create a security group for public access\. To connect to public insta
 
 1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose **Create security group**\. 
 
-1. On the **Create security group** page, set these values: 
+1. On the **Create security group** page, set these values:
    + **Security group name:** **tutorial\-dual\-stack\-securitygroup**
    + **Description:** **Tutorial Dual\-Stack Security Group**
    + **VPC:** Choose the VPC that you created earlier, for example: **vpc\-*identifier* \(tutorial\-dual\-stack\-vpc\)** 
 
 1. Add inbound rules to the security group\.
 
-   1. Determine the IP address to use to connect to instances in your VPC using Secure Shell \(SSH\)\. 
+   1. Determine the IP address to use to connect to EC2 instances in your VPC using Secure Shell \(SSH\)\.
 
-      To determine your public IP address, in a different browser window or tab use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IPv4 IP address is `203.0.113.25/32`\. An example of an IPv6 IP address is `2001:DB8::/32`\.
+      To determine your public IP address, in a different browser window or tab use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an Internet Protocol version 4 \(IPv4\) address is `203.0.113.25/32`\. An example of an Internet Protocol version 6 \(IPv6\) address is `2001:DB8::/32`\.
 
       If you are connecting through an internet service provider \(ISP\) or from behind your firewall without a static IP address, find out the range of IP addresses used by client computers\.
 **Warning**  
-If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you enable all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances\.
+If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you make it possible for all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
@@ -88,7 +88,7 @@ If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you enable all IP addresses t
 
 ## Create a VPC security group for a private DB instance<a name="CHAP_Tutorials.CreateVPCDualStack.SecurityGroupDB"></a>
 
-To keep your DB instance private, create a second security group for private access\. To connect to private instances in your VPC, add inbound rules to your VPC security group that allow traffic from your Amazon EC2 instance only\. 
+To keep your DB instance private, create a second security group for private access\. To connect to private DB instances in your VPC, add inbound rules to your VPC security group that allow traffic from your Amazon EC2 instance only\.
 
 **To create a VPC security group**
 
@@ -105,7 +105,7 @@ To keep your DB instance private, create a second security group for private acc
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your EC2 instance to your DB instance to store and retrieve data from your EC2 instance to your database\. 
+   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your EC2 instance to your DB instance to store and retrieve data from your EC2 instance to your database\.
       + **Type:** **MySQL/Aurora**
       + **Source:** The identifier of the **tutorial\-dual\-stack\-securitygroup** security group that you created previously in this tutorial, for example **sg\-9edd5cfb**\.
 
@@ -152,19 +152,19 @@ Your new DB subnet group appears in the DB subnet groups list on the RDS console
 
 To create an Amazon EC2 instance, follow the instructions in [Launch an instance using the new launch instance wizard](https://docs.aws.amazon.com/ec2-launch-instance-wizard.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-On the **Configure Instance Details** page, shown following, set these values and keep the other values as their defaults:
+On the **Configure Instance Details** page, set these values and keep the other values as their defaults:
 + **Network** – Choose the VPC with both public and private subnets that you chose for the DB instance, such as **vpc\-*identifier* \| tutorial\-dual\-stack\-vpc** created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)\.
-+ **Subnet** – Choose an existing public subnet, such as **subnet\-*identifier* \| tutorial\-dual\-stack\-subnet\-public1\-us\-east\-2a \| us\-east\-2a** created in [ Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\.
++ **Subnet** – Choose an existing public subnet, such as **subnet\-*identifier* \| tutorial\-dual\-stack\-subnet\-public1\-us\-east\-2a \| us\-east\-2a** created in [Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\.
 + **Auto\-assign Public IP** – Choose **Enable**\.
 + **Auto\-assign IPv6 IP** – Choose **Enable**\.
 + **Firewall \(security groups\)** – Choose **Select an existing security group**\.
-+ **Common security groups** – Choose choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.
++ **Common security groups** – Choose choose an existing security group, such as the `tutorial-securitygroup` created in [Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.
 
 ## Create a DB instance in dual\-stack mode<a name="CHAP_Tutorials.CreateVPCDualStack.CreateDBInstance"></a>
 
-In this step, you create an Amazon RDS DB instance that runs in dual\-stack mode\.
+In this step, you create a DB instance that runs in dual\-stack mode\.
 
-**To create a MySQL DB instance**
+**To create a DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -174,7 +174,7 @@ In this step, you create an Amazon RDS DB instance that runs in dual\-stack mode
 
 1. Choose **Create database**\.
 
-1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\.
+1. On the **Create database** page, make sure that the **Standard create** option is chosen, and then choose the MySQL DB engine type\.
 
 1. In the **Connectivity** section, set these values:
    + **Network type** – Choose **Dual\-stack mode**\.  
@@ -191,19 +191,20 @@ In this step, you create an Amazon RDS DB instance that runs in dual\-stack mode
    + **Availability Zone** – Choose **us\-west\-2a**\.
 
      To avoid cross\-AZ traffic, make sure the DB instance and the EC2 instance are in the same Availability Zone\.
-   + Open **Additional configuration**, and make sure **Database port** uses the default value **3306**\.
 
-1. For the remaining sections, specify your DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
+1. For the remaining sections, specify your DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
 ## Connect to your Amazon EC2 instance and DB instance<a name="CHAP_Tutorials.CreateVPCDualStack.Connect"></a>
 
-After your Amazon EC2 instance and DB instance are created in dual\-stack mode, you can connect to each one using the IPv6 protocol\. To connect to an Amazon EC2 instance using the IPv6 protocol, follow the instructions in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\. To connect to your DB instance, follow the instructions in [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)\.
+After you create your Amazon EC2 instance and DB instance in dual\-stack mode, you can connect to each one using the IPv6 protocol\. To connect to an Amazon EC2 instance using the IPv6 protocol, follow the instructions in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+To connect to your DB instance, follow the instructions in [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)\.
 
 ## Deleting the VPC<a name="CHAP_Tutorials.CreateVPCDualStack.Delete"></a>
 
 After you create the VPC and other resources for this tutorial, you can delete them if they are no longer needed\.
 
-If you added resources in the VPC that you created for this tutorial, such as Amazon EC2 instances or Amazon RDS DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
+If you added resources in the VPC that you created for this tutorial, such as Amazon EC2 instances or DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
 
 **To delete a VPC and related resources**
 

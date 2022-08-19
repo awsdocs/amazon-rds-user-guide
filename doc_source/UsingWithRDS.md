@@ -9,7 +9,7 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation helps you understand how to apply the shared responsibility model when using Amazon RDS\. The following topics show you how to configure Amazon RDS to meet your security and compliance objectives\. You also learn how to use other AWS services that help you monitor and secure your Amazon RDS resources\. 
 
 You can manage access to your Amazon RDS resources and your databases on a DB instance\. The method you use to manage access depends on what type of task the user needs to perform with Amazon RDS: 
-+ Run your DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service for the greatest possible network access control\. For more information about creating a DB instance in a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
++ Run your DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service for the greatest possible network access control\. For more information about creating a DB instance in a VPC, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\.
 + Use AWS Identity and Access Management \(IAM\) policies to assign permissions that determine who is allowed to manage Amazon RDS resources\. For example, you can use IAM to determine who is allowed to create, describe, modify, and delete DB instances, tag resources, or modify security groups\.
 + Use security groups to control what IP addresses or Amazon EC2 instances can connect to your databases on a DB instance\. When you first create a DB instance, its firewall prevents any database access except through rules specified by an associated security group\. 
 + Use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) connections with DB instances running the MySQL, MariaDB, PostgreSQL, Oracle, or Microsoft SQL Server database engines\. For more information on using SSL/TLS with a DB instance, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
@@ -18,7 +18,7 @@ You can manage access to your Amazon RDS resources and your databases on a DB in
 + Use the security features of your DB engine to control who can log in to the databases on a DB instance\. These features work just as if the database was on your local network\. 
 
 **Note**  
-You only have to configure security for your use cases\. You don't have to configure security access for processes that Amazon RDS manages\. These include creating backups, replicating data between a primary DB instance and a read replica, and other processes\.
+You have to configure security only for your use cases\. You don't have to configure security access for processes that Amazon RDS manages\. These include creating backups, replicating data between a primary DB instance and a read replica, and other processes\.
 
 For more information on managing access to Amazon RDS resources and your databases on a DB instance, see the following topics\.
 
@@ -35,4 +35,4 @@ For more information on managing access to Amazon RDS resources and your databas
 + [Controlling access with security groups](Overview.RDSSecurityGroups.md)
 + [Master user account privileges](UsingWithRDS.MasterAccounts.md)
 + [Using service\-linked roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)
-+ [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)
++ [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)
