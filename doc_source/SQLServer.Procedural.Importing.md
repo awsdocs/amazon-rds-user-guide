@@ -164,7 +164,7 @@ The following example uses an ARN to specify a resource\. For more information o
 15.         "Effect": "Allow",
 16.         "Action":
 17.             [
-18.                 "s3:GetObjectMetaData",
+18.                 "s3:GetObjectAttributes",
 19.                 "s3:GetObject",
 20.                 "s3:PutObject",
 21.                 "s3:ListMultipartUploadParts",
@@ -210,7 +210,7 @@ The IAM role must also be a key user and key administrator for the KMS key, that
 26.         "Effect": "Allow",
 27.         "Action":
 28.             [
-29.                 "s3:GetObjectMetaData",
+29.                 "s3:GetObjectAttributes",
 30.                 "s3:GetObject",
 31.                 "s3:PutObject",
 32.                 "s3:ListMultipartUploadParts",

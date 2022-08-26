@@ -35,5 +35,5 @@ The PostgreSQL command `pg_dumpall` requires super\_user permissions that are no
 **Topics**
 + [Importing a PostgreSQL database from an Amazon EC2 instance](PostgreSQL.Procedural.Importing.EC2.md)
 + [Using the \\copy command to import data to a table on a PostgreSQL DB instance](PostgreSQL.Procedural.Importing.Copy.md)
-+ [Importing Amazon S3 data into an RDS for PostgreSQL DB instance](USER_PostgreSQL.S3Import.md)
++ [Importing data from Amazon S3 into an RDS for PostgreSQL DB instance](USER_PostgreSQL.S3Import.md)
 + [Transporting PostgreSQL databases between DB instances](PostgreSQL.TransportableDB.md)

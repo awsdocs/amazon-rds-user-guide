@@ -905,15 +905,15 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r6gd\.xlarge | 4 | — | 32 | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6gd\.large | 2 | — | 16 | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | 128 | — | 1,024 | Yes | 40,000 | 50 Gbps | 
-| db\.r6i\.24xlarge | 96 | — | 768 | Yes | 30,000 | 37\.5 Gbps | 
-| db\.r6i\.16xlarge | 64 | — | 512 | Yes | 20,000 | 25 Gbps | 
-| db\.r6i\.12xlarge | 48 | — | 384 | Yes | 15,000 | 18\.75 Gbps | 
-| db\.r6i\.8xlarge | 32 | — | 256 | Yes | 10,000 | 12\.5 Gbps | 
-| db\.r6i\.4xlarge\* | 16 | — | 128 | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
-| db\.r6i\.2xlarge\* | 8 | — | 64 | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
-| db\.r6i\.xlarge\* | 4 | — | 32 | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
-| db\.r6i\.large\* | 2 | — | 16 | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.32xlarge | 128 | — | 1,024 | Yes | Yes | 40,000 | 50 Gbps | 
+| db\.r6i\.24xlarge | 96 | — | 768 | Yes | Yes | 30,000 | 37\.5 Gbps | 
+| db\.r6i\.16xlarge | 64 | — | 512 | Yes | Yes | 20,000 | 25 Gbps | 
+| db\.r6i\.12xlarge | 48 | — | 384 | Yes | Yes | 15,000 | 18\.75 Gbps | 
+| db\.r6i\.8xlarge | 32 | — | 256 | Yes | Yes | 10,000 | 12\.5 Gbps | 
+| db\.r6i\.4xlarge\* | 16 | — | 128 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.2xlarge\* | 8 | — | 64 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.xlarge\* | 4 | — | 32 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
+| db\.r6i\.large\* | 2 | — | 16 | Yes | Yes | Up to 10,000 | Up to 12\.5 Gbps | 
 | db\.r5d – memory\-optimized instance classes | 
 | db\.r5d\.24xlarge | 96 | 347 | 768 | Yes | 19,000 | 25 Gbps | 
 | db\.r5d\.16xlarge | 64 | 264 | 512 | Yes | 13,600 | 20 Gbps | 

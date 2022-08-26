@@ -601,7 +601,7 @@ Tasks are executed asynchronously\.
 
 ### Downloading files from an Amazon S3 bucket to an Oracle DB instance<a name="oracle-s3-integration.using.download"></a>
 
-To download files from an Amazon S3 bucket to an Oracle DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3`\. The `download_from_s3` procedure has the following parameters\.
+To download up to 2000 files from an Amazon S3 bucket to an RDS for Oracle instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3`\. If you need to download more than 2000 files from Amazon S3, split your download into separate actions with no more than 2000 files per procedure call\. The `download_from_s3` procedure has the following parameters\.
 
 
 ****  
@@ -610,12 +610,12 @@ To download files from an Amazon S3 bucket to an Oracle DB instance, use the Ama
 | --- | --- | --- | --- | --- | 
 |  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to download files from\.   | 
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
-|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  required  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. Suppose also that you specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
+|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  required  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. You specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
 |  `p_decompression_format`  |  VARCHAR2  |  `NONE`  |  optional  |  The decompression format\. Valid values are `NONE` for no decompression and `GZIP` for decompression\.  | 
 
 The return value for the `rdsadmin.rdsadmin_s3_tasks.download_from_s3` procedure is a task ID\.
 
-The following example downloads all of the files in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\. The files aren't compressed, so no decompression is applied\.
+The following example downloads all files in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\. The files aren't compressed, so no decompression is applied\.
 
 ```
 SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(

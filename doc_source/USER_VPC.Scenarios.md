@@ -21,7 +21,10 @@ The simplest way to manage access between EC2 instances and DB instances in the 
 
 There is an additional public and private subnet in a separate Availability Zone\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\.
 
-For a tutorial that shows you how to create a VPC with both public and private subnets for this scenario, see [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+For a tutorial that shows you how to create a VPC with both public and private subnets for this scenario, see [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
+
+**Tip**  
+You can set up network connectivity between an Amazon EC2 instance and a DB instance automatically when you create the DB instance\. For more information, see \.
 
 **To create a rule in a VPC security group that allows connections from another security group, do the following:**
 

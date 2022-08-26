@@ -1,10 +1,14 @@
 # Exporting data from an RDS for PostgreSQL DB instance to Amazon S3<a name="postgresql-s3-export"></a>
 
-You can query data from an RDS for PostgreSQL DB instance and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\.
+You can query data from an RDS for PostgreSQL DB instance and export it directly into files stored in an Amazon S3 bucket\. To do this, you first install the RDS for PostgreSQL `aws_s3` extension\. This extension provides you with the functions that you use to export the results of queries to Amazon S3\. Following, you can find out how to install the extension and how to export data to Amazon S3\. 
 
 You can export from a provisioned or an Aurora Serverless v2 DB instance\. These steps aren't supported for Aurora Serverless v1\. 
 
-For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\.
+All currently available versions of RDS for PostgreSQL support exporting data to Amazon Simple Storage Service\. For detailed version information, see [Amazon RDS for PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-versions.html) in the *Amazon RDS for PostgreSQL Release Notes*\.
+
+If you don't have a bucket set up for your export, see the following topics the *Amazon Simple Storage Service User Guide*\. 
++ [Setting up Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html)
++ [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
 
 The upload to Amazon S3 uses server\-side encryption by default\. If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't export data to a bucket that is encrypted with a customer managed key\.
 
@@ -12,27 +16,65 @@ The upload to Amazon S3 uses server\-side encryption by default\. If you are usi
 You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
 
 **Topics**
++ [Installing the aws\_s3 extension](#USER_PostgreSQL.S3Export.InstallExtension)
 + [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)
-+ [Verify that your RDS for PostgreSQL version supports exports](#postgresql-s3-supported)
 + [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)
 + [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)
 + [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)
 + [Troubleshooting access to Amazon S3](#postgresql-s3-export-troubleshoot)
 + [Function reference](#postgresql-s3-export-functions)
 
+## Installing the aws\_s3 extension<a name="USER_PostgreSQL.S3Export.InstallExtension"></a>
+
+Before you can use Amazon Simple Storage Service with your RDS for PostgreSQL DB instance, you need to install the `aws_s3` extension\. This extension provides functions for exporting data from an RDS for PostgreSQL DB instance to an Amazon S3 bucket\. It also provides functions for importing data from an Amazon S3\. For more information, see [Importing data from Amazon S3 into an RDS for PostgreSQL DB instance](USER_PostgreSQL.S3Import.md)\. The `aws_s3` extension depends on some of the helper functions in the `aws_commons` extension, which is installed automatically when needed\. 
+
+**To install the `aws_s3` extension**
+
+1. Use psql \(or pgAdmin\) to connect to the RDS for PostgreSQL DB instance as a user that has `rds_superuser` privileges\. If you kept the default name during the setup process, you connect as `postgres`\.
+
+   ```
+   psql --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password
+   ```
+
+1. To install the extension, run the following command\. 
+
+   ```
+   postgres=> CREATE EXTENSION aws_s3 CASCADE;
+   NOTICE: installing required extension "aws_commons"
+   CREATE EXTENSION
+   ```
+
+1. To verify that the extension is installed, you can use the psql `\dx` metacommand\.
+
+   ```
+   postgres=> \dx
+          List of installed extensions
+       Name     | Version |   Schema   |                 Description
+   -------------+---------+------------+---------------------------------------------
+    aws_commons | 1.2     | public     | Common data types across AWS services
+    aws_s3      | 1.1     | public     | AWS S3 extension for importing data from S3
+    plpgsql     | 1.0     | pg_catalog | PL/pgSQL procedural language
+   (3 rows)
+   ```
+
+The functions for importing data from Amazon S3 and exporting data to Amazon S3 are now available to use\.
+
+### Verify that your RDS for PostgreSQL version supports exports to Amazon S3<a name="postgresql-s3-supported"></a>
+
+You can verify that your RDS for PostgreSQL version supports export to Amazon S3 by using the `describe-db-engine-versions` command\. The following example verifies support for version 10\.14\.
+
+```
+aws rds describe-db-engine-versions --region us-east-1 ^
+--engine postgres --engine-version 10.14 | grep s3Export
+```
+
+If the output includes the string `"s3Export"`, then the engine supports Amazon S3 exports\. Otherwise, the engine doesn't support them\.
+
 ## Overview of exporting data to Amazon S3<a name="postgresql-s3-export-overview"></a>
 
 To export data stored in an RDS for PostgreSQL database to an Amazon S3 bucket, use the following procedure\.
 
 **To export RDS for PostgreSQL data to S3**
-
-1. Install the required PostgreSQL extensions\. These include the `aws_s3` and `aws_commons` extensions\. To do so, start psql and use the following commands\.
-
-   ```
-   CREATE EXTENSION IF NOT EXISTS aws_s3 CASCADE;
-   ```
-
-   The `aws_s3` extension provides the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function that you use to export data to Amazon S3\. The `aws_commons` extension is included to provide additional helper functions\. 
 
 1. Identify an Amazon S3 file path to use for exporting data\. For details about this process, see [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)\.
 
@@ -53,24 +95,6 @@ To export data stored in an RDS for PostgreSQL database to an Amazon S3 bucket, 
 1. Identify a database query to get the data\. Export the query data by calling the `aws_s3.query_export_to_s3` function\. 
 
    After you complete the preceding preparation tasks, use the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function to export query results to Amazon S3\. For details about this process, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)\.
-
-## Verify that your RDS for PostgreSQL version supports exports<a name="postgresql-s3-supported"></a>
-
-Currently, Amazon S3 exports are supported for the following versions of RDS for PostgreSQL:
-+ 14\.1 and higher 14 versions 
-+ 13\.1 and higher 13 versions
-+ 12\.4 and higher 12 versions
-+ 11\.9 and higher 11 versions
-+ 10\.14 and higher 10 versions
-
-You can also verify support by using the `describe-db-engine-versions` command\. The following example verifies support for version 10\.14\.
-
-```
-aws rds describe-db-engine-versions --region us-east-1 \
---engine postgres --engine-version 10.14 | grep s3Export
-```
-
-If the output includes the string `"s3Export"`, then the engine supports Amazon S3 exports\. Otherwise, the engine doesn't support them\.
 
 ## Specifying the Amazon S3 file path to export to<a name="postgresql-s3-export-file"></a>
 

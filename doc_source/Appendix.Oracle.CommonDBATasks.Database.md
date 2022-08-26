@@ -614,7 +614,7 @@ The following example resizes a temporary tablespace based on the tempfile with 
 EXEC rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');
 ```
 
-For more information about read replicas for Oracle DB instances, see [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
+For more information about read replicas for Oracle DB instances, see [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
 
 ## Purging the recycle bin<a name="Appendix.Oracle.CommonDBATasks.PurgeRecycleBin"></a>
 

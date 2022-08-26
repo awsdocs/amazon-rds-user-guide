@@ -182,9 +182,9 @@ In this step, you create a DB instance that runs in dual\-stack mode\.
    + **Virtual private cloud \(VPC\)** – Choose an existing VPC with both public and private subnets, such as **tutorial\-dual\-stack\-vpc** \(vpc\-*identifier*\) created in [Create a VPC with private and public subnets](#CHAP_Tutorials.CreateVPCDualStack.VPCAndSubnets)\.
 
      The VPC must have subnets in different Availability Zones\.
-   + **Subnet group** – Choose a DB subnet group for the VPC, such as **tutorial\-dual\-stack\-db\-subnet\-group** created in [Create a DB subnet group](#CHAP_Tutorials.CreateVPCDualStack.DBSubnetGroup)\.
+   + **DB subnet group** – Choose a DB subnet group for the VPC, such as **tutorial\-dual\-stack\-db\-subnet\-group** created in [Create a DB subnet group](#CHAP_Tutorials.CreateVPCDualStack.DBSubnetGroup)\.
    + **Public access** – Choose **No**\.
-   + **VPC security group** – Select **Choose existing**\.
+   + **VPC security group \(firewall\)** – Select **Choose existing**\.
    + **Existing VPC security groups** – Choose an existing VPC security group that is configured for private access, such as **tutorial\-dual\-stack\-db\-securitygroup** created in [ Create a VPC security group for a private DB instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupDB)\.
 
      Remove other security groups, such as the default security group, by choosing the **X** associated with each\.

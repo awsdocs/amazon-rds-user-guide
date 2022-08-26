@@ -5,36 +5,91 @@ A Multi\-AZ DB cluster has a writer DB instance and two reader DB instances in t
 **Note**  
 Multi\-AZ DB clusters are supported only for the MySQL and PostgreSQL DB engines\.
 
-In the following topic, you can find out how to create a Multi\-AZ DB cluster\. To get started, first see [DB cluster prerequisites](#create-multi-az-db-cluster-prerequisites)\.
-
-For instructions on connecting to your Multi\-AZ DB cluster, see [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)\.
-
 ## DB cluster prerequisites<a name="create-multi-az-db-cluster-prerequisites"></a>
 
-Before you create a Multi\-AZ DB cluster, make sure to complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\. The following are additional prerequisites to creating a Multi\-AZ DB cluster\.
+**Important**  
+Before you can create a Multi\-AZ DB cluster, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
-### VPC prerequisites<a name="create-multi-az-db-cluster-prerequisites.VPC"></a>
+The following are prerequisites to complete before creating a Multi\-AZ DB cluster\.
 
-You can only create a Multi\-AZ DB cluster in a virtual private cloud \(VPC\) based on the Amazon VPC service, in an AWS Region that has at least three Availability Zones\. The DB subnet group that you choose for the DB cluster must cover at least three Availability Zones\. This configuration ensures that your DB cluster always has at least two DB instance available for failover, in the unlikely event of an Availability Zone failure\.
+**Topics**
++ [Configure the network for the DB cluster](#create-multi-az-db-cluster-prerequisites-VPC)
++ [Additional prerequisites](#create-multi-az-db-cluster-prerequisites-additional)
 
-If you are using the AWS Management Console to create your Multi\-AZ DB cluster, you can have Amazon RDS automatically create a VPC for you\. Or you can use an existing VPC or create a new VPC for your Multi\-AZ DB cluster\. Your VPC must have at least one subnet in each of at least three Availability Zones for you to use it with a Multi\-AZ DB cluster\. For information on VPCs, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\.
+### Configure the network for the DB cluster<a name="create-multi-az-db-cluster-prerequisites-VPC"></a>
+
+You can create a Multi\-AZ DB cluster only in a virtual private cloud \(VPC\) based on the Amazon VPC service, in an AWS Region that has at least three Availability Zones\. The DB subnet group that you choose for the DB cluster must cover at least three Availability Zones\. This configuration ensures that each DB instance in the DB cluster is in a different Availability Zone\.
+
+If you plan to set up connectivity between your new DB cluster and an EC2 instance in the same VPC, you can do so during DB cluster creation\. If you plan to connect to your DB cluster from resources other than EC2 instances in the same VPC, you can configure the network connections manually\.
+
+**Topics**
++ [Configure automatic network connectivity with an EC2 instance](#create-multi-az-db-cluster-prerequisites-VPC-automatic)
++ [Configure the network manually](#create-multi-az-db-cluster-prerequisites-VPC-manual)
+
+#### Configure automatic network connectivity with an EC2 instance<a name="create-multi-az-db-cluster-prerequisites-VPC-automatic"></a>
+
+When you create a Multi\-AZ DB cluster, you can use the AWS Management Console to set up connectivity between an Amazon EC2 instance and the new DB cluster\. When you do so, RDS configures your VPC and network settings automatically\. The DB cluster is created in the same VPC as the EC2 instance so that the EC2 instance can access the DB cluster\.
+
+The following are requirements for connecting an EC2 instance with the DB cluster:
++ The EC2 instance must exist in the AWS Region before you create the DB cluster\.
+
+  If no EC2 instances exist in the AWS Region, the console provides a link to create one\.
++ The user who is creating the DB cluster must have permissions to perform the following operations:
+  + `ec2:AssociateRouteTable` 
+  + `ec2:AuthorizeSecurityGroupEgress` 
+  + `ec2:CreateRouteTable` 
+  + `ec2:CreateSubnet` 
+  + `ec2:CreateSecurityGroup` 
+  + `ec2:DescribeInstances` 
+  + `ec2:DescribeNetworkInterfaces` 
+  + `ec2:DescribeRouteTables` 
+  + `ec2:DescribeSecurityGroups` 
+  + `ec2:DescribeSubnets` 
+  + `ec2:ModifyNetworkInterfaceAttribute` 
+  + `ec2:RevokeSecurityGroupEgress` 
+
+Using this option creates a private DB cluster\. The DB cluster uses a DB subnet group with only private subnets to restrict access to resources within the VPC\.
+
+To connect an EC2 instance to the DB cluster, choose **Connect to an EC2 compute resource** in the **Connectivity** section on the **Create database** page\.
+
+![\[Connect an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ec2-set-up-connection-create.png)
+
+When you choose **Connect to an EC2 compute resource**, RDS sets the following options automatically\. You can't change these settings unless you choose not to set up connectivity with an EC2 instance by choosing **Don't connect to an EC2 compute resource**\.
+
+
+****  
+
+| Console option | Automatic setting | 
+| --- | --- | 
+|  **Virtual Private Cloud \(VPC\)**  |  RDS sets the VPC to the one associated with the EC2 instance\.  | 
+|  **DB subnet group**  |  A DB subnet group with a private subnet in each Availability Zone in the AWS Region is required\. If a DB subnet group that meets this requirement exists, RDS uses the existing DB subnet group\. If a DB subnet group that meets this requirement doesn’t exist, RDS uses an available private subnet in each Availability Zone to create a DB subnet group using the private subnets\. If a private subnet isn’t available in an Availability Zone, RDS creates a private subnet in the Availability Zone and then creates the DB subnet group\. When a private subnet is available, RDS uses the route table associated with it and adds any subnets it creates to this route table\. When no private subnet is available, RDS creates a route table with no internet gateway access and adds the subnets it creates to the route table\.  | 
+|  **Public access**  |  RDS chooses **No** so that the DB cluster isn't publicly accessible\. For security, it is a best practice to keep the database private and make sure it isn't accessible from the internet\.  | 
+|  **VPC security group \(firewall\)**  |  RDS creates a new security group that is associated with the DB cluster\. The security group is named `rds-ec2-n`, where `n` is a number\. This security group includes an inbound rule with the EC2 VPC security group \(firewall\) as the source\. This security group that is associated with the DB cluster allows the EC2 instance to access the DB cluster\. RDS also creates a new security group that is associated with the EC2 instance\. The security group is named `ec2-rds-n`, where `n` is a number\. This security group includes an outbound rule with the VPC security group of the DB cluster as the source\. This security group allows the DB cluster to send traffic to the EC2 instance\. You can add another new security group by choosing **Create new** and typing the name of the new security group\. You can add existing security groups by choosing **Choose existing** and selecting security groups to add\.  | 
+|  **Availability Zone**  |  RDS chooses the Availability Zone of the EC2 instance for one DB instance in the Multi\-AZ DB cluster deployment\. RDS randomly chooses a different Availability Zone for both of the other DB instances\. The writer DB instance is created in the same Availability Zone as the EC2 instance\. There is the possibility of cross Availability Zone costs if a failover occurs and the writer DB instance is in a different Availability Zone\.  | 
+
+For more information about these settings, see [Settings for creating Multi\-AZ DB clusters](#create-multi-az-db-cluster-settings)\.
+
+If you make any changes to these settings after the DB cluster is created, the changes might affect the connection between the EC2 instance and the DB cluster\.
+
+#### Configure the network manually<a name="create-multi-az-db-cluster-prerequisites-VPC-manual"></a>
+
+If you plan to connect to your DB cluster from resources other than EC2 instances in the same VPC, you can configure the network connections manually\. If you are using the AWS Management Console to create your Multi\-AZ DB cluster, you can have Amazon RDS automatically create a VPC for you\. Or you can use an existing VPC or create a new VPC for your Multi\-AZ DB cluster\. Your VPC must have at least one subnet in each of at least three Availability Zones for you to use it with a Multi\-AZ DB cluster\. For information on VPCs, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\.
 
 If you don't have a default VPC or you haven't created a VPC, and you don't plan to use the console, do the following:
 + Create a VPC with at least one subnet in each of at least three of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
-+ Specify a VPC security group that authorizes connections to your DB cluster\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
++ Specify a VPC security group that authorizes connections to your DB cluster\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup) and [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
 + Specify an RDS DB subnet group that defines at least three subnets in the VPC that can be used by the Multi\-AZ DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
 
 For information about limitations that apply to Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts.Limitations)\.
 
-### Additional prerequisites<a name="create-multi-az-db-cluster-prerequisites.Additional"></a>
+### Additional prerequisites<a name="create-multi-az-db-cluster-prerequisites-additional"></a>
 
-If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\.
+Before you create your Multi\-AZ DB cluster, consider the following additional prerequisites:
++ If you are connecting to AWS using AWS Identity and Access Management \(IAM\) credentials, your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\.
 
-If you are using IAM to access the Amazon RDS console, first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-If you want to tailor the configuration parameters for your DB cluster, specify a DB cluster parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group, see [Working with parameter groups for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-parameter-groups)\.
-
-Determine the TCP/IP port number to specify for your DB cluster\. The firewalls at some companies block connections to the default ports\. If your company firewall blocks the default port, choose another port for your DB cluster\. All DB instances in a DB cluster use the same port\.
+  If you are using IAM to access the Amazon RDS console, first sign on to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
++ If you want to tailor the configuration parameters for your DB cluster, specify a DB cluster parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group, see [Working with parameter groups for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-parameter-groups)\.
++ Determine the TCP/IP port number to specify for your DB cluster\. The firewalls at some companies block connections to the default ports\. If your company firewall blocks the default port, choose another port for your DB cluster\. All DB instances in a DB cluster use the same port\.
 
 ## Creating a DB cluster<a name="create-multi-az-db-cluster-creating"></a>
 
@@ -85,14 +140,17 @@ You can create a Multi\-AZ DB cluster by choosing **Multi\-AZ DB cluster** in th
 
 1. In **DB instance class**, choose a DB instance class\.
 
+1. \(Optional\) Set up a connection to a compute resource for this DB cluster\.
+
+   You can configure connectivity between an Amazon EC2 instance and the new DB cluster during DB cluster creation\. For more information, see [Configure automatic network connectivity with an EC2 instance](#create-multi-az-db-cluster-prerequisites-VPC-automatic)\.
+
 1. For the remaining sections, specify your DB cluster settings\. For information about each setting, see [Settings for creating Multi\-AZ DB clusters](#create-multi-az-db-cluster-settings)\.
 
 1. Choose **Create database**\. 
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the master user name and password for the DB cluster, choose **View credential details**\.  
-![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+   To view the master user name and password for the DB cluster, choose **View credential details**\.
 
    To connect to the DB cluster as the master user, use the user name and password that appear\.
 **Important**  
@@ -219,6 +277,7 @@ For details about settings that you choose when you create a Multi\-AZ DB cluste
 |  **DB cluster parameter group**  |  The DB cluster parameter group that you want associated with the DB cluster\.  For more information, see [Working with parameter groups for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-parameter-groups)\.   |  **CLI option:** `--db-cluster-parameter-group-name` **RDS API parameter:** `DBClusterParameterGroupName`  | 
 |  DB engine version  |  The version of database engine that you want to use\.  |  **CLI option:** `--engine-version` **RDS API parameter:** `EngineVersion`  | 
 |  DB parameter group  |  The DB instance parameter group that you want associated with the DB instances in the DB cluster\. For more information, see [Working with parameter groups for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-parameter-groups)\.  |  Not applicable\. Amazon RDS associates each DB instance with the appropriate default parameter group\.  | 
+|  DB subnet group  |  A DB subnet group to associate with this DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.  |  **CLI option:** `--db-subnet-group-name` **RDS API parameter:** `DBSubnetGroupName`  | 
 | Deletion protection |  **Enable deletion protection** to prevent your DB cluster from being deleted\. If you create a production DB cluster with the console, deletion protection is turned on by default\. For more information, see [Deleting a DB instance](USER_DeleteInstance.md)\.  |  **CLI option:** `--deletion-protection` `--no-deletion-protection` **RDS API parameter:** `DeletionProtection`  | 
 |  Encryption  |  **Enable Encryption** to turn on encryption at rest for this DB cluster\. Encryption is turned on by default for Multi\-AZ DB clusters\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.  |  **CLI options:** `--kms-key-id` `--storage-encrypted` `--no-storage-encrypted` **RDS API parameters:** `KmsKeyId` `StorageEncrypted`  | 
 |  Enhanced Monitoring  |  **Enable enhanced monitoring** to turn on metrics gathering in real time for the operating system that your DB cluster runs on\. For more information, see [Monitoring OS metrics with Enhanced Monitoring](USER_Monitoring.OS.md)\.  |  **CLI options:** `--monitoring-interval` `--monitoring-role-arn` **RDS API parameters:** `MonitoringInterval` `MonitoringRoleArn`  | 
@@ -226,14 +285,13 @@ For details about settings that you choose when you create a Multi\-AZ DB cluste
 |  **Log exports**  |  The types of database log files to publish to Amazon CloudWatch Logs\.  For more information, see [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.Procedural.UploadtoCloudWatch.md)\.   |  **CLI option:** `-enable-cloudwatch-logs-exports` **RDS API parameter:** `EnableCloudwatchLogsExports`  | 
 |  Maintenance window  |  The 30\-minute window in which pending modifications to your DB cluster are applied\. If the time period doesn't matter, choose **No preference**\. For more information, see [The Amazon RDS maintenance window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.  |  **CLI option:** `--preferred-maintenance-window` **RDS API parameter:** `PreferredMaintenanceWindow`  | 
 |  Master password  |  The password for your master user account\.  |  **CLI option:** `--master-user-password` **RDS API parameter:** `MasterUserPassword`  | 
-|  Master username  |  The name that you use as the master user name to log on to your DB cluster with all database privileges\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html) For more information on privileges granted to the master user, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.  |  **CLI option:** `--master-username` **RDS API parameter:** `MasterUsername`  | 
+|  Master username  |  The name that you use as the master user name to log on to your DB cluster with all database privileges\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html) You can't change the master user name after the Multi\-AZ DB cluster is created\. For more information on privileges granted to the master user, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.  |  **CLI option:** `--master-username` **RDS API parameter:** `MasterUsername`  | 
 | Performance Insights |  **Enable Performance Insights** to monitor your DB cluster load so that you can analyze and troubleshoot your database performance\. Choose a retention period to determine how much Performance Insights data history to keep\. The retention setting in the free tier is **Default \(7 days\)**\. To retain your performance data for longer, specify 1–24 months\. For more information about retention periods, see [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)\. Choose a master key to use to protect the key used to encrypt this database volume\. Choose from the master keys in your account, or enter the key from a different account\. For more information, see [Monitoring DB load with Performance Insights on Amazon RDS](USER_PerfInsights.md)\.  |  **CLI options:** `--enable-performance-insights` `--no-enable-performance-insights` `--performance-insights-retention-period` `--performance-insights-kms-key-id` **RDS API parameters:** `EnablePerformanceInsights` `PerformanceInsightsRetentionPeriod` `PerformanceInsightsKMSKeyId`  | 
 |  Provisioned IOPS  |  The amount of Provisioned IOPS \(input/output operations per second\) to be initially allocated for the DB cluster\. This setting is available only if Provisioned IOPS \(`io1`\) is selected as the storage type\. For more information, see [Provisioned IOPS SSD storage](CHAP_Storage.md#USER_PIOPS)\.   |  **CLI option:** `--iops` **RDS API parameter:** `Iops`  | 
 |  Public access  |  **Publicly accessible** to give the DB cluster a public IP address, meaning that it's accessible outside the VPC\. To be publicly accessible, the DB cluster also has to be in a public subnet in the VPC\. **Not publicly accessible** to make the DB cluster accessible only from inside the VPC\. For more information, see [Hiding a DB instance in a VPC from the internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\. To connect to a DB cluster from outside of its VPC, the DB cluster must be publicly accessible\. Also, access must be granted using the inbound rules of the DB cluster's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.  If your DB cluster isn't publicly accessible, you can use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\. For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.  |  **CLI option:** `--publicly-accessible` `--no-publicly-accessible` **RDS API parameter:** `PubliclyAccessible`  | 
 |  Storage type  |  The storage type for your DB cluster\.  Only Provisioned IOPS \(io1\) storage is supported\. For more information, see [Amazon RDS storage types](CHAP_Storage.md#Concepts.Storage)\.  |  **CLI option:** `--storage-type` **RDS API parameter:** `StorageType`  | 
-|  Subnet group  |  A DB subnet group to associate with this DB cluster\. For more information, see [Working with DB subnet groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.  |  **CLI option:** `--db-subnet-group-name` **RDS API parameter:** `DBSubnetGroupName`  | 
 |  Virtual Private Cloud \(VPC\)  |  A Amazon VPC to associate with this DB cluster\. For more information, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\.   |  For the CLI and API, you specify the VPC security group IDs\.  | 
-|  VPC security groups  |  The security groups to associate with the DB cluster\. For more information, see [Overview of VPC security groups](Overview.RDSSecurityGroups.md#Overview.RDSSecurityGroups.VPCSec)\.   |  **CLI option:** `--vpc-security-group-ids` **RDS API parameter:** `VpcSecurityGroupIds`  | 
+|  VPC security group \(firewall\)  |  The security groups to associate with the DB cluster\. For more information, see [Overview of VPC security groups](Overview.RDSSecurityGroups.md#Overview.RDSSecurityGroups.VPCSec)\.   |  **CLI option:** `--vpc-security-group-ids` **RDS API parameter:** `VpcSecurityGroupIds`  | 
 
 ## Settings that don't apply when creating Multi\-AZ DB clusters<a name="create-multi-az-db-cluster-settings-not-applicable"></a>
 

@@ -1,12 +1,14 @@
 # Master user account privileges<a name="UsingWithRDS.MasterAccounts"></a>
 
-When you create a new DB instance, the default master user that you use gets certain privileges for that DB instance\. The following table shows the privileges and database roles the master user gets for each of the database engines\.
+When you create a new DB instance, the default master user that you use gets certain privileges for that DB instance\. You can't change the master user name after the DB instance is created\.
 
 **Important**  
 We strongly recommend that you do not use the master user directly in your applications\. Instead, adhere to the best practice of using a database user created with the minimal privileges required for your application\.
 
 **Note**  
 If you accidentally delete the permissions for the master user, you can restore them by modifying the DB instance and setting a new master user password\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+The following table shows the privileges and database roles the master user gets for each of the database engines\.
 
 
 | Database engine | System privilege | Database role | 

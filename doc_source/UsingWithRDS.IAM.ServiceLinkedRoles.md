@@ -130,6 +130,18 @@ This service\-linked role has a permissions policy attached to it called `Amazon
                     ]
                 }
             }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:RestoreSecret",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:DeleteSecret",
+                "secretsmanager:UpdateSecret"
+            ],
+            "Resource": "arn:aws:secretsmanager:*:*:secret:rds-sqlserver-ssrs!*"
         }
     ]
 }

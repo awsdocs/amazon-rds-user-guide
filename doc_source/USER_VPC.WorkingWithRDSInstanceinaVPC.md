@@ -172,7 +172,7 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
    If you are using the console, make sure that the following settings are correct:
    + **Network type** – **Dual\-stack mode**  
 ![\[Network type section in the console with Dual-stack mode selected\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/dual-stack-mode.png)
-   + **Subnet group** – The DB subnet group that you configured in a previous step
+   + **DB subnet group** – The DB subnet group that you configured in a previous step
    + **Security group** – The security that you configured in a previous step
 
    If you are using the AWS CLI, make sure that the following settings are correct:

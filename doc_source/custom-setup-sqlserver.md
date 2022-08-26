@@ -124,6 +124,8 @@ The following networking configurations are designed to work best with DB instan
 
 To simplify setup, you can use an AWS CloudFormation template file to create a CloudFormation stack\. To learn how to create stacks, see [Creating a stack on the AWS CloudFormation console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in the *AWS CloudFormation User Guide*\.
 
+For a tutorial on how to lauch Amazon RDS Custom for SQL Server using an AWS CloudFormation template, see [Get started with Amazon RDS Custom for SQL Server using an AWS CloudFormation template](https://aws.amazon.com/blogs/database/get-started-with-amazon-rds-custom-for-sql-server-using-an-aws-cloudformation-template-network-setup/) in the *AWS Database Blog *\.
+
 **Topics**
 + [Resources created by CloudFormation](#custom-setup-sqlserver.cf.list)
 + [Downloading the template file](#custom-setup-sqlserver.cf.download)

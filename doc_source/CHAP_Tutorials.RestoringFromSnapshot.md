@@ -36,9 +36,9 @@ Use the following procedure to restore from a snapshot in the AWS Management Con
 
 1. Under **Connectivity**, use the default settings for the following:
    + **Virtual private cloud \(VPC\)**
-   + **Subnet group**
+   + **DB subnet group**
    + **Public access**
-   + **VPC security group**
+   + **VPC security group \(firewall\)**
 
 1. Choose the **DB instance class**\.
 

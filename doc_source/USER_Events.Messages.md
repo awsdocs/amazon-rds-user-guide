@@ -15,7 +15,7 @@ Amazon RDS generates a significant number of events in categories that you can s
 The following table shows the event category and a list of events when a DB instance is the source type\.
 
 
-|  Category  | Amazon RDS event ID |  Description  | 
+|  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
 |  availability  | RDS\-EVENT\-0006 |  The DB instance restarted\.  | 
 |  availability  | RDS\-EVENT\-0004 |  DB instance shutdown\.  | 
@@ -67,8 +67,10 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0220 |  The DB instance is in the cooling\-off period for a previous scale storage operation\. We are optimizing your instance\. This takes at least six hours\. No actions are necessary\. Autoscaling will retry after the cooling\-off period\.  | 
 |  failure  | RDS\-EVENT\-0223 |  Storage autoscaling is unable to scale the storage for the reason: \[reason\]\.  | 
 |  failure  | RDS\-EVENT\-0224 |  Storage autoscaling has triggered a pending scale storage task that would reach the maximum storage threshold\. Increase the maximum storage threshold\.  | 
+|  failure  | RDS\-EVENT\-0237 |  The DB instance has a storage type that's currently unavailable in the Availability Zone\. Autoscaling will retry later\.  | 
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
+|  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
 |  maintenance  | RDS\-EVENT\-0047 |  The DB instance was patched\.  | 

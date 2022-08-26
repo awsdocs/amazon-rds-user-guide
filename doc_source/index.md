@@ -4,13 +4,13 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
@@ -375,12 +375,14 @@ Amazon's trademarks and trade dress may not be used in
       + [Importing using Oracle Export/Import](Oracle.Procedural.Importing.ExportImport.md)
       + [Importing using Oracle SQL*Loader](Oracle.Procedural.Importing.SQLLoader.md)
       + [Migrating with Oracle materialized views](Oracle.Procedural.Importing.Materialized.md)
-   + [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)
+   + [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)
       + [Overview of Oracle replicas](oracle-read-replicas.overview.md)
       + [Replica requirements for Oracle](oracle-read-replicas.limitations.md)
       + [Preparing to create an Oracle replica](oracle-read-replicas.Configuration.md)
       + [Creating an Oracle replica in mounted mode](oracle-read-replicas.creating-in-mounted-mode.md)
       + [Modifying the Oracle replica mode](oracle-read-replicas.changing-replica-mode.md)
+      + [Working with RDS for Oracle replica backups](oracle-read-replicas.backups.md)
+      + [Performing an Oracle Data Guard switchover](oracle-replication-switchover.md)
       + [Troubleshooting Oracle replicas](oracle-read-replicas.troubleshooting.md)
    + [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)
       + [Overview of Oracle DB options](Appendix.Oracle.Options.overview.md)
@@ -435,7 +437,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
       + [Importing a PostgreSQL database from an Amazon EC2 instance](PostgreSQL.Procedural.Importing.EC2.md)
       + [Using the \copy command to import data to a table on a PostgreSQL DB instance](PostgreSQL.Procedural.Importing.Copy.md)
-      + [Importing Amazon S3 data into an RDS for PostgreSQL DB instance](USER_PostgreSQL.S3Import.md)
+      + [Importing data from Amazon S3 into an RDS for PostgreSQL DB instance](USER_PostgreSQL.S3Import.md)
       + [Transporting PostgreSQL databases between DB instances](PostgreSQL.TransportableDB.md)
    + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)
    + [Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance](PostgreSQL-Lambda.md)

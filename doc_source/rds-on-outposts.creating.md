@@ -70,7 +70,7 @@ If you haven't configured any Outposts, either the **Database location** section
 
    1. For **VPC security group**, choose the Amazon VPC security group for your DB instance\.
 
-   1. For **Subnet group**, choose the DB subnet group for your DB instance\.
+   1. For **DB subnet group**, choose the DB subnet group for your DB instance\.
 
       You can choose an existing DB subnet group that's associated with the Outpost—for example, if you performed the procedure in [Creating a DB subnet group](#rds-on-outposts.creating.console.subnet)\.
 
@@ -108,8 +108,7 @@ After you create your DB instance, you can view credentials and other details fo
 
 **To view DB instance details**
 
-1. To view the master user name and password for the DB instance, choose **View credential details** on the **Databases** page\.  
-![\[View credential details button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+1. To view the master user name and password for the DB instance, choose **View credential details** on the **Databases** page\.
 
    You can connect to the DB instance as the master user by using these credentials\.
 **Important**  

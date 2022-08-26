@@ -80,9 +80,9 @@ For information about connecting to a DB instance, see [Connecting to an Amazon 
  `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com` 
 
 **Reader endpoint**  
- A *reader endpoint* for a Multi\-AZ DB cluster provides support for read\-only connections to the DB cluster\. Use the reader endpoint for read operations, such as queries\. By processing those statements on the reader DB instances, this endpoint reduces the overhead on the writer DB instance\. It also helps the cluster to scale the capacity to handle simultaneous `SELECT` queries\. Each Multi\-AZ DB cluster has one reader endpoint\.   
+ A *reader endpoint* for a Multi\-AZ DB cluster provides support for read\-only connections to the DB cluster\. Use the reader endpoint for read operations, such as `SELECT` queries\. By processing those statements on the reader DB instances, this endpoint reduces the overhead on the writer DB instance\. It also helps the cluster to scale the capacity to handle simultaneous `SELECT` queries\. Each Multi\-AZ DB cluster has one reader endpoint\.   
  The reader endpoint sends each connection request to one of the reader DB instances\. When you use the reader endpoint for a session, you can only perform read\-only statements such as `SELECT` in that session\.   
- The following example illustrates a reader endpoint for a Multi\-AZ DB cluster\.   
+ The following example illustrates a reader endpoint for a Multi\-AZ DB cluster\. The read\-only intent of a reader endpoint is denoted by the `-ro` within the cluster endpoint name\.   
  `mydbcluster.cluster-ro-123456789012.us-east-1.rds.amazonaws.com` 
 
 **Instance endpoint**  
@@ -101,7 +101,7 @@ For information about connecting to a DB instance, see [Connecting to an Amazon 
 aws rds describe-db-cluster-endpoints
 ```
 
- With the Amazon RDS API, you retrieve the endpoints by calling the [DescribeDBClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterEndpoints.html) function\. The output also shows Amazon Aurora DB cluster endpoints, if any exist\.
+ With the Amazon RDS API, you retrieve the endpoints by calling the [DescribeDBClusterEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterEndpoints.html) action\. The output also shows Amazon Aurora DB cluster endpoints, if any exist\.
 
 ### Using the cluster endpoint<a name="multi-az-db-clusters-concepts-connection-management-endpoints-cluster"></a>
 

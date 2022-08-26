@@ -147,6 +147,11 @@ Before you can connect to your DB instance, you must add rules to a security gro
 
 For example, suppose that you have an application that accesses a database on your DB instance in a VPC\. In this case, you must add a custom TCP rule that specifies the port range and IP addresses that your application uses to access the database\. If you have an application on an Amazon EC2 instance, you can use the security group that you set up for the Amazon EC2 instance\.
 
+You can configure connectivity between an Amazon EC2 instance a DB instance when you create the DB instance\. For more information, see [Configure automatic network connectivity with an EC2 instance](USER_CreateDBInstance.md#USER_CreateDBInstance.Prerequisites.VPC.Automatic)\.
+
+**Tip**  
+You can set up network connectivity between an Amazon EC2 instance and a DB instance automatically when you create the DB instance\. For more information, see [Configure automatic network connectivity with an EC2 instance](USER_CreateDBInstance.md#USER_CreateDBInstance.Prerequisites.VPC.Automatic)\.
+
 For information about common scenarios for accessing a DB instance, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
 
 **To create a VPC security group**

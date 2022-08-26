@@ -41,9 +41,9 @@ Before you begin this step, make sure that you have a VPC with both public and p
    + **Virtual private cloud \(VPC\)** – Choose an existing VPC with both public and private subnets, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with private and public subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
 **Note**  
 The VPC must have subnets in different Availability Zones\.
-   + **Subnet group** – Choose a DB subnet group for the VPC, such as the `tutorial-db-subnet-group` created in [Create a DB subnet group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)\.
+   + **DB subnet group** – Choose a DB subnet group for the VPC, such as the `tutorial-db-subnet-group` created in [Create a DB subnet group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)\.
    + **Public access** – Choose **No**\.
-   + **VPC security group** – Select **Choose existing**\.
+   + **VPC security group \(firewall\)** – Select **Choose existing**\.
    + **Existing VPC security groups** – Choose an existing VPC security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [Create a VPC security group for a private DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)\.
 
      Remove other security groups, such as the default security group, by choosing the **X** associated with each\.

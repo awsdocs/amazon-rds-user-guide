@@ -64,8 +64,7 @@ For information about creating DB instances with **Standard create**, see [Creat
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
-   To view the master user name and password for the DB instance, choose **View credential details**\.  
-![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+   To view the master user name and password for the DB instance, choose **View credential details**\.
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  

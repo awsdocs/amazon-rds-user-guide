@@ -2,30 +2,31 @@
 
 Microsoft SQL Server Reporting Services \(SSRS\) is a server\-based application used for report generation and distribution\. It's part of a suite of SQL Server services that also includes SQL Server Analysis Services \(SSAS\) and SQL Server Integration Services \(SSIS\)\. SSRS is a service built on top of SQL Server\. You can use it to collect data from various data sources and present it in a way that's easily understandable and ready for analysis\.
 
-Amazon RDS for SQL Server supports running SSRS directly on RDS DB instances\. You can enable SSRS for existing or new DB instances\.
+Amazon RDS for SQL Server supports running SSRS directly on RDS DB instances\. You can use SSRS with existing or new DB instances\.
 
 RDS supports SSRS for SQL Server Standard and Enterprise Editions on the following versions:
-+ SQL Server 2019, version 15\.00\.4043\.16\.v1 and later
-+ SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
-+ SQL Server 2016, version 13\.00\.5820\.21\.v1 and later
++ SQL Server 2019, version 15\.00\.4043\.16\.v1 and higher
++ SQL Server 2017, version 14\.00\.3223\.3\.v1 and higher
++ SQL Server 2016, version 13\.00\.5820\.21\.v1 and higher
 
 **Contents**
 + [Limitations and recommendations](#SSRS.Limitations)
-+ [Enabling SSRS](#SSRS.Enabling)
++ [Turning on SSRS](#SSRS.Enabling)
   + [Creating an option group for SSRS](#SSRS.OptionGroup)
-  + [Adding the SSRS option to your option group](#Appendix.SQLServer.Options.SSAS.Add)
+  + [Adding the SSRS option to your option group](#SSRS.Add)
   + [Associating your option group with your DB instance](#SSRS.Apply)
   + [Allowing inbound access to your VPC security group](#SSRS.Inbound)
 + [Report server databases](#SSRS.DBs)
 + [SSRS log files](#SSRS.Logs)
 + [Accessing the SSRS web portal](#SSRS.Access)
-  + [Enabling SSL on RDS](#SSRS.Access.SSL)
+  + [Using SSL on RDS](#SSRS.Access.SSL)
   + [Granting access to domain users](#SSRS.Access.Grant)
   + [Accessing the web portal](#SSRS.Access)
 + [Deploying reports to SSRS](#SSRS.Deploy)
++ [Using SSRS Email to send reports](#SSRS.Email)
 + [Revoking system\-level permissions](#SSRS.Access.Revoke)
 + [Monitoring the status of a task](#SSRS.Monitor)
-+ [Disabling SSRS](#SSRS.Disable)
++ [Turning off SSRS](#SSRS.Disable)
 + [Deleting the SSRS databases](#SSRS.Drop)
 
 ## Limitations and recommendations<a name="SSRS.Limitations"></a>
@@ -37,16 +38,16 @@ The following limitations and recommendations apply to running SSRS on RDS for S
 
   Make sure to use the databases that are created when the `SSRS` option is added to the RDS DB instance\. For more information, see [Report server databases](#SSRS.DBs)\.
 + You can't configure SSRS to listen on the default SSL port \(443\)\. The allowed values are 1150–49511, except 1234, 1434, 3260, 3343, 3389, and 47001\.
-+ Subscriptions through email or a Microsoft Windows file share aren't supported\.
++ Subscriptions through a Microsoft Windows file share aren't supported\.
 + Using Reporting Services Configuration Manager isn't supported\.
 + Creating and modifying roles isn't supported\.
 + Modifying report server properties isn't supported\.
 + System administrator and system user roles aren't granted\.
 + You can't edit system\-level role assignments through the web portal\.
 
-## Enabling SSRS<a name="SSRS.Enabling"></a>
+## Turning on SSRS<a name="SSRS.Enabling"></a>
 
-Use the following process to enable SSRS on your DB instance:
+Use the following process to turn on SSRS for your DB instance:
 
 1. Create a new option group, or choose an existing option group\.
 
@@ -63,7 +64,7 @@ To work with SSRS, create an option group that corresponds to the SQL Server eng
 **Note**  
 You can also use an existing option group if it's for the correct SQL Server engine and version\.
 
-#### Console<a name="OptionGroup.SSRS.Console"></a>
+#### Console<a name="SSRS.OptionGroup.Console"></a>
 
 The following procedure creates an option group for SQL Server Standard Edition 2017\.
 
@@ -87,7 +88,7 @@ The following procedure creates an option group for SQL Server Standard Edition 
 
 1. Choose **Create**\.
 
-#### CLI<a name="OptionGroup.SSRS.CLI"></a>
+#### CLI<a name="SSRS.OptionGroup.CLI"></a>
 
 The following procedure creates an option group for SQL Server Standard Edition 2017\.
 
@@ -114,11 +115,11 @@ aws rds create-option-group ^
     --option-group-description "SSRS option group for SQL Server SE 2017"
 ```
 
-### Adding the SSRS option to your option group<a name="Appendix.SQLServer.Options.SSAS.Add"></a>
+### Adding the SSRS option to your option group<a name="SSRS.Add"></a>
 
 Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to your option group\.
 
-#### Console<a name="Options.SSAS.Add.Console"></a>
+#### Console<a name="SSRS.Add.CON"></a>
 
 **To add the SSRS option**
 
@@ -126,9 +127,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
 
 1. In the navigation pane, choose **Option groups**\.
 
-1. Choose the option group that you just created\.
-
-1. Choose **Add option**\.
+1. Choose the option group that you just created, then choose **Add option**\.
 
 1. Under **Option details**, choose **SSRS** for **Option name**\.
 
@@ -140,21 +139,70 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
 
       **Max memory** specifies the upper threshold above which no new memory allocation requests are granted to report server applications\. The number is a percentage of the total memory of the DB instance\. The allowed values are 10–80\.
 
-1. For **Security groups**, choose the VPC security group to associate with the option\. Use the same security group that is associated with your DB instance\.
+   1. For **Security groups**, choose the VPC security group to associate with the option\. Use the same security group that is associated with your DB instance\.
+
+1. To use SSRS Email to send reports, choose the **Configure email delivery options** check box under **Email delivery in reporting services**, and then do the following:
+
+   1. For **Sender email address**, enter the email address to use in the **From** field of messages sent by SSRS Email\.
+
+      Specify a user account that has permission to send mail from the SMTP server\.
+
+   1. For **SMTP server**, specify the SMTP server or gateway to use\.
+
+      It can be an IP address, the NetBIOS name of a computer on your corporate intranet, or a fully qualified domain name\.
+
+   1. For **SMTP port**, enter the port to use to connect to the mail server\. The default is 25\.
+
+   1. To use authentication:
+
+      1. Select the **Use authentication** check box\.
+
+      1. For **Secret Amazon Resource Name \(ARN\)** enter the AWS Secrets Manager ARN for the user credentials\.
+
+         Use the following format:
+
+         **arn:aws:secretsmanager:*Region*:*AccountId*:secret:*SecretName*\-*6RandomCharacters***
+
+         For example:
+
+         **arn:aws:secretsmanager:*us\-west\-2*:*123456789012*:secret:*MySecret\-a1b2c3***
+
+         For more information on creating the secret, see [Using SSRS Email to send reports](#SSRS.Email)\.
+
+   1. Select the **Use Secure Sockets Layer \(SSL\)** check box to encrypt email messages using SSL\.
 
 1. Under **Scheduling**, choose whether to add the option immediately or at the next maintenance window\.
 
 1. Choose **Add option**\.
 
-#### CLI<a name="Options.SSAS.Add.CLI"></a>
+#### CLI<a name="SSRS.Add.CLI"></a>
 
 **To add the SSRS option**
 
-1. Create a JSON file, for example `ssrs-option.json`, with the following parameters:
-   + `OptionGroupName` – The name of option group that you created or chose previously \(`ssrs-se-2017` in the following example\)\.
-   + `Port` – The port for the SSRS service to listen on\. The default is 8443\. For a list of allowed values, see [Limitations and recommendations](#SSRS.Limitations)\.
-   + `VpcSecurityGroupMemberships` – VPC security group memberships for your RDS DB instance\.
-   + `MAX_MEMORY` – The upper threshold above which no new memory allocation requests are granted to report server applications\. The number is a percentage of the total memory of the DB instance\. The allowed values are 10–80\.
+1. Create a JSON file, for example `ssrs-option.json`\.
+
+   1. Set the following required parameters:
+      + `OptionGroupName` – The name of option group that you created or chose previously \(`ssrs-se-2017` in the following example\)\.
+      + `Port` – The port for the SSRS service to listen on\. The default is 8443\. For a list of allowed values, see [Limitations and recommendations](#SSRS.Limitations)\.
+      + `VpcSecurityGroupMemberships` – VPC security group memberships for your RDS DB instance\.
+      + `MAX_MEMORY` – The upper threshold above which no new memory allocation requests are granted to report server applications\. The number is a percentage of the total memory of the DB instance\. The allowed values are 10–80\.
+
+   1. \(Optional\) Set the following parameters to use SSRS Email:
+      + `SMTP_ENABLE_EMAIL` – Set to `true` to use SSRS Email\. The default is `false`\.
+      + `SMTP_SENDER_EMAIL_ADDRESS` – The email address to use in the **From** field of messages sent by SSRS Email\. Specify a user account that has permission to send mail from the SMTP server\.
+      + `SMTP_SERVER_NAME` – The SMTP server or gateway to use\. It can be an IP address, the NetBIOS name of a computer on your corporate intranet, or a fully qualified domain name\.
+      + `SMTP_PORT` – The port to use to connect to the mail server\. The default is 25\.
+      + `SMTP_USE_SSL` – Set to `true` to encrypt email messages using SSL\. The default is `true`\.
+      + `SMTP_EMAIL_CREDENTIALS_SECRET_ARN` – The Secrets Manager ARN that holds the user credentials\. Use the following format:
+
+        **arn:aws:secretsmanager:*Region*:*AccountId*:secret:*SecretName*\-*6RandomCharacters***
+
+        For more information on creating the secret, see [Using SSRS Email to send reports](#SSRS.Email)\.
+      + `SMTP_USE_ANONYMOUS_AUTHENTICATION` – Set to `true` and don't include `SMTP_EMAIL_CREDENTIALS_SECRET_ARN` if you don't want to use authentication\.
+
+        The default is `false` when `SMTP_ENABLE_EMAIL` is `true`\.
+
+   The following example includes the SSRS Email parameters, using the secret ARN\.
 
    ```
    {
@@ -164,7 +212,15 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
    	"OptionName": "SSRS",
    	"Port": 8443,
    	"VpcSecurityGroupMemberships": ["sg-0abcdef123"],
-   	"OptionSettings": [{"Name": "MAX_MEMORY","Value": "60"}]
+   	"OptionSettings": [
+               {"Name": "MAX_MEMORY","Value": "60"},
+               {"Name": "SMTP_ENABLE_EMAIL","Value": "true"}
+               {"Name": "SMTP_SENDER_EMAIL_ADDRESS","Value": "nobody@example.com"},
+               {"Name": "SMTP_SERVER_NAME","Value": "email-smtp.us-west-2.amazonaws.com"},
+               {"Name": "SMTP_PORT","Value": "25"},
+               {"Name": "SMTP_USE_SSL","Value": "true"},
+               {"Name": "SMTP_EMAIL_CREDENTIALS_SECRET_ARN","Value": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MySecret-a1b2c3"}
+               ]
    	}],
    "ApplyImmediately": true
    }
@@ -195,13 +251,13 @@ Use the AWS Management Console or the AWS CLI to associate your option group wit
 
 If you use an existing DB instance, it must already have an Active Directory domain and AWS Identity and Access Management \(IAM\) role associated with it\. If you create a new instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)\.
 
-#### Console<a name="Apply.SSRS.Console"></a>
+#### Console<a name="SSRS.Apply.Console"></a>
 
 You can associate your option group with a new or existing DB instance:
 + For a new DB instance, associate the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 + For an existing DB instance, modify the instance and associate the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-#### CLI<a name="Apply.SSRS.CLI"></a>
+#### CLI<a name="SSRS.Apply.CLI"></a>
 
 You can associate your option group with a new or existing DB instance\.
 
@@ -289,13 +345,13 @@ For more information, see [Working with Microsoft SQL Server logs](Appendix.SQLS
 
 Use the following process to access the SSRS web portal:
 
-1. Enable Secure Sockets Layer \(SSL\)\.
+1. Turn on Secure Sockets Layer \(SSL\)\.
 
 1. Grant access to domain users\.
 
 1. Access the web portal using a browser and the domain user credentials\.
 
-### Enabling SSL on RDS<a name="SSRS.Access.SSL"></a>
+### Using SSL on RDS<a name="SSRS.Access.SSL"></a>
 
 SSRS uses the HTTPS SSL protocol for its connections\. To work with this protocol, import an SSL certificate into the Microsoft Windows operating system on your client computer\.
 
@@ -315,7 +371,7 @@ In a new SSRS activation, there are no role assignments in SSRS\. To give a doma
   ```
 
 The domain user or user group is granted the `RDS_SSRS_ROLE` system role\. This role has the following system\-level tasks granted to it:
-+ Execute report definitions
++ Run reports
 + Manage jobs
 + Manage shared schedules
 + View shared schedules
@@ -355,6 +411,79 @@ After you have access to the web portal, you can deploy reports to it\. You can 
   ```
   https://myssrsinstance.cg034itsfake.us-east-1.rds.amazonaws.com:8443/ReportServer
   ```
+
+## Using SSRS Email to send reports<a name="SSRS.Email"></a>
+
+SSRS includes the SSRS Email extension, which you can use to send reports to users\.
+
+To configure SSRS Email, use the `SSRS` option settings\. For more information, see [Adding the SSRS option to your option group](#SSRS.Add)\.
+
+After configuring SSRS Email, you can subscribe to reports on the report server\. For more information, see [Email delivery in Reporting Services](https://docs.microsoft.com/en-us/sql/reporting-services/subscriptions/e-mail-delivery-in-reporting-services) in the Microsoft documentation\.
+
+Integration with AWS Secrets Manager is required for SSRS Email to function on RDS\. To integrate with Secrets Manager, you create a secret\.
+
+**Note**  
+If you change the secret later, you also have to update the `SSRS` option in the option group\.
+
+**To create a secret for SSRS Email**
+
+1. Follow the steps in [Create a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html) in the *AWS Secrets Manager User Guide*\.
+
+   1. For **Select secret type**, choose **Other type of secrets**\.
+
+   1. For **Key/value pairs**, enter the following:
+      + **SMTP\_USERNAME** – Enter a user with permission to send mail from the SMTP server\.
+      + **SMTP\_PASSWORD** – Enter a password for the SMTP user\.
+
+   1. For **Encryption key**, don't use the default AWS KMS key\. Use your own existing key, or create a new one\.
+
+      The KMS key policy must allow the `kms:Decrypt` action, for example:
+
+      ```
+      {
+          "Sid": "Allow use of the key",
+          "Effect": "Allow",
+          "Principal": {
+              "Service": [
+                  "rds.amazonaws.com"
+              ]
+          },
+          "Action": [
+              "kms:Decrypt"
+          ],
+          "Resource": "*"
+      }
+      ```
+
+1. Follow the steps in [Attach a permissions policy to a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-policies.html) in the *AWS Secrets Manager User Guide*\. The permissions policy gives the `secretsmanager:GetSecretValue` action to the `rds.amazonaws.com` service principal\.
+
+   We recommend that you use the `aws:sourceAccount` and `aws:sourceArn` conditions in the policy to avoid the *confused deputy* problem\. Use your AWS account for `aws:sourceAccount` and the option group ARN for `aws:sourceArn`\. For more information, see [Preventing cross\-service confused deputy problems](cross-service-confused-deputy-prevention.md)\.
+
+   The following example shows a permissions policy\.
+
+   ```
+   {
+     "Version" : "2012-10-17",
+     "Statement" : [ {
+       "Effect" : "Allow",
+       "Principal" : {
+         "Service" : "rds.amazonaws.com",
+       },
+       "Action" : "secretsmanager:GetSecretValue",
+       "Resource" : "*",
+       "Condition" : {
+         "StringEquals" : {
+           "aws:sourceAccount" : "123456789012"
+         },
+         "ArnLike" : {
+           "aws:sourceArn" : "arn:aws:rds:us-west-2:123456789012:og:ssrs-se-2017"
+         }
+       }
+     } ]
+   }
+   ```
+
+   For more examples, see [Permissions policy examples]() in the *AWS Secrets Manager User Guide*\.
 
 ## Revoking system\-level permissions<a name="SSRS.Access.Revoke"></a>
 
@@ -408,11 +537,11 @@ The `rds_fn_task_status` function returns the following information\.
 | `overwrite_file` |  Not applicable to SSRS tasks\.  | 
 | `task_metadata` | Metadata associated with the SSRS task\. | 
 
-## Disabling SSRS<a name="SSRS.Disable"></a>
+## Turning off SSRS<a name="SSRS.Disable"></a>
 
-To disable SSRS, remove the `SSRS` option from its option group\. Removing the option doesn't delete the SSRS databases\. For more information, see [Deleting the SSRS databases](#SSRS.Drop)\.
+To turn off SSRS, remove the `SSRS` option from its option group\. Removing the option doesn't delete the SSRS databases\. For more information, see [Deleting the SSRS databases](#SSRS.Drop)\.
 
-You can re\-enable SSRS by adding back the `SSRS` option\. If you have also deleted the SSRS databases, re\-enabling SSRS on the same DB instance creates new report server databases\.
+You can turn SSRS on again by adding back the `SSRS` option\. If you have also deleted the SSRS databases, readding the option on the same DB instance creates new report server databases\.
 
 ### Console<a name="SSRS.Disable.Console"></a>
 

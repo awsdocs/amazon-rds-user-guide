@@ -1,6 +1,6 @@
 # Working with Oracle replicas for RDS Custom for Oracle<a name="custom-rr"></a>
 
-You can create Oracle replicas for RDS Custom for Oracle DB instances\. Creating a Oracle replica is similar to the process in Amazon RDS, but with important differences\. For general information about creating and managing Oracle replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
+You can create Oracle replicas for RDS Custom for Oracle DB instances\. Creating a Oracle replica is similar to the process in Amazon RDS, but with important differences\. For general information about creating and managing Oracle replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
 
 **Topics**
 + [Overview of RDS Custom for Oracle replication](#custom-rr.overview)

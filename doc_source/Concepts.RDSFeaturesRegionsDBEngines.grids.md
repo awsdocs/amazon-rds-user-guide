@@ -173,7 +173,7 @@ Exporting snapshots to S3 is available in all Regions except the following:
 **Topics**
 + [Export snapshots to S3 with RDS for MariaDB](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.mdb)
 + [Export snapshots to S3 with RDS for MySQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.my)
-+ [Export Snapshot to S3 with RDS for PostgreSQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.pg)
++ [Export snapshots to S3 with RDS for PostgreSQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.pg)
 
 ### Export snapshots to S3 with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.mdb"></a>
 
@@ -183,7 +183,7 @@ Exporting snapshots to S3 with RDS for MariaDB is available for all versions\.
 
 Exporting snapshots to S3 with RDS for MySQL is available for all versions\.
 
-### Export Snapshot to S3 with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.pg"></a>
+### Export snapshots to S3 with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.pg"></a>
 
 Exporting snapshots to S3 with RDS for PostgreSQL is available for all versions\.
 

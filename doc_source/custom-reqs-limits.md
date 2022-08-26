@@ -33,7 +33,7 @@ RDS Custom for Oracle supports the following DB instance classes:
 
 The following limitations apply to RDS Custom for Oracle:
 + You can't provide your own AMI\.
-+ Not all create options are supported\. For example, when you create an RDS Custom for Oracle DB instance, you can't do the following:
++ Not all options are supported\. For example, when you create or modify an RDS Custom for Oracle DB instance, you can't do the following:
   + Change the number of CPU cores and threads per core on the DB instance class\.
   + Turn on storage autoscaling\.
   + Set backup retention to `0`\.
@@ -41,6 +41,7 @@ The following limitations apply to RDS Custom for Oracle:
   + Specify your own DB parameter group or option group\.
   + Turn on Performance Insights\.
   + Turn on automatic minor version upgrade\.
+  + Change the DB instance class\. For example, you can't change a db\.m5\.xlarge DB instance to db\.m5\.2xlarge\. However, you can restore a snapshot of your RDS Custom for Oracle DB instance to a different instance class\.
 + The maximum DB instance storage is 64 TiB\.
 + You can't use the Oracle Multitenant architecture\.
 + Only one database is supported on an RDS Custom for Oracle DB instance\.

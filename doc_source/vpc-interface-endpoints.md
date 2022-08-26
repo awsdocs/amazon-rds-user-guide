@@ -8,6 +8,8 @@ Each interface endpoint is represented by one or more elastic network interfaces
 
 For more information about VPC endpoints, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. For more information about RDS API operations, see [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\.
 
+You don't need an interface VPC endpoint to connect to a DB instance\. For more information, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
+
 ## Considerations for VPC endpoints<a name="vpc-endpoint-considerations"></a>
 
 Before you set up an interface VPC endpoint for Amazon RDS API endpoints, ensure that you review [Interface endpoint properties and limitations](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#vpce-interface-limitations) in the *Amazon VPC User Guide*\. 

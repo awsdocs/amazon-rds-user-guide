@@ -1,73 +1,99 @@
-# Importing Amazon S3 data into an RDS for PostgreSQL DB instance<a name="USER_PostgreSQL.S3Import"></a>
+# Importing data from Amazon S3 into an RDS for PostgreSQL DB instance<a name="USER_PostgreSQL.S3Import"></a>
 
-You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL\. 
+You can import data that's been stored using Amazon Simple Storage Service into a table on an RDS for PostgreSQL DB instance\. To do this, you first install the RDS for PostgreSQL `aws_s3` extension\. This extension provides the functions that you use to import data from an Amazon S3 bucket\. A *bucket* is an Amazon S3 container for objects and files\. The data can be in a comma\-separate value \(CSV\) file, a text file, or a compressed \(gzip\) file\. Following, you can learn how to install the extension and how to import data from Amazon S3 into a table\. 
+
+Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL\. 
+
+If you don't have data stored on Amazon S3, you need to first create a bucket and store the data\. For more information, see the following topics in the *Amazon Simple Storage Service User Guide*\. 
++ [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
++ [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) 
 
 **Note**  
 Importing data from Amazon S3 isn't supported for Aurora Serverless v1\. It is supported for Aurora Serverless v2\.
 
-For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide*\.
-
 **Topics**
-+ [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)
++ [Installing the aws\_s3 extension](#USER_PostgreSQL.S3Import.InstallExtension)
++ [Overview of importing data from Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)
 + [Setting up access to an Amazon S3 bucket](#USER_PostgreSQL.S3Import.AccessPermission)
-+ [Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data](#USER_PostgreSQL.S3Import.FileFormats)
++ [Importing data from Amazon S3 to your RDS for PostgreSQL DB instance](#USER_PostgreSQL.S3Import.FileFormats)
 + [Function reference](#USER_PostgreSQL.S3Import.Reference)
 
-## Overview of importing Amazon S3 data<a name="USER_PostgreSQL.S3Import.Overview"></a>
+## Installing the aws\_s3 extension<a name="USER_PostgreSQL.S3Import.InstallExtension"></a>
 
-To import data stored in an Amazon S3 bucket to a PostgreSQL database table, follow these steps\. 
+Before you can use Amazon S3 with your RDS for PostgreSQL DB instance, you need to install the `aws_s3` extension\. This extension provides functions for importing data from an Amazon S3\. It also provides functions for exporting data from an RDS for PostgreSQL DB instance to an Amazon S3 bucket\. For more information, see [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)\. The `aws_s3` extension depends on some of the helper functions in the `aws_commons` extension, which is installed automatically when needed\. 
+
+**To install the `aws_s3` extension**
+
+1. Use psql \(or pgAdmin\) to connect to the RDS for PostgreSQL DB instance as a user that has `rds_superuser` privileges\. If you kept the default name during the setup process, you connect as `postgres`\.
+
+   ```
+   psql --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password
+   ```
+
+1. To install the extension, run the following command\. 
+
+   ```
+   postgres=> CREATE EXTENSION aws_s3 CASCADE;
+   NOTICE: installing required extension "aws_commons"
+   CREATE EXTENSION
+   ```
+
+1. To verify that the extension is installed, you can use the psql `\dx` metacommand\.
+
+   ```
+   postgres=> \dx
+          List of installed extensions
+       Name     | Version |   Schema   |                 Description
+   -------------+---------+------------+---------------------------------------------
+    aws_commons | 1.2     | public     | Common data types across AWS services
+    aws_s3      | 1.1     | public     | AWS S3 extension for importing data from S3
+    plpgsql     | 1.0     | pg_catalog | PL/pgSQL procedural language
+   (3 rows)
+   ```
+
+The functions for importing data from Amazon S3 and exporting data to Amazon S3 are now available to use\.
+
+## Overview of importing data from Amazon S3 data<a name="USER_PostgreSQL.S3Import.Overview"></a>
 
 **To import S3 data into Amazon RDS**
 
-1. Install the required PostgreSQL extensions\. These include the `aws_s3` and `aws_commons` extensions\. To do so, start psql and use the following command\. 
+First, gather the details that you need to supply to the function\. These include the name of the table on your RDS for PostgreSQL DB instance, and the bucket name, file path, file type, and AWS Region where the Amazon S3 data is stored\. For more information, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service User Guide*\.
+
+1. Get the name of the table into which the `aws_s3.table_import_from_s3` function is to import the data\. As an example, the following creates a database `t1` that can be used in later steps\. 
 
    ```
-   psql=> CREATE EXTENSION aws_s3 CASCADE;
-   NOTICE: installing required extension "aws_commons"
+   postgres=> CREATE TABLE t1 
+       (col1 varchar(80), 
+       col2 varchar(80), 
+       col3 varchar(80));
    ```
 
-   The `aws_s3` extension provides the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function that you use to import Amazon S3 data\. The `aws_commons` extension provides additional helper functions\.
+1. Get the details about the Amazon S3 bucket and the data to import\. To do this, open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/), and choose **Buckets**\. Find the bucket containing your data in the list\. Choose the bucket, open its Object overview page, and then choose Properties\.
 
-1. Identify the database table and Amazon S3 file to use\.
+   Make a note of the bucket name, path, the AWS Region, and file type\. You need the Amazon Resource Name \(ARN\) later, to set up access to Amazon S3 through an IAM role\. For more more information, see [Setting up access to an Amazon S3 bucket](#USER_PostgreSQL.S3Import.AccessPermission)\. The image following shows an example\.   
+![\[Image of a file object in an Amazon S3 bucket.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/aws_s3_import-export_s3_bucket-info.png)
 
-   The [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function requires the name of the PostgreSQL database table that you want to import data into\. The function also requires that you identify the Amazon S3 file to import\. To provide this information, take the following steps\.
+1. You can verify the path to the data on the Amazon S3 bucket by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
 
-   1. Identify the PostgreSQL database table to put the data in\. For example, the following is a sample `t1` database table used in the examples for this topic\. 
+   ```
+   aws s3 cp s3://sample_s3_bucket/sample_file_path ./ 
+   ```
 
-      ```
-      psql=> CREATE TABLE t1 (col1 varchar(80), col2 varchar(80), col3 varchar(80));
-      ```
+1. Set up permissions on your  RDS for PostgreSQL DB instance to allow access to the file on the Amazon S3 bucket\. To do so, you use either an AWS Identity and Access Management \(IAM\) role or security credentials\. For more information, see [Setting up access to an Amazon S3 bucket](#USER_PostgreSQL.S3Import.AccessPermission)\.
 
-   1. Get the following information to identify the Amazon S3 file that you want to import:
-      + Bucket name – A *bucket* is a container for Amazon S3 objects or files\.
-      + File path – The file path locates the file in the Amazon S3 bucket\.
-      + AWS Region – The AWS Region is the location of the Amazon S3 bucket\. For example, if the S3 bucket is in the US East \(N\. Virginia\) Region, use `us-east-1`\. For a listing of AWS Region names and associated values, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+1. Supply the path and other Amazon S3 object details gathered \(see step 2\) to the `create_s3_uri` function to construct an Amazon S3 URI object\. To learn more about this function, see [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri)\. The following is an example of constructing this object during a psql session\.
 
-      To find how to get this information, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service User Guide*\. You can confirm the information by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
+   ```
+   postgres=> SELECT aws_commons.create_s3_uri(
+      'docs-lab-store-for-rpg',
+      'versions_and_jdks_listing.csv',
+      'us-west-1'
+   ) AS s3_uri \gset
+   ```
 
-      ```
-      aws s3 cp s3://sample_s3_bucket/sample_file_path ./ 
-      ```
+   In the next step, you pass this object \(`aws_commons._s3_uri_1`\) to the `aws_s3.table_import_from_s3` function to import the data to the table\. 
 
-   1. Use the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `aws_commons._s3_uri_1` structure to hold the Amazon S3 file information\. You provide this `aws_commons._s3_uri_1` structure as a parameter in the call to the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\.
-
-      For a psql example, see the following\.
-
-      ```
-      psql=> SELECT aws_commons.create_s3_uri(
-         'sample_s3_bucket',
-         'sample.csv',
-         'us-east-1'
-      ) AS s3_uri \gset
-      ```
-
-1. Provide permission to access the Amazon S3 file\.
-
-   To import data from an Amazon S3 file, give the RDS for PostgreSQL DB instance permission to access the Amazon S3 bucket the file is in\. To do this, you use either an AWS Identity and Access Management \(IAM\) role or security credentials\. For more information, see [Setting up access to an Amazon S3 bucket](#USER_PostgreSQL.S3Import.AccessPermission)\.
-
-1. Import the Amazon S3 data by calling the `aws_s3.table_import_from_s3` function\.
-
-   After you complete the previous preparation tasks, use the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function to import the Amazon S3 data\. For more information, see [Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data](#USER_PostgreSQL.S3Import.FileFormats)\.
+1. Invoke the `aws_s3.table_import_from_s3` function to import the data from Amazon S3 into your table\. For reference information, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\. For examples, see [Importing data from Amazon S3 to your RDS for PostgreSQL DB instance](#USER_PostgreSQL.S3Import.FileFormats)\. 
 
 ## Setting up access to an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.AccessPermission"></a>
 
@@ -101,11 +127,11 @@ You can't associate an IAM role with an Aurora Serverless v1 DB cluster, so the 
    + arn:aws:s3:::*your\-s3\-bucket*
    + arn:aws:s3:::*your\-s3\-bucket*/\*
 
-   For more information on creating an IAM policy for Amazon RDS for PostgreSQL, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
+   For more information on creating an IAM policy for RDS for PostgreSQL, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
 
    The following AWS CLI command creates an IAM policy named `rds-s3-import-policy` with these options\. It grants access to a bucket named `your-s3-bucket`\. 
 **Note**  
-Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. You need the ARN when you attach the policy to an IAM role, in a subsequent step\.  
+Make a note of the Amazon Resource Name \(ARN\) of the policy returned by this command\. You need the ARN in a subsequent step when you attach the policy to an IAM role\.  
 **Example**  
 
    For Linux, macOS, or Unix:
@@ -290,12 +316,12 @@ To add an IAM role for a PostgreSQL DB instance using the Amazon RDS API, call t
 
 ### Using security credentials to access an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.Credentials"></a>
 
-If you prefer, you can use security credentials to provide access to an Amazon S3 bucket instead of providing access with an IAM role\. To do this, use the `credentials` parameter in the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function call\. 
+If you prefer, you can use security credentials to provide access to an Amazon S3 bucket instead of providing access with an IAM role\. You do so by specifying the `credentials` parameter in the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function call\. 
 
 The `credentials` parameter is a structure of type `aws_commons._aws_credentials_1`, which contains AWS credentials\. Use the [aws\_commons\.create\_aws\_credentials](#USER_PostgreSQL.S3Import.create_aws_credentials) function to set the access key and secret key in an `aws_commons._aws_credentials_1` structure, as shown following\. 
 
 ```
-psql=> SELECT aws_commons.create_aws_credentials(
+postgres=> SELECT aws_commons.create_aws_credentials(
    'sample_access_key', 'sample_secret_key', '')
 AS creds \gset
 ```
@@ -303,7 +329,7 @@ AS creds \gset
 After creating the `aws_commons._aws_credentials_1 `structure, use the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function with the `credentials` parameter to import the data, as shown following\.
 
 ```
-psql=> SELECT aws_s3.table_import_from_s3(
+postgres=> SELECT aws_s3.table_import_from_s3(
    't', '', '(format csv)',
    :'s3_uri', 
    :'creds'
@@ -313,7 +339,7 @@ psql=> SELECT aws_s3.table_import_from_s3(
 Or you can include the [aws\_commons\.create\_aws\_credentials](#USER_PostgreSQL.S3Import.create_aws_credentials) function call inline within the `aws_s3.table_import_from_s3` function call\.
 
 ```
-psql=> SELECT aws_s3.table_import_from_s3(
+postgres=> SELECT aws_s3.table_import_from_s3(
    't', '', '(format csv)',
    :'s3_uri', 
    aws_commons.create_aws_credentials('sample_access_key', 'sample_secret_key', '')
@@ -322,22 +348,22 @@ psql=> SELECT aws_s3.table_import_from_s3(
 
 ### Troubleshooting access to Amazon S3<a name="USER_PostgreSQL.S3Import.troubleshooting"></a>
 
-If you encounter connection problems when attempting to import Amazon S3 file data, see the following for recommendations:
+If you encounter connection problems when attempting to import data from Amazon S3, see the following for recommendations:
 + [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md)
 + [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service User Guide*
 + [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the *IAM User Guide*
 
-## Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data<a name="USER_PostgreSQL.S3Import.FileFormats"></a>
+## Importing data from Amazon S3 to your RDS for PostgreSQL DB instance<a name="USER_PostgreSQL.S3Import.FileFormats"></a>
 
-Import your Amazon S3 data by calling the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
+You import data from your Amazon S3 bucket by using the `table_import_from_s3` function of the aws\_s3 extension\. For reference information, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\. 
 
 **Note**  
-The following examples use the IAM role method for providing access to the Amazon S3 bucket\. Thus, the `aws_s3.table_import_from_s3` function calls don't include credential parameters\.
+The following examples use the IAM role method to allow access to the Amazon S3 bucket\. Thus, the `aws_s3.table_import_from_s3` function calls don't include credential parameters\.
 
-The following shows a typical PostgreSQL example using `psql`\.
+The following shows a typical example\.
 
 ```
-psql=> SELECT aws_s3.table_import_from_s3(
+postgres=> SELECT aws_s3.table_import_from_s3(
    't1',
    '', 
    '(format csv)',
@@ -348,8 +374,8 @@ psql=> SELECT aws_s3.table_import_from_s3(
 The parameters are the following:
 + `t1` – The name for the table in the PostgreSQL DB instance to copy the data into\. 
 + `''` – An optional list of columns in the database table\. You can use this parameter to indicate which columns of the S3 data go in which table columns\. If no columns are specified, all the columns are copied to the table\. For an example of using a column list, see [Importing an Amazon S3 file that uses a custom delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)\.
-+ `(format csv)` – PostgreSQL COPY arguments\. The copy process uses the arguments and format of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command\. In the preceding example, the `COPY` command uses the comma\-separated value \(CSV\) file format to copy the data\. 
-+  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)\.
++ `(format csv)` – PostgreSQL COPY arguments\. The copy process uses the arguments and format of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command to import the data\. Choices for format include comma\-separated value \(CSV\) as shown in this example, text, and binary\. The default is text\. 
++  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of importing data from Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)\.
 
 For more information about this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
 
@@ -379,7 +405,7 @@ For this example, assume that the following information is organized into pipe\-
 1. Create a table in the database for the imported data\.
 
    ```
-   psql=> CREATE TABLE test (a text, b text, c text, d text, e text);
+   postgres=> CREATE TABLE test (a text, b text, c text, d text, e text);
    ```
 
 1. Use the following form of the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function to import data from the Amazon S3 file\. 
@@ -387,7 +413,7 @@ For this example, assume that the following information is organized into pipe\-
    You can include the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function call inline within the `aws_s3.table_import_from_s3` function call to specify the file\. 
 
    ```
-   psql=> SELECT aws_s3.table_import_from_s3(
+   postgres=> SELECT aws_s3.table_import_from_s3(
       'test',
       'a,b,d,e',
       'DELIMITER ''|''', 
@@ -398,7 +424,7 @@ For this example, assume that the following information is organized into pipe\-
 The data is now in the table in the following columns\.
 
 ```
-psql=> SELECT * FROM test;
+postgres=> SELECT * FROM test;
 a | b | c | d | e 
 ---+------+---+---+------+-----------
 1 | foo1 | | bar1 | elephant1
@@ -420,8 +446,8 @@ For more information about Amazon S3 metadata and details about system\-provided
 Import the gzip file into your RDS for PostgreSQL DB instance as shown following\.
 
 ```
-psql=> CREATE TABLE test_gzip(id int, a text, b text, c text, d text);
-psql=> SELECT aws_s3.table_import_from_s3(
+postgres=> CREATE TABLE test_gzip(id int, a text, b text, c text, d text);
+postgres=> SELECT aws_s3.table_import_from_s3(
  'test_gzip', '', '(format csv)',
  'myS3Bucket', 'test-data.gz', 'us-east-2'
 );
@@ -432,7 +458,7 @@ psql=> SELECT aws_s3.table_import_from_s3(
 The following example shows how to import a file from Amazon S3 that has Windows\-1252 encoding\.
 
 ```
-psql=> SELECT aws_s3.table_import_from_s3(
+postgres=> SELECT aws_s3.table_import_from_s3(
  'test_table', '', 'encoding ''WIN1252''',
  aws_commons.create_s3_uri('sampleBucket', 'SampleFile', 'us-east-2')
 );
@@ -540,7 +566,7 @@ A text string containing the name of the Amazon S3 bucket that contains the file
 A text string containing the Amazon S3 file name including the path of the file\. 
 
 *region*  
-A text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+A text string identifying the AWS Region location of the file\. For a listing of AWS Region names and associated values, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\.
 
 *access\_key*  
 A text string containing the access key to use for the import operation\. The default is NULL\.

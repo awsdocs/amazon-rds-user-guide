@@ -2,8 +2,6 @@
 
 You can use the Amazon RDS console to view, watch, and download SQL Server Agent logs, Microsoft SQL Server error logs, and SQL Server Reporting Services \(SSRS\) logs\.
 
-\.
-
 ## Watching log files<a name="Appendix.SQLServer.CommonDBATasks.Logs.Watch"></a>
 
 If you view a log in the Amazon RDS console, you can see its contents as they exist at that moment\. Watching a log in the console opens it in a dynamic state so that you can see updates to it in near\-real time\.

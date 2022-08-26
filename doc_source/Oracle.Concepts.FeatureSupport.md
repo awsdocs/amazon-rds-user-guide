@@ -36,7 +36,7 @@ Amazon RDS for Oracle supports the following Oracle Database features:
   For more information, see [Generating performance reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
 + Active Data Guard with Maximum Performance in the same AWS Region or across AWS Regions
 
-  For more information, see [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
+  For more information, see [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
 + Blockchain tables \(Oracle Database 21c and higher\)
 
   For more information, see [Managing Blockchain Tables ](https://docs.oracle.com/en/database/oracle/oracle-database/21/admin/managing-tables.html#GUID-43470B0C-DE4A-4640-9278-B066901C3926) in the Oracle Database documentation\.
