@@ -4,7 +4,7 @@ To configure replication between Oracle DB instances, you can create replica dat
 
 **Topics**
 + [Overview of Oracle replicas](oracle-read-replicas.overview.md)
-+ [Replica requirements for Oracle](oracle-read-replicas.limitations.md)
++ [Considerations for RDS for Oracle replicas](oracle-read-replicas.limitations.md)
 + [Preparing to create an Oracle replica](oracle-read-replicas.Configuration.md)
 + [Creating an Oracle replica in mounted mode](oracle-read-replicas.creating-in-mounted-mode.md)
 + [Modifying the Oracle replica mode](oracle-read-replicas.changing-replica-mode.md)

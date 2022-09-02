@@ -31,17 +31,17 @@ The following quick reference table lists each feature and supported RDS DB engi
 
 | Feature | RDS for MariaDB | RDS for MySQL | RDS for Oracle | RDS for PostgreSQL | RDS for SQL Server | 
 | --- | --- | --- | --- | --- | --- | 
-| Cross\-Region automated backups | \- | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.ora) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.pg) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.sq) | 
-| Cross\-Region read replicas | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | \- | 
-| Database activity streams | \- | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams) | \- | \- | 
-| Dual\-stack mode | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.my) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.ora) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.pg) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.sq) | 
-| Export Snapshot to Amazon S3 | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.pg) | \- | 
-| AWS Identity and Access Management \(IAM\) database authentication | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.pg) | \- | 
-| Kerberos authentication | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.my) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.ora) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.pg) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.sq) | 
-| Multi\-AZ DB clusters | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.pg) | \- | 
+| Cross\-Region automated backups | – | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.ora) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.pg) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.sq) | 
+| Cross\-Region read replicas | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas) | – | 
+| Database activity streams | – | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams) | – | – | 
+| Dual\-stack mode | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode) | 
+| Export Snapshot to Amazon S3 | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.pg) | – | 
+| AWS Identity and Access Management \(IAM\) database authentication | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.pg) | – | 
+| Kerberos authentication | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.my) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.ora) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.pg) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.sq) | 
+| Multi\-AZ DB clusters | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.pg) | – | 
 | Performance Insights | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | 
-| RDS Custom | \- | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq) | 
-| RDS Proxy | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | \- | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | \- | 
+| RDS Custom | – | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq) | 
+| RDS Proxy | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | – | 
 
 ## Cross\-Region automated backups<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups"></a>
 
@@ -97,7 +97,7 @@ Cross\-Region read replicas for RDS for Oracle have the following version and Re
 + For RDS for Oracle 12c, cross\-Region read replicas are available for Oracle Enterprise Edition \(EE\) of Oracle Database 12c Release 1 \(12\.1\) using 12\.1\.0\.2\.v10 and higher 12c releases\.
 + You can replicate between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions, but not into or out of AWS GovCloud \(US\)\.
 
-For more information on additional requirements for cross\-Region read replicas with RDS for Oracle, see [Replica requirements for Oracle](oracle-read-replicas.limitations.md)\. 
+For more information on additional requirements for cross\-Region read replicas with RDS for Oracle, see [Considerations for RDS for Oracle replicas](oracle-read-replicas.limitations.md)\. 
 
 ## Database activity streams<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams"></a>
 
@@ -119,6 +119,7 @@ For more information on additional requirements for database activity streams wi
 Database activity streams for RDS for Oracle are supported in all AWS Regions except the following:
 + China \(Beijing\) Region
 + China \(Ningxia\) Region
++ Middle East \(UAE\) Region
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
@@ -126,32 +127,13 @@ Database activity streams for RDS for Oracle are supported in all AWS Regions ex
 
 By using dual\-stack mode in Amazon RDS, resources can communicate with the DB instance over Internet Protocol version 4 \(IPv4\), Internet Protocol version 6 \(IPv6\), or both\. For more information, see [Dual\-stack mode](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing.dual-stack-mode)\.
 
-**Topics**
-+ [Dual\-stack mode with RDS for MariaDB](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.mdb)
-+ [Dual\-stack mode with RDS for MySQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.my)
-+ [Dual\-stack mode with RDS for PostgreSQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.pg)
-+ [Dual\-stack mode with RDS for Oracle](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.ora)
-+ [Dual\-stack mode with RDS for SQL Server](#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.sq)
+Dual\-stack mode is available for all versions in all Regions, except in the Middle East \(UAE\) Region, for the following engines:
++ RDS for MariaDB
++ RDS for MySQL
++ RDS for Oracle
++ RDS for PostgreSQL
 
-### Dual\-stack mode with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.mdb"></a>
-
-Dual\-stack mode for RDS for MariaDB is available for all versions in all Regions\.
-
-### Dual\-stack mode with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.my"></a>
-
-Dual\-stack mode for RDS for MySQL is available for all versions in all Regions\.
-
-### Dual\-stack mode with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.pg"></a>
-
-Dual\-stack mode for RDS for PostgreSQL is available for all versions in all Regions\.
-
-### Dual\-stack mode with RDS for Oracle<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.ora"></a>
-
-Dual\-stack mode for RDS for Oracle is available for all versions in all Regions\.
-
-### Dual\-stack mode with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.sq"></a>
-
-Dual\-stack mode for RDS for SQL Server is available in all Regions with the following version limitations:
+Dual\-stack mode for RDS for SQL Server is available in all Regions, except in the Middle East \(UAE\) Region, with the following version limitations:
 + For RDS for SQL Server 2019, dual\-stack mode is available for all versions\.
 + For RDS for SQL Server 2017, dual\-stack mode is available for all versions\.
 + For RDS for SQL Server 2016, dual\-stack mode is available for all versions\.
@@ -167,6 +149,7 @@ Exporting snapshots to S3 isn't available with the following engines:
 
 Exporting snapshots to S3 is available in all Regions except the following:
 + Asia Pacific \(Jakarta\)
++ Middle East \(UAE\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
@@ -177,7 +160,7 @@ Exporting snapshots to S3 is available in all Regions except the following:
 
 ### Export snapshots to S3 with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.mdb"></a>
 
-Exporting snapshots to S3 with RDS for MariaDB is available for all versions\.
+Exporting snapshots to S3 with RDS for MariaDB is available for all versions\. 
 
 ### Export snapshots to S3 with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.my"></a>
 
@@ -202,7 +185,7 @@ IAM database authentication isn't available with the following engines:
 
 ### IAM database authentication with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.mdb"></a>
 
-IAM database authentication for RDS for MariaDB is available in all Regions for the following versions:
+IAM database authentication for RDS for MariaDB is available in all Regions, exept for the Middle East \(UAE\) Region, for the following versions:
 + For RDS for MariaDB 10\.6, IAM database authentication is available for all versions\.
 
 ### IAM database authentication with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.my"></a>
@@ -238,6 +221,7 @@ Kerberos authentication for RDS for MySQL is available in all Regions except the
 + Europe \(Milan\)
 + Europe \(Paris\)
 + Middle East \(Bahrain\)
++ Middle East \(UAE\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
@@ -255,6 +239,7 @@ Kerberos authentication for RDS for Oracle is available in all Regions except th
 + Europe \(Milan\)
 + Europe \(Paris\)
 + Middle East \(Bahrain\)
++ Middle East \(UAE\)
 
 ### Kerberos authentication with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.pg"></a>
 
@@ -267,10 +252,11 @@ Kerberos authentication for RDS for PostgreSQL is available in all Regions excep
 + Asia Pacific \(Osaka\)
 + Europe \(Milan\)
 + Middle East \(Bahrain\)
++ Middle East \(UAE\)
 
 ### Kerberos authentication with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.sq"></a>
 
-Amazon RDS supports Kerberos authentication for all versions of RDS for SQL Server in all AWS Regions\.
+Amazon RDS supports Kerberos authentication for all versions of RDS for SQL Server in all AWS Regions except in the Middle East \(UAE\) Region\.
 
 ## Multi\-AZ DB clusters<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters"></a>
 
@@ -294,30 +280,31 @@ Following are the supported engines and Region availability for Multi\-AZ DB clu
 | --- | --- | 
 | US East \(Ohio\) | Version 8\.0\.28 and higher | 
 | US East \(N\. Virginia\) | Version 8\.0\.28 and higher | 
-| US West \(N\. California\) | \- | 
+| US West \(N\. California\) | – | 
 | US West \(Oregon\) | Version 8\.0\.28 and higher | 
-| Africa \(Cape Town\) | \- | 
-| Asia Pacific \(Hong Kong\) | \- | 
-| Asia Pacific \(Jakarta\) | \- | 
-| Asia Pacific \(Mumbai\) | \- | 
-| Asia Pacific \(Osaka\) | \- | 
-| Asia Pacific \(Seoul\) | \- | 
+| Africa \(Cape Town\) | – | 
+| Asia Pacific \(Hong Kong\) | – | 
+| Asia Pacific \(Jakarta\) | – | 
+| Asia Pacific \(Mumbai\) | – | 
+| Asia Pacific \(Osaka\) | – | 
+| Asia Pacific \(Seoul\) | – | 
 | Asia Pacific \(Singapore\) | Version 8\.0\.28 and higher | 
 | Asia Pacific \(Sydney\) | Version 8\.0\.28 and higher | 
 | Asia Pacific \(Tokyo\) | Version 8\.0\.28 and higher | 
-| Canada \(Central\) | \- | 
-| China \(Beijing\) | \- | 
-| China \(Ningxia\) | \- | 
+| Canada \(Central\) | – | 
+| China \(Beijing\) | – | 
+| China \(Ningxia\) | – | 
 | Europe \(Frankfurt\) | Version 8\.0\.28 and higher | 
 | Europe \(Ireland\) | Version 8\.0\.28 and higher | 
-| Europe \(London\) | \- | 
-| Europe \(Milan\) | \- | 
-| Europe \(Paris\) | \- | 
+| Europe \(London\) | – | 
+| Europe \(Milan\) | – | 
+| Europe \(Paris\) | – | 
 | Europe \(Stockholm\) | Version 8\.0\.28 and higher | 
-| Middle East \(Bahrain\) | \- | 
-| South America \(São Paulo\) | \- | 
-| AWS GovCloud \(US\-East\) | \- | 
-| AWS GovCloud \(US\-West\) | \- | 
+| Middle East \(Bahrain\) | – | 
+| Middle East \(UAE\) | – | 
+| South America \(São Paulo\) | – | 
+| AWS GovCloud \(US\-East\) | – | 
+| AWS GovCloud \(US\-West\) | – | 
 
 ### Multi\-AZ DB clusters with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.pg"></a>
 
@@ -328,30 +315,31 @@ Following are the supported engine version and Region availability for Multi\-AZ
 | --- | --- | 
 | US East \(Ohio\) | Version 13\.4 | 
 | US East \(N\. Virginia\) | Version 13\.4 | 
-| US West \(N\. California\) | \- | 
+| US West \(N\. California\) | – | 
 | US West \(Oregon\) | Version 13\.4 | 
-| Africa \(Cape Town\) | \- | 
-| Asia Pacific \(Hong Kong\) | \- | 
-| Asia Pacific \(Jakarta\) | \- | 
-| Asia Pacific \(Mumbai\) | \- | 
-| Asia Pacific \(Osaka\) | \- | 
-| Asia Pacific \(Seoul\) | \- | 
+| Africa \(Cape Town\) | – | 
+| Asia Pacific \(Hong Kong\) | – | 
+| Asia Pacific \(Jakarta\) | – | 
+| Asia Pacific \(Mumbai\) | – | 
+| Asia Pacific \(Osaka\) | – | 
+| Asia Pacific \(Seoul\) | – | 
 | Asia Pacific \(Singapore\) | Version 13\.4 | 
 | Asia Pacific \(Sydney\) | Version 13\.4 | 
 | Asia Pacific \(Tokyo\) | Version 13\.4 | 
-| Canada \(Central\) | \- | 
-| China \(Beijing\) | \- | 
-| China \(Ningxia\) | \- | 
+| Canada \(Central\) | – | 
+| China \(Beijing\) | – | 
+| China \(Ningxia\) | – | 
 | Europe \(Frankfurt\) | Version 13\.4 | 
 | Europe \(Ireland\) | Version 13\.4 | 
-| Europe \(London\) | \- | 
-| Europe \(Milan\) | \- | 
-| Europe \(Paris\) | \- | 
+| Europe \(London\) | – | 
+| Europe \(Milan\) | – | 
+| Europe \(Paris\) | – | 
 | Europe \(Stockholm\) | Version 13\.4 | 
-| Middle East \(Bahrain\) | \- | 
-| South America \(São Paulo\) | \- | 
-| AWS GovCloud \(US\-East\) | \- | 
-| AWS GovCloud \(US\-West\) | \- | 
+| Middle East \(Bahrain\) | – | 
+| Middle East \(UAE\) | – | 
+| South America \(São Paulo\) | – | 
+| AWS GovCloud \(US\-East\) | – | 
+| AWS GovCloud \(US\-West\) | – | 
 
 ## Performance Insights<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights"></a>
 
@@ -385,30 +373,31 @@ Following are the supported engine versions and Region availability for RDS Cust
 | --- | --- | --- | --- | 
 | US East \(Ohio\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | US East \(N\. Virginia\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| US West \(N\. California\) | \- | \- | \- | 
+| US West \(N\. California\) | – | – | – | 
 | US West \(Oregon\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| Africa \(Cape Town\) | \- | \- | \- | 
-| Asia Pacific \(Hong Kong\) | \- | \- | \- | 
-| Asia Pacific \(Jakarta\) | \- | \- | \- | 
+| Africa \(Cape Town\) | – | – | – | 
+| Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| Asia Pacific \(Osaka\) | \- | \- | \- | 
-| Asia Pacific \(Seoul\) | \- | \- | \- | 
+| Asia Pacific \(Osaka\) | – | – | – | 
+| Asia Pacific \(Seoul\) | – | – | – | 
 | Asia Pacific \(Singapore\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Sydney\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Tokyo\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| Canada \(Central\) | \- | \- | \- | 
-| China \(Beijing\) | \- | \- | \- | 
-| China \(Ningxia\) | \- | \- | \- | 
+| Canada \(Central\) | – | – | – | 
+| China \(Beijing\) | – | – | – | 
+| China \(Ningxia\) | – | – | – | 
 | Europe \(Frankfurt\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Europe \(Ireland\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Europe \(London\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| Europe \(Milan\) | \- | \- | \- | 
-| Europe \(Paris\) | \- | \- | \- | 
+| Europe \(Milan\) | – | – | – | 
+| Europe \(Paris\) | – | – | – | 
 | Europe \(Stockholm\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| Middle East \(Bahrain\) | \- | \- | \- | 
-| South America \(São Paulo\) | \- | \- | \- | 
-| AWS GovCloud \(US\-East\) | \- | \- | \- | 
-| AWS GovCloud \(US\-West\) | \- | \- | \- | 
+| Middle East \(Bahrain\) | – | – | – | 
+| Middle East \(UAE\) | – | – | – | 
+| South America \(São Paulo\) | – | – | – | 
+| AWS GovCloud \(US\-East\) | – | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | – | 
 
 ### RDS Custom with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq"></a>
 
@@ -419,30 +408,31 @@ Following are the supported engine versions and Region availability for RDS Cust
 | --- | --- | 
 | US East \(Ohio\) | Enterprise, Standard, or Web | 
 | US East \(N\. Virginia\) | Enterprise, Standard, or Web | 
-| US West \(N\. California\) | \- | 
+| US West \(N\. California\) | – | 
 | US West \(Oregon\) | Enterprise, Standard, or Web | 
-| Africa \(Cape Town\) | \- | 
-| Asia Pacific \(Hong Kong\) | \- | 
-| Asia Pacific \(Jakarta\) | \- | 
+| Africa \(Cape Town\) | – | 
+| Asia Pacific \(Hong Kong\) | – | 
+| Asia Pacific \(Jakarta\) | – | 
 | Asia Pacific \(Mumbai\) | Enterprise, Standard, or Web | 
-| Asia Pacific \(Osaka\) | \- | 
-| Asia Pacific \(Seoul\) | \- | 
+| Asia Pacific \(Osaka\) | – | 
+| Asia Pacific \(Seoul\) | – | 
 | Asia Pacific \(Singapore\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Sydney\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Tokyo\) | Enterprise, Standard, or Web | 
-| Canada \(Central\) | \- | 
-| China \(Beijing\) | \- | 
-| China \(Ningxia\) | \- | 
+| Canada \(Central\) | – | 
+| China \(Beijing\) | – | 
+| China \(Ningxia\) | – | 
 | Europe \(Frankfurt\) | Enterprise, Standard, or Web | 
 | Europe \(Ireland\) | Enterprise, Standard, or Web | 
 | Europe \(London\) | Enterprise, Standard, or Web | 
-| Europe \(Milan\) | \- | 
-| Europe \(Paris\) | \- | 
+| Europe \(Milan\) | – | 
+| Europe \(Paris\) | – | 
 | Europe \(Stockholm\) | Enterprise, Standard, or Web | 
-| Middle East \(Bahrain\) | \- | 
-| South America \(São Paulo\) | \- | 
-| AWS GovCloud \(US\-East\) | \- | 
-| AWS GovCloud \(US\-West\) | \- | 
+| Middle East \(Bahrain\) | – | 
+| Middle East \(UAE\) | – | 
+| South America \(São Paulo\) | – | 
+| AWS GovCloud \(US\-East\) | – | 
+| AWS GovCloud \(US\-West\) | – | 
 
 ## Amazon RDS Proxy<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy"></a>
 
@@ -456,6 +446,7 @@ RDS Proxy is available in all Regions except the following:
 + Asia Pacific \(Jakarta\)
 + China \(Beijing\)
 + China \(Ningxia\)
++ Middle East \(UAE\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
@@ -474,7 +465,7 @@ Amazon RDS supports RDS Proxy for all versions of RDS for MySQL\.
 
 ### RDS Proxy with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg"></a>
 
-Amazon RDS supports RDS Proxy for all versions of RDS for PostgreSQL\.
+Amazon RDS supports RDS Proxy for all versions of RDS for PostgreSQL except version 14\.
 
 ## Engine\-native features<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.EngineNativeFeatures"></a>
 

@@ -27,9 +27,11 @@ If you deleted a DB instance, you can delete its automated DB snapshots by remov
 
 1. Choose the DB snapshot that you want to delete\.
 
-1. For **Actions**, choose **Delete Snapshot**\.
+1. For **Actions**, choose **Delete snapshot**\.  
+![\[Delete snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/delete-snapshot.png)
 
-1. Choose **Delete** on the confirmation page\.
+1. Choose **Delete** on the confirmation page\.  
+![\[Confirm snapshot deletion\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/delete-snapshot-confirm.png)
 
 ### AWS CLI<a name="USER_DeleteSnapshot.CLI"></a>
 

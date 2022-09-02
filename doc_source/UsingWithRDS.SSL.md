@@ -49,6 +49,7 @@ To get a certificate bundle that contains both the intermediate and root certifi
 | Europe \(Paris\) | [eu\-west\-3\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-west-3/eu-west-3-bundle.pem) | [eu\-west\-3\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-west-3/eu-west-3-bundle.p7b) | 
 | Europe \(Stockholm\) | [eu\-north\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-north-1/eu-north-1-bundle.pem) | [eu\-north\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-north-1/eu-north-1-bundle.p7b) | 
 | Middle East \(Bahrain\) | [me\-south\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/me-south-1/me-south-1-bundle.pem) | [me\-south\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/me-south-1/me-south-1-bundle.p7b) | 
+| Middle East \(UAE\) | [me\-central\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/me-central-1/me-central-1-bundle.pem) | [me\-central\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/me-central-1/me-central-1-bundle.p7b) | 
 | South America \(São Paulo\) | [sa\-east\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/sa-east-1/sa-east-1-bundle.pem) | [sa\-east\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/sa-east-1/sa-east-1-bundle.p7b) | 
 
 ## AWS GovCloud \(US\) certificates<a name="UsingWithRDS.SSL.GovCloudCertificates"></a>

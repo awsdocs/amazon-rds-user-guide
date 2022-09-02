@@ -40,7 +40,24 @@ Oracle Data Guard switchover is supported for the following releases:
 
 ### AWS Region support<a name="oracle-replication-switchover.overview.Region"></a>
 
-Oracle Data Guard switchover is available in all commercial AWS Regions that support role transition in the same Region or in different Regions\.
+Oracle Data Guard switchover is available in the following AWS Regions:
++ Asia Pacific \(Mumbai\)
++ Asia Pacific \(Osaka\)
++ Asia Pacific \(Seoul\)
++ Asia Pacific \(Singapore\)
++ Asia Pacific \(Sydney\)
++ Asia Pacific \(Tokyo\)
++ Canada \(Central\)
++ Europe \(Frankfurt\)
++ Europe \(Ireland\)
++ Europe \(London\)
++ Europe \(Paris\)
++ Europe \(Stockholm\)
++ South America \(São Paulo\)
++ US East \(N\. Virginia\)
++ US East \(Ohio\)
++ US West \(N\. California\)
++ US West \(Oregon\)
 
 ### Cost of Oracle Data Guard switchover<a name="oracle-replication-switchover.overview.cost"></a>
 

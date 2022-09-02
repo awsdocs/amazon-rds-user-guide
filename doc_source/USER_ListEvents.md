@@ -13,7 +13,7 @@ If you need to store events for longer periods of time, you can send Amazon RDS 
 
 For descriptions of the Amazon RDS events, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\.
 
-To access detailed information about events using AWS CloudTrail, including request parameters, see [ CloudTrail events  CloudTrail captures API calls for Amazon RDS as events\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. Events include calls from the Amazon RDS console and from code calls to the Amazon RDS API operations\.  Amazon RDS activity is recorded in a CloudTrail event in **Event history**\. You can use the CloudTrail console to view the last 90 days of recorded API activity and events in an AWS Region\. For more information, see [Viewing events with CloudTrail event history](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\.  ](logging-using-cloudtrail.md#service-name-info-in-cloudtrail.events.title)\.
+To access detailed information about events using AWS CloudTrail, including request parameters, see [CloudTrail events](logging-using-cloudtrail.md#service-name-info-in-cloudtrail.events)\.
 
 ## Console<a name="USER_ListEvents.CON"></a>
 

@@ -1,20 +1,34 @@
 # Upgrading a DB instance for Amazon RDS Custom for Oracle<a name="custom-upgrading"></a>
 
-You can upgrade an Amazon RDS Custom DB instance by modifying it to use a new custom engine version \(CEV\)\. To do this, make sure that the new CEV already exists\.
-
-Only minor version upgrades are supported\. For example, you can't upgrade from a version 12\.1 CEV to a version 19c CEV\.
-
-Read replicas are upgraded after the primary DB instance is upgraded\. You don't have to upgrade read replicas manually\.
-
-When you upgrade a CEV, data in the `bin` volume of your DB instance is deleted\.
-
-For general information about upgrading DB instances, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+You can upgrade an Amazon RDS Custom DB instance by modifying it to use a new custom engine version \(CEV\)\. For general information about upgrades, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
 
 **Topics**
++ [Requirements and considerations for RDS Custom for Oracle upgrades](#custom-upgrading-considerations)
 + [Viewing valid upgrade targets for RDS Custom for Oracle DB instances](#custom-upgrading-target)
 + [Upgrading an RDS Custom DB instance](#custom-upgrading-modify)
 + [Viewing pending upgrades for RDS Custom DB instances](#custom-upgrading-pending)
-+ [Troubleshooting an upgrade failure for an RDS Custom DB instance](#custom-upgrading-failure)
++ [Troubleshooting an upgrade failure for an RDS Custom for Oracle DB instance](#custom-upgrading-failure)
+
+## Requirements and considerations for RDS Custom for Oracle upgrades<a name="custom-upgrading-considerations"></a>
+
+Before upgrading your DB instance, note the following requirements:
++ You can upgrade your DB instance to a new CEV only if it already exists\.
++ You can upgrade your DB instance to a new minor version only\. For example, you can't upgrade a DB instance using an Oracle Database 12c CEV to an Oracle Database 19c CEV\.
+
+Consider the following:
++ We strongly recommend that you upgrade your RDS Custom for Oracle DB instance using CEVs\. RDS Custom for Oracle automation synchronizes the patch metadata with the database binary on your DB instance\.
+
+  In special circumstances, RDS Custom supports applying a "one\-off" patch directly to the underlying Amazon EC2 instance directly using OPATCH\. A valid use case might be a patch that you want to apply immediately, but the RDS Custom team is upgrading the CEV feature, causing a delay\. To apply a patch manually, perform the following steps:
+
+  1. Pause RDS Custom automation\.
+
+  1. Apply your patch to the database binaries on the Amazon EC2 instance\.
+
+  1. Resume RDS Custom automation\.
+
+  A disadvantage of the preceding technique is that you must apply the patch manually to every instance that you want to upgrade\. In contrast, when you create a new CEV, you can create or upgrade multiple DB instances using the same CEV\.
++ When you upgrade your primary DB instance, RDS Custom for Oracle upgrades your read replicas automatically\. You don't have to upgrade read replicas manually\.
++ When you upgrade a CEV, RDS Custom deletes the data in the `bin` volume of your DB instance\.
 
 ## Viewing valid upgrade targets for RDS Custom for Oracle DB instances<a name="custom-upgrading-target"></a>
 
@@ -159,7 +173,7 @@ The output resembles the following\.
 }
 ```
 
-## Troubleshooting an upgrade failure for an RDS Custom DB instance<a name="custom-upgrading-failure"></a>
+## Troubleshooting an upgrade failure for an RDS Custom for Oracle DB instance<a name="custom-upgrading-failure"></a>
 
 If an RDS Custom DB instance upgrade fails, an RDS event is generated and the DB instance status becomes `upgrade-failed`\.
 

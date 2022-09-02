@@ -21,7 +21,7 @@ RDS for Oracle supports uploading files from a DB instance in one account to an 
 + [Step 1: Create an IAM policy for your Amazon RDS role](#oracle-s3-integration.preparing.policy)
 + [Step 2: \(Optional\) Create an IAM policy for your Amazon S3 bucket](#oracle-s3-integration.preparing.policy-bucket)
 + [Step 3: Create an IAM role for your DB instance and attach your policy](#oracle-s3-integration.preparing.role)
-+ [Step 4: Associate your IAM role with your DB instance](#oracle-s3-integration.preparing.instance)
++ [Step 4: Associate your IAM role with your RDS for Oracle DB instance](#oracle-s3-integration.preparing.instance)
 
 ### Step 1: Create an IAM policy for your Amazon RDS role<a name="oracle-s3-integration.preparing.policy"></a>
 
@@ -389,9 +389,12 @@ This step assumes that you have created the IAM policy in [Step 1: Create an IAM
 
    Replace `your-policy-arn` with the policy ARN that you noted in a previous step\.
 
-### Step 4: Associate your IAM role with your DB instance<a name="oracle-s3-integration.preparing.instance"></a>
+### Step 4: Associate your IAM role with your RDS for Oracle DB instance<a name="oracle-s3-integration.preparing.instance"></a>
 
-This step assumes that you have access to a role with the Amazon S3 permissions policy attached to it\. You can now associate the role with your DB instance\. The status of your instance must be `available`\.
+The last step in configuring permissions for Amazon S3 integration is associating your IAM role with your DB instance\. Note the following requirements:
++ You must have access to an IAM role with the required Amazon S3 permissions policy attached to it\. 
++ You can only associate one IAM role with your RDS for Oracle at a time\.
++ The status of your instance must be `available`\.
 
 #### Console<a name="oracle-s3-integration.preparing.instance.console"></a>
 
@@ -601,7 +604,13 @@ Tasks are executed asynchronously\.
 
 ### Downloading files from an Amazon S3 bucket to an Oracle DB instance<a name="oracle-s3-integration.using.download"></a>
 
-To download up to 2000 files from an Amazon S3 bucket to an RDS for Oracle instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3`\. If you need to download more than 2000 files from Amazon S3, split your download into separate actions with no more than 2000 files per procedure call\. The `download_from_s3` procedure has the following parameters\.
+To download files from an Amazon S3 bucket to an RDS for Oracle instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3`\. 
+
+When you download files using the procedure `download_from_s3`, consider the following:
++ The download limit is 2000 files per procedure call\. If you need to download more than 2000 files from Amazon S3, split your download into separate actions, with no more than 2000 files per procedure call\. 
++ If a file exists in your download folder, and you attempt to download a file with the same name, `download_from_s3` skips the download\. To remove a file from the download directory, use [UTL\_FILE\.FREMOVE](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_FILE.html#GUID-09B09C2A-2C21-4F70-BF04-D0EEA7B59CAF), found on the Oracle website\.
+
+The `download_from_s3` procedure has the following parameters\.
 
 
 ****  
