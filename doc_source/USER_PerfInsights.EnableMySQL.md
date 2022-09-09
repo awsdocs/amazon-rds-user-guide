@@ -35,9 +35,12 @@ Performance Insights and the Performance Schema are separate features, but they 
 
 When you create an Amazon RDS for MariaDB or MySQL DB instance with Performance Insights turned on, the Performance Schema is also turned on\. In this case, Performance Insights automatically manages your Performance Schema parameters\. This is the recommended configuration\.
 
+**Note**  
+Automatic management of the Performance Schema isn't supported for the t4g\.medium instance class\.
+
 For automatic management of the Performance Schema, the following conditions must be true:
 + The `performance_schema` parameter is set to `0`\.
-+ The **Source** is set to a value other than `0`\. By default, the value of **Source** is `system`\.
++ The **Source** is set to `system`, which is the default\.
 
 If you change the `performance_schema` parameter value manually, and then later want to change to automatic management, see [Configuring the Performance Schema for automatic management](#USER_PerfInsights.EnableMySQL.RDS)\.
 

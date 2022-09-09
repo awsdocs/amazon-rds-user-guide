@@ -1,4 +1,4 @@
-# Modifying the Oracle replica mode<a name="oracle-read-replicas.changing-replica-mode"></a>
+# Modifying the RDS for Oracle replica mode<a name="oracle-read-replicas.changing-replica-mode"></a>
 
 To change the replica mode of an existing replica, use the console, AWS CLI, or RDS API\. When you change to mounted mode, the replica disconnects all active connections\. When you change to read\-only mode, Amazon RDS initializes Active Data Guard\.
 

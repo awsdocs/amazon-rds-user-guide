@@ -70,16 +70,11 @@ For a more detailed description of how baseline performance and I/O credit balan
 
 For a production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS \(input/output operations per second\) storage\. Provisioned IOPS storage is a storage type that delivers predictable performance, and consistently low latency\. Provisioned IOPS storage is optimized for online transaction processing \(OLTP\) workloads that have consistent performance requirements\. Provisioned IOPS helps performance tuning of these workloads\. 
 
-**Note**  
-Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors that affect storage performance](#CHAP_Storage.Other.Factors)\.
+In some cases, your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors that affect storage performance](#CHAP_Storage.Other.Factors)\.
 
 When you create a DB instance, you specify the IOPS rate and the size of the volume\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
-+ The ratio of IOPS to allocated storage \(in GiB\) must be from 1–50 on RDS for SQL Server, and 0\.5–50 on other RDS DB engines\.
-+ If you're using storage autoscaling, the same ratios between IOPS and maximum storage threshold \(in GiB\) also apply\.
 
-  For more information on storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
-
-The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
+For I/O\-intensive workloads, you can use Provisioned IOPS SSD io1 storage and achieve up to 256,000 I/O operations per second \(IOPS\)\. The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 
 <a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
 
@@ -87,8 +82,11 @@ The following table shows the range of Provisioned IOPS and storage size range f
 For SQL Server, the maximum 64,000 IOPS is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5\*, m6i, r5\*, r6i, and z1d instance types\. Other instance types guarantee performance up to 32,000 IOPS\.  
 For Oracle, you can provision the maximum 256,000 IOPS only on the r5b instance type\.
 
-**Important**  
-Depending on the instance class you're using, you might see lower IOPS performance than the maximum that RDS allows you to provision\. For specific information on IOPS performance for DB instance classes, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\. We recommend that you determine the maximum IOPS for the instance class before setting a Provisioned IOPS value for your DB instance\.
+The IOPS and storage size ranges have the following constraints:
++ The ratio of IOPS to allocated storage \(in GiB\) must be from 1–50 on RDS for SQL Server, and 0\.5–50 on other RDS DB engines\.
++ If you're using storage autoscaling, the same ratios between IOPS and maximum storage threshold \(in GiB\) also apply\.
+
+  For more information on storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
 
 ### Combining Provisioned IOPS storage with Multi\-AZ deployments or read replicas<a name="Overview.ProvisionedIOPS-support"></a>
 

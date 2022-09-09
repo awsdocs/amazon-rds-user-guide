@@ -234,7 +234,7 @@ For more information about storage, see [Amazon RDS DB instance storage](CHAP_St
 
 ## Modifying SSD storage settings for Provisioned IOPS<a name="User_PIOPS.Increase"></a>
 
-You can modify the settings for a DB instance that uses Provisioned IOPS SSD storage by using the Amazon RDS console, AWS CLI, or Amazon RDS API\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose from a range between 1,000 IOPS and 100 GiB of storage up to 80,000 IOPS and 64 TiB \(64,000 GiB\) of storage\. The range depends on your database engine and instance type\. 
+You can modify the settings for a DB instance that uses Provisioned IOPS SSD storage by using the Amazon RDS console, AWS CLI, or Amazon RDS API\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. The range depends on your database engine and instance type\.
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the storage size\.
 
@@ -257,7 +257,7 @@ To filter the list of DB instances, for **Filter databases** enter a text string
 
 1. Choose **Modify**\.
 
-1. On the **Modify DB Instance page**, choose Provisioned IOPS for **Storage type** and then provide a Provisioned IOPS value\.   
+1. On the **Modify DB instance** page, choose Provisioned IOPS for **Storage type** and then provide a Provisioned IOPS value\.   
 ![\[Console Tags tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops2-new.png)
 
    If the value you specify for either** Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed\. This message gives the range of values required for the other parameter\. 

@@ -118,6 +118,7 @@ Amazon RDS for Oracle doesn't support the following Oracle Database features:
 + Database Vault
 + Flashback Database
 + FTP and SFTP
++ Hybrid partitioned tables
 + Messaging Gateway
 + Oracle Enterprise Manager Cloud Control Management Repository
 + Real Application Clusters \(Oracle RAC\)

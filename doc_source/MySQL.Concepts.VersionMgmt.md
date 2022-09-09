@@ -1,6 +1,6 @@
 # MySQL on Amazon RDS versions<a name="MySQL.Concepts.VersionMgmt"></a>
 
-For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.7 to 8\.0\. A version change is considered minor if only the minor version number changes—for example, going from version 8\.0\.27 to 8\.0\.28\. 
+For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.7 to 8\.0\. A version change is considered minor if only the minor version number changes—for example, going from version 8\.0\.27 to 8\.0\.30\. 
 
 **Topics**
 + [Supported MySQL versions on Amazon RDS](#MySQL.Concepts.VersionMgmt.Supported)
@@ -61,7 +61,7 @@ Dates with only a month and a year are approximate and are updated with an exact
 
 | MySQL major version | Community release date | RDS release date | Community end of life date | RDS end of standard support date | 
 | --- | --- | --- | --- | --- | 
-|  MySQL 8\.0 Current minor version: 8\.0\.28  | 19 April 2018 | 23 October 2018 | April 2026 | April 2026 | 
+|  MySQL 8\.0 Current minor version: 8\.0\.30  | 19 April 2018 | 23 October 2018 | April 2026 | April 2026 | 
 |  MySQL 5\.7 Current minor version: 5\.7\.38  | 21 October 2015 | 22 February 2016 | October 2023 | October 2023 | 
 |  MySQL 5\.6 Current minor version: N/A  | 5 February 2013 | 1 July 2013 | 5 February 2021 | 1 March 2022 | 
 
