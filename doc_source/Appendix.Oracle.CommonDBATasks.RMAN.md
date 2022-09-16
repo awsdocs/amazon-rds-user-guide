@@ -175,7 +175,7 @@ This procedure also uses the following additional parameters\.
 
 ## Enabling and disabling block change tracking<a name="Appendix.Oracle.CommonDBATasks.BlockChangeTracking"></a>
 
-Block changing tracking records changed blocks in a tracking file\. This technique can improve the performance of incremental backups\. For more information, see [Using Block Change Tracking to Improve Incremental Backup Performance](https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/backing-up-database.html#GUID-4E1F605A-76A7-48D0-9D9B-7343B4327E2A) in the Oracle Database documentation\.
+Block changing tracking records changed blocks in a tracking file\. This technique can improve the performance of RMAN incremental backups\. For more information, see [Using Block Change Tracking to Improve Incremental Backup Performance](https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/backing-up-database.html#GUID-4E1F605A-76A7-48D0-9D9B-7343B4327E2A) in the Oracle Database documentation\.
 
 To enable block change tracking for a DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.enable_block_change_tracking`\. To disable block change tracking, use `disable_block_change_tracking`\. These procedures take no parameters\.
 

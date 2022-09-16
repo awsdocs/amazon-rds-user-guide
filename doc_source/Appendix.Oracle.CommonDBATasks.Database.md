@@ -7,6 +7,9 @@ Following, you can find how to perform certain common DBA tasks related to datab
 + [Creating and sizing tablespaces](#Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles)
 + [Setting the default tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace)
 + [Setting the default temporary tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace)
++ [Creating a temporary tablespace on the instance store](#Appendix.Oracle.CommonDBATasks.creating-tts-instance-store)
++ [Adding a tempfile to the instance store on a read replica](#Appendix.Oracle.CommonDBATasks.adding-tempfile-replica)
++ [Dropping tempfiles on a read replica](#Appendix.Oracle.CommonDBATasks.dropping-tempfiles-replica)
 + [Checkpointing a database](#Appendix.Oracle.CommonDBATasks.CheckpointingDatabase)
 + [Setting distributed recovery](#Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery)
 + [Setting the database time zone](#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)
@@ -108,6 +111,76 @@ The following example sets the default temporary tablespace to *temp01*\.
 ```
 EXEC rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
 ```
+
+## Creating a temporary tablespace on the instance store<a name="Appendix.Oracle.CommonDBATasks.creating-tts-instance-store"></a>
+
+To create a temporary tablespace on the instance store, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.create_inst_store_tmp_tblspace`\. The `create_inst_store_tmp_tblspace` procedure has the following parameters\. 
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `p_tablespace_name`  |  varchar  |  —  |  Yes  |  The name of the temporary tablespace\.  | 
+
+The following example creates the temporary tablespace *temp01* in the instance store\. 
+
+```
+EXEC rdsadmin.rdsadmin_util.create_inst_store_tmp_tblspace(p_tablespace_name => 'temp01');
+```
+
+**Important**  
+When you run `rdsadmin_util.create_inst_store_tmp_tblspace`, the newly created temporary tablespace is not automatically set as the default temporary tablespace\. To set it as the default, see [Setting the default temporary tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace)\.
+
+For more information, see [Storing temporary data in an RDS for Oracle instance store](CHAP_Oracle.advanced-features.instance-store.md)\.
+
+## Adding a tempfile to the instance store on a read replica<a name="Appendix.Oracle.CommonDBATasks.adding-tempfile-replica"></a>
+
+When you create a temporary tablespace on a primary DB instance, the read replica doesn't create tempfiles\. Assume that an empty temporary tablespace exists on your read replica for either of the following reasons:
++ You dropped a tempfile from the tablespace on your read replica\. For more information, see [Dropping tempfiles on a read replica](#Appendix.Oracle.CommonDBATasks.dropping-tempfiles-replica)\.
++ You created a new temporary tablespace on the primary DB instance\. In this case, RDS for Oracle synchronizes the metadata to the read replica\.
+
+You can add a tempfile to the empty temporary tablespace, and store the tempfile in the instance store\. To create a tempfile in the instance store, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.add_inst_store_tempfile`\. You can use this procedure only on a read replica\. The procedure has the following parameters\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `p_tablespace_name`  |  varchar  |  —  |  Yes  |  The name of the temporary tablespace on your read replica\.  | 
+
+In the following example, the empty temporary tablespace *temp01* exists on your read replica\. Run the following command to create a tempfile for this tablespace, and store it in the instance store\.
+
+```
+EXEC rdsadmin.rdsadmin_util.add_inst_store_tempfile(p_tablespace_name => 'temp01');
+```
+
+For more information, see [Storing temporary data in an RDS for Oracle instance store](CHAP_Oracle.advanced-features.instance-store.md)\.
+
+## Dropping tempfiles on a read replica<a name="Appendix.Oracle.CommonDBATasks.dropping-tempfiles-replica"></a>
+
+You can't drop an existing temporary tablespace on a read replica\. You can change the tempfile storage on a read replica from Amazon EBS to the instance store, or from the instance store to Amazon EBS\. To achieve these goals, do the following:
+
+1. Drop the current tempfiles in the temporary tablespace on the read replica\.
+
+1. Create new tempfiles on different storage\.
+
+To drop the tempfiles, use the Amazon RDS procedure `rdsadmin.rdsadmin_util. drop_replica_tempfiles`\. You can use this procedure only on read replicas\. The `drop_replica_tempfiles` procedure has the following parameters\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `p_tablespace_name`  |  varchar  |  —  |  Yes  |  The name of the temporary tablespace on your read replica\.  | 
+
+Assume that a temporary tablespace named *temp01* resides in the instance store on your read replica\. Drop all tempfiles in this tablespace by running the following command\.
+
+```
+EXEC rdsadmin.rdsadmin_util.drop_replica_tempfiles(p_tablespace_name => 'temp01');
+```
+
+For more information, see [Storing temporary data in an RDS for Oracle instance store](CHAP_Oracle.advanced-features.instance-store.md)\.
 
 ## Checkpointing a database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
 

@@ -1,6 +1,6 @@
 # Overview of the Top SQL tab<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL"></a>
 
-By default, the **Top SQL** tab shows the SQL queries that are contributing the most to DB load\. To help tune your queries, you can analyze information such as the query text, statistics, and Support SQL ID\. You can also choose the statistics that you want to appear in the **Top SQL** tab\.
+By default, the **Top SQL** tab shows the 25 queries that are contributing the most to DB load\. To help tune your queries, you can analyze information such as the query text and SQL statistics\. You can also choose the statistics that you want to appear in the **Top SQL** tab\.
 
 **Topics**
 + [SQL text](#USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.text)
@@ -11,7 +11,7 @@ By default, the **Top SQL** tab shows the SQL queries that are contributing the 
 
 ## SQL text<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.text"></a>
 
-By default, each row in the **Top SQL** table shows 500 bytes of SQL text for each SQL statement\. 
+By default, each row in the **Top SQL** table shows 500 bytes of text for each statement\. 
 
 ![\[SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/sql-text-oracle.png)
 
@@ -32,9 +32,9 @@ To see the literal SQL statements in a digest, select the query, and then choose
 **Note**  
 A SQL digest groups similar SQL statements, but doesn't redact sensitive information\.
 
-Performance Insights can show Oracle SQL text as **Unknown**\. This occurs in the following situations:
-+ An Oracle database user other than `SYS` is active but not currently issuing SQL\. For example, when a parallel query completes, the query coordinator waits for helper processes to send their session statistics\. For the duration of the wait, the query text shows **Unknown**\.
-+ For an RDS for Oracle instance on Standard Edition, Resource Manager limits the number of parallel threads\. The background process doing this work causes the query text to show as **Unknown**\.
+Performance Insights can show Oracle SQL text as **Unknown**\. The text has this status in the following situations:
++ An Oracle database user other than `SYS` is active but not currently executing SQL\. For example, when a parallel query completes, the query coordinator waits for helper processes to send their session statistics\. For the duration of the wait, the query text shows **Unknown**\.
++ For an RDS for Oracle instance on Standard Edition 2, Oracle Resource Manager limits the number of parallel threads\. The background process doing this work causes the query text to show as **Unknown**\.
 
 ## SQL statistics<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.statistics"></a>
 

@@ -79,6 +79,8 @@ Amazon RDS supports backup replication for all versions of RDS for PostgreSQL\.
 
 Amazon RDS supports backup replication for all versions of RDS for SQL Server\.
 
+Backup replication isn't supported for encrypted SQL Server DB instances\. Make sure to clear the **Enable encryption** check box when you create a SQL Server DB instance for which you want to use backup replication\.
+
 ## Cross\-Region read replicas<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas"></a>
 
 By using cross\-Region read replicas in Amazon RDS, you can create a MariaDB, MySQL, Oracle, or PostgreSQL read replica in a different Region from the source DB instance\. For more information, see [Creating a read replica in a different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)\.
@@ -243,9 +245,9 @@ Kerberos authentication for RDS for Oracle is available in all Regions except th
 
 ### Kerberos authentication with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.pg"></a>
 
-Amazon RDS supports Kerberos authentication for all versions of RDS for PostgreSQL\.
+Amazon RDS supports Kerberos authentication for all currently available versions of RDS for PostgreSQL\. For details, see [Amazon RDS for PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-versions.html) in the *Release Notes for Aurora PostgreSQL*\.
 
-Kerberos authentication for RDS for PostgreSQL is available in all Regions except the following:
+Kerberos authentication for RDS for PostgreSQL is available in all AWS Regions except the following:
 + Africa \(Cape Town\)
 + Asia Pacific \(Hong Kong\)
 + Asia Pacific \(Jakarta\)

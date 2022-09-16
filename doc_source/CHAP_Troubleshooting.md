@@ -67,7 +67,7 @@ Client connections from IP addresses within the range 169\.254\.0\.0/16 aren't p
 
 For engine\-specific connection issues, see the following topics:
 +  [Troubleshooting connections to your SQL Server DB instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)
-+ [Troubleshooting connections to your Oracle DB instance](USER_ConnectToOracleInstance.md#USER_ConnectToOracleInstance.Troubleshooting)
++ [Troubleshooting connections to your Oracle DB instance](USER_ConnectToOracleInstance.Troubleshooting.md)
 + [Troubleshooting connections to your RDS for PostgreSQL instance](USER_ConnectToPostgreSQLInstance.md#USER_ConnectToPostgreSQLInstance.Troubleshooting)
 + [Maximum MySQL and MariaDB connections](#USER_ConnectToInstance.max_connections)
 

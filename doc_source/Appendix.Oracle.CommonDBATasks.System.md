@@ -9,6 +9,7 @@ Following, you can find how to perform certain common DBA tasks related to the s
 + [Enabling and disabling restricted sessions](#Appendix.Oracle.CommonDBATasks.RestrictedSession)
 + [Flushing the shared pool](#Appendix.Oracle.CommonDBATasks.FlushingSharedPool)
 + [Flushing the buffer cache](#Appendix.Oracle.CommonDBATasks.FlushingBufferCache)
++ [Flushing the database smart flash cache](#Appendix.Oracle.CommonDBATasks.flushing-shared-pool)
 + [Granting SELECT or EXECUTE privileges to SYS objects](#Appendix.Oracle.CommonDBATasks.TransferPrivileges)
 + [Revoking SELECT or EXECUTE privileges on SYS objects](#Appendix.Oracle.CommonDBATasks.RevokePrivileges)
 + [Granting privileges to non\-master users](#Appendix.Oracle.CommonDBATasks.PermissionsNonMasters)
@@ -196,6 +197,16 @@ The following example flushes the buffer cache\.
 ```
 EXEC rdsadmin.rdsadmin_util.flush_buffer_cache;
 ```
+
+## Flushing the database smart flash cache<a name="Appendix.Oracle.CommonDBATasks.flushing-shared-pool"></a>
+
+To flush the database smart flash cache, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.flush_flash_cache`\. The `flush_flash_cache` procedure has no parameters\. The following example flushes the database smart flash cache\.
+
+```
+EXEC rdsadmin.rdsadmin_util.flush_flash_cache;
+```
+
+For more information about using the database smart flash cache with RDS for Oracle, see [Storing temporary data in an RDS for Oracle instance store](CHAP_Oracle.advanced-features.instance-store.md)\.
 
 ## Granting SELECT or EXECUTE privileges to SYS objects<a name="Appendix.Oracle.CommonDBATasks.TransferPrivileges"></a>
 

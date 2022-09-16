@@ -29,6 +29,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 + [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)
 + [Securing Oracle DB instance connections](Oracle.Concepts.RestrictedDBAPrivileges.md)
 + [Administering your Oracle DB instance](Appendix.Oracle.CommonDBATasks.md)
++ [Configuring advanced RDS for Oracle features](CHAP_Oracle.advanced-features.md)
 + [Importing data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)
 + [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)
 + [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)

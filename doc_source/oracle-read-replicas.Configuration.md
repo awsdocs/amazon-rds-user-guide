@@ -37,7 +37,7 @@ Modify the logging configuration for a DB instance by using the Amazon RDS proce
 
 ## Setting the MAX\_STRING\_SIZE parameter<a name="oracle-read-replicas.configuration.string-size"></a>
 
-Before you create an Oracle replica, ensure that the setting of the `MAX_STRING_SIZE` parameter is the same on the source DB instance and the replica\. You can do this by associating them with the same parameter group\. If you have different parameter groups for the source and the replica, you can set `MAX_STRING_SIZE` to the same value\. For more information about setting this parameter, see [Enabling extended data types for a new DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.ExtendedDataTypes.CreateDBInstance)\.
+Before you create an Oracle replica, ensure that the setting of the `MAX_STRING_SIZE` parameter is the same on the source DB instance and the replica\. You can do this by associating them with the same parameter group\. If you have different parameter groups for the source and the replica, you can set `MAX_STRING_SIZE` to the same value\. For more information about setting this parameter, see [Turning on extended data types for a new DB instance](Oracle.Concepts.ExtendedDataTypes.md#Oracle.Concepts.ExtendedDataTypes.CreateDBInstance)\.
 
 ## Planning compute and storage resources<a name="oracle-read-replicas.configuration.planning-resources"></a>
 

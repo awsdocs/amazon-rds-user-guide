@@ -17,8 +17,8 @@ You use AWS Directory Service for Microsoft Active Directory \(AWS Managed Micro
 AWS Directory Service creates a fully managed Active Directory in the AWS Cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers for you\. The directory servers are created in different subnets in a VPC\. This redundancy helps make sure that your directory remains accessible even if a failure occurs\. 
 
  When you create an AWS Managed Microsoft AD directory, AWS Directory Service performs the following tasks on your behalf: 
-+  Sets up an Active Directory within your VPC\. 
-+  Creates a directory administrator account with the user name `Admin` and the specified password\. You use this account to manage your directory\. 
++ Sets up an Active Directory within your VPC\. 
++ Creates a directory administrator account with the user name `Admin` and the specified password\. You use this account to manage your directory\. 
 **Important**  
 Make sure to save this password\. AWS Directory Service doesn't store this password, and it can't be retrieved or reset\.
 + Creates a security group for the directory controllers\. The security group must permit communication with the PostgreSQL DB instance\.
@@ -26,17 +26,17 @@ Make sure to save this password\. AWS Directory Service doesn't store this passw
 When you launch AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all of your directory's objects\. This OU, which has the NetBIOS name that you entered when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
 
  The `Admin` account that was created with your AWS Managed Microsoft AD directory has permissions for the most common administrative activities for your OU: 
-+  Create, update, or delete users
-+  Add resources to your domain such as file or print servers, and then assign permissions for those resources to users in your OU 
-+  Create additional OUs and containers 
-+  Delegate authority 
-+  Restore deleted objects from the Active Directory Recycle Bin 
-+  Run Active Directory and Domain Name Service \(DNS\) modules for Windows PowerShell on the Active Directory Web Service 
++ Create, update, or delete users
++ Add resources to your domain such as file or print servers, and then assign permissions for those resources to users in your OU 
++ Create additional OUs and containers 
++ Delegate authority 
++ Restore deleted objects from the Active Directory Recycle Bin 
++ Run Active Directory and Domain Name Service \(DNS\) modules for Windows PowerShell on the Active Directory Web Service 
 
- The `Admin` account also has rights to perform the following domain\-wide activities: 
-+  Manage DNS configurations \(add, remove, or update records, zones, and forwarders\) 
-+  View DNS event logs 
-+  View security event logs 
+The `Admin` account also has rights to perform the following domain\-wide activities: 
++ Manage DNS configurations \(add, remove, or update records, zones, and forwarders\) 
++ View DNS event logs 
++ View security event logs 
 
 **To create a directory with AWS Managed Microsoft AD**
 
@@ -83,7 +83,7 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
  To see information about your directory, choose the directory ID in the directory listing\. Make a note of the **Directory ID** value\. You need this value when you create or modify your PostgreSQL DB instance\. 
 
-![\[graphic of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
+![\[Image of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
 ## Step 2: \(Optional\) create a trust for an on\-premises Active Directory<a name="postgresql-kerberos-setting-up.create-trust"></a>
 
@@ -92,7 +92,7 @@ If you don't plan to use your own on\-premises Microsoft Active Directory, skip 
 To get Kerberos authentication using your on\-premises Active Directory, you need to create a trusting domain relationship using a forest trust between your on\-premises Microsoft Active Directory and the AWS Managed Microsoft AD directory \(created in [Step 1: Create a directory using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)\)\. The trust can be one\-way, where the AWS Managed Microsoft AD directory trusts the on\-premises Microsoft Active Directory\. The trust can also be two\-way, where both Active Directories trust each other\. For more information about setting up trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 **Note**  
-If you use an on\-premises Microsoft Active Directory, DB instance endpoints can't be used by Windows clients\.
+If you use an on\-premises Microsoft Active Directory, Windows clients connect using the domain name of the AWS Directory Service in the endpoint rather than rds\.amazonaws\.com\. To learn more, see [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)\. 
 
 Make sure that your on\-premises Microsoft Active Directory domain name includes a DNS suffix routing that corresponds to the newly created trust relationship\. The following screenshot shows an example\.
 
@@ -100,16 +100,16 @@ Make sure that your on\-premises Microsoft Active Directory domain name includes
 
 ## Step 3: Create an IAM role for Amazon RDS to access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to AWS Directory Service\. 
+For Amazon RDS to call AWS Directory Service for you, your AWS account needs an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to AWS Directory Service\. 
 
-When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, create the IAM role manually\. Choose **RDS** and then **RDS \- Directory Service**\. Attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to this role\.
+When you create a DB instance using the AWS Management Console and your console user account has the `iam:CreateRole` permission, the console creates the needed IAM role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, you must create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\. 
 
 For more information about creating IAM roles for a service, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
 **Note**  
 The IAM role used for Windows Authentication for RDS for Microsoft SQL Server can't be used for Amazon RDS for PostgreSQL\.
 
-Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the IAM role must have the following IAM trust policy\.
+As an alternative to using the `AmazonRDSDirectoryServiceAccess` managed policy, you can create policies with the required permissions\. In this case, the IAM role must have the following IAM trust policy\.
 
 ```
 {
@@ -195,6 +195,8 @@ Kerberos authentication is only supported for PostgreSQL DB instances in a VPC\.
 ### Console<a name="postgresql-kerberos-setting-up.create-modify.Console"></a>
 
 When you use the console to create, modify, or restore a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Then choose **Browse Directory**\. Select the directory or choose **Create a new directory** to use the Directory Service\.
+
+![\[Choosing Kerberos for authentication and identifying the directory to use.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rpg-authentication-use-kerberos.png)
 
 ### AWS CLI<a name="postgresql-kerberos-setting-up.create-modify.CLI"></a>
 

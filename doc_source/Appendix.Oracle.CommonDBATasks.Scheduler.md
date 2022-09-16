@@ -117,7 +117,7 @@ To modify the time zone for Oracle Scheduler, you can use the Oracle procedure `
 
 **To modify the current time zone setting**
 
-1. Connect to the database using a client such as SQL Developer\. For more information, see [Connecting to your DB instance using Oracle SQL developer](USER_ConnectToOracleInstance.md#USER_ConnectToOracleInstance.SQLDeveloper)\.
+1. Connect to the database using a client such as SQL Developer\. For more information, see [Connecting to your DB instance using Oracle SQL developer](USER_ConnectToOracleInstance.SQLDeveloper.md)\.
 
 1. Set the default time zone as following, substituting your time zone for `time_zone_name`\.
 

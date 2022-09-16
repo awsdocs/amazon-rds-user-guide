@@ -110,14 +110,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6i\.xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.m6i\.large | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.m5d – general\-purpose instance classes | 
-| db\.m5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.m5 – general\-purpose instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
@@ -181,24 +181,24 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6gd\.xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r6gd\.large | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r6i – memory\-optimized instance classes | 
-| db\.r6i\.32xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher  | 
-| db\.r6i\.24xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.16xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.12xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.8xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.4xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.2xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
-| db\.r6i\.large | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.32xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher  | 
+| db\.r6i\.24xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.16xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.12xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.8xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.4xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.2xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
+| db\.r6i\.large | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.r5d – memory\-optimized instance classes | 
-| db\.r5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r5b – memory\-optimized instance classes | 
 | db\.r5b\.24xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
 | db\.r5b\.16xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 

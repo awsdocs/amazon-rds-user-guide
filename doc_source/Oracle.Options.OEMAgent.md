@@ -202,7 +202,7 @@ After you enable the Management Agent option, take the following steps to begin 
 
    1. Enter the endpoint for the Amazon RDS DB instance, or choose it from the host name list\. Make sure that the specified host name matches the endpoint of the Amazon RDS DB instance\.
 
-      For information about finding the endpoint for your Amazon RDS DB instance, see [Finding the endpoint of your Oracle DB instance](USER_ConnectToOracleInstance.md#USER_Endpoint)\.
+      For information about finding the endpoint for your Amazon RDS DB instance, see [Finding the endpoint of your Oracle DB instance](USER_Endpoint.md)\.
 
    1. Specify the following database properties: 
       + For **Target name**, enter a name\. 

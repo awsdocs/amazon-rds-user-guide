@@ -47,7 +47,7 @@ Returns an integer representing the size, in bytes, of the data volume\.
 
 *DBInstanceClassHugePagesDefault*  
 Returns a Boolean value\. Currently, it's only supported for Oracle engines\.  
-For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.
+For more information, see [Turning on HugePages for an RDS for Oracle instance](Oracle.Concepts.HugePages.md)\.
 
 *DBInstanceClassMemory*  
  Returns an integer for the number of bytes of memory available to the database process\. This number is internally calculated by taking the total amount of memory for the DB instance class and subtracting memory reserved for the operating system and the RDS processes that manage the instance\. Therefore, the number is always somewhat lower than the memory figures shown in the instance class tables in [DB instance classes](Concepts.DBInstanceClass.md)\. The exact value depends on a combination of instance class, DB engine, and whether it applies to an RDS instance or an instance that's part of an Aurora cluster\. 
@@ -86,7 +86,7 @@ You specify the arguments of DB parameter functions as either integers or formul
 
 *IF*  
 Returns an argument\.  
-Currently, it's only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.  
+Currently, it's only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Turning on HugePages for an RDS for Oracle instance](Oracle.Concepts.HugePages.md)\.  
 Syntax  
 
 ```

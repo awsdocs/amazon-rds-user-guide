@@ -14,6 +14,12 @@
 
  Using RDS Proxy requires you to have a common virtual private cloud \(VPC\) between your Aurora DB cluster or RDS DB instance and RDS Proxy\. This VPC should have a minimum of two subnets that are in different Availability Zones\. Your account can either own these subnets or share them with other accounts\. For information about VPC sharing, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html)\. Your client application resources such as Amazon EC2, Lambda, or Amazon ECS can be in the same VPC or in a separate VPC from the proxy\. Note that if you've successfully connected to any RDS DB instances or Aurora DB clusters, you already have the required network resources\.
 
+**Topics**
++ [Getting information about your subnets](#rds-proxy-network-prereqs.subnet-info)
++ [Planning for IP address capacity](#rds-proxy-network-prereqs.plan-ip-address)
+
+### Getting information about your subnets<a name="rds-proxy-network-prereqs.subnet-info"></a>
+
  The following Linux example shows AWS CLI commands that examine the VPCs and subnets owned by your AWS account\. In particular, you pass subnet IDs as parameters when you create a proxy using the CLI\. 
 
 ```
@@ -22,7 +28,7 @@ aws ec2 describe-internet-gateways
 aws ec2 describe-subnets --query '*[].[VpcId,SubnetId]' --output text | sort
 ```
 
-The following Linux example shows AWS CLI commands to determine the subnet IDs corresponding to a specific Aurora DB cluster or RDS DB instance\. For an Aurora cluster, first you find the ID for one of the associated DB instances\. You can extract the subnet IDs used by that DB instance by examining the nested fields within the `DBSubnetGroup` and `Subnets` attributes in the describe output for the DB instance\. You specify some or all of those subnet IDs when setting up a proxy for that database server\. 
+The following Linux example shows AWS CLI commands to determine the subnet IDs corresponding to a specific Aurora DB cluster or RDS DB instance\. For an Aurora cluster, first you find the ID for one of the associated DB instances\. You can extract the subnet IDs used by that DB instance\. To do so, examine the nested fields within the `DBSubnetGroup` and `Subnets` attributes in the describe output for the DB instance\. You specify some or all of those subnet IDs when setting up a proxy for that database server\. 
 
 ```
 $ # Optional first step, only needed if you're starting from an Aurora cluster. Find the ID of any DB instance in the cluster.
@@ -40,7 +46,7 @@ subnet_id_3
 ...
 ```
 
- As an alternative, you can first find the VPC ID for the DB instance\. Then you can examine the VPC to find its subnets\. The following Linux example shows how\. 
+Or you can first find the VPC ID for the DB instance\. Then you can examine the VPC to find its subnets\. The following Linux example shows how\. 
 
 ```
 $ # From the DB instance, find the VPC.
@@ -55,6 +61,28 @@ subnet_id_4
 subnet_id_5
 subnet_id_6
 ```
+
+### Planning for IP address capacity<a name="rds-proxy-network-prereqs.plan-ip-address"></a>
+
+An RDS Proxy automatically adjusts its capacity as needed based on the size and number of DB instances registered with it\. Certain operations might also require additional proxy capacity\. Some examples are increasing the size of a registered database or internal RDS Proxy maintenance operations\. During these operations, your proxy might need more IP addresses to provision the extra capacity\. These additional addresses allows your proxy to scale without affecting your workload\. A lack of free IP addresses in your subnets prevents a proxy from scaling up\. This can lead to higher query latencies or client connection failures\. 
+
+Following are the recommended minimum number of IP addresses to leave free in your subnets for your proxy based on DB instance class sizes\.
+
+
+|  DB instance class  |  Minimum free IP addresses  | 
+| --- | --- | 
+|  db\.\*\.xlarge or smaller   | 10  | 
+|  db\.\*\.2xlarge   | 15  | 
+|  db\.\*\.4xlarge   | 25  | 
+|  db\.\*\.8xlarge   | 45  | 
+|  db\.\*\.12xlarge   | 60  | 
+|  db\.\*\.16xlarge   | 75  | 
+|  db\.\*\.24xlarge   | 110  | 
+
+These numbers of recommended IP addresses are estimates for a proxy with only the default endpoint\. A proxy with additional endpoints or read replicas might need more free IP addresses\. For each additional endpoint, we recommend that you reserve three more IP addresses\. For each read replica, we recommend that you reserve additional IP addresses as specified in the table based on that read replica's size\.
+
+**Note**  
+RDS Proxy never uses more than 215 IP addresses in a VPC\.
 
 ## Setting up database credentials in AWS Secrets Manager<a name="rds-proxy-secrets-arns"></a>
 

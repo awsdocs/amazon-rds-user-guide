@@ -36,7 +36,13 @@ If you have privileges to do so, you can also change parameter values by using t
 
 ## RDS for PostgreSQL DB instance parameter list<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters.parameters-list"></a>
 
-The following table lists some of the parameters available in an RDS for PostgreSQL DB instance\. 
+The following table lists some \(but not all\) parameters available in an RDS for PostgreSQL DB instance\. To view all available parameters, you use the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) AWS CLI command\. For example, to get the list of all parameters available in the default parameter group for RDS for PostgreSQL version 13, run the following\.
+
+```
+aws rds describe-db-parameters --db-parameter-group-name default.postgres13
+```
+
+You can also use the Console\. Choose **Parameter groups** from the Amazon RDS menu, and then choose the parameter group from those available in your AWS Region\.
 
 
 |  Parameter name  |  Apply\_Type  |  Description  | 
@@ -157,6 +163,7 @@ The following table lists some of the parameters available in an RDS for Postgre
 |  `quote_all_identifiers`  | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
 |  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. This parameter has no value unless query plan management \(QPM\) is turned on\. When QPM is on, the default value for this parameter 4\.  | 
 | rds\.adaptive\_autovacuum | Dynamic | Automatically tunes the autovacuum parameters whenever the transaction ID thresholds are exceeded\. | 
+| rds\.force\_ssl | Dynamic | Requires the use of SSL connections\. Default is 0 \(false\), so connections aren't required \(forced\) to use SSL\. | 
 |  `rds.log_retention_period`  | Dynamic | Sets log retention such that Amazon RDS deletes PostgreSQL logs that are older than n minutes\. | 
 | rds\.restrict\_password\_commands | Static | Restricts who can manage passwords to users with the rds\_password role\. Set this parameter to 1 to enable password restriction\. The default is 0\.  | 
 |  `search_path`  | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 

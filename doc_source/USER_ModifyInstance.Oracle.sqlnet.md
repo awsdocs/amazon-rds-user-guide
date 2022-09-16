@@ -1,4 +1,4 @@
-# Modifying Oracle sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet"></a>
+# Modifying connection properties using sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet"></a>
 
 The sqlnet\.ora file includes parameters that configure Oracle Net features on Oracle database servers and clients\. Using the parameters in the sqlnet\.ora file, you can modify properties for connections in and out of the database\. 
 
@@ -6,9 +6,9 @@ For more information about why you might set sqlnet\.ora parameters, see [Config
 
 ## Setting sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet.Setting"></a>
 
-Amazon RDS Oracle parameter groups include a subset of sqlnet\.ora parameters\. You set them in the same way that you set other Oracle parameters\. The `sqlnetora.` prefix identifies which parameters are sqlnet\.ora parameters\. For example, in an Oracle parameter group in Amazon RDS, the `default_sdu_size` sqlnet\.ora parameter is `sqlnetora.default_sdu_size`\.
+Amazon RDS for Oracle parameter groups include a subset of sqlnet\.ora parameters\. You set them in the same way that you set other Oracle parameters\. The `sqlnetora.` prefix identifies which parameters are sqlnet\.ora parameters\. For example, in an Oracle parameter group in Amazon RDS, the `default_sdu_size` sqlnet\.ora parameter is `sqlnetora.default_sdu_size`\.
 
-For information about managing parameter groups and setting parameter values, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For information about managing parameter groups and setting parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Supported sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet.Supported"></a>
 
@@ -19,7 +19,7 @@ Amazon RDS supports the following sqlnet\.ora parameters\. Changes to dynamic sq
 
 | Parameter | Valid values | Static/Dynamic | Description | 
 | --- | --- | --- | --- | 
-|  `sqlnetora.default_sdu_size`  |  Oracle 11g – `512` to `65535`  Oracle 12c – `512` to `2097152`   |  Dynamic  |  The session data unit \(SDU\) size, in bytes\.  The SDU is the amount of data that is put in a buffer and sent across the network at one time\.  | 
+|  `sqlnetora.default_sdu_size`  |  Oracle 12c – `512` to `2097152`   |  Dynamic  |  The session data unit \(SDU\) size, in bytes\.  The SDU is the amount of data that is put in a buffer and sent across the network at one time\.  | 
 |  `sqlnetora.diag_adr_enabled`  |  `ON`, `OFF`   |  Dynamic  |  A value that enables or disables Automatic Diagnostic Repository \(ADR\) tracing\.  `ON` specifies that ADR file tracing is used\. `OFF` specifies that non\-ADR file tracing is used\.  | 
 |  `sqlnetora.recv_buf_size`  |  `8192` to `268435456`   |  Dynamic  |  The buffer space limit for receive operations of sessions, supported by the TCP/IP, TCP/IP with SSL, and SDP protocols\.   | 
 |  `sqlnetora.send_buf_size`  |  `8192` to `268435456`   |  Dynamic  |  The buffer space limit for send operations of sessions, supported by the TCP/IP, TCP/IP with SSL, and SDP protocols\.   | 
@@ -31,9 +31,9 @@ Amazon RDS supports the following sqlnet\.ora parameters\. Changes to dynamic sq
 |  `sqlnetora.sqlnet.recv_timeout`  |  `0` or `10` to `7200`   |  Dynamic  |  Time, in seconds, for a database server to wait for client data after establishing a connection\.   | 
 |  `sqlnetora.sqlnet.send_timeout`  |  `0` or `10` to `7200`   |  Dynamic  |  Time, in seconds, for a database server to complete a send operation to clients after establishing a connection\.   | 
 |  `sqlnetora.tcp.connect_timeout`  |  `0` or `10` to `7200`   |  Dynamic  |  Time, in seconds, for a client to establish a TCP connection to the database server\.   | 
-|  `sqlnetora.trace_level_server`  |  `0`, `4`, `10`, `16`, `OFF`, `USER`, `ADMIN`, `SUPPORT`   |  Dynamic  |  For non\-ADR tracing, turns server tracing on at a specified level or turns it off\.   | 
+|  `sqlnetora.trace_level_server`  |  `0`, `4`, `10`, `16`, `OFF`, `USER`, `ADMIN`, `SUPPORT`  |  Dynamic  | For non\-ADR tracing, turns server tracing on at a specified level or turns it off\. | 
 
-The default value for each supported sqlnet\.ora parameter is the Oracle default for the release\. For information about default values for Oracle 12c, see [Parameters for the sqlnet\.ora file](https://docs.oracle.com/database/121/NETRF/sqlnet.htm#NETRF006) in the 12c Oracle documentation\. For information about default values for Oracle 11g, see [Parameters for the sqlnet\.ora file](https://docs.oracle.com/cd/E11882_01/network.112/e10835/sqlnet.htm#NETRF006) in the 11g Oracle documentation\.
+The default value for each supported sqlnet\.ora parameter is the Oracle default for the release\. For information about default values for Oracle Database 12c, see [Parameters for the sqlnet\.ora file](https://docs.oracle.com/database/121/NETRF/sqlnet.htm#NETRF006) in the Oracle Database 12c documentation\. 
 
 ## Viewing sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet.Viewing"></a>
 
@@ -41,7 +41,7 @@ You can view sqlnet\.ora parameters and their settings using the AWS Management 
 
 ### Viewing sqlnet\.ora parameters using the console<a name="USER_ModifyInstance.Oracle.sqlnet.Viewing.Console"></a>
 
-For information about viewing parameters in a parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+For information about viewing parameters in a parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 In Oracle parameter groups, the `sqlnetora.` prefix identifies which parameters are sqlnet\.ora parameters\.
 
@@ -57,17 +57,17 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds download-db-log-file-portion \
---db-instance-identifier mydbinstance \
---log-file-name trace/sqlnet-parameters \
---output text
+    --db-instance-identifier mydbinstance \
+    --log-file-name trace/sqlnet-parameters \
+    --output text
 ```
 For Windows:  
 
 ```
 aws rds download-db-log-file-portion ^
---db-instance-identifier mydbinstance ^
---log-file-name trace/sqlnet-parameters ^
---output text
+    --db-instance-identifier mydbinstance ^
+    --log-file-name trace/sqlnet-parameters ^
+    --output text
 ```
 
 ### Viewing sqlnet\.ora parameters using a SQL client<a name="USER_ModifyInstance.Oracle.sqlnet.Viewing.SQL"></a>
@@ -81,4 +81,4 @@ After you connect to the Oracle DB instance in a SQL client, the following query
 4.         p_filename  => 'sqlnet-parameters'));
 ```
 
-For information about connecting to an Oracle DB instance in a SQL client, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+For information about connecting to an Oracle DB instance in a SQL client, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.

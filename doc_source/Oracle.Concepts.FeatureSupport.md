@@ -64,7 +64,7 @@ This feature changes to Continuous Query Notification in Oracle Database 12c Rel
   For more information, see [Managing Gradual Database Password Rollover for Applications ](https://docs.oracle.com/en/database/oracle/oracle-database/19/dbseg/configuring-authentication.html#GUID-ACBA8DAE-C5B4-4811-A31D-53B97C50249B) in the Oracle Database documentation\.
 + HugePages
 
-  For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.
+  For more information, see [Turning on HugePages for an RDS for Oracle instance](Oracle.Concepts.HugePages.md)\.
 + Import/export \(legacy and Data Pump\) and SQL\*Loader
 
   For more information, see [Importing data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)\.
