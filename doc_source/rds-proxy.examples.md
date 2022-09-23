@@ -7,7 +7,7 @@
 +  [Adjusting the max_connections Setting for an Aurora DB Cluster](#example-adjust-cluster-max-connections) 
 
 **Example Preserving connections to a MySQL database across a failover**  
- This MySQL example demonstrates how open connections continue working during a failover, for example when you reboot a database or it becomes unavailable due to a problem\. This example uses a proxy named `the-proxy` and an Aurora DB cluster with DB instances `instance-8898` and `instance-9814`\. When you run the `failover-db-cluster` command from the Linux command line, the writer instance that the proxy is connected to changes to a different DB instance\. You can see that the DB instance associated with the proxy changes while the connection remains open\.   
+ This MySQL example demonstrates how open connections continue working during a failover\. An example is when you reboot a database or it becomes unavailable due to a problem\. This example uses a proxy named `the-proxy` and an Aurora DB cluster with DB instances `instance-8898` and `instance-9814`\. When you run the `failover-db-cluster` command from the Linux command line, the writer instance that the proxy is connected to changes to a different DB instance\. You can see that the DB instance associated with the proxy changes while the connection remains open\.   
 
 ```
 $ mysql -h the-proxy.proxy-demo.us-east-1.rds.amazonaws.com -u admin_user -p

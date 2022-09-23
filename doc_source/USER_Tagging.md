@@ -2,7 +2,7 @@
 
 You can use Amazon RDS tags to add metadata to your Amazon RDS resources\. You can use the tags to add your own notations about database instances, snapshots, Aurora clusters, and so on\. Doing so can help you to document your Amazon RDS resources\. You can also use the tags with automated maintenance procedures\. 
 
- In particular, you can use these tags with IAM policies to manage access to Amazon RDS resources and to control what actions can be applied to the Amazon RDS resources\. You can also use these tags to track costs by grouping expenses for similarly tagged resources\. 
+ In particular, you can use these tags with IAM policies\. You can use them to manage access to RDS resources and to control what actions can be applied to the RDS resources\. You can also use these tags to track costs by grouping expenses for similarly tagged resources\. 
 
 You can tag the following Amazon RDS resources:
 + DB instances
@@ -34,25 +34,25 @@ Currently, you can't tag RDS Proxies and RDS Proxy endpoints by using the AWS Ma
 
 ## Overview of Amazon RDS resource tags<a name="Overview.Tagging"></a>
 
-An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of "project" and a tag value of "Salix", indicating that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as `environment=test` or `environment=production`\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
+An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of "project" and a tag value of "Salix"\. In this case, these indicate that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as `environment=test` or `environment=production`\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
 
 In addition, you can use conditions in your IAM policies to control access to AWS resources based on the tags on that resource\. You can do this by using the global `aws:ResourceTag/tag-key` condition key\. For more information, see [Controlling access to AWS resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html#access_tags_control-resources) in the *AWS Identity and Access Management User Guide*\.
 
-Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 50 tags, or it can be empty\. If you add a tag to an Amazon RDS resource that has the same key as an existing tag on resource, the new value overwrites the old value\. 
+Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 50 tags, or it can be empty\. If you add a tag to an RDS resource with the same key as an existing resource tag, the new value overwrites the old\. 
 
-AWS does not apply any semantic meaning to your tags; tags are interpreted strictly as character strings\. Amazon RDS can set tags on a DB instance or other Amazon RDS resources, depending on the settings that you use when you create the resource\. For example, Amazon RDS might add a tag indicating that a DB instance is for production or for testing\.
-+ The tag key is the required name of the tag\. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with `aws:` or `rds:`\. The string can contain only the set of Unicode letters, digits, white\-space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
-+ The tag value is an optional string value of the tag\. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with `aws:`\. The string can contain only the set of Unicode letters, digits, white\-space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
+AWS doesn't apply any semantic meaning to your tags; tags are interpreted strictly as character strings\. RDS can set tags on a DB instance or other RDS resources\. Tag setting depends on the options that you use when you create the resource\. For example, Amazon RDS might add a tag indicating that a DB instance is for production or for testing\.
++ The tag key is the required name of the tag\. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with `aws:` or `rds:`\. The string can contain only the set of Unicode letters, digits, white space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
++ The tag value is an optional string value of the tag\. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with `aws:`\. The string can contain only the set of Unicode letters, digits, white space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
 
   Values do not have to be unique in a tag set and can be null\. For example, you can have a key\-value pair in a tag set of `project=Trinity` and `cost-center=Trinity`\. 
 
-You can use the AWS Management Console, the command line interface, or the Amazon RDS API to add, list, and delete tags on Amazon RDS resources\. When using the command line interface or the Amazon RDS API, you must provide the Amazon Resource Name \(ARN\) for the Amazon RDS resource you want to work with\. For more information about constructing an ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
+You can use the AWS Management Console, the AWS CLI, or the Amazon RDS API to add, list, and delete tags on Amazon RDS resources\. When using the CLI or API, make sure to provide the Amazon Resource Name \(ARN\) for the RDS resource to work with\. For more information about constructing an ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
 
 Tags are cached for authorization purposes\. Because of this, additions and updates to tags on Amazon RDS resources can take several minutes before they are available\. 
 
 ## Using tags for access control with IAM<a name="Tagging.IAM"></a>
 
- You can use tags with IAM policies to manage access to Amazon RDS resources and to control what actions can be applied to the Amazon RDS resources\. 
+ You can use tags with IAM policies to manage access to Amazon RDS resources\. You can also use tags to control what actions can be applied to the Amazon RDS resources\. 
 
 For information on managing access to tagged resources with IAM policies, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\. 
 
@@ -160,7 +160,7 @@ The following table provides a list of the allowed XML tags and their characteri
 
 ## Copying tags to DB instance snapshots<a name="USER_Tagging.CopyTags"></a>
 
-When you create or restore a DB instance, you can specify that the tags from the DB instance are copied to snapshots of the DB instance\. Copying tags ensures that the metadata for the DB snapshots matches that of the source DB instance, and that any access policies for the DB snapshots also match those of the source DB instance\.
+When you create or restore a DB instance, you can specify that the tags from the DB instance are copied to snapshots of the DB instance\. Copying tags ensures that the metadata for the DB snapshots matches that of the source DB instance\. It also ensures that any access policies for the DB snapshots also match those of the source DB instance\.
 
 You can specify that tags are copied to DB snapshots for the following actions: 
 + Creating a DB instance\.
@@ -168,12 +168,13 @@ You can specify that tags are copied to DB snapshots for the following actions:
 + Creating a read replica\.
 + Copying a DB snapshot\.
 
-In most cases, tags aren't copied by default\. However, when you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot, and then adds those tags to the restored DB instance\.
+In most cases, tags aren't copied by default\. However, when you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot\. RDS then adds those tags to the restored DB instance\.
 
 To prevent tags from source DB instances from being added to restored DB instances, we recommend that you specify new tags when restoring a DB instance\.
 
 **Note**  
-If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API operation\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. After you create your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API operation\), you can then add tags as described later in this topic\.
+In some cases, you might include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command\. Or you might supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API operation\. In these cases, RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option turned on\.   
+If you take this approach, you can create a copy of a DB instance from a DB snapshot\. This approach avoids adding tags that don't apply to the new DB instance\. You create your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` RDS API operation\)\. After you create your DB snapshot, you can add tags as described later in this topic\.
 
 ## Tutorial: Use tags to specify which DB instances to stop<a name="Tagging.RDS.Autostop"></a>
 
@@ -193,7 +194,7 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-snapsho
 
 1. Add the tag `stoppable` to this DB instance\.
 
-   The name for this tag is chosen by you\. Using a tag like this is an alternative to devising a naming convention that encodes all the relevant information in the name of the DB instance \(or other types of resources\)\. Because this example treats the tag as an attribute that is either present or absent, it omits the `Value=` part of the `--tags` parameter\. 
+   You choose the name for this tag\. This approach means that you can avoid devising a naming convention that encodes all relevant information in names\. In such a convention, you might encode information in the DB instance name or names of other resources\. Because this example treats the tag as an attribute that is either present or absent, it omits the `Value=` part of the `--tags` parameter\. 
 
    ```
    $ aws rds add-tags-to-resource \
@@ -224,7 +225,7 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-snapsho
 
 1. To stop all the DB instances that are designated as `stoppable`, prepare a list of all your DB instances\. Loop through the list and check if each DB instance is tagged with the relevant attribute\.
 
-   This Linux example uses shell scripting to save the list of DB instance ARNs to a temporary file and then perform CLI commands for each DB instance\. 
+   This Linux example uses shell scripting\. This scripting saves the list of DB instance ARNs to a temporary file and then performs CLI commands for each DB instance\. 
 
    ```
    $ aws rds describe-db-instances --query "*[].[DBInstanceArn]" --output text >/tmp/db_instance_arns.lst
@@ -248,7 +249,9 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-snapsho
            ...
    ```
 
- You can run a script like this at the end of each day to make sure that nonessential DB instances are stopped\. You might also schedule a job using a utility such as `cron` to perform such a check each night, in case some DB instances were left running by mistake\. In that case, you might fine\-tune the command that prepares the list of DB instances to check\. The following command produces a list of your DB instances, but only the ones in `available` state\. The script can ignore DB instances that are already stopped, because they will have different status values such as `stopped` or `stopping`\. 
+ You can run a script like this at the end of each day to make sure that nonessential DB instances are stopped\. You might also schedule a job using a utility such as `cron` to perform such a check each night\. For example, you might do this in case some DB instances were left running by mistake\. Here, you might fine\-tune the command that prepares the list of DB instances to check\. 
+
+The following command produces a list of your DB instances, but only the ones in `available` state\. The script can ignore DB instances that are already stopped, because they will have different status values such as `stopped` or `stopping`\. 
 
 ```
 $ aws rds describe-db-instances \
@@ -261,7 +264,7 @@ arn:aws:rds:us-east-1:123456789102:db:pg2-db-instance
 ```
 
 **Tip**  
- Once you're familiar with the general procedure of assigning tags and finding DB instances that have those tags, you can use the same technique to reduce costs in other ways\. For example, in this scenario with DB instances used for development and testing, you might designate some DB instances to be deleted at the end of each day, or to have their DB instances changed to a small DB instance classes during times of expected low usage\. 
+You can use assigning tags and finding DB instances with those tags to reduce costs in other ways\. For example, take this scenario with DB instances used for development and testing\. In this case, you might designate some DB instances to be deleted at the end of each day\. Or you might designate them to have their DB instances changed to small DB instance classes during times of expected low usage\. 
 
 ## Using tags to enable backups in AWS Backup<a name="Tagging.RDS.AWSBackup"></a>
 

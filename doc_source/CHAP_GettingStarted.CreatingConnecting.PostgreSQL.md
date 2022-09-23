@@ -85,11 +85,11 @@ If you need to change the master user password after the DB instance is availabl
 
 After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. Following, you can find two ways to connect to a PostgreSQL DB instance\. The first example uses pgAdmin, a popular open\-source administration and development tool for PostgreSQL\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\. The second example uses psql, a command line utility that is part of a PostgreSQL installation\. To use psql, make sure that you have PostgreSQL or the psql client installed on your client computer\.
 
-Before you attempt to connect to the DB instance, make sure that the DB instance is associated with a security group that provides access to it\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\. 
+Before you try connecting to the DB instance, make sure that the DB instance is associated with a security group that provides access to it\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\. 
 
-In some cases, you might have difficulty connecting to the DB instance\. If so, the problem is most often with the access rules that you set up in the security group that you assigned to the DB instance\. If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+In some cases, you might have difficulty connecting to the DB instance\. If so, the problem is most often with the access rules that you set up\. These reside in the security group that you assigned to the DB instance\. If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
+If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource to access it\. An example is the security group for an Amazon EC2 instance\.
 
 For more information about connecting to a PostgreSQL DB instance, see [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)\. If you can't connect to your DB instance, see [Troubleshooting connections to your RDS for PostgreSQL instance](USER_ConnectToPostgreSQLInstance.md#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
 
@@ -152,7 +152,7 @@ psql --host=database-1.123456789012.us-west-1.rds.amazonaws.com --port=5432 --us
 
 ## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.PostgreSQL"></a>
 
-After you have connected to the sample DB instance that you created, you should delete the DB instance so you are no longer charged for it\.
+After you connect to the sample DB instance that you created, delete it so you're no longer charged for it\.
 
 **To delete a DB instance with no final DB snapshot**
 

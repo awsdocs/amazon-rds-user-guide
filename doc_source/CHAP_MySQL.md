@@ -29,7 +29,7 @@ You can create the following:
 + Automated backups
 + Manual backups
 
-You can use DB instances running MySQL inside a virtual private cloud \(VPC\) based on Amazon VPC\. You can also add features to your MySQL DB instance by turning on various options\. Amazon RDS supports Multi\-AZ deployments for MariaDB as a high\-availability, failover solution\.
+You can use DB instances running MySQL inside a virtual private cloud \(VPC\) based on Amazon VPC\. You can also add features to your MySQL DB instance by turning on various options\. Amazon RDS supports Multi\-AZ deployments for MySQL as a high\-availability, failover solution\.
 
 **Important**  
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that need advanced privileges\. You can access your database using standard SQL clients such as the mysql client\. However, you can't access the host directly by using Telnet or Secure Shell \(SSH\)\.

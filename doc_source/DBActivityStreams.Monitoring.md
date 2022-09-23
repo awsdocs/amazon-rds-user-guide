@@ -29,7 +29,23 @@ If an activity stream has a failure while monitoring your DB instance, you are n
 
 When you enable an activity stream for a database, a Kinesis stream is created for you\. From Kinesis, you can monitor your database activity in real time\. To further analyze database activity, you can connect your Kinesis stream to consumer applications\. You can also connect the stream to compliance management applications such as IBM's Security Guardium or Imperva's SecureSphere Database Audit and Protection\.
 
-**To access an activity stream from Kinesis**
+You can access your Kinesis stream either from the RDS console or the Kinesis console\.
+
+**To access an activity stream from Kinesis using the RDS console**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the RDS for Oracle instance on which you started an activity stream\.
+
+1. Choose **Configuration**\.
+
+1. Under **Database activity stream**, choose the link under **Kinesis stream**\.
+
+1. In the Kinesis console, choose **Monitoring** to begin observing the database activity\.
+
+**To access an activity stream from Kinesis using the Kinesis console**
 
 1. Open the Kinesis console at [https://console\.aws\.amazon\.com/kinesis](https://console.aws.amazon.com/kinesis)\.
 

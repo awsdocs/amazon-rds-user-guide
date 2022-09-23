@@ -31,7 +31,7 @@ Create an Amazon EC2 instance in the public subnet of your VPC\.
 
      Otherwise, you can determine the IP address to use to connect to EC2 instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
 
-     If you are connecting through an internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to determine the range of IP addresses used by client computers\.
+     In many cases, you might connect through an internet service provider \(ISP\) or from behind your firewall without a static IP address\. If so, make sure to determine the range of IP addresses used by client computers\.
 **Warning**  
 If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances using SSH\.
    + Turn on **Allow HTTPs traffic from the internet**\.

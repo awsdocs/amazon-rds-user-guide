@@ -50,7 +50,7 @@ Returns a Boolean value\. Currently, it's only supported for Oracle engines\.
 For more information, see [Turning on HugePages for an RDS for Oracle instance](Oracle.Concepts.HugePages.md)\.
 
 *DBInstanceClassMemory*  
- Returns an integer for the number of bytes of memory available to the database process\. This number is internally calculated by taking the total amount of memory for the DB instance class and subtracting memory reserved for the operating system and the RDS processes that manage the instance\. Therefore, the number is always somewhat lower than the memory figures shown in the instance class tables in [DB instance classes](Concepts.DBInstanceClass.md)\. The exact value depends on a combination of instance class, DB engine, and whether it applies to an RDS instance or an instance that's part of an Aurora cluster\. 
+ Returns an integer for the number of bytes of memory available to the database process\. This number is internally calculated by starting with the total amount of memory for the DB instance class\. From this, the calculation subtracts memory reserved for the operating system and the RDS processes that manage the instance\. Therefore, the number is always somewhat lower than the memory figures shown in the instance class tables in [DB instance classes](Concepts.DBInstanceClass.md)\. The exact value depends on a combination of factors\. These include instance class, DB engine, and whether it applies to an RDS instance or an instance that's part of an Aurora cluster\. 
 
 *DBInstanceVCPU*  
 Returns an integer representing the number of virtual central processing units \(vCPUs\) used by Amazon RDS to manage the instance\. Currently, it's only supported for the PostgreSQL engine\.
@@ -172,7 +172,7 @@ Syntax
 ```
 
 **Example using a Boolean DB parameter expression**  
-The following Boolean DB parameter expression example compares the result of a parameter formula with an integer to modify the Boolean DB parameter `wal_compression` for a PostgreSQL DB instance\. The parameter expression compares the number of vCPUs with the value 2\. If the number of vCPUs is greater than 2, then the `wal_compression` DB parameter is set to true\.  
+The following Boolean DB parameter expression example compares the result of a parameter formula with an integer\. It does so to modify the Boolean DB parameter `wal_compression` for a PostgreSQL DB instance\. The parameter expression compares the number of vCPUs with the value 2\. If the number of vCPUs is greater than 2, then the `wal_compression` DB parameter is set to true\.  
 
 ```
 aws rds modify-db-parameter-group --db-parameter-group-name group-name \

@@ -1,6 +1,6 @@
 # Creating a MySQL DB instance and connecting to a database on a MySQL DB instance<a name="CHAP_GettingStarted.CreatingConnecting.MySQL"></a>
 
-The easiest way to create a DB instance is to use the AWS Management Console\. After you have created the DB instance, you can use standard MySQL utilities such as MySQL Workbench to connect to a database on the DB instance\.
+The easiest way to create a DB instance is to use the AWS Management Console\. After you create the DB instance, you can use standard MySQL utilities such as MySQL Workbench to connect to a database on the DB instance\.
 
 **Important**  
 Before you can create or connect to a DB instance, make sure to complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
@@ -94,7 +94,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
+   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource to access it\. An example is the security group for an Amazon EC2 instance\. 
 
 1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
@@ -105,7 +105,9 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
    1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
 
-1. Connect to the a database on a MySQL DB instance\. For example, enter the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL client\. Substitute the DNS name for your DB instance for `<endpoint>`\. In addition, substitute the master user name that you used for `<mymasteruser>`, and provide the master password that you used when prompted for a password\.
+1. Connect to a database on a MySQL DB instance\. For example, enter the following command at a command prompt on a client computer\. By doing this, you connect to a database on a MySQL DB instance using the MySQL client\. 
+
+   Substitute the DNS name for your DB instance for `<endpoint>`\. In addition, substitute the master user name that you used for `<mymasteruser>`, and provide the master password that you used when prompted for a password\.
 
    ```
    PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
@@ -127,7 +129,7 @@ For more information about connecting to a MySQL DB instance, see [Connecting to
 
 ## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.MySQL"></a>
 
-After you have connected to the sample DB instance that you created, you should delete the DB instance so you are no longer charged for it\. 
+After you connect to and explore the sample DB instance that you created, delete it so you're no longer charged for it\. 
 
 **To delete a DB instance with no final DB snapshot**
 

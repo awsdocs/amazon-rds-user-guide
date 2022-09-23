@@ -55,7 +55,7 @@ Currently, Amazon RDS Custom supports only the Oracle Database and Microsoft SQL
 
 ### Shared responsibility model<a name="custom-intro.solution.shared"></a>
 
-With Amazon RDS Custom, you get the automation of Amazon RDS and the flexibility of Amazon EC2\. By taking on additional database management responsibilities beyond what you do in Amazon RDS, you can benefit from RDS automation and the deeper customization of EC2\. To meet your application and business requirements, you manage the host yourself\.
+With Amazon RDS Custom, you get the automation of Amazon RDS and the flexibility of Amazon EC2\. You take on on additional database management responsibilities beyond what you do in Amazon RDS\. By doing so, you can benefit from RDS automation and the deeper customization of EC2\. To meet your application and business requirements, you manage the host yourself\.
 
 In the shared responsibility model of RDS Custom, you get more control than in Amazon RDS but also more responsibility\. Shared responsibility has two meanings:
 

@@ -5,16 +5,12 @@ As an RDS for Oracle database administrator, you need to safeguard your database
 Security threats are both external and internal\. To protect against internal threats, you can control administrator access to data streams by configuring the Database Activity Streams feature\. RDS for Oracle DBAs don't have access to the collection, transmission, storage, and processing of the streams\.
 
 **Topics**
-+ [Region and version availability](#DBActivityStreams.RegionVersionAvailability)
 + [How database activity streams work](#DBActivityStreams.Overview.how-they-work)
 + [Unified auditing in Oracle Database](#DBActivityStreams.Overview.unified-auditing)
 + [Asynchronous mode for database activity streams](#DBActivityStreams.Overview.sync-mode)
 + [Requirements for database activity streams](#DBActivityStreams.Overview.requirements)
++ [Region and version availability](#DBActivityStreams.RegionVersionAvailability)
 + [Supported DB instance classes for database activity streams](#DBActivityStreams.Overview.requirements.classes)
-
-## Region and version availability<a name="DBActivityStreams.RegionVersionAvailability"></a>
-
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with database activity streams, see [Database activity streams](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams)\.
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
@@ -87,6 +83,10 @@ In RDS for Oracle, database activity streams have the following requirements and
 + In a Multi\-AZ deployment, start the database activity stream on only the primary DB instance\. The activity stream audits both the primary and standby DB instances automatically\. No additional steps are required during a failover\.
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
+
+## Region and version availability<a name="DBActivityStreams.RegionVersionAvailability"></a>
+
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with database activity streams, see [Database activity streams](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams)\.
 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 

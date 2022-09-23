@@ -1,6 +1,6 @@
 # Working with Multi\-AZ deployments for Amazon RDS on AWS Outposts<a name="rds-on-outposts.maz"></a>
 
-For Multi\-AZ deployments, Amazon RDS creates a primary DB instance on one AWS Outpost and synchronously replicates the data to a standby DB instance on a different Outpost\. 
+For Multi\-AZ deployments, Amazon RDS creates a primary DB instance on one AWS Outpost\. RDS synchronously replicates the data to a standby DB instance on a different Outpost\. 
 
 Multi\-AZ deployments on AWS Outposts operate like Multi\-AZ deployments in AWS Regions, but with the following differences:
 + They require a local connection between two or more Outposts\.
@@ -22,7 +22,7 @@ You might see elevated latencies for a standard DB instance deployment as a resu
 We recommend the following actions to improve availability:
 + Allocate enough additional capacity for your mission\-critical applications to allow recovery and failover if there is an underlying host issue\. This applies to all Outposts that contain subnets in your DB subnet group\. For more information, see [Resilience in AWS Outposts](https://docs.aws.amazon.com/outposts/latest/userguide/disaster-recovery-resiliency.html)\.
 + Create multiple connections from each of your Outposts to the AWS Region\.
-+ Use more than two Outposts\. Having more than two Outposts allows Amazon RDS to recover a DB instance by moving it to another Outpost if the current Outpost experiences a failure\.
++ Use more than two Outposts\. Having more than two Outposts allows Amazon RDS to recover a DB instance\. RDS does this recovery by moving the DB instance to another Outpost if the current Outpost experiences a failure\.
 + Provide dual power sources and redundant network connectivity for your Outpost\.
 
 We recommend the following for your local networks:
@@ -45,7 +45,7 @@ Multi\-AZ deployments on RDS on Outposts have the following prerequisites:
 
   For more information about how to create an association, see the Amazon EC2 [create\-local\-gateway\-route\-table\-vpc\-association](https://docs.aws.amazon.com/cli/latest/reference/ec2/create-local-gateway-route-table-vpc-association.html) AWS CLI command\.
 + Make sure that your Outposts use customer\-owned IP \(CoIP\) routing\. Each route table must also each have at least one address pool\. Amazon RDS allocates an additional IP address each for the primary and standby DB instances for data synchronization\.
-+ Make sure that the AWS account that owns the RDS DB instances either owns the local gateway route tables and CoIP pools, or is part of a Resource Access Manager share with access to the local gateway route tables and CoIP pools\.  
++ Make sure that the AWS account that owns the RDS DB instances owns the local gateway route tables and CoIP pools\. Or make sure it's part of a Resource Access Manager share with access to the local gateway route tables and CoIP pools\.  
 + Make sure that the IP addresses in your CoIP pools can be routed from one Outpost local gateway to the others\.
 + Make sure that the VPC's CIDR blocks \(for example, 10\.0\.0\.0/4\) and your CoIP pool CIDR blocks don't contain IP addresses from Class E \(240\.0\.0\.0/4\)\. RDS uses these IP addresses internally\.
 + Make sure that you correctly set up outbound and related inbound traffic\. 

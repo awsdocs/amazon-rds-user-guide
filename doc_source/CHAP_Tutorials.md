@@ -15,10 +15,10 @@ You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blo
 The following tutorials in this guide show you how to perform common tasks with Amazon RDS:
 + [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 
-  Learn how to include a DB instance in an Amazon virtual private cloud \(VPC\) that shares data with a web server that is running on an Amazon EC2 instance in the same VPC\.
+  Learn how to include a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\. In this case, the VPC shares data with a web server that is running on an Amazon EC2 instance in the same VPC\.
 + [Tutorial: Create a VPC for use with a DB instance \(dual\-stack mode\)](CHAP_Tutorials.CreateVPCDualStack.md)
 
-  Learn how to include a DB instance in an Amazon virtual private cloud \(VPC\) that shares data with an Amazon EC2 instance in the same VPC\. In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\. 
+  Learn how to include a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\. In this case, the VPC shares data with an Amazon EC2 instance in the same VPC\. In this tutorial, you create the VPC for this scenario that works with a database running in dual\-stack mode\. 
 + [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)
 
   Learn how to install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is a MySQL DB instance\. Both the Amazon EC2 instance and the DB instance run in an Amazon VPC\.
@@ -59,16 +59,16 @@ The following tutorials in other AWS guides show you how to perform common tasks
 The following tutorials and sample code in GitHub show you how to perform common tasks with Amazon RDS:
 + [ Creating the Amazon Relational Database Service item tracker](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_rds_item_tracker)
 
-  Learn how to create an application that tracks and reports on work items using Amazon RDS, Amazon Simple Email Service, Elastic Beanstalk, and SDK for Java 2\.x\.
-+ [ SDK for Go code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/go/rds)
+  Learn how to create an application that tracks and reports on work items\. This application uses Amazon RDS, Amazon Simple Email Service, Elastic Beanstalk, and SDK for Java 2\.x\.
++ [ SDK for Go code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/go/rds)
 
-  View a collection of SDK for Go code samples for Amazon RDS and Aurora\.
-+ [ SDK for Java 2\.x code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/rds/src/main/java/com/example/rds)
+  View a collection of SDK for Go code examples for Amazon RDS and Aurora\.
++ [ SDK for Java 2\.x code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/rds/src/main/java/com/example/rds)
 
-  View a collection of SDK for Java 2\.x code samples for Amazon RDS and Aurora\.
-+ [ SDK for PHP code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php/example_code/rds)
+  View a collection of SDK for Java 2\.x code examples for Amazon RDS and Aurora\.
++ [ SDK for PHP code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php/example_code/rds)
 
-  View a collection of SDK for PHP code samples for Amazon RDS and Aurora\.
-+ [ SDK for Ruby code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/ruby/example_code/rds)
+  View a collection of SDK for PHP code examples for Amazon RDS and Aurora\.
++ [ SDK for Ruby code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/ruby/example_code/rds)
 
-  View a collection of SDK for Ruby code samples for Amazon RDS and Aurora\.
+  View a collection of SDK for Ruby code examples for Amazon RDS and Aurora\.

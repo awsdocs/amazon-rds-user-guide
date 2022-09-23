@@ -508,7 +508,7 @@ sponsored by Amazon.
       + [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)
 + [Quotas and constraints for Amazon RDS](CHAP_Limits.md)
 + [Troubleshooting for Amazon RDS](CHAP_Troubleshooting.md)
-+ [Amazon RDS application programming interface (API) reference](ProgrammingGuide.md)
++ [Amazon RDS API reference](ProgrammingGuide.md)
    + [Using the Query API](Using_the_Query_API.md)
    + [Troubleshooting applications on Amazon RDS](APITroubleshooting.md)
 + [Document history](WhatsNew.md)

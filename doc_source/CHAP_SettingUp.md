@@ -116,7 +116,7 @@ The basic building block of Amazon RDS is the DB instance\. In a DB instance, yo
 
 Before you create a DB instance and a security group, you must know your DB instance and network needs\. Here are some important things to consider:
 + **Resource requirements **– What are the memory and processor requirements for your application or service? You use these settings to help you determine what DB instance class to use\. For specifications about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
-+ **VPC, subnet, and security group – **Your DB instance will most likely be in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use and how you use it: in a default VPC or in a user\-defined VPC\. 
++ **VPC, subnet, and security group – **Your DB instance will most likely be in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use and how you use it\. For example, you can use: a default VPC or a user\-defined VPC\. 
 
   The following list describes the rules for each VPC option:
   + **Default VPC** – If your AWS account has a default VPC in the current AWS Region, that VPC is configured to support DB instances\. If you specify the default VPC when you create the DB instance, do the following:
@@ -135,7 +135,7 @@ Before you create a DB instance and a security group, you must know your DB inst
   + General Purpose \(SSD\)
   + Provisioned IOPS \(PIOPS\)
 
-  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
+  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads\. In particular, Provisioned IOPS storage is designed for database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
 When you have the information you need to create the security group and the DB instance, continue to the next step\.
 
@@ -160,7 +160,7 @@ For information about common scenarios for accessing a DB instance, see [Scenari
 **Note**  
 Make sure you are in the VPC console, not the RDS console\.
 
-1. In the top right corner of the AWS Management Console, choose the AWS Region where you want to create your VPC security group and DB instance\. In the list of Amazon VPC resources for that AWS Region, you should see at least one VPC and several subnets\. If you don't, you don't have a default VPC in that AWS Region\.
+1. In the upper\-right corner of the AWS Management Console, choose the AWS Region where you want to create your VPC security group and DB instance\. In the list of Amazon VPC resources for that AWS Region, you should see at least one VPC and several subnets\. If you don't, you don't have a default VPC in that AWS Region\.
 
 1. In the navigation pane, choose **Security Groups**\.
 
@@ -189,7 +189,7 @@ You can use the VPC security group that you just created as the security group f
 **Note**  
 If you use a default VPC, a default subnet group spanning all of the VPC's subnets is created for you\. When you create a DB instance, you can select the default VPC and use **default** for **DB Subnet Group**\.
 
-Once you have completed the setup requirements, you can create a DB instance using your requirements and security group by following the instructions in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. For information about getting started by creating a DB instance that uses a specific DB engine, see the relevant documentation in the following table\.
+After you have completed the setup requirements, you can create a DB instance using your requirements and security group\. To do so, follow the instructions in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. For information about getting started by creating a DB instance that uses a specific DB engine, see the relevant documentation in the following table\.
 
 
 ****  

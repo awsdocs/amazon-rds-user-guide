@@ -48,7 +48,7 @@ The option group associated with the DB instance is linked to the DB instance's 
 + Assign an option group that is linked to that VPC\.
 + Create a new option group and assign it to the DB instance\.
 
-With persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.
+With persistent or permanent options, such as Oracle TDE, you must create a new option group\. This option group must include the persistent or permanent option when restoring a DB instance into a different VPC\.
 
 Option settings control the behavior of an option\. For example, the Oracle Advanced Security option `NATIVE_NETWORK_ENCRYPTION` has a setting that you can use to specify the encryption algorithm for network traffic to and from the DB instance\. Some options settings are optimized for use with Amazon RDS and cannot be changed\.
 
@@ -60,9 +60,9 @@ Some options are mutually exclusive\. You can use one or the other, but not both
 
 ## Creating an option group<a name="USER_WorkingWithOptionGroups.Create"></a>
 
-You can create a new option group that derives its settings from the default option group, and then add one or more options to the new option group\. Alternatively, if you already have an existing option group, you can copy that option group with all of its options to a new option group\. For more information, see [Copying an option group](#USER_WorkingWithOptionGroups.Copy)\. 
+You can create a new option group that derives its settings from the default option group\. You then add one or more options to the new option group\. Or, if you already have an existing option group, you can copy that option group with all of its options to a new option group\. For more information, see [Copying an option group](#USER_WorkingWithOptionGroups.Copy)\. 
 
-After you create a new option group, it has no options\. To learn how to add options to the option group, see [Adding an option to an option group](#USER_WorkingWithOptionGroups.AddOption)\. After you have added the options you want, you can then associate the option group with a DB instance so that the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your specific engine listed at [Working with option groups](#USER_WorkingWithOptionGroups)\. 
+After you create a new option group, it has no options\. To learn how to add options to the option group, see [Adding an option to an option group](#USER_WorkingWithOptionGroups.AddOption)\. After you have added the options you want, you can then associate the option group with a DB instance\. This way, the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your engine in [Working with option groups](#USER_WorkingWithOptionGroups)\. 
 
 ### Console<a name="USER_WorkingWithOptionGroups.Create.Console"></a>
 
@@ -128,7 +128,7 @@ To create an option group, call the Amazon RDS API [https://docs.aws.amazon.com/
 
 ## Copying an option group<a name="USER_WorkingWithOptionGroups.Copy"></a>
 
-You can use the AWS CLI or the Amazon RDS API copy an option group\. Copying an option group is convenient when you have an existing option group and you want to include most of its custom parameters and values in a new option group\. You can also make a copy of an option group that you use in production and then modify the copy to test other option settings\.
+You can use the AWS CLI or the Amazon RDS API copy an option group\. Copying an option group can be convenient\. An example is when you have an existing option group and want to include most of its custom parameters and values in a new option group\. You can also make a copy of an option group that you use in production and then modify the copy to test other option settings\.
 
 **Note**  
 Currently, you can't copy an option group to a different AWS Region\.
@@ -177,7 +177,7 @@ Option group changes must be applied immediately in two cases:
 In these cases, choose the **Apply Immediately** option in the console\. Or you can include the `--apply-immediately` option when using the AWS CLI or set the `ApplyImmediately` parameter to `true` when using the Amazon RDS API\. Options that don't include port values can be applied immediately, or can be applied during the next maintenance window for the DB instance\. 
 
 **Note**  
-If you specify a security group as a value for an option in an option group, you manage the security group by modifying the option group\. You can't change or remove this security group by modifying a DB instance\. Also, the security group doesn't appear in the DB instance details in the AWS Management Console or in the output for the AWS CLI command `describe-db-instances`\.
+If you specify a security group as a value for an option in an option group, manage the security group by modifying the option group\. You can't change or remove this security group by modifying a DB instance\. Also, the security group doesn't appear in the DB instance details in the AWS Management Console or in the output for the AWS CLI command `describe-db-instances`\.
 
 ### Console<a name="USER_WorkingWithOptionGroups.AddOption.Console"></a>
 
@@ -335,7 +335,7 @@ To list the options and option settings for an option group, use the Amazon RDS 
 
 ## Modifying an option setting<a name="USER_WorkingWithOptionGroups.ModifyOption"></a>
 
-After you have added an option that has modifiable option settings, you can modify the settings at any time\. If you change options or option settings in an option group, those changes are applied to all DB instances that are associated with that option group\. For more information on what settings are available for the various options, see the documentation for your specific engine listed at [Working with option groups](#USER_WorkingWithOptionGroups)\. 
+After you have added an option that has modifiable option settings, you can modify the settings at any time\. If you change options or option settings in an option group, those changes are applied to all DB instances that are associated with that option group\. For more information on what settings are available for the various options, see the documentation for your engine in [Working with option groups](#USER_WorkingWithOptionGroups)\. 
 
 Option group changes must be applied immediately in two cases: 
 + When you add an option that adds or updates a port value, such as the `OEM` option\. 
@@ -495,7 +495,7 @@ Include the following parameters:
 
 You can delete an option group that is not associated with any Amazon RDS resource\. An option group can be associated with a DB instance, a manual DB snapshot, or an automated DB snapshot\.
 
-You can't delete a default option group\. In addition, if you try to delete an option group that is associated with an Amazon RDS resource, an error similar to the following is returned\. 
+You can't delete a default option group\. If you try to delete an option group that is associated with an RDS resource, an error like the following is returned\. 
 
 ```
 An error occurred (InvalidOptionGroupStateFault) when calling the DeleteOptionGroup operation: The option group 'optionGroupName' cannot be deleted because it is in use.            
@@ -513,7 +513,7 @@ An error occurred (InvalidOptionGroupStateFault) when calling the DeleteOptionGr
 
 If a DB instance is associated with the option group, modify the DB instance to use a different option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-If a manual DB snapshot is associated with the option group, modify the DB snapshot to use a different option group using the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\.
+If a manual DB snapshot is associated with the option group, modify the DB snapshot to use a different option group\. You can do so using the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\.
 
 **Note**  
 You can't modify the option group of an automated DB snapshot\.

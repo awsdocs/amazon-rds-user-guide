@@ -6,7 +6,7 @@ Create an Amazon RDS for MySQL DB instance that maintains the data used by a web
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the upper\-right corner of the AWS Management Console, make sure the AWS Region is the same as the one where you created your EC2 instance\.
+1. In the upper\-right corner of the AWS Management Console, check the AWS Region\. It should be the same as the one where you created your EC2 instance\.
 
 1. In the navigation pane, choose **Databases**\.
 

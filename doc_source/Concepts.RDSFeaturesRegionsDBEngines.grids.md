@@ -41,11 +41,11 @@ The following quick reference table lists each feature and supported RDS DB engi
 | Multi\-AZ DB clusters | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.pg) | – | 
 | Performance Insights | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights) | 
 | RDS Custom | – | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq) | 
-| RDS Proxy | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | – | 
+| RDS Proxy | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | – | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | [Available](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.sq) | 
 
 ## Cross\-Region automated backups<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups"></a>
 
-By using backup replication in Amazon RDS, you can configure your RDS DB instance to replicate snapshots and transaction logs to a destination Region\. When backup replication is configured for a DB instance, RDS initiates a cross\-Region copy of all snapshots and transaction logs as soon as they're ready on the DB instance\. For more information, see [Replicating automated backups to another AWS Region](USER_ReplicateBackups.md)\.
+By using backup replication in Amazon RDS, you can configure your RDS DB instance to replicate snapshots and transaction logs to a destination Region\. When backup replication is configured for a DB instance, RDS starts a cross\-Region copy of all snapshots and transaction logs when they're ready\. For more information, see [Replicating automated backups to another AWS Region](USER_ReplicateBackups.md)\.  
 
 Backup replication isn't available with the following engines:
 + RDS for MariaDB
@@ -127,7 +127,7 @@ Database activity streams for RDS for Oracle are supported in all AWS Regions ex
 
 ## Dual\-stack mode<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode"></a>
 
-By using dual\-stack mode in Amazon RDS, resources can communicate with the DB instance over Internet Protocol version 4 \(IPv4\), Internet Protocol version 6 \(IPv6\), or both\. For more information, see [Dual\-stack mode](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing.dual-stack-mode)\.
+By using dual\-stack mode in RDS, resources can communicate with a DB instance over Internet Protocol version 4 \(IPv4\), Internet Protocol version 6 \(IPv6\), or both\. For more information, see [Dual\-stack mode](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.IP_addressing.dual-stack-mode)\.
 
 Dual\-stack mode is available for all versions in all Regions, except in the Middle East \(UAE\) Region, for the following engines:
 + RDS for MariaDB
@@ -440,9 +440,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 
 Amazon RDS Proxy is a fully managed, highly available database proxy that makes applications more scalable by pooling and sharing established database connections\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\.
 
-RDS Proxy isn't available with the following engines:
-+ RDS for Oracle
-+ RDS for SQL Server
+RDS Proxy isn't available with RDS for Oracle\.
 
 RDS Proxy is available in all Regions except the following:
 + Asia Pacific \(Jakarta\)
@@ -456,6 +454,7 @@ RDS Proxy is available in all Regions except the following:
 + [RDS Proxy with RDS for MariaDB](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb)
 + [RDS Proxy with RDS for MySQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my)
 + [RDS Proxy with RDS for PostgreSQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg)
++ [RDS Proxy with RDS for SQL Server](#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.sq)
 
 ### RDS Proxy with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb"></a>
 
@@ -468,6 +467,10 @@ Amazon RDS supports RDS Proxy for all versions of RDS for MySQL\.
 ### RDS Proxy with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg"></a>
 
 Amazon RDS supports RDS Proxy for all versions of RDS for PostgreSQL except version 14\.
+
+### RDS Proxy with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.sq"></a>
+
+Amazon RDS supports RDS Proxy for RDS for SQL Server 2014 and higher\.
 
 ## Engine\-native features<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.EngineNativeFeatures"></a>
 

@@ -24,7 +24,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    sudo amazon-linux-extras install php8.0 mariadb10.5
    ```
 
-   If you receive an error stating `sudo: amazon-linux-extras: command not found`, then your instance was not launched with an Amazon Linux 2 AMI \(perhaps you are using the Amazon Linux AMI instead\)\. You can view your version of Amazon Linux using the following command\.
+   If you receive an error stating `sudo: amazon-linux-extras: command not found`, your instance wasn't launched with an Amazon Linux 2 AMI\. You might be using the Amazon Linux AMI instead\. You can view your version of Amazon Linux using the following command\.
 
    ```
    cat /etc/system-release
@@ -46,9 +46,9 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 
    You can test that your web server is properly installed and started\. To do this, enter the public Domain Name System \(DNS\) name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. 
 
-   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
+   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include one allowing HTTP \(port 80\) access for the IP address to connect to the web server\.
 **Note**  
-The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
+The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance\. Before this point, it appears on the Apache test page\.
 
 1. Configure the web server to start with each system boot using the `systemctl` command\.
 
@@ -103,10 +103,11 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
    find /var/www -type f -exec sudo chmod 0664 {} \;
    ```
 
-Now, `ec2-user` \(and any future members of the `apache` group\) can add, delete, and edit files in the Apache document root, enabling you to add content, such as a static website or a PHP application\. 
+Now, `ec2-user` \(and any future members of the `apache` group\) can add, delete, and edit files in the Apache document root\. This makes it possible for you to add content, such as a static website or a PHP application\. 
 
 **Note**  
-A web server running the HTTP protocol provides no transport security for the data that it sends or receives\. When you connect to an HTTP server using a web browser, the URLs that you visit, the content of web pages that you receive, and the contents \(including passwords\) of any HTML forms that you submit are all visible to eavesdroppers anywhere along the network pathway\. The best practice for securing your web server is to install support for HTTPS \(HTTP Secure\), which protects your data with SSL/TLS encryption\. For more information, see [ Tutorial: Configure SSL/TLS with the Amazon Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-ami.html) in the *Amazon EC2 User Guide*\.
+A web server running the HTTP protocol provides no transport security for the data that it sends or receives\. When you connect to an HTTP server using a web browser, much information is visible to eavesdroppers anywhere along the network pathway\. This information includes the URLs that you visit, the content of webpages that you receive, and the contents \(including passwords\) of any HTML forms\.   
+The best practice for securing your web server is to install support for HTTPS \(HTTP Secure\)\. This protocol protects your data with SSL/TLS encryption\. For more information, see [ Tutorial: Configure SSL/TLS with the Amazon Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-ami.html) in the *Amazon EC2 User Guide*\.
 
 ## Connect your Apache web server to your DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
 
@@ -288,7 +289,7 @@ We recommend placing the user name and password information in a folder that isn
 
 1. Verify that your web server successfully connects to your DB instance by opening a web browser and browsing to `http://EC2 instance endpoint/SamplePage.php`, for example: `http://ec2-55-122-41-31.us-west-2.compute.amazonaws.com/SamplePage.php`\.
 
-You can use `SamplePage.php` to add data to your DB instance\. The data that you add is then displayed on the page\. To verify that the data was inserted into the table, you can install MySQL client on the Amazon EC2 instance, connect to the DB instance, and query the table\. 
+You can use `SamplePage.php` to add data to your DB instance\. The data that you add is then displayed on the page\. To verify that the data was inserted into the table, install MySQL client on the Amazon EC2 instance\. Then connect to the DB instance and query the table\. 
 
 For information about installing the MySQL client and connecting to a DB instance, see [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)\.
 

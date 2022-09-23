@@ -1,6 +1,6 @@
 # Publishing database logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
 
-In an on\-premises database, the database logs reside on the file system\. Amazon RDS doesn't provide host access to the database logs on the file system of your DB instance\. For this reason, Amazon RDS lets you export database logs to [Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)\. With CloudWatch Logs, you can perform real\-time analysis of the log data, store the data in highly durable storage, and manage the data with the CloudWatch Logs Agent\. 
+In an on\-premises database, the database logs reside on the file system\. Amazon RDS doesn't provide host access to the database logs on the file system of your DB instance\. For this reason, Amazon RDS lets you export database logs to [Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)\. With CloudWatch Logs, you can perform real\-time analysis of the log data\. You can also store the data in highly durable storage and manage the data with the CloudWatch Logs Agent\. 
 
 **Topics**
 + [Overview of RDS integration with CloudWatch Logs](#rds-integration-cw-logs)

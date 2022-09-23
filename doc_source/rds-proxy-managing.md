@@ -126,7 +126,7 @@ aws rds modify-db-proxy-target-group --db-proxy-name the-proxy --target-group-na
 }
 ```
 
- With the `deregister-db-proxy-targets` and `register-db-proxy-targets` commands, you change which RDS DB instance or Aurora DB cluster the proxy is associated with through its target group\. Currently, each proxy can connect to one RDS DB instance or Aurora DB cluster\. The target group tracks the connection details for all the RDS DB instances in a Multi\-AZ configuration, or all the DB instances in an Aurora cluster\. 
+ With the `deregister-db-proxy-targets` and `register-db-proxy-targets` commands, you change which RDS DB instance or Aurora DB cluster the proxy is associated with through its target group\. Currently, each proxy can connect to one RDS DB instance or Aurora DB cluster\. The target group tracks the connection details for all the RDS DB instances in a Multi\-AZ configuration\. Or the target group tracks the connection details for all the DB instances in an Aurora cluster\. 
 
  The following example starts with a proxy that is associated with an Aurora MySQL cluster named `cluster-56-2020-02-25-1399`\. The example shows how to change the proxy so that it can connect to a different cluster named `provisioned-cluster`\. 
 
@@ -251,7 +251,7 @@ This setting is represented by the **Idle client connection timeout** field in t
 
 You can limit the number of connections that an RDS Proxy can establish with the database\. You specify the limit as a percentage of the maximum connections available for your database\. The proxy doesn't create all of these connections in advance\. This setting reserves the right for the proxy to establish these connections as the workload needs them\.
 
-For example, suppose that you configured RDS Proxy to use 75 percent of the maximum connections for your database that supports a maximum of 1,000 concurrent connections\. In that case, RDS Proxy can open up to 750 database connections\.
+For example, suppose that you configured RDS Proxy to use 75 percent of the maximum connections for your database\. In this case, your database supports a maximum of 1,000 concurrent connections\. Here, RDS Proxy can open up to 750 database connections\.
 
 This setting is represented by the **Connection pool maximum connections** field in the RDS console and the `MaxConnectionsPercent` setting in the AWS CLI and the API\. To learn how to change the value of the **Connection pool maximum connections** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `MaxConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
@@ -261,7 +261,7 @@ This setting is represented by the **Connection pool maximum connections** field
 
 You can control the number of idle database connections that RDS Proxy can keep in the connection pool\. RDS Proxy considers a database connection in it's pool to be *idle* when there's been no activity on the connection for five minutes\. 
 
-You specify the limit as a percentage of the maximum connections available for your database\. The default value is 50 percent and the upper limit is the value of `MaxConnectionsPercent`\. With a high value, the proxy leaves a high percentage of idle database connections open\. With a low value, the proxy closes a high percentage of idle database connections\. If your workloads are unpredictable, consider setting a high value for `MaxIdleConnectionsPercent` so that RDS Proxy can accommodate surges in activity without opening a lot of new database connections\. 
+You specify the limit as a percentage of the maximum connections available for your database\. The default value is 50 percent of `MaxConnectionsPercent`, and the upper limit is the value of `MaxConnectionsPercent`\. With a high value, the proxy leaves a high percentage of idle database connections open\. With a low value, the proxy closes a high percentage of idle database connections\. If your workloads are unpredictable, consider setting a high value for `MaxIdleConnectionsPercent`\. Doing so means that RDS Proxy can accommodate surges in activity without opening a lot of new database connections\. 
 
 This setting is represented by the `MaxIdleConnectionsPercent` setting of `DBProxyTargetGroup` in the AWS CLI and the API\. To learn how to change the value of the `MaxIdleConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
@@ -284,9 +284,32 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 
  RDS Proxy automatically pins a client connection to a specific DB connection when it detects a session state change that isn't appropriate for other sessions\. Pinning reduces the effectiveness of connection reuse\. If all or almost all of your connections experience pinning, consider modifying your application code or workload to reduce the conditions that cause the pinning\. 
 
- For example, if your application changes a session variable or configuration parameter, later statements can rely on the new variable or parameter to be in effect\. Thus, when RDS Proxy processes requests to change session variables or configuration settings, it pins that session to the DB connection\. That way, the session state remains in effect for all later transactions in the same session\. 
+ For example, suppose that your application changes a session variable or configuration parameter\. In this case, later statements can rely on the new variable or parameter to be in effect\. Thus, when RDS Proxy processes requests to change session variables or configuration settings, it pins that session to the DB connection\. That way, the session state remains in effect for all later transactions in the same session\. 
 
- For MySQL engine family databases, this rule doesn't apply to all parameters that you can set\. RDS Proxy tracks certain statements and variables\. Thus RDS Proxy doesn't pin the session when you modify them\. In this case, RDS Proxy only reuses the connection for other sessions that have the same values for those settings\. 
+ For some database engines, this rule doesn't apply to all parameters that you can set\. RDS Proxy tracks certain statements and variables\. Thus RDS Proxy doesn't pin the session when you modify them\. In this case, RDS Proxy only reuses the connection for other sessions that have the same values for those settings\. For details about what RDS Proxy tracks for a database engine, see the following: 
++ [What RDS Proxy tracks for RDS for SQL Server databases](#rds-proxy-pinning.sql-server-tracked-vars)
++ [What RDS Proxy tracks for RDS for MariaDB and RDS for MySQL databases](#rds-proxy-pinning.mysql-tracked-vars)
+
+### What RDS Proxy tracks for RDS for SQL Server databases<a name="rds-proxy-pinning.sql-server-tracked-vars"></a>
+
+Following are the SQL Server statements that RDS Proxy tracks:
++ `USE`
++ `SET ANSI_NULLS`
++ `SET ANSI_PADDING`
++ `SET ANSI_WARNINGS`
++ `SET ARITHABORT`
++ `SET CONCAT_NULL_YIELDS_NULL`
++ `SET CURSOR_CLOSE_ON_COMMIT`
++ `SET DATEFIRST`
++ `SET DATEFORMAT`
++ `SET LANGUAGE`
++ `SET LOCK_TIMEOUT`
++ `SET NUMERIC_ROUNDABORT`
++ `SET QUOTED_IDENTIFIER`
++ `SET TEXTSIZE`
++ `SET TRANSACTION ISOLATION LEVEL`
+
+### What RDS Proxy tracks for RDS for MariaDB and RDS for MySQL databases<a name="rds-proxy-pinning.mysql-tracked-vars"></a>
 
 Following are the MySQL and MariaDB statements that RDS Proxy tracks:
 + DROP DATABASE
@@ -317,13 +340,19 @@ Following are the MySQL and MariaDB variables that RDS Proxy tracks:
 + `TRANSACTION_READ_ONLY (or TX_READ_ONLY)`
 + `WAIT_TIMEOUT`
 
- Performance tuning for RDS Proxy involves trying to maximize transaction\-level connection reuse \(multiplexing\) by minimizing pinning\. You can do so by doing the following: 
+### Minimizing pinning<a name="rds-proxy-pinning.minimizing"></a>
+
+ Performance tuning for RDS Proxy involves trying to maximize transaction\-level connection reuse \(multiplexing\) by minimizing pinning\. 
+
+In some cases, RDS Proxy can't be sure that it's safe to reuse a database connection outside of the current session\. In these cases, it keeps the session on the same connection until the session ends\. This fallback behavior is called *pinning*\. 
+
+You can minimize pinning by doing the following: 
 +  Avoid unnecessary database requests that might cause pinning\. 
 +  Set variables and configuration settings consistently across all connections\. That way, later sessions are more likely to reuse connections that have those particular settings\. 
 
    However, for PostgreSQL setting a variable leads to session pinning\. 
 +  For a MySQL engine family database, apply a session pinning filter to the proxy\. You can exempt certain kinds of operations from pinning the session if you know that doing so doesn't affect the correct operation of your application\. 
-+  See how frequently pinning occurs by monitoring the CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
++  See how frequently pinning occurs by monitoring the Amazon CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 +  If you use `SET` statements to perform identical initialization for each client connection, you can do so while preserving transaction\-level multiplexing\. In this case, you move the statements that set up the initial session state into the initialization query used by a proxy\. This property is a string containing one or more SQL statements, separated by semicolons\. 
 
    For example, you can define an initialization query for a proxy that sets certain configuration parameters\. Then, RDS Proxy applies those settings whenever it sets up a new connection for that proxy\. You can remove the corresponding `SET` statements from your application code, so that they don't interfere with transaction\-level multiplexing\. 
@@ -336,7 +365,33 @@ Following are the MySQL and MariaDB variables that RDS Proxy tracks:
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session\.
 +  Prepared statements cause the proxy to pin the session\. This rule applies whether the prepared statement uses SQL text or the binary protocol\. 
 
-### Conditions that cause pinning for MySQL and MariaDB<a name="rds-proxy-pinning.mysql"></a>
+### Conditions that cause pinning for RDS for Microsoft SQL Server<a name="rds-proxy-pinning.sqlserver"></a>
+
+ For RDS for SQL Server, the following interactions also cause pinning: 
++ Using multiple active result sets \(MARS\)\. For information about MARS, see the [SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/native-client/features/using-multiple-active-result-sets-mars?view=sql-server-ver16) documentation\.
++ Using distributed transaction coordinator \(DTC\) communication\.
++ Creating temporary tables, transactions, cursors, or prepared statements\.
++ Using the following `SET` statements:
+  + `SET ANSI_DEFAULTS`
+  + `SET ANSI_NULL_DFLT`
+  + `SET ARITHIGNORE`
+  + `SET DEADLOCK_PRIORITY`
+  + `SET FIPS_FLAGGER`
+  + `SET FMTONLY`
+  + `SET FORCEPLAN`
+  + `SET IDENTITY_INSERT`
+  + `SET NOCOUNT`
+  + `SET NOEXEC`
+  + `SET OFFSETS`
+  + `SET PARSEONLY`
+  + `SET QUERY_GOVERNOR_COST_LIMIT`
+  + `SET REMOTE_PROC_TRANSACTIONS`
+  + `SET ROWCOUNT`
+  + `SET SHOWPLAN_ALL`, `SHOWPLAN_TEXT`, and `SHOWPLAN_XML`
+  + `SET STATISTICS`
+  + `SET XACT_ABORT`
+
+### Conditions that cause pinning for RDS for MariaDB and RDS for MySQL<a name="rds-proxy-pinning.mysql"></a>
 
  For MySQL and MariaDB, the following interactions also cause pinning: 
 +  Explicit  table lock statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
@@ -349,10 +404,10 @@ Following are the MySQL and MariaDB variables that RDS Proxy tracks:
 
  If you have expert knowledge about your application behavior, you can skip the pinning behavior for certain application statements\. To do so, choose the **Session pinning filters** option when creating the proxy\. Currently, you can opt out of session pinning for setting session variables and configuration settings\. 
 
-### Conditions that cause pinning for PostgreSQL<a name="rds-proxy-pinning.postgres"></a>
+### Conditions that cause pinning for RDS for PostgreSQL<a name="rds-proxy-pinning.postgres"></a>
 
  For PostgreSQL, the following interactions also cause pinning: 
-+  Using SET commands 
++  Using `SET` commands 
 +  Using the PostgreSQL extended query protocol such as by using JDBC default settings 
 +  Creating temporary sequences, tables, or views 
 +  Declaring cursors 

@@ -8,7 +8,7 @@ Deferred DB instance modifications that you have chosen not to apply immediately
 
 ## Viewing pending maintenance<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
 
-You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\.
+View whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\.
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailable.png)
 
@@ -130,7 +130,7 @@ To return a list of resources that have at least one pending update, call the Am
 
 ## Maintenance for Multi\-AZ deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
 
-Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event, because Amazon RDS applies operating system updates by following these steps: 
+Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event\. This result is because Amazon RDS applies operating system updates by following these steps: 
 
 1. Perform maintenance on the standby\.
 
@@ -138,17 +138,17 @@ Running a DB instance as a Multi\-AZ deployment can further reduce the impact of
 
 1. Perform maintenance on the old primary, which becomes the new standby\.
 
-When you modify the database engine for your DB instance in a Multi\-AZ deployment, then Amazon RDS upgrades both the primary and secondary DB instances at the same time\. In this case, the database engine for the entire Multi\-AZ deployment is shut down during the upgrade\. 
+When you modify the database engine for your DB instance in a Multi\-AZ deployment, Amazon RDS upgrades both primary and secondary DB instances at once\. In this case, the database engine for the entire Multi\-AZ deployment is shut down during the upgrade\. 
 
 For more information on Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
 
 ## The Amazon RDS maintenance window<a name="Concepts.DBMaintenance"></a>
 
-Every DB instance has a weekly maintenance window during which any system changes are applied\. You can think of the maintenance window as an opportunity to control when modifications and software patching occur, in the event either are requested or required\. If a maintenance event is scheduled for a given week, it is initiated during the 30\-minute maintenance window you identify\. Most maintenance events also complete during the 30\-minute maintenance window, although larger maintenance events may take more than 30 minutes to complete\. 
+Every DB instance has a weekly maintenance window during which any system changes are applied\. Think of the maintenance window as an opportunity to control when modifications and software patching occur\. If a maintenance event is scheduled for a given week, it's initiated during the 30\-minute maintenance window you identify\. Most maintenance events also complete during the 30\-minute maintenance window, although larger maintenance events may take more than 30 minutes to complete\. 
 
-The 30\-minute maintenance window is selected at random from an 8\-hour block of time per region\. If you don't specify a preferred maintenance window when you create the DB instance, then Amazon RDS assigns a 30\-minute maintenance window on a randomly selected day of the week\. 
+The 30\-minute maintenance window is selected at random from an 8\-hour block of time per region\. If you don't specify a maintenance window when you create the DB instance, RDS assigns a 30\-minute maintenance window on a randomly selected day of the week\. 
 
-RDS will consume some of the resources on your DB instance while maintenance is being applied\. You might observe a minimal effect on performance\. For a DB instance, on rare occasions, a Multi\-AZ failover might be required for a maintenance update to complete\. 
+RDS consumes some of the resources on your DB instance while maintenance is being applied\. You might observe a minimal effect on performance\. For a DB instance, on rare occasions, a Multi\-AZ failover might be required for a maintenance update to complete\. 
 
 Following, you can find the time blocks for each region from which default maintenance windows are assigned\. 
 
@@ -158,11 +158,11 @@ Following, you can find the time blocks for each region from which default maint
 
 ## Adjusting the preferred DB instance maintenance window<a name="AdjustingTheMaintenanceWindow"></a>
 
-The maintenance window should fall at the time of lowest usage and thus might need modification from time to time\. Your DB instance will only be unavailable during this time if the system changes, such as a change in DB instance class, are being applied and require an outage, and only for the minimum amount of time required to make the necessary changes\. 
+The maintenance window should fall at the time of lowest usage and thus might need modification from time to time\. Your DB instance is unavailable during this time only if the system changes, such as a change in DB instance class, are being applied and require an outage\. Your DB instance is unavailable only for the minimum amount of time required to make the necessary changes\. 
 
 In the following example, you adjust the preferred maintenance window for a DB instance\. 
 
-For the purpose of this example, we assume that the DB instance named *mydbinstance* exists and has a preferred maintenance window of "Sun:05:00\-Sun:06:00" UTC\. 
+For this example, we assume that a DB instance named *mydbinstance* exists and has a preferred maintenance window of "Sun:05:00\-Sun:06:00" UTC\. 
 
 ### Console<a name="AdjustingTheMaintenanceWindow.CON"></a>
 
@@ -292,7 +292,7 @@ The following output shows an optional operating system update\.
 
 ### Availability of operating system updates<a name="OS_Updates.Availability"></a>
 
-Operating system updates are specific to DB engine version and DB instance class\. Therefore, DB instances receive or require updates at different times\. When an operating system update is available for your DB instance based on its DB engine version and DB instance class, the update appears in the AWS Management Console\. It can also be viewed by running AWS CLI [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command, or by calling the Amazon RDS [DescribePendingMaintenanceActions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) API operation\. If an update is available for your instance, you can update your operating system by following the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.
+Operating system updates are specific to DB engine version and DB instance class\. Therefore, DB instances receive or require updates at different times\. When an operating system update is available for your DB instance based on its engine version and instance class, the update appears in the console\. It can also be viewed by running AWS CLI [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command or by calling the RDS [DescribePendingMaintenanceActions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) API operation\. If an update is available for your instance, you can update your operating system by following the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.
 
 ### Mandatory operating system updates schedule<a name="Mandatory_OS_Updates.Schedule"></a>
 

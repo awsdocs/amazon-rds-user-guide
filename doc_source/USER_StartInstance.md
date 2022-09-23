@@ -2,7 +2,7 @@
 
 You can stop your Amazon RDS DB instance temporarily to save money\. After you stop your DB instance, you can restart it to begin using it again\. For more details about stopping and starting DB instances, see [Stopping an Amazon RDS DB instance temporarily](USER_StopInstance.md)\. 
 
-When you start a DB instance that you previously stopped, the DB instance retains the ID, Domain Name Server \(DNS\) endpoint, parameter group, security group, and option group\. When you start a stopped instance, you are charged a full instance hour\. 
+When you start a DB instance that you previously stopped, the DB instance retains certain information\. This information is the ID, Domain Name Server \(DNS\) endpoint, parameter group, security group, and option group\. When you start a stopped instance, you are charged a full instance hour\. 
 
 ## Console<a name="USER_StartInstance.CON"></a>
 

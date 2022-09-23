@@ -10,7 +10,7 @@ The following diagram shows this scenario\.
 
 For information about other scenarios, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
 
-Because your DB instance needs to be available only to your Amazon EC2 instance, and not to the public internet, you create a VPC with both public and private subnets\. The Amazon EC2 instance is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The Amazon EC2 instance can connect to the DB instance because it's hosted within the same VPC\. However, the DB instance is not available to the public internet, providing greater security\.
+Your DB instance needs to be available only to your Amazon EC2 instance, and not to the public internet\. Thus, you create a VPC with both public and private subnets\. The Amazon EC2 instance is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The Amazon EC2 instance can connect to the DB instance because it's hosted within the same VPC\. However, the DB instance is not available to the public internet, providing greater security\.
 
 This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easy to switch to a Multi\-AZ DB instance deployment in the future\. 
 
@@ -72,13 +72,13 @@ Next, you create a security group for public access\. To connect to public EC2 i
 
       To determine your public IP address, in a different browser window or tab use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an Internet Protocol version 4 \(IPv4\) address is `203.0.113.25/32`\. An example of an Internet Protocol version 6 \(IPv6\) address is `2001:DB8::/32`\.
 
-      If you are connecting through an internet service provider \(ISP\) or from behind your firewall without a static IP address, find out the range of IP addresses used by client computers\.
+      In many cases, you might connect through an internet service provider \(ISP\) or from behind your firewall without a static IP address\. If so, find the range of IP addresses used by client computers\.
 **Warning**  
 If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you make it possible for all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your Amazon EC2 instance\. If you do this, you can connect to your EC2 instance to install SQL clients and other applications\. Specify an IP address to allow to access your EC2 instance:
+   1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your Amazon EC2 instance\. If you do this, you can connect to your EC2 instance to install SQL clients and other applications\. Specify an IP address so you can access your EC2 instance:
       + **Type:** **SSH**
       + **Source:** The IP address or range from step a\. An example of an IPv4 IP address is **203\.0\.113\.25/32**\. An example of an IPv6 IP address is **2001:DB8::/32**\.
 
@@ -88,7 +88,7 @@ If you use `0.0.0.0/0` for IPv4 or `::0` for IPv6, you make it possible for all 
 
 ## Create a VPC security group for a private DB instance<a name="CHAP_Tutorials.CreateVPCDualStack.SecurityGroupDB"></a>
 
-To keep your DB instance private, create a second security group for private access\. To connect to private DB instances in your VPC, add inbound rules to your VPC security group that allow traffic from your Amazon EC2 instance only\.
+To keep your DB instance private, create a second security group for private access\. To connect to private DB instances in your VPC, add inbound rules to your VPC security group\. These allow traffic from your Amazon EC2 instance only\.
 
 **To create a VPC security group**
 
@@ -105,7 +105,7 @@ To keep your DB instance private, create a second security group for private acc
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your EC2 instance to your DB instance to store and retrieve data from your EC2 instance to your database\.
+   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do, you can connect from your EC2 instance to your DB instance\. Doing this means that you can store and retrieve data from your EC2 instance to your database\.
       + **Type:** **MySQL/Aurora**
       + **Source:** The identifier of the **tutorial\-dual\-stack\-securitygroup** security group that you created previously in this tutorial, for example **sg\-9edd5cfb**\.
 
@@ -158,7 +158,7 @@ On the **Configure Instance Details** page, set these values and keep the other 
 + **Auto\-assign Public IP** – Choose **Enable**\.
 + **Auto\-assign IPv6 IP** – Choose **Enable**\.
 + **Firewall \(security groups\)** – Choose **Select an existing security group**\.
-+ **Common security groups** – Choose choose an existing security group, such as the `tutorial-securitygroup` created in [Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.
++ **Common security groups** – Choose an existing security group, such as the `tutorial-securitygroup` created in [Create a VPC security group for a public Amazon EC2 instance](#CHAP_Tutorials.CreateVPCDualStack.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.
 
 ## Create a DB instance in dual\-stack mode<a name="CHAP_Tutorials.CreateVPCDualStack.CreateDBInstance"></a>
 
@@ -204,7 +204,7 @@ To connect to your DB instance, follow the instructions in [Connecting to an Ama
 
 After you create the VPC and other resources for this tutorial, you can delete them if they are no longer needed\.
 
-If you added resources in the VPC that you created for this tutorial, such as Amazon EC2 instances or DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
+If you added resources in the VPC that you created for this tutorial, you might need to delete these before you can delete the VPC\. Examples of resources are Amazon EC2 instances or DB instances\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
 
 **To delete a VPC and related resources**
 

@@ -75,7 +75,7 @@ For engine\-specific connection issues, see the following topics:
 
 You can test your connection to a DB instance using common Linux or Microsoft Windows tools\. 
 
-From a Linux or Unix terminal, you can test the connection by entering the following \(replace `DB-instance-endpoint` with the endpoint and `port` with the port of your DB instance\)\.
+From a Linux or Unix terminal, you can test the connection by entering the following\. Replace `DB-instance-endpoint` with the endpoint and `port` with the port of your DB instance\.
 
 ```
 nc -zv DB-instance-endpoint port 
@@ -105,7 +105,7 @@ Amazon RDS doesn't accept internet control message protocol \(ICMP\) traffic, in
 
 ### Troubleshooting connection authentication<a name="CHAP_Troubleshooting.Connecting.Authorization"></a>
 
-If you can connect to your DB instance but you get authentication errors, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance\. 
+In some cases, you can connect to your DB instance but you get authentication errors\. In these cases, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance\. 
 
 For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
@@ -127,12 +127,12 @@ You can change the DB instance password by using the Amazon RDS console, the AWS
 
 ## Amazon RDS DB instance outage or reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
-A DB instance outage can occur when a DB instance is rebooted\. It can also occur when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you either manually reboot your DB instance or change a DB instance setting that requires a reboot before it can take effect\.
+A DB instance outage can occur when a DB instance is rebooted\. It can also occur when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you manually reboot your DB instance\. A reboot can also occur when you change a DB instance setting that requires a reboot before it can take effect\.
 
- A DB instance reboot occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately or it can occur during the DB instance's maintenance window\.
+ A DB instance reboot occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately\. Or it can occur during the DB instance's maintenance window\.
 
  A DB instance reboot occurs immediately when one of the following occurs:
-+ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0 and set **Apply Immediately** to `true`\. 
++ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0\. You then set **Apply Immediately** to `true`\. 
 + You change the DB instance class, and **Apply Immediately** is set to `true`\. 
 + You change the storage type from **Magnetic \(Standard\)** to **General Purpose \(SSD**\) or **Provisioned IOPS \(SSD\)**, or from **Provisioned IOPS \(SSD\)** or **General Purpose \(SSD\)** to **Magnetic \(Standard\)**\.
 
@@ -148,7 +148,7 @@ To see a table that shows DB instance actions and the effect that setting the **
 
 In some cases, you might change a parameter in a DB parameter group but don't see the changes take effect\. If so, you likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately\. When you change a static parameter, the change doesn't take effect until you reboot the DB instance associated with the parameter group\.
 
-You can reboot a DB instance using the RDS console or explicitly calling the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call\. An example of this might be calling `ModifyDBInstance` to change the DB instance class\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+You can reboot a DB instance using the RDS console\. Or you can explicitly call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation\. You can reboot without failover if the DB instance is in a Multi\-AZ deployment\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call\. An example of this is calling `ModifyDBInstance` to change the DB instance class\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Amazon RDS DB instance running out of storage<a name="CHAP_Troubleshooting.Storage"></a>
 
@@ -236,7 +236,7 @@ aws rds describe-events --source-type db-instance --source-identifier mydbinstan
 
 ## Amazon RDS insufficient DB instance capacity<a name="CHAP_Troubleshooting.Capacity"></a>
 
-The `InsufficientDBInstanceCapacity` error can be returned when you try to create, start, or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, a common cause is that the specific DB instance class isn't available in the requested Availability Zone\. You can try one of the following to solve the problem:
+The `InsufficientDBInstanceCapacity` error can be returned when you try to create, start, or modify a DB instance\. It can also be returned when you try to restore a DB instance from a DB snapshot\. When this error is returned, a common cause is that the specific DB instance class isn't available in the requested Availability Zone\. You can try one of the following to solve the problem:
 + Retry the request with a different DB instance class\.
 + Retry the request with a different Availability Zone\.
 + Retry the request without specifying an explicit Availability Zone\.
@@ -251,7 +251,7 @@ For information about modifying a DB instance, see [Modifying an Amazon RDS DB i
 
 You use the `FreeableMemory` metric in Amazon CloudWatch to monitor the freeable memory\. For more information, see [Overview of monitoring metrics in Amazon RDS](MonitoringOverview.md)\.
 
-If your DB instance consistently runs low on freeable memory or uses swap space, you might need to scale up to a larger DB instance class\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+If your DB instance consistently runs low on freeable memory or uses swap space, consider scaling up to a larger DB instance class\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 You can also change the memory settings\. For example, on RDS for MySQL, you might adjust the size of the `innodb_buffer_pool_size` parameter\. This parameter is set by default to 75 percent of physical memory\. For more MySQL troubleshooting tips, see [How can I troubleshoot low freeable memory in an Amazon RDS for MySQL database?](https://aws.amazon.com/premiumsupport/knowledge-center/low-freeable-memory-rds-mysql-mariadb/)
 
@@ -322,7 +322,7 @@ The calculation multiplies the value of the `max_connections` parameter by the s
 
 To resolve the problem, complete the following steps:
 
-1. Adjust the memory parameters in the DB parameter group associated with the DB instance so that the potential memory usage is lower than 1\.2 times the memory allocated to its DB instance class\.
+1. Adjust the memory parameters in the DB parameter group associated with the DB instance\. Do so such that the potential memory usage is lower than 1\.2 times the memory allocated to its DB instance class\.
 
    For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
@@ -375,12 +375,12 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and resolving a MySQL or MariaDB read replication failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your read replicas and updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Working with Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. If a MariaDB error message is returned, check the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
+Amazon RDS monitors the replication status of your read replicas\. RDS updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Working with Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. If a MariaDB error message is returned, check the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
 
-  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. If the `max_allowed_packet` value for the source DB instance is larger than the `max_allowed_packet` value for the read replica, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
+  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. In some cases, the `max_allowed_packet` value for the source DB instance might be larger than the `max_allowed_packet` value for the read replica\. If so, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
 + Writing to tables on a read replica\. If you're creating indexes on a read replica, you need to have the `read_only` parameter set to *0* to create the indexes\. If you're writing to tables on the read replica, it can break replication\.
 + Using a nontransactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the following storage engines: InnoDB for MySQL or MariaDB\.
 
@@ -392,7 +392,7 @@ Common situations that can cause replication errors include the following:
 The following steps can help resolve your replication error: 
 + If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Your MySQL or MariaDB DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\.
 + If you encounter a binary log \(binlog\) position issue, you can change the replica replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command to change the replica replay position\. For version information, see [mysql\.rds\_next\_master\_log](mysql_rds_next_master_log.md)\.
-+ If you encounter a temporary performance issue due to high DML load, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the read replica\. Doing this can help the read replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
++ You might encounter a temporary performance issue due to high DML load\. If so, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the read replica\. Doing this can help the read replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
 + You can delete the read replica and create an instance using the same DB instance identifier\. If you do this, the endpoint remains the same as that of your old read replica\.
 
 If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [Troubleshooting a MySQL read replica problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
@@ -407,7 +407,7 @@ When trying to create triggers in an RDS for MySQL or RDS for MariaDB DB instanc
 
 To use triggers when binary logging is enabled requires the SUPER privilege, which is restricted for RDS for MySQL and RDS for MariaDB DB instances\. You can create triggers when binary logging is enabled without the SUPER privilege by setting the `log_bin_trust_function_creators` parameter to true\. To set the `log_bin_trust_function_creators` to true, create a new DB parameter group or modify an existing DB parameter group\.
 
-To create a new DB parameter group that allows you to create triggers in your RDS for MySQL or RDS for MariaDB DB instance with binary logging enabled, use the following CLI commands\. To modify an existing parameter group, start with step 2\.
+You can create a new DB parameter group so you can create triggers in your RDS for MySQL or RDS for MariaDB DB instance with binary logging enabled\. To do so, use the following CLI commands\. To modify an existing parameter group, start with step 2\.
 
 **To create a new parameter group to allow triggers with binary logging enabled using the CLI**
 
@@ -487,7 +487,7 @@ functionality. Common examples of incompatible activity include using temporary 
 or using MyISAM tables. In this case, use of Temporary table was detected.
 ```
 
-PITR relies on both backup snapshots and binary logs \(binlogs\) from MySQL or MariaDB to restore your DB instance to a particular time\. Temporary table information can be unreliable in binlogs and can cause a PITR failure\. If you use temporary tables in your MySQL or MariaDB DB instance, you can minimize the possibility of a PITR failure by performing more frequent backups\. A PITR failure is most probable in the time between a temporary table's creation and the next backup snapshot\.
+PITR relies on both backup snapshots and binary logs \(binlogs\) from MySQL or MariaDB to restore your DB instance to a particular time\. Temporary table information can be unreliable in binlogs and can cause a PITR failure\. If you use temporary tables in your MySQL or MariaDB DB instance, you can lower the possibility of a PITR failure\. To do so, perform more frequent backups\. A PITR failure is most probable in the time between a temporary table's creation and the next backup snapshot\.
 
 **Restoring a DB Instance That Includes In\-Memory Tables**
 

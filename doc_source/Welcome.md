@@ -72,7 +72,7 @@ Amazon RDS provides the following specific advantages over database deployments 
 + Amazon RDS manages backups, software patching, automatic failure detection, and recovery\.
 + You can turn on automated backups, or manually create your own backup snapshots\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\.
 + You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use read replicas to increase read scaling\.
-+ In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud \(VPC\)\.
++ In addition to the security in your database package, you can help control who can access your RDS databases\. To do so, you can use AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud \(VPC\)\.
 
 ### Amazon RDS Custom for Oracle and Microsoft SQL Server<a name="Welcome.Concepts.Custom"></a>
 
@@ -105,13 +105,13 @@ A *DB engine* is the specific relational database software that runs on your DB 
 + Oracle
 + PostgreSQL
 
-Each DB engine has its own supported features, and each version of a DB engine can include specific features\. Support for Amazon RDS features varies across AWS Regions and specific versions of each DB engine\. To check feature support in different engine versions and Regions, see [Supported features in Amazon RDS by AWS Region and DB engine](Concepts.RDSFeaturesRegionsDBEngines.grids.md)
+Each DB engine has its own supported features, and each version of a DB engine can include specific features\. Support for Amazon RDS features varies across AWS Regions and specific versions of each DB engine\. To check feature support in different engine versions and Regions, see [Supported features in Amazon RDS by AWS Region and DB engine](Concepts.RDSFeaturesRegionsDBEngines.grids.md)\.
 
 Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\.
 
 ### DB instance classes<a name="Welcome.Concepts.DBInstance.instance-class"></a>
 
-A *DB instance class* determines the computation and memory capacity of a DB instance\. A DB instance class consists of both the DB instance type and the size\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors, while db\.m6g\.2xlarge is a DB instance class within the db\.m6g instance type\.
+A *DB instance class* determines the computation and memory capacity of a DB instance\. A DB instance class consists of both the DB instance type and the size\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors\. Within the db\.m6g instance type, db\.m6g\.2xlarge is a DB instance class\.
 
 You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
@@ -167,7 +167,7 @@ You can use the AWS Command Line Interface \(AWS CLI\) to access the Amazon RDS 
 
 ### Programming with Amazon RDS<a name="Welcome.Interfaces.API"></a>
 
-If you are a developer, you can access the Amazon RDS programmatically\. For more information, see [Amazon RDS application programming interface \(API\) reference](ProgrammingGuide.md)\. 
+If you are a developer, you can access the Amazon RDS programmatically\. For more information, see [Amazon RDS API reference](ProgrammingGuide.md)\. 
 
 For application development, we recommend that you use one of the AWS Software Development Kits \(SDKs\)\. The AWS SDKs handle low\-level details such as authentication, retry logic, and error handling, so that you can focus on your application logic\. AWS SDKs are available for a wide variety of languages\. For more information, see [Tools for Amazon web services ](https://aws.amazon.com/tools/)\. 
 

@@ -6,7 +6,7 @@ The following diagram shows this scenario\. For information about other scenario
 
 ![\[Single VPC scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
-Because your DB instance needs to be available only to your web server, and not to the public internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The web server can connect to the DB instance because it is hosted within the same VPC\. But the DB instance isn't available to the public internet, providing greater security\.
+Your DB instance needs to be available only to your web server, and not to the public internet\. Thus, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public internet\. The DB instance is hosted in a private subnet\. The web server can connect to the DB instance because it is hosted within the same VPC\. But the DB instance isn't available to the public internet, providing greater security\.
 
 This tutorial configures an additional public and private subnet in a separate Availability Zone\. These subnets aren't used by the tutorial\. An RDS DB subnet group requires a subnet in at least two Availability Zones\. The additional subnet makes it easier to switch to a Multi\-AZ DB instance deployment in the future\. 
 
@@ -49,7 +49,7 @@ Amazon RDS requires at least two subnets in two different Availability Zones to 
 
 ## Create a VPC security group for a public web server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
 
-Next, you create a security group for public access\. To connect to public EC2 instances in your VPC, you add inbound rules to your VPC security group that allow traffic to connect from the internet\.
+Next, you create a security group for public access\. To connect to public EC2 instances in your VPC, you add inbound rules to your VPC security group\. These allow traffic to connect from the internet\.
 
 **To create a VPC security group**
 
@@ -66,13 +66,13 @@ Next, you create a security group for public access\. To connect to public EC2 i
 
    1. Determine the IP address to use to connect to EC2 instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
 
-      If you are connecting through an internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
+      In many cases, you might connect through an internet service provider \(ISP\) or from behind your firewall without a static IP address\. If so, find the range of IP addresses used by client computers\.
 **Warning**  
 If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses to access your public instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your instances using SSH\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow SSH access to your Amazon EC2 instance\. If you do this, you can connect to your Amazon EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
+   1. Set the following values for your new inbound rule to allow SSH access to your Amazon EC2 instance\. If you do this, you can connect to your Amazon EC2 instance to install the web server and other utilities\. You also connect to your EC2 instance to upload content for your web server\. 
       + **Type:** **SSH**
       + **Source:** The IP address or range from Step a, for example: **203\.0\.113\.25/32**\.
 
@@ -105,7 +105,7 @@ To keep your DB instance private, create a second security group for private acc
 
    1. In the **Inbound rules** section, choose **Add rule**\.
 
-   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your web server to your DB instance to store and retrieve data from your web application to your database\. 
+   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your Amazon EC2 instance\. If you do this, you can connect from your web server to your DB instance\. By doing so, you can store and retrieve data from your web application to your database\. 
       + **Type:** **MySQL/Aurora**
       + **Source:** The identifier of the **tutorial\-securitygroup** security group that you created previously in this tutorial, for example: **sg\-9edd5cfb**\.
 
@@ -156,7 +156,7 @@ If you created this VPC to complete [Tutorial: Create a web server and an Amazon
 After you create the VPC and other resources for this tutorial, you can delete them if they are no longer needed\.
 
 **Note**  
-If you added resources in the VPC that you created for this tutorial, you might need to delete these resources before you can delete the VPC\. For example, these resources might include Amazon EC2 instances or Amazon RDS DB instances\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
+If you added resources in the VPC that you created for this tutorial, you might need to delete these before you can delete the VPC\. For example, these resources might include Amazon EC2 instances or Amazon RDS DB instances\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
 
 **To delete a VPC and related resources**
 

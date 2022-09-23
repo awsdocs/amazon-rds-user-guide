@@ -43,5 +43,7 @@ Statement\-based replication can cause inconsistencies between the source DB ins
 
 1. Choose **Save changes** to save the updates to the DB parameter group\.
 
+ After you perform these steps, you must reboot the DB instance for your changes to apply\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\. 
+
 **Important**  
 Changing a DB parameter group affects all DB instances that use that parameter group\. If you want to specify different binary logging formats for different MySQL DB instances in an AWS Region, the DB instances must use different DB parameter groups\. These parameter groups identify different logging formats\. Assign the appropriate DB parameter group to the each DB instance\.

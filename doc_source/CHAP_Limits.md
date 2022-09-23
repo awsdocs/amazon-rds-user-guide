@@ -26,7 +26,11 @@ The following limitations apply to the Amazon RDS DB instances:
 If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
 Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the manual snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
-If you use any of the Amazon RDS APIs and exceed the default quota for the number of calls per second, the Amazon RDS API issues an error similar to the following: ClientError: An error occurred \(ThrottlingException\) when calling the *API\_name* operation: Rate exceeded\. Reduce the number of calls per second\. The quota is meant to cover most use cases\. If higher limits are needed, request a quota increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
+If you use any RDS API operations and exceed the default quota for the number of calls per second, the Amazon RDS API issues an error like the following one\. 
+
+ClientError: An error occurred \(ThrottlingException\) when calling the *API\_name* operation: Rate exceeded\. 
+
+Here, reduce the number of calls per second\. The quota is meant to cover most use cases\. If higher limits are needed, request a quota increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
 
 **Note**  
 This quota can't be changed in the Amazon RDS Service Quotas console\.
@@ -49,9 +53,9 @@ The following table describes naming constraints in Amazon RDS\.
 
 ## Maximum number of database connections<a name="RDS_Limits.MaxConnections"></a>
 
-The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is set in the parameter group associated with the DB instance, except for Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Management Studio \(SSMS\)\.
+The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is generally set in the parameter group associated with the DB instance\. The exception is Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Management Studio \(SSMS\)\.
 
-`DBInstanceClassMemory` is in bytes\. For details about how this value is calculated, see [Specifying DB parameters](USER_ParamValuesRef.md)\. In particular, due to memory reserved for the operating system and the RDS management processes, this memory size is smaller than the value in gibibytes \(GiB\) shown in the table of [Hardware specifications for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+`DBInstanceClassMemory` is in bytes\. For details about how this value is calculated, see [Specifying DB parameters](USER_ParamValuesRef.md)\. Because of memory reserved for the operating system and RDS management processes, this memory size is smaller than the value in gibibytes \(GiB\) shown in [Hardware specifications for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
 
 **Note**  
 For Oracle, you set the maximum number of user processes and user and system sessions\.
@@ -60,7 +64,7 @@ For Oracle, you set the maximum number of user processes and user and system ses
 **Maximum database connections**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
 
-In an instance where the total RAM is 16 GiB, or 17,179,869,184 bytes, the variable `DBInstanceClassMemory` will automatically subtract the amounts reserved to the operating system and the RDS processes that manage the instance\. The remainder of the subtraction is then divided by 12,582,880, which will result in the maximum connections number being around 1300, depending on instance type, instance size and DB engine\.
+In some instances, the total RAM is 16 GiB, or 17,179,869,184 bytes\. In these instances, the variable `DBInstanceClassMemory` automatically subtracts the amounts reserved to the operating system and the RDS processes that manage the instance\. The remainder of the subtraction is then divided by 12,582,880\. This results in the maximum connections number being around 1,300, depending on instance type, instance size, and DB engine\.
 
 Database connections consume memory\. Setting one of these parameters too high can cause a low memory condition that might cause a DB instance to be placed in the **incompatible\-parameters** status\. For more information, see [Diagnosing and resolving incompatible parameters status for a memory limit](CHAP_Troubleshooting.md#CHAP_Troubleshooting.incompatible-parameters-memory)\.
 

@@ -21,7 +21,7 @@ If you have a DB instance in a Single\-AZ deployment and modify it to a Multi\-A
 
 1. Takes a snapshot of the primary DB instance's Amazon Elastic Block Store \(EBS\) volumes\.
 
-1. Creates new volumes for the standby replica\. from the snapshot\. These volumes initialize in the background, and maximum volume performance is achieved after the data is fully initialized\.
+1. Creates new volumes for the standby replica from the snapshot\. These volumes initialize in the background, and maximum volume performance is achieved after the data is fully initialized\.
 
 1. Turns on synchronous block\-level replication between the volumes of the primary and standby replicas\.
 

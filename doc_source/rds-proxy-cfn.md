@@ -1,6 +1,6 @@
 # Using RDS Proxy with AWS CloudFormation<a name="rds-proxy-cfn"></a>
 
- You can use RDS Proxy with AWS CloudFormation\. Doing so helps you to create groups of related resources, including a proxy that can connect to a newly created Amazon RDS DB instance or Aurora DB cluster\. RDS Proxy support in AWS CloudFormation involves two new registry types: `DBProxy` and `DBProxyTargetGroup`\. 
+ You can use RDS Proxy with AWS CloudFormation\. Doing so helps you to create groups of related resources\. Such a group can include a proxy that can connect to a newly created Amazon RDS DB instance or Aurora DB cluster\. RDS Proxy support in AWS CloudFormation involves two new registry types: `DBProxy` and `DBProxyTargetGroup`\. 
 
  The following listing shows a sample AWS CloudFormation template for RDS Proxy\. 
 

@@ -18,13 +18,13 @@ For more information about viewing, downloading, and watching file\-based databa
 
 ## Accessing MariaDB error logs<a name="USER_LogAccess.MariaDB.Errorlog"></a>
 
-The MariaDB error log is written to the `<host-name>.err` file\. You can view this file by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. The `<host-name>.err` file is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
+The MariaDB error log is written to the `<host-name>.err` file\. You can view this file by using the Amazon RDS console, You can also retrieve the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. The `<host-name>.err` file is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
 
 MariaDB writes to the error log only on startup, shutdown, and when it encounters errors\. A DB instance can go hours or days without new entries being written to the error log\. If you see no recent entries, it's because the server did not encounter an error that resulted in a log entry\.
 
 ## Accessing the MariaDB slow query and general logs<a name="USER_LogAccess.MariaDB.Generallog"></a>
 
-The MariaDB slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, AWS CLI, or AWS SDKs\.
+You can write the MariaDB slow query log and general log to a file or database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, AWS CLI, or AWS SDKs\.
 
 You can control MariaDB logging by using the parameters in this list:
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
@@ -38,7 +38,7 @@ You can control MariaDB logging by using the parameters in this list:
 
 When logging is enabled, Amazon RDS rotates table logs or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. `FILE` and `TABLE` logging approach rotation and deletion as follows:
 + When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
-+ When `TABLE` logging is enabled, in some cases log tables are rotated every 24 hours\. This rotation occurs if the space used by the table logs is more than 20 percent of the allocated storage space or the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, then the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space or the size of all logs combined is greater than 5 GB\.
++ When `TABLE` logging is enabled, in some cases log tables are rotated every 24 hours\. This rotation occurs if the space used by the table logs is more than 20 percent of the allocated storage space\. It also occurs if the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space\. They're also rotated if the size of all logs combined is greater than 5 GB\.
 
   When log tables are rotated, the current log table is copied to a backup log table and the entries in the current log table are removed\. If the backup log table already exists, then it is deleted before the current log table is copied to the backup\. You can query the backup log table if needed\. The backup log table for the `mysql.general_log` table is named `mysql.general_log_backup`\. The backup log table for the `mysql.slow_log` table is named `mysql.slow_log_backup`\.
 
@@ -58,7 +58,7 @@ For more information about the slow query and general logs, go to the following 
 
 You can configure your MariaDB DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
-Amazon RDS publishes each MariaDB database log as a separate database stream in the log group\. For example, if you configure the export function to include the slow query log, slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\.
+Amazon RDS publishes each MariaDB database log as a separate database stream in the log group\. For example, suppose that you configure the export function to include the slow query log\. Then slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\.
 
 The error log is enabled by default\. The following table summarizes the requirements for the other MariaDB logs\.
 
@@ -174,7 +174,7 @@ The MariaDB slow query log, error log, and the general log file sizes are constr
 
 ## Managing table\-based MariaDB logs<a name="Appendix.MariaDB.CommonDBATasks.Logs"></a>
 
-You can direct the general and slow query logs to tables on the DB instance by creating a DB parameter group and setting the `log_output` server parameter to `TABLE`\. General queries are then logged to the `mysql.general_log` table, and slow queries are logged to the `mysql.slow_log` table\. You can query the tables to access the log information\. Enabling this logging increases the amount of data written to the database, which can degrade performance\.
+You can direct the general and slow query logs to tables on the DB instance\. To do so, create a DB parameter group and set the `log_output` server parameter to `TABLE`\. General queries are then logged to the `mysql.general_log` table, and slow queries are logged to the `mysql.slow_log` table\. You can query the tables to access the log information\. Enabling this logging increases the amount of data written to the database, which can degrade performance\.
 
 Both the general log and the slow query logs are disabled by default\. In order to enable logging to tables, you must also set the `general_log` and `slow_query_log` server parameters to `1`\.
 
@@ -191,10 +191,10 @@ PROMPT> CALL mysql.rds_rotate_general_log;
 
 MariaDB on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats\. The default binary logging format is *mixed*\. For details on the different MariaDB binary log formats, see [Binary log formats](http://mariadb.com/kb/en/mariadb/binary-log-formats/) in the MariaDB documentation\.
 
-If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/5.7/en/replication-sbr-rbr.html) in the MySQL documentation\.
+If you plan to use replication, the binary logging format is important\. This is because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/5.7/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Important**  
-Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
+Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance\. They also can increase the amount of time to perform a restore operation of a DB instance\.  
 Statement\-based replication can cause inconsistencies between the source DB instance and a read replica\. For more information, see [ Unsafe statements for statement\-based replication](https://mariadb.com/kb/en/library/unsafe-statements-for-statement-based-replication/) in the MariaDB documentation\.
 
 **To set the MariaDB binary logging format**
@@ -256,15 +256,15 @@ mysqlbinlog ^
     --result-file=/tmp/binlog.txt
 ```
 
-Amazon RDS normally purges a binary log as soon as possible, but the binary log must still be available on the instance to be accessed by mysqlbinlog\. To specify the number of hours for RDS to retain binary logs, use the `mysql.rds_set_configuration` stored procedure and specify a period with enough time for you to download the logs\. After you set the retention period, monitor storage usage for the DB instance to ensure that the retained binary logs do not take up too much storage\.
+Amazon RDS normally purges a binary log as soon as possible\. However, the binary log must still be available on the instance to be accessed by mysqlbinlog\. To specify the number of hours for RDS to retain binary logs, use the `mysql.rds_set_configuration` stored procedure\. Specify a period with enough time for you to download the logs\. After you set the retention period, monitor storage usage for the DB instance to ensure that the retained binary logs don't take up too much storage\.
 
-The following example sets the retention period to 1 day:
+The following example sets the retention period to 1 day\.
 
 ```
 call mysql.rds_set_configuration('binlog retention hours', 24); 
 ```
 
-To display the current setting, use the `mysql.rds_show_configuration` stored procedure: 
+To display the current setting, use the `mysql.rds_show_configuration` stored procedure\.
 
 ```
 call mysql.rds_show_configuration; 

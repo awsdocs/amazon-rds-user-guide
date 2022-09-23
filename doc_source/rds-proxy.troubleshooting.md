@@ -2,7 +2,7 @@
 
  Following, you can find troubleshooting ideas for some common RDS Proxy issues and information on CloudWatch logs for RDS Proxy\. 
 
- In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. For more information about proxy endpoints, see [Working with Amazon RDS Proxy endpoints](rds-proxy-endpoints.md)\. 
+ In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name that you specified for a user\-defined endpoint\. Or it can be the special name `default` for read/write requests using the default endpoint of a proxy\. For more information about proxy endpoints, see [Working with Amazon RDS Proxy endpoints](rds-proxy-endpoints.md)\. 
 
 **Topics**
 + [Verifying connectivity for a proxy](#rds-proxy-verifying)
@@ -12,7 +12,7 @@
 
  You can use the following commands to verify that all components of the connection mechanism can communicate with the other components\. 
 
- Examine the proxy itself using the [describe\-db\-proxies](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-proxies.html) command\. Also examine the associated target group using the [describe\-db\-proxy\-target\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-proxy-target-groups.html) Check that the details of the targets match the RDS DB instance or Aurora DB cluster that you intend to associate with the proxy\. Use commands such as the following\. 
+ Examine the proxy itself using the [describe\-db\-proxies](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-proxies.html) command\. Also examine the associated target group using the [describe\-db\-proxy\-target\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-proxy-target-groups.html) command\. Check that the details of the targets match the RDS DB instance or Aurora DB cluster that you intend to associate with the proxy\. Use commands such as the following\. 
 
 ```
 aws rds describe-db-proxies --db-proxy-name $DB_PROXY_NAME
@@ -112,4 +112,4 @@ aws secretsmanager get-secret-value --secret-id your_secret_id
 |   `IAM is allowed only with SSL connections.`   |   A client tried to connect using IAM authentication, but SSL wasn't enabled\.   |   Enable SSL in the PostgreSQL client\.   | 
 |   `Unknown error.`   |   An unknown error occurred\.   |   Reach out to AWS Support to investigate the issue\.   | 
 |   `Timed-out waiting to acquire database connection.`   |   The proxy timed\-out waiting to acquire a database connection\. Some possible reasons include the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.troubleshooting.html)  |   Possible solutions are the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.troubleshooting.html)  | 
-|   `Request returned an error: database_error.`   |   The database connection established from the proxy returned an error\.   |   The solution depends on the specific database error\. One example is: `Request returned an error: database "your-database-name" does not exist`\. This means the specified database name, or the user name used as a database name \(in case a database name hasn't been specified\), doesn't exist in the database server\.   | 
+|   `Request returned an error: database_error.`   |   The database connection established from the proxy returned an error\.   |   The solution depends on the specific database error\. One example is: `Request returned an error: database "your-database-name" does not exist`\. This means that the specified database name doesn't exist on the database server\. Or it means that the user name used as a database name \(if a database name isn't specified\) doesn't exist on the server\.   | 

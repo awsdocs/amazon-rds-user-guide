@@ -1,6 +1,6 @@
 # Connecting to an Amazon RDS DB instance<a name="CHAP_CommonTasks.Connect"></a>
 
- Before you can connect to a DB instance, you must create the DB instance\. For information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. After Amazon RDS provisions your DB instance, you can use any standard client application or utility for your DB engine to connect to the DB instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
+ Before you can connect to a DB instance, you must create the DB instance\. For information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. After Amazon RDS provisions your DB instance, use any standard client application or utility for your DB engine to connect to the DB instance\. In the connection string, specify the DNS address from the DB instance endpoint as the host parameter\. Also, specify the port number from the DB instance endpoint as the port parameter\. 
 
 **Topics**
 + [Finding the connection information for an Amazon RDS DB instance](#CHAP_CommonTasks.Connect.EndpointAndPort)
@@ -24,9 +24,9 @@ The endpoint is unique for each DB instance, and the values of the port and user
 + Oracle – 1521
 + PostgreSQL – 5432
 
-To connect to a DB instance, use any client for a DB engine\. For example, you might use the mysql utility to connect to a MariaDB or MySQL DB instance\. You might use Microsoft SQL Server Management Studio to connect to a SQL Server DB instance\. You might use Oracle SQL Developer to connect to an Oracle DB instance, or the psql command line utility to connect to a PostgreSQL DB instance\.
+To connect to a DB instance, use any client for a DB engine\. For example, you might use the mysql utility to connect to a MariaDB or MySQL DB instance\. You might use Microsoft SQL Server Management Studio to connect to a SQL Server DB instance\. You might use Oracle SQL Developer to connect to an Oracle DB instance\. Similarly, you might use the psql command line utility to connect to a PostgreSQL DB instance\.
 
-To find the connection information for a DB instance, you can use the AWS Management Console, the AWS Command Line Interface \(AWS CLI\) [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list its details\. 
+To find the connection information for a DB instance, use the AWS Management Console\. You can also use the AWS Command Line Interface \(AWS CLI\) [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command or the RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. 
 
 ### Console<a name="CHAP_CommonTasks.Connect.EndpointAndPort.Console"></a>
 
@@ -113,8 +113,8 @@ A VPC security group controls access to DB instances inside a VPC\. Each VPC sec
 
 Before attempting to connect to your DB instance, configure your VPC for your use case\. The following are common scenarios for accessing a DB instance in a VPC: 
 + **A DB instance in a VPC accessed by an Amazon EC2 instance in the same VPC** – A common use of a DB instance in a VPC is to share data with an application server that is running in an EC2 instance in the same VPC\. The EC2 instance might run a web server with an application that interacts with the DB instance\.
-+ **A DB instance in a VPC accessed by an EC2 instance in a different VPC** – When your DB instance is in a different VPC from the EC2 instance that you're using to access it, you can use VPC peering to access the DB instance\. 
-+ **A DB instance in a VPC accessed by a client application through the internet** – To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet, and an internet gateway to enable communication over the internet\. 
++ **A DB instance in a VPC accessed by an EC2 instance in a different VPC** – In some cases, your DB instance is in a different VPC from the EC2 instance that you're using to access it\. If so, you can use VPC peering to access the DB instance\. 
++ **A DB instance in a VPC accessed by a client application through the internet** – To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet\. You also configure an internet gateway to enable communication over the internet\. 
 
   To connect to a DB instance from outside of its VPC, the DB instance must be publicly accessible\. Also, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 + **A DB instance in a VPC accessed by a private network** – If your DB instance isn't publicly accessible, you can use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\.
@@ -132,5 +132,4 @@ For information about connecting to a DB instance that is running a specific DB 
 
 ## Managing connections with RDS Proxy<a name="CHAP_CommonTasks.Connect.RDSProxy"></a>
 
-You can also use Amazon RDS Proxy to manage connections to RDS for MariaDB, RDS for MySQL, or RDS for PostgreSQL DB instances\. RDS Proxy allows applications to pool and share database connections to improve scalability\. 
-+ [Using Amazon RDS Proxy](rds-proxy.md)
+You can also use Amazon RDS Proxy to manage connections to RDS for MariaDB, RDS for Microsoft SQL Server, RDS for MySQL, and RDS for PostgreSQL DB instances\. RDS Proxy allows applications to pool and share database connections to improve scalability\. For more information, see [Using Amazon RDS Proxy](rds-proxy.md)\.

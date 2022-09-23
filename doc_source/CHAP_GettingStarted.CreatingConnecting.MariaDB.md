@@ -1,6 +1,6 @@
 # Creating a MariaDB DB instance and connecting to a database on a MariaDB DB instance<a name="CHAP_GettingStarted.CreatingConnecting.MariaDB"></a>
 
-The easiest way to create a MariaDB DB instance is to use the AWS Management Console\. After you create the DB instance, you can use command line tools such as mysql or graphical tools such as HeidiSQL to connect to a database on the DB instance\.
+The easiest way to create a MariaDB DB instance is to use the AWS Management Console\. After you create the DB instance, you can connect to a database on the DB instance\. To do so, you can use command line tools such as mysql or graphical tools such as HeidiSQL\.
 
 **Important**  
 Before you can create or connect to a DB instance, make sure to complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
@@ -90,7 +90,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource that you want to access it, such as the security group of an Amazon EC2 instance\.
+   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource to access it\. An example is the security group for an Amazon EC2 instance\.
 
 1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
@@ -125,7 +125,7 @@ For more information about connecting to a MariaDB DB instance, see [Connecting 
 
 ## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.MariaDB"></a>
 
-After you have connected to the sample DB instance that you created, you should delete the DB instance so you are no longer charged for it\.
+After you connect to the sample DB instance that you created, delete the DB instance so you're no longer charged for it\.
 
 **To delete a DB instance with no final DB snapshot**
 

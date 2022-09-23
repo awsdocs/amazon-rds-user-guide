@@ -1,8 +1,8 @@
 # Tutorial: Restore an Amazon RDS DB instance from a DB snapshot<a name="CHAP_Tutorials.RestoringFromSnapshot"></a>
 
-A common scenario when working with Amazon RDS is to have a DB instance that you work with occasionally but that you don't need full time\. For example, you might have a quarterly customer survey that uses an Amazon Elastic Compute Cloud \(Amazon EC2\) instance to host a customer survey website and a DB instance that is used to store the survey results\. One way to save money on such a scenario is to take a DB snapshot of the DB instance after the survey is completed, delete the DB instance, and then restore the DB instance when you need to conduct the survey again\.
+Often, when working with Amazon RDS you might have a DB instance that you work with occasionally but don't need full time\. For example, suppose that you have a quarterly customer survey that uses an Amazon EC2 instance to host a customer survey website\. You also have a DB instance that is used to store the survey results\. One way to save money on such a scenario is to take a DB snapshot of the DB instance after the survey is completed\. You then delete the DB instance and restore it when you need to conduct the survey again\.
 
-When you restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that's created from the restore operation\.
+When you restore the DB instance, you provide the name of the DB snapshot to restore from\. You then provide a name for the new DB instance that's created from the restore operation\.
 
 For more detailed information on restoring DB instances from snapshots, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 
@@ -61,7 +61,7 @@ Use the following procedure to restore from a snapshot in the AWS Management Con
 
       For this tutorial, use the default option group\.
 **Important**  
-If you're restoring from a DB snapshot of a DB instance that uses a persistent or permanent option, you must choose an option group that uses the same option\.
+In some cases, you might restore from a DB snapshot of a DB instance that uses a persistent or permanent option\. If so, make sure to choose an option group that uses the same option\.
 
    1. For **Deletion protection**, choose the **Enable deletion protection** check box\.
 

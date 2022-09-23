@@ -19,15 +19,15 @@
 
  Working with RDS Proxy endpoints involves the same kinds of procedures as with Aurora DB cluster and reader endpoints and RDS instance endpoints\. If you aren't familiar with RDS endpoints, find more information in [Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html) and [Connecting to a DB instance running the PostgreSQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html)\. 
 
- By default, the endpoint that you connect to when you use RDS Proxy with an Aurora cluster has read/write capability\. As a consequence, this endpoint sends all requests to the writer instance of the cluster, and all of those connections count against the `max_connections` value for the writer instance\. If your proxy is associated with an Aurora DB cluster, you can create additional read/write or read\-only endpoints for that proxy\. 
+ By default, the endpoint that you connect to when you use RDS Proxy with an Aurora cluster has read/write capability\. As a result, this endpoint sends all requests to the writer instance of the cluster\. All of those connections count against the `max_connections` value for the writer instance\. If your proxy is associated with an Aurora DB cluster, you can create additional read/write or read\-only endpoints for that proxy\. 
 
- You can use a read\-only endpoint with your proxy for read\-only queries, the same way that you use the reader endpoint for an Aurora provisioned cluster\. Doing so helps you to take advantage of the read scalability of an Aurora cluster with one or more reader DB instances\. You can run more simultaneous queries and make more simultaneous connections by using a read\-only endpoint and adding more reader DB instances to your Aurora cluster as needed\. 
+ You can use a read\-only endpoint with your proxy for read\-only queries\. You do this the same way that you use the reader endpoint for an Aurora provisioned cluster\. Doing so helps you to take advantage of the read scalability of an Aurora cluster with one or more reader DB instances\. You can run more simultaneous queries and make more simultaneous connections by using a read\-only endpoint and adding more reader DB instances to your Aurora cluster as needed\. 
 
  For a proxy endpoint that you create, you can also associate the endpoint with a different virtual private cloud \(VPC\) than the proxy itself uses\. By doing so, you can connect to the proxy from a different VPC, for example a VPC used by a different application within your organization\.  
 
  For information about limits associated with proxy endpoints, see [Limitations for proxy endpoints](#rds-proxy-endpoints-limits)\. 
 
- In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. 
+ In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint\. Or it can be the special name `default` for read/write requests using the default endpoint of a proxy\. 
 
  Each proxy endpoint has its own set of CloudWatch metrics\. You can monitor the metrics for all endpoints of a proxy\. You can also monitor metrics for a specific endpoint, or for all the read/write or read\-only endpoints of a proxy\. For more information, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 
@@ -95,9 +95,9 @@
 
     Connections that use a read\-only endpoint can only perform queries\. When there are multiple reader instances in the Aurora cluster, RDS Proxy can use a different reader instance for each connection to the endpoint\. That way, a query\-intensive application can take advantage of Aurora's clustering capability\. You can add more query capacity to the cluster by adding more reader DB instances\. These read\-only connections don't impose any overhead on the primary instance of the cluster\. That way, your reporting and analysis queries don't slow down the write operations of your OLTP applications\. 
 
-1.  For **Virtual Private Cloud \(VPC\)**, choose the default if you plan to access the endpoint from the same EC2 instances or other resources where you normally access the proxy or its associated database\. If you want to set up cross\-VPC access for this proxy, choose a VPC other than the default\. For more information about cross\-VPC access, see [Accessing Aurora and RDS databases across VPCs](#rds-proxy-cross-vpc)\. 
+1.  For **Virtual Private Cloud \(VPC\)**, choose the default to access the endpoint from the same EC2 instances or other resources where you normally access the proxy or its associated database\. To set up cross\-VPC access for this proxy, choose a VPC other than the default\. For more information about cross\-VPC access, see [Accessing Aurora and RDS databases across VPCs](#rds-proxy-cross-vpc)\. 
 
-1.  For **Subnets**, RDS Proxy fills in the same subnets as the associated proxy by default\. If you want to restrict access to the endpoint so that only a portion of the address range of the VPC can connect to it, remove one or more subnets from the set of choices\. 
+1.  For **Subnets**, RDS Proxy fills in the same subnets as the associated proxy by default\. To restrict access to the endpoint so only a portion of the VPC's address range can connect to it, remove one or more subnets\. 
 
 1.  For **VPC security group**, you can choose an existing security group or create a new one\. RDS Proxy fills in the same security group or groups as the associated proxy by default\. If the inbound and outbound rules for the proxy are appropriate for this endpoint, you can leave the default choice\. 
 

@@ -36,9 +36,10 @@ For each task, the following sections describe the requirements and limitations 
 A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for Oracle DB instance, you supply the KMS key identifier\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
 You have the following options:
-+ If you have an existing KMS key in your account, you can use it with RDS Custom\. No further action is necessary\.
++ If you have an existing KMS key in your AWS account, you can use it with RDS Custom\. No further action is necessary\.
 + If you already created a symmetric encryption KMS key for a different RDS Custom engine, you can reuse the same KMS key\. No further action is necessary\.
 + If you don't have an existing symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
++ If you're creating a CEV or RDS Custom DB instance, and your KMS key is in a different AWS account, make sure to use the AWS CLI\. You can't use the AWS console with cross\-account KMS keys\.
 
 RDS Custom doesn't support AWS\-managed KMS keys\.
 

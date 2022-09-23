@@ -31,9 +31,11 @@ Update the last archived time stamp\.
 
      When you choose **Immediately**, the RDS instance restarts right away\. If you choose **During the next maintenance window**, the RDS instance doesn't restart right away\. In this case, the database activity stream doesn't start until the next maintenance window\.
 
-   When you're done entering settings, choose **Start database activity stream**\.
+1. Choose **Start database activity stream**\.
 
-   The status for the Oracle database shows that the activity stream is starting\. 
+   The status for the Oracle database shows that the activity stream is starting\.
+**Note**  
+If you get the error `You can't start a database activity stream in this configuration`, check [Supported DB instance classes for database activity streams](DBActivityStreams.Overview.md#DBActivityStreams.Overview.requirements.classes) to see whether your RDS instance is using a supported instance class\.
 
 ## AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 

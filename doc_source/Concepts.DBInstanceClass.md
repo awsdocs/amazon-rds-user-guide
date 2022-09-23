@@ -2,7 +2,7 @@
 
 The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class that you need depends on your processing power and memory requirements\.
 
-A DB instance class consists of both the DB instance type and the size\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors, while db\.m6g\.2xlarge is a DB instance class within the db\.m6g instance type\.
+A DB instance class consists of both the DB instance type and the size\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors\. Within the db\.m6g instance type, db\.m6g\.2xlarge is a DB instance class\.
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -21,7 +21,7 @@ Amazon RDS supports three types of instance classes: general purpose, memory opt
 The following are the general\-purpose DB instance types available:
 + **db\.m6g** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\.
 
-  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.m6gd** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\. These have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
 
   These DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
@@ -36,18 +36,18 @@ The following are the general\-purpose DB instance types available:
 The following are the memory optimized DB instance types available:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
 
-  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.z1d** – Instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
 + **db\.x1e** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\.
 + **db\.x1** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 
-  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6gd** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. These have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
 
   These DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
-+ **db\.r5b** – Instance classes that are memory optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
++ **db\.r5b** – Instance classes that are memory optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance\. This is the fastest block storage performance on EC2\.
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 
   For the RDS for MySQL and RDS for PostgreSQL DB engines, these DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
@@ -55,9 +55,9 @@ The following are the memory optimized DB instance types available:
 + **db\.r3** – Instance classes that provide memory optimization\.
 
 The following are the burstable\-performance DB instance types available:
-+ **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode, which means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
++ **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
 
-  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as with any other DB instance modification\.
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.t3** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T3 instances are configured for Unlimited mode\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T2 instances can be configured for Unlimited mode\. We recommend using these instance classes only for development and test servers, or other nonproduction servers\.
 
@@ -267,10 +267,10 @@ In the following table, you can find details about supported Amazon RDS DB insta
 
 ## Determining DB instance class support in AWS Regions<a name="Concepts.DBInstanceClass.RegionSupport"></a>
 
-To determine the DB instance classes supported by each DB engine in a specific AWS Region, you can use the AWS Management Console, the [Amazon RDS Pricing](http://aws.amazon.com/rds/pricing/) page, or the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command for the AWS Command Line Interface \(AWS CLI\)\.
+To determine the DB instance classes supported by each DB engine in a specific AWS Region, you can take one of several approaches\. You can use the AWS Management Console, the [Amazon RDS Pricing](http://aws.amazon.com/rds/pricing/) page, or the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command for the AWS Command Line Interface \(AWS CLI\)\.
 
 **Note**  
-When you perform operations with the AWS CLI, such as creating or modifying a DB instance, it automatically shows the supported DB instance classes for a specific DB engine, DB engine version, and AWS Region\.
+When you perform operations with the AWS CLI, it automatically shows the supported DB instance classes for a specific DB engine, DB engine version, and AWS Region\. Examples of the operations that you can perform include creating and modifying a DB instance\. 
 
 **Contents**
 + [Using the Amazon RDS pricing page to determine DB instance class support in AWS Regions](#Concepts.DBInstanceClass.RegionSupport.PricingPage)
