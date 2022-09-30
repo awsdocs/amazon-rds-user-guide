@@ -54,7 +54,7 @@ You can also use the `describe-source-regions` AWS CLI command to find out which
 
 ## Enabling cross\-Region automated backups<a name="AutomatedBackups.Replicating.Enable"></a>
 
-You can enable backup replication on new or existing DB instances using the Amazon RDS console\. You can also use the `start-db-instance-automated-backups-replication` AWS CLI command or the `StartDBInstanceAutomatedBackupsReplication` RDS API operation\.
+You can enable backup replication on new or existing DB instances using the Amazon RDS console\. You can also use the `start-db-instance-automated-backups-replication` AWS CLI command or the `StartDBInstanceAutomatedBackupsReplication` RDS API operation\. You can replicate up to 20 backups to each destination AWS Region for each AWS account\.
 
 **Note**  
 To be able to replicate automated backups, make sure to enable them\. For more information, see [Enabling automated backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups.Enabling)\.

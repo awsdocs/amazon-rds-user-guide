@@ -46,7 +46,6 @@ When using IAM database authentication, the following limitations apply:
 + Currently, IAM database authentication doesn't support all global condition context keys\.
 
   For more information about global condition context keys, see [AWS global condition context keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
-+ Currently, IAM database authentication isn't supported for CNAMEs\.
 + For PostgreSQL, if the IAM role \(`rds_iam`\) is added to a user \(including the RDS master user\), IAM authentication takes precedence over password authentication, so the user must log in as an IAM user\.
 
 ## Recommendations for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>

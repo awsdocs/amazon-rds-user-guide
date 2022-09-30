@@ -362,7 +362,7 @@ sponsored by Amazon.
       + [Troubleshooting connections to your Oracle DB instance](USER_ConnectToOracleInstance.Troubleshooting.md)
       + [Modifying connection properties using sqlnet.ora parameters](USER_ModifyInstance.Oracle.sqlnet.md)
    + [Securing Oracle DB instance connections](Oracle.Concepts.RestrictedDBAPrivileges.md)
-      + [Encrypting client connections with SSL](Oracle.Concepts.SSL.md)
+      + [Using SSL with an RDS for Oracle DB instance](Oracle.Concepts.SSL.md)
       + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
       + [Configuring Kerberos authentication for Amazon RDS for Oracle](oracle-kerberos.md)
          + [Setting up Kerberos authentication for Oracle DB instances](oracle-kerberos-setting-up.md)

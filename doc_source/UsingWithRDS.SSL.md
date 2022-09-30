@@ -8,7 +8,7 @@ Each DB engine has its own process for implementing SSL/TLS\. To learn how to im
 + [Using SSL/TLS with a MariaDB DB instance](mariadb-ssl-connections.md#MariaDB.Concepts.SSLSupport)
 + [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)
 + [Using SSL/TLS with a MySQL DB instance](mysql-ssl-connections.md#MySQL.Concepts.SSLSupport)
-+ [Encrypting client connections with SSL](Oracle.Concepts.SSL.md)
++ [Using SSL with an RDS for Oracle DB instance](Oracle.Concepts.SSL.md)
 + [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)
 
 **Note**  

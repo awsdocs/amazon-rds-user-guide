@@ -1,4 +1,4 @@
-# Encrypting client connections with SSL<a name="Oracle.Concepts.SSL"></a>
+# Using SSL with an RDS for Oracle DB instance<a name="Oracle.Concepts.SSL"></a>
 
 Secure Sockets Layer \(SSL\) is an industry\-standard protocol for securing network connections between client and server\. After SSL version 3\.0, the name was changed to Transport Layer Security \(TLS\), but we still often refer to the protocol as SSL\. Amazon RDS supports SSL encryption for Oracle DB instances\. Using SSL, you can encrypt a connection between your application client and your Oracle DB instance\. SSL support is available in all AWS Regions for Oracle\.
 

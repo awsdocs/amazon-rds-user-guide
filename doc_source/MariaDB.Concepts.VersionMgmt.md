@@ -55,7 +55,7 @@ Dates with only a month and a year are approximate and are updated with an exact
 
 | MariaDB major version | Community release date | RDS release date | Community end of life date | RDS end of standard support date | 
 | --- | --- | --- | --- | --- | 
-|  MariaDB 10\.6 Current minor version: 10\.6\.8  | 6 July 2021 | 3 February 2022 | 6 July 2026 | July 2026 | 
+|  MariaDB 10\.6 Current minor version: 10\.6\.10  | 6 July 2021 | 3 February 2022 | 6 July 2026 | July 2026 | 
 |  MariaDB 10\.5 Current minor version: 10\.5\.17  | 24 June 2020 | 21 January 2021 | 24 June 2025 | June 2025 | 
 |  MariaDB 10\.4 Current minor version: 10\.4\.26  | 18 June 2019 | 6 April 2020 | 18 June 2024 | June 2024 | 
 |  MariaDB 10\.3 Current minor version: 10\.3\.36  | 25 May 2018 | 23 October 2018 | 25 May 2023 | October 2023 | 

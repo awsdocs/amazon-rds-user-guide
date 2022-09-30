@@ -118,7 +118,7 @@ You can use the AWS Management Console to work with reserved DB instances as sho
 
 1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Multi\-AZ deployment**, choose whether you want a Multi\-AZ deployment\.
+1. For **Deployment Option**, choose whether you want a Multi\-AZ deployment\.
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 
