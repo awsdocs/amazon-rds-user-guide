@@ -101,7 +101,7 @@ You can find out which major versions are available for your RDS for PostgreSQL 
 aws rds describe-db-engine-versions --engine postgres  --engine-version your-version --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
-The following table summarizes the results of this query for all available versions\. An asterisk \(\*\) on the version number means that version is deprecated\. If your current version is deprecated, we recommend that you upgrade to the newest minor version upgrade target or to one of the other available upgrade targets for that version\. For more information about RDS for PostgreSQL 9\.6 deprecation, see [Deprecation of PostgreSQL version 9\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
+The following table summarizes the results of this query for all available versions\. An asterisk \(\*\) on the version number means that version is deprecated\. If your current version is deprecated, we recommend that you upgrade to the newest minor version upgrade target or to one of the other available upgrade targets for that version\. For more information about RDS for PostgreSQL 9\.6 deprecation, see [Deprecation of PostgreSQL version 10Deprecation of PostgreSQL version 9\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
 
 
 | Current source version \(\*deprecated\) | Newest minor version upgrade target | Newest major version upgrade target | Other available upgrade targets | 

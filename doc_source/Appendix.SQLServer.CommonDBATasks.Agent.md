@@ -110,7 +110,7 @@ The EXECUTE permission was denied on the object 'xp_regread', database 'mssqlsys
 As a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS, it tries to run a process \(`xp_regread`\) for which RDS isn't authorized\.
 
 **Note**  
-On RDS for SQL Server, you can delete only SQL Server Agent jobs that were created by the same login\.
+On RDS for SQL Server, only members of the sysadmin role are allowed to update or delete jobs owned by a different login\.
 
 **To delete a SQL Server Agent job**
 + Run the following T\-SQL statement:

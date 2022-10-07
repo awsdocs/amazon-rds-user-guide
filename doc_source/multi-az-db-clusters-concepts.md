@@ -32,8 +32,6 @@ The following diagram shows a Multi\-AZ DB cluster\.
 
 Multi\-AZ DB clusters typically have lower write latency when compared to Multi\-AZ DB instance deployments\. They also allow read\-only workloads to run on reader DB instances\. The RDS console shows the Availability Zone of the writer DB instance and the Availability Zones of the reader DB instances\. You can also use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI command or the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API operation to find this information\. 
 
-Currently, Multi\-AZ DB clusters are available only in some AWS Regions\. For information about AWS Region support for Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](#multi-az-db-clusters-concepts.Limitations)\.
-
 ## Creating and managing a Multi\-AZ DB cluster<a name="multi-az-db-clusters-creating-managing"></a>
 
 You can create a Multi\-AZ DB cluster directly or by restoring from a snapshot\. For instructions, see these topics:

@@ -3,7 +3,7 @@
 Amazon RDS supports DB instances running several versions of PostgreSQL\. For a list of available versions, see [Available PostgreSQL database versions](#PostgreSQL.Concepts.General.DBVersions)\.
 
 **Note**  
-Deprecation of PostgreSQL 9\.6 is scheduled for April 26, 2022\. For more information, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
+Deprecation of PostgreSQL 9\.6 is scheduled for April 26, 2022\. For more information, see [Deprecation of PostgreSQL version 10Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. 
 
 You can create DB instances and DB snapshots, point\-in\-time restores and backups\. DB instances running PostgreSQL support Multi\-AZ deployments, read replicas, Provisioned IOPS, and can be created inside a virtual private cloud \(VPC\)\. You can also use Secure Socket Layer \(SSL\) to connect to a DB instance running PostgreSQL\.
 
@@ -107,7 +107,7 @@ If you want to create an instance in the Database Preview Environment with the A
 
 ## Available PostgreSQL database versions<a name="PostgreSQL.Concepts.General.DBVersions"></a>
 
-Amazon RDS supports DB instances running several editions of PostgreSQL\. You can specify any currently available PostgreSQL version when creating a new DB instance\. You can specify the major version \(such as PostgreSQL 10\), and any available minor version for the specified major version\. If no version is specified, Amazon RDS defaults to an available version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. 
+Amazon RDS supports DB instances running several editions of PostgreSQL\. You can specify any currently available PostgreSQL version when creating a new DB instance\. You can specify the major version \(such as PostgreSQL 14\), and any available minor version for the specified major version\. If no version is specified, Amazon RDS defaults to an available version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. 
 
 To see a list of available versions, as well as defaults for newly created DB instances, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example, to display the default PostgreSQL engine version, use the following command:
 
@@ -116,6 +116,20 @@ aws rds describe-db-engine-versions --default-only --engine postgres
 ```
 
 For details about the PostgreSQL versions that are supported on Amazon RDS, see the [https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/Welcome.html)\.
+
+### Deprecation of PostgreSQL version 10<a name="PostgreSQL.Concepts.General.DBVersions.Deprecation10"></a>
+
+On April 17, 2023, Amazon RDS plans to deprecate PostgreSQL 10 using the following schedule\. We recommend that you take action and upgrade your PostgreSQL databases running on major version 10 to a later version, such as PostgreSQL version 14\. To upgrade your RDS for PostgreSQL major version 10 DB instance from a PostgreSQL version older than 10\.19, we recommend that you first upgrade to version 10\.19 and then upgrade to version 14\. For more information, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+
+
+| Action or recommendation | Dates | 
+| --- | --- | 
+|  The PostgreSQL community plans to deprecate PostgreSQL 10 and won't provide any security patches after this date\.   |  November 10, 2022  | 
+|  Start upgrading RDS for PostgreSQL 10 DB instances to a later major version, such as PostgreSQL 14\. Although you can continue to restore PostgreSQL 10 snapshots and create read replicas with version 10, be aware of the other critical dates in this deprecation schedule and their impact\.   |  Now – February 14, 2023  | 
+|  After this date, you can't create new Amazon RDS instances with PostgreSQL major version 10 from either the AWS Management Console or the AWS CLI\.   |  February 14, 2023  | 
+|  After this date, Amazon RDS automatically upgrades PostgreSQL 10 instances to version 14\. If you restore a PostgreSQL 10 database snapshot, Amazon RDS automatically upgrades the restored database to PostgreSQL 14\.   |  April 17, 2023  | 
+
+For more information about RDS for PostgreSQL version 10 deprecation, see [\[Announcement\]: RDS for PostgreSQL 10 deprecation](https://repost.aws/questions/QUph1IFLkkRiyc0pCdTH493Q/announcement-amazon-rds-for-postgre-sql-10-deprecation) in AWS re:Post\. 
 
 ### Deprecation of PostgreSQL version 9\.6<a name="PostgreSQL.Concepts.General.DBVersions.Deprecation96"></a>
 

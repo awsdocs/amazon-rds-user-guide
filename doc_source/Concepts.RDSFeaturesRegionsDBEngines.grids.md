@@ -315,28 +315,28 @@ Following are the supported engine version and Region availability for Multi\-AZ
 
 | Region | RDS for PostgreSQL 13 | 
 | --- | --- | 
-| US East \(Ohio\) | Version 13\.4 | 
-| US East \(N\. Virginia\) | Version 13\.4 | 
+| US East \(Ohio\) | Version 13\.4 and version 13\.7 | 
+| US East \(N\. Virginia\) | Version 13\.4 and version 13\.7 | 
 | US West \(N\. California\) | – | 
-| US West \(Oregon\) | Version 13\.4 | 
+| US West \(Oregon\) | Version 13\.4 and version 13\.7 | 
 | Africa \(Cape Town\) | – | 
 | Asia Pacific \(Hong Kong\) | – | 
 | Asia Pacific \(Jakarta\) | – | 
 | Asia Pacific \(Mumbai\) | – | 
 | Asia Pacific \(Osaka\) | – | 
 | Asia Pacific \(Seoul\) | – | 
-| Asia Pacific \(Singapore\) | Version 13\.4 | 
-| Asia Pacific \(Sydney\) | Version 13\.4 | 
-| Asia Pacific \(Tokyo\) | Version 13\.4 | 
+| Asia Pacific \(Singapore\) | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Sydney\) | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Tokyo\) | Version 13\.4 and version 13\.7 | 
 | Canada \(Central\) | – | 
 | China \(Beijing\) | – | 
 | China \(Ningxia\) | – | 
-| Europe \(Frankfurt\) | Version 13\.4 | 
-| Europe \(Ireland\) | Version 13\.4 | 
+| Europe \(Frankfurt\) | Version 13\.4 and version 13\.7 | 
+| Europe \(Ireland\) | Version 13\.4 and version 13\.7 | 
 | Europe \(London\) | – | 
 | Europe \(Milan\) | – | 
 | Europe \(Paris\) | – | 
-| Europe \(Stockholm\) | Version 13\.4 | 
+| Europe \(Stockholm\) | Version 13\.4 and version 13\.7 | 
 | Middle East \(Bahrain\) | – | 
 | Middle East \(UAE\) | – | 
 | South America \(São Paulo\) | – | 

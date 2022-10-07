@@ -57,9 +57,11 @@ In some cases, the flash cache causes performance overhead because of cache mana
 
 ### Supported instance classes for the RDS for Oracle instance store<a name="CHAP_Oracle.advanced-features.instance-store.overview.instance-classes"></a>
 
-Amazon RDS supports the instance store for the following memory optimized instance classes:
+Amazon RDS supports the instance store for the following instance classes:
 + db\.m5d
 + db\.r5d
+
+RDS for Oracle supports the preceding instance classes for the BYOL licensing model only\. For more information, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported) and [Bring Your Own License \(BYOL\)](Oracle.Concepts.Licensing.md#Oracle.Concepts.Licensing.BYOL)\.
 
 To see the total instance storage for the supported instance types, run the following command in the AWS CLI\. 
 
@@ -113,9 +115,9 @@ The combined value of the preceding parameters must not exceed 10/10, or 100%\. 
 | --- | --- | --- | 
 |  db\_flash\_cache\_size=\{DBInstanceStore\*0/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*10/10\}  |  This is a valid configuration for all editions of Oracle Database\. Amazon RDS allocates 100% of instance store space to the temporary tablespace\. This is the default\.  | 
 |  db\_flash\_cache\_size=\{DBInstanceStore\*10/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*0/10\}  |  This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 100% of instance store space to the flash cache\.  | 
-|  db\_flash\_cache\_size=\{DBInstanceStore\*2/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*8/10\}  |  This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 20% of instance store space to the temporary tablespace, and 80% of instance store space to the flash cache\.  | 
-|  db\_flash\_cache\_size=\{DBInstanceStore\*6/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*4/10\}  |  This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 60% of instance store space to the temporary tablespace, and 40% of instance store space to the flash cache\.  | 
-|  db\_flash\_cache\_size=\{DBInstanceStore\*2/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*4/10\}  | This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 20% of instance store space to the temporary tablespace, and 40% of instance store space to the flash cache\. | 
+|  db\_flash\_cache\_size=\{DBInstanceStore\*2/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*8/10\}  |  This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 20% of instance store space to the flash cache, and 80% of instance store space to the temporary tablespace\.  | 
+|  db\_flash\_cache\_size=\{DBInstanceStore\*6/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*4/10\}  |  This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 60% of instance store space to the flash cache, and 40% of instance store space to the temporary tablespace\.  | 
+|  db\_flash\_cache\_size=\{DBInstanceStore\*2/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*4/10\}  | This is a valid configuration for Oracle Database Enterprise Edition only\. Amazon RDS allocates 20% of instance store space to the flash cache, and 40% of instance store space to the temporary tablespace\. | 
 |  db\_flash\_cache\_size=\{DBInstanceStore\*8/10\}  |  rds\.instance\_store\_temp\_size=\{DBInstanceStore\*8/10\}  |  This is an invalid configuration because the combined percentage of instance store space exceeds 100%\. In such cases, Amazon RDS fails the attempt\.  | 
 
 ## Considerations when changing the DB instance type<a name="CHAP_Oracle.advanced-features.instance-store.modifying"></a>

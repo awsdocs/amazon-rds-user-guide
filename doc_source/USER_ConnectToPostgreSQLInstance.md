@@ -35,6 +35,7 @@ Following are two ways to connect to a PostgreSQL DB instance\. The first exampl
 **Topics**
 + [Using pgAdmin to connect to a RDS for PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.pgAdmin)
 + [Using psql to connect to your RDS for PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.psql)
++ [Connecting with the AWS JDBC Driver for PostgreSQL](#USER_ConnectToPostgreSQLInstance.JDBCDriverPostgreSQL)
 + [Troubleshooting connections to your RDS for PostgreSQL instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)
 
 ## Using pgAdmin to connect to a RDS for PostgreSQL DB instance<a name="USER_ConnectToPostgreSQLInstance.pgAdmin"></a>
@@ -105,6 +106,14 @@ For example, the following command connects to a database called `mypgdb` on a P
 ```
 psql --host=mypostgresql.c6c8mwvfdgv0.us-west-2.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=mypgdb 
 ```
+
+## Connecting with the AWS JDBC Driver for PostgreSQL<a name="USER_ConnectToPostgreSQLInstance.JDBCDriverPostgreSQL"></a>
+
+The AWS JDBC Driver for PostgreSQL is a client wrapper designed for use with RDS for PostgreSQL\. The AWS JDBC Driver for PostgreSQL extends the functionality of the community pgJDBC driver by enabling AWS features such as authentication\. For more information about the AWS JDBC Driver for PostgreSQL and complete instructions for using it, see the [AWS JDBC Driver for PostgreSQL GitHub repository](https://github.com/awslabs/aws-advanced-jdbc-wrapper)\.
+
+The AWS JDBC Driver for PostgreSQL supports AWS Identity and Access Management \(IAM\) database authentication and AWS Secrets Manager\. For more information on using these authentication mechanisms with the driver, see [AWS IAM Authentication Plugin](https://github.com/awslabs/aws-advanced-jdbc-wrapper/blob/main/docs/using-the-jdbc-driver/using-plugins/UsingTheIamAuthenticationPlugin.md) and [AWS Secrets Manager Plugin](https://github.com/awslabs/aws-advanced-jdbc-wrapper/blob/main/docs/using-the-jdbc-driver/using-plugins/UsingTheAwsSecretsManagerPlugin.md) in the AWS JDBC Driver for PostgreSQL GitHub repository\.
+
+For more information about IAM database authentication, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. For more information about Secrets Manager, see the [AWS Secrets Manager User Guide](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)\.
 
 ## Troubleshooting connections to your RDS for PostgreSQL instance<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting"></a>
 
