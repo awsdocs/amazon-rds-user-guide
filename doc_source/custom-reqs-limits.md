@@ -10,7 +10,7 @@ Following, you can find a summary of the Amazon RDS Custom for Oracle requiremen
 
 ## Region and version availability<a name="custom-reqs-limits.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Amazon RDS Custom for Oracle, see [RDS Custom](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Amazon RDS Custom for Oracle, see [RDS Custom](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md)\. 
 
 ## General requirements for RDS Custom for Oracle<a name="custom-reqs-limits.reqs"></a>
 

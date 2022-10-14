@@ -19,7 +19,7 @@ You can subscribe to an event category for the following resources:
 + RDS Proxy
 + Custom engine version
 
-For example, if you subscribe to the backup category for a given DB instance, you're notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you're notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
+For example, if you subscribe to the backup category for a given DB instance, you're notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB instance, you're notified when the DB instance is changed\. You also receive notification when an event notification subscription changes\.
 
 You might want to create several different subscriptions\. For example, you might create one subscription that receives all event notifications for all DB instances and another subscription that includes only critical events for a subset of the DB instances\. For the second subscription, specify one or more DB instances in the filter\.
 

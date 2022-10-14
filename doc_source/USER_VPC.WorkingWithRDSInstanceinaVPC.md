@@ -196,7 +196,7 @@ The following limitations apply to modifying a DB instance to use dual\-stack mo
 
 #### Region and version availability<a name="USER_VPC.IP_addressing.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with dual stack mode, see [Dual\-stack mode](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with dual stack mode, see [Dual\-stack mode](Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.md)\. 
 
 #### Limitations for dual\-stack network DB instances<a name="USER_VPC.IP_addressing.dual-stack-limitations"></a>
 

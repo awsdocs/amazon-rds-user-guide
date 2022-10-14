@@ -17,7 +17,7 @@ You can also access credentials from your own on\-premises Microsoft Active Dire
 
 ## Region and version availability<a name="postgresql-kerberos.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of RDS for PostgreSQL with Kerberos authentication, see [Kerberos authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of RDS for PostgreSQL with Kerberos authentication, see [Kerberos authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
 
 ## Overview of Kerberos authentication for PostgreSQL DB instances<a name="postgresql-kerberos-overview"></a>
 

@@ -8,7 +8,7 @@ Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions\. R
 + [Application compatibility policy for AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_app_compatibility.html)
 + [Application compatibility policy for AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_connector_app_compatibility.html)
 
-For more information on version and Region availability of RDS for SQL Server with Kerberos authentication, see [Kerberos authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication)\.
+For more information on version and Region availability of RDS for SQL Server with Kerberos authentication, see [Kerberos authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
 
 ## Overview of setting up Windows authentication<a name="USER_SQLServerWinAuth.overview"></a>
 

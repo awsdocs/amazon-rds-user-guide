@@ -17,7 +17,7 @@ For an example of using backup replication, see the AWS online tech talk [Manage
 
 ## Region and version availability<a name="USER_ReplicateBackups.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with cross\-Region automated backups, see [Cross\-Region automated backups](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with cross\-Region automated backups, see [Cross\-Region automated backups](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.md)\. 
 
 ## Source and destination AWS Region support<a name="USER_ReplicateBackups.Regions"></a>
 

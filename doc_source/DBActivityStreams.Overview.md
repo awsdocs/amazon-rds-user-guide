@@ -86,7 +86,7 @@ In RDS for Oracle, database activity streams have the following requirements and
 
 ## Region and version availability<a name="DBActivityStreams.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with database activity streams, see [Database activity streams](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with database activity streams, see [Database activity streams](Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams.md)\.
 
 ## Supported DB instance classes for database activity streams<a name="DBActivityStreams.Overview.requirements.classes"></a>
 

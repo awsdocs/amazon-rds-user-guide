@@ -3,10 +3,10 @@
 Amazon RDS supports several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is listed here\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
 
 
-+ SQL Server 2019 CU15 15\.00\.4198\.2, released per [KB5008996](https://support.microsoft.com/en-us/topic/kb5008996-cumulative-update-15-for-sql-server-2019-4b6a8ee9-1c61-482d-914f-36e429901fb6) on January 27, 2022\.
-+ SQL Server 2017 CU27 14\.00\.3421\.10, released per [KB5006944](https://support.microsoft.com/en-us/topic/kb5006944-cumulative-update-27-for-sql-server-2017-79117c8f-9d54-42f8-9727-5870fe475187) on October 27, 2021\.
-+ SQL Server 2016 SP3 13\.00\.6300\.2, released per [KB5003279](https://support.microsoft.com/en-us/topic/kb5003279-sql-server-2016-service-pack-3-release-information-46ab9543-5cf9-464d-bd63-796279591c31) on September 15, 2021\.
-+ SQL Server 2014 SP3 CU4 SU 12\.00\.6433\.1, released per [KB4583462](https://support.microsoft.com/en-us/topic/kb4583462-description-of-the-security-update-for-sql-server-2014-sp3-cu4-january-12-2021-a791987a-d823-4a86-d573-6f11f646267f) on January 12, 2021\.
++ SQL Server 2019 CU16 15\.0\.4236\.7, released per [KB5014353](https://support.microsoft.com/en-us/topic/kb5014353-description-of-the-security-update-for-sql-server-2019-cu16-june-14-2022-f0afe659-bd19-4c87-a417-a4c67a47e644) on June 14, 2022\.
++ SQL Server 2017 CU30 14\.0\.3451\.2, released per [KB5013756](https://support.microsoft.com/en-us/topic/kb5013756-cumulative-update-30-for-sql-server-2017-274943fa-8dde-4844-90ed-d3b587fa0c7c) on July 13, 2022\.
++ SQL Server 2016 SP3 GDR 13\.0\.6419\.1, released per [KB5014355](https://support.microsoft.com/en-us/topic/kb5014355-description-of-the-security-update-for-sql-server-2016-sp3-gdr-june-14-2022-bb5097a0-f8f1-4d2c-bfe1-af069ca3cc59) on June 14, 2022\.
++ SQL Server 2014 SP3 CU4 12\.0\.6439\.10, released per [KB5014164](https://support.microsoft.com/en-us/topic/kb5014164-description-of-the-security-update-for-sql-server-2014-sp3-cu4-june-14-2022-f3400be9-b2d3-4873-ae58-15e6e0cc686e) on June 14, 2022\.
 + SQL Server 2012: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
 + SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
 
@@ -214,10 +214,10 @@ The following table shows the supported versions for all editions and all AWS Re
 
 | Major version | Minor version | RDS API `EngineVersion` and CLI `engine-version` | 
 | --- | --- | --- | 
-| SQL Server 2019 |  15\.00\.4198\.2 \(CU15\) 15\.00\.4153\.1 \(CU12\) 15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |  `15.00.4198.2.v1` `15.00.4153.1.v1` `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
-| SQL Server 2017 |  14\.00\.3421\.10 \(CU27\) 14\.00\.3401\.7 \(CU25\) 14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\)  |  `14.00.3421.10.v1` `14.00.3401.7.v1` `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1`  | 
-| SQL Server 2016 |  13\.00\.6300\.2 \(SP3\) 13\.00\.5882\.1 \(SP2 CU16\) 13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\)  |  `13.00.6300.2.v1` `13.00.5882.1.v1` `13.00.5850.14.v1` `13.00.5820.21.v1`  | 
-| SQL Server 2014 |  12\.00\.6433\.1 \(SP3 CU4 SU\) 12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\)  |  `12.00.6433.1.v1` `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1`  | 
+| SQL Server 2019 |  15\.00\.4236\.7 \(CU16\) 15\.00\.4198\.2 \(CU15\) 15\.00\.4153\.1 \(CU12\) 15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |  `15.00.4236.7.v1` `15.00.4198.2.v1` `15.00.4153.1.v1` `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
+| SQL Server 2017 |  14\.00\.3451\.2 \(CU30\) 14\.00\.3421\.10 \(CU27\) 14\.00\.3401\.7 \(CU25\) 14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\) 14\.00\.3281\.6 \(CU19\)  |  `14.00.3451.2.v1` `14.00.3421.10.v1` `14.00.3401.7.v1` `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1` `14.00.3281.6.v1`  | 
+| SQL Server 2016 |  13\.00\.6419\.1 \(SP3 \+ Hotfix\) 13\.00\.6300\.2 \(SP3\)   |  `13.00.6419.1.v1` `13.00.6300.2.v1`   | 
+| SQL Server 2014 |  12\.00\.6439\.10 \(SP3 CU4 SU\) 12\.00\.6433\.1 \(SP3 CU4 SU\) 12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\)   |  `12.00.6439.10.v1` `12.00.6433.1.v1` `12.00.6329.1.v1` `12.00.6293.0.v1`   | 
 
 ## Version management in Amazon RDS<a name="SQLServer.Concepts.General.Version-Management"></a>
 

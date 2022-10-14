@@ -14,4 +14,4 @@ You can access database logs using the AWS Management Console, the AWS Command L
 + [Microsoft SQL Server database log files](USER_LogAccess.Concepts.SQLServer.md)
 + [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)
 + [Oracle database log files](USER_LogAccess.Concepts.Oracle.md)
-+ [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)
++ [RDS for PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)

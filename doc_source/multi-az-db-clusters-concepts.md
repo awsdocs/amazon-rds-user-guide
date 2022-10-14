@@ -18,7 +18,7 @@ Multi\-AZ DB clusters aren't the same as Aurora DB clusters\. For information ab
 
 ## Region and version availability<a name="multi-az-db-clusters-concepts.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Multi\-AZ DB clusters, see [Multi\-AZ DB clusters](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Multi\-AZ DB clusters, see [Multi\-AZ DB clusters](Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.md)\. 
 
 ## Overview of Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-overview"></a>
 

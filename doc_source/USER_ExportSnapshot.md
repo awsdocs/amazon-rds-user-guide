@@ -24,7 +24,7 @@ After the data is exported, you can analyze the exported data directly through t
 
 ## Region and version availability<a name="USER_ExportSnapshot.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with exporting snapshots to S3, see [Export snapshots to S3](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with exporting snapshots to S3, see [Export snapshots to S3](Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.md)\.
 
 ## Limitations<a name="USER_ExportSnapshot.Limits"></a>
 

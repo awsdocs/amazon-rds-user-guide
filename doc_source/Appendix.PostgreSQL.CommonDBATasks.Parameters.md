@@ -171,7 +171,7 @@ You can also use the Console\. Choose **Parameter groups** from the Amazon RDS m
 |  `session_replication_role`  | Dynamic | Sets the sessions behavior for triggers and rewrite rules\. | 
 |  `shared_buffers`  | Static | Sets the number of shared memory buffers used by the server\. | 
 |  `shared_preload_libraries `  | Static | Lists the shared libraries to preload into the RDS for PostgreSQL DB instance\. Supported values include auto\_explain, orafce, pgaudit, pglogical, pg\_bigm, pg\_cron, pg\_hint\_plan, pg\_prewarm, pg\_similarity, pg\_stat\_statements, pg\_transport, and plprofiler\. | 
-|  `ssl`  | Static | Enables SSL connections\. | 
+|  `ssl`  | Dynamic | Enables SSL connections\. | 
 |  `sql_inheritance`  | Dynamic | Causes subtables to be included by default in various commands\. | 
 |  `ssl_renegotiation_limit`  | Dynamic | Sets the amount of traffic to send and receive before renegotiating the encryption keys\. | 
 |  `standard_conforming_strings`  | Dynamic | Causes \.\.\. strings to treat backslashes literally\. | 
@@ -182,7 +182,7 @@ You can also use the Console\. Choose **Parameter groups** from the Amazon RDS m
 |  `tcp_keepalives_idle`  | Dynamic | Time between issuing TCP keepalives\. | 
 |  `tcp_keepalives_interval`  | Dynamic | Time between TCP keepalive retransmits\. | 
 |  `temp_buffers`  | Dynamic | Sets the maximum number of temporary buffers used by each session\. | 
-| temp\_file\_limit | Static | Sets the maximum size in KB to which the temporary files can grow\. | 
+| temp\_file\_limit | Dynamic | Sets the maximum size in KB to which the temporary files can grow\. | 
 |  `temp_tablespaces`  | Dynamic | Sets the tablespaces to use for temporary tables and sort files\. | 
 |  `timezone`  | Dynamic | Sets the time zone for displaying and interpreting time stamps\. | 
 |  `track_activities`  | Dynamic | Collects information about running commands\. | 

@@ -25,7 +25,7 @@ The AWS JDBC Driver for MySQL supports IAM database authentication\. For more in
 
 ## Region and version availability<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with Amazon RDS and IAM database authentication, see [IAM database authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with Amazon RDS and IAM database authentication, see [IAM database authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.md)\.
 
 ## CLI and SDK support<a name="UsingWithRDS.IAMDBAuth.cli-sdk"></a>
 

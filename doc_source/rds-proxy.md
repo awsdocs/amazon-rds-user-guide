@@ -26,7 +26,7 @@
 
 ## Region and version availability<a name="rds-proxy.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with RDS Proxy, see [Amazon RDS Proxy](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with RDS Proxy, see [Amazon RDS Proxy](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md)\.
 
 ## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
 

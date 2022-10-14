@@ -6,7 +6,7 @@
 
 ## Region and version availability<a name="mysql-kerberos-setting-up.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Kerberos authentication, see [Kerberos authentication](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Kerberos authentication, see [Kerberos authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
 
 ## Overview of Setting up Kerberos authentication for MySQL DB instances<a name="mysql-kerberos-setting-up-overview"></a>
 

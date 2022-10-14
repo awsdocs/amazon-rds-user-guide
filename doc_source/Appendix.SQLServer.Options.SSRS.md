@@ -467,7 +467,7 @@ If you change the secret later, you also have to update the `SSRS` option in the
      "Statement" : [ {
        "Effect" : "Allow",
        "Principal" : {
-         "Service" : "rds.amazonaws.com"
+         "Service" : "rds.amazonaws.com",
        },
        "Action" : "secretsmanager:GetSecretValue",
        "Resource" : "*",

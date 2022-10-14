@@ -311,7 +311,7 @@ To create an encrypted read replica in a different AWS Region from the source DB
 
 ### Region and version availability<a name="USER_ReadRepl.XRgn.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with cross\-Region replication, see [Cross\-Region read replicas](Concepts.RDSFeaturesRegionsDBEngines.grids.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with cross\-Region replication, see [Cross\-Region read replicas](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md)\. 
 
 ### Creating a cross\-Region read replica<a name="ReadRepl.XRgn"></a>
 

@@ -127,11 +127,14 @@ The following table shows the event category and a list of events when a DB para
 
 The following table shows the event category and a list of events when a DB security group is the source type\.
 
+**Note**  
+DB security groups are resources for EC2\-Classic\. EC2\-Classic was retired on August 15, 2022\. If you haven't migrated from EC2\-Classic to a VPC, we recommend that you migrate as soon as possible\. For more information, see [Migrate from EC2\-Classic to a VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the *Amazon EC2 User Guide* and the blog [ EC2\-Classic Networking is Retiring – Here’s How to Prepare](http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/)\.
+
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
 |  configuration change  | RDS\-EVENT\-0038 |  The security group has been modified\.  | 
-|  failure  | RDS\-EVENT\-0039 |  The security group owned by \[user\] does not exist; authorization for the security group has been revoked\.  | 
+|  failure  | RDS\-EVENT\-0039 |  The security group owned by \[user\] does not exist\. Authorization for the security group has been revoked\.  | 
 
 ## DB snapshot events<a name="USER_Events.Messages.snapshot"></a>
 

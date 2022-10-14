@@ -5,6 +5,7 @@
 **Topics**
 + [Stopping an Amazon RDS DB instance temporarily](USER_StopInstance.md)
 + [Starting an Amazon RDS DB instance that was previously stopped](USER_StartInstance.md)
++ [Connecting an EC2 instance and an RDS database automatically](ec2-rds-connect.md)
 + [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)
 + [Modifying a Multi\-AZ DB cluster](modify-multi-az-db-cluster.md)
 + [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)
