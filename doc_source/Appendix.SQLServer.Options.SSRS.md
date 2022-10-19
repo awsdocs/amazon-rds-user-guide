@@ -190,7 +190,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
    1. \(Optional\) Set the following parameters to use SSRS Email:
       + `SMTP_ENABLE_EMAIL` – Set to `true` to use SSRS Email\. The default is `false`\.
       + `SMTP_SENDER_EMAIL_ADDRESS` – The email address to use in the **From** field of messages sent by SSRS Email\. Specify a user account that has permission to send mail from the SMTP server\.
-      + `SMTP_SERVER_NAME` – The SMTP server or gateway to use\. It can be an IP address, the NetBIOS name of a computer on your corporate intranet, or a fully qualified domain name\.
+      + `SMTP_SERVER` – The SMTP server or gateway to use\. It can be an IP address, the NetBIOS name of a computer on your corporate intranet, or a fully qualified domain name\.
       + `SMTP_PORT` – The port to use to connect to the mail server\. The default is 25\.
       + `SMTP_USE_SSL` – Set to `true` to encrypt email messages using SSL\. The default is `true`\.
       + `SMTP_EMAIL_CREDENTIALS_SECRET_ARN` – The Secrets Manager ARN that holds the user credentials\. Use the following format:
@@ -216,7 +216,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
                {"Name": "MAX_MEMORY","Value": "60"},
                {"Name": "SMTP_ENABLE_EMAIL","Value": "true"}
                {"Name": "SMTP_SENDER_EMAIL_ADDRESS","Value": "nobody@example.com"},
-               {"Name": "SMTP_SERVER_NAME","Value": "email-smtp.us-west-2.amazonaws.com"},
+               {"Name": "SMTP_SERVER","Value": "email-smtp.us-west-2.amazonaws.com"},
                {"Name": "SMTP_PORT","Value": "25"},
                {"Name": "SMTP_USE_SSL","Value": "true"},
                {"Name": "SMTP_EMAIL_CREDENTIALS_SECRET_ARN","Value": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MySecret-a1b2c3"}
