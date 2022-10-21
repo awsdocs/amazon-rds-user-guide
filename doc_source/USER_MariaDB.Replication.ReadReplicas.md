@@ -16,7 +16,7 @@ Following, you can find specific information about working with read replicas on
 
 Before a MariaDB DB instance can serve as a replication source, make sure to turn on automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. 
 
-You can create up to five read replicas from one DB instance\. For replication to operate effectively, each read replica should have as the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
+You can create up to 15 read replicas from one DB instance within the same Region\. For replication to operate effectively, each read replica should have as the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
 If a read replica is running any version of MariaDB, you can specify it as the source DB instance for another read replica\. For example, you can create ReadReplica1 from MyDBInstance, and then create ReadReplica2 from ReadReplica1\. Updates made to MyDBInstance are replicated to ReadReplica1 and then replicated from ReadReplica1 to ReadReplica2\. You can't have more than four instances involved in a replication chain\. For example, you can create ReadReplica1 from MySourceDBInstance, and then create ReadReplica2 from ReadReplica1, and then create ReadReplica3 from ReadReplica2, but you can't create a ReadReplica4 from ReadReplica3\. 
 
@@ -24,7 +24,7 @@ If you promote a MariaDB read replica that is in turn replicating to other read 
 
 To enable automatic backups on a read replica for RDS for MariaDB, first create the read replica, then modify the read replica to enable automatic backups\. 
 
-You can run multiple concurrent read replica create or delete actions that reference the same source DB instance, as long as you stay within the limit of five read replicas for the source instance\. 
+You can run multiple read replica create and delete actions at the same time that reference the same source DB instance\. When you perform these actions, stay within the limit of 15 read replicas for each source instance\.
 
 ## Configuring replication filters with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters"></a>
 

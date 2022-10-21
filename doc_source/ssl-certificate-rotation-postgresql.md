@@ -22,7 +22,9 @@ Check the DB instance configuration for the value of the `rds.force_ssl` paramet
 If you are using RDS PostgreSQL version 9\.5 or later major version and `rds.force_ssl` is not set to `1` \(on\), query the `pg_stat_ssl` view to check connections using SSL\. For example, the following query returns only SSL connections and information about the clients using SSL\.
 
 ```
-select datname, usename, ssl, client_addr from pg_stat_ssl inner join pg_stat_activity on pg_stat_ssl.pid = pg_stat_activity.pid where ssl is true and usename<>'rdsadmin';                
+SELECT datname, usename, ssl, client_addr 
+  FROM pg_stat_ssl INNER JOIN pg_stat_activity ON pg_stat_ssl.pid = pg_stat_activity.pid
+  WHERE ssl is true and usename<>'rdsadmin';
 ```
 
 Only rows using SSL/TLS connections are displayed with information about the connection\. The following is sample output\.
@@ -44,24 +46,24 @@ When a client, such as psql or JDBC, is configured with SSL support, the client 
 Use `PGSSLROOTCERT` to verify the certificate with the `PGSSLMODE` environment variable, with `PGSSLMODE` set to `require`, `verify-ca`, or `verify-full`\.
 
 ```
-PGSSLMODE=require PGSSLROOTCERT=/fullpath/rds-ca-2019-root.pem psql -h pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com -U masteruser -d postgres                
+PGSSLMODE=require PGSSLROOTCERT=/fullpath/rds-ca-2019-root.pem psql -h pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com -U masteruser -d postgres
 ```
 
 Use the `sslrootcert` argument to verify the certificate with `sslmode` in connection string format, with `sslmode` set to `require`, `verify-ca`, or `verify-full` to verify the certificate\.
 
 ```
-psql "host=pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com sslmode=require sslrootcert=/full/path/rds-ca-2019-root.pem user=masteruser dbname=postgres"                
+psql "host=pgdbidentifier.cxxxxxxxx.us-east-2.rds.amazonaws.com sslmode=require sslrootcert=/full/path/rds-ca-2019-root.pem user=masteruser dbname=postgres"
 ```
 
 For example, in the preceding case, if you are using an invalid root certificate, then you see an error similar to the following on your client\.
 
 ```
-psql: SSL error: certificate verify failed               
+psql: SSL error: certificate verify failed
 ```
 
 ## Updating your application trust store<a name="ssl-certificate-rotation-postgresql.updating-trust-store"></a>
 
-For information about updating the trust store for PostgreSQL applications, see [Secure TCP/IP connections with SSL](https://www.postgresql.org/docs/9.5/ssl-tcp.html) in the PostgreSQL documentation\.
+For information about updating the trust store for PostgreSQL applications, see [Secure TCP/IP connections with SSL](https://www.postgresql.org/docs/current/ssl-tcp.html) in the PostgreSQL documentation\.
 
 For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
@@ -77,7 +79,7 @@ The following provides information about using SSL/TLS connections for different
 
   The client is invoked from the command line by specifying options either as a connection string or as environment variables\. For SSL/TLS connections, the relevant options are `sslmode` \(environment variable `PGSSLMODE`\), `sslrootcert` \(environment variable `PGSSLROOTCERT`\)\.
 
-  For the complete list of options, see [Parameter key words](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-PARAMKEYWORDS) in the PostgreSQL documentation\. For the complete list of environment variables, see [Environment variables](https://www.postgresql.org/docs/11/libpq-envars.html) in the PostgreSQL documentation\.
+  For the complete list of options, see [Parameter key words](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-PARAMKEYWORDS) in the PostgreSQL documentation\. For the complete list of environment variables, see [Environment variables](https://www.postgresql.org/docs/current/libpq-envars.html) in the PostgreSQL documentation\.
 + **pgAdmin**
 
   This browser\-based client is a more user\-friendly interface for connecting to a PostgreSQL database\.
@@ -87,7 +89,7 @@ The following provides information about using SSL/TLS connections for different
 
   JDBC enables database connections with Java applications\.
 
-  For general information about connecting to a PostgreSQL database with JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/head/connect.html) in the PostgreSQL documentation\. For information about connecting with SSL/TLS, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\. 
+  For general information about connecting to a PostgreSQL database with JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/use/#connecting-to-the-database) in the PostgreSQL JDBC driver documentation\. For information about connecting with SSL/TLS, see [Configuring the client](https://jdbc.postgresql.org/documentation/ssl/#configuring-the-client) in the PostgreSQL JDBC driver documentation\. 
 + **Python**
 
   A popular Python library for connecting to PostgreSQL databases is `psycopg2`\.

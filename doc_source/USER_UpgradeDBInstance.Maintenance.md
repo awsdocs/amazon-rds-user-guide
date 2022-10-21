@@ -26,9 +26,6 @@ If an update is available, you can take one of the actions:
 + Schedule the maintenance items to start during your next maintenance window\.
 + Take no action\.
 
-**Note**  
-Certain OS updates are marked as **required**\. If you defer a required update, you get a notice from Amazon RDS indicating when the update will be performed\. Other updates are marked as **available**, and these you can defer indefinitely\.
-
 To take an action, choose the DB instance to show its details, then choose **Maintenance & backups**\. The pending maintenance items appear\.
 
 ![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailabledetails.png)

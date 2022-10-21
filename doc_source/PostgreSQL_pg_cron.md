@@ -119,7 +119,7 @@ For more information, see [Tables for scheduling jobs and capturing status ](#Po
 
 ### Logging errors to the postgresql\.log file only<a name="PostgreSQL_pg_cron.log_run"></a>
 
-To prevent writing to the `cron.job_run_details` table, modify the parameter group associated with the PostgreSQL DB instance and set the `cron.log_run` parameter to off\. If you do this, the `pg_cron` extension no longer writes to the table and captures errors to the `postgresql.log` file only\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
+To prevent writing to the `cron.job_run_details` table, modify the parameter group associated with the PostgreSQL DB instance and set the `cron.log_run` parameter to off\. The `pg_cron` extension no longer writes to the table and captures errors to the `postgresql.log` file only\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
 Use the following command to check the value of the `cron.log_run` parameter\.
 

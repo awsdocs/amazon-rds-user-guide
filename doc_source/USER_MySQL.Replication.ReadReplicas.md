@@ -18,15 +18,15 @@ Before a MySQL DB instance can serve as a replication source, make sure to enabl
 
 On RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
 
-You can create up to five read replicas from one DB instance\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
+You can create up to 15 read replicas from one DB instance within the same Region\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
 If a read replica is running any version of MySQL, you can specify it as the source DB instance for another read replica\. For example, you can create ReadReplica1 from MyDBInstance, and then create ReadReplica2 from ReadReplica1\. Updates made to MyDBInstance are replicated to ReadReplica1 and then replicated from ReadReplica1 to ReadReplica2\. You can't have more than four instances involved in a replication chain\. For example, you can create ReadReplica1 from MySourceDBInstance, and then create ReadReplica2 from ReadReplica1, and then create ReadReplica3 from ReadReplica2, but you can't create a ReadReplica4 from ReadReplica3\. 
 
 If you promote a MySQL read replica that is in turn replicating to other read replicas, those read replicas remain active\. Consider an example where MyDBInstance1 replicates to MyDBInstance2, and MyDBInstance2 replicates to MyDBInstance3\. If you promote MyDBInstance2, replication from MyDBInstance1 to MyDBInstance2 no longer occurs, but MyDBInstance2 still replicates to MyDBInstance3\. 
 
-To enable automatic backups on a read replica for RDS for MySQL, first create the read replica\. Then modify the read replica to enable automatic backups\. 
+To enable automatic backups on a read replica for RDS for MySQL, first create the read replica\. Then modify the read replica to enable automatic backups\.
 
-You can run multiple read replica create or delete actions at the same time that reference the same source DB instance\. To do this, stay within the limit of five read replicas for each source instance\. 
+You can run multiple read replica create and delete actions at the same time that reference the same source DB instance\. When you perform these actions, stay within the limit of 15 read replicas for each source instance\.
 
 A read replica of a MySQL DB instance can't use a lower DB engine version than its source DB instance\.
 

@@ -18,6 +18,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 **Topics**
 + [Common management tasks for Amazon RDS for PostgreSQL](#CHAP_PostgreSQL.CommonTasks)
 + [Working with the database preview environment](#working-with-the-database-preview-environment)
++ [PostgreSQL version 15 in the database preview environment](#PostgreSQL.Concepts.General.version15)
 + [Available PostgreSQL database versions](#PostgreSQL.Concepts.General.DBVersions)
 + [Supported PostgreSQL extension versions](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
 + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
@@ -68,21 +69,25 @@ Following is a list of other sections in this guide that can help you understand
 
 ## Working with the database preview environment<a name="working-with-the-database-preview-environment"></a>
 
-When you create a DB instance in Amazon RDS, you know that the PostgreSQL version it's based on has been tested and is fully supported by Amazon\. The PostgreSQL community releases new versions and new extensions continuously\. You can try out new PostgreSQL versions and extensions before they are fully supported\. To do that, you can create a new DB instance in the Database Preview Environment\. 
+ The PostgreSQL community continuously releases new PostgreSQL version and extensions, including beta versions\. This gives PostgreSQL users the opportunity to try out a new PostgreSQL version early\. To learn more about the PostgreSQL community beta release process, see [Beta Information](https://www.postgresql.org/developer/beta/) in the PostgreSQL documentation\. Similarly, Amazon RDS makes certain PostgreSQL beta versions available as Preview releases\. This allows you to create DB instances using the Preview version and test out its features in the Database Preview Environment\. 
 
-DB instances in the Database Preview Environment are similar to DB instances in a production environment\. However, keep in mind several important factors:
+RDS for PostgreSQL DB instances in the Database Preview Environment are functionally similar to other RDS for PostgreSQL instances\. However, you can't use a Preview version for production\.
+
+Keep in mind the following important limitations:
 + All DB instances are deleted 60 days after you create them, along with any backups and snapshots\.
 + You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+ You can only create M6g, M5, T3, R6g, and R5 instance types\. For more information about RDS instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 + You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
 + You can't get help from AWS Support with DB instances\. Instead, you can post your questions to the AWS‐managed Q&A community, [AWS re:Post](https://repost.aws/tags/TAsibBK6ZeQYihN9as4S_psg/amazon-relational-database-service)\.
 + You can't copy a snapshot of a DB instance to a production environment\.
+
+The following options are supported by the Preview\.
++ You can create DB instances using M6i, R6i, M6g, M5, T3, R6g, and R5 instance types only\. For more information about RDS instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 + You can use both single\-AZ and multi\-AZ deployments\.
 + You can use standard PostgreSQL dump and load functions to export databases from or import databases to the Database Preview Environment\.
 
 ### Features not supported in the preview environment<a name="preview-environment-exclusions"></a>
 
-The following features are not available in the preview environment:
+The following features aren't available in the preview environment:
 + Cross\-Region snapshot copy
 + Cross\-Region read replicas
 
@@ -94,16 +99,29 @@ Use the following procedure to create a DB instance in the preview environment\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  Choose **Dashboard** from the navigation pane\. 
+1. Choose **Dashboard** from the navigation pane\.
 
-1. Choose **Switch to database preview environment**\.   
-![\[Dialog box to select the preview environment\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/instance_preview.png)
+1. In the Dashboard page, locate the **Database Preview Environment** section on the Dashboard page, as shown in the following image\.  
+![\[Preview environment section with link displayed in RDS Console, Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rpg-preview-environment-dashboard.png)
 
-   You also can navigate directly to the [Database preview environment](https://us-east-2.console.aws.amazon.com/rds-preview/home?region=us-east-2#)\.
-**Note**  
-If you want to create an instance in the Database Preview Environment with the API or CLI, the endpoint is `rds-preview.us-east-2.amazonaws.com`\.
+   You can navigate directly to the [Database preview environment](https://us-east-2.console.aws.amazon.com/rds-preview/home?region=us-east-2#)\. Before you can proceed, you must acknowledge and accept the limitations\.   
+![\[Preview environment limitations dialog\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rpg-preview-environment-console.png)
 
-1. Continue with the procedure as described in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md#USER_CreateDBInstance.CON), [Console](USER_CreateDBInstance.md#USER_CreateDBInstance.CON)\.
+1. To create the RDS for PostgreSQL DB instance, follow the same process as that for creating any Amazon RDS DB instance\. For more information, see the [Console](USER_CreateDBInstance.md#USER_CreateDBInstance.CON) procedure in [Creating a DB instance](USER_CreateDBInstance.md#USER_CreateDBInstance.Creating)\.
+
+To create an instance in the Database Preview Environment using the RDS API or the AWS CLI, use the following endpoint\.
+
+```
+rds-preview.us-east-2.amazonaws.com
+```
+
+## PostgreSQL version 15 in the database preview environment<a name="PostgreSQL.Concepts.General.version15"></a>
+
+PostgreSQL version 15 is now available in the Amazon RDS Database Preview Environment\. PostgreSQL version 15 contains several improvements that are described in the following PostgreSQL documentation:
++ [ PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html)
++ [ PostgreSQL 15 Beta 3 Released\!](https://www.postgresql.org/about/news/1960/)
+
+For information on the Database Preview Environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\.
 
 ## Available PostgreSQL database versions<a name="PostgreSQL.Concepts.General.DBVersions"></a>
 

@@ -24,6 +24,7 @@ The following limitations apply to the Amazon RDS DB instances:
 40 for MySQL, MariaDB, or PostgreSQL
 40 for Oracle under the "bring\-your\-own\-license" \(BYOL\) licensing model
 If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
+For RDS for Oracle and RDS for SQL Server, the read replica limit is 5 per source database for each Region\.  
 Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the manual snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 If you use any RDS API operations and exceed the default quota for the number of calls per second, the Amazon RDS API issues an error like the following one\. 
@@ -56,6 +57,8 @@ The following table describes naming constraints in Amazon RDS\.
 The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is generally set in the parameter group associated with the DB instance\. The exception is Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Management Studio \(SSMS\)\.
 
 `DBInstanceClassMemory` is in bytes\. For details about how this value is calculated, see [Specifying DB parameters](USER_ParamValuesRef.md)\. Because of memory reserved for the operating system and RDS management processes, this memory size is smaller than the value in gibibytes \(GiB\) shown in [Hardware specifications for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+
+If your applications frequently open and close connections, or keep a large number of long\-lived connections open, we recommend that you use Amazon RDS Proxy\. RDS Proxy is a fully managed, highly available database proxy that uses connection pooling to share database connections securely and efficiently\. To learn more about RDS Proxy, see [Using Amazon RDS Proxy](rds-proxy.md)\.
 
 **Note**  
 For Oracle, you set the maximum number of user processes and user and system sessions\.

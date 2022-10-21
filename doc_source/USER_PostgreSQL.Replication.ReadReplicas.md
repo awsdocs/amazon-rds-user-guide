@@ -28,7 +28,7 @@ The following are limitations for PostgreSQL read replicas:
 
 ## Read replica configuration with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Configuration"></a>
 
-RDS for PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source DB instance\. This read replica DB instance is an asynchronously created physical replica of the source DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data from the source DB instance to the read replica\. For more information, see [Streaming Replication](https://www.postgresql.org/docs/14/warm-standby.html#STREAMING-REPLICATION) in the PostgreSQL documentation\. 
+RDS for PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source DB instance\. This read replica DB instance is an asynchronously created physical replica of the source DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data from the source DB instance to the read replica\. For more information, see [Streaming Replication](https://www.postgresql.org/docs/14/warm-standby.html#STREAMING-REPLICATION) in the PostgreSQL documentation\.
 
 PostgreSQL asynchronously streams database changes to this secure connection as they're made on the source DB instance\. You can encrypt communications from your client applications to the source DB instance or any read replicas by setting the `ssl` parameter to `1`\. For more information, see [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md) \.
 
@@ -36,7 +36,7 @@ PostgreSQL uses a *replication* role to perform streaming replication\. The role
 
 You can create a PostgreSQL read replica without affecting operations or users of the source DB instance\. Amazon RDS sets the necessary parameters and permissions for you, on the source DB instance and the read replica, without affecting the service\. A snapshot is taken of the source DB instance, and this snapshot is used to create the read replica\. If you delete the read replica at some point in the future, no outage occurs\.
 
-You can create up to five read replicas from one source DB instance\. As of RDS for PostgreSQL 14\.1, you can also create up to three levels of read replica in a chain \(cascade\) from a source DB instance\. For more information, see [Using cascading read replicas with RDS for PostgreSQL](#USER_PostgreSQL.Replication.ReadReplicas.Configuration.cascading)\. In all cases, the source DB instance needs to have automated backups configured\. You do this by setting the backup retention period on your DB instance to any value other than 0\. For more information, see [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. 
+You can create up to 15 read replicas from one source DB instance within the same Region\. As of RDS for PostgreSQL 14\.1, you can also create up to three levels of read replica in a chain \(cascade\) from a source DB instance\. For more information, see [Using cascading read replicas with RDS for PostgreSQL](#USER_PostgreSQL.Replication.ReadReplicas.Configuration.cascading)\. In all cases, the source DB instance needs to have automated backups configured\. You do this by setting the backup retention period on your DB instance to any value other than 0\. For more information, see [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. 
 
 You can create read replicas for your RDS for PostgreSQL DB instance in the same AWS Region as your source DB instance\. This is known as *in\-Region* replication\. You can also create read replicas in different AWS Regions than the source DB instance\. This is known as *cross\-Region* replication\. For more information about setting up cross\-Region read replicas, see [Creating a read replica in a different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)\. The various mechanisms supporting the replication process for in\-Region and cross\-Region differ slightly depending on the RDS for PostgreSQL version as explained in [How streaming replication works for different RDS for PostgreSQL versions](#USER_PostgreSQL.Replication.ReadReplicas.Configuration.mechanisms-versions)\. 
 
@@ -80,6 +80,9 @@ As with any read replica, you can promote a read replica that's part of a cascad
 + Your `rpg-db-main` continues replicating to `read-replica-1`\.
 
 For more information about promoting read replicas, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+
+**Note**  
+For cascading read replicas, RDS for PostgreSQL supports 15 read replicas for each source DB instance at first level of replication, and 5 read replicas for each source DB instance at the second and third level of replication\.
 
 ## How streaming replication works for different RDS for PostgreSQL versions<a name="USER_PostgreSQL.Replication.ReadReplicas.Configuration.mechanisms-versions"></a>
 
