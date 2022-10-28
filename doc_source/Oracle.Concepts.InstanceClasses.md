@@ -11,18 +11,19 @@ The supported RDS for Oracle instance classes are a subset of the RDS DB instanc
 RDS for Oracle also offers instance classes that are optimized for workloads that require additional memory, storage, and I/O per vCPU\. These instance classes use the following naming convention:
 
 ```
+db.r5b.instance_size.tpcthreads_per_core.memratio
 db.r5.instance_size.tpcthreads_per_core.memratio
 ```
 
 The following is an example of a supported instance class:
 
 ```
-db.r5.4xlarge.tpc2.mem2x
+db.r5b.4xlarge.tpc2.mem2x
 ```
 
 The components of the preceding instance class name are as follows:
-+ `db.r5.4xlarge` – The name of the instance class\.
-+ `tpc2` – The threads per core\. A value of 2 means that multithreading is turned on\. If the value is 1, hyperthreading is turned off\. 
++ `db.r5b.4xlarge` – The name of the instance class\.
++ `tpc2` – The threads per core\. A value of 2 means that multithreading is turned on\. If the value is 1, multithreading is turned off\. 
 + `mem2x` – The ratio of additional memory to the standard memory for the instance class\. In this example, the optimization provides twice as much memory as a standard db\.r5\.4xlarge instance\. 
 
 The following table lists all instance classes supported for Oracle Database\. Oracle Database 12c Release 1 \(12\.1\.0\.2\) and Oracle Database 12c Release 2 \(12\.2\.0\.2\) are listed in the table, but support for these releases is deprecated\. For information about the memory attributes of each type, see [ RDS for Oracle instance types](http://aws.amazon.com/rds/oracle/instance-types)\.

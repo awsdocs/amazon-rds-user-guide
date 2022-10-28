@@ -3,7 +3,7 @@
 Imports the certificate authority certificate, client certificate, and client key into an Aurora MySQL DB cluster\. The information is required for SSL communication and encrypted replication\.
 
 **Note**  
-Currently, this procedure is supported for Aurora MySQL version 1; version 2: 2\.09\.2, 2\.10\.0, and 2\.10\.1; and version 3: 3\.01\.1 and higher\.
+Currently, this procedure is supported for Aurora MySQL version 1; version 2: 2\.09\.2, 2\.10\.0, 2\.10\.1, and 2\.11\.0; and version 3: 3\.01\.1 and higher\.
 
 ## Syntax<a name="mysql_rds_import_binlog_ssl_material-syntax"></a>
 

@@ -24,7 +24,7 @@ After the data is exported, you can analyze the exported data directly through t
 
 ## Region and version availability<a name="USER_ExportSnapshot.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability with exporting snapshots to S3, see [Export snapshots to S3](Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.md)\.
+Feature availability and support varies across specific versions of each database engine and across AWS Regions\. For more information on version and Region availability with exporting snapshots to S3, see [Export snapshots to S3](Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.md)\.
 
 ## Limitations<a name="USER_ExportSnapshot.Limits"></a>
 
@@ -46,8 +46,8 @@ Exporting DB snapshot data to Amazon S3 has the following limitations:
   , ; { } ( ) \n \t = (space)
   ```
 + Tables with slashes \(/\) in their names are skipped during export\.
-+ If the data contains a large object such as a BLOB or CLOB, close to or greater than 500 MB, the export fails\.
-+ If a table contains a large row close to or greater than 2 GB, the table is skipped during export\.
++ If the data contains a large object, such as a BLOB or CLOB, that is close to or greater than 500 MB, then the export fails\.
++ If a table contains a large row that is close to or greater than 2 GB, then the table is skipped during export\.
 + We strongly recommend that you use a unique name for each export task\. If you don't use a unique task name, you might receive the following error message:
 
   ExportTaskAlreadyExistsFault: An error occurred \(ExportTaskAlreadyExists\) when calling the StartExportTask operation: The export task with the ID *xxxxx* already exists\.
@@ -105,7 +105,7 @@ For more information about working with Amazon S3 buckets, see the following in 
 
 Before you export DB snapshot data to Amazon S3, give the snapshot export tasks write\-access permission to the Amazon S3 bucket\. 
 
-To do this, create an IAM policy that provides access to the bucket\. Then create an IAM role and attach the policy to the role\. You later assign the IAM role to your snapshot export task\.
+To grant this permission, create an IAM policy that provides access to the bucket, then create an IAM role and attach the policy to the role\. You later assign the IAM role to your snapshot export task\.
 
 **Important**  
 If you plan to use the AWS Management Console to export your snapshot, you can choose to create the IAM policy and the role automatically when you export the snapshot\. For instructions, see [Exporting a DB snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\.
@@ -114,14 +114,14 @@ If you plan to use the AWS Management Console to export your snapshot, you can c
 
 1. Create an IAM policy\. This policy provides the bucket and object permissions that allow your snapshot export task to access Amazon S3\. 
 
-   Include in the policy the following required actions to allow the transfer of files from Amazon RDS to an S3 bucket: 
+   In the policy, include the following required actions to allow the transfer of files from Amazon RDS to an S3 bucket: 
    + `s3:PutObject*`
    + `s3:GetObject*` 
    + `s3:ListBucket` 
    + `s3:DeleteObject*`
    +  `s3:GetBucketLocation`
 
-   Include in the policy the following resources to identify the S3 bucket and objects in the bucket\. The following list of resources shows the Amazon Resource Name \(ARN\) format for accessing Amazon S3\.
+   In the policy, include the following resources to identify the S3 bucket and objects in the bucket\. The following list of resources shows the Amazon Resource Name \(ARN\) format for accessing Amazon S3\.
    + `arn:aws:s3:::your-s3-bucket`
    + `arn:aws:s3:::your-s3-bucket/*`
 
@@ -154,7 +154,7 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
    }'
    ```
 
-1. Create an IAM role\. You do this so that Amazon RDS can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+1. Create an IAM role, so that Amazon RDS can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
    The following example shows using the AWS CLI command to create a role named `rds-s3-export-role`\.
 
@@ -267,7 +267,7 @@ You can use a cross\-account AWS KMS key to encrypt Amazon S3 exports\. First, y
 
 ## Exporting a DB snapshot to an Amazon S3 bucket<a name="USER_ExportSnapshot.Exporting"></a>
 
-You can have up to five concurrent DB snapshot export tasks in progress per account\. 
+You can have up to five concurrent DB snapshot export tasks in progress per AWS account\.
 
 **Note**  
 Exporting RDS snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **Starting**\. When the task switches to exporting data to S3, progress displays as **In progress**\.  
@@ -322,7 +322,7 @@ The **Export to Amazon S3** console option appears only for snapshots that can b
 
 1. For **IAM role**, either choose a role that grants you write access to your chosen S3 bucket, or create a new role\. 
    + If you created a role by following the steps in [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole), choose that role\.
-   + If you didn't create a role that grants you write access to your chosen S3 bucket, choose **Create a new role** to create the role automatically\. Next, enter a name for the role in **IAM role name**\.
+   + If you didn't create a role that grants you write access to your chosen S3 bucket, then choose **Create a new role** to create the role automatically\. Next, enter a name for the role in **IAM role name**\.
 
 1. For **AWS KMS key**, enter the ARN for the key to use for encrypting the exported data\.
 
@@ -469,7 +469,7 @@ To display information about a specific snapshot export, include the `--export-t
 
 To display information about DB snapshot exports using the Amazon RDS API, use the [DescribeExportTasks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeExportTasks.html) operation\.
 
-To track completion of the export workflow or to trigger another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Working with Amazon RDS event notification](USER_Events.md)\.
+To track completion of the export workflow or to initiate another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 ## Canceling a snapshot export task<a name="USER_ExportSnapshot.Canceling"></a>
 
@@ -533,8 +533,8 @@ The following table describes the messages that are returned when Amazon S3 expo
 | An unknown internal error occurred\. |  The task has failed because of an unknown error, exception, or failure\.  | 
 | An unknown internal error occurred writing the export task's metadata to the S3 bucket \[bucket name\]\. |  The task has failed because of an unknown error, exception, or failure\.  | 
 | The RDS export failed to write the export task's metadata because it can't assume the IAM role \[role ARN\]\. |  The export task assumes your IAM role to validate whether it is allowed to write metadata to your S3 bucket\. If the task can't assume your IAM role, it fails\.  | 
-| The RDS export failed to write the export task's metadata to the S3 bucket \[bucket name\] using the IAM role \[role ARN\] with the KMS key \[key ID\]\. Error code: \[error code\] |  One or more permissions are missing, so the export task can't access the S3 bucket\. This failure message is raised when receiving one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) This means that there are settings misconfigured among the IAM role, S3 bucket, or KMS key\.  | 
-| The IAM role \[role ARN\] isn't authorized to call \[S3 action\] on the S3 bucket \[bucket name\]\. Review your permissions and retry the export\. |  The IAM policy is misconfigured\. Permission for the specific S3 action on the S3 bucket is missing\. This causes the export task to fail\.  | 
+| The RDS export failed to write the export task's metadata to the S3 bucket \[bucket name\] using the IAM role \[role ARN\] with the KMS key \[key ID\]\. Error code: \[error code\] |  One or more permissions are missing, so the export task can't access the S3 bucket\. This failure message is raised when receiving one of the following error codes: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) These error codes indicate settings are misconfigured for the IAM role, S3 bucket, or KMS key\.  | 
+| The IAM role \[role ARN\] isn't authorized to call \[S3 action\] on the S3 bucket \[bucket name\]\. Review your permissions and retry the export\. |  The IAM policy is misconfigured\. Permission for the specific S3 action on the S3 bucket is missing, which causes the export task to fail\.  | 
 | KMS key check failed\. Check the credentials on your KMS key and try again\. | The KMS key credential check failed\. | 
 | S3 credential check failed\. Check the permissions on your S3 bucket and IAM policy\. | The S3 credential check failed\. | 
 | The S3 bucket \[bucket name\] isn't valid\. Either it isn't located in the current AWS Region or it doesn't exist\. Review your S3 bucket name and retry the export\. | The S3 bucket is invalid\. | 
@@ -542,7 +542,7 @@ The following table describes the messages that are returned when Amazon S3 expo
 
 ## Troubleshooting PostgreSQL permissions errors<a name="USER_ExportSnapshot.postgres-permissions"></a>
 
-When exporting PostgreSQL databases to Amazon S3, you might see a `PERMISSIONS_DO_NOT_EXIST` error stating that certain tables were skipped\. This is usually caused by the superuser, which you specify when creating the DB instance, not having permissions to access those tables\.
+When exporting PostgreSQL databases to Amazon S3, you might see a `PERMISSIONS_DO_NOT_EXIST` error stating that certain tables were skipped\. This error usually occurs when the superuser, which you specified when creating the DB instance, doesn't have permissions to access those tables\.
 
 To fix this error, run the following command:
 
@@ -594,7 +594,7 @@ part-00001-d7a881cc-88cc-5ab7-2222-c41ecab340a4-c000.gz.parquet
 part-00002-f5a991ab-59aa-7fa6-3333-d41eccd340a7-c000.gz.parquet
 ```
 
-The file naming convention is subject to change\. Therefore, when reading target tables we recommend that you read everything inside the base prefix for the table\.
+The file naming convention is subject to change\. Therefore, when reading target tables, we recommend that you read everything inside the base prefix for the table\.
 
 ## Data conversion when exporting to an Amazon S3 bucket<a name="USER_ExportSnapshot.data-types"></a>
 

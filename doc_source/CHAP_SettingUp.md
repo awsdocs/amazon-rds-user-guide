@@ -3,18 +3,17 @@
 Before you use Amazon Relational Database Service for the first time, complete the following tasks\.
 
 **Topics**
-+ [Get an AWS account and your root user credentials](#getting-started-signup)
-+ [Create an IAM user](#CHAP_SettingUp.IAM)
-+ [Sign in as an IAM user](#getting-started-signin-iam-user)
++ [Sign up for an AWS account](#sign-up-for-aws)
++ [Create an administrative user](#create-an-admin)
 + [Create IAM user access keys](#getting-started-iam-user-access-keys)
 + [Determine requirements](#CHAP_SettingUp.Requirements)
 + [Provide access to your DB instance in your VPC by creating a security group](#CHAP_SettingUp.SecurityGroup)
 
 If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting started with Amazon RDS](CHAP_GettingStarted.md)\. 
 
-## Get an AWS account and your root user credentials<a name="getting-started-signup"></a>
+## Sign up for an AWS account<a name="sign-up-for-aws"></a>
 
-To access AWS, you must sign up for an AWS account\.
+If you do not have an AWS account, complete the following steps to create one\.
 
 **To sign up for an AWS account**
 
@@ -26,33 +25,31 @@ To access AWS, you must sign up for an AWS account\.
 
    When you sign up for an AWS account, an *AWS account root user* is created\. The root user has access to all AWS services and resources in the account\. As a security best practice, [assign administrative access to an administrative user](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html), and use only the root user to perform [tasks that require root user access](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html#aws_tasks-that-require-root)\.
 
- AWS sends you a confirmation email after the sign\-up process is complete\. At any time, you can view your current account activity and manage your account by going to [https://aws\.amazon\.com/](https://aws.amazon.com/) and choosing **My Account**\.
+AWS sends you a confirmation email after the sign\-up process is complete\. At any time, you can view your current account activity and manage your account by going to [https://aws\.amazon\.com/](https://aws.amazon.com/) and choosing **My Account**\.
 
-## Create an IAM user<a name="CHAP_SettingUp.IAM"></a>
+## Create an administrative user<a name="create-an-admin"></a>
 
-If your account already includes an IAM user with full AWS administrative permissions, you can skip this section\.
+After you sign up for an AWS account, create an administrative user so that you do not use the root user for everyday tasks\.
 
-When you first create an AWS account, you begin with one sign\-in identity that has complete access to all AWS services and resources in the account\. This identity is called the AWS account *root user* and is accessed by signing in with the email address and password that you used to create the account\.
+**Secure your AWS account root user**
 
-**Important**  
-We strongly recommend that you do not use the root user for your everyday tasks\. Safeguard your root user credentials and use them to perform the tasks that only the root user can perform\. For the complete list of tasks that require you to sign in as the root user, see [Tasks that require root user credentials](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html#aws_tasks-that-require-root) in the *AWS General Reference*\.
+1.  Sign in to the [AWS Management Console](https://console.aws.amazon.com/) as the account owner by choosing **Root user** and entering your AWS account email address\. On the next page, enter your password\.
 
-To create an administrator user, choose one of the following options\.
+   For help signing in using root user, see [Signing in as the root user](https://docs.aws.amazon.com/signin/latest/userguide/console-sign-in-tutorials.html#introduction-to-root-user-sign-in-tutorial) in the *AWS Sign\-In User Guide*\.
 
+1. Turn on multi\-factor authentication \(MFA\) for your root user\.
 
-****  
+   For instructions, see [Enable a virtual MFA device for your AWS account root user \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html#enable-virt-mfa-for-root) in the *IAM User Guide*\.
 
-| Choose one way to manage your administrator | To | By | You can also | 
-| --- | --- | --- | --- | 
-| In IAM Identity Center \(Recommended\) | Use short\-term credentials to access AWS\.This aligns with the security best practices\. For information about best practices, see [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-users-federation-idp) in the *IAM User Guide*\. | Following the instructions in [Getting started](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html) in the AWS IAM Identity Center \(successor to AWS Single Sign\-On\) User Guide\. | Configure programmatic access by [Configuring the AWS CLI to use AWS IAM Identity Center \(successor to AWS Single Sign\-On\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html) in the AWS Command Line Interface User Guide\. | 
-| In IAM \(Not recommended\) | Use long\-term credentials to access AWS\. | Following the instructions in [Creating your first IAM admin user and user group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the IAM User Guide\. | Configure programmatic access by [Managing access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) in the IAM User Guide\. | 
+**Create an administrative user**
++ For your daily administrative tasks, assign administrative access to an administrative user in AWS IAM Identity Center \(successor to AWS Single Sign\-On\)\.
 
-## Sign in as an IAM user<a name="getting-started-signin-iam-user"></a>
+  For instructions, see [Getting started](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html) in the *AWS IAM Identity Center \(successor to AWS Single Sign\-On\) User Guide*\.
 
- Sign in to the [IAM console](https://console.aws.amazon.com/iam) by choosing **IAM user** and entering your AWS account ID or account alias\. On the next page, enter your IAM user name and your password\.
+**Sign in as the administrative user**
++ To sign in with your IAM Identity Center user, use the sign\-in URL that was sent to your email address when you created the IAM Identity Center user\.
 
-**Note**  
-For your convenience, the AWS sign\-in page uses a browser cookie to remember your IAM user name and account information\. If you previously signed in as a different user, choose the sign\-in link beneath the button to return to the main sign\-in page\. From there, you can enter your AWS account ID or account alias to be redirected to the IAM user sign\-in page for your account\.
+  For help signing in using an IAM Identity Center user, see [Signing in to the AWS access portal](https://docs.aws.amazon.com/signin/latest/userguide/iam-id-center-sign-in-tutorial.html) in the *AWS Sign\-In User Guide*\.
 
 ## Create IAM user access keys<a name="getting-started-iam-user-access-keys"></a>
 

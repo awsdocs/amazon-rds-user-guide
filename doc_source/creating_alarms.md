@@ -52,4 +52,4 @@ Alarms invoke actions for sustained state changes only\. CloudWatch alarms don't
 **To set an alarm using the CloudWatch API**
 + Call [https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)\. For more information, see *[Amazon CloudWatch API Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
 
-For more information about setting up Amazon SNS topics and creating alarms, see [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/httpAmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)\.
+For more information about setting up Amazon SNS topics and creating alarms, see [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)\.

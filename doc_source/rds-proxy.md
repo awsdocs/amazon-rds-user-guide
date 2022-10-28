@@ -12,7 +12,7 @@
 
 **Topics**
 + [Region and version availability](#rds-proxy.RegionVersionAvailability)
-+ [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
++ [Quotas and limitations for RDS Proxy](#rds-proxy.limitations)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
 + [Getting started with RDS Proxy](rds-proxy-setup.md)
@@ -28,7 +28,7 @@
 
 Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with RDS Proxy, see [Amazon RDS Proxy](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md)\.
 
-## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
+## Quotas and limitations for RDS Proxy<a name="rds-proxy.limitations"></a>
 
  The following quotas and limitations apply to RDS Proxy: 
 +  You can have up to 20 proxies for each AWS account ID\. If your application requires more proxies, you can request additional proxies by opening a ticket with the AWS Support organization\.  
@@ -48,6 +48,14 @@ Feature availability and support varies across specific versions of each databas
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session to the current connection\.
 
+For additional limitations for each DB engine, see the following sections:
++ [Additional limitations for RDS for MariaDB](#rds-proxy.limitations-mdb)
++ [Additional limitations for RDS for SQL Server](#rds-proxy.limitations-ms)
++ [Additional limitations for RDS for MySQL](#rds-proxy.limitations-my)
++ [Additional limitations for RDS for PostgreSQL](#rds-proxy.limitations-pg)
+
+### Additional limitations for RDS for MariaDB<a name="rds-proxy.limitations-mdb"></a>
+
  The following additional limitations apply to RDS Proxy with RDS for MariaDB databases:
 +  Currently, all proxies listen on port 3306 for MariaDB\. The proxies still connect to your database using the port that you specified in the database settings\. 
 + You can't use RDS Proxy with self\-managed MariaDB databases in Amazon EC2 instances\.
@@ -60,12 +68,16 @@ Feature availability and support varies across specific versions of each databas
 **Important**  
  For proxies associated with MariaDB databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
 
+### Additional limitations for RDS for SQL Server<a name="rds-proxy.limitations-ms"></a>
+
  The following additional limitations apply to RDS Proxy with RDS for Microsoft SQL Server databases:
 + The number of Secrets Manager secrets that you need to create for a proxy depends on the collation that your DB instance uses\. For example, suppose that your DB instance uses case\-sensitive collation\. If your application accepts both "Admin" and "admin," then your proxy needs two separate secrets\. For more information about collation in SQL Server, see the [ Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support?view=sql-server-ver16) documentation\.
 + RDS Proxy doesn't support connections that use Active Directory\.
 + You can't use IAM authentication with clients that don't support token properties\. For more information, see [Considerations for connecting to a proxy with Microsoft SQL Server](rds-proxy-setup.md#rds-proxy-connecting-sqlserver)\.
 + The results of `@@IDENTITY`, `@@ROWCOUNT`, and `SCOPE_IDENTITY` aren't always accurate\. As a work\-around, retrieve their values in the same session statement to ensure that they return the correct information\.
 + If the connection uses multiple active result sets \(MARS\), RDS Proxy doesn't run the initialization queries\. For information about MARS, see the [ Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/native-client/features/using-multiple-active-result-sets-mars?view=sql-server-ver16) documentation\.
+
+### Additional limitations for RDS for MySQL<a name="rds-proxy.limitations-my"></a>
 
  The following additional limitations apply to RDS Proxy with RDS for MySQL databases:
 + RDS Proxy doesn't support the MySQL `sha256_password` and `caching_sha2_password` authentication plugins\. These plugins implement SHA\-256 hashing for user account passwords\.
@@ -78,6 +90,8 @@ Feature availability and support varies across specific versions of each databas
 **Important**  
  For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
 
+### Additional limitations for RDS for PostgreSQL<a name="rds-proxy.limitations-pg"></a>
+
  The following additional limitations apply to RDS Proxy with RDS for PostgreSQL databases:
 + RDS Proxy doesn't support session pinning filters for PostgreSQL\.
 + RDS Proxy doesn't support PostgreSQL SCRAM\-SHA\-256 authentication\.
@@ -85,3 +99,4 @@ Feature availability and support varies across specific versions of each databas
 + For PostgreSQL, RDS Proxy doesn't currently support canceling a query from a client by issuing a `CancelRequest`\. This is the case, for example, when you cancel a long\-running query in an interactive psql session by using Ctrl\+C\. 
 +  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.
 + RDS Proxy doesn't multiplex connections when your client application drivers use the PostgreSQL extended query protocol\.
++ RDS Proxy currently doesn't support streaming replication mode\.

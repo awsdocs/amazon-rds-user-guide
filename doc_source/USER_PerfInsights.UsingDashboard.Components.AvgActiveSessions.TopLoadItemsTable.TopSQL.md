@@ -75,8 +75,10 @@ You can control the statistics displayed in the **Top SQL** tab by choosing the 
 
 ![\[Statistics preferences\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-sql-ids-preferences-icon.png)
 
-When you choose the **Preferences** icon, the **Preferences** window opens\.
+When you choose the **Preferences** icon, the **Preferences** window opens\. The following screenshot is an example of the **Preferences** window\.
 
 ![\[Preferences window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/./images/perf-insights-sql-ids-preferences.png)
 
-To enable the statistics that you want to appear in the **Top SQL** tab, use your mouse to scroll to the bottom of the window, and then choose **Continue**\.
+To enable the statistics that you want to appear in the **Top SQL** tab, use your mouse to scroll to the bottom of the window, and then choose **Continue**\. 
+
+For more information about per\-second or per\-call statistics for the Amazon RDS engines, see the engine specific SQL statistics section in [SQL statistics for Performance Insights](sql-statistics.md)

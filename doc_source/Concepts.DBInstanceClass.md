@@ -33,6 +33,9 @@ The following are the general\-purpose DB instance types available:
 + **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\.
 + **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\.
 
+  Amazon RDS has started the the end\-of\-life process for db\.m3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.m3 DB instance classes, we recommend that you upgrade to a db\.m5 DB instance class as soon as possible\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
+
 The following are the memory optimized DB instance types available:
 + **db\.x2g** – Instance classes optimized for memory\-intensive applications and powered by AWS Graviton2 processors\. These offer low cost per GiB of memory\.
 
@@ -53,6 +56,9 @@ The following are the memory optimized DB instance types available:
   For the RDS for MySQL and RDS for PostgreSQL DB engines, these DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.r5** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r3** – Instance classes that provide memory optimization\.
+
+  Amazon RDS has started the the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 
 The following are the burstable\-performance DB instance types available:
 + **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
@@ -199,6 +205,18 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5b – memory\-optimized instance classes preconfigured for high memory, storage, and I/O  | 
+| db\.r5b\.8xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 
+| db\.r5b\.6xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5b\.4xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5b\.4xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 
+| db\.r5b\.4xlarge\.tpc2\.mem2x | No | No | No | Yes | No | 
+| db\.r5b\.2xlarge\.tpc2\.mem8x | No | No | No | Yes | No | 
+| db\.r5b\.2xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5b\.2xlarge\.tpc1\.mem2x | No | No | No | Yes | No | 
+| db\.r5b\.xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5b\.xlarge\.tpc2\.mem2x | No | No | No | Yes | No | 
+| db\.r5b\.large\.tpc1\.mem2x | No | No | No | Yes | No | 
 | db\.r5b – memory\-optimized instance classes | 
 | db\.r5b\.24xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
 | db\.r5b\.16xlarge | MariaDB version 10\.6\.5 & higher 10\.6 versions, MariaDB version 10\.5\.12 & higher 10\.5 versions, MariaDB version 10\.4\.24 & higher 10\.4 versions, and MariaDB version 10\.3\.34 & higher 10\.3 versions | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
@@ -439,7 +457,7 @@ There is no additional or reduced charge for specifying processor features on an
 You can configure the number of CPU cores and threads per core only when the following conditions are met:
 + You're configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\.
 + Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [RDS for Oracle licensing options](Oracle.Concepts.Licensing.md)\.
-+ Your instance isn't one of the db\.r5 instance classes that have predefined processor configurations\. These instance classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
++ Your instance doesn't belong to one of the db\.r5 or db\.r5b instance classes that have predefined processor configurations\. These instance classes have names in the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio* or db\.r5b\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5b\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5b\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 In the following table, you can find the DB instance classes that support setting a number of CPU cores and CPU threads per core\. You can also find the default value and the valid values for the number of CPU cores and CPU threads per core for each DB instance class\.
 

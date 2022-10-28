@@ -89,37 +89,7 @@ Perform the following steps to copy the database\.
 **Note**  
 Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
-1. Use the mysqldump utility to create a snapshot, which copies the data from Amazon RDS to your local client computer\. Then run another utility to load the data into the external MySQL database\. Ensure that your client computer has enough space to hold the `mysqldump` files from the databases to be replicated\. This process can take several hours for very large databases\. Follow the directions in [Creating a data snapshot using mysqldump](https://dev.mysql.com/doc/mysql-replication-excerpt/8.0/en/replication-howto-mysqldump.html) in the MySQL documentation\.
-
-   The following example runs `mysqldump` on a client, and then pipes the dump into the `mysql` client utility, which loads the data into the external MySQL database\.
-
-   For Linux, macOS, or Unix:
-
-   ```
-   mysqldump -h source_MySQL_DB_instance_endpoint \
-       -u user \
-       -ppassword \
-       --port=3306 \
-       --single-transaction \
-       --routines \
-       --triggers \
-       --databases  database database2 \
-       --compress
-   ```
-
-   For Windows:
-
-   ```
-   mysqldump -h source_MySQL_DB_instance_endpoint ^
-       -u user ^
-       -ppassword ^
-       --port=3306 ^
-       --single-transaction ^
-       --routines ^
-       --triggers ^
-       --databases  database database2 ^
-       --compress
-   ```
+1. Use the mysqldump utility to create a snapshot, which copies the data from Amazon RDS to your local client computer\. Ensure that your client computer has enough space to hold the `mysqldump` files from the databases to be replicated\. This process can take several hours for very large databases\. Follow the directions in [Creating a data snapshot using mysqldump](https://dev.mysql.com/doc/mysql-replication-excerpt/8.0/en/replication-howto-mysqldump.html) in the MySQL documentation\.
 
    The following example runs `mysqldump` on a client and writes the dump to a file\.
 
@@ -148,6 +118,8 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
        --triggers ^
        --databases  database database2 > path\rds-dump.sql
    ```
+
+   You can load the backup file into the external MySQL database\. For more information, see [ Reloading SQL\-Format Backups](https://dev.mysql.com/doc/refman/8.0/en/reloading-sql-format-dumps.html) in the MySQL documentation\. You can run another utility to load the data into the external MySQL database\. 
 
 ## Complete the export<a name="MySQL.Procedural.Exporting.NonRDSRepl.CompleteExp"></a>
 

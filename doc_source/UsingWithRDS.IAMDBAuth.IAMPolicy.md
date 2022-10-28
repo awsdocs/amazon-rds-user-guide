@@ -25,7 +25,7 @@ The following example policy allows an IAM user to connect to a DB instance usin
 ```
 
 **Important**  
-An IAM administrator user can access DB instances without explicit permissions in an IAM policy\. The example in [Create an IAM user](CHAP_SettingUp.md#CHAP_SettingUp.IAM) creates an IAM administrator user\. If you want to restrict administrator access to DB instances, you can create an IAM role with the appropriate, lesser privileged permissions and assign it to the administrator\. 
+A user with administrator permissions can access DB instances without explicit permissions in an IAM policy\. If you want to restrict administrator access to DB instances, you can create an IAM role with the appropriate, lesser privileged permissions and assign it to the administrator\.
 
 **Note**  
 Don't confuse the `rds-db:` prefix with other RDS API operation prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\. 

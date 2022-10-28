@@ -111,13 +111,13 @@ For more information about modifying a DB instance, see [Modifying an Amazon RDS
 
 ## Amazon RDS security issues<a name="CHAP_Troubleshooting.Security"></a>
 
-To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create AWS Identity and Access Management \(IAM\) users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\.
+To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\.
 
-For more information on creating IAM users, see [Create an IAM user](CHAP_SettingUp.md#CHAP_SettingUp.IAM)\.
+For information about creating IAM users, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\. For information about creating users in AWS IAM Identity Center \(successor to AWS Single Sign\-On\), see [Manage identities in IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-sso.html)\.
 
 ### Error message "failed to retrieve account attributes, certain console functions may be impaired\."<a name="CHAP_Troubleshooting.Security.AccountAttributes"></a>
 
-You can get this error for several reasons\. It might be because your account is missing permissions, or your account hasn't been properly set up\. If your account is new, you might not have waited for the account to be ready\. If this is an existing account, you might lack permissions in your access policies to perform certain actions such as creating a DB instance\. To fix the issue, your IAM administrator needs to provide the necessary roles to your account\. For more information, see [the IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
+You can get this error for several reasons\. It might be because your account is missing permissions, or your account hasn't been properly set up\. If your account is new, you might not have waited for the account to be ready\. If this is an existing account, you might lack permissions in your access policies to perform certain actions such as creating a DB instance\. To fix the issue, your administrator needs to provide the necessary roles to your account\. For more information, see [the IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
 ## Resetting the DB instance owner password<a name="CHAP_Troubleshooting.ResetPassword"></a>
 

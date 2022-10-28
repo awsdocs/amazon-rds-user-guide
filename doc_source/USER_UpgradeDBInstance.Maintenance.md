@@ -219,7 +219,7 @@ To adjust the preferred maintenance window, use the Amazon RDS API [https://docs
 RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB instances occasionally require operating system updates\. Amazon RDS upgrades the operating system to a newer version to improve database performance and customers’ overall security posture\. Typically, the updates take about 10 minutes\. Operating system updates don't change the DB engine version or DB instance class of a DB instance\.
 
 Operating system updates can be either optional or mandatory\.
-+ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
++ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\. To be notified when a new optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
 + A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
 
 **Note**  

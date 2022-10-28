@@ -82,7 +82,7 @@ The following table shows the event category and a list of events when a DB inst
 |  maintenance, failure  | RDS\-EVENT\-0195 |  The upgrade of the time zone file failed\. For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
 |  notification  | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
 |  notification  | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
-|  notification  | RDS\-EVENT\-0054 | The MySQL storage engine you are using is not InnoDB, which is the recommended MySQL storage engine for Amazon RDS\. For information about MySQL storage engines, see [Supported storage engines for MySQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.Storage.html)\. | 
+|  notification  | RDS\-EVENT\-0054 | The MySQL storage engine you are using is not InnoDB, which is the recommended MySQL storage engine for Amazon RDS\. For information about MySQL storage engines, see [Supported storage engines for RDS for MySQL](MySQL.Concepts.FeatureSupport.md#MySQL.Concepts.Storage)\. | 
 |  notification  | RDS\-EVENT\-0055 |  The number of tables you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Reduce the number of tables on your DB instance\. For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
 |  notification  | RDS\-EVENT\-0056 |  The number of databases you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Reduce the number of databases on your DB instance\.   For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
 |  notification  | RDS\-EVENT\-0064 | The TDE key has been rotated\. For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
@@ -112,6 +112,7 @@ The following table shows the event category and a list of events when a DB inst
 |  restoration  | RDS\-EVENT\-0019 |  The DB instance has been restored from a point\-in\-time backup\.  | 
 |  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot \[snapshot\_name\]\. The DB instance has been restored from a DB snapshot\.  | 
 |  security  | RDS\-EVENT\-0068 |  RDS is decrypting the CloudHSM partition password to make updates to the instance\. For more information see [Oracle Database Transparent Data Encryption \(TDE\) with AWS CloudHSM](https://docs.aws.amazon.com/cloudhsm/latest/userguide/oracle-tde.html) in the *AWS CloudHSM User Guide*\.  | 
+|  security patching  | RDS\-EVENT\-0230 |  A system update is available for your DB instance\. For information about applying updates, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.  | 
 
 ## DB parameter group events<a name="USER_Events.Messages.parameter-group"></a>
 
@@ -151,9 +152,9 @@ The following table shows the event category and a list of events when a DB snap
 |  notification  | RDS\-EVENT\-0059 |  Started copy of snapshot \[DB snapshot name\] from region \[region name\]\.  This is a cross\-Region snapshot copy\.   | 
 |  notification  | RDS\-EVENT\-0060 |  Finished copy of snapshot \[DB snapshot name\] from region \[region name\] in \[time\] minutes\.  This is a cross\-Region snapshot copy\.   | 
 |  notification  | RDS\-EVENT\-0061 |  Canceled snapshot copy request of \[DB snapshot name\] from region \[region name\]\.  This is a cross\-Region snapshot copy\.   | 
-|  notification  | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
-|  notification  | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
-|  notification  | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
+|  notification  | RDS\-EVENT\-0159 |  The DB snapshot export task failed\.  | 
+|  notification  | RDS\-EVENT\-0160 |  The DB snapshot export task was canceled\.  | 
+|  notification  | RDS\-EVENT\-0161 |  The DB snapshot export task completed\.  | 
 |  notification  | RDS\-EVENT\-0196 |  Started copy of snapshot \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
 |  notification  | RDS\-EVENT\-0197 |  Finished copy of snapshot \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
 |  notification  | RDS\-EVENT\-0190 |  Canceled snapshot copy request of \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 

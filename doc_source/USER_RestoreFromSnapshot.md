@@ -10,7 +10,7 @@ To help mitigate the effects of lazy loading on tables to which you require quic
 
 You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from magnetic storage, the migration process is the slowest\. That's because magnetic storage doesn't have the IOPS capability of Provisioned IOPS or General Purpose \(SSD\) storage\.
 
-You can use AWS CloudFormation to restore a DB instance from a DB instance snapshot\. For more information, see [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html) in the *AWS CloudFormation User Guide*\.
+You can use AWS CloudFormation to restore a DB instance from a DB instance snapshot\. For more information, see [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html) in the *AWS CloudFormation User Guide*\.
 
 **Note**  
 You can't restore a DB instance from a DB snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB snapshot and restore the DB instance from the copy\. For more information, see [Copying a DB snapshot](USER_CopySnapshot.md)\.
