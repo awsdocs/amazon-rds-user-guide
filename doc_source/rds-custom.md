@@ -80,6 +80,10 @@ The following table details the shared responsibility model for RDS Custom\.
 |  Hardware lifecycle  |  AWS  |  AWS  |  AWS  | AWS | 
 |  Power, network, and cooling  |  AWS  |  AWS  |  AWS  | AWS | 
 
+You can create an RDS Custom DB instance using Microsoft SQL Server\. In this case:
++ You don't manage your own media\.
++ You don't need to purchase SQL Server licenses separately\. AWS holds the license for the SQL Server database software\.
+
 You can create an RDS Custom DB instance using Oracle Database\. In this case, you do the following:
 + Manage your own media\.
 
@@ -87,10 +91,6 @@ You can create an RDS Custom DB instance using Oracle Database\. In this case, y
 + Manage your own licenses\.
 
   You bring your own Oracle Database licenses and manage licenses by yourself\.
-
-You can create an RDS Custom DB instance using Microsoft SQL Server\. In this case:
-+ You don't manage your own media\.
-+ You don't need to purchase SQL Server licenses separately\. AWS holds the license for the SQL Server database software\.
 
 ### Key benefits of RDS Custom<a name="custom-intro.solution.benefits"></a>
 

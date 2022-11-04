@@ -6,6 +6,7 @@ Amazon RDS Custom for SQL Server supports a subset of the usual management tasks
 + [Working with high availability features for RDS Custom for SQL Server](#custom-managing.AO)
 + [Pausing and resuming RDS Custom automation](#custom-managing-sqlserver.pausing)
 + [Modifying an RDS Custom for SQL Server DB instance](#custom-managing.modify-sqlserver)
++ [Modifying the storage for an RDS Custom for SQL Server DB instance](#custom-managing-sqlserver.storage-modify)
 + [Support for Transparent Data Encryption](#custom-managing-sqlserver.tde)
 + [Tagging RDS Custom for SQL Server resources](#custom-managing-sqlserver.tagging)
 + [Deleting an RDS Custom for SQL Server DB instance](#custom-managing-sqlserver.deleting)
@@ -216,7 +217,6 @@ Modifying an RDS Custom for SQL Server DB instance is similar to doing this for 
 The following limitations apply to modifying an RDS Custom for SQL Server DB instance:
 + Multi\-AZ deployments aren't supported\.
 + Custom DB option and parameter groups aren't supported\.
-+ You can't modify the allocated storage\.
 + Any storage volumes that you attach manually to your RDS Custom DB instance are outside the support perimeter\.
 
   For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
@@ -237,7 +237,7 @@ The following limitations apply to modifying an RDS Custom for SQL Server DB ins
 
    1. For **DB engine version**, choose the new version\.
 
-   1. Change the value for **DB instance class**\. For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+   1. Change the value for **DB instance class**\. For supported classes, see  [DB instance class support for RDS Custom for SQL Server](custom-reqs-limits-MS.md#custom-reqs-limits.instancesMS)
 
    1. Change the value for **Backup retention period**\.
 
@@ -254,7 +254,7 @@ The following limitations apply to modifying an RDS Custom for SQL Server DB ins
 ### AWS CLI<a name="custom-managing.modify-sqlserver.CLI"></a>
 
 To modify an RDS Custom for SQL Server DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
-+ `--db-instance-class` – For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
++ `--db-instance-class` – For supported classes, see  [DB instance class support for RDS Custom for SQL Server](custom-reqs-limits-MS.md#custom-reqs-limits.instancesMS)
 + `--engine-version` – The version number of the database engine to which you're upgrading\.
 + `--backup-retention-period` – How long to retain automated backups, from 0–35 days\.
 + `--preferred-backup-window` – The daily time range during which automated backups are created\.
@@ -262,6 +262,87 @@ To modify an RDS Custom for SQL Server DB instance, use the [modify\-db\-instanc
 + `--apply-immediately` – Use `--apply-immediately` to apply the storage changes immediately\.
 
   Or use `--no-apply-immediately` \(the default\) to apply the changes during the next maintenance window\.
+
+## Modifying the storage for an RDS Custom for SQL Server DB instance<a name="custom-managing-sqlserver.storage-modify"></a>
+
+Modifying storage for an RDS Custom for SQL Server DB instance is similar to modifying storage for an Amazon RDS DB instance, but you can only do the following:
++ Increase the allocated storage size\.
++ Change the storage type\. For example, you can modify the the storage type from io1 to gp2, or gp2 to io1\.
++ Change the provisioned IOPS, if you're using the volume types that supports provisioned IOPS, such as io1\.
+
+The following limitations apply to modifying the storage for an RDS Custom for SQL Server DB instance:
++ The minimum allocated storage size for RDS Custom for SQL Server is 20 GiB, and the maximum supported storage size is 16 TiB\.
++ As with Amazon RDS, you can't decrease the allocated storage\. This is a limitation of Amazon Elastic Block Store \(Amazon EBS\) volumes\. For more information, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)
++ Storage autoscaling isn't supported for RDS Custom for SQL Server DB instances\.
++ Any storage volumes that you manually attach to your RDS Custom DB instance are not considered for storage scaling\. Only the RDS\-provided default data volumes, i\.e\., the D drive, are considered for storage scaling\.
+
+  For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
++ Scaling storage usually doesn't cause any outage or performance degradation of the DB instance\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\.
++ Storage optimization can take several hours\. You can't make further storage modifications for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\. For more information, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)
+
+For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
+
+For general information about storage modification, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)\.
+
+### Console<a name="custom-managing.storage-modify.CON"></a>
+
+**To modify the storage for an RDS Custom for SQL Server DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the DB instance that you want to modify\.
+
+1. Choose **Modify**\.
+
+1. Make the following changes as needed:
+
+   1. Enter a new value for **Allocated storage**\. It must be greater than the current value, and from 20 GiB–16 TiB\.
+
+   1. Change the value for **Storage type**\. You can use available storage types like General Purpose \(gp2\) or Provisioned IOPS \(io1\) storage\.
+
+   1. If you are specifying volume types that support provisioned IOPS, you can define the **Provisioned IOPS** value\.
+
+1. Choose **Continue**\.
+
+1. Choose **Apply immediately** or **Apply during the next scheduled maintenance window**\.
+
+1. Choose **Modify DB instance**\.
+
+### AWS CLI<a name="custom-managing-sqlserver.storage-modify.CLI"></a>
+
+To modify the storage for an RDS Custom for SQL Server DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
++ `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\. It must be greater than the current value, and from 20–16,384 GiB\.
++ `--storage-type` – The storage type, for example, gp2 or io1\.
++ `--iops` – Provisioned IOPS for the DB instance\. You can specify this only for storage types that support provisioned IOPS, like io1\.
++ `--apply-immediately` – Use `--apply-immediately` to apply the storage changes immediately\.
+
+  Or use `--no-apply-immediately` \(the default\) to apply the changes during the next maintenance window\.
+
+The following example changes the storage size of my\-custom\-instance to 200 GiB, storage type to io1, and Provisioned IOPS to 3000\.
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-instance \
+    --db-instance-identifier my-custom-instance \
+    --storage-type io1 \
+    --iops 3000 \
+    --allocated-storage 200 \
+    --apply-immediately
+```
+For Windows:  
+
+```
+aws rds modify-db-instance ^
+    --db-instance-identifier my-custom-instance ^
+    --storage-type io1 ^
+    --iops 3000 ^
+    --allocated-storage 200 ^
+    --apply-immediately
+```
 
 ## Support for Transparent Data Encryption<a name="custom-managing-sqlserver.tde"></a>
 

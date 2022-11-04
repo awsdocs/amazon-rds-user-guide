@@ -69,11 +69,11 @@ To simplify setup, you can use the AWS CloudFormation template files to create C
 
 **To download the template files**
 
-1. Open the context \(right\-click\) menu for the link [custom\-oracle\-iam\.json](./images/custom-oracle-iam.json) and choose **Save Link As**\.
+1. Open the context \(right\-click\) menu for the link [ custom\-oracle\-iam\.zip](samples/custom-oracle-iam.zip) and choose **Save Link As**\.
 
 1. Save the file to your computer\.
 
-1. Repeat the previous steps for the link [custom\-vpc\.json](./images/custom-vpc.json)\.
+1. Repeat the previous steps for the link [custom\-vpc\.zip](samples/custom-vpc.zip)\.
 
    If you already configured your VPC for RDS Custom for SQL Server, skip this step\.
 

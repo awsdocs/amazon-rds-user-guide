@@ -332,7 +332,7 @@ For information about AWS Region names, see [AWS RegionsAvailability Zones](Conc
 The following examples demonstrate how to determine DB instance class support in an AWS Region using the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) AWS CLI command\.
 
 **Note**  
-To limit the output, these examples show results only for the General Purpose SSD \(gp2\) storage type\. If necessary, you can change the storage type to Provisioned IOPS \(io1\) or magnetic \(standard\) in the commands\.
+To limit the output, these examples show results only for the General Purpose SSD \(`gp2`\) storage type\. If necessary, you can change the storage type to General Purpose SSD \(`gp3`\), Provisioned IOPS \(`io1`\), or magnetic \(`standard`\) in the commands\.
 
 **Topics**
 + [Listing the DB instance classes that are supported by a specific DB engine version in an AWS Region](#Concepts.DBInstanceClass.RegionSupport.CLI.Example1)
@@ -806,7 +806,7 @@ The DB instance uses an optimized configuration stack and provides additional, d
 
 **Max\. Bandwidth \(Mbps\)**  
 The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
-General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.* For information on estimating bandwidth for gp2 storage, see [General Purpose SSD storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)\.
+General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.*
 
 **Network Performance**  
 The network speed relative to other DB instance classes\.

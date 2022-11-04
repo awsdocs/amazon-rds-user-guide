@@ -152,7 +152,7 @@ Use the following procedures to create the CloudFormation stack for RDS Custom f
 
 **To download the template file**
 
-1. Open the context \(right\-click\) menu for the link [custom\-sqlserver\-onboard\.json](./images/custom-sqlserver-onboard.json) and choose **Save Link As**\.
+1. Open the context \(right\-click\) menu for the link [ custom\-sqlserver\-onboard\.zip](samples/custom-sqlserver-onboard.zip) and choose **Save Link As**\.
 
 1. Save the file to your computer\.
 

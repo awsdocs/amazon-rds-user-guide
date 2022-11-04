@@ -180,6 +180,8 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
    SELECT pg_drop_replication_slot(slot_name);
    ```
 
+   Logical replication setups that use the `pglogical` extension also need to have slots dropped for a successful major version upgrade\. For information about how to identify and drop slots created using the `pglogical` extension, see [Managing logical replication slots for RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.Extensions.md#Appendix.PostgreSQL.CommonDBATasks.pglogical.handle-slots)\.
+
 1. **Handle read replicas** – An upgrade also upgrades the in\-Region read replicas along with the primary DB instance\.
 
    You can't upgrade read replicas separately\. If you could, it could lead to situations where the primary and replica DB instances have different PostgreSQL major versions\. However, read replica upgrades might increase downtime on the primary DB instance\. To prevent a read replica upgrade, promote the replica to a standalone instance or delete it before starting the upgrade process\.

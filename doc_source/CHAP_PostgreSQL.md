@@ -337,7 +337,10 @@ To learn more about PostgreSQL memory management, see [Resource Consumption](htt
 
 ### Performing logical replication for Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication"></a>
 
-Starting with version 10\.4, Amazon RDS for PostgreSQL supports the publication and subscription SQL syntax that was first introduced in PostgreSQL 10\. To learn more, see [Logical replication](https://www.postgresql.org/docs/current/logical-replication.html) in the PostgreSQL documentation\. 
+Starting with version 10\.4, RDS for PostgreSQL supports the publication and subscription SQL syntax that was introduced in PostgreSQL 10\. To learn more, see [Logical replication](https://www.postgresql.org/docs/current/logical-replication.html) in the PostgreSQL documentation\. 
+
+**Note**  
+In addition to the native PostgreSQL logical replication feature introduced in PostgreSQL 10, RDS for PostgreSQL also supports the `pglogical` extension\. For more information, see [Using pglogical to synchronize data across instances](Appendix.PostgreSQL.CommonDBATasks.Extensions.md#Appendix.PostgreSQL.CommonDBATasks.pglogical)\. 
 
 Following, you can find information about setting up logical replication for an RDS for PostgreSQL DB instance\. 
 

@@ -106,7 +106,7 @@ sponsored by Amazon.
       + [Overview of Performance Insights on Amazon RDS](USER_PerfInsights.Overview.md)
          + [Database load](USER_PerfInsights.Overview.ActiveSessions.md)
          + [Maximum CPU](USER_PerfInsights.Overview.MaxCPU.md)
-         + [Amazon RDS DB engine, Region, Region, and instance class support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
+         + [Amazon RDS DB engine, Region, and instance class support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
          + [Pricing and data retention for Performance Insights](USER_PerfInsights.Overview.cost.md)
       + [Turning Performance Insights on and off](USER_PerfInsights.Enabling.md)
       + [Turning on the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)

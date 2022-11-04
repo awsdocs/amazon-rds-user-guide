@@ -62,11 +62,11 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Asia Pacific \(Jakarta\) | – | 
 | Asia Pacific \(Mumbai\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Osaka\) | – | 
-| Asia Pacific \(Seoul\) | – | 
+| Asia Pacific \(Seoul\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Singapore\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Sydney\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Tokyo\) | Enterprise, Standard, or Web | 
-| Canada \(Central\) | – | 
+| Canada \(Central\) | Enterprise, Standard, or Web | 
 | China \(Beijing\) | – | 
 | China \(Ningxia\) | – | 
 | Europe \(Frankfurt\) | Enterprise, Standard, or Web | 
@@ -77,6 +77,6 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Europe \(Stockholm\) | Enterprise, Standard, or Web | 
 | Middle East \(Bahrain\) | – | 
 | Middle East \(UAE\) | – | 
-| South America \(São Paulo\) | – | 
+| South America \(São Paulo\) | Enterprise, Standard, or Web | 
 | AWS GovCloud \(US\-East\) | – | 
 | AWS GovCloud \(US\-West\) | – | 

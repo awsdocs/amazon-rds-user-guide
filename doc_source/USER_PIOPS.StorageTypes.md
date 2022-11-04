@@ -5,8 +5,9 @@ To specify how you want your data stored in Amazon RDS, choose a storage type an
 **Topics**
 + [Increasing DB instance storage capacity](#USER_PIOPS.ModifyingExisting)
 + [Managing capacity automatically with Amazon RDS storage autoscaling](#USER_PIOPS.Autoscaling)
-+ [Modifying SSD storage settings for Provisioned IOPS](#User_PIOPS.Increase)
++ [Modifying settings for Provisioned IOPS SSD storage](#User_PIOPS.Increase)
 + [I/O\-intensive storage modifications](#USER_PIOPS.IOIntensive)
++ [Modifying settings for General Purpose SSD \(gp3\) storage](#USER_PIOPS.gp3)
 
 ## Increasing DB instance storage capacity<a name="USER_PIOPS.ModifyingExisting"></a>
 
@@ -60,7 +61,7 @@ To increase the storage for a DB instance, use the AWS CLI command [https://docs
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-### Amazon RDS API<a name="USER_PIOPS.ModifyingExisting.api"></a>
+### RDS API<a name="USER_PIOPS.ModifyingExisting.api"></a>
 
 To increase storage for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameters:
 + `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
@@ -144,7 +145,7 @@ To enable storage autoscaling for a new DB instance, use the AWS CLI command [ht
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-#### Amazon RDS API<a name="USER_PIOPS.EnablingAutoscaling.api"></a>
+#### RDS API<a name="USER_PIOPS.EnablingAutoscaling.api"></a>
 
 To enable storage autoscaling for a new DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. Set the following parameter:
 +  `MaxAllocatedStorage` – Turns on Amazon RDS storage autoscaling and sets the upper limit on storage size, in gibibytes\. 
@@ -186,7 +187,7 @@ To change the storage autoscaling settings for a DB instance, use the AWS CLI co
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-#### Amazon RDS API<a name="USER_PIOPS.ModifyingAutoscaling.api"></a>
+#### RDS API<a name="USER_PIOPS.ModifyingAutoscaling.api"></a>
 
  To change the storage autoscaling settings for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameter: 
 +  `MaxAllocatedStorage` – Sets the upper limit on storage size, in gibibytes\. 
@@ -225,14 +226,14 @@ Changing the storage autoscaling limit occurs immediately\. This setting ignores
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-#### Amazon RDS API<a name="USER_PIOPS.DisablingAutoscaling.api"></a>
+#### RDS API<a name="USER_PIOPS.DisablingAutoscaling.api"></a>
 
  To turn off storage autoscaling for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameter:
 +  `MaxAllocatedStorage` – Specify a value equal to the `AllocatedStorage` setting to prevent further Amazon RDS storage autoscaling for the specified DB instance\. 
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-## Modifying SSD storage settings for Provisioned IOPS<a name="User_PIOPS.Increase"></a>
+## Modifying settings for Provisioned IOPS SSD storage<a name="User_PIOPS.Increase"></a>
 
 You can modify the settings for a DB instance that uses Provisioned IOPS SSD storage by using the Amazon RDS console, AWS CLI, or Amazon RDS API\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. The range depends on your database engine and instance type\.
 
@@ -243,6 +244,8 @@ In most cases, scaling storage doesn't require any outage and doesn't degrade pe
 **Note**  
 Storage optimization can take several hours\. You can't make further storage modifications for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.
 
+For information on the ranges of allocated storage and Provisioned IOPS available for each database engine, see [Provisioned IOPS SSD storage](CHAP_Storage.md#USER_PIOPS)\.
+
 ### Console<a name="User_PIOPS.Increase.con"></a>
 
 **To change the Provisioned IOPS settings for a DB instance**
@@ -250,21 +253,22 @@ Storage optimization can take several hours\. You can't make further storage mod
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. In the navigation pane, choose **Databases**\.
-**Note**  
-To filter the list of DB instances, for **Filter databases** enter a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
+
+   To filter the list of DB instances, for **Filter databases** enter a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
 
 1. Choose the DB instance with Provisioned IOPS that you want to modify\.
 
 1. Choose **Modify**\.
 
-1. On the **Modify DB instance** page, choose Provisioned IOPS for **Storage type** and then provide a Provisioned IOPS value\.   
-![\[Console Tags tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops2-new.png)
+1. On the **Modify DB instance** page, choose **Provisioned IOPS SSD \(io1\)** for **Storage type**\.
 
-   If the value you specify for either** Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed\. This message gives the range of values required for the other parameter\. 
+1. For **Provisioned IOPS**, enter a value\.
+
+   If the value that you specify for either **Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed\. This message gives the range of values required for the other parameter\. 
 
 1. Choose **Continue**\.
 
-1. To apply the changes to the DB instance immediately, choose **Apply immediately** in the **Scheduling of modifications** section\. Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
+1. Choose **Apply immediately** in the **Scheduling of modifications** section to apply the changes to the DB instance immediately\. Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
 
    An immediate outage occurs when the storage type changes\. For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
@@ -280,7 +284,7 @@ To change the Provisioned IOPS setting for a DB instance, use the AWS CLI comman
 + `--iops` – The new amount of Provisioned IOPS for the DB instance, expressed in I/O operations per second\.
 + `--apply-immediately` – Use `--apply-immediately` to apply changes immediately\. Use `--no-apply-immediately` \(the default\) to apply changes during the next maintenance window\.
 
-### Amazon RDS API<a name="User_PIOPS.Increase.api"></a>
+### RDS API<a name="User_PIOPS.Increase.api"></a>
 
 To change the Provisioned IOPS settings for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameters:
 + `StorageType` – Set to `io1` for Provisioned IOPS\.
@@ -304,3 +308,66 @@ If your storage modification involves an I/O\-intensive operation, it consumes I
 We recommend as a best practice to schedule these storage modification requests outside of peak hours to help reduce the time required to complete the storage modification operation\. Alternatively, you can create a read replica of the DB instance and perform the storage modification on the read replica\. Then promote the read replica to be the primary DB instance\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
 
 For more information, see [Why is an Amazon RDS DB instance stuck in the modifying state when I try to increase the allocated storage?](https://aws.amazon.com/premiumsupport/knowledge-center/rds-stuck-modifying/)
+
+## Modifying settings for General Purpose SSD \(gp3\) storage<a name="USER_PIOPS.gp3"></a>
+
+You can modify the settings for a DB instance that uses General Purpose SSD \(gp3\) storage by using the Amazon RDS console, AWS CLI, or Amazon RDS API\. Specify the storage type, allocated storage, amount of Provisioned IOPS, and storage throughput that you require\. Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the storage size\.
+
+In most cases, scaling storage doesn't require any outage\. After you modify the storage IOPS for a DB instance, the status of the DB instance is **storage\-optimization**\. You can expect elevated latencies, but still within the single\-digit millisecond range, during storage optimization\. The DB instance is fully operational after a storage modification\.
+
+**Note**  
+You can't make further storage modifications until six \(6\) hours after storage optimization has completed on the instance\.
+
+For information on the ranges of allocated storage, Provisioned IOPS, and storage throughput available for each database engine, see [gp3 storage](CHAP_Storage.md#gp3-storage)\.
+
+### Console<a name="USER_PIOPS.gp3.Console"></a>
+
+**To change the storage performance settings for a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+   To filter the list of DB instances, for **Filter databases** enter a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
+
+1. Choose the DB instance with gp3 storage that you want to modify\.
+
+1. Choose **Modify**\.
+
+1. On the **Modify DB Instance page**, choose **General Purpose SSD \(gp3\)** for **Storage type**, then do the following:
+
+   1. For **Provisioned IOPS**, choose a value\.
+
+      If the value that you specify for either **Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message appears\. This message gives the range of values required for the other parameter\.
+
+   1. For **Storage throughput**, choose a value\.
+
+      If the value that you specify for either **Provisioned IOPS** or **Storage throughput** is outside the limits supported by the other parameter, a warning message appears\. This message gives the range of values required for the other parameter\.
+
+1. Choose **Continue**\.
+
+1. Choose **Apply immediately** in the **Scheduling of modifications** section to apply the changes to the DB instance immediately\. Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
+
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
+
+1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
+
+   The new value for Provisioned IOPS appears in the **Status** column\.
+
+### AWS CLI<a name="USER_PIOPS.gp3.CLI"></a>
+
+To change the storage performance settings for a DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. Set the following parameters:
++ `--storage-type` – Set to `gp3` for General Purpose SSD \(gp3\)\.
++ `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
++ `--iops` – The new amount of Provisioned IOPS for the DB instance, expressed in I/O operations per second\.
++ `--storage-throughput` – The new storage throughput for the DB instance, expressed in MiBps\.
++ `--apply-immediately` – Use `--apply-immediately` to apply changes immediately\. Use `--no-apply-immediately` \(the default\) to apply changes during the next maintenance window\.
+
+### RDS API<a name="USER_PIOPS.gp3.API"></a>
+
+To change the storage performance settings for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameters:
++ `StorageType` – Set to `gp3` for General Purpose SSD \(gp3\)\.
++ `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
++ `Iops` – The new IOPS rate for the DB instance, expressed in I/O operations per second\.
++ `StorageThroughput` – The new storage throughput for the DB instance, expressed in MiBps\.
++ `ApplyImmediately` – Set this option to `True` to apply changes immediately\. Set this option to `False` \(the default\) to apply changes during the next maintenance window\.

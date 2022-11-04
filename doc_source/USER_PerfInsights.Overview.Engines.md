@@ -1,4 +1,4 @@
-# Amazon RDS DB engine, Region, Region, and instance class support for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
+# Amazon RDS DB engine, Region, and instance class support for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
 
 Following, you can find the Amazon RDS DB engines that support Performance Insights\.
 

@@ -4,13 +4,16 @@ You can query data from an RDS for PostgreSQL DB instance and export it directly
 
 You can export from a provisioned or an Aurora Serverless v2 DB instance\. These steps aren't supported for Aurora Serverless v1\. 
 
+**Note**  
+Cross\-account export to Amazon S3 isn't supported\. 
+
 All currently available versions of RDS for PostgreSQL support exporting data to Amazon Simple Storage Service\. For detailed version information, see [Amazon RDS for PostgreSQL updates](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/postgresql-versions.html) in the *Amazon RDS for PostgreSQL Release Notes*\.
 
 If you don't have a bucket set up for your export, see the following topics the *Amazon Simple Storage Service User Guide*\. 
 + [Setting up Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html)
 + [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
 
-The upload to Amazon S3 uses server\-side encryption by default\. If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't export data to a bucket that is encrypted with a customer managed key\.
+The upload to Amazon S3 uses server\-side encryption by default\. If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't export data to a bucket that's encrypted with a customer managed key\.
 
 **Note**  
 You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.

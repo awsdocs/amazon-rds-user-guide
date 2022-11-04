@@ -534,4 +534,4 @@ When connecting through an RDS proxy, the startup message can include the follow
 
   The default for the `preferQueryMode` parameter is `extended`, which uses the extended mode for all queries\. The extended mode uses a series of `Prepare`, `Bind`, `Execute`, and `Sync` requests and corresponding responses\. This type of series causes connection pinning in an RDS proxy\. 
 
-For more information, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\. For more information about connecting using JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/head/connect.html) in the PostgreSQL documentation\.
+For more information, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\. For more information about connecting using JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/setup/) in the PostgreSQL documentation\.

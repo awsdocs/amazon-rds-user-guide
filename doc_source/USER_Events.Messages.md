@@ -68,6 +68,7 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0223 |  Storage autoscaling is unable to scale the storage for the reason: \[reason\]\.  | 
 |  failure  | RDS\-EVENT\-0224 |  Storage autoscaling has triggered a pending scale storage task that would reach the maximum storage threshold\. Increase the maximum storage threshold\.  | 
 |  failure  | RDS\-EVENT\-0237 |  The DB instance has a storage type that's currently unavailable in the Availability Zone\. Autoscaling will retry later\.  | 
+| failure | RDS\-EVENT\-0254 |  The storage for your AWS account has exceeded the allowed storage quota\. Increase the quota to let the autoscaling operation proceed\.  | 
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 

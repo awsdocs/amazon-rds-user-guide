@@ -22,6 +22,7 @@ To learn more about the `rds_superuser` role, see [Understanding PostgreSQL role
 + [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)
 + [Using pgAudit to log database activity](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
 + [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)
++ [Using pglogical to synchronize data across instances](#Appendix.PostgreSQL.CommonDBATasks.pglogical)
 + [Reducing bloat in tables and indexes with the pg\_repack extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
 + [Upgrading and using the PLV8 extension](#PostgreSQL.Concepts.General.UpgradingPLv8)
 + [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)
@@ -465,6 +466,487 @@ You can control the audit logging by changing one or more of the parameters list
 To log multiple event types with session auditing, use a comma\-separated list\. To log all event types, set `pgaudit.log` to `ALL`\. Reboot your DB instance to apply the changes\.
 
 With object auditing, you can refine audit logging to work with specific relations\. For example, you can specify that you want audit logging for `READ` operations on one or more tables\.
+
+## Using pglogical to synchronize data across instances<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical"></a>
+
+All currently available RDS for PostgreSQL versions support the `pglogical` extension\. The pglogical extension predates the functionally similar logical replication feature that was introduced by PostgreSQL in version 10\. For more information, see [Performing logical replication for Amazon RDS for PostgreSQL](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\.
+
+The `pglogical` extension supports logical replication between two or more RDS for PostgreSQL DB instances\. It also supports replication between different PostgreSQL versions, and between databases running on RDS for PostgreSQL DB instances and Aurora PostgreSQL DB clusters\. The `pglogical` extension uses a publish\-subscribe model to replicate changes to tables and other objects, such as sequences, from a publisher to a subscriber\. It relies on a replication slot to ensure that changes are synchronized from a publisher node to a subscriber node, defined as follows\. 
++ The *publisher node* is the RDS for PostgreSQL DB instance that's the source of data to be replicated to other nodes\. The publisher node defines the tables to be replicated in a publication set\. 
++ The *subscriber node* is the RDS for PostgreSQL DB instance that receives WAL updates from the publisher\. The subscriber creates a subscription to connect to the publisher and get the decoded WAL data\. When the subscriber creates the subscription, the replication slot is created on the publisher node\. 
+
+Following, you can find information about setting up the `pglogical` extension\. 
+
+**Topics**
++ [Requirements and limitations for the pglogical extension](#Appendix.PostgreSQL.CommonDBATasks.pglogical.requirements-limitations)
++ [Setting up the pglogical extension](#Appendix.PostgreSQL.CommonDBATasks.pglogical.basic-setup)
++ [Setting up logical replication for RDS for PostgreSQL DB instance](#Appendix.PostgreSQL.CommonDBATasks.pglogical.setup-replication)
++ [Reestablishing logical replication after a major upgrade](#Appendix.PostgreSQL.CommonDBATasks.pglogical.recover-replication-after-upgrade)
++ [Managing logical replication slots for RDS for PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.pglogical.handle-slots)
++ [Parameter reference for the pglogical extension](#Appendix.PostgreSQL.CommonDBATasks.pglogical.reference)
+
+### Requirements and limitations for the pglogical extension<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.requirements-limitations"></a>
+
+All currently available releases of RDS for PostgreSQL support the `pglogical` extension\. 
+
+Both the publisher node and the subscriber node must be set up for logical replication\.
+
+The tables that you want to replicate from subscriber to publisher must have the same names and the same schema\. These tables must also contain the same columns, and the columns must use the same data types\. Both publisher and subscriber tables must have the same primary keys\. We recommend that you use only the PRIMARY KEY as the unique constraint\.
+
+The tables on the subscriber node can have more permissive constraints than those on the publisher node for CHECK constraints and NOT NULL constraints\. 
+
+The `pglogical` extension provides features such as two\-way replication that aren't supported by the logical replication feature built into PostgreSQL \(version 10 and higher\)\. For more information, see [PostgreSQL bi\-directional replication using pglogical](https://aws.amazon.com/blogs/database/postgresql-bi-directional-replication-using-pglogical/)\.
+
+### Setting up the pglogical extension<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.basic-setup"></a>
+
+To set up the `pglogical` extension on your RDS for PostgreSQL DB instance , you add `pglogical` to the shared libraries on the custom DB parameter group for your RDS for PostgreSQL DB instance\. You also need to set the value of the `rds.logical_replication` parameter to `1`, to turn on logical decoding\. Finally, you create the extension in the database\. You can use the AWS Management Console or the AWS CLI for these tasks\. 
+
+You must have permissions as the `rds_superuser` role to perform these tasks\.
+
+The steps following assume that your RDS for PostgreSQL DB instance is associated with a custom DB parameter group\. For information about creating a custom DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+
+#### Console<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.basic-setup.CON"></a>
+
+**To set up the pglogical extension**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose your RDS for PostgreSQL DB instance\.
+
+1. Open the **Configuration** tab for your RDS for PostgreSQL DB instance\. Among the Instance details, find the **Parameter group** link\. 
+
+1. Choose the link to open the custom parameters associated with your RDS for PostgreSQL DB instance\. 
+
+1. In the **Parameters** search field, type `shared_pre` to find the `shared_preload_libraries` parameter\.
+
+1. Choose **Edit parameters** to access the property values\.
+
+1. Add `pglogical` to the list in the **Values** field\. Use a comma to separate items in the list of values\.   
+![\[Image of the shared_preload_libraries parameter with pglogical added.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/apg_rpg_shared_preload_pglogical.png)
+
+1. Find the `rds.logical_replication` parameter and set it to `1`, to turn on logical replication\.
+
+1. Reboot the RDS for PostgreSQL DB instance so that your changes take effect\. 
+
+1. When the instance is available, you can use `psql` \(or pgAdmin\) to connect to the RDS for PostgreSQL DB instance\. 
+
+   ```
+   psql --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
+   ```
+
+1. To verify that pglogical is initialized, run the following command\.
+
+   ```
+   SHOW shared_preload_libraries;
+   shared_preload_libraries 
+   --------------------------
+   rdsutils,pglogical
+   (1 row)
+   ```
+
+1. Verify the setting that enables logical decoding, as follows\.
+
+   ```
+   SHOW wal_level;
+   wal_level
+   -----------
+    logical
+   (1 row)
+   ```
+
+1. Create the extension, as follows\.
+
+   ```
+   CREATE EXTENSION pglogical;
+   EXTENSION CREATED
+   ```
+
+1. Choose **Save changes**\.
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose your RDS for PostgreSQL DB instance from the Databases list to select it, and then choose **Reboot** from the Actions menu\.
+
+#### AWS CLI<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.basic-setup.CLI"></a>
+
+**To setup the pglogical extension**
+
+To setup pglogical using the AWS CLI, you call the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) operation to modify certain parameters in your custom parameter group as shown in the following procedure\.
+
+1. Use the following AWS CLI command to add `pglogical` to the `shared_preload_libraries` parameter\.
+
+   ```
+   aws rds modify-db-parameter-group \
+      --db-parameter-group-name custom-param-group-name \
+      --parameters "ParameterName=shared_preload_libraries,ParameterValue=pglogical,ApplyMethod=pending-reboot" \
+      --region aws-region
+   ```
+
+1. Use the following AWS CLI command to set `rds.logical_replication` to `1` to turn on the logical decoding capability for the RDS for PostgreSQL DB instance\.
+
+   ```
+   aws rds modify-db-parameter-group \
+      --db-parameter-group-name custom-param-group-name \
+      --parameters "ParameterName=rds.logical_replication,ParameterValue=1,ApplyMethod=pending-reboot" \
+      --region aws-region
+   ```
+
+1. Use the following AWS CLI command to reboot the RDS for PostgreSQL DB instance so that the pglogical library is initialized\.
+
+   ```
+   aws rds reboot-db-instance \
+       --db-instance-identifier your-instance \
+       --region aws-region
+   ```
+
+1. When the instance is available, use `psql` to connect to the RDS for PostgreSQL DB instance\. 
+
+   ```
+   psql --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
+   ```
+
+1. Create the extension, as follows\.
+
+   ```
+   CREATE EXTENSION pglogical;
+   EXTENSION CREATED
+   ```
+
+1. Reboot the RDS for PostgreSQL DB instance using the following AWS CLI command\.
+
+   ```
+   aws rds reboot-db-instance \
+       --db-instance-identifier your-instance \
+       --region aws-region
+   ```
+
+### Setting up logical replication for RDS for PostgreSQL DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.setup-replication"></a>
+
+The following procedure shows you how to start logical replication between two RDS for PostgreSQL DB instances\. The steps assume that both the source \(publisher\) and the target \(subscriber\) have the `pglogical` extension set up as detailed in [Setting up the pglogical extension](#Appendix.PostgreSQL.CommonDBATasks.pglogical.basic-setup)\. 
+
+**To create the publisher node and define the tables to replicate**
+
+These steps assume that your RDS for PostgreSQL DB instance has a database that has one or more tables that you want to replicate to another node\. You need to recreate the table structure from the publisher on the subscriber, so first, get the table structure if necessary\. You can do that by using the `psq1` metacommand `\d tablename` and then creating the same table on the subscriber instance\. The following procedure creates an example table on the publisher \(source\) for demonstration purposes\.
+
+1. Use `psql` to connect to the instance that has the table you want to use as a source for subscribers\. 
+
+   ```
+   psql --host=source-instance.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
+   ```
+
+   If you don't have an existing table that you want to replicate, you can create a sample table as follows\.
+
+   1. Create an example table using the following SQL statement\.
+
+      ```
+      CREATE TABLE docs_lab_table (a int PRIMARY KEY);
+      ```
+
+   1. Populate the table with generated data by using the following SQL statement\.
+
+      ```
+      INSERT INTO docs_lab_table VALUES (generate_series(1,5000));
+      INSERT 0 5000
+      ```
+
+   1. Verify that data exists in the table by using the following SQL statement\.
+
+      ```
+      SELECT count(*) FROM docs_lab_table;
+      ```
+
+1. Identify this RDS for PostgreSQL DB instance as the publisher node, as follows\.
+
+   ```
+   SELECT pglogical.create_node(
+       node_name := 'docs_lab_provider',
+       dsn := 'host=source-instance.aws-region.rds.amazonaws.com port=5432 dbname=labdb');
+    create_node
+   -------------
+      3410995529
+   (1 row)
+   ```
+
+1. Add the table that you want to replicate to the default replication set\. For more information about replication sets, see [Replication sets](https://github.com/2ndQuadrant/pglogical/tree/REL2_x_STABLE/docs#replication-sets) in the pglogical documentation\. 
+
+   ```
+   SELECT pglogical.replication_set_add_table('default', 'docs_lab_table', 'true', NULL, NULL);
+    replication_set_add_table
+     ---------------------------
+     t
+     (1 row)
+   ```
+
+The publisher node setup is complete\. You can now set up the subscriber node to receive the updates from the publisher\.
+
+**To set up the subscriber node and create a subscription to receive updates**
+
+These steps assume that the RDS for PostgreSQL DB instance has been set up with the `pglogical` extension\. For more information, see [Setting up the pglogical extension](#Appendix.PostgreSQL.CommonDBATasks.pglogical.basic-setup)\. 
+
+1. Use `psql` to connect to the instance that you want to receive updates from the publisher\.
+
+   ```
+   psql --host=target-instance.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
+   ```
+
+1. On the subscriber RDS for PostgreSQL DB instance,create the same table that exists on the publisher\. For this example, the table is `docs_lab_table`\. You can create the table as follows\.
+
+   ```
+   CREATE TABLE docs_lab_table (a int PRIMARY KEY);
+   ```
+
+1. Verify that this table is empty\.
+
+   ```
+   SELECT count(*) FROM docs_lab_table;
+    count
+   -------
+     0
+   (1 row)
+   ```
+
+1. Identify this RDS for PostgreSQL DB instance as the subscriber node, as follows\.
+
+   ```
+   SELECT pglogical.create_node(
+       node_name := 'docs_lab_target',
+       dsn := 'host=target-instance.aws-region.rds.amazonaws.com port=5432 sslmode=require dbname=labdb user=postgres password=********');
+    create_node
+   -------------
+      2182738256
+   (1 row)
+   ```
+
+1. Create the subscription\. 
+
+   ```
+   SELECT pglogical.create_subscription(
+      subscription_name := 'docs_lab_subscription',
+      provider_dsn := 'host=source-instance.aws-region.rds.amazonaws.com port=5432 sslmode=require dbname=labdb user=postgres password=*******',
+      replication_sets := ARRAY['default'],
+      synchronize_data := true,
+      forward_origins := '{}' );  
+    create_subscription
+   ---------------------
+   1038357190
+   (1 row)
+   ```
+
+   When you complete this step, the data from the table on the publisher is created in the table on the subscriber\. You can verify that this has occurred by using the following SQL query\.
+
+   ```
+   SELECT count(*) FROM docs_lab_table;
+    count
+   -------
+     5000
+   (1 row)
+   ```
+
+From this point forward, changes made to the table on the publisher are replicated to the table on the subscriber\.
+
+### Reestablishing logical replication after a major upgrade<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.recover-replication-after-upgrade"></a>
+
+Before you can perform a major version upgrade of an RDS for PostgreSQL DB instance that's set up as a publisher node for logical replication, you must drop all replication slots, even those that aren't active\. We recommend that you temporarily divert database transactions from the publisher node, drop the replication slots, upgrade the RDS for PostgreSQL DB instance, and then re\-establish and restart replication\.
+
+The replication slots are hosted on the publisher node only\.  The RDS for PostgreSQL subscriber node in a logical replication scenario has no slots to drops, but it can't be upgraded to a major version while it's designated as a subscriber node with a subscription to the publisher\. Before upgrading the RDS for PostgreSQL subscriber node, drop the subscription and the node\. For more information, see [Managing logical replication slots for RDS for PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.pglogical.handle-slots)\.   
+
+#### Determining that logical replication has been disrupted<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.recover-replication-after-upgrade.identifying-the-issue"></a>
+
+You can determine that the replication process has been disrupted by querying either the publisher node or the subscriber node, as follows\.
+
+**To check the publisher node**
++ Use `psql` to connect to the publisher node, and then query the `pg_replication_slots` function\. Note the value in the active column\. Normally, this will return `t` \(true\), showing that replication is active\. If the query returns `f` \(false\), it's an indication that replication to the subscriber has stopped\. 
+
+  ```
+  SELECT slot_name,plugin,slot_type,active FROM pg_replication_slots;
+                      slot_name              |      plugin      | slot_type | active
+  -------------------------------------------+------------------+-----------+--------
+   pgl_labdb_docs_labcb4fa94_docs_lab3de412c | pglogical_output | logical   | f
+  (1 row)
+  ```
+
+**To check the subscriber node**
+
+On the subscriber node, you can check the status of replication in three different ways\.
++ Look through the PostgreSQL logs on the subscriber node to find failure messages\. The log identifies failure with messages that include exit code 1, as shown following\.
+
+  ```
+  2022-07-06 16:17:03 UTC::@:[7361]:LOG: background worker "pglogical apply 16404:2880255011" (PID 14610) exited with exit code 1
+  2022-07-06 16:19:44 UTC::@:[7361]:LOG: background worker "pglogical apply 16404:2880255011" (PID 21783) exited with exit code 1
+  ```
++ Query the `pg_replication_origin` function\. Connect to the database on the subscriber node using `psql` and query the `pg_replication_origin` function, as follows\.
+
+  ```
+  SELECT * FROM pg_replication_origin;
+   roident | roname
+  ---------+--------
+  (0 rows)
+  ```
+
+  The empty result set means that replication has been disrupted\. Normally, you see output such as the following\.
+
+  ```
+     roident |                       roname
+    ---------+----------------------------------------------------
+           1 | pgl_labdb_docs_labcb4fa94_docs_lab3de412c
+    (1 row)
+  ```
++ Query the `pglogical.show_subscription_status` function as shown in the following example\.
+
+  ```
+  SELECT subscription_name,status,slot_name FROM pglogical.show_subscription_status();
+       subscription_name | status |              slot_name
+  ---====----------------+--------+-------------------------------------
+   docs_lab_subscription | down   | pgl_labdb_docs_labcb4fa94_docs_lab3de412c
+  (1 row)
+  ```
+
+  This output shows that replication has been disrupted\. Its status is `down`\. Normally, the output shows the status as `replicating`\.
+
+If your logical replication process has been disrupted, you can re\-establish replication by following these steps\.
+
+**To reestablish logical replication between publisher and subscriber nodes**
+
+To re\-establish replication, you first disconnect the subscriber from the publisher node and then re\-establish the subscription, as outlined in these steps\. 
+
+1. Connect to the subscriber node using `psql` as follows\.
+
+   ```
+   psql --host=222222222222.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=labdb
+   ```
+
+1. Deactivate the subscription by using the `pglogical.alter_subscription_disable` function\.
+
+   ```
+   SELECT pglogical.alter_subscription_disable('docs_lab_subscription',true);
+    alter_subscription_disable
+   ----------------------------
+    t
+   (1 row)
+   ```
+
+1. Get the publisher node's identifier by querying the `pg_replication_origin`, as follows\.
+
+   ```
+   SELECT * FROM pg_replication_origin;
+    roident |               roname
+   ---------+-------------------------------------
+          1 | pgl_labdb_docs_labcb4fa94_docs_lab3de412c
+   (1 row)
+   ```
+
+1. Use the response from the previous step with the `pg_replication_origin_create` command to assign the identifier that can be used by the subscription when re\-established\. 
+
+   ```
+   SELECT pg_replication_origin_create('pgl_labdb_docs_labcb4fa94_docs_lab3de412c');
+     pg_replication_origin_create
+   ------------------------------
+                               1
+   (1 row)
+   ```
+
+1. Turn on the subscription by passing its name with a status of `true`, as shown in the following example\.
+
+   ```
+   SELECT pglogical.alter_subscription_enable('docs_lab_subscription',true);
+     alter_subscription_enable
+   ---------------------------
+    t
+   (1 row)
+   ```
+
+Check the status of the node\. Its status should be `replicating` as shown in this example\.
+
+```
+SELECT subscription_name,status,slot_name
+  FROM pglogical.show_subscription_status();
+             subscription_name |   status    |              slot_name
+-------------------------------+-------------+-------------------------------------
+ docs_lab_subscription         | replicating | pgl_labdb_docs_lab98f517b_docs_lab3de412c
+(1 row)
+```
+
+Check the status of the subscriber's replication slot on the publisher node\. The slot's `active` column should return `t` \(true\), indicating that replication has been re\-established\.
+
+```
+SELECT slot_name,plugin,slot_type,active
+  FROM pg_replication_slots;
+                    slot_name              |      plugin      | slot_type | active
+-------------------------------------------+------------------+-----------+--------
+ pgl_labdb_docs_lab98f517b_docs_lab3de412c | pglogical_output | logical   | t
+(1 row)
+```
+
+### Managing logical replication slots for RDS for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.handle-slots"></a>
+
+Before you can perform a major version upgrade on an RDS for PostgreSQL DB instance that's serving as a publisher node in a logical replication scenario, you must drop the replication slots on the instance\. The major version upgrade pre\-check process notifies you that the upgrade can't proceed until the slots are dropped\.
+
+To drop slots from your RDS for PostgreSQL DB instance, first drop the subscription and then drop the slot\. 
+
+To identify replication slots that were created using the `pglogical` extension, log in to each database and get the name of the nodes\. When you query the subscriber node, you get both the publisher and the subscriber nodes in the output, as shown in this example\. 
+
+```
+SELECT * FROM pglogical.node;
+node_id   |     node_name
+------------+-------------------
+ 2182738256 | docs_lab_target
+ 3410995529 | docs_lab_provider
+(2 rows)
+```
+
+You can get the details about the subscription with the following query\.
+
+```
+SELECT sub_name,sub_slot_name,sub_target
+  FROM pglogical.subscription;
+ sub_name |         sub_slot_name          | sub_target
+----------+--------------------------------+------------
+  docs_lab_subscription     | pgl_labdb_docs_labcb4fa94_docs_lab3de412c | 2182738256
+(1 row)
+```
+
+You can now drop the subscription, as follows\.
+
+```
+SELECT pglogical.drop_subscription(subscription_name := 'docs_lab_subscription');
+ drop_subscription
+-------------------
+                 1
+(1 row)
+```
+
+After dropping the subscription, you can delete the node\.
+
+```
+SELECT pglogical.drop_node(node_name := 'docs-lab-subscriber');
+ drop_node
+-----------
+ t
+(1 row)
+```
+
+You can verify that the node no longer exists, as follows\.
+
+```
+SELECT * FROM pglogical.node;
+ node_id | node_name
+---------+-----------
+(0 rows)
+```
+
+### Parameter reference for the pglogical extension<a name="Appendix.PostgreSQL.CommonDBATasks.pglogical.reference"></a>
+
+In the table you can find parameters associated with the `pglogical` extension\. Parameters such as `pglogical.conflict_log_level` and `pglogical.conflict_resolution` are used to handle update conflicts\. Conflicts can emerge when changes are made locally to the same tables that are subscribed to changes from the publisher\. Conflicts can also occur during various scenarios, such as two\-way replication or when multiple subscribers are replicating from the same publisher\. For more information, see [ PostgreSQL bi\-directional replication using pglogical](https://aws.amazon.com/blogs/database/postgresql-bi-directional-replication-using-pglogical/)\. 
+
+
+| Parameter | Description | 
+| --- | --- | 
+| pglogical\.batch\_inserts | Batch inserts if possible\. Not set by default\. Change to '1' to turn on, '0' to turn off\. | 
+| pglogical\.conflict\_log\_level | Sets the log level to use for logging resolved conflicts\. Supported string values are debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, panic\. | 
+| pglogical\.conflict\_resolution | Sets method to use to resolve conflicts when conflicts are resolvable\. Supported string values are error, apply\_remote, keep\_local, last\_update\_wins, first\_update\_wins\. | 
+| pglogical\.extra\_connection\_options | Connection options to add to all peer node connections\. | 
+| pglogical\.synchronous\_commit | pglogical specific synchronous commit value | 
+| pglogical\.use\_spi | Use SPI \(server programming interface\) instead of low\-level API to apply changes\. Set to '1' to turn on, '0' to turn off\. For more information about SPI, see [Server Programming Interface](https://www.postgresql.org/docs/current/spi.html) in the PostgreSQL documentation\.  | 
 
 ## Reducing bloat in tables and indexes with the pg\_repack extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
 
