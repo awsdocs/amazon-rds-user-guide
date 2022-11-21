@@ -8,6 +8,7 @@ Following, you can find specific information about working with read replicas on
 + [Configuring delayed replication with MariaDB](#USER_MariaDB.Replication.ReadReplicas.DelayReplication)
 + [Updating read replicas with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Updates)
 + [Working with Multi\-AZ read replica deployments with MariaDB](#USER_MariaDB.Replication.ReadReplicas.MultiAZ)
++ [Using cascading read replicas with RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.Cascading)
 + [Monitoring MariaDB read replicas](#USER_MariaDB.Replication.ReadReplicas.Monitor)
 + [Starting and stopping replication with MariaDB read replicas](#USER_MariaDB.Replication.ReadReplicas.StartStop)
 + [Troubleshooting a MariaDB read replica problem](#USER_ReadRepl.Troubleshooting.MariaDB)
@@ -18,11 +19,7 @@ Before a MariaDB DB instance can serve as a replication source, make sure to tur
 
 You can create up to 15 read replicas from one DB instance within the same Region\. For replication to operate effectively, each read replica should have as the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
-If a read replica is running any version of MariaDB, you can specify it as the source DB instance for another read replica\. For example, you can create ReadReplica1 from MyDBInstance, and then create ReadReplica2 from ReadReplica1\. Updates made to MyDBInstance are replicated to ReadReplica1 and then replicated from ReadReplica1 to ReadReplica2\. You can't have more than four instances involved in a replication chain\. For example, you can create ReadReplica1 from MySourceDBInstance, and then create ReadReplica2 from ReadReplica1, and then create ReadReplica3 from ReadReplica2, but you can't create a ReadReplica4 from ReadReplica3\. 
-
-If you promote a MariaDB read replica that is in turn replicating to other read replicas, those read replicas remain active\. Consider an example where MyDBInstance1 replicates to MyDBInstance2, and MyDBInstance2 replicates to MyDBInstance3\. If you promote MyDBInstance2, replication from MyDBInstance1 to MyDBInstance2 no longer occurs, but MyDBInstance2 still replicates to MyDBInstance3\. 
-
-To enable automatic backups on a read replica for RDS for MariaDB, first create the read replica, then modify the read replica to enable automatic backups\. 
+RDS for MariaDB supports cascading read replicas\. To learn how to configure cascading read replicas, see [Using cascading read replicas with RDS for MariaDB](#USER_MariaDB.Replication.ReadReplicas.Cascading)\.
 
 You can run multiple read replica create and delete actions at the same time that reference the same source DB instance\. When you perform these actions, stay within the limit of 15 read replicas for each source instance\.
 
@@ -306,6 +303,29 @@ Read replicas are designed to support read queries, but you might need occasiona
 You can create a read replica from either single\-AZ or Multi\-AZ DB instance deployments\. You use Multi\-AZ deployments to improve the durability and availability of critical data, but you can't use the Multi\-AZ secondary to serve read\-only queries\. Instead, you can create read replicas from high\-traffic Multi\-AZ DB instances to offload read\-only queries\. If the source instance of a Multi\-AZ deployment fails over to the secondary, any associated read replicas automatically switch to use the secondary \(now primary\) as their replication source\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
 You can create a read replica as a Multi\-AZ DB instance\. Amazon RDS creates a standby of your replica in another Availability Zone for failover support for the replica\. Creating your read replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
+
+## Using cascading read replicas with RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Cascading"></a>
+
+RDS for MariaDB supports cascading read replicas\. With *cascading read replicas*, you can scale reads without adding overhead to your source RDS for MariaDB DB instance\.
+
+With cascading read replicas, your RDS for MariaDB DB instance sends data to the first read replica in the chain\. That read replica then sends data to the second replica in the chain, and so on\. The end result is that all read replicas in the chain have the changes from the RDS for MariaDB DB instance, but without the overhead solely on the source DB instance\.
+
+You can create a series of up to three read replicas in a chain from a source RDS for MariaDB DB instance\. For example, suppose that you have an RDS for MariaDB DB instance, `mariadb-main`\. You can do the following:
++ Starting with `mariadb-main`, create the first read replica in the chain, `read-replica-1`\.
++ Next, from `read-replica-1`, create the next read replica in the chain, `read-replica-2`\.
++ Finally, from `read-replica-2`, create the third read replica in the chain, `read-replica-3`\.
+
+You can't create another read replica beyond this third cascading read replica in the series for `mariadb-main`\. A complete series of instances from an RDS for MariaDB source DB instance through to the end of a series of cascading read replicas can consist of at most four DB instances\.
+
+For cascading read replicas to work, each source RDS for MariaDB DB instance must have automated backups turned on\. To turn on automatic backups on a read replica, first create the read replica, and then modify the read replica to turn on automatic backups\. For more information, see [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
+
+As with any read replica, you can promote a read replica that's part of a cascade\. Promoting a read replica from within a chain of read replicas removes that replica from the chain\. For example, suppose that you want to move some of the workload from your `mariadb-main` DB instance to a new instance for use by the accounting department only\. Assuming the chain of three read replicas from the example, you decide to promote `read-replica-2`\. The chain is affected as follows:
++ Promoting `read-replica-2` removes it from the replication chain\.
+  + It is now a full read/write DB instance\.
+  + It continues replicating to `read-replica-3`, just as it was doing before promotion\.
++ Your `mariadb-main` continues replicating to `read-replica-1`\.
+
+For more information about promoting read replicas, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 ## Monitoring MariaDB read replicas<a name="USER_MariaDB.Replication.ReadReplicas.Monitor"></a>
 

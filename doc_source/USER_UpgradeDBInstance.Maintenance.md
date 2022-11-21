@@ -233,7 +233,7 @@ You can use the AWS Management Console or the AWS CLI to determine whether an up
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**, and then select the DB instance\. 
+1. In the navigation pane, choose **Databases**, and then select the DB instance\.
 
 1. Choose **Maintenance & backups**\.
 

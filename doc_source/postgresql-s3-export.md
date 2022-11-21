@@ -164,7 +164,8 @@ We strongly recommend that you do not create a policy with all\-resource access\
           {
             "Sid": "s3export",
             "Action": [
-              "S3:PutObject"
+              "s3:PutObject",
+              "s3:AbortMultipartUpload"
             ],
             "Effect": "Allow",
             "Resource": [

@@ -11,6 +11,7 @@ The shared responsibility model of RDS Custom provides OS shell–level access a
 + [How Amazon RDS Custom replaces an impaired host](#custom-troubleshooting.host-problems)
 + [Troubleshooting upgrades for RDS Custom for Oracle](#custom-troubleshooting-upgrade)
 + [Troubleshooting replica promotion for RDS Custom for Oracle](#custom-troubleshooting-promote)
++ [Troubleshooting replica creation for RDS Custom for Oracle](#custom-troubleshooting-create-replica)
 
 ## Viewing RDS Custom events<a name="custom-troubleshooting.support-perimeter.viewing-events"></a>
 
@@ -247,3 +248,38 @@ To respond to the stuck workflow, complete the following steps:
    ```
 
 1. Contact AWS Support and request it to move your DB instance to available status\.
+
+## Troubleshooting replica creation for RDS Custom for Oracle<a name="custom-troubleshooting-create-replica"></a>
+
+When you attempt to create a new Oracle replica from an RDS Custom for Oracle DB instance that was created before November 18, 2022, the replication becomes stuck\. You can fix this problem by creating a new SPFILE on the Oracle replica that is experiencing the problem\.
+
+**To create a new SPFILE on your Oracle replica**
+
+1. Log in to the underlying Amazon EC2 instance for your Oracle replica\. Use `sed` to change the current Oracle home value of `/rdsdbbin/oracle` to the latest Oracle home in your initialization parameter file\.
+
+   ```
+   sed -i "s|/rdsdbbin/oracle|$ORACLE_HOME|g" /rdsdbdata/config/oracle_pfile 
+   ```
+
+1. Start an Oracle SQL client, and log in to your RDS Custom for Oracle DB instance as a user with `SYSDBA` privileges\. 
+
+1. In your SQL client, create an SPFILE from your initialization parameter file\. 
+
+   ```
+   CREATE SPFILE='/rdsdbdata/admin/$ORACLE_SID/pfile/spfile$ORACLE_SID.ora' 
+       FROM PFILE='/rdsdbdata/config/oracle_pfile';
+   ```
+
+1. Shut down your Oracle replica database:
+
+   ```
+   SHUTDOWN IMMEDIATE
+   ```
+
+1. Start your Oracle replica database and mount it:
+
+   ```
+   STARTUP MOUNT
+   ```
+
+Your source RDS Custom for Oracle DB instance can now replicate to your Oracle replica database\.

@@ -13,6 +13,7 @@ You can upgrade an Amazon RDS Custom DB instance by modifying it to use a new cu
 
 Before upgrading your DB instance, note the following requirements:
 + You can upgrade your DB instance to a new CEV only if it already exists\.
++ You can upgrade your DB instance to a new CEV only if it uses the same installation parameter settings in the manifest\. For example, you can't upgrade a database that uses the default Oracle home to a CEV that uses a nondefault Oracle home\.
 + You can upgrade your DB instance to a new minor version only\. For example, you can't upgrade a DB instance using an Oracle Database 12c CEV to an Oracle Database 19c CEV\.
 
 Consider the following:
@@ -29,6 +30,20 @@ Consider the following:
   A disadvantage of the preceding technique is that you must apply the patch manually to every instance that you want to upgrade\. In contrast, when you create a new CEV, you can create or upgrade multiple DB instances using the same CEV\.
 + When you upgrade your primary DB instance, RDS Custom for Oracle upgrades your read replicas automatically\. You don't have to upgrade read replicas manually\.
 + When you upgrade a CEV, RDS Custom deletes the data in the `bin` volume of your DB instance\.
++ When you upgrade a container database \(CDB\), RDS Custom for Oracle checks that all PDBs are open or could be opened\. If these conditions aren't met, RDS Custom stops the check and returns the database to its original state without attempting the upgrade\. If the conditions are met, RDS Custom patches the CDB root first, and then patches all other PDBs \(including `PDB$SEED`\) in parallel\.
+
+  After the patching process completes, RDS Custom attempts to open all PDBs\. If any PDBs fail to open, you receive the following event: `The following PDBs failed to open: list-of-PDBs`\. If RDS Custom fails to patch the CDB root or any PDBs, the instance is put into the `PATCH_DB_FAILED` state\.
++ You might want to perform a major version upgrade and a conversion of non\-CDB to CDB at the same time\. In this case, we recommend that you complete this goal in the following process:
+
+  1. Create a new RDS Custom DB instance that uses the Oracle Multitenant architecture\.
+
+  1. Plug in a non\-CDB into your CDB root, creating it as a PDB\. Make sure that the non\-CDB is the same major version as your CDB\.
+
+  1. Convert your PDB by running the `noncdb_to_pdb.sql` Oracle script\.
+
+  1. Validate your CDB instance\.
+
+  1. Upgrade your CDB instance\.
 
 ## Viewing valid upgrade targets for RDS Custom for Oracle DB instances<a name="custom-upgrading-target"></a>
 

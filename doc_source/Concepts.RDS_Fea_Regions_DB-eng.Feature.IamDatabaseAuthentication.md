@@ -39,7 +39,9 @@ Following are the supported engines and Region availability for IAM database aut
 | Europe \(London\) | Version 10\.6 and higher | \- | \- | \- | 
 | Europe \(Milan\) | Version 10\.6 and higher | \- | \- | \- | 
 | Europe \(Paris\) | Version 10\.6 and higher | \- | \- | \- | 
+| Europe \(Spain\) | – | – | – | – | 
 | Europe \(Stockholm\) | Version 10\.6 and higher | \- | \- | \- | 
+| Europe \(Zurich\) | – | – | – | – | 
 | Middle East \(Bahrain\) | Version 10\.6 and higher | \- | \- | \- | 
 | Middle East \(UAE\) | \- | \- | \- | \- | 
 | South America \(São Paulo\) | Version 10\.6 and higher | \- | \- | \- | 

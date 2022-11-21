@@ -39,7 +39,9 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Europe \(London\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Europe \(Milan\) | – | – | – | 
 | Europe \(Paris\) | – | – | – | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | – | – | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | – | – | – | 
@@ -74,7 +76,9 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Europe \(London\) | Enterprise, Standard, or Web | 
 | Europe \(Milan\) | – | 
 | Europe \(Paris\) | – | 
+| Europe \(Spain\) | – | 
 | Europe \(Stockholm\) | Enterprise, Standard, or Web | 
+| Europe \(Zurich\) | – | 
 | Middle East \(Bahrain\) | – | 
 | Middle East \(UAE\) | – | 
 | South America \(São Paulo\) | Enterprise, Standard, or Web | 

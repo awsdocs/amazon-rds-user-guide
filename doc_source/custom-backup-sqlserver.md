@@ -244,26 +244,26 @@ Use one of the following options to specify the backup to restore from:
 
 The `custom-iam-instance-profile` option is required\.
 
-The following command restores `my-custom-instance` to a new DB instance named `my-restored-custom-instance`, as of the specified time\.
+The following example restores `my-custom-db-instance` to a new DB instance named `my-restored-custom-db-instance`, as of the specified time\.
 
 **Example**  
 For Linux, macOS, or Unix:  
 
 ```
 1. aws rds restore-db-instance-to-point-in-time \
-2.     --source-db-instance-identifier my-custom-instance\
-3.     --target-db-instance-identifier my-restored-custom-instance \
+2.     --source-db-instance-identifier my-custom-db-instance\
+3.     --target-db-instance-identifier my-restored-custom-db-instance \
 4.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance \
-5.     --restore-time 2021-07-14T23:45:00.000Z
+5.     --restore-time 2022-10-14T23:45:00.000Z
 ```
 For Windows:  
 
 ```
 1. aws rds restore-db-instance-to-point-in-time ^
-2.     --source-db-instance-identifier my-custom-instance ^
-3.     --target-db-instance-identifier my-restored-custom-instance ^
+2.     --source-db-instance-identifier my-custom-db-instance ^
+3.     --target-db-instance-identifier my-restored-custom-db-instance ^
 4.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance ^
-5.     --restore-time 2021-07-14T23:45:00.000Z
+5.     --restore-time 2022-10-14T23:45:00.000Z
 ```
 
 ## Deleting an RDS Custom for SQL Server snapshot<a name="custom-backup-sqlserver.deleting"></a>

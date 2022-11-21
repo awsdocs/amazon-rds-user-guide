@@ -1,16 +1,22 @@
-# Requirements and limitations for Amazon RDS Custom for Oracle<a name="custom-reqs-limits"></a>
+# Availability and requirements for Amazon RDS Custom for Oracle<a name="custom-reqs-limits"></a>
 
-Following, you can find a summary of the Amazon RDS Custom for Oracle requirements and limitations for quick reference\. Requirements and limitations also appear in the relevant sections\.
+In this topic, you can find a summary of the Amazon RDS Custom for Oracle feature availability and requirements for quick reference\.
 
 **Topics**
 + [Region and version availability](#custom-reqs-limits.RegionVersionAvailability)
-+ [General requirements for RDS Custom for Oracle](#custom-reqs-limits.reqs)
 + [DB instance class support for RDS Custom for Oracle](#custom-reqs-limits.instances)
++ [General requirements for RDS Custom for Oracle](#custom-reqs-limits.reqs)
 + [Limitations for RDS Custom for Oracle](#custom-reqs-limits.limits)
 
 ## Region and version availability<a name="custom-reqs-limits.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Amazon RDS Custom for Oracle, see [RDS Custom](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md)\. 
+Feature availability and support vary across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS Custom for Oracle, see [RDS Custom](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md)\. 
+
+## DB instance class support for RDS Custom for Oracle<a name="custom-reqs-limits.instances"></a>
+
+RDS Custom for Oracle supports the following DB instance classes:
++ db\.m5\.large–db\.m5\.24xlarge
++ db\.r5\.large–db\.r5\.24xlarge
 
 ## General requirements for RDS Custom for Oracle<a name="custom-reqs-limits.reqs"></a>
 
@@ -22,12 +28,6 @@ Make sure to follow these requirements for Amazon RDS Custom for Oracle:
 + Create an AWS Identity and Access Management \(IAM\) role and instance profile\. For more information, see [Configuring IAM and your VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
 + Make sure to supply a networking configuration that RDS Custom can use to access other AWS services\. For specific requirements, see [Configuring IAM and your VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
 + Make sure that the combined number of RDS Custom and Amazon RDS DB instances doesn't exceed your quota limit\. For example, if your quota for Amazon RDS is 40 DB instances, you can have 20 RDS Custom for Oracle DB instances and 20 Amazon RDS DB instances\.
-
-## DB instance class support for RDS Custom for Oracle<a name="custom-reqs-limits.instances"></a>
-
-RDS Custom for Oracle supports the following DB instance classes:
-+ db\.m5\.large–db\.m5\.24xlarge
-+ db\.r5\.large–db\.r5\.24xlarge
 
 ## Limitations for RDS Custom for Oracle<a name="custom-reqs-limits.limits"></a>
 
@@ -43,5 +43,4 @@ The following limitations apply to RDS Custom for Oracle:
   + Turn on automatic minor version upgrade\.
   + Change the DB instance class\. For example, you can't change a db\.m5\.xlarge DB instance to db\.m5\.2xlarge\. However, you can restore a snapshot of your RDS Custom for Oracle DB instance to a different instance class\.
 + The maximum DB instance storage is 64 TiB\.
-+ You can't use the Oracle Multitenant architecture\.
 + Only one database is supported on an RDS Custom for Oracle DB instance\.

@@ -50,7 +50,7 @@ Feature availability and support varies across specific versions of each databas
 
 For additional limitations for each DB engine, see the following sections:
 + [Additional limitations for RDS for MariaDB](#rds-proxy.limitations-mdb)
-+ [Additional limitations for RDS for SQL Server](#rds-proxy.limitations-ms)
++ [Additional limitations for RDS for Microsoft SQL Server](#rds-proxy.limitations-ms)
 + [Additional limitations for RDS for MySQL](#rds-proxy.limitations-my)
 + [Additional limitations for RDS for PostgreSQL](#rds-proxy.limitations-pg)
 
@@ -68,7 +68,7 @@ For additional limitations for each DB engine, see the following sections:
 **Important**  
  For proxies associated with MariaDB databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
 
-### Additional limitations for RDS for SQL Server<a name="rds-proxy.limitations-ms"></a>
+### Additional limitations for RDS for Microsoft SQL Server<a name="rds-proxy.limitations-ms"></a>
 
  The following additional limitations apply to RDS Proxy with RDS for Microsoft SQL Server databases:
 + The number of Secrets Manager secrets that you need to create for a proxy depends on the collation that your DB instance uses\. For example, suppose that your DB instance uses case\-sensitive collation\. If your application accepts both "Admin" and "admin," then your proxy needs two separate secrets\. For more information about collation in SQL Server, see the [ Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support?view=sql-server-ver16) documentation\.

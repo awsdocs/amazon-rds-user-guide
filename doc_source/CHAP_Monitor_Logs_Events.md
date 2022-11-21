@@ -4,6 +4,7 @@ When you monitor your Amazon RDS databases and your other AWS solutions, your go
 + Reliability
 + Availability
 + Performance
++ Security
 
 [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md) explains how to monitor your instance  using metrics\. A complete solution must also monitor database events, log files, and activity streams\. AWS provides you with the following monitoring tools:
 + *Amazon EventBridge* is a serverless event bus service that makes it easy to connect your applications with data from a variety of sources\. EventBridge delivers a stream of real\-time data from your own applications, Software\-as\-a\-Service \(SaaS\) applications, and AWS services\. EventBridge routes that data to targets such as AWS Lambda\. This way, you can monitor events that happen in services and build event\-driven architectures\. For more information, see the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.

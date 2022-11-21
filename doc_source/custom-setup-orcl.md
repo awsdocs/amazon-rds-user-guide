@@ -13,10 +13,10 @@ Before you create a DB instance based on Amazon RDS Custom for Oracle, perform t
 
 Before creating an RDS Custom for Oracle DB instance, make sure that you meet the following prerequisites:
 + You have access to [My Oracle Support](https://support.oracle.com/portal/) and [Oracle Software Delivery Cloud](https://edelivery.oracle.com/osdc/faces/Home.jspx) to download the supported list of installation files and patches for the Enterprise Edition of any of the following Oracle Database releases:
-  + Oracle Database 12c Release 1 \(12\.1\)
-  + Oracle Database 12c Release 2 \(12\.2\)
-  + Oracle Database 18c
   + Oracle Database 19c
+  + Oracle Database 18c
+  + Oracle Database 12c Release 2 \(12\.2\)
+  + Oracle Database 12c Release 1 \(12\.1\)
 
   If you use an unknown patch, custom engine version \(CEV\) creation fails\. In this case, contact the RDS Custom support team and ask it to add the missing patch\.
 
@@ -29,11 +29,11 @@ Before creating an RDS Custom for Oracle DB instance, make sure that you meet th
 
   For more information, see [Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)\.
 
-For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 6\. For general requirements that apply to RDS Custom, see [Requirements and limitations for Amazon RDS Custom for Oracle](custom-reqs-limits.md)\.
+For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 6\. For general requirements that apply to RDS Custom, see [Availability and requirements for Amazon RDS Custom for Oracle](custom-reqs-limits.md)\.
 
 ## Make sure that you have a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
 
-A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for Oracle DB instance, you supply the KMS key identifier\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
+A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for Oracle DB instance, you supply the KMS key identifier\. For more information, see [Configuring a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
 You have the following options:
 + If you have an existing KMS key in your AWS account, you can use it with RDS Custom\. No further action is necessary\.

@@ -4,12 +4,12 @@ You use AWS Directory Service for Microsoft Active Directory \(AWS Managed Micro
 
 **Topics**
 + [Step 1: Create a directory using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)
-+ [Step 2: \(Optional\) create a trust for an on\-premises Active Directory](#postgresql-kerberos-setting-up.create-trust)
++ [Step 2: \(Optional\) Create a trust relationship between your on\-premises Active Directory and AWS Directory Service](#postgresql-kerberos-setting-up.create-trust)
 + [Step 3: Create an IAM role for Amazon RDS to access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)
 + [Step 4: Create and configure users](#postgresql-kerberos-setting-up.create-users)
 + [Step 5: Enable cross\-VPC traffic between the directory and the DB instance](#postgresql-kerberos-setting-up.vpc-peering)
 + [Step 6: Create or modify a PostgreSQL DB instance](#postgresql-kerberos-setting-up.create-modify)
-+ [Step 7: Create Kerberos authentication PostgreSQL logins](#postgresql-kerberos-setting-up.create-logins)
++ [Step 7: Create PostgreSQL users for your Kerberos principals](#postgresql-kerberos-setting-up.create-logins)
 + [Step 8: Configure a PostgreSQL client](#postgresql-kerberos-setting-up.configure-client)
 
 ## Step 1: Create a directory using AWS Managed Microsoft AD<a name="postgresql-kerberos-setting-up.create-directory"></a>
@@ -70,7 +70,7 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 1. On the **Choose VPC and subnets** page, provide the following information:  
 **VPC**  
- Choose the VPC for the directory\. You can create the PostgreSQL DB instance in this same VPC or in a different VPC\.   
+Choose the VPC for the directory\. You can create the PostgreSQL DB instance in this same VPC or in a different VPC\.   
 **Subnets**  
  Choose the subnets for the directory servers\. The two subnets must be in different Availability Zones\. 
 
@@ -85,7 +85,7 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ![\[Image of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
-## Step 2: \(Optional\) create a trust for an on\-premises Active Directory<a name="postgresql-kerberos-setting-up.create-trust"></a>
+## Step 2: \(Optional\) Create a trust relationship between your on\-premises Active Directory and AWS Directory Service<a name="postgresql-kerberos-setting-up.create-trust"></a>
 
 If you don't plan to use your own on\-premises Microsoft Active Directory, skip to [Step 3: Create an IAM role for Amazon RDS to access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)\.
 
@@ -152,9 +152,9 @@ The role must also have the following IAM role policy\.
 
 ## Step 4: Create and configure users<a name="postgresql-kerberos-setting-up.create-users"></a>
 
- You can create users by using the Active Directory Users and Computers tool\. This is one of the Active Directory Domain Services and Active Directory Lightweight Directory Services tools\. In this case, *users* are individual people or entities who have access to your directory\.
+ You can create users by using the Active Directory Users and Computers tool\. This is one of the Active Directory Domain Services and Active Directory Lightweight Directory Services tools\. For more information, see [Add Users and Computers to the Active Directory domain](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/create-an-active-directory-server#add-users-and-computers-to-the-active-directory-domain) in the Microsoft documentation\. In this case, users are individuals or other entities, such as their computers that are part of the domain and whose identities are being maintained in the directory\. 
 
-To create users in an AWS Directory Service directory, you must be connected to a Windows\-based Amazon EC2 instance\. Also, this EC2 instance must be a member of the AWS Directory Service directory\. At the same time, you must be logged in as a user that has privileges to create users\. For more information, see [Create a user](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_create_user.html) in the *AWS Directory Service Administration Guide*\.
+To create users in an AWS Directory Service directory, you must be connected to a Windows\-based Amazon EC2 instance that's a member of the AWS Directory Service directory\. At the same time, you must be logged in as a user that has privileges to create users\. For more information, see [Create a user](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_create_user.html) in the *AWS Directory Service Administration Guide*\.
 
 ## Step 5: Enable cross\-VPC traffic between the directory and the DB instance<a name="postgresql-kerberos-setting-up.vpc-peering"></a>
 
@@ -213,20 +213,37 @@ aws rds modify-db-instance --db-instance-identifier mydbinstance --domain d-Dire
 **Important**  
 If you modify a DB instance to enable Kerberos authentication, reboot the DB instance after making the change\.
 
-## Step 7: Create Kerberos authentication PostgreSQL logins<a name="postgresql-kerberos-setting-up.create-logins"></a>
+## Step 7: Create PostgreSQL users for your Kerberos principals<a name="postgresql-kerberos-setting-up.create-logins"></a>
 
-Use the RDS master user credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision PostgreSQL logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard PostgreSQL permissions to these logins\. 
+At this point, your RDS for PostgreSQL DB instance is joined to the AWS Managed Microsoft AD domain\. The users that you created in the directory in [ Step 4: Create and configure users ](#postgresql-kerberos-setting-up.create-users) need to be set up as PostgreSQL database users and granted privileges to login to the database\. You do that by signing in as the database user with `rds_superuser` privileges\. For example, if you accepted the defaults when you created your RDS for PostgreSQL DB instance, you use `postgres`, as shown in the following steps\. 
 
-To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\. 
+**To create PostgreSQL database users for Kerberos principals**
 
-```
-CREATE USER "username@CORP.EXAMPLE.COM" WITH LOGIN; 
-GRANT rds_ad TO "username@CORP.EXAMPLE.COM";
-```
+1. Use `psql` to connect to your RDS for PostgreSQL DB instance endpoint using `psql`\. The following example uses the default `postgres` account for the `rds_superuser` role\.
 
- Replace `username ` with the user name and include the domain name in uppercase\. Users \(both humans and applications\) from your domain can now connect to the RDS PostgreSQL instance from a domain\-joined client machine using Kerberos authentication\. 
+   ```
+   psql --host=cluster-instance-1.111122223333.aws-region.rds.amazonaws.com --port=5432 --username=postgres --password
+   ```
 
-Note that a database user can use either Kerberos or IAM authentication but not both, so this user can't also have the `rds_iam` role\. This also applies to nested memberships\. For more information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
+1. Create a database user name for each Kerberos principal \(Active Directory username\) that you want to have access to the database\. Use the canonical username \(identity\) as defined in the Active Directory instance, that is, a lower\-case `alias` \(username in Active Directory\) and the upper\-case name of the Active Directory domain for that user name\. The Active Directory user name is an externally authenticated user, so use quotes around the name as shown following\.
+
+   ```
+   postgres=> CREATE USER "username@CORP.EXAMPLE.COM" WITH LOGIN;
+   CREATE ROLE
+   ```
+
+1. Grant the `rds_ad` role to the database user\.
+
+   ```
+   postgres=> GRANT rds_ad TO "username@CORP.EXAMPLE.COM";
+   GRANT ROLE
+   ```
+
+After you finish creating all the PostgreSQL users for your Active Directory user identities, users can access the RDS for PostgreSQL DB instance by using their Kerberos credentials\. 
+
+It's assumed that the database users who authenticate using Kerberos are doing so from client machines that are members of the Active Directory domain\.
+
+Database users that have been granted the `rds_ad` role can't also have the `rds_iam` role\. This also applies to nested memberships\. For more information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
 
 ## Step 8: Configure a PostgreSQL client<a name="postgresql-kerberos-setting-up.configure-client"></a>
 

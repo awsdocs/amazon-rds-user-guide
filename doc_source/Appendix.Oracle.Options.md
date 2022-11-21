@@ -6,6 +6,7 @@ In Amazon RDS, an option is an additional feature\. Following, you can find a de
 + [Overview of Oracle DB options](Appendix.Oracle.Options.overview.md)
 + [Amazon S3 integration](oracle-s3-integration.md)
 + [Oracle Application Express \(APEX\)](Appendix.Oracle.Options.APEX.md)
++ [Amazon EFS integration](oracle-efs-integration.md)
 + [Oracle Java virtual machine](oracle-options-java.md)
 + [Oracle Enterprise Manager](Oracle.Options.OEM.md)
 + [Oracle Label Security](Oracle.Options.OLS.md)

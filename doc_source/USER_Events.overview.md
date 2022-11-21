@@ -45,7 +45,9 @@ You can use AWS Lambda to process event notifications from a DB instance\. For m
 
 ## Delivery of RDS event notifications<a name="USER_Events.overview.subscriptions"></a>
 
-Amazon RDS sends notifications to the addresses that you provide when you create the subscription\. Event notifications might take up to five minutes to be delivered\. 
+Amazon RDS sends notifications to the addresses that you provide when you create the subscription\. The notification can include message attributes which provide structured metadata about the message\. For more information about message attributes, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\.
+
+Event notifications might take up to five minutes to be delivered\.
 
 **Important**  
 Amazon RDS doesn't guarantee the order of events sent in an event stream\. The event order is subject to change\.

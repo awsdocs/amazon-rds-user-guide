@@ -59,5 +59,5 @@ Using `pending-reboot` with dynamic parameters in the AWS CLI or RDS API on RDS 
 **Topics**
 + [Working with DB parameter groups](USER_WorkingWithDBInstanceParamGroups.md)
 + [Working with DB cluster parameter groups for Multi\-AZ DB clusters](USER_WorkingWithDBClusterParamGroups.md)
-+ [Comparing DB parameter groups](USER_WorkingWithParamGroups.Comparing.md)
++ [Comparing parameter groups](USER_WorkingWithParamGroups.Comparing.md)
 + [Specifying DB parameters](USER_ParamValuesRef.md)

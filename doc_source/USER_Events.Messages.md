@@ -1,14 +1,40 @@
 # Amazon RDS event categories and event messages<a name="USER_Events.Messages"></a>
 
-Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\. Each category applies to a source type\.
+Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\.
 
 **Topics**
++ [DB cluster events](#USER_Events.Messages.cluster)
 + [DB instance events](#USER_Events.Messages.instance)
 + [DB parameter group events](#USER_Events.Messages.parameter-group)
 + [DB security group events](#USER_Events.Messages.security-group)
 + [DB snapshot events](#USER_Events.Messages.snapshot)
++ [DB cluster snapshot events](#USER_Events.Messages.cluster-snapshot)
 + [RDS Proxy events](#USER_Events.Messages.rds-proxy)
 + [Custom engine version events](#USER_Events.Messages.CEV)
++ [Message attributes](#USER_Events.Messages.Attributes)
+
+## DB cluster events<a name="USER_Events.Messages.cluster"></a>
+
+The following table shows the event category and a list of events when a DB cluster is the source type\.
+
+For more information about Multi\-AZ DB cluster deployments, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)
+
+
+|  Category  | RDS event ID |  Description  | 
+| --- | --- | --- | 
+| creation | RDS\-EVENT\-0170 |  DB cluster created\.  | 
+|  failover  | RDS\-EVENT\-0069 |  A failover for the DB cluster has failed\.  | 
+|  failover  | RDS\-EVENT\-0070 |  A failover for the DB cluster has restarted\.  | 
+|  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 
+|  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
+|  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
+|  global failover  | RDS\-EVENT\-0181 |  The failover of the global database has started\. The process can be delayed because other operations are running on the DB cluster\.  | 
+|  global failover  | RDS\-EVENT\-0182 |  The old primary instance in the global database isn't accepting writes\. All volumes are synchronized\.  | 
+|  global failover  | RDS\-EVENT\-0183 |  A replication lag is occurring during the synchronization phase of the global database failover\.  | 
+|  global failover  | RDS\-EVENT\-0184 |  The volume topology of the global database is reestablished with the new primary volume\.  | 
+|  global failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
+|  global failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
+|  global failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
 
 ## DB instance events<a name="USER_Events.Messages.instance"></a>
 
@@ -161,6 +187,19 @@ The following table shows the event category and a list of events when a DB snap
 |  notification  | RDS\-EVENT\-0190 |  Canceled snapshot copy request of \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
 |  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot \[snapshot\_name\]\. A DB instance is being restored from a DB snapshot\.  | 
 
+## DB cluster snapshot events<a name="USER_Events.Messages.cluster-snapshot"></a>
+
+The following table shows the event category and a list of events when a DB cluster snapshot is the source type\.
+
+
+|  Category  | RDS event ID |  Description  | 
+| --- | --- | --- | 
+|  backup  | RDS\-EVENT\-0074 |  Creation of a manual DB cluster snapshot has started\.  | 
+|  backup  | RDS\-EVENT\-0075 |  A manual DB cluster snapshot has been created\.  | 
+| backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
+| backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
+| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
+
 ## RDS Proxy events<a name="USER_Events.Messages.rds-proxy"></a>
 
 The following table shows the event category and a list of events when an RDS Proxy is the source type\.
@@ -177,6 +216,7 @@ The following table shows the event category and a list of events when an RDS Pr
 |  creation  | RDS\-EVENT\-0206 |  RDS created the endpoint for the DB proxy \(RDS Proxy\)\.  | 
 | deletion | RDS\-EVENT\-0205 |  RDS deleted the DB proxy \(RDS Proxy\)\.  | 
 |  deletion  | RDS\-EVENT\-0208 |  RDS deleted the endpoint of DB proxy \(RDS Proxy\)\.  | 
+|  failure  | RDS\-EVENT\-0243 |  RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
 
 ## Custom engine version events<a name="USER_Events.Messages.CEV"></a>
 
@@ -186,3 +226,13 @@ The following table shows the event category and a list of events when a custom 
 |  Category  | Amazon RDS event ID |  Description  | 
 | --- | --- | --- | 
 |  failure  | RDS\-EVENT\-0198 |  Creation failed for custom engine version\. The message includes details about the failure, such as missing files\.  | 
+
+## Message attributes<a name="USER_Events.Messages.Attributes"></a>
+
+The following table shows the message attribute for RDS events\.
+
+
+| Amazon RDS event attribute |  Description  | 
+| --- | --- | 
+| Event ID |  Identifier for the RDS event message\. For example, RDS\-EVENT\-0006\.  | 
+| Resource |  The ARN identifier for the resource emitting the event\. For example, `arn:aws:rds:ap-southeast-2:123456789012:db:database-1`\.  | 

@@ -3,6 +3,7 @@
 Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS DB instances\. Following, you can find instructions for the supported RDS Custom for Oracle management tasks using the AWS Management Console and the AWS CLI\.
 
 **Topics**
++ [Working with container databases \(CDBs\) in RDS Custom for Oracle](#custom-managing.multitenant)
 + [Working with high availability features for RDS Custom for Oracle](#custom-managing.ha)
 + [Pausing and resuming RDS Custom automation](#custom-managing.pausing)
 + [Modifying the storage for an RDS Custom for Oracle DB instance](#custom-managing.storage-modify)
@@ -11,6 +12,26 @@ Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS
 + [Support for Transparent Data Encryption](#custom-managing.tde)
 + [Tagging RDS Custom for Oracle resources](#custom-managing.tagging)
 + [Deleting an RDS Custom for Oracle DB instance](#custom-managing.deleting)
+
+## Working with container databases \(CDBs\) in RDS Custom for Oracle<a name="custom-managing.multitenant"></a>
+
+You can either create your RDS Custom for Oracle DB instance with the Oracle Multitenant architecture \(`custom-oracle-ee-cdb` engine type\) or with the traditional non\-CDB architecture \(`custom-oracle-ee` engine type\)\. When you create a container database \(CDB\), it contains one pluggable database \(PDB\) and one PDB seed\. You can create additional PDBs manually using Oracle SQL\.
+
+In the RDS Custom for Oracle shared responsibility model, you are responsible for managing PDBs and creating any additional PDBs\. RDS Custom doesn't restrict the number of PDBs\. You can manually create, modify, and delete PDBs by connecting to the CDB root and running a SQL command\. Create PDBs on an Amazon EBS data volume to prevent the DB instance from going outside the support perimeter\.
+
+You can't rename existing PDBs using Amazon RDS APIs\. You also can't rename the CDB using the `modify-db-instance` command\.
+
+To modify your CDBs or PDBs, complete the following steps:
+
+1. Pause automation to prevent interference with RDS Custom actions\.
+
+1. Modify your CDB or PDBs\.
+
+1. Back up any modified PDBs\.
+
+1. Resume automation\.
+
+RDS Custom keeps the CDB root open in the same way as it keeps a non\-CDB open\. If the state of the CDB root changes, the monitoring and recovery automation attempts to recover the CDB root to the desired state\. You receive RDS event notifications when the root CDB is shut down \(`RDS-EVENT-0004`\) or restarted \(`RDS-EVENT-0006`\), similar to the non\-CDB architecture\. RDS Custom attempts to open all PDBs in `READ WRITE` mode at DB instance startup\. If some PDBs can't be opened, RDS Custom publishes the following event: `tenant database shutdown`\. 
 
 ## Working with high availability features for RDS Custom for Oracle<a name="custom-managing.ha"></a>
 
@@ -29,7 +50,7 @@ To learn how to configure high availability, see the whitepaper [Enabling high a
 
 ## Pausing and resuming RDS Custom automation<a name="custom-managing.pausing"></a>
 
-RDS Custom automatically provides monitoring and instance recovery for an RDS Custom for Oracle DB instance\. If you need to customize the instance, do the following:
+RDS Custom automatically provides monitoring and instance recovery for an RDS Custom for Oracle DB instance\. If you need to customize your DB instance, do the following:
 
 1. Pause RDS Custom automation for a specified period\. The pause ensures that your customizations don't interfere with RDS Custom automation\.
 
@@ -37,10 +58,11 @@ RDS Custom automatically provides monitoring and instance recovery for an RDS Cu
 
 1. Do either of the following:
    + Resume automation manually\.
-   + Wait for the pause period to end\. In this case, RDS Custom resumes monitoring and instance recovery automatically\.
-
 **Important**  
 Pausing and resuming automation are the only supported automation tasks when modifying an RDS Custom for Oracle DB instance\.
+   + Wait for the pause period to end\. In this case, RDS Custom resumes monitoring and instance recovery automatically\.
+
+In an on\-premises Oracle CDB, you can preserve a specified open mode for PDBs using a built\-in command or after a startup trigger\. This mechanism brings PDBs to a specified state when the CDB restarts\. When opening your CDB, RDS Custom automation always discards any user\-specified preserved states and attempts to open all PDBs\. If RDS Custom can't open all PDBs, the following event is issued: `The following PDBs failed to open: list-of-PDBs`\.
 
 ### Console<a name="custom-managing.pausing.console"></a>
 

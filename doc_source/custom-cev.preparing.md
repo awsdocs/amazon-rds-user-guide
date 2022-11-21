@@ -217,7 +217,7 @@ This section assumes the following:
 
 1. Start with either a blank JSON policy template or an existing policy that you can adapt\.
 
-   The following command retrieves an existing policy and saves it as *my\-policy\.json*\. iIn this example, the S3 bucket containing your installation files is named *oracle\-media\-bucket*\.
+   The following command retrieves an existing policy and saves it as *my\-policy\.json*\. In this example, the S3 bucket containing your installation files is named *oracle\-media\-bucket*\.
 
    ```
    aws s3api get-bucket-policy \ 
@@ -285,7 +285,11 @@ This section assumes the following:
 
 ## Preparing the CEV manifest<a name="custom-cev.preparing.manifest"></a>
 
-A CEV manifest is a JSON document that describes that installation \.zip files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they're listed in the manifest\.
+A CEV manifest is a JSON document that includes the following:
++ \(Required\) The list of installation \.zip files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they're listed in the manifest\.
++ \(Optional\) Installation parameters that set nondefault values for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\. Be aware that you can’t modify the installation parameters for an existing CEV or an existing DB instance\. You also can’t upgrade from one CEV to another CEV when the installation parameters have different settings\.
+
+For sample CEV manifests, see [CEV manifest examples](#custom-cev.preparing.manifest.examples)\.
 
 **Topics**
 + [JSON fields in the CEV manifest](#custom-cev.preparing.manifest.fields)
@@ -306,6 +310,7 @@ The following table describes the JSON fields in the manifest\.
 |  `opatchFileNames`  |  Ordered list of OPatch installers used for the Oracle DB engine\. Only one value is valid\. Values for `opatchFileNames` must start with `p6880880_`\.  | 
 |  `psuRuPatchFileNames`  |  The PSU and RU patches for this database\.  If you include `psuRuPatchFileNames`, `opatchFileNames` is required\. Values for `opatchFileNames` must start with `p6880880_`\.   | 
 |  `OtherPatchFileNames`  |  The patches that aren't in the list of PSU and RU patches\. RDS Custom applies these patches after applying the PSU and RU patches\.  If you include `OtherPatchFileNames`, `opatchFileNames` is required\. Values for `opatchFileNames` must start with `p6880880_`\.    | 
+|  `installationParameters`  |  Nondefault settings for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\. You can set the following parameters: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)  | 
 
 Each Oracle Database release has a different list of supported installation files\. When you create your CEV manifest, make sure to specify only files that are supported by RDS Custom for Oracle\. Otherwise, CEV creation fails with an error\. 
 
@@ -401,7 +406,7 @@ The following examples show CEV manifest files for different Oracle Database rel
 + [Sample CEV manifest for Oracle Database 19c](#oracle-cev-manifest-19c)
 
 **Example Sample CEV manifest for Oracle Database 12c Release 1 \(12\.1\)**  
-In the following example for the July 2021 PSU for Oracle Database 12c Release 1 \(12\.1\), RDS Custom applies the patches in the order specified\. Thus, RDS Custom applies p32768233, then p32876425, then p18759211, and so on\.  
+In the following example for the July 2021 PSU for Oracle Database 12c Release 1 \(12\.1\), RDS Custom applies the patches in the order specified\. Thus, RDS Custom applies p32768233, then p32876425, then p18759211, and so on\. The example sets new values for the UNIX user and group, and the Oracle home and Oracle base\.  
 
 ```
 {
@@ -443,12 +448,18 @@ In the following example for the July 2021 PSU for Oracle Database 12c Release 1
         "p25031502_12102210720_Linux-x86-64.zip",
         "p23711335_12102191015_Generic.zip",
         "p19504946_121020_Linux-x86-64.zip"
-    ]
+    ],
+    "installationParameters": {
+        "unixGroupName": "dba",
+        "unixUname": "oracle",
+        "oracleHome": "/home/oracle/oracle.12.1.0.2",
+        "oracleBase": "/home/oracle"
+    }
 }
 ```
 
 **Example Sample CEV manifest for Oracle Database 12c Release 2 \(12\.2\)**  
-In following example for the October 2021 PSU for Oracle Database 12c Release 2 \(12\.2\), RDS Custom applies p33261817, then p33192662, then p29213893, and so on\.  
+In following example for the October 2021 PSU for Oracle Database 12c Release 2 \(12\.2\), RDS Custom applies p33261817, then p33192662, then p29213893, and so on\. The example sets new values for the UNIX user and group, and the Oracle home and Oracle base\.  
 
 ```
 {
@@ -478,12 +489,18 @@ In following example for the October 2021 PSU for Oracle Database 12c Release 2 
         "p31335037_122010_Linux-x86-64.zip",
         "p32327201_122010_Linux-x86-64.zip",
         "p32327208_122010_Generic.zip"
-    ]
+    ],
+    "installationParameters": {
+        "unixGroupName": "dba",
+        "unixUname": "oracle",
+        "oracleHome": "/home/oracle/oracle.12.2.0.1",
+        "oracleBase": "/home/oracle"
+    }
 }
 ```
 
 **Example Sample CEV manifest for Oracle Database 18c**  
-In following example for the October 2021 PSU for Oracle Database 18c, RDS Custom applies p32126855, then p28730253, then p27539475, and so on\.  
+In following example for the October 2021 PSU for Oracle Database 18c, RDS Custom applies p32126855, then p28730253, then p27539475, and so on\. The example sets new values for the UNIX user and group, and the Oracle home and Oracle base\.  
 
 ```
 {
@@ -509,11 +526,17 @@ In following example for the October 2021 PSU for Oracle Database 18c, RDS Custo
         "p31335037_180000_Linux-x86-64.zip",
         "p31335142_180000_Generic.zip"
     ]
+    "installationParameters": {
+        "unixGroupName": "dba",
+        "unixUname": "oracle",
+        "oracleHome": "/home/oracle/18.0.0.0.ru-2020-10.rur-2020-10.r1",
+        "oracleBase": "/home/oracle/"
+    }
 }
 ```
 
 **Example Sample CEV manifest for Oracle Database 19c**  
-In the following example for Oracle Database 19c, RDS Custom applies p32126828, then p29213893, then p29782284, and so on\.  
+In the following example for Oracle Database 19c, RDS Custom applies p32126828, then p29213893, then p29782284, and so on\. The example sets new values for the UNIX user and group, and the Oracle home and Oracle base\.  
 
 ```
 {
@@ -536,7 +559,13 @@ In the following example for Oracle Database 19c, RDS Custom applies p32126828, 
         "p29997937_190000_Linux-x86-64.zip",
         "p31335037_190000_Linux-x86-64.zip",
         "p31335142_190000_Generic.zip"
-    ]
+    ],
+    "installationParameters": {
+        "unixGroupName": "dba",
+        "unixUname": "oracle",
+        "oracleHome": "/home/oracle/oracle.19.0.0.0.ru-2020-04.rur-2020-04.r1.EE.1",
+        "oracleBase": "/home/oracle"
+    }
 }
 ```
 

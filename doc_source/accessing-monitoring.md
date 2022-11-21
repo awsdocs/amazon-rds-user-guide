@@ -8,10 +8,12 @@ Using the Amazon RDS console, you can quickly access the status of your DB insta
 
 ## Viewing Amazon RDS DB instance status<a name="Overview.DBInstance.Status"></a>
 
-The status of a DB instance indicates the health of the DB instance\. You can view the status of a DB instance by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
+The status of a DB instance indicates the health of the DB instance\. You can use the following procedures to view the DB instance status in the Amazon RDS console, the AWS CLI command, or the API operation\.
 
 **Note**  
 Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information about maintenance status, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+
+### Console<a name="DBinstance.Status.Console"></a>
 
 **To view the status of a DB instance**
 
@@ -56,6 +58,31 @@ Find the possible status values for DB instances in the following table\. This t
 |  **Storage\-full**  | Billed |  The DB instance has reached its storage capacity allocation\. This is a critical status, and we recommend that you fix this issue immediately\. To do so, scale up your storage by modifying the DB instance\. To avoid this situation, set Amazon CloudWatch alarms to warn you when storage space is getting low\.   | 
 |  **Storage\-optimization**  | Billed |  Amazon RDS is optimizing the storage of your DB instance\. The DB instance is fully operational\. The storage optimization process is usually short, but can sometimes take up to and even beyond 24 hours\.  | 
 |  **Upgrading**  | Billed |  The database engine version is being upgraded\.   | 
+
+### CLI<a name="DBinstance.Status.Cli"></a>
+
+To view DB instance and its status information by using the AWS CLI, use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command\. For example, the following AWS CLI command lists all the DB instances information \.
+
+```
+aws rds describe-db-instances
+```
+
+To view a specific DB instance and its status, call the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command with the following option:
++ `DBInstanceIdentifier` – The name of the DB instance\. 
+
+```
+aws rds describe-db-instances --db-instance-identifier mydbinstance
+```
+
+To view just the status of all the DB instances, use the following query in AWS CLI\.
+
+```
+aws rds describe-db-instances --query 'DBInstances[*].[DBInstanceIdentifier,DBInstanceStatus]' --output table
+```
+
+### API<a name="DBinstance.Status.Api"></a>
+
+To view the status of the DB instance using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\.
 
 ## Viewing Amazon RDS recommendations<a name="USER_Recommendations"></a>
 

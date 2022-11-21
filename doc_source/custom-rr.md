@@ -1,6 +1,6 @@
 # Working with Oracle replicas for RDS Custom for Oracle<a name="custom-rr"></a>
 
-You can create Oracle replicas for RDS Custom for Oracle DB instances\. Creating a Oracle replica is similar to the process in Amazon RDS, but with important differences\. For general information about creating and managing Oracle replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
+You can create Oracle replicas for RDS Custom for Oracle DB instances\. Both container databases \(CDBs\) and non\-CDBs are supported\. Creating an Oracle replica is similar to the process in Amazon RDS, but with important differences\. For general information about creating and managing Oracle replicas, see [Working with read replicas](USER_ReadRepl.md) and [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
 
 **Topics**
 + [Overview of RDS Custom for Oracle replication](#custom-rr.overview)
@@ -34,6 +34,7 @@ When you create RDS Custom for Oracle replicas, not all RDS Oracle replica optio
 ### General requirements and limitations<a name="custom-rr.limitations"></a>
 
 RDS Custom for Oracle replicas have the following limitations:
++ We recommend that you create Oracle replicas only for RDS Custom for Oracle DB instances created after November 18, 2022\. If you need to create Oracle replicas for pre\-existing RDS Custom for Oracle DB instances, see [Troubleshooting replica creation for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting-create-replica)\.
 + You can create RDS Custom for Oracle replicas in mounted mode only\. However, you can manually change the mode of mounted replicas to read\-only, and from read\-only to mounted\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
 + Cross\-Region Oracle replicas aren't supported\.
 + Make sure not to modify the `RDS_DATAGUARD` user\. This user is reserved for RDS Custom for Oracle automation\. Modifying this user can result in undesired outcomes, such as an inability to create Oracle replicas for your RDS Custom for Oracle DB instance\.
@@ -46,6 +47,7 @@ RDS Custom for Oracle replicas have the following limitations:
   do-not-delete-rds-custom-db-DB_resource_id-6-digit_UUID-dg
   ```
 + While creating a Oracle replica, RDS Custom temporarily pauses the cleanup of redo log files\. In this way, RDS Custom ensures that it can apply these logs to the new Oracle replica after it becomes available\.
++ If your RDS Custom DB instance is a CDB, we recommend that you don't specify the clause `STANDBYS=NONE` in a `CREATE PLUGGABLE DATABASE` command\. The goal is to ensure that your standby CDB contains all PDBs if a failover occurs\.
 
 ### Networking requirements and limitations<a name="custom-rr.network"></a>
 

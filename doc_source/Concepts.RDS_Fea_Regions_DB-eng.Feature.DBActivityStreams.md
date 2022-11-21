@@ -41,7 +41,9 @@ For more information on additional requirements for database activity streams wi
 | Europe \(London\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Europe \(Milan\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Europe \(Paris\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 

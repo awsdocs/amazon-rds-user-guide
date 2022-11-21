@@ -34,25 +34,31 @@ For RDS Custom, you supply your own media\. When you create a custom engine vers
 
 ## Custom engine version<a name="custom-concept.workflow.cev"></a>
 
-An RDS Custom custom engine version \(CEV\) is a binary volume snapshot of a database version and AMI\. You store your database installation files in Amazon S3\. When you create your CEV, you specify the files in a JSON document called a CEV manifest\.
+An RDS Custom custom engine version \(CEV\) is a binary volume snapshot of a database version and AMI\. You store your database installation files in Amazon S3\. When you create your CEV, you specify the files in a JSON document called a CEV manifest\. You can also specify installation parameters that set nondefault values for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\.
 
 Name your CEV using a customer\-specified string\. The name format is the following, depending on your Oracle Database release:
-+ `12.1.customized_string`
-+ `12.2.customized_string`
-+ `18.customized_string`
 + `19.customized_string`
++ `18.customized_string`
++ `12.2.customized_string`
++ `12.1.customized_string`
 
-You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might name your CEV `19.my_cev1`\. To learn how to create a CEV, see [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)\.
+You can use 1–50 alphanumeric characters, underscores, dashes, and periods\. For example, you might name your CEV `19.my_cev1`\. When you create a CEV, you can specify the Oracle Multitenant option\. You can create container databases \(CDBs\) only when the CEV was created with the Oracle Multitenant option\. For more information, see [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)\.
 
 ## Creating a DB instance for RDS Custom for Oracle<a name="custom-concept.workflow.instance"></a>
 
-After you create the CEV, it's available for use\. You can create multiple CEVs, and you can create multiple RDS Custom for Oracle instances from any CEV\. You can also change the status of a CEV to make it available or inactive\.
+After you create your CEV, it's available for use\. You can create multiple CEVs, and you can create multiple RDS Custom for Oracle DB instances from any CEV\. You can also change the status of a CEV to make it available or inactive\.
 
-To create your RDS Custom for Oracle DB instance, use the `create-db-instance` command\. In this command, specify which CEV to use\. The procedure is similar to creating an Amazon RDS instance\. However, some of the parameters are different\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
+You can either create your RDS Custom for Oracle DB instance with the Oracle Multitenant architecture \(`custom-oracle-ee-cdb` engine type\) or with the traditional non\-CDB architecture \(`custom-oracle-ee` engine type\)\. When you create a container database \(CDB\), it contains one pluggable database \(PDB\) and one PDB seed\. You can create additional PDBs manually using Oracle SQL\.
+
+To create your RDS Custom for Oracle DB instance, use the `create-db-instance` command\. In this command, specify which CEV to use\. The procedure is similar to creating an Amazon RDS DB instance\. However, some parameters are different\. For more information, see [Configuring a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
 ## Database connection<a name="custom-concept.workflow.db-connection"></a>
 
-Like an Amazon RDS DB instance, your RDS Custom DB instance resides in a VPC\. Your application connects to the RDS Custom instance using an Oracle Listener, just as with RDS for Oracle\.
+Like an Amazon RDS DB instance, an RDS Custom DB instance resides in a virtual private cloud \(VPC\)\. Your application connects to the Oracle database using an Oracle listener\.
+
+If your database is a CDB, you can use the listener `L_RDSCDB_001` to connect to the CDB root and to a PDB\. If you plug a non\-CDB into a CDB, make sure to set `USE_SID_AS_SERVICE_LISTENER = ON` so that migrated applications keep the same settings\.
+
+When you connect to a non\-CDB, the master user is the user for the non\-CDB\. When you connect to a CDB, the master user is the user for the PDB\. To connect to the CDB root, log in to the host, start a SQL client, and create an administrative user with SQL commands\. 
 
 ## RDS Custom customization<a name="custom-concept.workflow.db-customization"></a>
 

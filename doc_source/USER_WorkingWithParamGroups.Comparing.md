@@ -1,6 +1,6 @@
-# Comparing DB parameter groups<a name="USER_WorkingWithParamGroups.Comparing"></a>
+# Comparing parameter groups<a name="USER_WorkingWithParamGroups.Comparing"></a>
 
-You can use the AWS Management Console to view the differences between two parameter groups for the same DB engine and version\.
+You can use the AWS Management Console to view the differences between two parameter groups\.
 
 **To compare two parameter groups**
 
@@ -12,5 +12,5 @@ You can use the AWS Management Console to view the differences between two param
 
 1. For **Parameter group actions**, choose **Compare**\.
 **Note**  
-The specified parameter groups must be for the same DB engine and version\. If they aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.7 and a MySQL 8\.0 parameter group because the DB engine version is different\.   
-In addition, they both must be DB parameter groups, or they both must be DB cluster parameter groups\. For example, you can't compare an Aurora MySQL 8\.0 DB parameter group and an Aurora MySQL 8\.0 DB cluster parameter group\. This is true even though the DB engine and version are the same\.
+The specified parameter groups must both be DB parameter groups, or they both must be DB cluster parameter groups\. This is true even when the DB engine and version are the same\. For example, you can't compare an Aurora MySQL 8\.0 DB parameter group and an Aurora MySQL 8\.0 DB cluster parameter group\.  
+You can compare Aurora MySQL and RDS for MySQL DB parameter groups, even for different versions, but you can't compare Aurora PostgreSQL and RDS for PostgreSQL DB parameter groups\.

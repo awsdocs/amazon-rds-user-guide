@@ -15,7 +15,9 @@ Restore DB snapshots using either the AWS Management Console or the AWS CLI\.
 
 ## Creating an RDS Custom for Oracle snapshot<a name="custom-backup.creating"></a>
 
-RDS Custom for Oracle creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. When you create an RDS Custom for Oracle snapshot, specify which RDS Custom DB instance to back up\. Give your snapshot a name so you can restore from it later\.
+RDS Custom for Oracle creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. When your DB instance contains a container database \(CDB\), the snapshot of the instance includes the root CDB and all PDBs\.
+
+When you create an RDS Custom for Oracle snapshot, specify which RDS Custom DB instance to back up\. Give your snapshot a name so you can restore from it later\.
 
 When you create a snapshot, RDS Custom for Oracle creates an Amazon EBS snapshot for every volume attached to the DB instance\. RDS Custom for Oracle uses the EBS snapshot of the root volume to register a new Amazon Machine Image \(AMI\)\. To make snapshots easy to associate with a specific DB instance, they're tagged with `DBSnapshotIdentifier`, `DbiResourceId`, and `VolumeType`\.
 
@@ -146,6 +148,7 @@ In RDS Custom for Oracle, PITR differs in the following important ways from PITR
 
   To illustrate, assume that your LRT is 10 minutes ago\. You pause automation\. During the pause, RDS Custom doesn't upload archived redo logs\. If your DB instance crashes, you can only recover to a time before the LRT that existed when you paused\. When you resume automation, RDS Custom resumes uploading logs\. The LRT advances\. Normal PITR rules apply\. 
 + In RDS Custom, you can manually specify an arbitrary number of hours to retain archived redo logs before RDS Custom deletes them after upload\. In RDS Custom, specify the number of hours manually in the following file: `/opt/aws/rdscustomagent/config/redo_logs_custom_configuration.json`\. The format is `{"archivedLogRetentionHours" : "num_of_hours"}`\. The number must be an integer in the range 1–840\.
++ Assume that you plug a non\-CDB into a container database \(CDB\) as a PDB and then attempt PITR\. The operation succeeds only if you previously backed up the PDB\. After you create or modify a PDB, we recommend that you always back it up\.
 + We recommend that you don't customize database initialization parameters\. For example, modifying the following parameters affects PITR:
   + `CONTROL_FILE_RECORD_KEEP_TIME` affects the rules for uploading and deleting logs\.
   + `LOG_ARCHIVE_DEST_n` doesn't support multiple destinations\.
@@ -201,26 +204,26 @@ Use one of the following options to specify the backup to restore from:
 
 The `custom-iam-instance-profile` option is required\.
 
-The following command restores `my-custom-instance` to a new DB instance named `my-restored-custom-instance`, as of the specified time\.
+The following example restores `my-custom-db-instance` to a new DB instance named `my-restored-custom-db-instance`, as of the specified time\.
 
 **Example**  
 For Linux, macOS, or Unix:  
 
 ```
 1. aws rds restore-db-instance-to-point-in-time \
-2.     --source-db-instance-identifier my-custom-instance\
-3.     --target-db-instance-identifier my-restored-custom-instance \
+2.     --source-db-instance-identifier my-custom-db-instance\
+3.     --target-db-instance-identifier my-restored-custom-db-instance \
 4.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance \
-5.     --restore-time 2021-07-14T23:45:00.000Z
+5.     --restore-time 2022-10-14T23:45:00.000Z
 ```
 For Windows:  
 
 ```
 1. aws rds restore-db-instance-to-point-in-time ^
-2.     --source-db-instance-identifier my-custom-instance ^
-3.     --target-db-instance-identifier my-restored-custom-instance ^
+2.     --source-db-instance-identifier my-custom-db-instance ^
+3.     --target-db-instance-identifier my-restored-custom-db-instance ^
 4.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance ^
-5.     --restore-time 2021-07-14T23:45:00.000Z
+5.     --restore-time 2022-10-14T23:45:00.000Z
 ```
 
 ## Deleting an RDS Custom for Oracle snapshot<a name="custom-backup.deleting"></a>

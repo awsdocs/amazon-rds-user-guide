@@ -1,23 +1,47 @@
-# Creating and connecting to a DB instance for Amazon RDS Custom for Oracle<a name="custom-creating"></a>
+# Configuring a DB instance for Amazon RDS Custom for Oracle<a name="custom-creating"></a>
 
 You can create an RDS Custom DB instance, and then connect to it using Secure Shell \(SSH\) or AWS Systems Manager\.
 
-**Important**  
-Before you can create or connect to an RDS Custom DB instance, make sure to complete the tasks in [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)\.  
-You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom for Oracle resources](custom-managing.md#custom-managing.tagging)\.  
-The first time that you create an RDS Custom for Oracle DB instance, you might receive the following error: The service\-linked role is in the process of being created\. Try again later\. If you do, wait a few minutes and then try again to create the DB instance\.
-
 **Topics**
++ [Overview of Amazon RDS Custom for Oracle architecture](#custom-creating.overview)
 + [Creating an RDS Custom for Oracle DB instance](#custom-creating.create)
 + [RDS Custom service\-linked role](#custom-creating.slr)
 + [Connecting to your RDS Custom DB instance using SSH](#custom-creating.ssh)
 + [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)
 
+## Overview of Amazon RDS Custom for Oracle architecture<a name="custom-creating.overview"></a>
+
+If you create an Amazon RDS Custom for Oracle DB instance with the Oracle Multitenant architecture \(`custom-oracle-ee-cdb` engine type\), your database is a container database \(CDB\)\. If you don't specify the Oracle Multitenant architecture, your database is a traditional non\-CDB that uses the `custom-oracle-ee` engine type\. A non\-CDB can't contain pluggable databases \(PDBs\)\.
+
+An RDS Custom for Oracle CDB supports the following features:
++ Backups
++ Restoring and point\-time\-restore \(PITR\) from backups
++ Read replicas
++ Minor version upgrades
+
+When you create a CDB instance using the Oracle Multitenant architecture, your CDB includes the following:
++ CDB root \(`CDB$ROOT`\)
++ PDB seed \(`PDB$SEED`\)
++ PDB
+
+By default, your CDB is named `RDSCDB`, which is also the name of the Oracle System ID \(Oracle SID\), and your PDB is named `ORCL`\. You can choose a different name for your PDB, but the Oracle SID and the PDB name can’t be the same\.
+
+If you want additional PDBs, create them manually using Oracle SQL\. RDS Custom for Oracle doesn't restrict the number of PDBs that you can create using Oracle SQL\. RDS Custom for Oracle doesn't supply APIs for PDBs\. In general, you are responsible for creating and managing PDBs, as in an on\-premises deployment\.
+
+**Note**  
+If you create a PDB, we recommend that you take a manual snapshot afterward in case you need to perform point\-in\-time recovery \(PITR\)\.
+
+You can't rename existing PDBs using Amazon RDS APIs\. You also can't rename the CDB using the `modify-db-instance` command\.
+
+The open mode for the CDB root is `READ WRITE` on the primary and `MOUNTED` on a mounted standby database\. RDS Custom for Oracle attempts to open all PDBs when opening the CDB\. If RDS Custom for Oracle can’t open all PDBs, it issues the event `tenant database shutdown`\.
+
 ## Creating an RDS Custom for Oracle DB instance<a name="custom-creating.create"></a>
 
-Create an Amazon RDS Custom for Oracle DB instance using either the AWS Management Console or the AWS CLI\. The procedure is similar to the procedure for creating an Amazon RDS DB instance\.
+Create an Amazon RDS Custom for Oracle DB instance using either the AWS Management Console or the AWS CLI\. The procedure is similar to the procedure for creating an Amazon RDS DB instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+If you included installation parameters in your CEV manifest, then your DB instance uses the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group that you specified\. The `oratab` file, which is created by Oracle Database during installation, points to the real installation location rather than to a symbolic link\. When RDS Custom runs commands, it runs as the configured OS user rather than the default user `rdsdb`\. For more information, see [Preparing the CEV manifest](custom-cev.preparing.md#custom-cev.preparing.manifest)\.
+
+Before you attempt to create or connect to an RDS Custom DB instance, complete the tasks in [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)\.
 
 ### Console<a name="custom-creating.console"></a>
 
@@ -37,7 +61,11 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
 1. For **Edition**, choose **Oracle Enterprise Edition**\.
 
-1. For **Database version**, choose the RDS Custom custom engine version \(CEV\) that you previously created\. The CEV has the following format: `major-engine-version.customized_string`\. An example identifier is `19.my_cev1`\.
+1. For **Architecture settings**, choose **Multitenant architecture** if you want your database to be a CDB\. At creation, your CDB contains one PDB and one PDB seed\. If you don't choose **Multitenant architecture**, your database is a non\-CDB, which means it can't contain PDBs\.
+
+1. For **Database version**, choose the RDS Custom custom engine version \(CEV\) that you previously created\. The CEV has the following format: `major-engine-version.customized_string`\. An example identifier is `19.cdb_cev1`\.
+
+   If you chose **Multitenant architecture** in the previous step, you can only specify a Multitenant CEV\. The console filters out CEVs that were created as non\-CDBs\.
 
 1. In **Templates**, choose **Production**\.
 
@@ -49,9 +77,9 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
    1. Clear the **Auto generate a password** check box\.
 
-   1. Change the **Master username** value and enter the same password in **Master password** and **Confirm password**\.
+   1. Change the **Master username** value and enter the same password in **Master password** and **Confirm password**\. By default, the new RDS Custom DB instance uses an automatically generated password for the master user\.
 
-   By default, the new RDS Custom DB instance uses an automatically generated password for the master user\.
+   When you connect to a non\-CDB, the master user is the user for the non\-CDB\. When you connect to a CDB, the master user is the user for the PDB\. To connect to the CDB root, log in to the host, start a SQL client, and create an administrative user with SQL commands\. 
 
 1. In **DB instance size**, choose a **DB instance class**\.
 
@@ -69,9 +97,13 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
       An AWS KMS key is required for RDS Custom\. For more information, see [Make sure that you have a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
 
-1. \(Optional\) In **Additional configuration**, enter an **Initial database name** if you want\.
+1. \(Optional\) Choose **Add new tag** to apply an identifier to this DB instance\.
+**Important**  
+You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom for Oracle resources](custom-managing.md#custom-managing.tagging)\.
 
-   The default database name is `ORCL`\.
+1. For **Initial database name**, enter a name or leave the default value `ORCL`\. In Oracle Multitenant, the initial database name is the PDB name\.
+
+   The **System ID \(SID\)** value of `RDSCDB` is the name of the Oracle database instance that manages your database files\. In this context, the term "Oracle database instance" refers exclusively to the system global area \(SGA\) and Oracle background processes\. The Oracle SID is also the name of your CDB\. You can't change this value\.
 
 1. For the remaining sections, specify your preferred RDS Custom DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. The following settings don't appear in the console and aren't supported:
    + **Processor features**
@@ -86,7 +118,9 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
    **Backup retention period** is supported, but you can't choose **0 days**\.
 
-1. Choose **Create database**\. 
+1. Choose **Create database**\.
+**Important**  
+When you create an RDS Custom for Oracle DB instance, you might receive the following error: The service\-linked role is in the process of being created\. Try again later\. If you do, wait a few minutes and then try again to create the DB instance\.
 
    The **View credential details** button appears on the **Databases** page\.
 
@@ -112,54 +146,56 @@ You create an RDS Custom DB instance by using the [create\-db\-instance](https:/
 The following options are required:
 + `--db-instance-identifier`
 + `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\)
-+ `--engine custom-oracle-ee`
++ `--engine engine_type` \(where *`engine-type`* is `custom-oracle-ee-cdb` for a CDB and `custom-oracle-ee` for a non\-CDB\)
 + `--engine-version cev` \(where *`cev`* is the name of the custom engine version that you specified in [Creating a CEV](custom-cev.create.md)\)
 + `--kms-key-id`
 + `--no-auto-minor-version-upgrade`
 + `--custom-iam-instance-profile`
 
-The following example creates an RDS Custom DB instance named `my-custom-instance`\. The backup retention period is three days\.
+The following example creates an RDS Custom DB instance named `my-cdb-instance`\. The database is a CDB\. The PDB name is *my\-pdb*\. The backup retention period is three days\.
 
 **Example**  
 For Linux, macOS, or Unix:  
 
 ```
- 1. aws create-db-instance \
- 2.     --engine custom-oracle-ee \
- 3.     --db-instance-identifier my-custom-instance \
- 4.     --engine-version 19.my_cev1 \
- 5.     --allocated-storage 250 \
- 6.     --db-instance-class db.m5.xlarge \
- 7.     --db-subnet-group mydbsubnetgroup \
- 8.     --master-username myawsuser \
- 9.     --master-user-password mypassword \
-10.     --backup-retention-period 3 \
-11.     --no-multi-az \
-12.     --port 8200 \
-13.     --license-model bring-your-own-license \
-14.     --kms-key-id my-kms-key \
-15.     --no-auto-minor-version-upgrade \
-16.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+ 1. aws rds create-db-instance \
+ 2.     --engine custom-oracle-ee-cdb \
+ 3.     --db-instance-identifier my-cdb-instance \
+ 4.     --engine-version 19.cdb_cev1 \
+ 5.     --db-name my-pdb \
+ 6.     --allocated-storage 250 \
+ 7.     --db-instance-class db.m5.xlarge \
+ 8.     --db-subnet-group mydbsubnetgroup \
+ 9.     --master-username myawsuser \
+10.     --master-user-password mypassword \
+11.     --backup-retention-period 3 \
+12.     --no-multi-az \
+13.     --port 8200 \
+14.     --license-model bring-your-own-license \
+15.     --kms-key-id my-kms-key \
+16.     --no-auto-minor-version-upgrade \
+17.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
 ```
 For Windows:  
 
 ```
  1. aws rds create-db-instance ^
- 2.     --engine custom-oracle-ee ^
- 3.     --db-instance-identifier my-custom-instance ^
- 4.     --engine-version 19.my_cev1 ^
- 5.     --allocated-storage 250 ^
- 6.     --db-instance-class db.m5.xlarge ^
- 7.     --db-subnet-group mydbsubnetgroup ^
- 8.     --master-username myawsuser ^
- 9.     --master-user-password mypassword ^
-10.     --backup-retention-period 3 ^
-11.     --no-multi-az ^
-12.     --port 8200 ^
-13.     --license-model bring-your-own-license ^
-14.     --kms-key-id my-kms-key ^
-15.     --no-auto-minor-version-upgrade ^
-16.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+ 2.     --engine custom-oracle-ee-cdb ^
+ 3.     --db-instance-identifier my-cdb-instance ^
+ 4.     --engine-version 19.cdb_cev1 ^
+ 5.     --db-name my-pdb ^
+ 6.     --allocated-storage 250 ^
+ 7.     --db-instance-class db.m5.xlarge ^
+ 8.     --db-subnet-group mydbsubnetgroup ^
+ 9.     --master-username myawsuser ^
+10.     --master-user-password mypassword ^
+11.     --backup-retention-period 3 ^
+12.     --no-multi-az ^
+13.     --port 8200 ^
+14.     --license-model bring-your-own-license ^
+15.     --kms-key-id my-kms-key ^
+16.     --no-auto-minor-version-upgrade ^
+17.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
 ```
 
 Get details about your instance by using the `describe-db-instances` command\.
@@ -167,7 +203,7 @@ Get details about your instance by using the `describe-db-instances` command\.
 **Example**  
 
 ```
-1. aws rds describe-db-instances --db-instance-identifier my-custom-instance
+1. aws rds describe-db-instances --db-instance-identifier my-cdb-instance
 ```
 The following partial output shows the engine, parameter groups, and other information\.  
 
@@ -176,17 +212,17 @@ The following partial output shows the engine, parameter groups, and other infor
  2.     "DBInstances": [
  3.         {
  4.             "PendingModifiedValues": {},
- 5.             "Engine": "custom-oracle-ee",
+ 5.             "Engine": "custom-oracle-ee-cdb",
  6.             "MultiAZ": false,
  7.             "DBSecurityGroups": [],
  8.             "DBParameterGroups": [
  9.                 {
-10.                     "DBParameterGroupName": "default.custom-oracle-ee-19",
+10.                     "DBParameterGroupName": "default.custom-oracle-ee-cdb-19",
 11.                     "ParameterApplyStatus": "in-sync"
 12.                 }
 13.             ],
 14.             "AutomationMode": "full",
-15.             "DBInstanceIdentifier": "my-custom-instance",
+15.             "DBInstanceIdentifier": "my-cdb-instance",
 16.             ...
 17.             "TagList": [
 18.                 {

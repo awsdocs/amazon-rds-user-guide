@@ -39,7 +39,9 @@ Following are the supported engines and Region availability for Multi\-AZ DB clu
 | Europe \(London\) | Version 8\.0\.28 and higher | 
 | Europe \(Milan\) | Version 8\.0\.28 and higher | 
 | Europe \(Paris\) | Version 8\.0\.28 and higher | 
+| Europe \(Spain\) | – | 
 | Europe \(Stockholm\) | Version 8\.0\.28 and higher | 
+| Europe \(Zurich\) | – | 
 | Middle East \(Bahrain\) | Version 8\.0\.28 and higher | 
 | Middle East \(UAE\) | – | 
 | South America \(São Paulo\) | Version 8\.0\.28 and higher | 
@@ -75,35 +77,37 @@ You can change the DB instance class to show the supported engine versions for i
 Following are the supported engine version and Region availability for Multi\-AZ DB clusters with RDS for PostgreSQL\.
 
 
-| Region | RDS for PostgreSQL 13 | 
-| --- | --- | 
-| US East \(Ohio\) | Version 13\.4 and version 13\.7 | 
-| US East \(N\. Virginia\) | Version 13\.4 and version 13\.7 | 
-| US West \(N\. California\) | – | 
-| US West \(Oregon\) | Version 13\.4 and version 13\.7 | 
-| Africa \(Cape Town\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Hong Kong\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Jakarta\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Mumbai\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Osaka\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Seoul\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Singapore\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Sydney\) | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Tokyo\) | Version 13\.4 and version 13\.7 | 
-| Canada \(Central\) | Version 13\.4 and version 13\.7 | 
-| China \(Beijing\) | – | 
-| China \(Ningxia\) | – | 
-| Europe \(Frankfurt\) | Version 13\.4 and version 13\.7 | 
-| Europe \(Ireland\) | Version 13\.4 and version 13\.7 | 
-| Europe \(London\) | Version 13\.4 and version 13\.7 | 
-| Europe \(Milan\) | Version 13\.4 and version 13\.7 | 
-| Europe \(Paris\) | Version 13\.4 and version 13\.7 | 
-| Europe \(Stockholm\) | Version 13\.4 and version 13\.7 | 
-| Middle East \(Bahrain\) | Version 13\.4 and version 13\.7 | 
-| Middle East \(UAE\) | – | 
-| South America \(São Paulo\) | Version 13\.4 and version 13\.7 | 
-| AWS GovCloud \(US\-East\) | – | 
-| AWS GovCloud \(US\-West\) | – | 
+| Region | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | 
+| --- | --- | --- | 
+| US East \(Ohio\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| US East \(N\. Virginia\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| US West \(N\. California\) | – | – | 
+| US West \(Oregon\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Africa \(Cape Town\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Hong Kong\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Jakarta\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Mumbai\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Osaka\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Seoul\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Singapore\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Sydney\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Tokyo\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Canada \(Central\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| China \(Beijing\) | – | – | 
+| China \(Ningxia\) | – | – | 
+| Europe \(Frankfurt\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Ireland\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(London\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Milan\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Paris\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Spain\) | – | – | 
+| Europe \(Stockholm\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Zurich\) | – | – | 
+| Middle East \(Bahrain\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Middle East \(UAE\) | – | – | 
+| South America \(São Paulo\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| AWS GovCloud \(US\-East\) | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | 
 
 You can also list the supported versions in a Region for the db\.r5d\.large DB instance class by running the following AWS CLI command\.
 

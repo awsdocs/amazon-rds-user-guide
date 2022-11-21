@@ -64,7 +64,7 @@ subnet_id_6
 
 ### Planning for IP address capacity<a name="rds-proxy-network-prereqs.plan-ip-address"></a>
 
-An RDS Proxy automatically adjusts its capacity as needed based on the size and number of DB instances registered with it\. Certain operations might also require additional proxy capacity\. Some examples are increasing the size of a registered database or internal RDS Proxy maintenance operations\. During these operations, your proxy might need more IP addresses to provision the extra capacity\. These additional addresses allow your proxy to scale without affecting your workload\. A lack of free IP addresses in your subnets prevents a proxy from scaling up\. This can lead to higher query latencies or client connection failures\. 
+An RDS Proxy automatically adjusts its capacity as needed based on the size and number of DB instances registered with it\. Certain operations might also require additional proxy capacity\. Some examples are increasing the size of a registered database or internal RDS Proxy maintenance operations\. During these operations, your proxy might need more IP addresses to provision the extra capacity\. These additional addresses allow your proxy to scale without affecting your workload\. A lack of free IP addresses in your subnets prevents a proxy from scaling up\. This can lead to higher query latencies or client connection failures\.  RDS notifies you through event `RDS-EVENT-0243` when there aren't enough free IP addresses in your subnets\. For information about this event, see [Working with RDS Proxy eventsWorking with RDS Proxy events](rds-proxy.events.md)\.
 
 Following are the recommended minimum number of IP addresses to leave free in your subnets for your proxy based on DB instance class sizes\.
 

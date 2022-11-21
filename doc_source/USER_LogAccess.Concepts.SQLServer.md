@@ -39,6 +39,8 @@ With CloudWatch Logs, you can do the following:
 
  Amazon RDS publishes each SQL Server database log as a separate database stream in the log group\. For example, if you publish error logs, error data is stored in an error log stream in the `/aws/rds/instance/my_instance/error` log group\. 
 
+For Multi\-AZ DB instances, Amazon RDS publishes the database log as two separate streams in the log group\. For example, if you publish the error logs, the error data is stored in the error log streams `/aws/rds/instance/my_instance.node1/error` and `/aws/rds/instance/my_instance.node2/error` respectively\. The log streams don't change during a failover and the error log stream of each node can contain error logs from primary or secondary instance\.
+
 **Note**  
 Publishing SQL Server logs to CloudWatch Logs isn't enabled by default\. Publishing trace and dump files isn't supported\. Publishing SQL Server logs to CloudWatch Logs is supported in all regions, except for Asia Pacific \(Hong Kong\)\.
 

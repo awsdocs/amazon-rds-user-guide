@@ -4,6 +4,11 @@ You can use the RDS console to simplify setting up a connection between an EC2 i
 
 ![\[Automatically connect an RDS database with an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2.png)
 
+**Topics**
++ [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
++ [Connecting an EC2 instance and an RDS database automatically](#ec2-rds-connect-connecting)
++ [Viewing connecting compute resources](#ec2-rds-connect-viewing)
+
 ## Overview of automatic connectivity with an EC2 instance<a name="ec2-rds-connect-overview"></a>
 
 When you set up a connection between an EC2 instance and an RDS database automatically, RDS configures the VPC security group for your EC2 instance and for your RDS database\.
@@ -79,3 +84,32 @@ You can only set up a connection between an EC2 instance and an RDS database aut
    If the changes are correct, choose **Set up connection**\.
 
    If the changes aren't correct, choose **Previous** or **Cancel**\.
+
+## Viewing connecting compute resources<a name="ec2-rds-connect-viewing"></a>
+
+You can use the AWS Management Console to view the compute resources that are connected to an RDS database\. The resources shown include compute resource connections that were set up automatically\. You can set up connectivity with compute resources automatically in the following ways:
++ You can select the compute resource when you create the database\.
+
+  For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) and [Creating a Multi\-AZ DB cluster](create-multi-az-db-cluster.md)\.
++ You can set up connectivity between an existing database and a compute resource\.
+
+  For more information, see [Connecting an EC2 instance and an RDS database automatically](#ec2-rds-connect-connecting)\.
+
+The listed compute resources don't include ones that were connected to the database manually\. For example, you can allow a compute resource to access a database manually by adding a rule to the VPC security group associated with the database\.
+
+For a compute resource to be listed, the following conditions must apply:
++ The name of the security group associated with the compute resource matches the pattern `ec2-rds-n` \(where `n` is a number\)\.
++ The security group associated with the compute resource has an outbound rule with the port range set to the port used by the RDS database\.
++ The security group associated with the compute resource has an outbound rule with the source set to a security group associated with the RDS database\.
++ The name of the security group associated with the RDS database matches the pattern `rds-ec2-n` \(where `n` is a number\)\.
++ The security group associated with the RDS database has an inbound rule with the port range set to the port used by the RDS database\.
++ The security group associated with the RDS database has an inbound rule with the source set to a security group associated with the compute resource\.
+
+**To connect an EC2 instance and an RDS database automatically**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the name of the RDS database\.
+
+1. On the **Connectivity & security** tab, view the compute resources in the **Connected compute resources**\.  
+![\[Connected compute resources\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ec2-connected-compute-resources.png)

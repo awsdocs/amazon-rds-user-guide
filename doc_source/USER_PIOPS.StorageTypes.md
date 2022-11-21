@@ -97,11 +97,17 @@ The maximum storage threshold is the limit that you set for autoscaling the DB i
 **Note**  
 We recommend that you carefully choose the maximum storage threshold based on usage patterns and customer needs\. If there are any aberrations in the usage patterns, the maximum storage threshold can prevent scaling storage to an unexpectedly high value when autoscaling predicts a very high threshold\. After a DB instance has been autoscaled, its allocated storage can't be reduced\.
 
+**Topics**
++ [Limitations](#autoscaling-limitations)
++ [Enabling storage autoscaling for a new DB instance](#USER_PIOPS.EnablingAutoscaling)
++ [Changing the storage autoscaling settings for a DB instance](#USER_PIOPS.ModifyingAutoscaling)
++ [Turning off storage autoscaling for a DB instance](#USER_PIOPS.DisablingAutoscaling)
+
 ### Limitations<a name="autoscaling-limitations"></a>
 
 The following limitations apply to storage autoscaling:
 + Autoscaling doesn't occur if the maximum storage threshold would be equaled or exceeded by the storage increment\.
-+ When autoscaling, RDS predicts the storage size for subsequent autoscaling operations\. If a subsequent operation is predicted to exceed the maximum storage threshold, then RDS autoscales to 1 GiB less than the maximum storage threshold\.
++ When autoscaling, RDS predicts the storage size for subsequent autoscaling operations\. If a subsequent operation is predicted to exceed the maximum storage threshold, then RDS autoscales to the maximum storage threshold\.
 + Autoscaling can't completely prevent storage\-full situations for large data loads\. This is because further storage modifications can't be made for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.
 
    If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.

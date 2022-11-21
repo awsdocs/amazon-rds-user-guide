@@ -38,7 +38,9 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | Europe \(London\) | – | All versions | All versions | All versions | 
 | Europe \(Milan\) | – | All versions | All versions | All versions | 
 | Europe \(Paris\) | – | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | 
 | Europe \(Stockholm\) | – | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | 
 | Middle East \(Bahrain\) | – | All versions | All versions | All versions | 
 | Middle East \(UAE\) | – | – | – | – | 
 | South America \(São Paulo\) | – | All versions | All versions | All versions | 
@@ -73,7 +75,9 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | Europe \(London\) | All versions | All versions | All versions | 
 | Europe \(Milan\) | All versions | All versions | All versions | 
 | Europe \(Paris\) | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | All versions | All versions | All versions | 
 | Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | 
@@ -108,7 +112,9 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | Europe \(London\) | – | All versions | All versions | All versions | All versions | 
 | Europe \(Milan\) | – | All versions | All versions | All versions | All versions | 
 | Europe \(Paris\) | – | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | – | 
 | Europe \(Stockholm\) | – | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | 
 | Middle East \(Bahrain\) | – | All versions | All versions | All versions | All versions | 
 | Middle East \(UAE\) | – | – | – | – | – | 
 | South America \(São Paulo\) | – | All versions | All versions | All versions | All versions | 
@@ -143,7 +149,9 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | Europe \(London\) | All versions | All versions | All versions | All versions | 
 | Europe \(Milan\) | All versions | All versions | All versions | All versions | 
 | Europe \(Paris\) | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | 
 | Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | 
 | Middle East \(UAE\) | – | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | 

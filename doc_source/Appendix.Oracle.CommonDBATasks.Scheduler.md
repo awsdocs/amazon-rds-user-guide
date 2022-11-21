@@ -161,9 +161,9 @@ END;
 
 For more information about changing the system time zone, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md)\.
 
-## Disabling SYS\-owned Oracle Scheduler jobs<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Disabling"></a>
+## Turning off Oracle Scheduler jobs owned by SYS<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Disabling"></a>
 
-To disable a SYS\-owned Oracle Scheduler job, use the `rdsadmin.rdsadmin_dbms_scheduler.disable` procedure\. 
+To disable an Oracle Scheduler job owned by the SYS user, use the `rdsadmin.rdsadmin_dbms_scheduler.disable` procedure\. 
 
 This procedure uses the `name` common parameter for Oracle Scheduler tasks\. For more information, see [Common parameters for Oracle Scheduler procedures](#Appendix.Oracle.CommonDBATasks.Scheduler.CommonParameters)\.
 
@@ -176,9 +176,9 @@ END;
 /
 ```
 
-## Enabling SYS\-owned Oracle Scheduler jobs<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Enabling"></a>
+## Turning on Oracle Scheduler jobs owned by SYS<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Enabling"></a>
 
-To enable a SYS\-owned Oracle Scheduler job, use the `rdsadmin.rdsadmin_dbms_scheduler.enable` procedure\.
+To turn on an Oracle Scheduler job owned by SYS, use the `rdsadmin.rdsadmin_dbms_scheduler.enable` procedure\.
 
 This procedure uses the `name` common parameter for Oracle Scheduler tasks\. For more information, see [Common parameters for Oracle Scheduler procedures](#Appendix.Oracle.CommonDBATasks.Scheduler.CommonParameters)\.
 
@@ -191,7 +191,7 @@ END;
 /
 ```
 
-## Modifying the repeat interval for jobs of CALENDAR type<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Modifying_Calendar"></a>
+## Modifying the Oracle Scheduler repeat interval for jobs of CALENDAR type<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Modifying_Calendar"></a>
 
 To modify the repeat interval to modify a SYS\-owned Oracle Scheduler job of `CALENDAR` type, use the `rdsadmin.rdsadmin_dbms_scheduler.disable` procedure\.
 
@@ -214,7 +214,7 @@ END;
 /
 ```
 
-## Modifying the repeat interval for jobs of NAMED type<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Modifying_Named"></a>
+## Modifying the Oracle Scheduler repeat interval for jobs of NAMED type<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Modifying_Named"></a>
 
 Some Oracle Scheduler jobs use a schedule name instead of an interval\. For this type of jobs, you must create a new named schedule in the master user schema\. Use the standard Oracle `sys.dbms_scheduler.create_schedule` procedure to do this\. Also, use the `rdsadmin.rdsadmin_dbms_scheduler.set_attribute procedure` to assign the new named schedule to the job\. 
 
@@ -245,4 +245,34 @@ BEGIN
           value     => 'rds_master_user.new_schedule');
 END;
 /
+```
+
+## Turning off autocommit for Oracle Scheduler job creation<a name="Appendix.Oracle.CommonDBATasks.Scheduler.autocommit"></a>
+
+When `DBMS_SCHEDULER.CREATE_JOB` creates Oracle Scheduler jobs, it creates the jobs immediately and commits the changes\. You might need to incorporate the creation of Oracle Scheduler jobs in the user transaction to do the following:
++ Roll back the Oracle Schedule job when the user transaction is rolled back\.
++ Create the Oracle Scheduler job when the main user transaction is committed\.
+
+You can use the procedure `rdsadmin.rdsadmin_dbms_scheduler.set_no_commit_flag` to turn on this behavior\. This procedure takes no parameters\. You can use this procedure in the following RDS for Oracle releases:
++ 21\.0\.0\.0\.ru\-2022\-07\.rur\-2022\-07\.r1 and higher
++ 19\.0\.0\.0\.ru\-2022\-07\.rur\-2022\-07\.r1 and higher
+
+The following example turns off autocommit for Oracle Scheduler, creates an Oracle Scheduler job, and then rolls back the transaction\. Because autocommit is turned off, the database also rolls back the creation of the Oracle Scheduler job\.
+
+```
+BEGIN
+  rdsadmin.rdsadmin_dbms_scheduler.set_no_commit_flag;
+  DBMS_SCHEDULER.CREATE_JOB(job_name   => 'EMPTY_JOB', 
+                            job_type   => 'PLSQL_BLOCK', 
+                            job_action => 'begin null; end;',
+                            auto_drop  => false);
+  ROLLBACK;
+END;
+/
+
+PL/SQL procedure successfully completed.
+
+SELECT * FROM DBA_SCHEDULER_JOBS WHERE JOB_NAME='EMPTY_JOB';
+
+no rows selected
 ```

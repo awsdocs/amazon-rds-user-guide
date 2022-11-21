@@ -11,6 +11,7 @@ Amazon RDS supports the following options for Microsoft SQL Server DB instances\
 
 | Option | Option ID | Engine editions | 
 | --- | --- | --- | 
+|  [Linked Servers with Oracle OLEDB](Appendix.SQLServer.Options.LinkedServers_Oracle_OLEDB.md)  |  `OLEDB_ORACLE`  |  SQL Server Enterprise Edition SQL Server Standard Edition SQL Server Web Edition SQL Server Express Edition  | 
 |  [Native backup and restore](Appendix.SQLServer.Options.BackupRestore.md)  |  `SQLSERVER_BACKUP_RESTORE`  |  SQL Server Enterprise Edition SQL Server Standard Edition SQL Server Web Edition SQL Server Express Edition  | 
 |  [Transparent Data Encryption](Appendix.SQLServer.Options.TDE.md)  |  `TRANSPARENT_DATA_ENCRYPTION` \(RDS console\) `TDE` \(AWS CLI and RDS API\)  |  SQL Server 2014–2019 Enterprise Edition SQL Server 2019 Standard Edition | 
 |  [SQL Server Audit](Appendix.SQLServer.Options.Audit.md)  |  `SQLSERVER_AUDIT`  |  In RDS, starting with SQL Server 2014, all editions of SQL Server support server\-level audits, and Enterprise Edition also supports database\-level audits\. Starting with SQL Server SQL Server 2016 \(13\.x\) SP1, all editions support both server\-level and database\-level audits\. For more information, see [SQL Server Audit \(database engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine?view=sql-server-2017) in the SQL Server documentation\. | 

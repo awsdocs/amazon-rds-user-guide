@@ -1,10 +1,11 @@
 # Creating a DB snapshot<a name="USER_CreateSnapshot"></a>
 
-Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. Creating this DB snapshot on a Single\-AZ DB instance results in a brief I/O suspension that can last from a few seconds to a few minutes, depending on the size and class of your DB instance\. For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity is not suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for Multi\-AZ deployments\. 
+Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. Creating this DB snapshot on a Single\-AZ DB instance results in a brief I/O suspension that can last from a few seconds to a few minutes, depending on the size and class of your DB instance\. For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity is not suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for Multi\-AZ deployments\.
 
 When you create a DB snapshot, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. The amount of time it takes to create a snapshot varies with the size of your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 
 **Note**  
+Your DB instance must be in the `available` state to take a DB snapshot\.  
 For PostgreSQL DB instances, data in unlogged tables might not be restored from snapshots\. For more information, see [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\.
 
 Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.

@@ -45,7 +45,7 @@ By using General Purpose SSD gp3 storage volumes, you can customize storage perf
 For every RDS DB engine except RDS for SQL Server, when the storage size for gp3 volumes reaches a certain threshold, the baseline storage performance increases to 12,000 IOPS and 500 MiBps\. This is because of *volume striping*, where the storage uses four logical volumes instead of one\. RDS for SQL Server doesn't support volume striping, and therefore doesn't have a threshold value\.
 
 **Note**  
-General Purpose SSD gp3 storage isn't supported on Multi\-AZ DB clusters\.
+General Purpose SSD gp3 storage is supported on Single\-AZ and Multi\-AZ DB instances, but isn't supported on Multi\-AZ DB clusters\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md) and [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 
 Storage performance for gp3 volumes on Amazon RDS DB engines, including the threshold, is shown in the following table\.
 
@@ -122,10 +122,10 @@ The following table shows use cases and performance characteristics for the SSD 
 | Characteristic | Provisioned IOPS \(io1\) | General Purpose \(gp3\) | General Purpose \(gp2\) | 
 | --- | --- | --- | --- | 
 | Description |  Consistent storage performance \(IOPS, throughput, latency\) Designed for latency\-sensitive, transactional workloads\.  |  Flexibility in provisioning storage, IOPS, and throughput independently Balances price performance for a wide variety of transactional workloads  |  Provides burstable IOPS Balances price performance for a wide variety of transactional workloads  | 
-| Use cases |  Transactional workloads that require sustained IOPS performance up to 80,000 IOPS  |  Broad range of workloads running on medium\-sized relational databases in development/test environments  |  Broad range of workloads running on medium\-sized relational databases in development/test environments  | 
+| Use cases |  Transactional workloads that require sustained IOPS performance up to 256,000 IOPS  |  Broad range of workloads running on medium\-sized relational databases in development/test environments  |  Broad range of workloads running on medium\-sized relational databases in development/test environments  | 
 | Latency |  Single\-digit millisecond, provided consistently 99\.9% of the time  |  Single\-digit millisecond, provided consistently 99% of the time  |  Single\-digit millisecond, provided consistently 99% of the time  | 
 | Volume size |  100 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  |  20 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  |  20 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  | 
-| Maximum IOPS | 80,000 | 64,000 | 16,000 | 
+| Maximum IOPS | 256,000 \(64,000 on RDS for SQL Server\) | 64,000 \(16,000 on RDS for SQL Server\) | 16,000 | 
 | Maximum throughput | Scales based on Provisioned IOPS up to 4,000 MB/s | Provision additional throughput up to 4,000 MB/s | 250 MB/s | 
 | AWS CLI and RDS API name | io1 | gp3 | gp2 | 
 

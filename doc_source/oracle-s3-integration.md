@@ -617,10 +617,11 @@ The `download_from_s3` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-|  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to download files from\.   | 
-|  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
-|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  required  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. You specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
-|  `p_decompression_format`  |  VARCHAR2  |  `NONE`  |  optional  |  The decompression format\. Valid values are `NONE` for no decompression and `GZIP` for decompression\.  | 
+|  `p_bucket_name`  |  VARCHAR2  |  –  |  Required  |  The name of the Amazon S3 bucket to download files from\.   | 
+|  `p_directory_name`  |  VARCHAR2  |  –  |  Required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
+|  `p_error_on_zero_downloads`  |  VARCHAR2  | FALSE |  Optional  |  A flag that determines whether the task raises an error when no objects in the Amazon S3 bucket match the prefix\. If this parameter is not set or set to FALSE \(default\), the task prints a message that no objects were found, but doesn't raise an exception or fail\. If this parameter is TRUE, the task raises an exception and fails\.  Examples of prefix specifications that can fail match tests are spaces in prefixes, as in `' import/test9.log'`, and case mismatches, as in `test9.log` and `test9.LOG`\.  | 
+|  `p_s3_prefix`  |  VARCHAR2  |  –  |  Required  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. You specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
+|  `p_decompression_format`  |  VARCHAR2  |  –  |  Optional  |  The decompression format\. Valid values are `NONE` for no decompression and `GZIP` for decompression\.  | 
 
 The return value for the `rdsadmin.rdsadmin_s3_tasks.download_from_s3` procedure is a task ID\.
 
@@ -633,14 +634,15 @@ SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
    AS TASK_ID FROM DUAL;
 ```
 
-The following example downloads all of the files with the prefix `db` in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\. The files are compressed with GZIP, so decompression is applied\. 
+The following example downloads all of the files with the prefix `db` in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\. The files are compressed with GZIP, so decompression is applied\. The parameter `p_error_on_zero_downloads` turns on prefix error checking, so if the prefix doesn't match any files in the bucket, the task raises and exception and fails\.
 
 ```
 SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
-      p_bucket_name          =>  'mys3bucket', 
-      p_s3_prefix            =>  'db', 
-      p_directory_name       =>  'DATA_PUMP_DIR',
-      p_decompression_format =>  'GZIP') 
+      p_bucket_name               =>  'mys3bucket', 
+      p_s3_prefix                 =>  'db', 
+      p_directory_name            =>  'DATA_PUMP_DIR',
+      p_decompression_format      =>  'GZIP',
+      p_error_on_zero_downloads   =>  'TRUE') 
    AS TASK_ID FROM DUAL;
 ```
 

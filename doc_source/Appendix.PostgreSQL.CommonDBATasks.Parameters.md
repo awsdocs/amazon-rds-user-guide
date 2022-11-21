@@ -133,7 +133,7 @@ You can also use the Console\. Choose **Parameter groups** from the Amazon RDS m
 |  `log_executor_stats`  | Dynamic | Writes executor performance statistics to the server log\. | 
 |  `log_filename`  | Dynamic | Sets the file name pattern for log files\. | 
 |  `log_file_mode`  | Dynamic | Sets file permissions for log files\. Default value is 0644\. | 
-|  `log_hostname`  | Dynamic | Logs the host name in the connection logs\. | 
+|  `log_hostname`  | Dynamic | Logs the host name in the connection logs\. As of PostgreSQL 12 and later versions, this parameter is 'off' by default\. When turned on, the connection uses DNS reverse\-lookup to get the hostname that gets captured to the connection logs\. If you turn on this parameter, you should monitor the impact that it has on the time it takes to establish connections\.  | 
 |  `log_line_prefix `  | Dynamic | Controls information prefixed to each log line\. | 
 |  `log_lock_waits`  | Dynamic | Logs long lock waits\. | 
 |  `log_min_duration_statement`  | Dynamic | Sets the minimum running time above which statements will be logged\. | 

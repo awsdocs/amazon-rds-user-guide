@@ -41,7 +41,9 @@ Following are the supported engines and Region availability for backup replicati
 | Europe \(London\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | Europe \(Milan\) | – | – | – | 
 | Europe \(Paris\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
+| Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
+| Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | Middle East \(UAE\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | South America \(São Paulo\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
@@ -76,7 +78,9 @@ Following are the supported engines and Region availability for backup replicati
 | Europe \(London\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Milan\) | – | – | – | – | – | 
 | Europe \(Paris\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | – | 
 | Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | All versions | 
 | Middle East \(UAE\) | All versions | All versions | All versions | All versions | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 
@@ -114,7 +118,9 @@ Backup replication isn't supported for encrypted SQL Server DB instances\. Make 
 | Europe \(London\) | All versions | All versions | All versions | All versions | 
 | Europe \(Milan\) | – | – | – | – | 
 | Europe \(Paris\) | All versions | All versions | All versions | All versions | 
+| Europe \(Spain\) | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | 
+| Europe \(Zurich\) | – | – | – | – | 
 | Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | 
 | Middle East \(UAE\) | All versions | All versions | All versions | All versions | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | 
