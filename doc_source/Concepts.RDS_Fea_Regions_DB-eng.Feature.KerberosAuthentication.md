@@ -24,6 +24,7 @@ Following are the supported engines and Region availability for Kerberos authent
 | US West \(Oregon\) | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | – | – | 
@@ -61,6 +62,7 @@ Following are the supported engines and Region availability for Kerberos authent
 | US West \(Oregon\) | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | – | – | 
@@ -98,6 +100,7 @@ Following are the supported engines and Region availability for Kerberos authent
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | – | – | – | – | 
@@ -135,6 +138,7 @@ Following are the supported engines and Region availability for Kerberos authent
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | 

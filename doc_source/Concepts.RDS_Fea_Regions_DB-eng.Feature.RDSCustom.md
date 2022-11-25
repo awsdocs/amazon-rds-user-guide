@@ -24,6 +24,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 | US West \(Oregon\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Osaka\) | – | – | – | 
@@ -61,6 +62,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 | US West \(Oregon\) | Enterprise, Standard, or Web | 
 | Africa \(Cape Town\) | – | 
 | Asia Pacific \(Hong Kong\) | – | 
+| Asia Pacific \(Hyderabad\) | – | 
 | Asia Pacific \(Jakarta\) | – | 
 | Asia Pacific \(Mumbai\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Osaka\) | – | 

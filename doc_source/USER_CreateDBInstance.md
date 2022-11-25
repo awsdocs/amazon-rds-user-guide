@@ -39,6 +39,7 @@ The following are requirements for connecting an EC2 instance with the DB instan
 + The user who is creating the DB instance must have permissions to perform the following operations:
   + `ec2:AssociateRouteTable` 
   + `ec2:AuthorizeSecurityGroupEgress` 
+  + `ec2:AuthorizeSecurityGroupIngress` 
   + `ec2:CreateRouteTable` 
   + `ec2:CreateSubnet` 
   + `ec2:CreateSecurityGroup` 

@@ -81,9 +81,9 @@ To determine whether encryption at rest is turned on for a DB instance by using 
 
 ## Availability of Amazon RDS encryption<a name="Overview.Encryption.Availability"></a>
 
-Amazon RDS encryption is currently available for all database engines and storage types\.
+Amazon RDS encryption is currently available for all database engines and storage types, except for SQL Server Express Edition\.
 
-Amazon RDS encryption is available for most DB instance classes\. The following table lists DB instance classes that *do not support* Amazon RDS encryption:
+Amazon RDS encryption is available for most DB instance classes\. The following table lists DB instance classes that *don't support* Amazon RDS encryption:
 
 
 | Instance type | Instance class | 
@@ -91,9 +91,6 @@ Amazon RDS encryption is available for most DB instance classes\. The following 
 | General purpose \(M1\) |  db\.m1\.small db\.m1\.medium db\.m1\.large db\.m1\.xlarge  | 
 | Memory optimized \(M2\) |  db\.m2\.xlarge db\.m2\.2xlarge db\.m2\.4xlarge  | 
 | Burstable \(T2\) |  db\.t2\.micro  | 
-
-**Note**  
-Encryption at rest is not available for DB instances running SQL Server Express Edition\.   
 
 ## Limitations of Amazon RDS encrypted DB instances<a name="Overview.Encryption.Limitations"></a>
 

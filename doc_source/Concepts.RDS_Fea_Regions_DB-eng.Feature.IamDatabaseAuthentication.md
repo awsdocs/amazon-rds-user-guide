@@ -24,6 +24,7 @@ Following are the supported engines and Region availability for IAM database aut
 | US West \(Oregon\) | Version 10\.6 and higher | \- | \- | \- | 
 | Africa \(Cape Town\) | Version 10\.6 and higher | \- | \- | \- | 
 | Asia Pacific \(Hong Kong\) | Version 10\.6 and higher | \- | \- | \- | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | Version 10\.6 and higher | \- | \- | \- | 
 | Asia Pacific \(Mumbai\) | Version 10\.6 and higher | \- | \- | \- | 
 | Asia Pacific \(Osaka\) | Version 10\.6 and higher | \- | \- | \- | 

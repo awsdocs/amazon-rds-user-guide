@@ -220,7 +220,7 @@ You can import data from Amazon S3 to a new MySQL DB instance using the AWS Mana
 
 1. Under **S3 destination**:
 
-   1. Choose the **S3 bucket** where to write audit logs\.
+   1. Choose the **S3 bucket** that contains the backup\.
 
    1. \(Optional\) For **S3 folder path prefix**, enter a file path prefix for the files stored in your Amazon S3 bucket\.
 

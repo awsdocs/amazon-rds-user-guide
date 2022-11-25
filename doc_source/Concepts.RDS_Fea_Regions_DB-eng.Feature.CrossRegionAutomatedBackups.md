@@ -26,6 +26,7 @@ Following are the supported engines and Region availability for backup replicati
 | US West \(Oregon\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | Asia Pacific \(Osaka\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
@@ -63,6 +64,7 @@ Following are the supported engines and Region availability for backup replicati
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | All versions | 
@@ -103,6 +105,7 @@ Backup replication isn't supported for encrypted SQL Server DB instances\. Make 
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | 

@@ -8,12 +8,10 @@ Rebooting a DB cluster restarts the database engine service\. Rebooting a DB clu
 
 You can't reboot your DB cluster if it isn't in the **Available** state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\.
 
-**Important**  
-When you reboot the writer instance of a Multi\-AZ DB cluster, it doesn't affect the reader DB instances in that DB cluster and no failover occurs\. When you reboot a reader DB instance, no failover occurs\. To fail over a Multi\-AZ DB cluster, choose **Failover** in the console, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or call the API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\.
-
 The time required to reboot your DB cluster depends on the crash recovery process, the database activity at the time of reboot, and the behavior of your specific DB cluster\. To improve the reboot time, we recommend that you reduce database activity as much as possible during the reboot process\. Reducing database activity reduces rollback activity for in\-transit transactions\. 
 
-Multi\-AZ DB clusters don't support reboot with a failover\.
+**Important**  
+Multi\-AZ DB clusters don't support reboot with a failover\. When you reboot the writer instance of a Multi\-AZ DB cluster, it doesn't affect the reader DB instances in that DB cluster and no failover occurs\. When you reboot a reader DB instance, no failover occurs\. To fail over a Multi\-AZ DB cluster, choose **Failover** in the console, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or call the API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\.
 
 ## Console<a name="USER_RebootMultiAZDBCluster.Console"></a>
 

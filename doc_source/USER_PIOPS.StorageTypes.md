@@ -276,8 +276,6 @@ For information on the ranges of allocated storage and Provisioned IOPS availabl
 
 1. Choose **Apply immediately** in the **Scheduling of modifications** section to apply the changes to the DB instance immediately\. Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
 
-   An immediate outage occurs when the storage type changes\. For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
-
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 
    The new value for allocated storage or for Provisioned IOPS appears in the **Status** column\. 
@@ -353,8 +351,6 @@ For information on the ranges of allocated storage, Provisioned IOPS, and storag
 1. Choose **Continue**\.
 
 1. Choose **Apply immediately** in the **Scheduling of modifications** section to apply the changes to the DB instance immediately\. Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
-
-   An immediate outage occurs when the storage type changes\. For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 

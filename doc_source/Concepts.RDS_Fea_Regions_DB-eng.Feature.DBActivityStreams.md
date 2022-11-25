@@ -26,6 +26,7 @@ For more information on additional requirements for database activity streams wi
 | US West \(Oregon\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Africa \(Cape Town\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Hong Kong\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Mumbai\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Osaka\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 

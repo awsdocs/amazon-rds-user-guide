@@ -126,7 +126,7 @@ The following table shows use cases and performance characteristics for the SSD 
 | Latency |  Single\-digit millisecond, provided consistently 99\.9% of the time  |  Single\-digit millisecond, provided consistently 99% of the time  |  Single\-digit millisecond, provided consistently 99% of the time  | 
 | Volume size |  100 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  |  20 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  |  20 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  | 
 | Maximum IOPS | 256,000 \(64,000 on RDS for SQL Server\) | 64,000 \(16,000 on RDS for SQL Server\) | 16,000 | 
-| Maximum throughput | Scales based on Provisioned IOPS up to 4,000 MB/s | Provision additional throughput up to 4,000 MB/s | 250 MB/s | 
+| Maximum throughput | Scales based on Provisioned IOPS up to 4,000 MB/s | Provision additional throughput up to 4,000 MB/s | 1000 MB/s | 
 | AWS CLI and RDS API name | io1 | gp3 | gp2 | 
 
 ## Magnetic storage<a name="CHAP_Storage.Magnetic"></a>

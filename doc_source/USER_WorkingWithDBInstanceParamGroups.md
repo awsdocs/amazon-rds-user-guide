@@ -15,6 +15,13 @@ DB instances use DB parameter groups\. The following sections describe configuri
 
 You can create a new DB parameter group using the AWS Management Console, the AWS CLI, or the RDS API\.
 
+The following limitations apply to the DB parameter group name:
++ The name must be 1 to 255 letters, numbers, or hyphens\.
+
+  Default parameter group names can include a period, such as `default.mysql8.0`\. However, custom parameter group names can't include a period\.
++ The first character must be a letter\.
++ The name can't end with a hyphen or contain two consecutive hyphens\.
+
 ### Console<a name="USER_WorkingWithParamGroups.Creating.CON"></a>
 
 **To create a DB parameter group**

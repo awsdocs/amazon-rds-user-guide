@@ -124,6 +124,10 @@ Before initiating the Oracle Data Guard switchover, make sure that your replicat
 **Note**  
 A *bystander replica* is a replica in the Oracle Data Guard configuration that isn't the target of the switchover\. Bystander replicas can be in any state during the switchover\.
 + The original standby database has a configuration that is as close as desired to the original primary database\. Assume a scenario where the original primary and original standby databases have different options\. After the switchover completes, Amazon RDS doesn't automatically reconfigure the new primary database to have the same options as the original primary database\.
++ You configure your desired Multi\-AZ deployment before initiating a switchover\. Amazon RDS doesn't manage Multi\-AZ as part of the switchover\. The Multi\-AZ deployment remains as it is\.
+
+  Assume that db\_maz is the primary database in a Multi\-AZ deployment, and db\_saz is a Single\-AZ replica\. You initiate a switchover from db\_maz to db\_saz\. Afterward, db\_maz is a Multi\-AZ replica database, and db\_saz is a Single\-AZ primary database\. The new primary database is now unprotected by a Multi\-AZ deployment\.
++ In preparation for a cross\-Region switchover, the primary database doesn't use the same option group as a DB instance outside of the replication configuration\. For a cross\-Region switchover to succeed, the current primary database and its read replicas must be the only DB instances to use the option group of the current primary database\. Otherwise, Amazon RDS prevents the switchover\.
 
 ## Initiating the Oracle Data Guard switchover<a name="oracle-switchover.initiating"></a>
 

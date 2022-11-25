@@ -16,6 +16,13 @@ You can create a new DB cluster parameter group using the AWS Management Console
 
 After you create a DB cluster parameter group, wait at least 5 minutes before creating a DB cluster that uses that DB cluster parameter group\. Doing this allows Amazon RDS to fully create the parameter group before it is used by the new DB cluster\. You can use the **Parameter groups** page in the [Amazon RDS console](https://console.aws.amazon.com/rds/) or the [describe\-db\-cluster\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html) command to verify that your DB cluster parameter group is created\.
 
+The following limitations apply to the DB cluster parameter group name:
++ The name must be 1 to 255 letters, numbers, or hyphens\.
+
+  Default parameter group names can include a period, such as `default.aurora-mysql5.7`\. However, custom parameter group names can't include a period\.
++ The first character must be a letter\.
++ The name can't end with a hyphen or contain two consecutive hyphens\.
+
 ### Console<a name="USER_WorkingWithParamGroups.CreatingCluster.CON"></a>
 
 **To create a DB cluster parameter group**

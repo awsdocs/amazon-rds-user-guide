@@ -23,6 +23,7 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | US West \(Oregon\) | – | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | All versions | All versions | All versions | 
 | Asia Pacific \(Hong Kong\) | – | All versions | All versions | All versions | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | – | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | All versions | All versions | All versions | 
@@ -60,6 +61,7 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | US West \(Oregon\) | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | All versions | All versions | All versions | 
 | Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | 
@@ -97,6 +99,7 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | US West \(Oregon\) | – | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hong Kong\) | – | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | – | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | – | All versions | All versions | All versions | All versions | 
@@ -134,6 +137,7 @@ Following are the supported engines and Region availability for RDS Proxy with R
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | 
