@@ -2,7 +2,7 @@
 
 Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. By default, RDS for PostgreSQL uses and expects all clients to connect using SSL/TLS, but you can also require it\. RDS for PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\.
 
-For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
+For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/ssl/) in the PostgreSQL documentation\.
 
 SSL support is available in all AWS Regions for PostgreSQL\. Amazon RDS creates an SSL certificate for your PostgreSQL DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
@@ -41,7 +41,7 @@ $ psql -h db-name.555555555555.ap-southeast-1.rds.amazonaws.com
 
 ## Requiring an SSL connection to a PostgreSQL DB instance<a name="PostgreSQL.Concepts.General.SSL.Requiring"></a>
 
-You can require that connections to your PostgreSQL DB instance use SSL by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB instance\. 
+You can require that connections to your PostgreSQL DB instance use SSL by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB instance\.
 
 To change the value of this parameter, you need to create a custom DB parameter group\. You then change the value for `rds.force_ssl` in your custom DB parameter group to `1` to turn on this feature\. If you prepare the custom DB parameter group before creating your RDS for PostgreSQL DB instance you can choose it \(instead of a default parameter group\) during the creation process\. If you do this after your RDS for PostgreSQL DB instance is already running, you need to reboot the instance so that your instance uses the custom parameter group\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
@@ -57,9 +57,9 @@ psql: error: FATAL: no pg_hba.conf entry for host "w.x.y.z", user "testuser", da
 The encrypted status of your connection is shown in the logon banner when you connect to the DB instance:
 
 ```
-Password for user master: 
-psql (10.3) 
-SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256) 
+Password for user master:
+psql (10.3)
+SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)
 Type "help" for help.
 postgres=>
 ```
@@ -137,12 +137,12 @@ To learn more about the `sslmode` option, see [Database connection control funct
 The PostgreSQL configuration parameter [ssl\_ciphers](https://www.postgresql.org/docs/current/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SSL) specifies the categories of cipher suites that are allowed for SSL connections\. The following table lists the default cipher suites used in RDS for PostgreSQL\.
 
 
-| PostgreSQL engine version | Cipher suites | 
-| --- | --- | 
-| 14 | HIGH:\!aNULL:\!3DES | 
-| 13 | HIGH:\!aNULL:\!3DES | 
-| 12 | HIGH:\!aNULL:\!3DES | 
-| 11\.4 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
-| 11\.1, 11\.2 | HIGH:MEDIUM:\+3DES:\!aNULL | 
-| 10\.9 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
-| 10\.7 and lower minor versions | HIGH:MEDIUM:\+3DES:\!aNULL | 
+| PostgreSQL engine version | Cipher suites |
+| --- | --- |
+| 14 | HIGH:\!aNULL:\!3DES |
+| 13 | HIGH:\!aNULL:\!3DES |
+| 12 | HIGH:\!aNULL:\!3DES |
+| 11\.4 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 |
+| 11\.1, 11\.2 | HIGH:MEDIUM:\+3DES:\!aNULL |
+| 10\.9 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 |
+| 10\.7 and lower minor versions | HIGH:MEDIUM:\+3DES:\!aNULL |
