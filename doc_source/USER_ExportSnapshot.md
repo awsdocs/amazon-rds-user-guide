@@ -70,9 +70,9 @@ You use the following process to export DB snapshot data to an Amazon S3 bucket\
 
    1. Create an AWS Identity and Access Management \(IAM\) role that grants the snapshot export task access to the S3 bucket\. For more information, see [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)\. 
 
-1. Create a symmetric encryption AWS KMS key for the server\-side encryption\. The KMS key is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+1. Create a symmetric encryption AWS KMS key for the server\-side encryption\. The KMS key is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. The KMS key policy must include both the `kms:Encrypt` and `kms:Decrypt` permissions\. For more information on using KMS keys in Amazon RDS, see [AWS KMS key management](Overview.Encryption.Keys.md)\.
 
-   The KMS key is also used for local disk encryption at rest on Amazon EC2\. In addition, if you have a deny statement in your KMS key policy, make sure to explicitly exclude the AWS service principal `export.rds.amazonaws.com`\.
+   If you have a deny statement in your KMS key policy, make sure to explicitly exclude the AWS service principal `export.rds.amazonaws.com`\.
 
    You can use a KMS key within your AWS account, or you can use a cross\-account KMS key\. For more information, see [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)\.
 

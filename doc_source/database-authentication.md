@@ -11,6 +11,9 @@ For PostgreSQL, use only one of the following role settings for a user of a spec
 
 Don't assign both the `rds_iam` and `rds_ad` roles to a user of a PostgreSQL database either directly or indirectly by nested grant access\. If the `rds_iam` role is added to the master user, IAM authentication takes precedence over password authentication so the master user has to log in as an IAM user\.
 
+**Important**  
+We strongly recommend that you do not use the master user directly in your applications\. Instead, adhere to the best practice of using a database user created with the minimal privileges required for your application\.
+
 **Topics**
 + [Password authentication](#password-authentication)
 + [IAM database authentication](#iam-database-authentication)

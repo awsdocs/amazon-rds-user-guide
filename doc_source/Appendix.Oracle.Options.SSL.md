@@ -52,6 +52,7 @@ The following table shows the cipher suite option settings that are supported fo
 
 | Oracle engine version | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384" | 
 | --- | --- | --- | --- | 
+|  21\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 

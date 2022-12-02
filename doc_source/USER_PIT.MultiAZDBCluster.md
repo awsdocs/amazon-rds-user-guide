@@ -8,6 +8,8 @@ When you restore a Multi\-AZ DB cluster to a point in time, you can choose the d
 
 Restored Multi\-AZ DB clusters are automatically associated with the default DB cluster parameter group\. However, you can apply a customer DB cluster parameter group by specifying it during a restore\.
 
+If the source DB instance has resource tags, RDS adds the latest tags to the restored DB instance\.
+
 **Note**  
 We recommend that you restore to the same or similar Multi\-AZ DB cluster size as the source DB cluster\. We also recommend that you restore with the same or similar IOPS value if you're using Provisioned IOPS storage\. You might get an error if, for example, you choose a DB cluster size with an incompatible IOPS value\.
 

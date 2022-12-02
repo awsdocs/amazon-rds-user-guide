@@ -21,6 +21,9 @@ Amazon RDS records events that relate to the following resources:
 + RDS Proxy events
 
   For a list of RDS Proxy events, see [RDS Proxy events](USER_Events.Messages.md#USER_Events.Messages.rds-proxy)\.
++ Blue/green deployment events
+
+  For a list of blue/green deployment events, see [Blue/green deployment events](USER_Events.Messages.md#USER_Events.Messages.BlueGreenDeployments)\.
 
 This information includes the following: 
 + The date and time of the event

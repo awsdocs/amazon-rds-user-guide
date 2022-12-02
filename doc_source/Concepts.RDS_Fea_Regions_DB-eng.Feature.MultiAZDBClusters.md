@@ -80,34 +80,34 @@ Following are the supported engine version and Region availability for Multi\-AZ
 
 | Region | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | 
 | --- | --- | --- | 
-| US East \(Ohio\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| US East \(N\. Virginia\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| US East \(Ohio\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| US East \(N\. Virginia\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | US West \(N\. California\) | – | – | 
-| US West \(Oregon\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Africa \(Cape Town\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Hong Kong\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| US West \(Oregon\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Africa \(Cape Town\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Hong Kong\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Asia Pacific \(Hyderabad\) | – | – | 
-| Asia Pacific \(Jakarta\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Mumbai\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Osaka\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Seoul\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Singapore\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Sydney\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Asia Pacific \(Tokyo\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Canada \(Central\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Asia Pacific \(Jakarta\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Mumbai\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Osaka\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Seoul\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Singapore\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Sydney\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Tokyo\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Canada \(Central\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | China \(Beijing\) | – | – | 
 | China \(Ningxia\) | – | – | 
-| Europe \(Frankfurt\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Europe \(Ireland\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Europe \(London\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Europe \(Milan\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
-| Europe \(Paris\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Frankfurt\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Ireland\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(London\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Milan\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Paris\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Europe \(Spain\) | – | – | 
-| Europe \(Stockholm\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Europe \(Stockholm\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Europe \(Zurich\) | – | – | 
-| Middle East \(Bahrain\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| Middle East \(Bahrain\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Middle East \(UAE\) | – | – | 
-| South America \(São Paulo\) | Version 14\.5 | Version 13\.4 and version 13\.7 | 
+| South America \(São Paulo\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | AWS GovCloud \(US\-East\) | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | 
 

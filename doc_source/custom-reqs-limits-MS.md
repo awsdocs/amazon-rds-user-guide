@@ -41,6 +41,7 @@ The following limitations apply to RDS Custom for SQL Server:
 + You can't modify the time zone of an existing RDS Custom for SQL Server DB instance\.
 + You can't modify the server\-level collation of an existing RDS Custom for SQL Server DB instance\.
 + Changes to the Microsoft Windows operating system or C: drive don't persist when you replace an Amazon EC2 instance\. However, you can redo those changes using automation\.
++  You can’t stop your RDS Custom for SQL Server DB instance or its underlying Amazon EC2 instance\. Billing for an RDS Custom for SQL Server DB instance cannot be stopped\. 
 + Not all options are supported\. For example, when you create an RDS Custom for SQL Server DB instance, you can't do the following:
   + Change the number of CPU cores and threads per core on the DB instance class\.
   + Turn on storage autoscaling\.

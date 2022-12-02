@@ -49,7 +49,7 @@ For more information about DB option groups, see [Working with option groups](US
 
 ## Resource tagging considerations<a name="restore-from-snapshot.tagging"></a>
 
-When you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot, and then adds those tags to the restored DB instance\.
+When you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS adds the tags from the source DB instance at the time of snapshot creation to the restored DB instance\.
 
 For more information, see [Copying tags to DB instance snapshots](USER_Tagging.md#USER_Tagging.CopyTags)\.
 

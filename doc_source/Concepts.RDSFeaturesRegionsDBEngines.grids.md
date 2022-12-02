@@ -7,6 +7,7 @@ Amazon RDS features are different from engine\-native features and options\. For
 **Topics**
 + [Table conventions](#Concepts.RDS_Fea_Regions_DB-eng.Feature.TableConventions)
 + [Feature quick reference](#Concepts.RDS_Fea_Regions_DB-eng.Feature.QuickReferenceTable)
++ [Blue/Green Deployments](Concepts.RDS_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.md)
 + [Cross\-Region automated backups](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.md)
 + [Cross\-Region read replicas](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md)
 + [Database activity streams](Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams.md)
@@ -34,6 +35,7 @@ The following quick reference table lists each feature and supported RDS DB engi
 
 | Feature | RDS for MariaDB | RDS for MySQL | RDS for Oracle | RDS for PostgreSQL | RDS for SQL Server | 
 | --- | --- | --- | --- | --- | --- | 
+| Blue/Green Deployments | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.md) | – | – | – | 
 | Cross\-Region automated backups | – | – | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.ora) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.pg) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.sq) | 
 | Cross\-Region read replicas | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.mdb) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.my) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.ora) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.pg) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.sq) | 
 | Database activity streams | – | – | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.DBActivityStreams.ora) | – | – | 

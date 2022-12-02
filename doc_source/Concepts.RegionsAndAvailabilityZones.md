@@ -37,6 +37,18 @@ When you work with a DB instance using the AWS CLI or API operations, make sure 
 
 When you create a DB instance, you can choose an Availability Zone or have Amazon RDS choose one for you randomly\. An Availability Zone is represented by an AWS Region code followed by a letter identifier \(for example, `us-east-1a`\)\.
 
+Use the [describe\-availability\-zones](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html) Amazon EC2 command as follows to describe the Availability Zones within the specified Region that are enabled for your account\.
+
+```
+aws ec2 describe-availability-zones --region region-name
+```
+
+For example, to describe the Availability Zones within the US East \(N\. Virginia\) Region \(us\-east\-1\) that are enabled for your account, run the following command:
+
+```
+aws ec2 describe-availability-zones --region us-east-1
+```
+
 You can't choose the Availability Zones for the primary and secondary DB instances in a Multi\-AZ DB deployment\. Amazon RDS chooses them for you randomly\. For more information about Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
 
 **Note**  

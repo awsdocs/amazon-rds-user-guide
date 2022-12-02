@@ -8,8 +8,10 @@ In contrast, *minor version upgrades* include only changes that are backward\-co
 
 If your MySQL DB instance is using read replicas, you must upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. Your DB instance will not be available until the upgrade is complete\. 
 
-**Note**  
 Database engine upgrades require downtime\. The duration of the downtime varies based on the size of your DB instance\.
+
+**Tip**  
+You can minimize the downtime required for DB instance upgrade by using a blue/green deployment\. For more information, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.
 
 **Topics**
 + [Overview of upgrading](#USER_UpgradeDBInstance.MySQL.Overview)

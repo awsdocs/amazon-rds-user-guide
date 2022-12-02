@@ -23,17 +23,13 @@ The following are the general\-purpose DB instance types available:
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.m6gd** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\. These have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
-
-  These DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.m6i** – General\-purpose instance classes that are well suited for a broad range of general\-purpose workloads\.
 + **db\.m5d** – General\-purpose instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
-
-  For the RDS for MySQL and RDS for PostgreSQL DB engines, these DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.m5** –General\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\.
 + **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\.
 
-  Amazon RDS has started the the end\-of\-life process for db\.m3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.m3 DB instance classes, we recommend that you upgrade to a db\.m5 DB instance class as soon as possible\.    
+  For the RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB engines, Amazon RDS has started the the end\-of\-life process for db\.m3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.m3 DB instance classes, we recommend that you upgrade to a db\.m5 DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 
 The following are the memory optimized DB instance types available:
@@ -47,17 +43,13 @@ The following are the memory optimized DB instance types available:
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6gd** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. These have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
-
-  These DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.r6i** – Instance classes that are ideal for running memory\-intensive workloads\.
 + **db\.r5b** – Instance classes that are memory optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance\. This is the fastest block storage performance on EC2\.
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
-
-  For the RDS for MySQL and RDS for PostgreSQL DB engines, these DB instance classes are only supported for Multi\-AZ DB clusters\. For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 + **db\.r5** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
-  Amazon RDS has started the the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
+  For the RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB engines, Amazon RDS has started the the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 
 The following are the burstable\-performance DB instance types available:
@@ -98,13 +90,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 versions, all PostgreSQL 13 versions, PostgreSQL 12\.7 and higher | 
 | db\.m6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 versions, all PostgreSQL 13 versions, PostgreSQL 12\.7 and higher | 
 | db\.m6gd – general\-purpose instance classes powered by AWS Graviton2 processors | 
-| db\.m6gd\.16xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m6gd\.12xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m6gd\.8xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m6gd\.4xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m6gd\.2xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m6gd\.xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m6gd\.large | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.16xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.12xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.8xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.4xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.2xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m6gd\.large | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.m6i – general\-purpose instance classes | 
 | db\.m6i\.32xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher  | 
 | db\.m6i\.24xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
@@ -116,14 +108,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6i\.xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.m6i\.large | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Oracle Database 19c  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.m5d – general\-purpose instance classes | 
-| db\.m5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.m5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.m5d\.large | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.m5 – general\-purpose instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
@@ -179,13 +171,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6g\.xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
 | db\.r6g\.large | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
 | db\.r6gd – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6gd\.16xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r6gd\.12xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r6gd\.8xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r6gd\.4xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r6gd\.2xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r6gd\.xlarge | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r6gd\.large | No | No | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.16xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.12xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.8xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.4xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.2xlarge | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.xlarge | No | No | MySQL 8\.0\.28 & higher  | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r6gd\.large | No | No | MySQL 8\.0\.28 & higher | No | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r6i – memory\-optimized instance classes | 
 | db\.r6i\.32xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher  | 
 | db\.r6i\.24xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
@@ -197,14 +189,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6i\.xlarge | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.r6i\.large | MariaDB version 10\.6\.7 & higher 10\.6 versions, MariaDB version 10\.5\.15 & higher 10\.5 versions, and MariaDB version 10\.4\.24 & higher 10\.4 versions | Yes | MySQL version 8\.0\.28 & higher 8\.0 versions |  Yes  | All PostgreSQL 14 versions; PostgreSQL 13\.4, 12\.8, 11\.13 and higher | 
 | db\.r5d – memory\-optimized instance classes | 
-| db\.r5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
-| db\.r5d\.large | No | Yes | MySQL 8\.0\.28 & higher Multi\-AZ DB clusters | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.24xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.16xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.12xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.8xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.4xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.2xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.xlarge | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
+| db\.r5d\.large | No | Yes | MySQL 8\.0\.28 & higher | Yes | PostgreSQL 13\.4 Multi\-AZ DB clusters | 
 | db\.r5b – memory\-optimized instance classes preconfigured for high memory, storage, and I/O  | 
 | db\.r5b\.8xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 
 | db\.r5b\.6xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 

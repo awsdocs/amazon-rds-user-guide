@@ -6,6 +6,8 @@ When you restore a DB instance to a point in time, you can choose the default vi
 
 Restored DB instances are automatically associated with the default DB parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
+If the source DB instance has resource tags, RDS adds the latest tags to the restored DB instance\.
+
 RDS uploads transaction logs for DB instances to Amazon S3 every five minutes\. To see the latest restorable time for a DB instance, use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for each DB instance, choose **Automated backups** in the Amazon RDS console\.

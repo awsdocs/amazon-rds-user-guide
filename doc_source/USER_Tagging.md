@@ -18,6 +18,7 @@ You can tag the following Amazon RDS resources:
 + DB subnet groups
 + RDS Proxies
 + RDS Proxy endpoints
++ Blue/green deployments
 
 **Note**  
 Currently, you can't tag RDS Proxies and RDS Proxy endpoints by using the AWS Management Console\.
@@ -168,7 +169,7 @@ You can specify that tags are copied to DB snapshots for the following actions:
 + Creating a read replica\.
 + Copying a DB snapshot\.
 
-In most cases, tags aren't copied by default\. However, when you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot\. RDS then adds those tags to the restored DB instance\.
+In most cases, tags aren't copied by default\. However, when you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags\. If yes, the new tags are added to the restored DB instance\. If there are no new tags, RDS adds the tags from the source DB instance at the time of snapshot creation to the restored DB instance\.
 
 To prevent tags from source DB instances from being added to restored DB instances, we recommend that you specify new tags when restoring a DB instance\.
 

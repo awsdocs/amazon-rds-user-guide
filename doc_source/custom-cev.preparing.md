@@ -451,7 +451,9 @@ In the following example for the July 2021 PSU for Oracle Database 12c Release 1
     ],
     "installationParameters": {
         "unixGroupName": "dba",
+        "unixGroupId": 123,
         "unixUname": "oracle",
+        "unixUid": 12345,
         "oracleHome": "/home/oracle/oracle.12.1.0.2",
         "oracleBase": "/home/oracle"
     }
@@ -492,7 +494,9 @@ In following example for the October 2021 PSU for Oracle Database 12c Release 2 
     ],
     "installationParameters": {
         "unixGroupName": "dba",
+        "unixGroupId": 123,
         "unixUname": "oracle",
+        "unixUid": 12345,
         "oracleHome": "/home/oracle/oracle.12.2.0.1",
         "oracleBase": "/home/oracle"
     }
@@ -528,7 +532,9 @@ In following example for the October 2021 PSU for Oracle Database 18c, RDS Custo
     ]
     "installationParameters": {
         "unixGroupName": "dba",
+        "unixGroupId": 123,
         "unixUname": "oracle",
+        "unixUid": 12345,
         "oracleHome": "/home/oracle/18.0.0.0.ru-2020-10.rur-2020-10.r1",
         "oracleBase": "/home/oracle/"
     }
@@ -562,7 +568,9 @@ In the following example for Oracle Database 19c, RDS Custom applies p32126828, 
     ],
     "installationParameters": {
         "unixGroupName": "dba",
+        "unixGroupId": 123,
         "unixUname": "oracle",
+        "unixUid": 12345,
         "oracleHome": "/home/oracle/oracle.19.0.0.0.ru-2020-04.rur-2020-04.r1.EE.1",
         "oracleBase": "/home/oracle"
     }

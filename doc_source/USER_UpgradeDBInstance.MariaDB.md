@@ -10,8 +10,10 @@ If your MariaDB DB instance is using read replicas, you must upgrade all of the 
 
 For more information about MariaDB supported versions and version management, see [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)\. 
 
-**Note**  
 Database engine upgrades require downtime\. The duration of the downtime varies based on the size of your DB instance\.
+
+**Tip**  
+You can minimize the downtime required for DB instance upgrade by using a blue/green deployment\. For more information, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.
 
 **Topics**
 + [Overview of upgrading](#USER_UpgradeDBInstance.MariaDB.Overview)

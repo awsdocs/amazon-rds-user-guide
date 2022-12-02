@@ -10,6 +10,7 @@ Amazon RDS generates a significant number of events in categories that you can s
 + [DB snapshot events](#USER_Events.Messages.snapshot)
 + [DB cluster snapshot events](#USER_Events.Messages.cluster-snapshot)
 + [RDS Proxy events](#USER_Events.Messages.rds-proxy)
++ [Blue/green deployment events](#USER_Events.Messages.BlueGreenDeployments)
 + [Custom engine version events](#USER_Events.Messages.CEV)
 + [Message attributes](#USER_Events.Messages.Attributes)
 
@@ -123,6 +124,7 @@ The following table shows the event category and a list of events when a DB inst
 |  notification  | RDS\-EVENT\-0189 |  The gp2 burst balance credits for the RDS database instance are low\. To resolve this issue, reduce IOPS usage or modify your storage settings to enable higher performance\. For more information, see [I/O credits and burst performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html#EBSVolumeTypes_gp2) in the *Amazon Elastic Compute Cloud User Guide*\.  | 
 |  notification  | RDS\-EVENT\-0225 |  Storage size \[value\] GB is approaching the maximum storage threshold \[value\] GB\. This event is invoked when storage reaches 80% of the maximum storage threshold\. To avoid the event, increase the maximum storage threshold\.  | 
 |  notification  | RDS\-EVENT\-0231 |  Your DB instance's storage modification encountered an internal error\. The modification request is pending and will be retried later\.  | 
+|  notification  | RDS\-EVENT\-0253 |  The database is using the doublewrite buffer\. RDS Optimized Writes is incompatible with the instance storage configuration\. For more information, see [Improving write performance with Amazon RDS Optimized Writes](rds-optimized-writes.md)\.  | 
 |  read replica  | RDS\-EVENT\-0045 |  An error has occurred in the read replication process\. For more information, see the event message\.  In addition, see the troubleshooting section for read replicas for your DB engine\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html)   | 
 |  read replica  | RDS\-EVENT\-0046 | The read replica has resumed replication\. This message appears when you first create a read replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  read replica  | RDS\-EVENT\-0057 |  Replication on the read replica was terminated\.  | 
@@ -217,6 +219,25 @@ The following table shows the event category and a list of events when an RDS Pr
 | deletion | RDS\-EVENT\-0205 |  RDS deleted the DB proxy \(RDS Proxy\)\.  | 
 |  deletion  | RDS\-EVENT\-0208 |  RDS deleted the endpoint of DB proxy \(RDS Proxy\)\.  | 
 |  failure  | RDS\-EVENT\-0243 |  RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
+
+## Blue/green deployment events<a name="USER_Events.Messages.BlueGreenDeployments"></a>
+
+The following table shows the event category and a list of events when a blue/green deployment is the source type\.
+
+For more information about blue/green deployments, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.
+
+
+|  Category  | Amazon RDS event ID |  Description  | 
+| --- | --- | --- | 
+|  creation  | RDS\-EVENT\-0244 |  Blue/green deployment tasks completed\. You can make more modifications to the green environment databases or switch over the deployment\.  | 
+|  deletion  | RDS\-EVENT\-0246 |  Blue/green deployment deleted\.  | 
+|  failure  | RDS\-EVENT\-0245 |  Creation of blue/green deployment failed\.  | 
+|  failure  | RDS\-EVENT\-0249 |  Switchover canceled on blue/green deployment\.  | 
+|  failure  | RDS\-EVENT\-0252 |  Switchover from primary source to target canceled\.  | 
+|  notification  | RDS\-EVENT\-0247 |  Switchover started on blue/green deployment\.  | 
+|  notification  | RDS\-EVENT\-0248 |  Switchover completed on blue/green deployment\.  | 
+|  notification  | RDS\-EVENT\-0250 |  Switchover from primary source to target started\.  | 
+|  notification  | RDS\-EVENT\-0251 |  Switchover from primary source to target completed and databases renamed\.  | 
 
 ## Custom engine version events<a name="USER_Events.Messages.CEV"></a>
 

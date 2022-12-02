@@ -158,7 +158,7 @@ You can also use the Console\. Choose **Parameter groups** from the Amazon RDS m
 |  `max_stack_depth`  | Dynamic | Sets the maximum stack depth, in kilobytes\. | 
 |  `max_standby_archive_delay`  | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing archived WAL data\. | 
 |  `max_standby_streaming_delay`  | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing streamed WAL data\. | 
-| max\_wal\_size | Dynamic | Sets the WAL size that triggers the checkpoint\. For PostgreSQL version 9\.6 and earlier, max\_wal\_size is in units of 16 MB\. For PostgreSQL version 10 and later, max\_wal\_size is in units of 1 MB\.  | 
+| max\_wal\_size | Dynamic | Sets the WAL size \(MB\) that triggers a checkpoint\. For all versions after RDS for PostgreSQL 10, the default is at least 1 GB \(1024 MB\)\. For example, max\_wal\_size setting for RDS for PostgreSQL 14 is 2 GB \(2048 MB\)\. Use the SHOW max\_wal\_size; command on your RDS for PostgreSQL DB instance to see its current value\. | 
 | min\_wal\_size | Dynamic | Sets the minimum size to shrink the WAL to\. For PostgreSQL version 9\.6 and earlier, min\_wal\_size is in units of 16 MB\. For PostgreSQL version 10 and later, min\_wal\_size is in units of 1 MB\.  | 
 |  `quote_all_identifiers`  | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
 |  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. This parameter has no value unless query plan management \(QPM\) is turned on\. When QPM is on, the default value for this parameter 4\.  | 

@@ -2,7 +2,10 @@
 
 You can extend the functionality of PostgreSQL by installing a variety of extensions and modules\. For example, to work with spatial data you can install and use the PostGIS extension\. For more information, see [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)\. As another example, if you want to improve data entry for very large tables, you can consider partitioning your data by using the `pg_partman` extension\. To learn more, see [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)\.
 
-In some cases, rather than installing an extension, you might add a specific module to the list of `shared_preload_libraries` in your Aurora PostgreSQL DB cluster's custom DB cluster parameter group\. Typically, the default DB cluster parameter group loads only the `pg_stat_statements`, but several other modules are available to add to the list\. For example, you can add scheduling capability by adding the `pg_cron` module, as detailed in [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)\. As another example, you can log query execution plans by loading the `auto_explain` module\. To learn more, see [Logging execution plans of queries](https://aws.amazon.com/premiumsupport/knowledge-center/rds-postgresql-tune-query-performance/#) in the AWS knowledge center\.
+**Note**  
+As of RDS for PostgreSQL 14\.5, RDS for PostgreSQL supports Trusted Language Extensions for PostgreSQL\. This feature is implemented as the extension `pg_tle`, which you can add to your RDS for PostgreSQL DB instance\. By using this extension, developers can create their own PostgreSQL extensions in a safe environment that simplifies the setup and configuration requirements\. For more information, see [Working with Trusted Language Extensions for PostgreSQL](PostgreSQL_trusted_language_extension.md)\.
+
+In some cases, rather than installing an extension, you might add a specific module to the list of `shared_preload_libraries` in your RDS for PostgreSQL DB instance's custom DB parameter group\. Typically, the default DB cluster parameter group loads only the `pg_stat_statements`, but several other modules are available to add to the list\. For example, you can add scheduling capability by adding the `pg_cron` module, as detailed in [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)\. As another example, you can log query execution plans by loading the `auto_explain` module\. To learn more, see [Logging execution plans of queries](https://aws.amazon.com/premiumsupport/knowledge-center/rds-postgresql-tune-query-performance/#) in the AWS knowledge center\.
 
 Depending on your version of RDS for PostgreSQL, installing an extension might require `rds_superuser` permissions, as follows: 
 + For RDS for PostgreSQL versions 12 and earlier versions, installing extensions requires `rds_superuser` privileges\.
@@ -36,7 +39,7 @@ RDS for PostgreSQL doesn't support the `utl_file` package that is part of the or
 
 **To use the orafce extension**
 
-1. Connect to the DB instance with the master user name that you used to create the DB instance\. 
+1. Connect to the DB instance with the primary user name that you used to create the DB instance\. 
 
    If you want to turn on orafce for a different database in the same DB instance, use the `/c dbname` psql command\. Using this command, you change from the primary database after initiating the connection\.
 
