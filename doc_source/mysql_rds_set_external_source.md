@@ -1,6 +1,6 @@
-# mysql\.rds\_set\_external\_master<a name="mysql_rds_set_external_master"></a>
+# mysql\.rds\_set\_external\_source<a name="mysql_rds_set_external_source"></a>
 
-Configures a MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\. The `mysql.rds_set_external_master` procedure is deprecated and will be removed in a future release\. Use `mysql\.rds\_set\_external\_source` instead\.
+Configures a MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\.
 
 **Important**  
 To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
@@ -8,12 +8,12 @@ To run this procedure, `autocommit` must be enabled\. To enable it, set the `aut
 **Note**  
 You can use the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure to configure an external source database instance and delayed replication\.
 
-## Syntax<a name="mysql_rds_set_external_master-syntax"></a>
+## Syntax<a name="mysql_rds_set_external_source-syntax"></a>
 
  
 
 ```
-CALL mysql.rds_set_external_master (
+CALL mysql.rds_set_external_source (
   host_name
   , host_port
   , replication_user_name
@@ -24,7 +24,7 @@ CALL mysql.rds_set_external_master (
 );
 ```
 
-## Parameters<a name="mysql_rds_set_external_master-parameters"></a>
+## Parameters<a name="mysql_rds_set_external_source-parameters"></a>
 
  *host\_name*   
 The host name or IP address of the MySQL instance running external to Amazon RDS to become the source database instance\.
@@ -49,11 +49,11 @@ You can determine the binlog file name and location by running `SHOW MASTER STAT
 A value that specifies whether Secure Socket Layer \(SSL\) encryption is used on the replication connection\. 1 specifies to use SSL encryption, 0 specifies to not use encryption\. The default is 0\.  
 The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set to 0, which means that the connection is encrypted, but the certificates aren't verified\.
 
-## Usage notes<a name="mysql_rds_set_external_master-usage-notes"></a>
+## Usage notes<a name="mysql_rds_set_external_source-usage-notes"></a>
 
- The master user must run the `mysql.rds_set_external_master` procedure\. This procedure must be run on the MySQL DB instance to be configured as the read replica of a MySQL instance running external to Amazon RDS\. 
+ The master user must run the `mysql.rds_set_external_source` procedure\. This procedure must be run on the MySQL DB instance to be configured as the read replica of a MySQL instance running external to Amazon RDS\. 
 
- Before you run `mysql.rds_set_external_master`, you must configure the instance of MySQL running external to Amazon RDS to be a source database instance\. To connect to the MySQL instance running external to Amazon RDS, you must specify `replication_user_name` and `replication_user_password` values that indicate a replication user that has `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the external instance of MySQL\. 
+ Before you run `mysql.rds_set_external_source`, you must configure the instance of MySQL running external to Amazon RDS to be a source database instance\. To connect to the MySQL instance running external to Amazon RDS, you must specify `replication_user_name` and `replication_user_password` values that indicate a replication user that has `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the external instance of MySQL\. 
 
 **To configure an external instance of MySQL as a source database instance**
 
@@ -90,16 +90,16 @@ To use encrypted replication, configure source database instance to use SSL conn
 **Note**  
 We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
 
-After calling `mysql.rds_set_external_master` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the read replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the read replica configuration\.
+After calling `mysql.rds_set_external_source` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the read replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the read replica configuration\.
 
-When `mysql.rds_set_external_master` is called, Amazon RDS records the time, user, and an action of `set master` in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
+When `mysql.rds_set_external_source` is called, Amazon RDS records the time, user, and an action of `set master` in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
 
-## Examples<a name="mysql_rds_set_external_master-examples"></a>
+## Examples<a name="mysql_rds_set_external_source-examples"></a>
 
 When run on a MySQL DB instance, the following example configures the DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\.
 
 ```
-call mysql.rds_set_external_master(
+call mysql.rds_set_external_source(
   'Externaldb.some.com',
   3306,
   'repl_user',

@@ -242,7 +242,7 @@ FROM (
           AND ((s.tablename = i.tblname AND s.attname = pg_catalog.pg_get_indexdef(a.attrelid, a.attnum, TRUE)) 
           -- stats from tbl
           OR  (s.tablename = i.idxname AND s.attname = a.attname))
-          -- stats from functionnal cols
+          -- stats from functional cols
         JOIN pg_type AS t ON a.atttypid = t.oid
       WHERE a.attnum > 0
       GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9

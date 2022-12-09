@@ -64,6 +64,8 @@ Times are shown in your local time zone, which is indicated by an offset from Co
 
 To restore a DB instance to a specified time, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\. This example also enables storage autoscaling\.
 
+Resource tagging is supported for this operation\. When you use the `--tags` option, the source DB instance tags are ignored and the provided ones are used\. Otherwise, the latest tags from the source instance are used\.
+
 You can specify other settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
 **Example**  

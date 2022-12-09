@@ -71,7 +71,7 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-instances \
-  --filters "Name=engine,Values=mariadb" \                  
+  --filters "Name=engine,Values=mariadb" \
   --query "*[].[DBInstanceIdentifier,Endpoint.Address,Endpoint.Port,MasterUsername]"
 ```
 
@@ -79,7 +79,7 @@ For Windows:
 
 ```
 aws rds describe-db-instances ^
-  --filters "Name=engine,Values=mariadb" ^                  
+  --filters "Name=engine,Values=mariadb" ^
   --query "*[].[DBInstanceIdentifier,Endpoint.Address,Endpoint.Port,MasterUsername]"
 ```
 

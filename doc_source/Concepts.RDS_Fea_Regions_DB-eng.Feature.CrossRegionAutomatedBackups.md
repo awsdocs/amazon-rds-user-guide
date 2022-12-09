@@ -45,8 +45,8 @@ Following are the supported engines and Region availability for backup replicati
 | Europe \(Spain\) | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | Europe \(Zurich\) | – | – | – | 
-| Middle East \(Bahrain\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
-| Middle East \(UAE\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
+| Middle East \(Bahrain\) | – | – | – | 
+| Middle East \(UAE\) | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | AWS GovCloud \(US\-East\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
 | AWS GovCloud \(US\-West\) | All versions | All versions | Version 12\.1\.0\.2\.v10 and higher | 
@@ -83,8 +83,8 @@ Following are the supported engines and Region availability for backup replicati
 | Europe \(Spain\) | – | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Zurich\) | – | – | – | – | – | 
-| Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | All versions | 
-| Middle East \(UAE\) | All versions | All versions | All versions | All versions | 
+| Middle East \(Bahrain\) | – | – | – | – | – | 
+| Middle East \(UAE\) | – | – | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 
 | AWS GovCloud \(US\-East\) | All versions | All versions | All versions | All versions | All versions | 
 | AWS GovCloud \(US\-West\) | All versions | All versions | All versions | All versions | All versions | 
@@ -105,7 +105,7 @@ Backup replication isn't supported for encrypted SQL Server DB instances\. Make 
 | US West \(Oregon\) | All versions | All versions | All versions | All versions | 
 | Africa \(Cape Town\) | – | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | – | 
-| Asia Pacific \(Hyderabad\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | 
@@ -124,8 +124,8 @@ Backup replication isn't supported for encrypted SQL Server DB instances\. Make 
 | Europe \(Spain\) | – | – | – | – | 
 | Europe \(Stockholm\) | All versions | All versions | All versions | All versions | 
 | Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | 
-| Middle East \(UAE\) | All versions | All versions | All versions | All versions | 
+| Middle East \(Bahrain\) | – | – | – | – | 
+| Middle East \(UAE\) | – | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | 
 | AWS GovCloud \(US\-East\) | All versions | All versions | All versions | All versions | 
 | AWS GovCloud \(US\-West\) | All versions | All versions | All versions | All versions | 

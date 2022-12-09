@@ -30,6 +30,37 @@ Using a snapshot to create the standby instance avoids downtime when you convert
 While this capability lets large volumes be restored from snapshots quickly, it can cause a significant increase in the latency of I/O operations because of the synchronous replication\. This latency can impact your database performance\. We highly recommend as a best practice not to perform Multi\-AZ conversion on a production DB instance\.  
 To avoid the performance impact on the DB instance currently serving the sensitive workload, create a read replica and enable backups on the read replica\. Convert the read replica to Multi\-AZ, and run queries that load the data into the read replica's volumes \(on both AZs\)\. Then promote the read replica to be the primary DB instance\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
 
+There are two ways to modify a DB instance to be a Multi\-AZ DB instance deployment:
+
+**Topics**
++ [Convert to a Multi\-AZ DB instance deployment with the RDS console](#Concepts.MultiAZ.Migrating.Convert)
++ [Modifying a DB instance to be a Multi\-AZ DB instance deployment](#Concepts.MultiAZ.Migrating.Modify)
+
+### Convert to a Multi\-AZ DB instance deployment with the RDS console<a name="Concepts.MultiAZ.Migrating.Convert"></a>
+
+You can use the RDS console to convert a DB instance to a Multi\-AZ DB instance deployment\.
+
+You can only use the console to complete the conversion\. To use the AWS CLI or RDS API, follow the instructions in [Modifying a DB instance to be a Multi\-AZ DB instance deployment](#Concepts.MultiAZ.Migrating.Modify)\.
+
+**To convert to a Multi\-AZ DB instance deployment with the RDS console**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
+
+1. From **Actions**, choose **Convert to Multi\-AZ deployment**\.
+
+1. On the confirmation page, choose **Apply immediately** to apply the changes immediately\. Choosing this option doesn't cause downtime, but there is a possible performance impact\. Alternatively, you can choose to apply the update during the next maintenance window\. For more information, see [Using the Apply Immediately setting](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\.
+
+1. Choose **Convert to Multi\-AZ**\.
+
+### Modifying a DB instance to be a Multi\-AZ DB instance deployment<a name="Concepts.MultiAZ.Migrating.Modify"></a>
+
+You can modify a DB instance to be a MultiAZ DB instance deployment in the following ways:
++ Using the RDS console, modify the DB instance, and set **Multi\-AZ deployment** to **Yes**\.
++ Using the AWS CLI, call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command, and set the `--multi-az` option\.
++ Using the RDS API, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation, and set the `MultiAZ` parameter to `true`\.
+
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. After the modification is complete, Amazon RDS triggers an event \(RDS\-EVENT\-0025\) that indicates the process is complete\. You can monitor Amazon RDS events\. For more information about events, see [Working with Amazon RDS event notification](USER_Events.md)\.
 
 ## Failover process for Amazon RDS<a name="Concepts.MultiAZ.Failover"></a>

@@ -82,7 +82,7 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-instances \
-  --filters "Name=engine,Values=mysql" \                  
+  --filters "Name=engine,Values=mysql" \
   --query "*[].[DBInstanceIdentifier,Endpoint.Address,Endpoint.Port,MasterUsername]"
 ```
 
@@ -90,7 +90,7 @@ For Windows:
 
 ```
 aws rds describe-db-instances ^
-  --filters "Name=engine,Values=mysql" ^                  
+  --filters "Name=engine,Values=mysql" ^
   --query "*[].[DBInstanceIdentifier,Endpoint.Address,Endpoint.Port,MasterUsername]"
 ```
 

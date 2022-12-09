@@ -9,9 +9,12 @@ The following system stored procedures are supported for Amazon RDS DB instances
 **Replication** 
 + [mysql\.rds\_set\_master\_auto\_position](mysql_rds_set_master_auto_position.md)
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
++ [mysql\.rds\_set\_external\_source](mysql_rds_set_external_source.md)
 + [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md)
 + [mysql\.rds\_set\_external\_master\_with\_auto\_position](mysql_rds_set_external_master_with_auto_position.md)
++ [mysql\.rds\_set\_external\_source\_with\_auto\_position](mysql_rds_set_external_source_with_auto_position.md)
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
++ [mysql\.rds\_reset\_external\_source](mysql_rds_reset_external_source.md)
 + [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md)
 + [mysql\.rds\_remove\_binlog\_ssl\_material](mysql_rds_remove_binlog_ssl_material.md)
 + [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md)
