@@ -6,7 +6,7 @@ In this topic, you can find a summary of the Amazon RDS Custom for Oracle featur
 + [Region and version availability](#custom-reqs-limits.RegionVersionAvailability)
 + [DB instance class support for RDS Custom for Oracle](#custom-reqs-limits.instances)
 + [General requirements for RDS Custom for Oracle](#custom-reqs-limits.reqs)
-+ [Limitations for RDS Custom for Oracle](#custom-reqs-limits.limits)
++ [General limitations for RDS Custom for Oracle](#custom-reqs-limits.limits)
 
 ## Region and version availability<a name="custom-reqs-limits.RegionVersionAvailability"></a>
 
@@ -29,7 +29,7 @@ Make sure to follow these requirements for Amazon RDS Custom for Oracle:
 + Make sure to supply a networking configuration that RDS Custom can use to access other AWS services\. For specific requirements, see [Configuring IAM and your VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
 + Make sure that the combined number of RDS Custom and Amazon RDS DB instances doesn't exceed your quota limit\. For example, if your quota for Amazon RDS is 40 DB instances, you can have 20 RDS Custom for Oracle DB instances and 20 Amazon RDS DB instances\.
 
-## Limitations for RDS Custom for Oracle<a name="custom-reqs-limits.limits"></a>
+## General limitations for RDS Custom for Oracle<a name="custom-reqs-limits.limits"></a>
 
 The following limitations apply to RDS Custom for Oracle:
 + You can't provide your own AMI\.
@@ -41,7 +41,8 @@ The following limitations apply to RDS Custom for Oracle:
   + Specify your own DB parameter group or option group\.
   + Turn on Performance Insights\.
   + Turn on automatic minor version upgrade\.
-  + Change the DB instance class\. For example, you can't change a db\.m5\.xlarge DB instance to db\.m5\.2xlarge\. However, you can restore a snapshot of your RDS Custom for Oracle DB instance to a different instance class\.
-  + Exceed the maximum DB instance storage of 64 TiB\.
-+ You can't create more than one database on an RDS Custom for Oracle DB instance\.
++ The maximum DB instance storage is 64 TiB\.
++ Only one database is supported on an RDS Custom for Oracle DB instance\.
 + You can’t stop your RDS Custom for Oracle DB instance or its underlying Amazon EC2 instance\. Billing for an RDS Custom for Oracle DB instance cannot be stopped\.
+
+For limitations specific to modifying an RDS Custom for Oracle DB instance, see [Modifying your RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.modifying)\.

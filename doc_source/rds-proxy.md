@@ -93,9 +93,13 @@ For additional limitations for each DB engine, see the following sections:
 
  The following additional limitations apply to RDS Proxy with RDS for PostgreSQL databases:
 + RDS Proxy doesn't support session pinning filters for PostgreSQL\.
-+ RDS Proxy doesn't support PostgreSQL SCRAM\-SHA\-256 authentication\.
 +  Currently, all proxies listen on port 5432 for PostgreSQL\.
 + For PostgreSQL, RDS Proxy doesn't currently support canceling a query from a client by issuing a `CancelRequest`\. This is the case, for example, when you cancel a long\-running query in an interactive psql session by using Ctrl\+C\. 
 +  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.
 + RDS Proxy doesn't multiplex connections when your client application drivers use the PostgreSQL extended query protocol\.
 + RDS Proxy currently doesn't support streaming replication mode\.
+
+**Important**  
+For existing proxies with PostgreSQL databases, if you modify the database authentication to use `SCRAM` only, the proxy becomes unavailable for up to 60 seconds\. To avoid the issue, do one of the following:  
+Ensure that the database allows both `SCRAM` and `MD5` authentication\.
+To use only `SCRAM` authentication, create a new proxy, migrate your application traffic to the new proxy, then delete the proxy previously associated with the database\.

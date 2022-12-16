@@ -289,12 +289,11 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
 1.  Choose all the settings for your proxy\. 
 
     For **Proxy configuration**, provide information for the following: 
-   +  **Proxy identifier**\. Specify a name of your choosing, unique within your AWS account ID and current AWS Region\. 
    +  **Engine family**\. This setting determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database\. For RDS for MariaDB or RDS for MySQL, choose **MySQL**\. For RDS for PostgreSQL, choose **PostgreSQL**\. For RDS for SQL Server, choose **SQL Server**\. 
-   +  **Require Transport Layer Security**\. Choose this setting if you want the proxy to enforce TLS/SSL for all client connections\. For an encrypted or unencrypted connection to a proxy, the proxy uses the same encryption setting when it makes a connection to the underlying database\. 
+   +  **Proxy identifier**\. Specify a name of your choosing, unique within your AWS account ID and current AWS Region\. 
    +  **Idle client connection timeout**\. Choose a time period that a client connection can be idle before the proxy can close it\. The default is 1,800 seconds \(30 minutes\)\. A client connection is considered idle when the application doesn't submit a new request within the specified time after the previous request completed\. The underlying database connection stays open and is returned to the connection pool\. Thus, it's available to be reused for new client connections\. 
 
-      Consider lowering the idle client connection timeout if you want the proxy to proactively remove stale connections\. If your workload is spiking, consider raising the idle client connection timeout to save the cost of establishing connections\. 
+      Consider lowering the idle client connection timeout if you want the proxy to proactively remove stale connections\. If your workload is spiking, consider raising the idle client connection timeout to save the cost of establishing connections\.
 
     For **Target group configuration**, provide information for the following: 
    +  **Database**\. Choose one RDS DB instance or Aurora DB cluster to access through this proxy\. The list only includes DB instances and clusters with compatible database engines, engine versions, and other settings\. If the list is empty, create a new DB instance or cluster that's compatible with RDS Proxy\. To do so, follow the procedure in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) \. Then try creating the proxy again\. 
@@ -303,10 +302,14 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
    +  **Connection borrow timeout**\. In some cases, you might expect the proxy to sometimes use all available database connections\. In such cases, you can specify how long the proxy waits for a database connection to become available before returning a timeout error\. You can specify a period up to a maximum of five minutes\. This setting only applies when the proxy has the maximum number of connections open and all connections are already in use\.
    +  **Initialization query**\. \(Optional\) You can specify one or more SQL statements for the proxy to run when opening each new database connection\. The setting is typically used with `SET` statements to make sure that each connection has identical settings such as time zone and character set\. For multiple statements, use semicolons as the separator\. You can also include multiple variables in a single `SET` statement, such as `SET x=1, y=2`\. Initialization query is not currently supported for PostgreSQL\.
 
-    For **Connectivity**, provide information for the following: 
-   +  **Secrets Manager secrets**\. Choose at least one Secrets Manager secret that contains database user credentials for the RDS DB instance or Aurora DB cluster to access with this proxy\. 
+    For **Authentication**, provide information for the following:
    +  **IAM role**\. Choose an IAM role that has permission to access the Secrets Manager secrets that you chose earlier\. You can also choose for the AWS Management Console to create a new IAM role for you and use that\. 
-   +  **IAM Authentication**\. Choose whether to require, allow, or disallow IAM authentication for connections to your proxy\. The allow option is only valid for proxies for RDS for SQL Server\. The choice of IAM authentication or native database authentication applies to all DB users that access this proxy\. 
+   +  **Secrets Manager secrets**\. Choose at least one Secrets Manager secret that contains database user credentials for the RDS DB instance or Aurora DB cluster to access with this proxy\. 
+   + **Client authentication type**\. Choose the type of authentication the proxy uses for connections from clients\. Your choice applies to all Secrets Manager secrets that you associate with this proxy\. If you need to specify a different client authentication type for each secret, create your proxy by using the AWS CLI or the API instead\.
+   +  **IAM authentication**\. Choose whether to require, allow, or disallow IAM authentication for connections to your proxy\. The allow option is only valid for proxies for RDS for SQL Server\.  Your choice applies to all Secrets Manager secrets that you associate with this proxy\. If you need to specify a different IAM authentication for each secret, create your proxy by using the AWS CLI or the API instead\. 
+
+    For **Connectivity**, provide information for the following:
+   +  **Require Transport Layer Security**\. Choose this setting if you want the proxy to enforce TLS/SSL for all client connections\. For an encrypted or unencrypted connection to a proxy, the proxy uses the same encryption setting when it makes a connection to the underlying database\.
    +  **Subnets**\. This field is prepopulated with all the subnets associated with your VPC\. You can remove any subnets that you don't need for this proxy\. You must leave at least two subnets\. 
 
     Provide additional connectivity configuration: 

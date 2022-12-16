@@ -19,7 +19,7 @@ For more information about major and minor version upgrades for a specific DB en
 For major version upgrades, you must manually modify the DB engine version through the AWS Management Console, AWS CLI, or RDS API\. For minor version upgrades, you can manually modify the engine version, or you can choose to enable auto minor version upgrades\.
 
 **Note**  
-Database engine upgrades require downtime\. The duration of the downtime varies based on the size of your DB instance\.
+Database engine upgrades require downtime\. You can minimize the downtime required for DB instance upgrade by using a blue/green deployment\. For more information, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\.
 
 **Topics**
 + [Manually upgrading the engine version](#USER_UpgradeDBInstance.Upgrading.Manual)

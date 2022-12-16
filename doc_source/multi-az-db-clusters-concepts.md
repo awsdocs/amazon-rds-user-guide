@@ -319,7 +319,8 @@ The following limitations apply to Multi\-AZ DB clusters:
 
     As an alternative, you can restore a Multi\-AZ DB cluster to a point in time and specify a different port\.
   + Option groups
-  + Read replicas
+  + Creating a read replica with a Multi\-AZ DB cluster source
+  + Creating a Multi\-AZ DB cluster read replica with a DB instance source
   + Reserved DB instances
   + Restoring a Multi\-AZ DB cluster snapshot from an Amazon S3 bucket
   + Storage autoscaling by setting the maximum allocated storage

@@ -6,6 +6,9 @@ You can make changes to the RDS DB instances in the green environment without af
 
 Because the green environment is a copy of the topology of the production environment, the green environment includes the features used by the DB instance\. These features include the read replicas, the storage configuration, DB snapshots, automated backups, Performance Insights, and Enhanced Monitoring\. If the blue DB instance is a Multi\-AZ DB instance deployment, then the green DB instance is also a Multi\-AZ DB instance deployment\.
 
+**Note**  
+Currently, blue/green deployments are supported only for RDS for MariaDB and RDS for MySQL\. 
+
 **Topics**
 + [Benefits of using Amazon RDS Blue/Green Deployments](#blue-green-deployments-benefits)
 + [Workflow of a blue/green deployment](#blue-green-deployments-major-steps)
@@ -157,3 +160,6 @@ The following limitations apply to blue/green deployments:
   + You can't change an encrypted DB instance into an unencrypted DB instance\.
   + You can't change a blue environment DB instance to a higher engine version than its corresponding green environment DB instance\.
   + The resources in the blue environment and green environment must be in the same AWS account\.
+  + If the source database is associated with a custom option group, you can't specify a major version upgrade when you create the blue/green deployment\.
+
+    In this case, you can create a blue/green deployment without specifying a major version upgrade\. Then, you can upgrade the database in the green environment\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.

@@ -208,6 +208,11 @@ RDS for PostgreSQL version 13\.1 and higher support scram\-sha\-256\. These vers
 
  you can require the RDS for PostgreSQL DB instance to accept only passwords that use the scram\-sha\-256 algorithm\.
 
+**Important**  
+For existing RDS Proxies with PostgreSQL databases, if you modify the database authentication to use `SCRAM` only, the proxy becomes unavailable for up to 60 seconds\. To avoid the issue, do one of the following:  
+Ensure that the database allows both `SCRAM` and `MD5` authentication\.
+To use only `SCRAM` authentication, create a new proxy, migrate your application traffic to the new proxy, then delete the proxy previously associated with the database\.
+
 Before making changes to your system, be sure you understand the complete process, as follows:
 + Get information about all roles and password encryption for all database users\. 
 + Double\-check the parameter settings for your RDS for PostgreSQL DB instance for the parameters that control password encryption\.

@@ -93,34 +93,34 @@ Following are the supported engines and Region availability for RDS Proxy with R
 
 | Region | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | RDS for PostgreSQL 12 | RDS for PostgreSQL 11 | RDS for PostgreSQL 10 | 
 | --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | – | All versions | All versions | All versions | All versions | 
-| US East \(N\. Virginia\) | – | All versions | All versions | All versions | All versions | 
-| US West \(N\. California\) | – | All versions | All versions | All versions | All versions | 
-| US West \(Oregon\) | – | All versions | All versions | All versions | All versions | 
-| Africa \(Cape Town\) | – | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Hong Kong\) | – | All versions | All versions | All versions | All versions | 
+| US East \(Ohio\) | All versions | All versions | All versions | All versions | All versions | 
+| US East \(N\. Virginia\) | All versions | All versions | All versions | All versions | All versions | 
+| US West \(N\. California\) | All versions | All versions | All versions | All versions | All versions | 
+| US West \(Oregon\) | All versions | All versions | All versions | All versions | All versions | 
+| Africa \(Cape Town\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | – | – | 
-| Asia Pacific \(Mumbai\) | – | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Osaka\) | – | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Seoul\) | – | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Singapore\) | – | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Sydney\) | – | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Tokyo\) | – | All versions | All versions | All versions | All versions | 
-| Canada \(Central\) | – | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Singapore\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Sydney\) | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Tokyo\) | All versions | All versions | All versions | All versions | All versions | 
+| Canada \(Central\) | All versions | All versions | All versions | All versions | All versions | 
 | China \(Beijing\) | – | – | – | – | – | 
 | China \(Ningxia\) | – | – | – | – | – | 
-| Europe \(Frankfurt\) | – | All versions | All versions | All versions | All versions | 
-| Europe \(Ireland\) | – | All versions | All versions | All versions | All versions | 
-| Europe \(London\) | – | All versions | All versions | All versions | All versions | 
-| Europe \(Milan\) | – | All versions | All versions | All versions | All versions | 
-| Europe \(Paris\) | – | All versions | All versions | All versions | All versions | 
+| Europe \(Frankfurt\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Ireland\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(London\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Milan\) | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Paris\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Spain\) | – | – | – | – | – | 
-| Europe \(Stockholm\) | – | All versions | All versions | All versions | All versions | 
+| Europe \(Stockholm\) | All versions | All versions | All versions | All versions | All versions | 
 | Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | – | All versions | All versions | All versions | All versions | 
+| Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | All versions | 
 | Middle East \(UAE\) | – | – | – | – | – | 
-| South America \(São Paulo\) | – | All versions | All versions | All versions | All versions | 
+| South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 
 | AWS GovCloud \(US\-East\) | – | – | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | – | – | 
 

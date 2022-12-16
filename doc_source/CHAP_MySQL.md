@@ -42,7 +42,6 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 + [Improving query performance with Amazon RDS Optimized Reads](rds-optimized-reads.md)
 + [Improving write performance with Amazon RDS Optimized Writes](rds-optimized-writes.md)
 + [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)
-+ [Upgrading a MySQL DB snapshot](USER_UpgradeDBSnapshot.MySQL.md)
 + [Importing data into a MySQL DB instance](MySQL.Procedural.Importing.Other.md)
 + [Working with MySQL replication in Amazon RDS](USER_MySQL.Replication.md)
 + [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)

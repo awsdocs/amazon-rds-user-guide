@@ -13,15 +13,7 @@ For example, you can use the following tools, depending on your requirements:
 **Important**  
 Before you use the preceding migration techniques, we recommend that you back up your database\. After you import the data, you can back up your RDS for Oracle DB instances by creating snapshots\. Later, you can restore the snapshots\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
 
-For many database engines, ongoing replication can continue until you are ready to switch over to the target database\. You can use AWS DMS to migrate to RDS for Oracle from either the same database engine or a different engine\. If you migrate from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that AWS DMS doesn't migrate\. 
-
-The following video summarizes the different Oracle Database migration techniques\.
-
-[![AWS Videos](http://img.youtube.com/vi/z9c_FYJmtv4/0.jpg)](http://www.youtube.com/watch?v=z9c_FYJmtv4)
-
-The following video explains how to plan and execute a data migration\.
-
-[![AWS Videos](http://img.youtube.com/vi/qwoiCMwiEk0/0.jpg)](http://www.youtube.com/watch?v=qwoiCMwiEk0)
+For many database engines, ongoing replication can continue until you are ready to switch over to the target database\. You can use AWS DMS to migrate to RDS for Oracle from either the same database engine or a different engine\. If you migrate from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that AWS DMS doesn't migrate\.
 
 **Topics**
 + [Importing using Oracle SQL Developer](Oracle.Procedural.Importing.SQLDeveloper.md)

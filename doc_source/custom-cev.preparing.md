@@ -6,7 +6,7 @@ To create a CEV, access the installation files and patches that are stored in yo
 + Oracle Database 12c Release 2 \(12\.2\)
 + Oracle Database 12c Release 1 \(12\.1\)
 
-For example, you can use the April 2021 RU/RUR for Oracle Database 19c, or any valid combination of installation files and patches\.
+For example, you can use the April 2021 RU/RUR for Oracle Database 19c, or any valid combination of installation files and patches\. For more information on the versions and Regions supported by RDS Custom for Oracle, see [RDS Custom with RDS for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.html#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora)\.
 
 **Topics**
 + [Downloading your database installation files and patches from Oracle Software Delivery Cloud](#custom-cev.preparing.download)

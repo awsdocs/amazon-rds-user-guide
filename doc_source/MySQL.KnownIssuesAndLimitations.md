@@ -64,7 +64,7 @@ In this case, the search engine will search both indexes\. However, due to the b
 
 To resolve this issue, you can do one of the following: 
 + Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
-+ Upgrade your MySQL DB instance to MySQL version 5\.7 or 8\.0\. For more information, see [Upgrading a MySQL DB snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
++ Upgrade your MySQL DB instance to MySQL version 5\.7 or 8\.0\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\. 
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```

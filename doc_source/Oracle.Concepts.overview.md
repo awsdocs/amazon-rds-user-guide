@@ -1,8 +1,6 @@
 # Overview of Oracle on Amazon RDS<a name="Oracle.Concepts.overview"></a>
 
-The following video is a useful introduction to running a production workload on RDS for Oracle\.
-
-[![AWS Videos](http://img.youtube.com/vi/vpSWZx4-M-M/0.jpg)](http://www.youtube.com/watch?v=vpSWZx4-M-M)
+You can read the following sections to get an overview of RDS for Oracle\.
 
 **Topics**
 + [RDS for Oracle features](Oracle.Concepts.FeatureSupport.md)

@@ -5,8 +5,6 @@ You might need to reboot your DB instance, usually for maintenance reasons\. For
 **Note**  
 If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
-Rebooting a DB instance restarts the database engine service\. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to *rebooting*\.
-
 If the Amazon RDS DB instance is configured for Multi\-AZ, you can perform the reboot with a failover\. An Amazon RDS event is created when the reboot is completed\. If your DB instance is a Multi\-AZ deployment, you can force a failover from one Availability Zone \(AZ\) to another when you reboot\. When you force a failover of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone, and updates the DNS record for the DB instance to point to the standby DB instance\. As a result, you need to clean up and re\-establish any existing connections to your DB instance\. Rebooting with failover is beneficial when you want to simulate a failure of a DB instance for testing, or restore operations to the original AZ after a failover occurs\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
 **Warning**  
@@ -16,6 +14,8 @@ On RDS for Microsoft SQL Server, reboot with failover reboots only the primary D
 
 **Note**  
 When you force a failover from one Availability Zone to another when you reboot, the Availability Zone change might not be reflected in the AWS Management Console, and in calls to the AWS CLI and RDS API, for several minutes\.
+
+Rebooting a DB instance restarts the database engine service\. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to *rebooting*\. An outage occurs for both a Single\-AZ deployment and a Multi\-AZ DB instance deployment, even when you reboot with a failover\.
 
 You can't reboot your DB instance if it isn't in the `available` state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\.
 

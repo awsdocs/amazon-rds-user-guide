@@ -12,9 +12,12 @@
 
 ## Modifying an RDS Proxy<a name="rds-proxy-modifying-proxy"></a>
 
- You can change certain settings associated with a proxy after you create the proxy\. You do so by modifying the proxy itself, its associated target group, or both\. Each proxy has an associated target group\. 
+ You can change specific settings associated with a proxy after you create the proxy\. You do so by modifying the proxy itself, its associated target group, or both\. Each proxy has an associated target group\. 
 
 ### AWS Management Console<a name="rds-proxy-modifying-proxy.console"></a>
+
+**Important**  
+The values in the **Client authentication type** and **IAM authentication** fields apply to all Secrets Manager secrets that are associated with this proxy\. To specify different values for each secret, modify your proxy by using the AWS CLI or the API instead\.
 
 **To modify the settings for a proxy**
 
@@ -26,13 +29,14 @@
 
 1.  For **Actions**, choose **Modify**\. 
 
-1.  Enter or choose the properties to modify\. You can modify the following:  
+1.  Enter or choose the properties to modify\. You can modify the following: 
    +  **Proxy identifier** – Rename the proxy by entering a new identifier\. 
-   +  **Require Transport Layer Security** – Turn the requirement for Transport layer Security \(TLS\) on or off\. 
    +  **Idle client connection timeout** – Enter a time period for the idle client connection timeout\. 
-   +  **Secrets Manager secrets** – Add or remove Secrets Manager secrets\. These secrets correspond to database user names and passwords\. 
    +  **IAM role** – Change the IAM role used to retrieve the secrets from Secrets Manager\. 
-   +  **IAM Authentication** – Require or disallow IAM authentication for connections to the proxy\. 
+   +  **Secrets Manager secrets** – Add or remove Secrets Manager secrets\. These secrets correspond to database user names and passwords\. 
+   +  **Client authentication type** – \(PostgreSQL only\) Change the type of authentication for client connections to the proxy\. 
+   +  **IAM authentication** – Require or disallow IAM authentication for connections to the proxy\. 
+   +  **Require Transport Layer Security** – Turn the requirement for Transport layer Security \(TLS\) on or off\. 
    +  **VPC security group** – Add or remove VPC security groups for the proxy to use\. 
    +  **Enable enhanced logging** – Enable or disable enhanced logging\. 
 

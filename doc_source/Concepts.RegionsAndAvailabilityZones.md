@@ -56,7 +56,7 @@ Random selection of Availability Zones by RDS doesn't guarantee an even distribu
 
 ## Local Zones<a name="Concepts.RegionsAndAvailabilityZones.LocalZones"></a>
 
-A *Local Zone* is an extension of an AWS Region that is geographically close to your users\. You can extend any VPC from the parent AWS Region into Local Zones\. To do so, create a new subnet and assigning it to the AWS Local Zone\. When you create a subnet in a Local Zone, your VPC is extended to that Local Zone\. The subnet in the Local Zone operates the same as other subnets in your VPC\.
+A *Local Zone* is an extension of an AWS Region that is geographically close to your users\. You can extend any VPC from the parent AWS Region into Local Zones\. To do so, create a new subnet and assign it to the AWS Local Zone\. When you create a subnet in a Local Zone, your VPC is extended to that Local Zone\. The subnet in the Local Zone operates the same as other subnets in your VPC\.
 
 When you create a DB instance, you can choose a subnet in a Local Zone\. Local Zones have their own connections to the internet and support AWS Direct Connect\. Thus, resources created in a Local Zone can serve local users with very low\-latency communications\. For more information, see [AWS Local Zones](http://aws.amazon.com/about-aws/global-infrastructure/localzones/)\.
 

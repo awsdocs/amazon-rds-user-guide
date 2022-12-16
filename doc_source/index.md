@@ -316,7 +316,6 @@ sponsored by Amazon.
    + [Improving query performance with Amazon RDS Optimized Reads](rds-optimized-reads.md)
    + [Improving write performance with Amazon RDS Optimized Writes](rds-optimized-writes.md)
    + [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)
-   + [Upgrading a MySQL DB snapshot](USER_UpgradeDBSnapshot.MySQL.md)
    + [Importing data into a MySQL DB instance](MySQL.Procedural.Importing.Other.md)
       + [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)
       + [Importing data from a MariaDB or MySQL database to a MariaDB or MySQL DB instance](MySQL.Procedural.Importing.SmallExisting.md)
