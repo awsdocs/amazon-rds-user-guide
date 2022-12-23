@@ -393,7 +393,7 @@ This step assumes that you have created the IAM policy in [Step 1: Create an IAM
 
 The last step in configuring permissions for Amazon S3 integration is associating your IAM role with your DB instance\. Note the following requirements:
 + You must have access to an IAM role with the required Amazon S3 permissions policy attached to it\. 
-+ You can only associate one IAM role with your RDS for Oracle at a time\.
++ You can only associate one IAM role with your RDS for Oracle DB instance at a time\.
 + The status of your instance must be `available`\.
 
 #### Console<a name="oracle-s3-integration.preparing.instance.console"></a>

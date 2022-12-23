@@ -102,7 +102,7 @@ You can't create a read replica in a different AWS account from the source DB in
 
 1. For **DB instance identifier**, enter a name for the read replica\.
 
-1. Choose your instance specifications\. We recommend that you use the same DB instance class and storage type as the source DB instance for the read replica\.
+1. Choose your instance specifications\. We recommend that you use the same or larger DB instance class and storage type as the source DB instance for the read replica\.
 
 1. For **Multi\-AZ deployment**, choose **Yes** to create a standby of your replica in another Availability Zone for failover support for the replica\.
 **Note**  
@@ -336,7 +336,7 @@ You can create a read replica across AWS Regions using the AWS Management Consol
 
 1. Choose the **Destination Region\.**
 
-1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type for the read replica\.
+1. Choose the instance specifications that you want to use\. We recommend that you use the same or larger DB instance class and storage type for the read replica\.
 
 1. To create an encrypted read replica in another AWS Region:
 

@@ -106,7 +106,7 @@ The following code restores the snapshot named `my-custom-snapshot` for `my-cust
 For Linux, macOS, or Unix:  
 
 ```
-aws restore-db-instance-from-db-snapshot \
+aws rds restore-db-instance-from-db-snapshot \
   --db-snapshot-identifier my-custom-snapshot \
   --db-instance-identifier my-custom-instance \
   --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance \
@@ -115,7 +115,7 @@ aws restore-db-instance-from-db-snapshot \
 For Windows:  
 
 ```
-aws restore-db-instance-from-db-snapshot ^
+aws rds restore-db-instance-from-db-snapshot ^
   --db-snapshot-identifier my-custom-snapshot ^
   --db-instance-identifier my-custom-instance ^
   --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance ^

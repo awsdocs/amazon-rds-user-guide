@@ -16,18 +16,18 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon RDS supports three types of instance classes: general purpose, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\.
+Amazon RDS supports three types of DB instance classes: general purpose, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\.
 
 The following are the general\-purpose DB instance types available:
-+ **db\.m6g** – General\-purpose instance classes powered by AWS Graviton2 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\.
++ **db\.m6g** – General\-purpose DB instance classes powered by AWS Graviton2 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
-+ **db\.m6gd** – General\-purpose instance classes powered by AWS Graviton2 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\. They have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
-+ **db\.m6i** – General\-purpose instance classes that are well suited for a broad range of general\-purpose workloads\.
-+ **db\.m5d** – General\-purpose instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
-+ **db\.m5** –General\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
-+ **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\.
-+ **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\.
++ **db\.m6gd** – General\-purpose DB instance classes powered by AWS Graviton2 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\. They have local NVMe\-based SSD block\-level storage for applications that need high\-speed, low latency local storage\.
++ **db\.m6i** – General\-purpose DB instance classes that are well suited for a broad range of general\-purpose workloads\.
++ **db\.m5d** – General\-purpose DB instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
++ **db\.m5** –General\-purpose DB instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
++ **db\.m4** – General\-purpose DB instance classes that provide more computing capacity than the previous db\.m3 instance classes\.
++ **db\.m3** – General\-purpose DB instance classes that provide more computing capacity than the previous db\.m1 instance classes\.
 
   For the RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB engines, Amazon RDS has started the end\-of\-life process for db\.m3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.m3 DB instance classes, we recommend that you upgrade to a db\.m5 DB instance class as soon as possible\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
@@ -842,8 +842,6 @@ In the following table, you can find hardware details about the Amazon RDS DB in
 For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.Support)\. 
 
 
-****  
-
 | Instance class | vCPU | ECU | Memory \(GiB\) | EBS optimized | Max\. bandwidth \(Mbps\) | Network performance \(Gbps\) | 
 | --- | --- | --- | --- | --- | --- | --- | 
 | db\.m6g – general\-purpose instance classes powered by AWS Graviton2 processors | 
@@ -994,6 +992,18 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r5b\.2xlarge\* | 8 | 38 | 64 | Yes | Up to 10,000 | Up to 10 | 
 | db\.r5b\.xlarge\* | 4 | 19 | 32 | Yes | Up to 10,000 | Up to 10 | 
 | db\.r5b\.large\* | 2 | 10 | 16 | Yes | Up to 10,000 | Up to 10 | 
+| db\.r5b – Oracle memory\-optimized instance classes preconfigured for high memory, storage, and I/O | 
+| db\.r5b\.8xlarge\.tpc2\.mem3x | 32 | 347 | 768 | Yes | 60,000 | 25 | 
+| db\.r5b\.6xlarge\.tpc2\.mem4x | 24 | 347 | 768 | Yes | 60,000 | 25 | 
+| db\.r5b\.4xlarge\.tpc2\.mem4x | 16 | 264 | 512 | Yes | 40,000 | 20 | 
+| db\.r5b\.4xlarge\.tpc2\.mem3x | 16 | 173 | 384 | Yes | 30,000 | 10 | 
+| db\.r5b\.4xlarge\.tpc2\.mem2x | 16 | 132 | 256 | Yes | 20,000 | 10 | 
+| db\.r5b\.2xlarge\.tpc2\.mem8x | 8 | 264 | 512 | Yes | 40,000 | 20 | 
+| db\.r5b\.2xlarge\.tpc2\.mem4x | 8 | 132 | 256 | Yes | 20,000 | 10 | 
+| db\.r5b\.2xlarge\.tpc1\.mem2x | 4 | 71 | 128 | Yes | 10,000 | Up to 10 | 
+| db\.r5b\.xlarge\.tpc2\.mem4x | 4 | 71 | 128 | Yes | 10,000 | Up to 10 | 
+| db\.r5b\.xlarge\.tpc2\.mem2x | 4 | 38 | 64 | Yes | Up to 10,000 | Up to 10 | 
+| db\.r5b\.large\.tpc1\.mem2x | 1 | 19 | 32 | Yes | Up to 10,000 | Up to 10 | 
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | 19,000 | 25 | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | 13,600 | 20 | 
@@ -1003,6 +1013,19 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r5\.2xlarge\* | 8 | 38 | 64 | Yes | Up to 4,750 | Up to 10 | 
 | db\.r5\.xlarge\* | 4 | 19 | 32 | Yes | Up to 4,750 | Up to 10 | 
 | db\.r5\.large\* | 2 | 10 | 16 | Yes | Up to 4,750 | Up to 10 | 
+| db\.r5 – Oracle memory\-optimized instance classes preconfigured for high memory, storage, and I/O | 
+| db\.r5\.12xlarge\.tpc2\.mem2x | 48 | 347 | 768 | Yes | 19,000 | 25 | 
+| db\.r5\.8xlarge\.tpc2\.mem3x | 32 | 347 | 768 | Yes | 19,000 | 25 | 
+| db\.r5\.6xlarge\.tpc2\.mem4x | 24 | 347 | 768 | Yes | 19,000 | 25 | 
+| db\.r5\.4xlarge\.tpc2\.mem4x | 16 | 264 | 512 | Yes | 13,600 | 20 | 
+| db\.r5\.4xlarge\.tpc2\.mem3x | 16 | 173 | 384 | Yes | 9,500 | 10 | 
+| db\.r5\.4xlarge\.tpc2\.mem2x | 16 | 132 | 256 | Yes | 6,800 | 10 | 
+| db\.r5\.2xlarge\.tpc2\.mem8x | 8 | 264 | 512 | Yes | 13,600 | 20 | 
+| db\.r5\.2xlarge\.tpc2\.mem4x | 8 | 132 | 256 | Yes | 6,800 | 10 | 
+| db\.r5\.2xlarge\.tpc1\.mem2x | 4 | 71 | 128 | Yes | 4,750 | Up to 10 | 
+| db\.r5\.xlarge\.tpc2\.mem4x | 4 | 71 | 128 | Yes | 4,750 | Up to 10 | 
+| db\.r5\.xlarge\.tpc2\.mem2x | 4 | 38 | 64 | Yes | Up to 4,750 | Up to 10 | 
+| db\.r5\.large\.tpc1\.mem2x | 1 | 19 | 32 | Yes | Up to 4,750 | Up to 10 | 
 | db\.r4 – memory\-optimized instance classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | 14,000 | 25 | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | 7,000 | 10 | 

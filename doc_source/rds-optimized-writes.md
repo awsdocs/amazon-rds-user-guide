@@ -89,7 +89,14 @@ You can create a DB instance using the [ CreateDBInstance](https://docs.aws.amaz
 
 The following limitations apply to RDS Optimized Writes:
 + RDS Optimized Writes is supported for RDS for MySQL version 8\.0\.30 and higher\. For information about RDS for MySQL versions, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
-+ RDS Optimized Writes is supported for RDS for MySQL databases that use the db\.x2iedn, db\.r5b, or db\.r6i DB instance classes\. For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
++ RDS Optimized Writes is supported for RDS for MySQL databases that use the following DB instance classes:
+  + db\.x2iedn
+  + db\.r6i
+  + db\.r6g
+  + db\.r6gd
+  + db\.r5b
+
+  For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 + You can only modify a database to turn on RDS Optimized Writes if the database was created with a DB engine version and DB instance class that support the feature\. In this case, if RDS Optimized Writes is turned off for the database, you can turn it on by setting the `rds.optimized_writes` parameter to `AUTO`\.
 + When you are restoring an RDS for MySQL database from a snapshot, you can only turn on RDS Optimized Writes for the database if all of the following conditions apply:
   + The snapshot was created from a database that supports RDS Optimized Writes\.

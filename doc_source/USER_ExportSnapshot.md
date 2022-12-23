@@ -13,7 +13,6 @@ After the data is exported, you can analyze the exported data directly through t
 + [Limitations](#USER_ExportSnapshot.Limits)
 + [Overview of exporting snapshot data](#USER_ExportSnapshot.Overview)
 + [Setting up access to an Amazon S3 bucket](#USER_ExportSnapshot.Setup)
-+ [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)
 + [Exporting a DB snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
 + [Monitoring snapshot exports](#USER_ExportSnapshot.Monitoring)
 + [Canceling a snapshot export task](#USER_ExportSnapshot.Canceling)
@@ -88,6 +87,7 @@ To export DB snapshot data to an Amazon S3 file, you first give the snapshot per
 + [Identifying the Amazon S3 bucket for export](#USER_ExportSnapshot.SetupBucket)
 + [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)
 + [Using a cross\-account Amazon S3 bucket](#USER_ExportSnapshot.Setup.XAcctBucket)
++ [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)
 
 ### Identifying the Amazon S3 bucket for export<a name="USER_ExportSnapshot.SetupBucket"></a>
 
@@ -211,7 +211,7 @@ You can use Amazon S3 buckets across AWS accounts\. To use a cross\-account buck
   }
   ```
 
-## Using a cross\-account AWS KMS key for encrypting Amazon S3 exports<a name="USER_ExportSnapshot.CMK"></a>
+### Using a cross\-account AWS KMS key for encrypting Amazon S3 exports<a name="USER_ExportSnapshot.CMK"></a>
 
 You can use a cross\-account AWS KMS key to encrypt Amazon S3 exports\. First, you add a key policy to the local account, then you add IAM policies in the external account\. For more information, see [Allowing users in other accounts to use a KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)\.
 

@@ -142,6 +142,49 @@ This service\-linked role has a permissions policy attached to it called `Amazon
                 "secretsmanager:UpdateSecret"
             ],
             "Resource": "arn:aws:secretsmanager:*:*:secret:rds-sqlserver-ssrs!*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+              "secretsmanager:GetRandomPassword"
+            ],
+            "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:DeleteSecret",
+            "secretsmanager:DescribeSecret",
+            "secretsmanager:PutSecretValue",
+            "secretsmanager:RotateSecret",
+            "secretsmanager:UpdateSecret",
+            "secretsmanager:UpdateSecretVersionStage",
+            "secretsmanager:ListSecretVersionIds"
+          ],
+          "Resource": [
+            "arn:aws:secretsmanager:*:*:secret:rds!*"
+          ],
+          "Condition": {
+            "StringLike": {
+              "secretsmanager:ResourceTag/aws:secretsmanager:owningService": "rds"
+            }
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "secretsmanager:TagResource",
+          "Resource": "arn:aws:secretsmanager:*:*:secret:rds!*",
+          "Condition": {
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": [
+                "aws:rds:primaryDBInstanceArn",
+                "aws:rds:primaryDBClusterArn"
+              ]
+            },
+            "StringLike": {
+              "secretsmanager:ResourceTag/aws:secretsmanager:owningService": "rds"
+            }
+          }
         }
     ]
 }

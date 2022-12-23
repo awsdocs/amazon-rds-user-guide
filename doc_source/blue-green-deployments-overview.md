@@ -49,7 +49,7 @@ Complete the following major steps when you use a blue/green deployment for data
 
    When you create the blue/green deployment, you can upgrade your DB engine version and specify a different DB parameter group for the DB instances in the green environment\. RDS also configures logical replication from the primary DB instance in the blue environment to the primary DB instance in the green environment\.
 
-   After you create the blue/green deployment, the DB instance in the green environment is read\-only by default\. You can make the DB instance writable if necessary\.
+   After you create the blue/green deployment, the DB instance in the green environment is read\-only by default\.
 
 1. Make additional changes to the staging environment, if required\.
 
@@ -58,6 +58,8 @@ Complete the following major steps when you use a blue/green deployment for data
    For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. Test your staging environment\.
+
+   During testing, we recommend that you keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts in the green environment\. They can also result in unintended data in the production databases after switchover\.
 
 1. When ready, switch over to promote the staging environment to be the new production environment\. For instructions, see [Switching a blue/green deployment](blue-green-deployments-switching.md)\.
 
@@ -132,6 +134,7 @@ The following are best practices for blue/green deployments:
 
   For example, if your DB engine version supports it, consider using GTID replication, parallel replication, and crash\-safe replication in your production environment before deploying your blue/green deployment\. These options promote consistency and durability of your data before you switch over your blue/green deployment\. For more information about GTID replication for read replicas, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
 + Thoroughly test the DB instances in the green environment before switching over\.
++ Keep your databases in the green environment read only\. We recommend that you enable write operations on the green environment with caution because they can result in replication conflicts in the green environment\. They can also result in unintended data in the production databases after switchover\.
 + Identify the best time for the switchover\.
 
   During the switchover, writes are cut off from databases in both environments\. Identify a time when traﬃc is lowest on your production environment\. Long\-running transactions, such as active DDLs, can increase your switchover time, resulting in longer downtime for your production workloads\.

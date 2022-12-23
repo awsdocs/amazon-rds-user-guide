@@ -14,7 +14,7 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Starting a DB instance  |  Yes  |  —  |  [Starting an Amazon RDS DB instance that was previously stopped](USER_StartInstance.md)  | 
 |  Multi\-AZ deployments  |  Yes  |  Multi\-AZ deployments are supported on MySQL and PostgreSQL DB instances\.  |  [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md)  [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)  | 
 |  DB parameter groups  |  Yes  |  —  |  [Working with parameter groups](USER_WorkingWithParamGroups.md)  | 
-|  Read replicas  |   No   |   —   |    [Working with read replicas](USER_ReadRepl.md)  | 
+|  Read replicas  |  Yes  |  Read replicas are supported for MySQL and PostgreSQL DB instances\.  |  [Creating read replicas for Amazon RDS on AWS Outposts](rds-on-outposts.rr.md)  | 
 |  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS resources](Overview.Encryption.md)  | 
 |  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
 |  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) AWS CLI command  [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 

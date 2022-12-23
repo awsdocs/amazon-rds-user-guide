@@ -27,6 +27,7 @@ This policy includes the following permissions:
 + `cloudwatch` – Allows principals to get Amazon CloudWatch metric statistics\.
 + `ec2` – Allows principals to describe Availability Zones and networking resources\.
 + `logs` – Allows principals to describe CloudWatch Logs log streams of log groups, and get CloudWatch Logs log events\.
++ `devops-guru` – Allows principals to describe resources that have Amazon DevOps Guru coverage, which is specified either by CloudFormation stack names or resource tags\.
 
 ```
 {
@@ -43,6 +44,13 @@ This policy includes the following permissions:
                 "ec2:DescribeSubnets",
                 "ec2:DescribeVpcAttribute",
                 "ec2:DescribeVpcs"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "devops-guru:GetResourceCollection"
             ],
             "Effect": "Allow",
             "Resource": "*"
@@ -75,6 +83,7 @@ This policy includes the following permissions:
 + `outposts` – Allows principals to get AWS Outposts instance types\.
 + `pi` – Allows principals to get Performance Insights metrics\.
 + `sns` – Allows principals to Amazon Simple Notification Service \(Amazon SNS\) subscriptions and topics, and to publish Amazon SNS messages\.
++ `devops-guru` – Allows principals to describe resources that have Amazon DevOps Guru coverage, which is specified either by CloudFormation stack names or resource tags\.
 
 ```
 {
@@ -121,6 +130,13 @@ This policy includes the following permissions:
             "Action": "pi:*",
             "Effect": "Allow",
             "Resource": "arn:aws:pi:*:*:metrics/rds/*"
+        },
+        {
+            "Action": [
+                "devops-guru:GetResourceCollection"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
         },
         {
             "Action": "iam:CreateServiceLinkedRole",

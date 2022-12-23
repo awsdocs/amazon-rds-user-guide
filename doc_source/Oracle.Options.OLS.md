@@ -8,7 +8,7 @@ Most database security controls access at the object level\. Oracle Label Securi
 + [Prerequisites for Oracle Label Security](#Oracle.Options.OLS.PreReqs)
 + [Adding the Oracle Label Security option](#Oracle.Options.OLS.Add)
 + [Using Oracle Label Security](#Oracle.Options.OLS.Using)
-+ [Removing the Oracle Label Security option](#Oracle.Options.OLS.Remove)
++ [Removing the Oracle Label Security option \(not supported\)](#Oracle.Options.OLS.Remove)
 + [Troubleshooting](#Oracle.Options.OLS.Troubleshooting)
 
 ## Prerequisites for Oracle Label Security<a name="Oracle.Options.OLS.PreReqs"></a>
@@ -71,15 +71,9 @@ GRANT ALL ON LBACSYS.OLS_ENFORCEMENT TO username;
 
 You can configure Label Security through the Oracle Enterprise Manager \(OEM\) Cloud Control\. Amazon RDS supports the OEM Cloud Control through the Management Agent option\. For more information, see [Oracle Management Agent for Enterprise Manager Cloud Control](Oracle.Options.OEMAgent.md)\. 
 
-## Removing the Oracle Label Security option<a name="Oracle.Options.OLS.Remove"></a>
+## Removing the Oracle Label Security option \(not supported\)<a name="Oracle.Options.OLS.Remove"></a>
 
-You can remove Oracle Label Security from a DB instance\. 
-
-To remove Label Security from a DB instance, do one of the following: 
-+ To remove Label Security from multiple DB instances, remove the Label Security option from the option group they belong to\. This change affects all DB instances that use the option group\. When you remove Label Security from an option group that is attached to multiple DB instances, all the DB instances are restarted\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-
-   
-+ To remove Label Security from a single DB instance, modify the DB instance and specify a different option group that doesn't include the Label Security option\. You can specify the default \(empty\) option group, or a different custom option group\. When you remove the Label Security option, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+Starting with Oracle Database 12c Release 2 \(12\.2\), Oracle Label Security is a permanent and persistent option\. Because the option is permanent, you can't remove it from an option group\. If you add Oracle Label Security to an option group and associate it with your DB instance, you can later associate a different option group with your DB instance, but this group must also contain the Oracle Label Security option\.
 
 ## Troubleshooting<a name="Oracle.Options.OLS.Troubleshooting"></a>
 

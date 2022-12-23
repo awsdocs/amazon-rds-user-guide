@@ -18,10 +18,6 @@ To see new RDS for Oracle features, use the following techniques:
 + Search [Document history](WhatsNew.md) for the keyword **Oracle**\.
 + You can filter new Amazon RDS features on the [What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products**, choose **Amazon RDS**\. Then search for **Oracle *YYYY***, where *YYYY* is a year such as **2022**\.
 
-The following video shows a recent video from re:Invent about Oracle new features\.
-
-[![AWS Videos](http://img.youtube.com/vi/GzXPHtS-PoA/0.jpg)](http://www.youtube.com/watch?v=GzXPHtS-PoA)
-
 ## Supported features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.supported"></a>
 
 Amazon RDS for Oracle supports the following Oracle Database features:

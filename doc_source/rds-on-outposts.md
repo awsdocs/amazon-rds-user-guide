@@ -21,6 +21,7 @@ When network connectivity to the AWS Region isn't available, your DB instance co
 + [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)
 + [Working with Multi\-AZ deployments for Amazon RDS on AWS Outposts](rds-on-outposts.maz.md)
 + [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md)
++ [Creating read replicas for Amazon RDS on AWS Outposts](rds-on-outposts.rr.md)
 + [Considerations for restoring DB instances on Amazon RDS on AWS Outposts](rds-on-outposts.restoring.md)
 
 ## Prerequisites for Amazon RDS on AWS Outposts<a name="rds-on-outposts.prerequisites"></a>

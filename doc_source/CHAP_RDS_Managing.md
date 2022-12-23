@@ -11,6 +11,7 @@
 + [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)
 + [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)
 + [Renaming a DB instance](USER_RenameInstance.md)
++ [Renaming a Multi\-AZ DB cluster](multi-az-db-cluster-rename.md)
 + [Rebooting a DB instance](USER_RebootInstance.md)
 + [Rebooting Multi\-AZ DB clusters and reader DB instances](multi-az-db-clusters-concepts-rebooting.md)
 + [Working with read replicas](USER_ReadRepl.md)

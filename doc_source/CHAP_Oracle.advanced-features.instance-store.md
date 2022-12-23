@@ -57,13 +57,15 @@ In some cases, the flash cache causes performance overhead because of cache mana
 
 ### Supported instance classes for the RDS for Oracle instance store<a name="CHAP_Oracle.advanced-features.instance-store.overview.instance-classes"></a>
 
-Amazon RDS supports the instance store for the following instance classes:
+Amazon RDS supports the instance store for the following DB instance classes:
 + db\.m5d
 + db\.r5d
++ db\.x2idn
++ db\.x2iedn
 
-RDS for Oracle supports the preceding instance classes for the BYOL licensing model only\. For more information, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported) and [Bring Your Own License \(BYOL\)](Oracle.Concepts.Licensing.md#Oracle.Concepts.Licensing.BYOL)\.
+RDS for Oracle supports the preceding DB instance classes for the BYOL licensing model only\. For more information, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported) and [Bring Your Own License \(BYOL\)](Oracle.Concepts.Licensing.md#Oracle.Concepts.Licensing.BYOL)\.
 
-To see the total instance storage for the supported instance types, run the following command in the AWS CLI\. 
+To see the total instance storage for the supported DB instance types, run the following command in the AWS CLI\. 
 
 **Example**  
 

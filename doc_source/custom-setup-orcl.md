@@ -67,6 +67,13 @@ You can configure your IAM role and virtual private cloud \(VPC\) using either o
 
 To simplify setup, you can use the AWS CloudFormation template files to create CloudFormation stacks\. To learn how to create stacks, see [Creating a stack on the AWS CloudFormation console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in *AWS CloudFormation User Guide*\.
 
+**Topics**
++ [Step 1: Download the CloudFormation template files](#custom-setup-orcl.cf.dl-templates)
++ [Step 2: Configure IAM using CloudFormation](#custom-setup-orcl.cf.config-iam)
++ [Step 3: Configure your VPC using CloudFormation](#custom-setup-orcl.cf.config-vpc)
+
+#### Step 1: Download the CloudFormation template files<a name="custom-setup-orcl.cf.dl-templates"></a>
+
 **To download the template files**
 
 1. Open the context \(right\-click\) menu for the link [ custom\-oracle\-iam\.zip](samples/custom-oracle-iam.zip) and choose **Save Link As**\.
@@ -77,13 +84,17 @@ To simplify setup, you can use the AWS CloudFormation template files to create C
 
    If you already configured your VPC for RDS Custom for SQL Server, skip this step\.
 
+#### Step 2: Configure IAM using CloudFormation<a name="custom-setup-orcl.cf.config-iam"></a>
+
 **To configure IAM using CloudFormation**
 
 1. Open the CloudFormation console at [https://console\.aws\.amazon\.com/cloudformation](https://console.aws.amazon.com/cloudformation/)\.
 
 1. Start the Create Stack wizard, and choose **Create Stack**\.
 
-1. On the **Specify template** page, do the following:
+1. On the **Create stack** page, do the following:
+
+   1. For **Prepare template**, choose **Template is ready**\.
 
    1. For **Template source**, choose **Upload a template file**\.
 
@@ -101,27 +112,31 @@ To simplify setup, you can use the AWS CloudFormation template files to create C
 
 1. On the **Review custom\-oracle\-iam** page, do the following:
 
-   1. For **Capabilities**, select the ****I acknowledge that AWS CloudFormation might create IAM resources with custom names**** check box\.
+   1. Select the ****I acknowledge that AWS CloudFormation might create IAM resources with custom names**** check box\.
 
-   1. Choose **Create stack**\.
+   1. Choose **Submit**\.
 
    CloudFormation creates the IAM roles that RDS Custom for Oracle requires\.
 
+#### Step 3: Configure your VPC using CloudFormation<a name="custom-setup-orcl.cf.config-vpc"></a>
+
+This procedure assumes that you've already used CloudFormation to create your IAM roles\. If you've already configured your VPC for a different RDS Custom engine, skip this step\.
+
+Before beginning the following procedure, make sure that you know your route table ID\. 
+
 **To configure your VPC using CloudFormation**
-
-This procedure assumes that you've already used CloudFormation to create your IAM roles\.
-
-If you've already configured your VPC for a different RDS Custom engine, skip this step\.
 
 1. Open the CloudFormation console at [https://console\.aws\.amazon\.com/cloudformation](https://console.aws.amazon.com/cloudformation/)\.
 
-1. On the **Stacks** page, for **Create stack** choose **With new resources \(standard\)**\.
+1. Start the Create Stack wizard, and choose **Create Stack**\.
 
-1. On the **Specify template** page, do the following:
+1. On the **Create stack** page, do the following:
+
+   1. For **Prepare template**, choose **Template is ready**\.
 
    1. For **Template source**, choose **Upload a template file**\.
 
-   1. For **Choose file**, go to and choose `custom-vpc.json`\.
+   1. For **Choose file**, navigate to, then choose `custom-vpc.json`\.
 
    1. Choose **Next**\.
 
@@ -139,7 +154,11 @@ If you've already configured your VPC for a different RDS Custom engine, skip th
 
 1. On the **Configure stack options page**, choose **Next**\.
 
-1. On the **Review custom\-vpc** page, choose **Create stack**\.
+1. On the **Review custom\-vpc** page, do the following:
+
+   1. Select the ****I acknowledge that AWS CloudFormation might create IAM resources with custom names**** check box\.
+
+   1. Choose **Submit**\.
 
    CloudFormation configures your VPC\.
 

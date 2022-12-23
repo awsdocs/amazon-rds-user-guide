@@ -19,6 +19,7 @@ Amazon RDS features are different from engine\-native features and options\. For
 + [Performance Insights](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md)
 + [RDS Custom](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md)
 + [Amazon RDS Proxy](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md)
++ [Secrets Manager integration](Concepts.RDS_Fea_Regions_DB-eng.Feature.SecretsManager.md)
 + [Engine\-native features](Concepts.RDS_Fea_Regions_DB-eng.Feature.EngineNativeFeatures.md)
 
 ## Table conventions<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.TableConventions"></a>
@@ -47,3 +48,4 @@ The following quick reference table lists each feature and supported RDS DB engi
 | Performance Insights | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md) | 
 | RDS Custom | – | – | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora) | – | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq) | 
 | RDS Proxy | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my) | – | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSProxy.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.sq) | 
+| Secrets Manager integration | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.SecretsManager.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.SecretsManager.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.SecretsManager.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.SecretsManager.md) | [Available](Concepts.RDS_Fea_Regions_DB-eng.Feature.SecretsManager.md) | 

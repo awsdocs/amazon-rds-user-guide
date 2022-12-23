@@ -2,9 +2,7 @@
 
 Amazon RDS Custom automates database administration tasks and operations\. RDS Custom makes it possible for you as a database administrator to access and customize your database environment and operating system\. With RDS Custom, you can customize to meet the requirements of legacy, custom, and packaged applications\.
 
-The following video is an overview of Amazon RDS Custom from AWS re:Invent 2021\.
-
-[![AWS Videos](http://img.youtube.com/vi/zpPMYGIaocM/0.jpg)](http://www.youtube.com/watch?v=zpPMYGIaocM)
+For the latest webinars and blogs about RDS Custom, see [Amazon RDS Custom resources](http://aws.amazon.com/rds/custom/resources/)\.
 
 **Topics**
 + [Addressing the challenge of database customization](#custom-intro.challenge)

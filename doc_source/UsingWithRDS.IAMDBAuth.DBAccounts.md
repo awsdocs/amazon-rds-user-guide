@@ -11,7 +11,7 @@ The user name used for IAM authentication must match the case of the user name i
 
 ## Using IAM authentication with MariaDB and MySQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.MySQL"></a>
 
-With MariaDB and MySQL, authentication is handled by `AWSAuthenticationPlugin`—an AWS\-provided plugin that works seamlessly with IAM to authenticate your IAM users\. Connect to the DB instance and issue the `CREATE USER` statement, as shown in the following example\.
+With MariaDB and MySQL, authentication is handled by `AWSAuthenticationPlugin`—an AWS\-provided plugin that works seamlessly with IAM to authenticate your IAM users\. Connect to the DB instance as the master user or a different user who can create users and grant privileges\. After connecting, issue the `CREATE USER` statement, as shown in the following example\.
 
 ```
 CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS'; 
@@ -28,7 +28,7 @@ After you create an account using `AWSAuthenticationPlugin`, you manage it in th
 
 ## Using IAM authentication with PostgreSQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL"></a>
 
-To use IAM authentication with PostgreSQL, connect to the DB instance, create database users, and then grant them the `rds_iam` role as shown in the following example\.
+To use IAM authentication with PostgreSQL, connect to the DB instance as the master user or a different user who can create users and grant privileges\. After connecting, create database users and then grant them the `rds_iam` role as shown in the following example\.
 
 ```
 CREATE USER db_userx; 

@@ -36,6 +36,7 @@ For more information about Multi\-AZ DB cluster deployments, see [Multi\-AZ DB c
 |  global failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
 |  global failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
 |  global failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
+| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## DB instance events<a name="USER_Events.Messages.instance"></a>
 
@@ -200,7 +201,6 @@ The following table shows the event category and a list of events when a DB clus
 |  backup  | RDS\-EVENT\-0075 |  A manual DB cluster snapshot has been created\.  | 
 | backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
 | backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
-| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## RDS Proxy events<a name="USER_Events.Messages.rds-proxy"></a>
 

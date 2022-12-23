@@ -88,7 +88,7 @@ If you choose to create a Multi\-AZ deployment, you can't store backups on your 
       + **Outposts \(on\-premises\)** to create local backups\.
 **Note**  
 To store backups on your Outpost, your Outpost must have Amazon S3 capability\. For more information, see [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/)\.  
-Local backups aren't supported for Multi\-AZ deployments\.
+Local backups aren't supported for Multi\-AZ deployments or read replicas\.
 
    1. Choose **Enable automated backups** to create point\-in\-time snapshots of your DB instance\.
 
@@ -169,7 +169,7 @@ Before you create a new DB instance in an Outpost with the AWS CLI, first create
     + `outposts` – Store them locally on your Outpost\.
     + `region` – Store them in the parent AWS Region\. This is the default value\.
 
-    If you use the `--multi-az` option, you can't use `outposts` for `--backup-target`\.
+    If you use the `--multi-az` option, you can't use `outposts` for `--backup-target`\. In addition, the DB instance can't have read replicas if you use `outposts` for `--backup-target`\.
   + `--storage-encrypted`
   + `--kms-key-id`
 
@@ -227,6 +227,8 @@ Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/A
 + `AvailabilityZone`
 + `BackupRetentionPeriod`
 + `BackupTarget`
+
+  If you are creating a Multi\-AZ DB instance deployment, you can't use `outposts` for `BackupTarget`\. In addition, the DB instance can't have read replicas if you use `outposts` for `BackupTarget`\.
 + `DBInstanceClass`
 + `DBInstanceIdentifier`
 + `VpcSecurityGroupIds`
