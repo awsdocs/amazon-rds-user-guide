@@ -69,6 +69,9 @@ The following tutorials and sample code in GitHub show you how to perform common
 + [ SDK for PHP code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php/example_code/rds)
 
   View a collection of SDK for PHP code examples for Amazon RDS and Aurora\.
++ [AWS SDK for Python \(Boto3\) code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/example_code/rds)
+
+  View a collection of AWS SDK for Python \(Boto3\) code examples for Amazon RDS\.
 + [ SDK for Ruby code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/ruby/example_code/rds)
 
   View a collection of SDK for Ruby code examples for Amazon RDS and Aurora\.

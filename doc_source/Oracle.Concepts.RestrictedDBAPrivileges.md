@@ -4,6 +4,7 @@ Amazon RDS for Oracle supports SSL/TLS encrypted connections and also the Oracle
 
 **Topics**
 + [Using SSL with an RDS for Oracle DB instance](Oracle.Concepts.SSL.md)
-+ [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
++ [Updating your applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
++ [Using native network encryption with an RDS for Oracle DB instance](Oracle.Concepts.NNE.md)
 + [Configuring Kerberos authentication for Amazon RDS for Oracle](oracle-kerberos.md)
 + [Configuring UTL\_HTTP access using certificates and an Oracle wallet](Oracle.Concepts.ONA.md)

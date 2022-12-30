@@ -29,10 +29,10 @@ Modify the values of the following variables as needed:
 
 This code connects to a MariaDB or MySQL DB instance\.
 
-Before running this code, install Connector/Python version 8\.0 by following the instructions in [ Connector/Python Installation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation.html) in the MySQL documentation\.
+Before running this code, install the PyMySQL driver by following the instructions in the [ Python Package Index](https://pypi.org/project/PyMySQL/)\.
 
 ```
-import mysql.connector
+import pymysql
 import sys
 import boto3
 import os
@@ -51,7 +51,7 @@ client = session.client('rds')
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 
 try:
-    conn =  mysql.connector.connect(host=ENDPOINT, user=USER, passwd=token, port=PORT, database=DBNAME, ssl_ca='SSLCERTIFICATE')
+    conn =  pymysql.connect(host=ENDPOINT, user=USER, passwd=token, port=PORT, database=DBNAME, ssl_ca='SSLCERTIFICATE')
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()

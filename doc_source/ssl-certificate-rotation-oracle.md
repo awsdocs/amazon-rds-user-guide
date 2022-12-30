@@ -1,4 +1,4 @@
-# Updating applications to use new SSL/TLS certificates<a name="ssl-certificate-rotation-oracle"></a>
+# Updating your applications to use new SSL/TLS certificates<a name="ssl-certificate-rotation-oracle"></a>
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 

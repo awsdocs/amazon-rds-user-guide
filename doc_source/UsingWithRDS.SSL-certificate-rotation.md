@@ -33,7 +33,7 @@ Complete the following steps to update your CA certificate\.
    + [Using new SSL/TLS certificates for MariaDB DB instances](ssl-certificate-rotation-mariadb.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
    + [Using new SSL/TLS certificates for MySQL DB instances](ssl-certificate-rotation-mysql.md)
-   + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating your applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
    + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
    For a sample script that updates a trust store for a Linux operating system, see [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
@@ -121,7 +121,7 @@ Complete the following steps to update your CA certificate by applying DB instan
    + [Using new SSL/TLS certificates for MariaDB DB instances](ssl-certificate-rotation-mariadb.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
    + [Using new SSL/TLS certificates for MySQL DB instances](ssl-certificate-rotation-mysql.md)
-   + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating your applications to use new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
    + [Updating applications to use new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
    For a sample script that updates a trust store for a Linux operating system, see [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.

@@ -34,11 +34,10 @@ When you create RDS Custom for Oracle replicas, not all RDS Oracle replica optio
 ### General requirements and limitations<a name="custom-rr.limitations"></a>
 
 RDS Custom for Oracle replicas have the following limitations:
-+ We recommend that you create Oracle replicas only for RDS Custom for Oracle DB instances created after November 18, 2022\. If you need to create Oracle replicas for pre\-existing RDS Custom for Oracle DB instances, see [Troubleshooting replica creation for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting-create-replica)\.
 + You can create RDS Custom for Oracle replicas in mounted mode only\. However, you can manually change the mode of mounted replicas to read\-only, and from read\-only to mounted\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
 + Cross\-Region Oracle replicas aren't supported\.
-+ Make sure not to modify the `RDS_DATAGUARD` user\. This user is reserved for RDS Custom for Oracle automation\. Modifying this user can result in undesired outcomes, such as an inability to create Oracle replicas for your RDS Custom for Oracle DB instance\.
 + You can't change the value of the Oracle Data Guard `CommunicationTimeout` parameter\. This parameter is set to 15 seconds for RDS Custom for Oracle DB instances\.
++ Make sure not to modify the `RDS_DATAGUARD` user\. This user is reserved for RDS Custom for Oracle automation\. Modifying this user can result in undesired outcomes, such as an inability to create Oracle replicas for your RDS Custom for Oracle DB instance\.
 + Make sure not to change the replication user password\. It is required to administer the Oracle Data Guard configuration on the host\. If you change the password, RDS Custom for Oracle might put your Oracle replica outside the support perimeter\. For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 
   The password is stored in AWS Secrets Manager, tagged with the DB resource ID\. Each Oracle replica has its own secret in Secrets Manager\. The format for the secret is the following\.
@@ -46,6 +45,7 @@ RDS Custom for Oracle replicas have the following limitations:
   ```
   do-not-delete-rds-custom-db-DB_resource_id-6-digit_UUID-dg
   ```
++ Make sure not to change the `DB_UNIQUE_NAME` for the primary DB instance\. Changing the name causes any restore operation to become stuck\.
 + While creating a Oracle replica, RDS Custom temporarily pauses the cleanup of redo log files\. In this way, RDS Custom ensures that it can apply these logs to the new Oracle replica after it becomes available\.
 + If your RDS Custom DB instance is a CDB, we recommend that you don't specify the clause `STANDBYS=NONE` in a `CREATE PLUGGABLE DATABASE` command\. The goal is to ensure that your standby CDB contains all PDBs if a failover occurs\.
 

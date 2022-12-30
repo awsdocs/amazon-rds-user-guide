@@ -35,13 +35,11 @@ RDS Custom for SQL Server supports the DB instance classes shown in the followin
 ## Limitations for RDS Custom for SQL Server<a name="custom-reqs-limits.limitsMS"></a>
 
 The following limitations apply to RDS Custom for SQL Server:
-+ You can't provide your own custom DB engine version\.
-+ You can't provide your own AMI\.
 + You can't create read replicas in Amazon RDS for RDS Custom for SQL Server DB instances\. However, you can configure high availability manually using Always On Availability Groups\. For more information, see [Working with high availability features for RDS Custom for SQL Server](custom-managing-sqlserver.md#custom-managing.AO)\.
 + You can't modify the time zone of an existing RDS Custom for SQL Server DB instance\.
 + You can't modify the server\-level collation of an existing RDS Custom for SQL Server DB instance\.
-+ Changes to the Microsoft Windows operating system or C: drive don't persist when you replace an Amazon EC2 instance\. However, you can redo those changes using automation\.
-+  You can’t stop your RDS Custom for SQL Server DB instance or its underlying Amazon EC2 instance\. Billing for an RDS Custom for SQL Server DB instance cannot be stopped\. 
++ For an RDS Custom for SQL Server DB instance that wasn't created with a custom engine version \(CEV\), changes to the Microsoft Windows operating system or C: drive aren't guaranteed to persist\. For example, you will lose these changes when you scale compute or initiate a snapshot restore operation\. If the RDS Custom for SQL Server DB instance was created with a CEV, then those changes are persisted\.
++  You can’t stop your RDS Custom for SQL Server DB instance or its underlying Amazon EC2 instance\. Billing for an RDS Custom for SQL Server DB instance can't be stopped\. 
 + Not all options are supported\. For example, when you create an RDS Custom for SQL Server DB instance, you can't do the following:
   + Change the number of CPU cores and threads per core on the DB instance class\.
   + Turn on storage autoscaling\.

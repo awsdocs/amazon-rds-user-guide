@@ -6,12 +6,12 @@ The shared responsibility model of RDS Custom provides OS shell–level access a
 + [Viewing RDS Custom events](#custom-troubleshooting.support-perimeter.viewing-events)
 + [Subscribing to event notifications](#custom-troubleshooting.support-perimeter.subscribing)
 + [Troubleshooting custom engine version creation for RDS Custom for Oracle](#custom-troubleshooting.cev)
++ [Troubleshooting CEV errors for RDS Custom for SQL Server](#custom-troubleshooting-sqlserver.cev)
 + [RDS Custom support perimeter and unsupported configurations](#custom-troubleshooting.support-perimeter)
 + [Fixing unsupported configurations](#custom-troubleshooting.fix-unsupported)
 + [How Amazon RDS Custom replaces an impaired host](#custom-troubleshooting.host-problems)
 + [Troubleshooting upgrades for RDS Custom for Oracle](#custom-troubleshooting-upgrade)
 + [Troubleshooting replica promotion for RDS Custom for Oracle](#custom-troubleshooting-promote)
-+ [Troubleshooting replica creation for RDS Custom for Oracle](#custom-troubleshooting-create-replica)
 
 ## Viewing RDS Custom events<a name="custom-troubleshooting.support-perimeter.viewing-events"></a>
 
@@ -72,6 +72,37 @@ aws rds describe-events --duration 360
 Currently, the MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with AWS CloudTrail\. Therefore, if you turn on data logging for Amazon RDS in CloudTrail, calls to the MediaImport service such as the `CreateCustomDbEngineVersion` event aren't logged\.
 
 However, you might see calls from the API gateway that accesses your Amazon S3 bucket\. These calls come from the MediaImport service for the `CreateCustomDbEngineVersion` event\.
+
+## Troubleshooting CEV errors for RDS Custom for SQL Server<a name="custom-troubleshooting-sqlserver.cev"></a>
+
+When you try to create a CEV, it might fail\. In this case, RDS Custom issues the `RDS-EVENT-0198` event message\. For more information on viewing RDS events, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\. 
+
+Use the following information to help you address possible causes\.
+
+
+****  
+
+| Message | Troubleshooting suggestions | 
+| --- | --- | 
+| `Custom Engine Version creation expected a Sysprep’d AMI. Retry creation using a Sysprep’d AMI.` | Run Sysprep on the EC2 instance that you created from the AMI\. For more information about prepping an AMI using Sysprep, see [Create a standardized Amazon Machine Image \(AMI\) using Sysprep](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/Creating_EBSbacked_WinAMI.html#sysprep-using-ec2launchv2)\. | 
+| `EC2 Image permissions for image (AMI_ID) weren't found for customer (Customer_ID). Verify customer (Customer_ID) has valid permissions on the EC2 Image.` | Verify that your account and profile used for creation has the required permissions on `create EC2 Instance` and `Describe Images` for the selected AMI\. | 
+| `Image (AMI_ID) doesn't exist in your account (ACCOUNT_ID). Verify (ACCOUNT_ID) is the owner of the EC2 image.` | Ensure the AMI exists in the same customer account\. | 
+| `Image id (AMI_ID) isn't valid. Specify a valid image id, and try again.` | The name of the AMI is incorrect\. Ensure the correct AMI ID is provided\. | 
+| `Image (AMI_ID) operating system platform isn't supported. Specify a valid image, and try again.` |  Choose a supported AMI that has Windows Server with SQL Server Enterprise, Standard, or Web edition\. Choose an AMI with one of the following usage operation codes from the EC2 Marketplace: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  | 
+| `The custom engine version can't be the same as the OEV engine version. Specify a valid CEV, and try again.` | Classic RDS Custom for SQL Server engine versions aren't supported\. For example, version **15\.00\.4073\.23\.v1**\. Use a supported version number\. | 
+| `The custom engine version isn't in an active state. Specify a valid CEV, and try again.` | The CEV must be in an `AVAILABLE` state to complete the operation\. Modify the CEV from `INACTIVE` to `AVAILABLE`\.  | 
+| `The custom engine version isn't valid for an upgrade. Specify a valid CEV with an engine version greater or equal to (X), and try again.` | The target CEV is not valid\. Check the requirements for a valid upgrade path\. For more information, see \(link needed here\) | 
+| `The custom engine version isn't valid. Names can include only lowercase letters (a-z), dashes (-), underscores (_), and periods (.). Specify a valid CEV, and try again.` | Follow the required CEV naming convention\. For more information, see [Requirements](custom-cev-sqlserver.preparing.md#custom-cev-sqlserver.preparing.Requirements)\. | 
+| `The custom engine version isn't valid. Specify valid database engine version, and try again. Example: 15.00.4073.23-cev123.` | An unsupported DB engine version was provided\. Use a supported DB engine version\. | 
+| `The expected architecture is (X) for image (AMI_ID), but architecture (Y) was found.` | Use an AMI built on the **x86\_64** architecture\. | 
+| `The expected owner of image (AMI_ID) is customer account ID (ACCOUNT_ID), but owner (ACCOUNT_ID) was found.` | Create the EC2 instance from the AMI that you have permission for\. Run Sysprep on the EC2 instance to create and save a base image\.  | 
+| `The expected platform is (X) for image (AMI_ID), but platform (Y) was found.` | Use an AMI built with the Windows platform\. | 
+| `The expected root device type is (X) for image %s, but root device type (Y) was found.` | Create the AMI with the EBS device type\. | 
+| `The expected SQL Server edition is (X), but (Y) was found.` |  Choose a supported AMI that has Windows Server with SQL Server Enterprise, Standard, or Web edition\. Choose an AMI with one of the following usage operation codes from the EC2 Marketplace: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  | 
+| `The expected state is (X) for image (AMI_ID), but the following state was found: (Y).` | Ensure the AMI is in a state of `AVAILABLE`\. | 
+| `The provided Windows OS name (X) isn’t valid. Make sure the OS is one of the following: (Y).` | Use a supported Windows OS\. | 
+| `RDS expected a Windows build version greater than or equal to (X), but found version (Y).` | Use an AMI with a minimum OS build version of **14393**\.  | 
+| `RDS expected a Windows major version greater than or equal to (X).1f, but found version (Y).1f.` | Use an AMI with a minimum OS major version of **10\.0** or higher\.  | 
 
 ## RDS Custom support perimeter and unsupported configurations<a name="custom-troubleshooting.support-perimeter"></a>
 
@@ -248,38 +279,3 @@ To respond to the stuck workflow, complete the following steps:
    ```
 
 1. Contact AWS Support and request it to move your DB instance to available status\.
-
-## Troubleshooting replica creation for RDS Custom for Oracle<a name="custom-troubleshooting-create-replica"></a>
-
-When you attempt to create a new Oracle replica from an RDS Custom for Oracle DB instance that was created before November 18, 2022, the replication becomes stuck\. You can fix this problem by creating a new SPFILE on the Oracle replica that is experiencing the problem\.
-
-**To create a new SPFILE on your Oracle replica**
-
-1. Log in to the underlying Amazon EC2 instance for your Oracle replica\. Use `sed` to change the current Oracle home value of `/rdsdbbin/oracle` to the latest Oracle home in your initialization parameter file\.
-
-   ```
-   sed -i "s|/rdsdbbin/oracle|$ORACLE_HOME|g" /rdsdbdata/config/oracle_pfile 
-   ```
-
-1. Start an Oracle SQL client, and log in to your RDS Custom for Oracle DB instance as a user with `SYSDBA` privileges\. 
-
-1. In your SQL client, create an SPFILE from your initialization parameter file\. 
-
-   ```
-   CREATE SPFILE='/rdsdbdata/admin/$ORACLE_SID/pfile/spfile$ORACLE_SID.ora' 
-       FROM PFILE='/rdsdbdata/config/oracle_pfile';
-   ```
-
-1. Shut down your Oracle replica database:
-
-   ```
-   SHUTDOWN IMMEDIATE
-   ```
-
-1. Start your Oracle replica database and mount it:
-
-   ```
-   STARTUP MOUNT
-   ```
-
-Your source RDS Custom for Oracle DB instance can now replicate to your Oracle replica database\.

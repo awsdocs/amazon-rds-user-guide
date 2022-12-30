@@ -11,7 +11,7 @@ You can use Native Network Encryption or Secure Sockets Layer, but not both\. Fo
 
 You can specify encryption requirements on both the server and the client\. The DB instance can act as a client when, for example, it uses a database link to connect to another database\. You might want to avoid forcing encryption on the server side\. For example, you might not want to force all client communications to use encryption because the server requires it\. In this case, you can force encryption on the client side using the `SQLNET.*CLIENT` options\.
 
-Amazon RDS supports the following settings for the NNE option\. 
+Amazon RDS supports the following settings for the NNE option\.
 
 **Note**  
 When you use commas to separate values for an option setting, don't put a space after the comma\.

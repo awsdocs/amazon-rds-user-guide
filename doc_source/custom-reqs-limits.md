@@ -44,5 +44,6 @@ The following limitations apply to RDS Custom for Oracle:
 + The maximum DB instance storage is 64 TiB\.
 + Only one database is supported on an RDS Custom for Oracle DB instance\.
 + You can’t stop your RDS Custom for Oracle DB instance or its underlying Amazon EC2 instance\. Billing for an RDS Custom for Oracle DB instance cannot be stopped\.
++ Make sure not to change the `DB_UNIQUE_NAME` for the primary DB instance\. Changing the name causes any restore operation to become stuck\.
 
-For limitations specific to modifying an RDS Custom for Oracle DB instance, see [Modifying your RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.modifying)\.
+For limitations specific to modifying an RDS Custom for Oracle DB instance, see [Modifying your RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.modifying)\. For replication limitations, see [General requirements and limitations](custom-rr.md#custom-rr.limitations)\.

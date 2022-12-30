@@ -37,6 +37,8 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
 1. In the **Edition** section, choose the DB engine edition that you want to use\. For RDS Custom for SQL Server, the choices are Enterprise, Standard, and Web\.
 
+1. \(Optional\) If you intend to create the DB instance from a CEV, check the **Use custom engine version \(CEV\)** check box\. Select your CEV in the drop\-down list\.
+
 1. For **Database version**, keep the SQL Server 2019 default value\.
 
 1. For **Templates**, choose **Production**\.
@@ -107,12 +109,15 @@ You create an RDS Custom DB instance by using the [create\-db\-instance](https:/
 
 The following options are required:
 + `--db-instance-identifier`
-+ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\)
++ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom for SQL Server](custom-reqs-limits-MS.md#custom-reqs-limits.instancesMS)\)
 + `--engine` \(`custom-sqlserver-ee`, `custom-sqlserver-se`, or `custom-sqlserver-web`\)
 + `--kms-key-id`
 + `--custom-iam-instance-profile`
 
 The following example creates an RDS Custom for SQL Server DB instance named `my-custom-instance`\. The backup retention period is 3 days\.
+
+**Note**  
+To create a DB instance from a custom engine version \(CEV\), supply an existing CEV name to the `--engine-version` parameter\. For example, `--engine-version 15.00.4249.2.my_cevtest`
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -130,9 +135,8 @@ For Linux, macOS, or Unix:
 10.     --backup-retention-period 3 \
 11.     --no-multi-az \
 12.     --port 8200 \
-13.     --license-model license-included \
-14.     --kms-key-id mykmskey \
-15.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+13.     --kms-key-id mykmskey \
+14.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
 ```
 For Windows:  
 
@@ -149,9 +153,8 @@ For Windows:
 10.     --backup-retention-period 3 ^
 11.     --no-multi-az ^
 12.     --port 8200 ^
-13.     --license-model license-included ^
-14.     --kms-key-id mykmskey ^
-15.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+13.     --kms-key-id mykmskey ^
+14.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
 ```
 
 Get details about your instance by using the `describe-db-instances` command\.
