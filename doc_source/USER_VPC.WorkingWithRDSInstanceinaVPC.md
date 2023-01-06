@@ -26,7 +26,7 @@ Here are some tips on working with a DB instance in a VPC:
 **Note**  
 The DB subnet group for a Local Zone can have only one subnet\.
 + If you want your DB instance in the VPC to be publicly accessible, make sure to turn on the VPC attributes *DNS hostnames* and *DNS resolution*\. 
-+ Your VPC must have a DB subnet group that you create\. You create a DB subnet group by specifying the subnets you created\. Amazon RDS chooses a subnet and an IP address within that subnet to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\.
++ Your VPC must have a DB subnet group that you create\. You create a DB subnet group by specifying the subnets you created\. Amazon RDS chooses a subnet and an IP address within that subnet group to associate with your DB instance\. The DB instance uses the Availability Zone that contains the subnet\.
 + Your VPC must have a VPC security group that allows access to the DB instance\.
 
   For more information, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.

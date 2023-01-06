@@ -211,18 +211,15 @@ aws secretsmanager get-secret-value --secret-id your_secret_name
  The following commands perform the same operation through the AWS CLI\. 
 
 ```
-PREFIX=choose_an_identifier
+PREFIX=my_identifier
 
-aws iam create-role --role-name choose_role_name \
+aws iam create-role --role-name my_role_name \
   --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":["rds.amazonaws.com"]},"Action":"sts:AssumeRole"}]}'
 
-aws iam put-role-policy --role-name same_role_name_as_previous \
-  --policy-name $PREFIX-secret-reader-policy --policy-document """
-same_json_as_in_previous_example
-"""
+aws iam put-role-policy --role-name my_role_name \
+  --policy-name $PREFIX-secret-reader-policy --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":["rds.amazonaws.com"]},"Action":"sts:AssumeRole"}]}'
 
-aws kms create-key --description "$PREFIX-test-key" --policy """
-{
+aws kms create-key --description "$PREFIX-test-key" --policy '{
   "Id":"$PREFIX-kms-policy",
   "Version":"2012-10-17",
   "Statement":
@@ -268,8 +265,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
         "Resource":"*"
       }
     ]
-}
-"""
+}'
 ```
 
 ## Creating an RDS Proxy<a name="rds-proxy-creating"></a>

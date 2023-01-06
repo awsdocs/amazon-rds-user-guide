@@ -143,7 +143,7 @@ aws rds create-db-proxy-endpoint ^
 
 ### RDS API<a name="rds-proxy-endpoints.CreatingEndpoint.API"></a>
 
- To create a proxy endpoint, use the RDS API [CreateProxyEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html) action\. 
+ To create a proxy endpoint, use the RDS API [CreateDBProxyEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBProxyEndpoint.html) action\. 
 
 ## Viewing proxy endpoints<a name="rds-proxy-endpoints.DescribingEndpoint"></a>
 

@@ -14,16 +14,94 @@ Each DB engine has its own process for implementing SSL/TLS\. To learn how to im
 **Note**  
 All certificates are only available for download using SSL/TLS connections\.
 
-To get a certificate bundle that contains both the intermediate and root certificates for all AWS Regions, download from [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem)\. 
+## Certificate authorities<a name="UsingWithRDS.SSL.RegionCertificateAuthorities"></a>
 
-If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/global/global-bundle.p7b)\. 
+The certificate authority \(CA\) is the certificate that identifies the root CA at the top of the certificate chain\. The CA signs the DB instance certificate, which is the server certificate that is installed on each DB instance\. The server certificate identifies the DB instance as a trusted server\.
+
+Amazon RDS provides the following CAs to sign the server certificate for a DB instance\.
+
+
+****  
+
+| Certificate authority \(CA\) | Description | 
+| --- | --- | 
+|  rds\-ca\-2019  |  Uses a certificate authority with RSA 2048 private key algorithm and SHA256 signing algorithm for your DB instance server certificate\. This CA expires in 2024 and doesn't support automatic server certificate rotation\. If you are using this CA and want to keep the same standard, we recommend that you switch to the rds\-ca\-rsa2048\-g1 CA\.  | 
+|  rds\-ca\-rsa2048\-g1  |  Uses a certificate authority with RSA 2048 private key algorithm and SHA256 signing algorithm for your DB instance server certificate in most AWS Regions\. In the AWS GovCloud \(US\) Regions, this CA uses a certificate authority with RSA 2048 private key algorithm and SHA384 signing algorithm for your DB instance server certificate\. This CA remains valid for longer than the rds\-ca\-2019 CA\. This CA supports automatic server certificate rotation\.  | 
+|  rds\-ca\-rsa4096\-g1  |  Uses a certificate authority with RSA 4096 private key algorithm and SHA384 signing algorithm for your DB instance server certificate\. This CA supports automatic server certificate rotation\.  | 
+|  rds\-ca\-ecc384\-g1  |  Uses a certificate authority with ECC 384 private key algorithm and SHA384 signing algorithm for your DB instance server certificate\. This CA supports automatic server certificate rotation\.  | 
+
+When you use the rds\-ca\-rsa2048\-g1, rds\-ca\-rsa4096\-g1, or rds\-ca\-ecc384\-g1 CA with a DB instance, RDS manages the server certificate on the DB instance\. RDS rotates it automatically before it expires\. These CA certificates are included in the regional and global certificate bundle\.
+
+You can set the CA for a DB instance when you perform the following tasks:
++ Create a DB instance – You can set the CA when you create a DB instance\. For instructions, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
++ Modify a DB instance – You can set the CA for a DB instance by modifying it\. For instructions, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+The available CAs depend on the DB engine and DB engine version\. When you use the AWS Management Console, you can choose the CA using the **Certificate authority** setting, as shown in the following image\.
+
+![\[Certificate authority option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/certificate-authority.png)
+
+The console only shows the CAs that are available for the DB engine and DB engine version\. If you are using the AWS CLI, you can set the CA for a DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) or [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\.
+
+If you are using the AWS CLI, you can see the available CAs for your account by using the [describe\-certificates](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-certificates.html) command\. This command also shows the expiration date for each CA in `ValidTill` in the output\. You can find the CAs that are available for a specific DB engine and DB engine version using the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-certificates.html) command\.
+
+The following example shows the CAs available for the default RDS for PostgreSQL DB engine version\.
+
+```
+aws rds describe-db-engine-versions --default-only --engine postgres
+```
+
+Your output is similar to the following\. The available CAs are listed in `SupportedCACertificatesIdentifiers`\. The output also shows whether the DB engine version supports rotating the certificate without restart in `SupportsCertificateRotationWithoutRestart`\.
+
+```
+{
+    "DBEngineVersions": [
+        {
+            "Engine": "postgres",
+            "MajorEngineVersion": "13",
+            "EngineVersion": "13.4",
+            "DBParameterGroupFamily": "postgres13",
+            "DBEngineDescription": "PostgreSQL",
+            "DBEngineVersionDescription": "PostgreSQL 13.4-R1",
+            "ValidUpgradeTarget": [],
+            "SupportsLogExportsToCloudwatchLogs": false,
+            "SupportsReadReplica": true,
+            "SupportedFeatureNames": [
+                "Lambda"
+            ],
+            "Status": "available",
+            "SupportsParallelQuery": false,
+            "SupportsGlobalDatabases": false,
+            "SupportsBabelfish": false,
+            "SupportsCertificateRotationWithoutRestart": true,
+            "SupportedCACertificatesIdentifiers": [
+                "rds-ca-2019",
+                "rds-ca-rsa2048-g1",
+                "rds-ca-ecc384-g1",
+                "rds-ca-rsa4096-g1"
+            ]
+        }
+    ]
+}
+```
+
+You can view the details about the CA for a DB instance by viewing the **Connectivity & security** tab in the console, as in the following image\.
+
+![\[Certificate authority details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/certificate-authority-details.png)
+
+If you are using the AWS CLI, you can view the details about the CA for a DB instance by using the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command\.
+
+## Certificate bundles for all AWS Regions<a name="UsingWithRDS.SSL.CertificatesAllRegions"></a>
+
+To get a certificate bundle that contains both the intermediate and root certificates for all AWS Regions, download it from [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem)\. 
+
+If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/global/global-bundle.p7b)\.
 
 **Note**  
 Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.howitworks.md#rds-proxy-security.tls)\.
 
-## Certificate bundles for AWS Regions<a name="UsingWithRDS.SSL.RegionCertificates"></a>
+## Certificate bundles for specific AWS Regions<a name="UsingWithRDS.SSL.RegionCertificates"></a>
 
-To get a certificate bundle that contains both the intermediate and root certificates for an AWS Region, download from the link for the AWS Region in the following table\.
+To get a certificate bundle that contains both the intermediate and root certificates for an AWS Region, download it from the link for the AWS Region in the following table\.
 
 
 | **AWS Region** | **Certificate bundle \(PEM\)** | **Certificate bundle \(PKCS7\)** | 

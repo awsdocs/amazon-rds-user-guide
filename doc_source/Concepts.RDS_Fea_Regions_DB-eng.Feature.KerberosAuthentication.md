@@ -122,8 +122,8 @@ Following are the supported engines and Region availability for Kerberos authent
 | Middle East \(Bahrain\) | – | – | – | – | – | 
 | Middle East \(UAE\) | – | – | – | – | – | 
 | South America \(São Paulo\) | All versions | All versions | All versions | All versions | All versions | 
-| AWS GovCloud \(US\-East\) | All versions | All versions | All versions | All versions | All versions | 
-| AWS GovCloud \(US\-West\) | All versions | All versions | All versions | All versions | All versions | 
+| AWS GovCloud \(US\-East\) | – | – | – | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | – | – | – | 
 
 ## Kerberos authentication with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.sq"></a>
 
@@ -139,7 +139,7 @@ Following are the supported engines and Region availability for Kerberos authent
 | Africa \(Cape Town\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Jakarta\) | – | – | – | – | 
 | Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | 
 | Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | 

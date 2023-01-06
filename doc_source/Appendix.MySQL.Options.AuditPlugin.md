@@ -51,7 +51,7 @@ Adding the MariaDB Audit Plugin to a DB instance might cause an outage\. We reco
 
 ## Audit log format<a name="Appendix.MySQL.Options.AuditPlugin.LogFormat"></a>
 
-Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 format\. The audit log is stored separately on the local \(ephemeral\) storage of each RDS for MySQL DB instance\.
+Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 format\.
 
 **Tip**  
 Log file entries are not in sequential order\. To order the entries, use the timestamp value\. To see the latest events, you might have to review all log files\. For more flexibility in sorting and searching the log data, turn on the setting to upload the audit logs to CloudWatch and view them using the CloudWatch interface\.  

@@ -12,7 +12,7 @@ A *switchover* promotes the green environment to be the new production environme
 
 ## Switchover timeout<a name="blue-green-deployments-switching-timeout"></a>
 
-You can specify a switchover timeout period between 30 seconds and 2,592,000 seconds \(approximately one month\)\. If the switchover takes longer than the specified duration, then any changes are rolled back and no changes are made to either environment\. The default timeout period is 300 seconds \(five minutes\)\.
+You can specify a switchover timeout period between 30 seconds and 3,600 seconds \(one hour\)\. If the switchover takes longer than the specified duration, then any changes are rolled back and no changes are made to either environment\. The default timeout period is 300 seconds \(five minutes\)\.
 
 ## Switchover guardrails<a name="blue-green-deployments-switching-guardrails"></a>
 

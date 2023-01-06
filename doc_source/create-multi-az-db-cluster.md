@@ -83,6 +83,8 @@ If you don't have a default VPC or you haven't created a VPC, and you don't plan
 
 For information about limitations that apply to Multi\-AZ DB clusters, see [Limitations for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts.Limitations)\.
 
+If you want to connect to a resource that isn't in the same VPC as the Multi\-AZ DB cluster, see the appropriate scenarios in [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
+
 ### Additional prerequisites<a name="create-multi-az-db-cluster-prerequisites-additional"></a>
 
 Before you create your Multi\-AZ DB cluster, consider the following additional prerequisites:

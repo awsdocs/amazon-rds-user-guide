@@ -4,6 +4,8 @@ You can use the RDS console to simplify setting up a connection between an EC2 i
 
 ![\[Automatically connect an RDS database with an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2.png)
 
+If you want to connect to an EC2 instance that isn't in the same VPC as the RDS database, see the appropriate scenarios in [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
+
 **Topics**
 + [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
 + [Connecting an EC2 instance and an RDS database automatically](#ec2-rds-connect-connecting)
