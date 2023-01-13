@@ -23,7 +23,7 @@ To start replication between an external source instance and a MariaDB DB instan
 
    The GTID is formatted as `<domain-id>-<server-id>-<sequence-id>`\. A typical GTID looks something like **0\-1234510749\-1728**\. For more information about GTIDs and their component parts, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\. 
 
-1. Copy the database from the external MariaDB instance to the MariaDB DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
+1. Copy the database from the external MariaDB instance to the MariaDB DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
 
    For Linux, macOS, or Unix:
 

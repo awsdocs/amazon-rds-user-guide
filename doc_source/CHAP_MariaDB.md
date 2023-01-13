@@ -42,6 +42,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 + [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)
 + [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)
 + [Securing MariaDB DB instance connections](securing-mariadb-connections.md)
++ [Improving query performance for RDS for MariaDB with Amazon RDS Optimized Reads](rds-optimized-reads-mariadb.md)
 + [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)
 + [Importing data into a MariaDB DB instance](MariaDB.Procedural.Importing.md)
 + [Working with MariaDB replication in Amazon RDS](USER_MariaDB.Replication.md)

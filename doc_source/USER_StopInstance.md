@@ -71,11 +71,13 @@ You can stop a DB using the AWS Management Console, the AWS CLI, or the RDS API\
 
 1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to stop\. 
 
-1. For **Actions**, choose **Stop**\. 
+1. For **Actions**, choose **Stop temporarily**\. 
 
-1. \(Optional\) In the **Stop DB Instance** window, choose **Yes** for **Create Snapshot?** and enter the snapshot name for **Snapshot name**\. Choose **Yes** if you want to create a snapshot of the DB instance before stopping it\. 
+1. In the **Stop DB instance temporarily** window, select the acknowledgement that the DB instance will restart automatically after 7 days\.
 
-1. Choose **Yes, Stop Now** to stop the DB instance, or choose **Cancel** to cancel the operation\.
+1. \(Optional\) Select **Save the DB instance in a snapshot** and enter the snapshot name for **Snapshot name**\. Choose this option if you want to create a snapshot of the DB instance before stopping it\.
+
+1. Choose **Stop temporarily** to stop the DB instance, or choose **Cancel** to cancel the operation\.
 
 ### AWS CLI<a name="USER_StopInstance.CLI"></a>
 

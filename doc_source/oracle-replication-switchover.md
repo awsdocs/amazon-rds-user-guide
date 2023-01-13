@@ -58,6 +58,8 @@ Oracle Data Guard switchover is available in the following AWS Regions:
 + US East \(Ohio\)
 + US West \(N\. California\)
 + US West \(Oregon\)
++ AWS GovCloud \(US\-East\)
++ AWS GovCloud \(US\-West\)
 
 ### Cost of Oracle Data Guard switchover<a name="oracle-replication-switchover.overview.cost"></a>
 

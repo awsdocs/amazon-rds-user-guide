@@ -62,7 +62,7 @@ Times are shown in your local time zone, which is indicated by an offset from Co
 
 ## AWS CLI<a name="USER_PIT.CLI"></a>
 
-To restore a DB instance to a specified time, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\. This example also enables storage autoscaling\.
+To restore a DB instance to a specified time, use the AWS CLI command [restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\. This example also sets the allocated storage size and enables storage autoscaling\.
 
 Resource tagging is supported for this operation\. When you use the `--tags` option, the source DB instance tags are ignored and the provided ones are used\. Otherwise, the latest tags from the source instance are used\.
 
@@ -76,7 +76,8 @@ For Linux, macOS, or Unix:
 2.     --source-db-instance-identifier mysourcedbinstance \
 3.     --target-db-instance-identifier mytargetdbinstance \
 4.     --restore-time 2017-10-14T23:45:00.000Z \
-5.     --max-allocated-storage 1000
+5.     --allocated-storage 100 \
+6.     --max-allocated-storage 1000
 ```
 For Windows:  
 
@@ -85,7 +86,8 @@ For Windows:
 2.     --source-db-instance-identifier mysourcedbinstance ^
 3.     --target-db-instance-identifier mytargetdbinstance ^
 4.     --restore-time 2017-10-14T23:45:00.000Z ^
-5.     --max-allocated-storage 1000
+5.     --allocated-storage 100 ^
+6.     --max-allocated-storage 1000
 ```
 
 ## RDS API<a name="USER_PIT.API"></a>

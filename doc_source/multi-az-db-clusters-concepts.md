@@ -49,6 +49,8 @@ You can create a snapshot of a Multi\-AZ DB cluster by following the instruction
 
 You can restore a Multi\-AZ DB cluster to a point in time by following the instructions in [Restoring a Multi\-AZ DB cluster to a specified time](USER_PIT.MultiAZDBCluster.md)\.
 
+You can import data from an on\-premises database to a Multi\-AZ DB cluster by following the instructions in [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
+
 ## Managing connections for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-connection-management"></a>
 
  A Multi\-AZ DB cluster has three DB instances instead of a single DB instance\. Each connection is handled by a specific DB instance\. When you connect to a Multi\-AZ DB cluster, the host name and port that you specify point to a fully qualified domain name called an *endpoint*\. The Multi\-AZ DB cluster uses the endpoint mechanism to abstract these connections\. Thus, you don't have to hardcode all the host names or write your own logic for rerouting connections when some DB instances aren't available\. 
@@ -306,8 +308,7 @@ To modify the JVM's TTL, set the [https://docs.oracle.com/javase/7/docs/technote
 
 The following limitations apply to Multi\-AZ DB clusters:
 + Multi\-AZ DB clusters only support Provisioned IOPS storage\.
-+ You can't change a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
-+ You can't restore a Multi\-AZ DB cluster snapshot to a Multi\-AZ DB instance deployment or single\-AZ deployment\.
++ You can't change a Single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a Single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
 + Multi\-AZ DB clusters don't support modifications at the DB instance level because all modifications are done at the DB cluster level\.
 + Multi\-AZ DB clusters don't support the following features:
   + Amazon RDS Proxy

@@ -90,7 +90,7 @@ You can restore a DB instance from a DB snapshot using the AWS Management Consol
 
 1. On the **Restore snapshot** page, for **DB instance identifier**, enter the name for your restored DB instance\.
 
-1. Specify other settings\.
+1. Specify other settings, such as allocated storage size\.
 
    For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
@@ -100,7 +100,7 @@ You can restore a DB instance from a DB snapshot using the AWS Management Consol
 
 To restore a DB instance from a DB snapshot, use the AWS CLI command [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)\. 
 
-In this example, you restore from a previously created DB snapshot named `mydbsnapshot`\. You restore to a new DB instance named `mynewdbinstance`\.
+In this example, you restore from a previously created DB snapshot named `mydbsnapshot`\. You restore to a new DB instance named `mynewdbinstance`\. This example also sets the allocated storage size\.
 
 You can specify other settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
@@ -111,7 +111,8 @@ For Linux, macOS, or Unix:
 ```
 1. aws rds restore-db-instance-from-db-snapshot \
 2.     --db-instance-identifier mynewdbinstance \
-3.     --db-snapshot-identifier mydbsnapshot
+3.     --db-snapshot-identifier mydbsnapshot \
+4.     --allocated-storage 100
 ```
 For Windows:  
    
@@ -119,7 +120,8 @@ For Windows:
 ```
 1. aws rds restore-db-instance-from-db-snapshot ^
 2.     --db-instance-identifier mynewdbinstance ^
-3.     --db-snapshot-identifier mydbsnapshot
+3.     --db-snapshot-identifier mydbsnapshot ^
+4.     --allocated-storage 100
 ```
 This command returns output similar to the following:  
 

@@ -361,12 +361,18 @@ For general information about resource tagging, see [Tagging Amazon RDS resource
 
 ## Deleting an RDS Custom for SQL Server DB instance<a name="custom-managing-sqlserver.deleting"></a>
 
-To delete an RDS Custom DB instance, do the following:
+To delete an RDS Custom for SQL Server DB instance, do the following:
 + Provide the name of the DB instance\.
-+ Clear the option to take a final DB snapshot of the DB instance\.
++ Choose or clear the option to take a final DB snapshot of the DB instance\.
 + Choose or clear the option to retain automated backups\.
 
-You can delete an RDS Custom DB instance using the console or the CLI\. The time required to delete the DB instance can vary depending on the backup retention period \(that is, how many backups to delete\) and how much data is deleted\.
+You can delete an RDS Custom for SQL Server DB instance using the console or the CLI\. The time required to delete the DB instance can vary depending on the backup retention period \(that is, how many backups to delete\), how much data is deleted, and whether a final snapshot is taken\.
+
+**Note**  
+You can't create a final DB snapshot of your DB instance if it has a status of `creating`, `failed`, `incompatible-create`, `incompatible-restore`, or `incompatible-network`\. For more information, see [Viewing Amazon RDS DB instance status](accessing-monitoring.md#Overview.DBInstance.Status)\.
+
+**Important**  
+When you choose to take a final snapshot, we recommend that you avoid writing data to your DB instance while the DB instance deletion is in progress\. Once the DB instance deletion is initiated, data changes are not guaranteed to be captured by the final snapshot\.
 
 ### Console<a name="custom-managing-sqs.deleting.console"></a>
 
@@ -374,9 +380,11 @@ You can delete an RDS Custom DB instance using the console or the CLI\. The time
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**, and then choose the RDS Custom DB instance that you want to delete\. RDS Custom DB instances show the role **Instance \(RDS Custom\)**\.
+1. In the navigation pane, choose **Databases**, and then choose the RDS Custom for SQL Server DB instance that you want to delete\. RDS Custom for SQL Server DB instances show the role **Instance \(RDS Custom for SQL Server\)**\.
 
 1. For **Actions**, choose **Delete**\.
+
+1. To take a final snapshot, choose **Create final snapshot**, and provide a name for the **Final snapshot name**\.
 
 1. To retain automated backups, choose **Retain automated backups**\.
 
@@ -386,12 +394,9 @@ You can delete an RDS Custom DB instance using the console or the CLI\. The time
 
 ### AWS CLI<a name="custom-managing-sqs.deleting.CLI"></a>
 
-You delete an RDS Custom DB instance by using the [delete\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html) AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. The remaining parameters are the same as for an Amazon RDS DB instance, with the following exceptions:
-+ `--skip-final-snapshot` is required\.
-+ `--no-skip-final-snapshot` isn't supported\.
-+ `--final-db-snapshot-identifier` isn't supported\.
+You delete an RDS Custom for SQL Server DB instance by using the [delete\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html) AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. The remaining parameters are the same as for an Amazon RDS DB instance\.
 
-The following example deletes the RDS Custom DB instance named `my-custom-instance`, and retains automated backups\.
+The following example deletes the RDS Custom for SQL Server DB instance named `my-custom-instance`, takes a final snapshot, and retains automated backups\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -399,7 +404,8 @@ For Linux, macOS, or Unix:
 ```
 aws rds delete-db-instance \
     --db-instance-identifier my-custom-instance \
-    --skip-final-snapshot \
+    --no-skip-final-snapshot \
+    --final-db-snapshot-identifier my-custom-instance-final-snapshot \
     --no-delete-automated-backups
 ```
 For Windows:  
@@ -407,6 +413,13 @@ For Windows:
 ```
 aws rds delete-db-instance ^
     --db-instance-identifier my-custom-instance ^
-    --skip-final-snapshot ^
+    --no-skip-final-snapshot ^
+    --final-db-snapshot-identifier my-custom-instance-final-snapshot ^
     --no-delete-automated-backups
 ```
+
+To take a final snapshot, the `--final-db-snapshot-identifier` option is required and must be specified\.
+
+To skip the final snapshot, specify the `--skip-final-snapshot` option instead of the `--no-skip-final-snapshot` and `--final-db-snapshot-identifier` options in the command\.
+
+To delete automated backups, specify the `--delete-automated-backups` option instead of the `--no-delete-automated-backups` option in the command\.

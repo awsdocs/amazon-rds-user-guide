@@ -15,7 +15,7 @@ You can view details about your CEV by using the AWS Management Console or the A
 1. Choose the name of the CEV that you want to view\.
 
 1. Choose **Configuration** to view the details\.  
-![\[View the configuration details for a CEV.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds_custom_sqlserver_cev_view_details.PNG)
+![\[View the configuration details for a CEV.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds_custom_sqlserver_cev_viewdetails.PNG)
 
 ## AWS CLI<a name="custom-viewing-sqlserver.CEV"></a>
 

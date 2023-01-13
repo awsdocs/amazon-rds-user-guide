@@ -156,13 +156,16 @@ The following limitations apply to blue/green deployments:
   + Amazon RDS Proxy
   + Cascading read replicas
   + Cross\-Region read replicas
-  + Multi\-AZ DB clusters
   + AWS CloudFormation
+  + Multi\-AZ DB cluster deployments
+
+    Blue/green deployments are supported for Multi\-AZ DB instance deployments\. For more information about Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
 + The following are limitations for changes in a blue/green deployment:
   + You can't change an unencrypted DB instance into an encrypted DB instance\.
   + You can't change an encrypted DB instance into an unencrypted DB instance\.
   + You can't change a blue environment DB instance to a higher engine version than its corresponding green environment DB instance\.
   + The resources in the blue environment and green environment must be in the same AWS account\.
+  + During switchover, the blue primary DB instance can't be the target of external replication\.
   + If the source database is associated with a custom option group, you can't specify a major version upgrade when you create the blue/green deployment\.
 
     In this case, you can create a blue/green deployment without specifying a major version upgrade\. Then, you can upgrade the database in the green environment\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.

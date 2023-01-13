@@ -43,7 +43,7 @@ Follow these guidelines when you set up an external source instance and a replic
    ------------------------------------
    ```
 
-1. Copy the database from the external instance to the Amazon RDS DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MariaDB or MySQL DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
+1. Copy the database from the external instance to the Amazon RDS DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
 
    For Linux, macOS, or Unix:
 

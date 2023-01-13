@@ -9,6 +9,7 @@ This section shows how to back up and restore a DB instance\.
 + [Creating a Multi\-AZ DB cluster snapshot](USER_CreateMultiAZDBClusterSnapshot.md)
 + [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)
 + [Restoring from a snapshot to a Multi\-AZ DB cluster](USER_RestoreFromMultiAZDBClusterSnapshot.Restoring.md)
++ [Restoring from a Multi\-AZ DB cluster snapshot to a DB instance](USER_RestoreFromMultiAZDBClusterSnapshot.md)
 + [Copying a DB snapshot](USER_CopySnapshot.md)
 + [Sharing a DB snapshot](USER_ShareSnapshot.md)
 + [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)

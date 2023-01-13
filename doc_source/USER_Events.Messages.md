@@ -234,10 +234,13 @@ For more information about blue/green deployments, see [Using Amazon RDS Blue/Gr
 |  failure  | RDS\-EVENT\-0245 |  Creation of blue/green deployment failed\.  | 
 |  failure  | RDS\-EVENT\-0249 |  Switchover canceled on blue/green deployment\.  | 
 |  failure  | RDS\-EVENT\-0252 |  Switchover from primary source to target canceled\.  | 
+|  failure  | RDS\-EVENT\-0261 |  Switchover from source DB cluster to target DB cluster canceled\.  | 
 |  notification  | RDS\-EVENT\-0247 |  Switchover started on blue/green deployment\.  | 
 |  notification  | RDS\-EVENT\-0248 |  Switchover completed on blue/green deployment\.  | 
 |  notification  | RDS\-EVENT\-0250 |  Switchover from primary source to target started\.  | 
 |  notification  | RDS\-EVENT\-0251 |  Switchover from primary source to target completed and databases renamed\.  | 
+|  notification  | RDS\-EVENT\-0259 |  Switchover from source DB cluster to target DB cluster started\.  | 
+|  notification  | RDS\-EVENT\-0260 |  Switchover from source DB cluster to target DB cluster completed\.  | 
 
 ## Custom engine version events<a name="USER_Events.Messages.CEV"></a>
 

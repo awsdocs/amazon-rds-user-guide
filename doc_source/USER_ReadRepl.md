@@ -116,7 +116,7 @@ Creating your read replica as a Multi\-AZ DB instance is independent of whether 
 **Note**  
  The source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
-1. Specify other settings, such as storage autoscaling\.
+1. Specify other settings, such as allocated storage size and whether you want to use storage autoscaling\.
 
    For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
@@ -126,7 +126,7 @@ After the read replica is created, you can see it on the **Databases** page in t
 
 ### AWS CLI<a name="USER_ReadRepl.Create.CLI"></a>
 
-To create a read replica from a source DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also enables storage autoscaling\.
+To create a read replica from a source DB instance, use the AWS CLI command [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also sets the allocated storage size and enables storage autoscaling\.
 
 You can specify other settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
@@ -137,6 +137,7 @@ For Linux, macOS, or Unix:
 aws rds create-db-instance-read-replica \
     --db-instance-identifier myreadreplica \
     --source-db-instance-identifier mydbinstance \
+    --allocated-storage 100 \
     --max-allocated-storage 1000
 ```
 For Windows:  
@@ -145,6 +146,7 @@ For Windows:
 aws rds create-db-instance-read-replica ^
     --db-instance-identifier myreadreplica ^
     --source-db-instance-identifier mydbinstance ^
+    --allocated-storage 100 ^
     --max-allocated-storage 1000
 ```
 

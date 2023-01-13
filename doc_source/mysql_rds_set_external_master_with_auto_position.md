@@ -2,8 +2,6 @@
 
 Configures an RDS for MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\. This procedure also configures delayed replication and replication based on global transaction identifiers \(GTIDs\)\.
 
-The `mysql.rds_set_external_master_with_auto_position` procedure is deprecated and will be removed in a future release\. Use `mysql\.rds\_set\_external\_source\_with\_auto\_position` instead\.
-
 **Important**  
 To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 

@@ -1,6 +1,6 @@
-# Improving query performance with Amazon RDS Optimized Reads<a name="rds-optimized-reads"></a>
+# Improving query performance for RDS for MySQL with Amazon RDS Optimized Reads<a name="rds-optimized-reads"></a>
 
-You can achieve faster query processing with Amazon RDS Optimized Reads\. An RDS for MySQL DB instance that uses RDS Optimized Reads can achieve up to 50 percent faster query processing compared to a DB instance that doesn't use it\.
+You can achieve faster query processing for RDS for MySQL with Amazon RDS Optimized Reads\. An RDS for MySQL DB instance that uses RDS Optimized Reads can achieve up to 2x faster query processing compared to a DB instance that doesn't use it\.
 
 **Topics**
 + [Overview of RDS Optimized Reads](#rds-optimized-reads-overview)
@@ -14,7 +14,7 @@ You can achieve faster query processing with Amazon RDS Optimized Reads\. An RDS
 
 When you use an RDS for MySQL DB instance that has RDS Optimized Reads turned on, your DB instance achieves faster query performance through the use of an instance store\. An *instance store* provides temporary block\-level storage for your DB instance\. The storage is located on Non\-Volatile Memory Express \(NVMe\) solid state drives \(SSDs\) that are physically attached to the host server\. This storage is optimized for low latency, high random I/O performance, and high sequential read throughput\.
 
-RDS Optimized Reads is turned on by default when a DB instance uses a DB instance class with an instance store, such as db\.m5d or db\.m6gd\. With RDS Optimized Reads, some temporary objects are stored on the instance store\. These temporary objects include internal temporary files, internal on\-disk temp tables, memory map files, and binlog cache files\. For more information about the instance store, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon Elastic Compute Cloud User Guide for Linux Instances*\.
+RDS Optimized Reads is turned on by default when a DB instance uses a DB instance class with an instance store, such as db\.m5d or db\.m6gd\. With RDS Optimized Reads, some temporary objects are stored on the instance store\. These temporary objects include internal temporary files, internal on\-disk temp tables, memory map files, and binary log \(binlog\) cache files\. For more information about the instance store, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon Elastic Compute Cloud User Guide for Linux Instances*\.
 
 The workloads that generate temporary objects in MySQL for query processing can take advantage of the instance store for faster query processing\. This type of workload includes queries involving sorts, hash aggregations, high\-load joins, Common Table Expressions \(CTEs\), and queries on unindexed columns\. These instance store volumes provide higher IOPS and performance, regardless of the storage configurations used for persistent Amazon EBS storage\. Because RDS Optimized Reads offloads operations on temporary objects to the instance store, the input/output operations per second \(IOPS\) or throughput of the persistent storage \(Amazon EBS\) can now be used for operations on persistent objects\. These operations include regular data file reads and writes, and background engine operations, such as flushing and insert buffer merges\.
 
@@ -35,8 +35,8 @@ If you have workloads that rely heavily on temporary objects, such as internal t
 
 ## Best practices for RDS Optimized Reads<a name="rds-optimized-reads-best-practices"></a>
 
-Following are best practices for using RDS Optimized Reads:
-+ Add retry logic for read\-only queries in case they fail because of a storage full error on the instance store during the execution\.
+Use the following best practices for RDS Optimized Reads:
++ Add retry logic for read\-only queries in case they fail because the instance store is full during the execution\.
 + Monitor the storage space available on the instance store with the CloudWatch metric `FreeLocalStorage`\. If the instance store is reaching its limit because of workload on the DB instance, modify the DB instance to use a larger DB instance class\.
 + When your DB instance has sufficient memory but is still reaching the storage limit on the instance store, increase the `binlog_cache_size` value to maintain the session\-specific binlog entries in memory\. This configuration prevents writing the binlog entries to temporary binlog cache files on disk\.
 
@@ -49,6 +49,8 @@ Following are best practices for using RDS Optimized Reads:
 ## Using RDS Optimized Reads<a name="rds-optimized-reads-using"></a>
 
 When you provision an RDS for MySQL DB instance with one of the following DB instance classes in a Single\-AZ DB instance deployment or Multi\-AZ DB instance deployment, the DB instance automatically uses RDS Optimized Reads:
++ db\.x2idn
++ db\.x2iedn
 + db\.m6gd
 + db\.r6gd
 + db\.m5d
@@ -80,6 +82,6 @@ These metrics provide data about available instance store storage, IOPS, and thr
 The following limitations apply to RDS Optimized Reads:
 + RDS Optimized Reads is supported for RDS for MySQL version 8\.0\.28 and higher\. For information about RDS for MySQL versions, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
 + You can't change the location of temporary objects to persistent storage \(Amazon EBS\) on the DB instance classes that support RDS Optimized Reads\.
-+ When binary logging is enabled on a DB instance, the maximum transaction size is limited by the size of the instance store\. In this case, any session that requires more storage than the value of `binlog_cache_size` writes transaction changes to temporary binlog cache files, which are created on the instance store\.
++ When binary logging is enabled on a DB instance, the maximum transaction size is limited by the size of the instance store\. In MySQL, any session that requires more storage than the value of `binlog_cache_size` writes transaction changes to temporary binlog cache files, which are created on the instance store\.
 + Transactions can fail when the instance store is full\.
 + RDS Optimized Reads isn't supported for Multi\-AZ DB cluster deployments\.

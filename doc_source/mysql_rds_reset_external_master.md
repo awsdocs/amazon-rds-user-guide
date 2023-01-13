@@ -1,6 +1,6 @@
 # mysql\.rds\_reset\_external\_master<a name="mysql_rds_reset_external_master"></a>
 
-Reconfigures a MySQL DB instance to no longer be a read replica of an instance of MySQL running external to Amazon RDS\. The `mysql.rds_reset_external_master` procedure is deprecated and will be removed in a future release\. Use `mysql\.rds\_reset\_external\_source` instead\.
+Reconfigures a MySQL DB instance to no longer be a read replica of an instance of MySQL running external to Amazon RDS\.
 
 **Important**  
 To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.

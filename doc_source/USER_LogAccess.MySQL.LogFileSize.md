@@ -22,7 +22,7 @@ RDS for MySQL writes errors in the `mysql-error.log` file\. Each log file has th
 
 RDS for MySQL writes to the error log only on startup, shutdown, and when it encounters errors\. A DB instance can go hours or days without new entries being written to the error log\. If you see no recent entries, it's because the server didn't encounter an error that would result in a log entry\.
 
-By design, the error logs are filtered so that only unexpected events such as errors are shown\. However, the error logs also contain some additional database information, for example query progress, which isn't shown\. Therefore, even without any actual errors the size of the error logs might increase because of ongoing database activities\.
+By design, the error logs are filtered so that only unexpected events such as errors are shown\. However, the error logs also contain some additional database information, for example query progress, which isn't shown\. Therefore, even without any actual errors the size of the error logs might increase because of ongoing database activities\. And while you might see a certain size in bytes or kilobytes for the error logs in the AWS Management Console, they might have 0 bytes when you download them\.
 
 RDS for MySQL writes `mysql-error.log` to disk every 5 minutes\. It appends the contents of the log to `mysql-error-running.log`\.
 
