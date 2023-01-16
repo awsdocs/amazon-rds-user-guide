@@ -174,7 +174,7 @@ exec msdb.dbo.rds_tlog_backup_copy_to_S3
 	@db_name='mydatabasename',
 	[@kms_key_arn='arn:aws:kms:region:account-id:key/key-id'],	
 	[@backup_file_start_time='2022-09-01 01:00:15'],
-	[@backup_file_end_time=''2022-09-01 21:30:45''],
+	[@backup_file_end_time='2022-09-01 21:30:45'],
 	[@starting_lsn=149000000112100001],
 	[@ending_lsn=149000000120400001],
 	[@rds_backup_starting_seq_id=5],
