@@ -29,13 +29,13 @@ For more information about Multi\-AZ DB cluster deployments, see [Multi\-AZ DB c
 |  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 
 |  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
 |  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
-|  global failover  | RDS\-EVENT\-0181 |  The failover of the global database has started\. The process can be delayed because other operations are running on the DB cluster\.  | 
-|  global failover  | RDS\-EVENT\-0182 |  The old primary instance in the global database isn't accepting writes\. All volumes are synchronized\.  | 
-|  global failover  | RDS\-EVENT\-0183 |  A replication lag is occurring during the synchronization phase of the global database failover\.  | 
-|  global failover  | RDS\-EVENT\-0184 |  The volume topology of the global database is reestablished with the new primary volume\.  | 
-|  global failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
-|  global failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
-|  global failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
+|  global-failover  | RDS\-EVENT\-0181 |  The failover of the global database has started\. The process can be delayed because other operations are running on the DB cluster\.  | 
+|  global-failover  | RDS\-EVENT\-0182 |  The old primary instance in the global database isn't accepting writes\. All volumes are synchronized\.  | 
+|  global-failover  | RDS\-EVENT\-0183 |  A replication lag is occurring during the synchronization phase of the global database failover\.  | 
+|  global-failover  | RDS\-EVENT\-0184 |  The volume topology of the global database is reestablished with the new primary volume\.  | 
+|  global-failover  | RDS\-EVENT\-0185 |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
+|  global-failover  | RDS\-EVENT\-0186 |  The global database failover is canceled\.  | 
+|  global-failover  | RDS\-EVENT\-0187 |  The global failover to the DB cluster failed\.  | 
 | notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## DB instance events<a name="USER_Events.Messages.instance"></a>
