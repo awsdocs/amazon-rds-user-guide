@@ -136,7 +136,7 @@ Some RDS API operations, such as those for creating resources, can't be performe
 "Resource": "*"
 ```
 
-Many Amazon RDS API operations involve multiple resources\. For example, `CreateDBInstance` creates a DB instance\. You can specify that an IAM user must use a specific security group and parameter group when creating a DB instance\. To specify multiple resources in a single statement, separate the ARNs with commas\. 
+Many Amazon RDS API operations involve multiple resources\. For example, `CreateDBInstance` creates a DB instance\. You can specify that an user must use a specific security group and parameter group when creating a DB instance\. To specify multiple resources in a single statement, separate the ARNs with commas\. 
 
 ```
 "Resource": [

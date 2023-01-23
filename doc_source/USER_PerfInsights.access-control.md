@@ -1,8 +1,8 @@
 # Configuring access policies for Performance Insights<a name="USER_PerfInsights.access-control"></a>
 
 To access Performance Insights, a principal must have the appropriate permissions from AWS Identity and Access Management \(IAM\)\. You can grant access in the following ways:
-+ Attach the `AmazonRDSPerformanceInsightsReadOnly` managed policy to an IAM user or role\.
-+ Create a custom IAM policy and attach it to an IAM user or role\.
++ Attach the `AmazonRDSPerformanceInsightsReadOnly` managed policy to a permission set or role\.
++ Create a custom IAM policy and attach it to a permission set or role\.
 
 If you specified a customer managed key when you turned on Performance Insights, make sure that users in your account have the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the KMS key\.
 
@@ -12,11 +12,11 @@ If you specified a customer managed key when you turned on Performance Insights,
 
 `AmazonRDSPerformanceInsightsReadOnly` is an AWS\-managed policy that grants access to all read\-only operations of the Amazon RDS Performance Insights API\. Currently, all operations in this API are read\-only\.
 
-If you attach `AmazonRDSPerformanceInsightsReadOnly` to an IAM user or role, the recipient can use Performance Insights with other console features\.
+If you attach `AmazonRDSPerformanceInsightsReadOnly` to a permission set or role, the recipient can use Performance Insights with other console features\.
 
 ## Creating a custom IAM policy for Performance Insights<a name="USER_PerfInsights.access-control.custom-policy"></a>
 
-For users who don't have the `AmazonRDSPerformanceInsightsReadOnly` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
+For users who don't have the `AmazonRDSPerformanceInsightsReadOnly` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM permission set or role, the recipient can use Performance Insights\.
 
 **To create a custom policy**
 
@@ -82,9 +82,9 @@ For users who don't have the `AmazonRDSPerformanceInsightsReadOnly` policy, you 
 
 1. Provide a name for the policy and optionally a description, and then choose **Create policy**\.
 
-You can now attach the policy to an IAM user or role\. The following procedure assumes that you already have an IAM user available for this purpose\.
+You can now attach the policy to a permission set or role\. The following procedure assumes that you already have a user available for this purpose\.
 
-**To attach the policy to an IAM user**
+**To attach the policy to a user**
 
 1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 

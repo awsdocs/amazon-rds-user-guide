@@ -37,7 +37,7 @@ For more information on SSL/TLS connections with MySQL, see the [ Using encrypte
 
 ## Requiring SSL/TLS for all connections to a MySQL DB instance<a name="mysql-ssl-connections.require-ssl"></a>
 
-You can require that all user connections to your MySQL DB instance use SSL/TLS by using the `require_secure_transport` parameter\. By default, the `require_secure_transport` parameter is set to `OFF`\. You can set the `require_secure_transport` parameter to `ON` to require SSL/TLS for connections to your DB instance\.
+Use the `require_secure_transport` parameter to require that all user connections to your MySQL DB instance use SSL/TLS\. By default, the `require_secure_transport` parameter is set to `OFF`\. You can set the `require_secure_transport` parameter to `ON` to require SSL/TLS for connections to your DB instance\.
 
 You can set the `require_secure_transport` parameter value by updating the DB parameter group for your DB instance\. You don't need to reboot your DB instance for the change to take effect\.
 

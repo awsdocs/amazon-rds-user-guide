@@ -4,6 +4,7 @@ Secure Sockets Layer \(SSL\) is an industry\-standard protocol for securing netw
 
 **Topics**
 + [Using SSL/TLS with a MariaDB DB instance](#MariaDB.Concepts.SSLSupport)
++ [Requiring SSL/TLS for all connections to a MariaDB DB instance](#mariadb-ssl-connections.require-ssl)
 + [Connecting from the MySQL command\-line client with SSL/TLS \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)
 
 ## Using SSL/TLS with a MariaDB DB instance<a name="MariaDB.Concepts.SSLSupport"></a>
@@ -25,6 +26,25 @@ ALTER USER 'encrypted_user'@'%' REQUIRE SSL;
 ```
 
 For more information on SSL/TLS connections with MariaDB, see [ Securing Connections for Client and Server](https://mariadb.com/kb/en/securing-connections-for-client-and-server/) in the MariaDB documentation\. 
+
+## Requiring SSL/TLS for all connections to a MariaDB DB instance<a name="mariadb-ssl-connections.require-ssl"></a>
+
+Use the `require_secure_transport` parameter to require that all user connections to your MariaDB DB instance use SSL/TLS\. By default, the `require_secure_transport` parameter is set to `OFF`\. You can set the `require_secure_transport` parameter to `ON` to require SSL/TLS for connections to your DB instance\.
+
+**Note**  
+The `require_secure_transport` parameter is only supported for MariaDB version 10\.5 and higher\.
+
+You can set the `require_secure_transport` parameter value by updating the DB parameter group for your DB instance\. You don't need to reboot your DB instance for the change to take effect\.
+
+When the `require_secure_transport` parameter is set to `ON` for a DB instance, a database client can connect to it if it can establish an encrypted connection\. Otherwise, an error message similar to the following is returned to the client:
+
+```
+ERROR 1045 (28000): Access denied for user 'USER'@'localhost' (using password: YES | NO)
+```
+
+For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+For more information about the `require_secure_transport` parameter, see the [MariaDB documentation](https://mariadb.com/docs/ent/ref/mdb/system-variables/require_secure_transport/)\.
 
 ## Connecting from the MySQL command\-line client with SSL/TLS \(encrypted\)<a name="USER_ConnectToMariaDBInstanceSSL.CLI"></a>
 

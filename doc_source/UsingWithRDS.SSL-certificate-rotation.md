@@ -10,7 +10,8 @@ Amazon RDS provides new CA certificates as an AWS security best practice\. For i
 Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your SSL/TLS certificate, you don't need to update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.howitworks.md#rds-proxy-security.tls)\.
 
 **Note**  
-If you are using a Go version 1\.15 application with a DB instance that was created or updated to the `rds-ca-2019` certificate prior to July 28, 2020, you must update the certificate again\. Run the `modify-db-instance` command shown in the AWS CLI section using `rds-ca-2019` as the CA certificate identifier\. In this case, it isn't possible to update the certificate using the AWS Management Console\. If you created your DB instance or updated its certificate after July 28, 2020, no action is required\. For more information, see [Go GitHub issue \#39568](https://github.com/golang/go/issues/39568)\.
+If you are using a Go version 1\.15 application with a DB instance that was created or updated to the `rds-ca-2019` certificate prior to July 28, 2020, you must update the certificate again\. Update the certificate to rds\-ca\-rsa2048\-g1, rds\-ca\-rsa4096\-g1, or rds\-ca\-ecc384\-g1 depending on your engine\. Run the `modify-db-instance` command shown in the AWS CLI section using the new CA certificate identifier\. You can find the CAs that are available for a specific DB engine and DB engine version using the `describe-db-engine-versions` command\.  
+If you created your DB instance or updated its certificate after July 28, 2020, no action is required\. For more information, see [Go GitHub issue \#39568](https://github.com/golang/go/issues/39568)\.
 
 **Topics**
 + [Updating your CA certificate by modifying your DB instance](#UsingWithRDS.SSL-certificate-rotation-updating)

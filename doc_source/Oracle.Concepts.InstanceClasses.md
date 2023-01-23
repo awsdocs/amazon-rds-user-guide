@@ -41,10 +41,10 @@ If you have DB snapshots of DB instances that were using deprecated DB instance 
 ## Deprecated Oracle DB instance classes<a name="Oracle.Concepts.InstanceClasses.Deprecated"></a>
 
 The following DB instance classes are deprecated for RDS for Oracle:
-+ db\.m1, db\.m2, db\.m3
++ db\.m1, db\.m2, db\.m3, db\.m4
 + db\.t3\.micro \(supported only on 12\.1\.0\.2, which is deprecated\)
 + db\.t1, db\.t2
-+ db\.r1, db\.r2, db\.r3
++ db\.r1, db\.r2, db\.r3, db\.r4
 
 The preceding DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. RDS for Oracle automatically scales DB instances to DB instance classes that are not deprecated\. 
 

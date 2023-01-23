@@ -1,11 +1,11 @@
 # Creating and using an IAM policy for IAM database access<a name="UsingWithRDS.IAMDBAuth.IAMPolicy"></a>
 
-To allow an IAM user or role to connect to your DB instance, you must create an IAM policy\. After that, you attach the policy to an IAM user or role\.
+To allow a user or role to connect to your DB instance, you must create an IAM policy\. After that, you attach the policy to a permissions set or role\.
 
 **Note**  
 To learn more about IAM policies, see [Identity and access management for Amazon RDS](UsingWithRDS.IAM.md)\.
 
-The following example policy allows an IAM user to connect to a DB instance using IAM database authentication\.
+The following example policy allows a user to connect to a DB instance using IAM database authentication\.
 
 ```
  1. {
@@ -115,20 +115,20 @@ The following policy matches all of the DB instances for a particular AWS accoun
 14. }
 ```
 
-The IAM user or role has access to only those databases that the database user does\. For example, suppose that your DB instance has a database named *dev*, and another database named *test*\. If the database user `jane_doe` has access only to *dev*, any IAM users or roles that access that DB instance with the `jane_doe` user also have access only to *dev*\. This access restriction is also true for other database objects, such as tables, views, and so on\.
+The user or role has access to only those databases that the database user does\. For example, suppose that your DB instance has a database named *dev*, and another database named *test*\. If the database user `jane_doe` has access only to *dev*, any users or roles that access that DB instance with the `jane_doe` user also have access only to *dev*\. This access restriction is also true for other database objects, such as tables, views, and so on\.
 
-An IAM administrator must create IAM policies that grant users and roles permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the IAM users or groups that require those permissions\. For examples of policies, see [Identity\-based policy examples for Amazon RDS](security_iam_id-based-policy-examples.md)\.
+An administrator must create IAM policies that grant entities permission to perform specific API operations on the specified resources they need\. The administrator must then attach those policies to the permission sets or roles that require those permissions\. For examples of policies, see [Identity\-based policy examples for Amazon RDS](security_iam_id-based-policy-examples.md)\.
 
-## Attaching an IAM policy to an IAM user or role<a name="UsingWithRDS.IAMDBAuth.IAMPolicy.Attaching"></a>
+## Attaching an IAM policy to a permission set or role<a name="UsingWithRDS.IAMDBAuth.IAMPolicy.Attaching"></a>
 
-After you create an IAM policy to allow database authentication, you need to attach the policy to an IAM user or role\. For a tutorial on this topic, see [ Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
+After you create an IAM policy to allow database authentication, you need to attach the policy to a permission set or role\. For a tutorial on this topic, see [ Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
 
-As you work through the tutorial, you can use one of the policy examples shown in this section as a starting point and tailor it to your needs\. At the end of the tutorial, you have an IAM user with an attached policy that can make use of the `rds-db:connect` action\.
+As you work through the tutorial, you can use one of the policy examples shown in this section as a starting point and tailor it to your needs\. At the end of the tutorial, you have a permission set with an attached policy that can make use of the `rds-db:connect` action\.
 
 **Note**  
-You can map multiple IAM users or roles to the same database user account\. For example, suppose that your IAM policy specified the following resource ARN\.  
+You can map multiple permission sets or roles to the same database user account\. For example, suppose that your IAM policy specified the following resource ARN\.  
 
 ```
 arn:aws:rds-db:us-east-2:123456789012:dbuser:db-12ABC34DEFG5HIJ6KLMNOP78QR/jane_doe
 ```
-If you attach the policy to IAM users *Jane*, *Bob*, and *Diego*, then each of those users can connect to the specified DB instance using the `jane_doe` database account\.
+If you attach the policy to *Jane*, *Bob*, and *Diego*, then each of those users can connect to the specified DB instance using the `jane_doe` database account\.

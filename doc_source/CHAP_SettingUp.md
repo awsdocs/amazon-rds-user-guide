@@ -5,7 +5,7 @@ Before you use Amazon Relational Database Service for the first time, complete t
 **Topics**
 + [Sign up for an AWS account](#sign-up-for-aws)
 + [Create an administrative user](#create-an-admin)
-+ [Create IAM user access keys](#getting-started-iam-user-access-keys)
++ [Grant programmatic access](#getting-started-iam-user-access-keys)
 + [Determine requirements](#CHAP_SettingUp.Requirements)
 + [Provide access to your DB instance in your VPC by creating a security group](#CHAP_SettingUp.SecurityGroup)
 
@@ -51,7 +51,7 @@ After you sign up for an AWS account, create an administrative user so that you 
 
   For help signing in using an IAM Identity Center user, see [Signing in to the AWS access portal](https://docs.aws.amazon.com/signin/latest/userguide/iam-id-center-sign-in-tutorial.html) in the *AWS Sign\-In User Guide*\.
 
-## Create IAM user access keys<a name="getting-started-iam-user-access-keys"></a>
+## Grant programmatic access<a name="getting-started-iam-user-access-keys"></a>
 
 Users need programmatic access if they want to interact with AWS outside of the AWS Management Console\. The way to grant programmatic access depends on the type of user that's accessing AWS:
 + If you manage identities in IAM Identity Center, the AWS APIs require a profile, and the AWS Command Line Interface requires a profile or an environment variable\.

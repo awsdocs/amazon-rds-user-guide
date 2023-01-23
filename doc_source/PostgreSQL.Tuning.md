@@ -2,9 +2,7 @@
 
 Wait events are an important tuning tool for RDS for PostgreSQL\. When you can find out why sessions are waiting for resources and what they are doing, you're better able to reduce bottlenecks\. You can use the information in this section to find possible causes and corrective actions\. This section also discusses basic PostgreSQL tuning concepts\.
 
-The wait events in this section are specific to RDS for PostgreSQL\. For information about wait events for Aurora PostgreSQL, see [Tuning with wait events for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Tuning.html) in the *Amazon Aurora User Guide*\.
-
-Some wait events discussed in this section have no analogs in the open source versions of these database engines\. Other wait events have the same names as events in open source engines, but behave differently\. 
+The wait events in this section are specific to RDS for PostgreSQL\.
 
 **Topics**
 + [Essential concepts for RDS for PostgreSQL tuning](PostgreSQL.Tuning.concepts.md)

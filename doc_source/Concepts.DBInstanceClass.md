@@ -51,6 +51,10 @@ The following are the memory\-optimized DB instance types available:
 + **db\.r5b** – Instance classes that are memory\-optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance\. This is the fastest block storage performance on EC2\.
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Instance classes optimized for memory\-intensive applications\. These instance classes offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
++ **db\.r4** – Instance classes that provide improved networking over previous db\.r3 instance classes\.
+
+  For the RDS for Oracle DB engines, Amazon RDS has started the end\-of\-life process for db\.r4 DB instance classes using the following schedule, which includes upgrade recommendations\. For RDS for Oracle DB instances that use db\.r4 instance classes, we recommend that you upgrade to a db\.r5 instance class as soon as possible\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 + **db\.r3** – Instance classes that provide memory optimization\.
 
   For the RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB engines, Amazon RDS has started the end\-of\-life process for db\.r3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.r3 DB instance classes, we recommend that you upgrade to a db\.r5 DB instance class as soon as possible\.    

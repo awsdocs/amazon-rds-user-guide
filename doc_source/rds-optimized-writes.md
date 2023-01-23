@@ -90,10 +90,11 @@ You can create a DB instance using the [ CreateDBInstance](https://docs.aws.amaz
 The following limitations apply to RDS Optimized Writes:
 + RDS Optimized Writes is supported for RDS for MySQL version 8\.0\.30 and higher\. For information about RDS for MySQL versions, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
 + RDS Optimized Writes is supported for RDS for MySQL databases that use the following DB instance classes:
+  + db\.x2idn
   + db\.x2iedn
-  + db\.r6i
   + db\.r6g
   + db\.r6gd
+  + db\.r6i
   + db\.r5b
 
   For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.

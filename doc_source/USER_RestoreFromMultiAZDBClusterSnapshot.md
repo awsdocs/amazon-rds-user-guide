@@ -47,13 +47,13 @@ For Linux, macOS, or Unix:
 2.     --db-instance-identifier mynewdbinstance \
 3.     --db-cluster-snapshot-identifier myclustersnapshot \
 4.     --engine mysql \
-5.     --multi-AZ \
+5.     --multi-az \
 6.     --db-instance-class db.r6g.xlarge
 ```
 For Windows:  
 
 ```
-1. aws rds restore-db-cluster-from-snapshot ^
+1. aws rds restore-db-instance-from-db-snapshot ^
 2.     --db-instance-identifier mynewdbinstance ^
 3.     --db-cluster-snapshot-identifier myclustersnapshot ^
 4.     --engine mysql ^
