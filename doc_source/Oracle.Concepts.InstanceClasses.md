@@ -46,8 +46,8 @@ The following DB instance classes are deprecated for RDS for Oracle:
 + db\.t1, db\.t2
 + db\.r1, db\.r2, db\.r3, db\.r4
 
-The preceding DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. RDS for Oracle automatically scales DB instances to DB instance classes that are not deprecated\. 
-
-If you have DB instances that use deprecated DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+The preceding DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. If you have DB instances that use deprecated DB instance classes, you have the following options:
++ Allow Amazon RDS to modify each DB instance automatically to use a comparable non\-deprecated DB instance class\. For deprecation timelines, see [DB instance class types](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Types)\.
++ Change the DB instance class yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 If you have DB snapshots of DB instances that were using deprecated DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.

@@ -546,7 +546,10 @@ To create CEVs or RDS Custom for Oracle DB instances, the IAM principal needs to
         {
             "Sid": "CreateKmsGrant",
             "Effect": "Allow",
-            "Action": "kms:CreateGrant",
+            "Action": [
+                "kms:CreateGrant",
+                "kms:DescribeKey"
+            ],
             "Resource": "*"
         }
     ]

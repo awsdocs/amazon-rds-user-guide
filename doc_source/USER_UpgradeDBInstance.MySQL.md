@@ -147,7 +147,7 @@ When you start an upgrade from MySQL 5\.7 to 8\.0, Amazon RDS runs prechecks aut
 
 These prechecks are mandatory\. You can't choose to skip them\. The prechecks provide the following benefits:
 + They enable you to avoid unplanned downtime during the upgrade\.
-+ If there are incompatibilities, Amazon RDS prevents the upgrade and provides a log for you to learn about them\. You can then use the log to prepare your database for the upgrade to MySQL 8\.0 by eliminating the incompatibilities\. For detailed information about removing incompatibilities, see [ Preparing your installation for upgrade](https://dev.mysql.com/doc/refman/8.0/en/upgrade-prerequisites.html) in the MySQL documentation and [ Upgrading to MySQL 8\.0? here is what you need to know\.\.\.](https://mysqlserverteam.com/upgrading-to-mysql-8-0-here-is-what-you-need-to-know/) on the MySQL Server Blog\.
++ If there are incompatibilities, Amazon RDS prevents the upgrade and provides a log for you to learn about them\. You can then use the log to prepare your database for the upgrade to MySQL 8\.0 by reducing the incompatibilities\. For detailed information about removing incompatibilities, see [ Preparing your installation for upgrade](https://dev.mysql.com/doc/refman/8.0/en/upgrade-prerequisites.html) in the MySQL documentation and [ Upgrading to MySQL 8\.0? here is what you need to know\.\.\.](https://mysqlserverteam.com/upgrading-to-mysql-8-0-here-is-what-you-need-to-know/) on the MySQL Server Blog\.
 
 The prechecks include some that are included with MySQL and some that were created specifically by the Amazon RDS team\. For information about the prechecks provided by MySQL, see [Upgrade checker utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-upgrade.html)\.
 
@@ -299,7 +299,9 @@ For more information, see [Automatically upgrading the minor engine version](USE
 
 ## Using a read replica to reduce downtime when upgrading a MySQL database<a name="USER_UpgradeDBInstance.MySQL.ReducedDowntime"></a>
 
-If your MySQL DB instance is currently in use with a production application, you can use the following procedure to upgrade the database version for your DB instance\. This procedure can reduce the amount of downtime for your application\. 
+In most cases, a blue/green deployment is the best option to reduce downtime when upgrading a MySQL DB instance\. For more information, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\. 
+
+If you can't use a blue/green deployment and your MySQL DB instance is currently in use with a production application, you can use the following procedure to upgrade the database version for your DB instance\. This procedure can reduce the amount of downtime for your application\. 
 
 By using a read replica, you can perform most of the maintenance steps ahead of time and minimize the necessary changes during the actual outage\. With this technique, you can test and prepare the new DB instance without making any changes to your existing DB instance\.
 
@@ -308,7 +310,7 @@ The following procedure shows an example of upgrading from MySQL version 5\.7 to
 **Note**  
 When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete the prechecks before performing the upgrade\. For more information, see [Prechecks for upgrades from MySQL 5\.7 to 8\.0](#USER_UpgradeDBInstance.MySQL.57to80Prechecks)\.
 
-**To upgrade an MySQL database while a DB instance is in use**
+**To upgrade a MySQL database while a DB instance is in use**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -324,7 +326,7 @@ When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete t
 
 1. \(Optional\) When the read replica has been created and **Status** shows **Available**, convert the read replica into a Multi\-AZ deployment and enable backups\.
 
-   By default, a read replicas is created as a single\-AZ deployment with backups disabled\. Because the read replica will ultimately become the production DB instance, it is a best practice to configure a Multi\-AZ deployment and enable backups now\.
+   By default, a read replica is created as a Single\-AZ deployment with backups disabled\. Because the read replica ultimately becomes the production DB instance, it is a best practice to configure a Multi\-AZ deployment and enable backups now\.
 
    1. In the console, choose **Databases**, and then choose the read replica that you just created\.
 
@@ -332,7 +334,7 @@ When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete t
 
    1. For **Multi\-AZ deployment**, choose **Create a standby instance**\.
 
-   1. For **Backup Retention Period**, choose a positive nonzero value, for example 3 days, and then choose **Continue**\.
+   1. For **Backup Retention Period**, choose a positive nonzero value, such as 3 days, and then choose **Continue**\.
 
    1. For **Scheduling of modifications**, choose **Apply immediately**\.
 
@@ -350,7 +352,7 @@ When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete t
 
    1. Choose **Modify DB instance** to start the upgrade\. 
 
-1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.7 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW REPLICA STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\.
+1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.7 DB instance\. To verify, connect to the read replica and run the `SHOW REPLICA STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\.
 **Note**  
 Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
@@ -368,7 +370,7 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 
 1. \(Optional\) Configure a custom DB parameter group for the read replica\.
 
-   If you want the DB instance to use a custom parameter group after it is promoted to a standalone DB instance, you can create the DB parameter group now can associate it with the read replica\.
+   If you want the DB instance to use a custom parameter group after it is promoted to a standalone DB instance, you can create the DB parameter group now and associate it with the read replica\.
 
    1. Create a custom DB parameter group for MySQL 8\.0\. For instructions, see [Creating a DB parameter group](USER_WorkingWithDBInstanceParamGroups.md#USER_WorkingWithParamGroups.Creating)\.
 
@@ -386,7 +388,7 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 
 1. Make your MySQL 8\.0 read replica a standalone DB instance\. 
 **Important**  
-When you promote your MySQL 8\.0 read replica to a standalone DB instance, it no longer is a replica of your MySQL 5\.7 DB instance\. We recommend that you promote your MySQL 8\.0 read replica during a maintenance window when your source MySQL 5\.7 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 8\.0 DB instance to ensure that no write operations are lost\.  
+When you promote your MySQL 8\.0 read replica to a standalone DB instance, it is no longer a replica of your MySQL 5\.7 DB instance\. We recommend that you promote your MySQL 8\.0 read replica during a maintenance window when your source MySQL 5\.7 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 8\.0 DB instance to ensure that no write operations are lost\.  
 In addition, we recommend that, before promoting your MySQL 8\.0 read replica, you perform all necessary data definition language \(DDL\) operations on your MySQL 8\.0 read replica\. An example is creating indexes\. This approach avoids negative effects on the performance of the MySQL 8\.0 read replica after it has been promoted\. To promote a read replica, use the following procedure\.
 
    1. In the console, choose **Databases**, and then choose the read replica that you just upgraded\.

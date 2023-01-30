@@ -58,8 +58,8 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0030 |  The DB instance is being converted to a Single\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0012 |  Applying modification to database instance class\.   | 
 |  configuration change  | RDS\-EVENT\-0018 |  The current storage settings for this DB instance are being changed\.  | 
-|  configuration change  | RDS\-EVENT\-0011 |  A parameter group for this DB instance has changed\.  | 
-|  configuration change  | RDS\-EVENT\-0092 |  A parameter group for this DB instance has finished updating\.  | 
+|  configuration change  | RDS\-EVENT\-0011 |  Updated to use DBParameterGroup *name*\.  | 
+|  configuration change  | RDS\-EVENT\-0092 |  Finished updating DB parameter group\.  | 
 |  configuration change  | RDS\-EVENT\-0028 |  Automatic backups for this DB instance have been disabled\.  | 
 |  configuration change  | RDS\-EVENT\-0032 |  Automatic backups for this DB instance have been enabled\.  | 
 |  configuration change  | RDS\-EVENT\-0033 |  There are \[count\] users that match the master user name\. Users not tied to a specific host have been reset\.  | 
@@ -104,6 +104,13 @@ The following table shows the event category and a list of events when a DB inst
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
 |  maintenance  | RDS\-EVENT\-0047 |  The DB instance was patched\.  | 
 |  maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade required\.  | 
+|  maintenance  | RDS\-EVENT\-0264 |  The pre\-check started for the DB engine version upgrade\.  | 
+|  maintenance  | RDS\-EVENT\-0265 |  The pre\-check finished for the DB engine version upgrade\.  | 
+|  maintenance  | RDS\-EVENT\-0266 |  The downtime started for the DB instance\.  | 
+|  maintenance  | RDS\-EVENT\-0267 |  The engine version upgrade started\.  | 
+|  maintenance  | RDS\-EVENT\-0268 |  The engine version upgrade finished\. | 
+|  maintenance  | RDS\-EVENT\-0269 |  The post\-upgrade tasks are in progress\. | 
+|  maintenance  | RDS\-EVENT\-0270 |  The DB engine version upgrade failed\. The engine version upgrade rollback succeeded\. | 
 |  maintenance, notification  | RDS\-EVENT\-0191 |  An Oracle time zone file update is available\. If you update your Oracle engine, Amazon RDS generates this event if you haven't chosen a time zone file upgrade and the database doesn’t use the latest DST time zone file available on the instance\.  For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
 |  maintenance, notification  | RDS\-EVENT\-0192 |  The upgrade of your Oracle time zone file has begun\.  For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
 |  maintenance, notification  | RDS\-EVENT\-0193 |  Your Oracle DB instance is using latest time zone file version, and either of the following is true: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html) For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
@@ -151,8 +158,7 @@ The following table shows the event category and a list of events when a DB para
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
-|  configuration change  | RDS\-EVENT\-0011 |  Updated to use DBParameterGroup *name*\.  | 
-|  configuration change  | RDS\-EVENT\-0092 |  Finished updating DB parameter group\.  | 
+|  configuration change  | RDS\-EVENT\-0037 |  Updated parameter *name* to *value* with apply method *method*\.   | 
 
 ## DB security group events<a name="USER_Events.Messages.security-group"></a>
 

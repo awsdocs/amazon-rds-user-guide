@@ -22,7 +22,6 @@ In the following sections, find information about MariaDB feature support on Ama
 + [MariaDB 10\.5 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-5)
 + [MariaDB 10\.4 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-4)
 + [MariaDB 10\.3 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-3)
-+ [MariaDB 10\.2 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-2)
 
 For information about supported minor versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)\.
 
@@ -31,7 +30,7 @@ For information about supported minor versions of Amazon RDS for MariaDB, see [M
 Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.6 or higher: 
 + **MyRocks storage engine** – You can use the MyRocks storage engine with RDS for MariaDB to optimize storage consumption of your write\-intensive, high\-performance web applications\. For more information, see [Supported storage engines for MariaDB on Amazon RDS](#MariaDB.Concepts.Storage) and [MyRocks](https://mariadb.com/kb/en/myrocks/)\.
 + **AWS Identity and Access Management \(IAM\) DB authentication** – You can use IAM DB authentication for better security and central management of connections to your MariaDB DB instances\. For more information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
-+ **Upgrade options** – You can now upgrade to RDS for MariaDB version 10\.6 from any prior major release \(10\.2, 10\.3, 10\.4, 10\.5\)\. You can also restore a snapshot of an existing MySQL 5\.6 or 5\.7 DB instance to a MariaDB 10\.6 instance\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
++ **Upgrade options** – You can now upgrade to RDS for MariaDB version 10\.6 from any prior major release \(10\.3, 10\.4, 10\.5\)\. You can also restore a snapshot of an existing MySQL 5\.6 or 5\.7 DB instance to a MariaDB 10\.6 instance\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
 + **Delayed replication** – You can now set a configurable time period for which a read replica lags behind the source database\. In a standard MariaDB replication configuration, there is minimal replication delay between the source and the replica\. With delayed replication, you can set an intentional delay as a strategy for disaster recovery\. For more information, see [Configuring delayed replication with MariaDB](USER_MariaDB.Replication.ReadReplicas.md#USER_MariaDB.Replication.ReadReplicas.DelayReplication)\.
 + **Oracle PL/SQL compatibility** – By using RDS for MariaDB version 10\.6, you can more easily migrate your legacy Oracle applications to Amazon RDS\. For more information, see [SQL\_MODE=ORACLE](https://mariadb.com/kb/en/sql_modeoracle/)\.
 + **Atomic DDL** – Your dynamic data language \(DDL\) statements can be relatively crash\-safe with RDS for MariaDB version 10\.6\. `CREATE TABLE`, `ALTER TABLE`, `RENAME TABLE`, `DROP TABLE`, `DROP DATABASE` and related DDL statements are now atomic\. Either the statement succeeds, or it's completely reversed\. For more information, see [Atomic DDL](https://mariadb.com/kb/en/atomic-ddl/)\.
@@ -97,25 +96,6 @@ For a list of all MariaDB 10\.3 features and their documentation, see [Changes &
 
 For a list of unsupported features, see [MariaDB features not supported by Amazon RDS](#MariaDB.Concepts.FeatureNonSupport)\. 
 
-### MariaDB 10\.2 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-2"></a>
-
-Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.2 or later: 
-+ ALTER USER
-+ Common Table Expressions
-+ Compressing Events to Reduce Size of the Binary Log
-+ CREATE USER — new options for limiting resource usage and SSL/TLS
-+ EXECUTE IMMEDIATE
-+ Flashback
-+ InnoDB — now the default storage engine instead of XtraDB
-+ InnoDB — set the buffer pool size dynamically
-+ JSON Functions
-+ Window Functions
-+ WITH
-
-For a list of all MariaDB 10\.2 features and their documentation, see [Changes & improvements in MariaDB 10\.2](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-102/) and [Release notes \- MariaDB 10\.2 series](https://mariadb.com/kb/en/library/release-notes-mariadb-102-series/) on the MariaDB website\. 
-
-For a list of unsupported features, see [MariaDB features not supported by Amazon RDS](#MariaDB.Concepts.FeatureNonSupport)\. 
-
 ## Supported storage engines for MariaDB on Amazon RDS<a name="MariaDB.Concepts.Storage"></a>
 
 RDS for MariaDB supports the following storage engines\.
@@ -166,7 +146,7 @@ For more information about MyRocks, see [MyRocks](https://mariadb.com/kb/en/myro
 
 InnoDB cache warming can provide performance gains for your MariaDB DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This approach bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. For more information on cache warming, see [ Dumping and restoring the buffer pool](http://mariadb.com/kb/en/mariadb/xtradbinnodb-buffer-pool/#dumping-and-restoring-the-buffer-pool) in the MariaDB documentation\.
 
-Cache warming is enabled by default on MariaDB 10\.2 and higher DB instances\. To enable it, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group affects all MariaDB DB instances that use that parameter group\. To enable cache warming for specific MariaDB DB instances, you might need to create a new parameter group for those DB instances\. For information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+Cache warming is enabled by default on MariaDB 10\.3 and higher DB instances\. To enable it, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group affects all MariaDB DB instances that use that parameter group\. To enable cache warming for specific MariaDB DB instances, you might need to create a new parameter group for those DB instances\. For information on parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 Cache warming primarily provides a performance benefit for DB instances that use standard storage\. If you use PIOPS storage, you don't commonly see a significant performance benefit\.
 

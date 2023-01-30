@@ -4,6 +4,4 @@ Performance Insights in Amazon RDS expands on existing Amazon RDS monitoring fea
 
 Performance Insights is available for all RDS DB engines and all versions\.
 
-Performance Insights is available in all AWS Regions except the following:
-+ AWS GovCloud \(US\-East\)
-+ AWS GovCloud \(US\-West\)
+Performance Insights is available in all AWS Regions\.

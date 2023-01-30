@@ -26,8 +26,9 @@ For more information on additional requirements for database activity streams wi
 | US West \(Oregon\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Africa \(Cape Town\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Hong Kong\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
-| Asia Pacific \(Hyderabad\) | – | – | – | 
+| Asia Pacific \(Hyderabad\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Jakarta\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Osaka\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Asia Pacific \(Seoul\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
@@ -42,11 +43,11 @@ For more information on additional requirements for database activity streams wi
 | Europe \(London\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Europe \(Milan\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Europe \(Paris\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
-| Europe \(Spain\) | – | – | – | 
+| Europe \(Spain\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Europe \(Stockholm\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | Europe \(Zurich\) | – | – | – | 
 | Middle East \(Bahrain\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
-| Middle East \(UAE\) | – | – | – | 
+| Middle East \(UAE\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | South America \(São Paulo\) | – | Oracle Database 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher, using either Enterprise Edition \(EE\) or Standard Edition 2 \(SE2\) | – | 
 | AWS GovCloud \(US\-East\) | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | 

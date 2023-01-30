@@ -41,7 +41,7 @@ Following are general prerequisites for using Management Agent:
   + At least 2\.5 GiB for OEM 12c 
 + If you are using Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`, and if you want to use TCPS connectivity, follow the instructions in [Configuring third party CA certificates for communication with target databases](https://docs.oracle.com/cd/E73210_01/EMSEC/GUID-8337AD48-1A32-4CD5-84F3-256FAE93D043.htm#EMSEC15996) in the Oracle documentation\. Also, update the JDK on your OMS by following the instructions in the Oracle document with the Oracle Doc ID 2241358\.1\. This step ensures that OMS supports all the cipher suites that the database supports\.
 **Note**  
-TCPS connectivity between the Management Agent and the DB instance is only supported for Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`\.
+TCPS connectivity between the Management Agent and the DB instance is supported for Management Agent `OEM_AGENT 13.2.0.0.v3`, `13.3.0.0.v2`, `13.4.0.9.v1`, and higher versions\.
 
 ### Oracle Database release prerequisites<a name="Oracle.Options.OEMAgent.PreReqs.db-release"></a>
 

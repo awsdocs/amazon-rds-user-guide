@@ -43,7 +43,7 @@ Each Amazon RDS resource has a tag set, which contains all the tags that are ass
 
 AWS doesn't apply any semantic meaning to your tags; tags are interpreted strictly as character strings\. RDS can set tags on a DB instance or other RDS resources\. Tag setting depends on the options that you use when you create the resource\. For example, Amazon RDS might add a tag indicating that a DB instance is for production or for testing\.
 + The tag key is the required name of the tag\. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with `aws:` or `rds:`\. The string can contain only the set of Unicode letters, digits, white space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
-+ The tag value is an optional string value of the tag\. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with `aws:`\. The string can contain only the set of Unicode letters, digits, white space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
++ The tag value is an optional string value of the tag\. The string value can be from 1 to 256 Unicode characters in length\. The string can contain only the set of Unicode letters, digits, white space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-@\]\*\)$"\)\.
 
   Values do not have to be unique in a tag set and can be null\. For example, you can have a key\-value pair in a tag set of `project=Trinity` and `cost-center=Trinity`\. 
 

@@ -29,6 +29,9 @@ Currently, Amazon RDS supports the following server collations:
 |  Japanese\_BIN  | Japanese, binary sort | 
 |  Japanese\_CI\_AS  |  Japanese, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Japanese\_CS\_AS  |  Japanese, case\-sensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Japanese\_XJIS\_140\_CI\_AS  |  Japanese\-XJIS\-140, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive, supplementary characters, variation selector insensitive  | 
+|  Japanese\_XJIS\_140\_CI\_AS\_KS\_VSS  |  Japanese\-XJIS\-140, case\-insensitive, accent\-sensitive, kanatype\-sensitive, width\-insensitive, supplementary characters, variation selector sensitive  | 
+|  Japanese\_XJIS\_140\_CI\_AS\_VSS  |  Japanese\-XJIS\-140, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive, supplementary characters, variation selector sensitive  | 
 |  Korean\_Wansung\_CI\_AS  |  Korean\-Wansung, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Latin1\_General\_100\_BIN  |  Latin1\-General\-100, binary sort  | 
 |  Latin1\_General\_100\_BIN2  |  Latin1\-General\-100, binary code point sort order  | 
@@ -51,7 +54,7 @@ Currently, Amazon RDS supports the following server collations:
 |  Thai\_CI\_AS  |  Thai, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 
 To choose the collation:
-+ If you're using the Amazon RDS console, when creating a new DB instance choose **Additional configuration**, then choose the collation from the **Collation** menu under **Database options**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
++ If you're using the Amazon RDS console, when creating a new DB instance choose **Additional configuration**, then enter the collation in the **Collation** field\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
 + If you're using the AWS CLI, use the `--character-set-name` option with the `create-db-instance` command\. For more information, see [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\.
 + If you're using the Amazon RDS API, use the `CharacterSetName` parameter with the `CreateDBInstance` operation\. For more information, see [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\.
 

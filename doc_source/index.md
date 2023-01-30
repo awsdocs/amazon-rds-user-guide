@@ -60,6 +60,7 @@ sponsored by Amazon.
    + [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)
    + [Working with option groups](USER_WorkingWithOptionGroups.md)
    + [Working with parameter groups](USER_WorkingWithParamGroups.md)
+      + [Overview of parameter groups](parameter-groups-overview.md)
       + [Working with DB parameter groups](USER_WorkingWithDBInstanceParamGroups.md)
       + [Working with DB cluster parameter groups for Multi-AZ DB clusters](USER_WorkingWithDBClusterParamGroups.md)
       + [Comparing parameter groups](USER_WorkingWithParamGroups.Comparing.md)

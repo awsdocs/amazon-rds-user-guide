@@ -81,7 +81,7 @@ Dates with only a month and a year are approximate and are updated with an exact
 |  MariaDB 10\.5 Current minor version: 10\.5\.18  | 24 June 2020 | 21 January 2021 | 24 June 2025 | June 2025 | 
 |  MariaDB 10\.4 Current minor version: 10\.4\.27  | 18 June 2019 | 6 April 2020 | 18 June 2024 | June 2024 | 
 |  MariaDB 10\.3 Current minor version: 10\.3\.37  | 25 May 2018 | 23 October 2018 | 25 May 2023 | 23 October 2023 | 
-|  MariaDB 10\.2 Current minor version: 10\.2\.44  | 23 May 2017 | 5 Jan 2018 | 23 May 2022 | 15 Oct 2022 | 
+|  MariaDB 10\.2 Last minor version: 10\.2\.44  | 23 May 2017 | 5 Jan 2018 | 23 May 2022 | 15 Oct 2022 | 
 
 ## MariaDB 10\.3 end of life<a name="MariaDB.Concepts.VersionMgmt.EndOfLife103"></a>
 

@@ -146,7 +146,7 @@ The following are best practices for blue/green deployments:
 
   For example, you can add new columns at the end of a table, create indexes, or drop indexes without disrupting replication from the blue deployment to the green deployment\. However, schema changes, such as renaming columns or renaming tables, break binary log replication to the green deployment\.
 
-  For more information about replication\-compatible changes, see [ Replication with Differing Table Definitions on Source and Replica](https://dev.mysql.com/doc/refman/8.0/en/replication-features-differing-tables.html) in the MySQL documentation\.
+  For more information about replication\-compatible changes, see [Replication with Differing Table Definitions on Source and Replica](https://dev.mysql.com/doc/refman/8.0/en/replication-features-differing-tables.html) in the MySQL documentation\.
 + After you create the blue/green deployment, handle lazy loading if necessary\. Make sure data loading is complete before switching over\. For more information, see [Handling lazy loading when you create a blue/green deployment](blue-green-deployments-creating.md#blue-green-deployments-creating-lazy-loading)\.
 
 ## Region and version availability<a name="blue-green-deployments-region-version-availability"></a>
@@ -156,6 +156,7 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations for blue/green deployments<a name="blue-green-deployments-limitations"></a>
 
 The following limitations apply to blue/green deployments:
++ MySQL version 8\.0\.13 and earlier have a [community bug](https://bugs.mysql.com/bug.php?id=93901) that prevents RDS from supporting them for blue/green deployments\.
 + Blue/green deployments aren't supported for the following features:
   + Amazon RDS Proxy
   + Cascading read replicas

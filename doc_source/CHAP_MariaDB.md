@@ -4,8 +4,7 @@ Amazon RDS supports DB instances that run the following versions of MariaDB:
 + MariaDB 10\.6
 + MariaDB 10\.5
 + MariaDB 10\.4
-+ MariaDB 10\.3
-+ MariaDB 10\.2 \(end of life scheduled for October 15, 2022\)
++ MariaDB 10\.3 \(end of life scheduled for October 23, 2023\)
 
 For more information about minor version support, see [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)\. 
 

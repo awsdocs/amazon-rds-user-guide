@@ -9,23 +9,23 @@ In the following examples, substitute the user name of your DB instance administ
 For Linux, macOS, or Unix:  
 
 ```
-1. sqlplus 'user_name@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dns_name)(PORT=port))(CONNECT_DATA=(SID=database_name)))'                  
+1. sqlplus 'user_name@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dns_name)(PORT=port))(CONNECT_DATA=(SID=database_name)))'
 ```
 For Windows:  
 
 ```
-1. sqlplus user_name@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dns_name)(PORT=port))(CONNECT_DATA=(SID=database_name)))             
+1. sqlplus user_name@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dns_name)(PORT=port))(CONNECT_DATA=(SID=database_name)))
 ```
 You should see output similar to the following\.  
 
 ```
-SQL*Plus: Release 12.1.0.2.0 Production on Mon Aug 21 09:42:20 2017                
+SQL*Plus: Release 12.1.0.2.0 Production on Mon Aug 21 09:42:20 2017
 ```
 After you enter the password for the user, the SQL prompt appears\.  
 
 ```
- SQL>               
+SQL>
 ```
 
 **Note**  
-The shorter format connection string \(Easy connect or EZCONNECT\), such as `sqlplus USER/PASSWORD@LONGER-THAN-63-CHARS-RDS-ENDPOINT-HERE:1521/DATABASE_IDENTIFIER`, might encounter a maximum character limit and should not be used to connect\. 
+The shorter format connection string \(EZ Connect\), such as `sqlplus USER/PASSWORD@longer-than-63-chars-rds-endpoint-here:1521/database-identifier`, might encounter a maximum character limit, so you we recommend that you don't use it to connect\.

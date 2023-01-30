@@ -30,29 +30,27 @@ The following requirements must be met before enabling access to transaction log
 **Example of an Amazon S3 permissions policy for access to transaction log backups**  
 
   ```
-   1. {
-   2.     {
-   3.     "Version": "2012-10-17",
-   4.     "Statement": [
-   5.         {
-   6.             "Sid": "Only allow writes to my bucket with bucket owner full control",
-   7.             "Effect": "Allow",
-   8.             "Principal": {
-   9.                 "Service": "backups.rds.amazonaws.com"
-  10.             },
-  11.             "Action": "s3:PutObject",
-  12.             "Resource": "arn:aws:s3:::{customer_bucket}/{customer_path}/*",
-  13.             "Condition": {
-  14.                 "StringEquals": {
-  15.                     "s3:x-amz-acl": "bucket-owner-full-control",
-  16.                     "aws:sourceAccount": "{customer_account}",
-  17.                     "aws:sourceArn": "{db_instance_arn}"
-  18.                 }
-  19.             }
-  20.         }
-  21.     ]
-  22. }
-  23. }
+   1.     {
+   2.     "Version": "2012-10-17",
+   3.     "Statement": [
+   4.         {
+   5.             "Sid": "Only allow writes to my bucket with bucket owner full control",
+   6.             "Effect": "Allow",
+   7.             "Principal": {
+   8.                 "Service": "backups.rds.amazonaws.com"
+   9.             },
+  10.             "Action": "s3:PutObject",
+  11.             "Resource": "arn:aws:s3:::{customer_bucket}/{customer_path}/*",
+  12.             "Condition": {
+  13.                 "StringEquals": {
+  14.                     "s3:x-amz-acl": "bucket-owner-full-control",
+  15.                     "aws:sourceAccount": "{customer_account}",
+  16.                     "aws:sourceArn": "{db_instance_arn}"
+  17.                 }
+  18.             }
+  19.         }
+  20.     ]
+  21. }
   ```
 + An AWS Identity and Access Management \(IAM\) role to access the Amazon S3 bucket\. If you already have an IAM role, you can use that\. You can choose to have a new IAM role created for you when you add the `SQLSERVER_BACKUP_RESTORE` option by using the AWS Management Console\. Alternatively, you can create a new one manually\. For more information on creating and configuring an IAM role with `SQLSERVER_BACKUP_RESTORE`, see [Manually creating an IAM role for native backup and restore](SQLServer.Procedural.Importing.md#SQLServer.Procedural.Importing.Native.Enabling.IAM)\.
 + The `SQLSERVER_BACKUP_RESTORE` option must be added to an option group on your DB instance\. For more information on adding the `SQLSERVER_BACKUP_RESTORE` option, see [Support for native backup and restore in SQL Server](Appendix.SQLServer.Options.BackupRestore.md)\.
@@ -210,7 +208,7 @@ Following are the valid input parameter combinations for the `rds_tlog_backup_co
 | --- | --- | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3  <br />	@db_name = 'testdb1',<br />            @backup_file_start_time='2022-08-23 00:00:00',<br />            @backup_file_end_time='2022-08-30 00:00:00';</pre>  | Copies transaction log backups from the last seven days and exist between the provided range of `backup_file_start_time` and `backup_file_end_time`\. In this example, the stored procedure will copy transaction log backups that were generated between '2022\-08\-23 00:00:00' and '2022\-08\-30 00:00:00'\.  | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />           @db_name = 'testdb1',<br />           @backup_file_start_time='2022-08-23 00:00:00';</pre>  | Copies transaction log backups from the last seven days and starting from the provided `backup_file_start_time`\. In this example, the stored procedure will copy transaction log backups from '2022\-08\-23 00:00:00' up to the latest transaction log backup\.  | 
-|  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />          @db_name = 'testdb1',<br />          @backup_end_time='2022-08-30 00:00:00';</pre>  | Copies transaction log backups from the last seven days up to the provided `backup_file_end_time`\. In this example, the stored procedure will copy transaction log backups from '2022\-08\-23 00:00:00 up to '2022\-08\-30 00:00:00'\.  | 
+|  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />          @db_name = 'testdb1',<br />          @backup_file_end_time='2022-08-30 00:00:00';</pre>  | Copies transaction log backups from the last seven days up to the provided `backup_file_end_time`\. In this example, the stored procedure will copy transaction log backups from '2022\-08\-23 00:00:00 up to '2022\-08\-30 00:00:00'\.  | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />         @db_name='testdb1',<br />         @starting_lsn =1490000000040007,<br />         @ending_lsn =  1490000000050009;</pre>  | Copies transaction log backups that are available from the last seven days and are between the provided range of the `starting_lsn` and `ending_lsn`\. In this example, the stored procedure will copy transaction log backups from the last seven days with an LSN range between 1490000000040007 and 1490000000050009\.   | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />        @db_name='testdb1',<br />        @starting_lsn =1490000000040007;</pre>  |  Copies transaction log backups that are available from the last seven days, beginning from the provided `starting_lsn`\. In this example, the stored procedure will copy transaction log backups from LSN 1490000000040007 up to the latest transaction log backup\.   | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />        @db_name='testdb1',<br />        @ending_lsn  =  1490000000050009;</pre>  |  Copies transaction log backups that are available from the last seven days, up to the provided `ending_lsn`\. In this example, the stored procedure will copy transaction log backups beginning from the last seven days up to lsn 1490000000050009\.   | 

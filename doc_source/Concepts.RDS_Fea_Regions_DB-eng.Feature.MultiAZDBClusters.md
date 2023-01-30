@@ -26,6 +26,7 @@ Following are the supported engines and Region availability for Multi\-AZ DB clu
 | Asia Pacific \(Hong Kong\) | Version 8\.0\.28 and higher | 
 | Asia Pacific \(Hyderabad\) | – | 
 | Asia Pacific \(Jakarta\) | Version 8\.0\.28 and higher | 
+| Asia Pacific \(Melbourne\) | – | 
 | Asia Pacific \(Mumbai\) | Version 8\.0\.28 and higher | 
 | Asia Pacific \(Osaka\) | Version 8\.0\.28 and higher | 
 | Asia Pacific \(Seoul\) | Version 8\.0\.28 and higher | 
@@ -88,6 +89,7 @@ Following are the supported engine version and Region availability for Multi\-AZ
 | Asia Pacific \(Hong Kong\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Asia Pacific \(Hyderabad\) | – | – | 
 | Asia Pacific \(Jakarta\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Melbourne\) | – | – | 
 | Asia Pacific \(Mumbai\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Asia Pacific \(Osaka\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 
 | Asia Pacific \(Seoul\) | Version 14\.5 | Version 13\.4 and version 13\.7 and higher | 

@@ -7,7 +7,6 @@ Amazon RDS Custom for SQL Server supports a subset of the usual management tasks
 + [Pausing and resuming RDS Custom automation](#custom-managing-sqlserver.pausing)
 + [Modifying an RDS Custom for SQL Server DB instance](#custom-managing.modify-sqlserver)
 + [Modifying the storage for an RDS Custom for SQL Server DB instance](#custom-managing-sqlserver.storage-modify)
-+ [Support for Transparent Data Encryption](#custom-managing-sqlserver.tde)
 + [Tagging RDS Custom for SQL Server resources](#custom-managing-sqlserver.tagging)
 + [Deleting an RDS Custom for SQL Server DB instance](#custom-managing-sqlserver.deleting)
 
@@ -20,8 +19,6 @@ You can configure your high availability environment in the following ways:
 + Place your standby databases in mounted or read\-only mode\.
 + Fail over or switch over from the primary database to a standby database with no data loss\.
 + Migrate data by configuring high availability for your on\-premises instance, and then failing over or switching over to the RDS Custom standby database\.
-
-To learn how to configure high availability, see the blog post [Configure high availability with Always On Availability Groups on Amazon RDS Custom for SQL Server](http://aws.amazon.com/blogs/database/configure-high-availability-with-always-on-availability-groups-on-amazon-rds-custom-for-sql-server/)\. You can perform the following tasks:
 + Use a virtual private network \(VPN\) tunnel to encrypt data in transit for your high availability instances\. Encryption in transit isn't configured automatically by RDS Custom\.
 + Configure Always On AGs to monitor your high availability instances\.
 + Allow the observer to perform automatic failover when necessary conditions are met\.
@@ -343,12 +340,6 @@ aws rds modify-db-instance ^
     --allocated-storage 200 ^
     --apply-immediately
 ```
-
-## Support for Transparent Data Encryption<a name="custom-managing-sqlserver.tde"></a>
-
-RDS Custom supports Transparent Data Encryption \(TDE\) for RDS Custom for SQL Server DB instances\.
-
-However, you can't enable TDE using an option in a custom option group as you can in RDS for SQL Server\. You turn on TDE manually\. For information about Transparent Data Encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) in the Microsoft documentation\.
 
 ## Tagging RDS Custom for SQL Server resources<a name="custom-managing-sqlserver.tagging"></a>
 

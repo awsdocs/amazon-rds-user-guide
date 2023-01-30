@@ -25,6 +25,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Africa \(Cape Town\) | – | – | – | 
 | Asia Pacific \(Hong Kong\) | – | – | – | 
 | Asia Pacific \(Jakarta\) | – | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | 
 | Asia Pacific \(Mumbai\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Osaka\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Seoul\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
@@ -61,6 +62,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Asia Pacific \(Hong Kong\) | – | 
 | Asia Pacific \(Hyderabad\) | – | 
 | Asia Pacific \(Jakarta\) | – | 
+| Asia Pacific \(Melbourne\) | – | 
 | Asia Pacific \(Mumbai\) | Enterprise, Standard, or Web | 
 | Asia Pacific \(Osaka\) | – | 
 | Asia Pacific \(Seoul\) | Enterprise, Standard, or Web | 

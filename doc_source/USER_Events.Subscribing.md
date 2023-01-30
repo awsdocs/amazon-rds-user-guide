@@ -33,7 +33,7 @@ The following table explains the result when you specify or don't specify ***Res
    1. For **Name**, enter a name for the event notification subscription\.
 
    1. For **Send notifications to**, do one of the following:
-      + Choose **New email topic**\. Enter a name for your email topic and a list of recipients\.
+      + Choose **New email topic**\. Enter a name for your email topic and a list of recipients\. We recommend that you configure the events subscriptions to the same email address as your primary account contact\. The recommendations, service events, and personal health messages are sent using different channels\. The subscriptions to the same email address ensures that all the messages are consolidated in one location\.
       + Choose **Amazon Resource Name \(ARN\)**\. Then choose existing Amazon SNS ARN for an Amazon SNS topic\.
 
         If you want to use a topic that has been enabled for server\-side encryption \(SSE\), grant Amazon RDS the necessary permissions to access the AWS KMS key\. For more information, see [ Enable compatibility between event sources from AWS services and encrypted topics](https://docs.aws.amazon.com/sns/latest/dg/sns-key-management.html#compatibility-with-aws-services) in the *Amazon Simple Notification Service Developer Guide*\.

@@ -17,7 +17,7 @@ To connect to your DB instance, you need its DNS name and port number\. For info
    + For **Password**, enter the password for the database administrator\.
    + For **Hostname**, enter the DNS name of the DB instance\.
    + For **Port**, enter the port number\.
-   + For **SID**, enter the Oracle database SID\.
+   + For **SID**, enter the DB name\. You can find the DB name on the **Configuration** tab of your database details page\.
 
    The completed dialog box should look similar to the following\.  
 ![\[Creating a new connection in Oracle SQL Developer\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-newcon.png)
@@ -29,7 +29,7 @@ To connect to your DB instance, you need its DNS name and port number\. For info
    1. In the **Worksheet** tab for your connection, enter the following SQL query\.
 
       ```
-      SELECT NAME FROM V$DATABASE;                           
+      SELECT NAME FROM V$DATABASE;
       ```
 
    1. Choose the **execute** icon to run the query\.  

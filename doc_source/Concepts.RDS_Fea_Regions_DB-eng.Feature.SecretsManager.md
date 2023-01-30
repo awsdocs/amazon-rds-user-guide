@@ -9,6 +9,7 @@ Secrets Manager integration is available for all RDS DB engines and all versions
 Secrets Manager integration is available in all AWS Regions except the following:
 + Asia Pacific \(Hyderabad\)
 + Asia Pacific \(Jakarta\)
++ Asia Pacific \(Melbourne\)
 + Asia Pacific \(Osaka\)
 + Europe \(Spain\)
 + Europe \(Zurich\)

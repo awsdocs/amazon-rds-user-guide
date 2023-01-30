@@ -269,7 +269,7 @@ Include the appropriate actions to grant the access your DB instance requires:
   	         "Principal": {
   	            "Service": "rds.amazonaws.com"
   	          },
-  	         "Action": "sts:AssumeRole"
+  	         "Action": "sts:AssumeRole",
                   "Condition": {
                       "StringEquals": {
                           "aws:SourceArn":"arn:aws:rds:Region:my_account_ID:db:db_instance_identifier"
@@ -295,7 +295,7 @@ Include the appropriate actions to grant the access your DB instance requires:
                       "rds.amazonaws.com"
                   ]
               },
-              "Action": "sts:AssumeRole"
+              "Action": "sts:AssumeRole",
               "Condition": {
                   "StringEquals": {
                       "aws:SourceArn":"arn:aws:rds:Region:my_account_ID:db:db_instance_identifier"

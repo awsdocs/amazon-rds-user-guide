@@ -63,7 +63,7 @@ Oracle Data Guard switchover is available in the following AWS Regions:
 
 ### Cost of Oracle Data Guard switchover<a name="oracle-replication-switchover.overview.cost"></a>
 
-The Oracle Data Guard switchover feature doesn't incur additional costs\. You need an Oracle Data Guard license to use read replicas in mounted mode, and an Oracle Active Data Guard license to use read replicas in read\-only mode\.
+The Oracle Data Guard switchover feature doesn't incur additional costs\. Oracle Database Enterprise Edition includes support for standby databases in mounted mode\. To open standby databases in read\-only mode, you need the Oracle Active Data Guard option\.
 
 ### How Oracle Data Guard switchover works<a name="oracle-replication-switchover.overview.how-it-works"></a>
 

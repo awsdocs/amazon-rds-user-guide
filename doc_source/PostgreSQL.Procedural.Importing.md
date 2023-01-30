@@ -25,7 +25,7 @@ Modify your DB parameter group to include the following settings\. You should on
 |  `checkpoint_timeout`  |  1800  |  The value for this setting allows for less frequent WAL rotation\.  | 
 |  `synchronous_commit`  |  Off  |  Disable this setting to speed up writes\. Turning this parameter off can increase the risk of data loss in the event of a server crash \(do not turn off FSYNC\)\.  | 
 |  `wal_buffers`  |   8192  |  This is value is in 8 KB units\. This again helps your WAL generation speed  | 
-|  `autovacuum`  |  Off  |  Disable the PostgreSQL auto vacuum parameter while you are loading data so that it doesn't use resources  | 
+|  `autovacuum`  |  0  |  Disable the PostgreSQL auto vacuum parameter while you are loading data so that it doesn't use resources  | 
 
 Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands with these settings\.
 

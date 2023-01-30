@@ -13,7 +13,6 @@ Using the AWS CLI, you can view the parameters for an RDS for MariaDB version by
 + `mariadb10.5`
 + `mariadb10.4`
 + `mariadb10.3`
-+ `mariadb10.2`
 
 For example, to view the parameters for RDS for MariaDB version 10\.6, run the following command\.
 

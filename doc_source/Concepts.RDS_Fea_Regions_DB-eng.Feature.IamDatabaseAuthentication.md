@@ -18,36 +18,37 @@ Following are the supported engines and Region availability for IAM database aut
 
 | Region | RDS for MariaDB 10\.6 | RDS for MariaDB 10\.5 | RDS for MariaDB 10\.4 | RDS for MariaDB 10\.3 | 
 | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 10\.6 and higher | \- | \- | \- | 
-| US East \(N\. Virginia\) | Version 10\.6 and higher | \- | \- | \- | 
-| US West \(N\. California\) | Version 10\.6 and higher | \- | \- | \- | 
-| US West \(Oregon\) | Version 10\.6 and higher | \- | \- | \- | 
-| Africa \(Cape Town\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Hong Kong\) | Version 10\.6 and higher | \- | \- | \- | 
+| US East \(Ohio\) | Version 10\.6 and higher | – | – | – | 
+| US East \(N\. Virginia\) | Version 10\.6 and higher | – | – | – | 
+| US West \(N\. California\) | Version 10\.6 and higher | – | – | – | 
+| US West \(Oregon\) | Version 10\.6 and higher | – | – | – | 
+| Africa \(Cape Town\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Hong Kong\) | Version 10\.6 and higher | – | – | – | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Mumbai\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Osaka\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Seoul\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Singapore\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Sydney\) | Version 10\.6 and higher | \- | \- | \- | 
-| Asia Pacific \(Tokyo\) | Version 10\.6 and higher | \- | \- | \- | 
-| Canada \(Central\) | Version 10\.6 and higher | \- | \- | \- | 
-| China \(Beijing\) | Version 10\.6 and higher | \- | \- | \- | 
-| China \(Ningxia\) | Version 10\.6 and higher | \- | \- | \- | 
-| Europe \(Frankfurt\) | Version 10\.6 and higher | \- | \- | \- | 
-| Europe \(Ireland\) | Version 10\.6 and higher | \- | \- | \- | 
-| Europe \(London\) | Version 10\.6 and higher | \- | \- | \- | 
-| Europe \(Milan\) | Version 10\.6 and higher | \- | \- | \- | 
-| Europe \(Paris\) | Version 10\.6 and higher | \- | \- | \- | 
+| Asia Pacific \(Jakarta\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Melbourne\) | – | – | – | – | 
+| Asia Pacific \(Mumbai\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Osaka\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Seoul\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Singapore\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Sydney\) | Version 10\.6 and higher | – | – | – | 
+| Asia Pacific \(Tokyo\) | Version 10\.6 and higher | – | – | – | 
+| Canada \(Central\) | Version 10\.6 and higher | – | – | – | 
+| China \(Beijing\) | Version 10\.6 and higher | – | – | – | 
+| China \(Ningxia\) | Version 10\.6 and higher | – | – | – | 
+| Europe \(Frankfurt\) | Version 10\.6 and higher | – | – | – | 
+| Europe \(Ireland\) | Version 10\.6 and higher | – | – | – | 
+| Europe \(London\) | Version 10\.6 and higher | – | – | – | 
+| Europe \(Milan\) | Version 10\.6 and higher | – | – | – | 
+| Europe \(Paris\) | Version 10\.6 and higher | – | – | – | 
 | Europe \(Spain\) | – | – | – | – | 
-| Europe \(Stockholm\) | Version 10\.6 and higher | \- | \- | \- | 
+| Europe \(Stockholm\) | Version 10\.6 and higher | – | – | – | 
 | Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | Version 10\.6 and higher | \- | \- | \- | 
-| Middle East \(UAE\) | \- | \- | \- | \- | 
-| South America \(São Paulo\) | Version 10\.6 and higher | \- | \- | \- | 
-| AWS GovCloud \(US\-East\) | Version 10\.6 and higher | \- | \- | \- | 
-| AWS GovCloud \(US\-West\) | Version 10\.6 and higher | \- | \- | \- | 
+| Middle East \(Bahrain\) | Version 10\.6 and higher | – | – | – | 
+| Middle East \(UAE\) | – | – | – | – | 
+| South America \(São Paulo\) | Version 10\.6 and higher | – | – | – | 
+| AWS GovCloud \(US\-East\) | Version 10\.6 and higher | – | – | – | 
+| AWS GovCloud \(US\-West\) | Version 10\.6 and higher | – | – | – | 
 
 ## IAM database authentication with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.my"></a>
 

@@ -31,7 +31,7 @@ To find the endpoint of an Oracle DB instance by using the AWS CLI, call the [de
 **Example To find the endpoint using the AWS CLI**  
 
 ```
-1. aws rds describe-db-instances                                
+1. aws rds describe-db-instances
 ```
 Search for `Endpoint` in the output to find the DNS name and port number for your DB instance\. The `Address` line in the output contains the DNS name\. The following is an example of the JSON endpoint output\.  
 
