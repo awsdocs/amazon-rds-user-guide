@@ -99,19 +99,33 @@ Following are some limitations to using Management Agent:
 Amazon RDS supports the following settings for the Management Agent option\.
 
 
-****  
-
 | Option setting | Required | Valid values | Description | 
 | --- | --- | --- | --- | 
-| **Version** \(`AGENT_VERSION`\) | Yes |  `13.5.0.0.v1` `13.4.0.9.v1` `13.3.0.0.v2` `13.3.0.0.v1` `13.2.0.0.v3` `13.2.0.0.v2` `13.2.0.0.v1` `13.1.0.0.v1` `12.1.0.5.v1` `12.1.0.4.v1`  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\) Regions, 12\.1 and 13\.1 versions aren't available\.   | 
-| **Port** \(`AGENT_PORT`\) | Yes | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
-| **Security Groups** | Yes | Existing security groups |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
-| **OMS\_HOST** | Yes |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 
-| **OMS\_PORT** | Yes | An integer value |  The HTTPS upload port on the OMS Host that listens for the Management Agent\.  To determine the HTTPS upload port, connect to the OMS host, and run the following command \(which requires the `SYSMAN` password\): emctl status oms \-details  The AWS CLI option name is `OMS_PORT`\.  | 
-| **AGENT\_REGISTRATION\_PASSWORD** | Yes | A string value |  The password that the Management Agent uses to authenticate itself with the OMS\. We recommend that you create a persistent password in your OMS before enabling the `OEM_AGENT` option\. With a persistent password you can share a single Management Agent option group among multiple Amazon RDS databases\.  The AWS CLI option name is `AGENT_REGISTRATION_PASSWORD`\.  | 
-| **ALLOW\_TLS\_ONLY** | No | `true`, `false` \(default\) |  A value that configures the OEM Agent to support only the `TLSv1` protocol while the agent listens as a server\. This setting is only supported for 12\.1 agent versions\. Later agent versions only support Transport Layer Security \(TLS\) by default\.   | 
-| **MINIMUM\_TLS\_VERSION** | No | `TLSv1` \(default\), `TLSv1.2` |  A value that specifies the minimum TLS version supported by the OEM Agent while the agent listens as a server\. This setting is only supported for agent versions 13\.1\.0\.0\.v1 and higher\. Earlier agent versions only support the `TLSv1` setting\.   | 
-| **TLS\_CIPHER\_SUITE** | No |  `TLS_RSA_WITH_AES_128_CBC_SHA` \(Default supported by all agent versions\) `TLS_RSA_WITH_AES_128_CBC_SHA256` \(Requires version 13\.1\.0\.0\.v1 or above\) `TLS_RSA_WITH_AES_256_CBC_SHA` \(Requires version 13\.2\.0\.0\.v3 or above\) `TLS_RSA_WITH_AES_256_CBC_SHA256` \(Requires version 13\.2\.0\.0\.v3 or above\)  |  A value that specifies the TLS cipher suite used by the OEM Agent while the agent listens as a server\.   | 
+|  **Version** \(`AGENT_VERSION`\)  |  Yes  |  `13.5.0.0.v1` `13.4.0.9.v1` `13.3.0.0.v2` `13.3.0.0.v1` `13.2.0.0.v3` `13.2.0.0.v2` `13.2.0.0.v1` `13.1.0.0.v1` `12.1.0.5.v1` `12.1.0.4.v1`  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\) Regions, 12\.1 and 13\.1 versions aren't available\.   | 
+|  **Port** \(`AGENT_PORT`\)  |  Yes  |  An integer value  |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
+|  **Security Groups**  |  Yes  |  Existing security groups  |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
+|  **OMS\_HOST**  |  Yes  |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 
+|  **OMS\_PORT**  |  Yes  |  An integer value  |  The HTTPS upload port on the OMS Host that listens for the Management Agent\.  To determine the HTTPS upload port, connect to the OMS host, and run the following command \(which requires the `SYSMAN` password\): emctl status oms \-details  The AWS CLI option name is `OMS_PORT`\.  | 
+|  **AGENT\_REGISTRATION\_PASSWORD**  |  Yes  |  A string value  |  The password that the Management Agent uses to authenticate itself with the OMS\. We recommend that you create a persistent password in your OMS before enabling the `OEM_AGENT` option\. With a persistent password you can share a single Management Agent option group among multiple Amazon RDS databases\.  The AWS CLI option name is `AGENT_REGISTRATION_PASSWORD`\.  | 
+|  **ALLOW\_TLS\_ONLY**  |  No  |  `true`, `false` \(default\)  |  A value that configures the OEM Agent to support only the `TLSv1` protocol while the agent listens as a server\. This setting is only supported for 12\.1 agent versions\. Later agent versions only support Transport Layer Security \(TLS\) by default\.   | 
+|  **MINIMUM\_TLS\_VERSION**  |  No  |  `TLSv1` \(default\), `TLSv1.2`  |  A value that specifies the minimum TLS version supported by the OEM Agent while the agent listens as a server\. This setting is only supported for agent versions 13\.1\.0\.0\.v1 and higher\. Earlier agent versions only support the `TLSv1` setting\.   | 
+|  **TLS\_CIPHER\_SUITE**  |  No  |  See [TLS settings for the Management Agent option](#oem-tls)\.  |  A value that specifies the TLS cipher suite used by the OEM Agent while the agent listens as a server\.   | 
+
+The following table lists the TLS cipher suites that the Management Agent option supports\.
+
+
+**TLS settings for the Management Agent option**  
+
+| Cipher suite | Agent version supported | FedRAMP compliant | 
+| --- | --- | --- | 
+| TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA | All | No | 
+| TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256 | 13\.1\.0\.0\.v1 or higher | No | 
+| TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA | 13\.2\.0\.0\.v3 or higher | No | 
+| TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA256 | 13\.2\.0\.0\.v3 or higher | No | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA | 13\.2\.0\.0\.v3 or higher | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA | 13\.2\.0\.0\.v3 or higher | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256 | 13\.2\.0\.0\.v3 or higher | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA384 | 13\.2\.0\.0\.v3 or higher | Yes | 
 
 ## Adding the Management Agent option<a name="Oracle.Options.OEMAgent.Add"></a>
 

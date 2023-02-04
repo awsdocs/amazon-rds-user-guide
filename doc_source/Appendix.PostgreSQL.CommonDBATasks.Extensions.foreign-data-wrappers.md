@@ -268,7 +268,7 @@ To enforce encryption for existing MySQL database user accounts, you can use the
 | --- | --- | 
 |  `ALTER USER 'user'@'%' REQUIRE SSL;`  |  `GRANT USAGE ON *.* to 'user'@'%' REQUIRE SSL;`  | 
 
-For more information about the `mysql_fdw` extension, see the [mysql\_fdw](https://https://github.com/EnterpriseDB/mysql_fdw) documentation\. 
+For more information about the `mysql_fdw` extension, see the [mysql\_fdw](https://github.com/EnterpriseDB/mysql_fdw) documentation\. 
 
 ## Working with Oracle databases by using the oracle\_fdw extension<a name="postgresql-oracle-fdw"></a>
 

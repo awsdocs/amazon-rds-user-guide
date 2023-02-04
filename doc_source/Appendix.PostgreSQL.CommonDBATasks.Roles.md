@@ -319,7 +319,7 @@ You can now associate the custom parameter group with your DB instance\.
 #### Configuring password encryption to use SCRAM<a name="PostgreSQL_Password_Encryption_configuration.configure-password-encryption"></a>
 
 The password encryption mechanism used by an RDS for PostgreSQL DB instance is set in the DB parameter group in the `password_encryption` parameter\. Allowed values are unset, `md5`, or `scram-sha-256`\. The default value depends on the RDS for PostgreSQL version, as follows:
-+ RDS for PostgreSQL 14 – No default value \(unset\)
++ RDS for PostgreSQL 14 and above – Default is `scram-sha-256`
 + RDS for PostgreSQL 13 – Default is `md5`
 
 With a custom DB parameter group attached to your RDS for PostgreSQL DB instance, you can modify values for the password encryption parameter\.

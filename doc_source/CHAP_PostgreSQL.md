@@ -121,7 +121,7 @@ rds-preview.us-east-2.amazonaws.com
 
 PostgreSQL version 15 is now available in the Amazon RDS Database Preview Environment\. PostgreSQL version 15 contains several improvements that are described in the following PostgreSQL documentation:
 + [ PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html)
-+ [ PostgreSQL 15 Beta 3 Released\!](https://www.postgresql.org/about/news/1960/)
++ [ PostgreSQL 15 Beta 3 Released\!](https://www.postgresql.org/about/news/2496/)
 
 For information on the Database Preview Environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\.
 
@@ -264,6 +264,7 @@ Following, you can find information about some other features supported by RDS f
 + [Performing logical replication for Amazon RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)
 + [RAM disk for the stats\_temp\_directory](#PostgreSQL.Concepts.General.FeatureSupport.RamDisk)
 + [Tablespaces for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.Tablespaces)
++ [Collations supported in RDS for PostgreSQL](PostgreSQL-Collations.md)
 + [RDS for PostgreSQL collations for EBCDIC and other mainframe migrations](#PostgreSQL.Collations.mainframe.migration)
 
 ### Custom data types and enumerations with RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.AlterEnum"></a>

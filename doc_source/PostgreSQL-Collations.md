@@ -1,0 +1,11 @@
+# Collations supported in RDS for PostgreSQL<a name="PostgreSQL-Collations"></a>
+
+Collations are set of rules that determine how character strings stored in the database are sorted and compared\. Collations play a fundamental role in the computer system and are included as part of the operating system\. Collations change over time when new characters are added to languages or when ordering rules change\.
+
+Collation libraries define specific rules and algorithms for a collation\. The most popular collation libraries used within PostgreSQL are GNU C \(glibc\) and Internationalization components for Unicode \(ICU\)\. By default, RDS for PostgreSQL uses the glibc collation that includes unicode character sort orders for multi\-byte character sequences\.
+
+When you create a new DB instance in RDS for PostgreSQL , it checks the operating system for the available collation\. The PostgreSQL parameters of the `CREATE DATABASE` command `LC_COLLATE` and `LC_CTYPE` are used to specify a collation, which stands as the default collation in that database\. Alternatively, you can also use the `LOCALE` parameter in `CREATE DATABASE` to set these parameters\. This determines the default collation for character strings in the database and the rules for classifying characters as letters, numbers, or symbols\. You can also choose a collation to use on a column, index, or on a query\.
+
+RDS for PostgreSQL depends on the glibc library in the operating system for collation support\. RDS for PostgreSQL instance is periodically updated with the latest versions of the operating system\. These updates sometimes include a newer version of the glibc library\. Rarely, newer versions of glibc change the sort order or collation of some characters, which can cause the data to sort differently or produce invalid index entries\. If you discover sort order issues for collation during an update, you might need to rebuild the indexes\.
+
+To reduce the possible impacts of the glibc updates, RDS for PostgreSQL now includes an independent default collation library\. This collation library is available in RDS for PostgreSQL 14\.6, 13\.9, 12\.13, 11\.18, 10\.23 and newer minor version releases\. It is compatible with glibc 2\.26\-59\.amzn2, and provides sort order stability to prevent incorrect query results\.

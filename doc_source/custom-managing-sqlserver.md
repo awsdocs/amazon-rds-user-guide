@@ -70,7 +70,7 @@ Pausing and resuming automation are the only supported automation tasks when mod
 
 ### AWS CLI<a name="custom-managing-sqlserver.pausing.CLI"></a>
 
-To pause or resume RDS Custom automation, use the [modify\-db\-instance]() AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. Control the automation mode with the following parameters:
+To pause or resume RDS Custom automation, use the `modify-db-instance` AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. Control the automation mode with the following parameters:
 + `--automation-mode` specifies the pause state of the DB instance\. Valid values are `all-paused`, which pauses automation, and `full`, which resumes it\.
 + `--resume-full-automation-mode-minutes` specifies the duration of the pause\. The default value is 60 minutes\.
 

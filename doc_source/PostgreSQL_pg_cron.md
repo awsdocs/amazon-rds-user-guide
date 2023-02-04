@@ -4,7 +4,7 @@ You can use the PostgreSQL `pg_cron` extension to schedule maintenance commands 
 
 The `pg_cron` extension is supported on RDS for PostgreSQL engine versions 12\.5 and higher\.
 
-To learn more about using `pg_cron`, see [Schedule jobs with pg\_cron on your RDS for PostgreSQL or your Aurora PostgreSQL\-Compatible Edition databases](https://docs.aws.amazon.com/blogs/database/schedule-jobs-with-pg_cron-on-your-amazon-rds-for-postgresql-or-amazon-aurora-for-postgresql-databases/)
+To learn more about using `pg_cron`, see [Schedule jobs with pg\_cron on your RDS for PostgreSQL or your Aurora PostgreSQL\-Compatible Edition databases](https://aws.amazon.com/blogs/database/schedule-jobs-with-pg_cron-on-your-amazon-rds-for-postgresql-or-amazon-aurora-for-postgresql-databases/)\.
 
 **Topics**
 + [Setting up the pg\_cron extension](#PostgreSQL_pg_cron.enable)

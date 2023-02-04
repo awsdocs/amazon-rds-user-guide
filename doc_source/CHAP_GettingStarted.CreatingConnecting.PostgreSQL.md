@@ -9,6 +9,7 @@ There's no charge for creating an AWS account\. However, by completing this tuto
 
 **Contents**
 + [Creating a PostgreSQL DB instance](#CHAP_GettingStarted.Creating.PostgreSQL)
++ [Connecting an EC2 instance and an PostgreSQL DB instance automatically](#CHAP_GettingStarted.Connecting.EC2.PostgreSQL)
 + [Connecting to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL)
   + [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)
   + [Using psql to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.psql)
@@ -80,6 +81,41 @@ If you need to change the master user password after the DB instance is availabl
 
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **Creating** until the DB instance is ready to use\. When the state changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch06.png)
+
+## Connecting an EC2 instance and an PostgreSQL DB instance automatically<a name="CHAP_GettingStarted.Connecting.EC2.PostgreSQL"></a>
+
+You can automatically connect an existing EC2 instance to the DB instance from the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your PostgreSQL DB instance\.
+
+Before setting up a connection between an EC2 instance and an RDS database, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\. If you make changes to required security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the RDS database\.
+
+**Note**  
+You can only set up a connection between an EC2 instance and an RDS database automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
+
+**To connect an EC2 instance and an RDS database automatically**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the RDS database\.
+
+1. For **Actions**, choose **Set up EC2 connection**\.
+
+   The **Set up EC2 connection** page appears\.  
+![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-set-up.png)
+
+1. On the **Set up EC2 connection** page, choose the EC2 instance\.
+
+   If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the RDS database\.
+
+1. Choose **Continue**\.
+
+   The **Review and confirm** page appears\.  
+![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-confirm.png)
+
+1. On the **Review and confirm** page, review the changes that RDS will make to set up a connection with the EC2 instance\. Do one of the following:
+   + If the changes are correct, choose **Set up connection**\.
+   + If the changes aren't correct, choose **Previous** or **Cancel**\.
+
+1. To verify that the connection is made, choose **Connectivity and security** in the console and find the EC2 resource identifier under **Connected compute resource**\.
 
 ## Connecting to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL"></a>
 

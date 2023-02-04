@@ -20,6 +20,7 @@ You can use Oracle GoldenGate with RDS for Oracle to upgrade to major versions o
 + [Oracle GoldenGate architecture](#Appendix.OracleGoldenGate.Overview)
 + [Setting up Oracle GoldenGate](#Appendix.OracleGoldenGate.setting-up)
 + [Working with the EXTRACT and REPLICAT utilities of Oracle GoldenGate](#Appendix.OracleGoldenGate.ExtractReplicat)
++ [Monitoring Oracle GoldenGate](#Appendix.OracleGoldenGate.Monitoring)
 + [Troubleshooting Oracle GoldenGate](#Appendix.OracleGoldenGate.Troubleshooting)
 
 ## Supported versions and licensing options for Oracle GoldenGate<a name="Appendix.OracleGoldenGate.licensing"></a>
@@ -366,11 +367,19 @@ OGGTARGET=
 
 ## Working with the EXTRACT and REPLICAT utilities of Oracle GoldenGate<a name="Appendix.OracleGoldenGate.ExtractReplicat"></a>
 
-The Oracle GoldenGate utilities `EXTRACT` and `REPLICAT` work together to keep the source and target databases in sync via incremental transaction replication using trail files\. All changes that occur on the source database are automatically detected by `EXTRACT`, then formatted and transferred to trail files on the Oracle GoldenGate on\-premises or EC2\-instance hub\. After initial load is completed, the data is read from these files and replicated to the target database by the `REPLICAT` utility\.
+The Oracle GoldenGate utilities `EXTRACT` and `REPLICAT` work together to keep the source and target databases in sync via incremental transaction replication using trail files\. All changes that occur on the source database are automatically detected by `EXTRACT`, then formatted and transferred to trail files on the Oracle GoldenGate on\-premises or Amazon EC2 instance hub\. After initial load is completed, the data is read from these files and replicated to the target database by the `REPLICAT` utility\.
 
 ### Running the Oracle GoldenGate EXTRACT utility<a name="Appendix.OracleGoldenGate.Extract"></a>
 
-The `EXTRACT` utility retrieves, converts, and outputs data from the source database to trail files\. `EXTRACT` queues transaction details to memory or to temporary disk storage\. When the transaction is committed to the source database, `EXTRACT` flushes all of the transaction details to a trail file\. The trail file routes these details to the Oracle GoldenGate on\-premises or the Amazon EC2 instance hub and then to the target database\.
+The `EXTRACT` utility retrieves, converts, and outputs data from the source database to trail files\. The basic process is as follows:
+
+1. `EXTRACT` queues transaction details to memory or to temporary disk storage\.
+
+1. The source database commits the transaction\.
+
+1. `EXTRACT` writes the transaction details to a trail file\.
+
+1. The trail file routes these details to the Oracle GoldenGate on\-premises or the Amazon EC2 instance hub and then to the target database\.
 
 The following steps start the `EXTRACT` utility, capture the data from `EXAMPLE.TABLE` in source database `OGGSOURCE`, and create the trail files\. 
 
@@ -467,6 +476,14 @@ The following steps enable and start the `REPLICAT` utility so that it can repli
    start RABC
    ```
 
+## Monitoring Oracle GoldenGate<a name="Appendix.OracleGoldenGate.Monitoring"></a>
+
+When you use Oracle GoldenGate for replication, make sure that the Oracle GoldenGate process is up and running and the source and target databases are synchronized\. You can use the following monitoring tools:
++ [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) is a monitoring service that is used in this pattern to monitor GoldenGate error logs\.
++ [Amazon SNS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/US_SetupSNS.html) is a message notification service that is used in this pattern to send email notifications\.
+
+For detailed instructions, see [Monitor Oracle GoldenGate logs by using Amazon CloudWatch](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/monitor-oracle-goldengate-logs-by-using-amazon-cloudwatch.html)\.
+
 ## Troubleshooting Oracle GoldenGate<a name="Appendix.OracleGoldenGate.Troubleshooting"></a>
 
 This section explains the most common issues when using Oracle GoldenGate with Amazon RDS for Oracle\.
@@ -529,7 +546,7 @@ Oracle GoldenGate Conflict Detection and Resolution \(CDR\) provides basic confl
 When CDR resolves a collision, it can insert records into the exception table `_DBA_APPLY_CDR_INFO` temporarily\. Integrated `REPLICAT` deletes these records later\. In a rare scenario, the integrated `REPLICAT` can process a large number of collisions, but a new integrated `REPLICAT` does not replace it\. Instead of being removed, the existing rows in `_DBA_APPLY_CDR_INFO` are orphaned\. Any new integrated `REPLICAT` processes slow down because they are querying orphaned rows in `_DBA_APPLY_CDR_INFO`\.
 
 To remove all rows from `_DBA_APPLY_CDR_INFO`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.truncate_apply$_cdr_info`\. This procedure is released as part of the October 2020 release and patch update\. The procedure is available in the following database versions:
-+ [ Version 21\.0\.0\.0\.ru\-2022\-01\.rur\-2022\-01\.r1](https://docs.aws.amazon.com/https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-21-0.html#oracle-version-RU-RUR.21.0.0.0.ru-2022-01.rur-2022-01.r1) and higher
++ [ Version 21\.0\.0\.0\.ru\-2022\-01\.rur\-2022\-01\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-21-0.html#oracle-version-RU-RUR.21.0.0.0.ru-2022-01.rur-2022-01.r1) and higher
 + [ Version 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-19-0.html#oracle-version-RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1) and higher
 
 The following example truncates the table `_DBA_APPLY_CDR_INFO`\.

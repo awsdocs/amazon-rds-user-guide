@@ -75,7 +75,7 @@ You can use IAM condition keys to enforce RDS management of the master user pass
     "Statement": [
         {
             "Effect": "Deny",
-            "Action": ["rds:CreateDBInstance, rds:CreateDBCluster, rds:RestoreDBInstanceFromS3, rds:RestoreDBClusterFromS3"],
+            "Action": ["rds:CreateDBInstance", "rds:CreateDBCluster", "rds:RestoreDBInstanceFromS3", "rds:RestoreDBClusterFromS3"],
             "Resource": "*",
             "Condition": {
                 "Bool": {
@@ -86,6 +86,10 @@ You can use IAM condition keys to enforce RDS management of the master user pass
     ]
 }
 ```
+
+**Note**  
+This policy enforces password management in AWS Secrets Manager at creation\. However, you can still disable Secrets Manager integration and manually set a master password by modifying the instance\.  
+To prevent this, include `rds:ModifyDBInstance`, `rds:ModifyDBCluster` in the Action block of the policy\. Be aware, this prevents the user from applying any further modifications to existing instances which do not have Secrets Manager integration enabled\. 
 
 For more information about using condition keys in IAM policies, see [Policy condition keys for Amazon RDS](security_iam_service-with-iam.md#UsingWithRDS.IAM.Conditions) and [Example policies: Using condition keys](security_iam_id-based-policy-examples.md#UsingWithRDS.IAM.Conditions.Examples)\.
 
@@ -508,8 +512,8 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations for Secrets Manager integration with Amazon RDS<a name="rds-secrets-manager-limitations"></a>
 
 Managing master user passwords with Secrets Manager isn't supported for the following features:
-+ DB instances with read replicas, except for RDS for SQL Server DB instances
-+ Read replicas
++ For all DB engines except for RDS for SQL Server, creating a read replica when the source DB or DB cluster manages credentials with Secrets Manager
++ Managing master user password with Secrets Manager for a read replica
 + Amazon RDS Blue/Green Deployments
 + Amazon RDS Custom
 + Oracle Data Guard switchover

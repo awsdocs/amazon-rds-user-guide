@@ -92,7 +92,7 @@ In an on\-premises Oracle CDB, you can preserve a specified open mode for PDBs u
 
 ### AWS CLI<a name="custom-managing.pausing.CLI"></a>
 
-To pause or resume RDS Custom automation, use the [modify\-db\-instance]() AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. Control the automation mode with the following parameters:
+To pause or resume RDS Custom automation, use the `modify-db-instance` AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. Control the automation mode with the following parameters:
 + `--automation-mode` specifies the pause state of the DB instance\. Valid values are `all-paused`, which pauses automation, and `full`, which resumes it\.
 + `--resume-full-automation-mode-minutes` specifies the duration of the pause\. The default value is 60 minutes\.
 

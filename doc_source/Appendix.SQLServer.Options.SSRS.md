@@ -483,7 +483,7 @@ If you change the secret later, you also have to update the `SSRS` option in the
    }
    ```
 
-   For more examples, see [Permissions policy examples]() in the *AWS Secrets Manager User Guide*\.
+   For more examples, see [Permissions policy examples for AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html) in the *AWS Secrets Manager User Guide*\.
 
 ## Revoking system\-level permissions<a name="SSRS.Access.Revoke"></a>
 

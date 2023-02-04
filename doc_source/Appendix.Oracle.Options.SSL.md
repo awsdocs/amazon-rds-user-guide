@@ -1,82 +1,49 @@
 # Oracle Secure Sockets Layer<a name="Appendix.Oracle.Options.SSL"></a>
 
-You enable Secure Sockets Layer \(SSL\) encryption for an RDS for Oracle DB instance by adding the Oracle SSL option to the option group associated with an RDS for Oracle DB instance\. You specify the port you want to communicate over using SSL\. You must configure SQL\*Plus as shown in this following section\. 
+You enable Secure Sockets Layer \(SSL\) encryption for an RDS for Oracle DB instance by adding the Oracle SSL option to the option group associated with an RDS for Oracle DB instance\. You specify the port you want to communicate using SSL\. You must configure SQL\*Plus as shown in this following section\.
 
-You enable SSL encryption for an RDS for Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections\. This approach allows both clear text and SSL\-encrypted communication to occur at the same time between an DB instance and SQL\*Plus\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\.
+You enable SSL encryption for an RDS for Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections\. This approach allows both clear text and SSL\-encrypted communication to occur at the same time between a DB instance and SQL\*Plus\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\.
 
 **Note**  
-You can use SSL or Native Network Encryption \(NNE\) on the same RDS for Oracle DB instance, but not both\. If you use SSL encryption, make sure to turn off any other connection encryption\. For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
+You can use SSL or Native Network Encryption \(NNE\) on the same RDS for Oracle DB instance, but not both\. If you use SSL encryption, make sure to turn off any other connection encryption\. For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\.
 
-SSL/TLS and NNE and are no longer part of Oracle Advanced Security\. In RDS for Oracle, you can use SSL encryption with all licensed editions of the following database versions: 
+SSL/TLS and NNE and are no longer part of Oracle Advanced Security\. In RDS for Oracle, you can use SSL encryption with all licensed editions of the following database versions:
 + Oracle Database 21c \(21\.0\.0\)
 + Oracle Database 19c \(19\.0\.0\)
-+ Oracle Database 12c Release 2 \(12\.2\) – no longer supported
-+ Oracle Database 12c Release 1 \(12\.1\) – no longer supported
++ Oracle Database 12c Release 2 \(12\.2\) – this release is no longer supported
++ Oracle Database 12c Release 1 \(12\.1\) – this release is no longer supported
+
+The following table summarizes SSL support for RDS for Oracle\. The specified Oracle Database releases support all editions\.
+
+
+| Cipher suite \(SQLNET\.CIPHER\_SUITE\) | TLS version support \(SQLNET\.SSL\_VERSION\) | Supported Oracle Database releases | FIPS support | FedRAMP compliant | 
+| --- | --- | --- | --- | --- | 
+| SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA \(default\) | 1\.0 and 1\.2 | 12c, 19c, 21c | Yes | No | 
+| SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256 | 1\.2 | 12c, 19c, 21c | Yes | No | 
+| SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384 | 1\.2 | 12c, 19c, 21c | Yes | No | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384 | 1\.2 | 19c, 21c | Yes | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256 | 1\.2 | 19c, 21c | Yes | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA384 | 1\.2 | 19c, 21c | Yes | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256 | 1\.2 | 19c, 21c | Yes | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA | 1\.2 | 19c, 21c | Yes | Yes | 
+| TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA | 1\.2 | 19c, 21c | Yes | Yes | 
 
 ## TLS versions for the Oracle SSL option<a name="Appendix.Oracle.Options.SSL.TLS"></a>
 
-Amazon RDS for Oracle supports Transport Layer Security \(TLS\) versions 1\.0 and 1\.2\. To use the Oracle SSL option, use the `SQLNET.SSL_VERSION` option setting\. The following values are allowed for this option setting:
-+ `"1.0"` – Clients can connect to the DB instance using TLS 1\.0 only\.
+Amazon RDS for Oracle supports Transport Layer Security \(TLS\) versions 1\.0 and 1\.2\. When you add a new Oracle SSL option, you must set `SQLNET.SSL_VERSION` explicitly to a valid value\. The following values are allowed for this option setting:
++ `"1.0"` – Clients can connect to the DB instance using TLS 1\.0 only\. For existing Oracle SSL options, `SQLNET.SSL_VERSION` is set to `"1.0"` automatically\. You can change the setting if necessary\.
 + `"1.2"` – Clients can connect to the DB instance using TLS 1\.2 only\.
 + `"1.2 or 1.0"` – Clients can connect to the DB instance using either TLS 1\.2 or 1\.0\.
 
-To use the Oracle SSL option, the `SQLNET.SSL_VERSION` option setting is also required:
-+ For existing Oracle SSL options, `SQLNET.SSL_VERSION` is set to `"1.0"` automatically\. You can change the setting if necessary\.
-+ When you add a new Oracle SSL option, you must set `SQLNET.SSL_VERSION` explicitly to a valid value\.
-
-The following table shows the TLS option settings that are supported for different Oracle engine versions and editions\.
-
-
-****  
-
-| Oracle engine version | SQLNET\.SSL\_VERSION = "1\.0" | SQLNET\.SSL\_VERSION = "1\.2" | SQLNET\.SSL\_VERSION = "1\.2 or 1\.0" | 
-| --- | --- | --- | --- | 
-|  21\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-
 ## Cipher suites for the Oracle SSL option<a name="Appendix.Oracle.Options.SSL.CipherSuites"></a>
 
-Amazon RDS for Oracle supports multiple SSL cipher suites\. By default, the Oracle SSL option is configured to use the `SSL_RSA_WITH_AES_256_CBC_SHA` cipher suite\. To specify a different cipher suite to use over SSL connections, use the `SQLNET.CIPHER_SUITE` option setting\. Following are the allowed values for this option setting:
-+ `"SSL_RSA_WITH_AES_256_CBC_SHA"` – The default setting, which is compatible with TLS 1\.0 and TLS 1\.2
-+ `"SSL_RSA_WITH_AES_256_CBC_SHA256"` – Only compatible with TLS 1\.2
-+ `"SSL_RSA_WITH_AES_256_GCM_SHA384"` – Only compatible with TLS 1\.2
-
-For existing Oracle SSL options, `SQLNET.CIPHER_SUITE` is set to `"SSL_RSA_WITH_AES_256_CBC_SHA"` automatically\. You can change the setting if necessary\.
-
-The following table shows the cipher suite option settings that are supported for different Oracle engine versions and editions\.
-
-
-****  
-
-| Oracle engine version | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384" | 
-| --- | --- | --- | --- | 
-|  21\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
+Amazon RDS for Oracle supports multiple SSL cipher suites\. By default, the Oracle SSL option is configured to use the `SSL_RSA_WITH_AES_256_CBC_SHA` cipher suite\. To specify a different cipher suite to use over SSL connections, use the `SQLNET.CIPHER_SUITE` option setting\.
 
 ## FIPS support<a name="Appendix.Oracle.Options.SSL.FIPS"></a>
 
-RDS for Oracle allows you to use the Federal Information Processing Standard \(FIPS\) standard for 140\-2\. FIPS 140\-2 is a United States government standard that defines cryptographic module security requirements\. You turn on the FIPS standard by setting `FIPS.SSLFIPS_140` to `TRUE` for the Oracle SSL option\. When FIPS 140\-2 is configured for SSL, the cryptographic libraries encrypt data between the client and the RDS for Oracle DB instance\. 
+RDS for Oracle allows you to use the Federal Information Processing Standard \(FIPS\) standard for 140\-2\. FIPS 140\-2 is a United States government standard that defines cryptographic module security requirements\. You turn on the FIPS standard by setting `FIPS.SSLFIPS_140` to `TRUE` for the Oracle SSL option\. When FIPS 140\-2 is configured for SSL, the cryptographic libraries encrypt data between the client and the RDS for Oracle DB instance\.
 
-You can turn on the FIPS setting with the following Oracle database versions and editions: 
-+ 19\.0\.0\.0: All versions, all editions including Standard Edition Two
-+ 12\.2\.0\.1: All versions, all editions including Standard Edition Two
-+ 12\.1\.0\.2: Version 2 and later, all editions including Standard Edition Two
-
-Clients must use the cipher suite that is FIPS\-compliant\. When establishing a connection, the client and RDS for Oracle DB instance negotiate which cipher suite to use when transmitting messages back and forth\. The following table shows the FIPS\-compliant SSL cipher suites for each TLS version\. 
-
-
-****  
-
-| SQLNET\.SSL\_VERSION | Supported cipher suites | 
-| --- | --- | 
-|  1\.0  |  SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA  | 
-|  1\.2  |  SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384  | 
-
-For more information, see [Oracle database FIPS 140\-2 settings](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/oracle-database-fips-140-settings.html#GUID-DDBEB3F9-B216-44BB-8C18-43B5E468CBBB) in the Oracle documentation\.
+Clients must use the cipher suite that is FIPS\-compliant\. When establishing a connection, the client and RDS for Oracle DB instance negotiate which cipher suite to use when transmitting messages back and forth\. The following table shows the FIPS\-compliant SSL cipher suites for each TLS version\. For more information, see [Oracle database FIPS 140\-2 settings](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/oracle-database-fips-140-settings.html#GUID-DDBEB3F9-B216-44BB-8C18-43B5E468CBBB) in the Oracle documentation\.
 
 ## Adding the SSL option<a name="Appendix.Oracle.Options.SSL.OptionGroup"></a>
 
@@ -244,7 +211,7 @@ If you want to close Transmission Control Protocol \(TCP\) port access, create a
 
 To use an SSL connection over JDBC, you must create a keystore, trust the Amazon RDS root CA certificate, and use the code snippet specified following\.
 
-To create the keystore in JKS format, use the following command\. For more information about creating the keystore, see the [Oracle documentation](https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html)\. 
+To create the keystore in JKS format, use the following command\. For more information about creating the keystore, see the [Oracle documentation](https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html)\.
 
 ```
 keytool -keystore clientkeystore -genkey -alias client            
@@ -266,7 +233,7 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 
    Replace the file name with the one you downloaded\.
 
-1.  Import the certificate into the keystore using the following command\. 
+1.  Import the certificate into the keystore using the following command\.
 
    ```
    keytool -import -alias rds-root -keystore clientkeystore.jks -file rds-ca-2019-root.der                

@@ -76,6 +76,9 @@ Before you restore a DB snapshot, you can upgrade it to a later release\. For mo
 
 You can restore a DB instance from a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
+**Note**  
+You can't reduce the amount of storage when you restore a DB instance\. When you increase the allocated storage, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\. You can't increase the allocated storage when restoring RDS for SQL Server DB instances\.
+
 ### Console<a name="USER_RestoreFromSnapshot.CON"></a>
 
 **To restore a DB instancefrom a DB snapshot**
