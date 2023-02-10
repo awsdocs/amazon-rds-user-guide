@@ -20,7 +20,7 @@ For more information, see [Creating an RDS Custom for Oracle DB instance](custom
 
 1. For **Engine type**, choose **Oracle**\.
 
-1. For **Edition**, choose **Oracle Enterprise Edition**\. **Oracle Enterprise Edition \(Oracle RAC option\)** isn't supported\.
+1. For **Edition**, choose **Oracle Enterprise Edition**\.
 
 1. For **Architecture settings**, choose **Multitenant architecture** to create a Multitenant CEV, which uses the engine `custom-oracle-ee-cdb`\. You can create an RDS Custom for Oracle CDB with a Multitenant CEV only\. If you don't choose this option, your CEV is a non\-CDB, which uses the engine `custom-oracle-ee`\.
 

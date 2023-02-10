@@ -145,7 +145,7 @@ We recommend placing the user name and password information in a folder that isn
    ?>
    ```
 
-1. Save and close the `dbinfo.inc` file\.
+1. Save and close the `dbinfo.inc` file\. If you are using nano, save and close the file by using Ctrl\+S and Ctrl\+X\.
 
 1. Change the directory to `/var/www/html`\.
 

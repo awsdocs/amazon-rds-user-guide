@@ -54,7 +54,7 @@
  You can connect to RDS Proxy using the TLS/SSL protocol\. 
 
 **Note**  
- RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you use RDS Proxy, when you rotate your TLS/SSL certificate you don't need to update applications that use RDS Proxy connections\. 
+ RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\.
 
  To enforce TLS for all connections between the proxy and your database, you can specify a setting **Require Transport Layer Security** when you create or modify a proxy\. 
 

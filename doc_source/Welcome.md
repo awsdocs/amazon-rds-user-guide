@@ -7,7 +7,7 @@ This guide covers Amazon RDS database engines other than Amazon Aurora\. For inf
 
 If you are new to AWS products and services, begin learning more with the following resources:
 + For an overview of all AWS products, see [What is cloud computing?](http://aws.amazon.com/what-is-aws/)
-+ Amazon Web Services provides a number of database services\. For guidance on which service is best for your environment, see [Running databases on AWS](http://aws.amazon.com/running_databases/)\. 
++ Amazon Web Services provides a number of database services\. To learn more about the variety of database options available on AWS, see [Choosing an AWS database service](http://aws.amazon.com/getting-started/decision-guides/databases-on-aws-how-to-choose) and [Running databases on AWS](http://aws.amazon.com/running_databases/)\. 
 
 ## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
 
@@ -133,7 +133,7 @@ Each DB instance has minimum and maximum storage requirements depending on the s
 
 You can run a DB instance on a virtual private cloud \(VPC\) using the Amazon Virtual Private Cloud \(Amazon VPC\) service\. When you use a VPC, you have control over your virtual networking environment\. You can choose your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether it's running in a VPC or not\. Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There's no additional cost to run your DB instance in a VPC\. For more information on using Amazon VPC with RDS, see [Amazon VPC VPCs and Amazon RDS](USER_VPC.md)\. 
 
-Amazon RDS uses Network Time Protocol \(NTP\) to synchronize the time on DB Instances\. 
+Amazon RDS uses Network Time Protocol \(NTP\) to synchronize the time on DB instances\. 
 
 ## AWS Regions and Availability Zones<a name="Welcome.Concepts.Regions"></a>
 
@@ -149,7 +149,7 @@ A *security group *controls the access to a DB instance\. It does so by allowing
 
 For more information about security groups, see [Security in Amazon RDS](UsingWithRDS.md)\.
 
-## Monitoring an Amazon RDS DB instance<a name="Welcome.Monitoring"></a>
+## Amazon RDS monitoring<a name="Welcome.Monitoring"></a>
 
 There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, or DB parameter group\. For more information, see [Monitoring metrics in an Amazon RDS instance](CHAP_Monitoring.md)\. 
 
@@ -165,9 +165,9 @@ The AWS Management Console is a simple web\-based user interface\. You can manag
 
 You can use the AWS Command Line Interface \(AWS CLI\) to access the Amazon RDS API interactively\. To install the AWS CLI, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)\. To begin using the AWS CLI for RDS, see [AWS Command Line Interface reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html)\. 
 
-### Programming with Amazon RDS<a name="Welcome.Interfaces.API"></a>
+### Amazon RDS APIs<a name="Welcome.Interfaces.API"></a>
 
-If you are a developer, you can access the Amazon RDS programmatically\. For more information, see [Amazon RDS API reference](ProgrammingGuide.md)\. 
+If you are a developer, you can access the Amazon RDS programmatically using APIs\. For more information, see [Amazon RDS API reference](ProgrammingGuide.md)\. 
 
 For application development, we recommend that you use one of the AWS Software Development Kits \(SDKs\)\. The AWS SDKs handle low\-level details such as authentication, retry logic, and error handling, so that you can focus on your application logic\. AWS SDKs are available for a wide variety of languages\. For more information, see [Tools for Amazon web services ](https://aws.amazon.com/tools/)\. 
 
@@ -195,3 +195,7 @@ You can review information specific to a particular DB engine in the following s
 + [Amazon RDS for MySQL](CHAP_MySQL.md)
 + [Amazon RDS for Oracle](CHAP_Oracle.md)
 + [Amazon RDS for PostgreSQL](CHAP_PostgreSQL.md)
+
+## Amazon RDS shared responsibility model<a name="Welcome.Concepts.SharedResponsibility"></a>
+
+Amazon RDS is responsible for hosting the software components and infrastructure of DB instances and DB cluster\. You are responsible for query tuning, which is the process of adjusting SQL queries to improve performance\. Query performance is highly dependent on database design, data size, data distribution, application workload, and query patterns, which can vary greatly\. Monitoring and tuning are highly individualized processes that you own for your RDS databases\. You can use Amazon RDS Performance Insights and other tools to identify problematic queries\.

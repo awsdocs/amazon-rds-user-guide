@@ -266,3 +266,5 @@ The following table shows the message attribute for RDS events\.
 | --- | --- | 
 | Event ID |  Identifier for the RDS event message\. For example, RDS\-EVENT\-0006\.  | 
 | Resource |  The ARN identifier for the resource emitting the event\. For example, `arn:aws:rds:ap-southeast-2:123456789012:db:database-1`\.  | 
+
+By default, an Amazon SNS topic subscriber receives every message published to the topic\. To receive only a subset of the messages, the subscriber must assign a filter policy to the topic subscription\. For more information about SNS message filtering, see [Amazon SNS message filtering](https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html) in the *Amazon Simple Notification Service Developer Guide*

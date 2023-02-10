@@ -152,9 +152,9 @@ To test your rule, shut down an RDS DB instance\. After waiting a few minutes fo
 
 1. In the navigation pane, choose **Rules**, choose the name of the rule that you created\.
 
-1. In **Rule details**, choose **Metrics for the rule**\.
+1. In **Rule details**, choose **Monitoring**\.
 
-   You are redirected to the Amazon CloudWatch console\.
+   You are redirected to the Amazon CloudWatch console\. If you are not redirected, click **View the metrics in CloudWatch**\.
 
 1. In **All metrics**, choose the name of the rule that you created\.
 

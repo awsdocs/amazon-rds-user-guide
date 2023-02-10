@@ -30,13 +30,13 @@ Amazon RDS offers two types of General Purpose SSD storage: [gp2 storage](#gp2-s
 
 ### gp2 storage<a name="gp2-storage"></a>
 
-When your applications don't need high storage performance, you can use General Purpose SSD gp2 storage\. Baseline I/O performance for gp2 storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(5\.34 TiB and greater\) is 16,000 IOPS\.
+When your applications don't need high storage performance, you can use General Purpose SSD gp2 storage\. Baseline I/O performance for gp2 storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(21\.36 TiB and greater\) is 64,000 IOPS\.
 
 Volumes below 1 TiB in size also have the ability to burst to 3,000 IOPS for extended periods of time\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html#EBSVolumeTypes_gp2) in the *Amazon EC2 User Guide*\. For a more detailed description of how baseline performance and I/O credit balance affect performance, see the post [Understanding burst vs\. baseline performance with Amazon RDS and gp2](http://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/) on the AWS Database Blog\.
 
 Many workloads never deplete the burst balance\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
 
-For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is often irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\. However, for DB instances larger than 1 TiB where the storage is *striped* across four Amazon EBS volumes, burst performance of up to 12,000 IOPS can be seen\. This applies to RDS database engines other than Microsoft SQL Server, which doesn't support volume striping\.
+For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is often irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\. However, for DB instances between 1 TiB and 4 TiB, storage is *striped* across four Amazon EBS volumes providing burst performance of up to 12,000 IOPS\. For volumes above 4TiB of storage, baseline IOPS exceeds the maximum burst of 12,000 IOPS\. This applies to RDS database engines other than Microsoft SQL Server, which doesn't support volume striping\.
 
 ### gp3 storage<a name="gp3-storage"></a>
 
@@ -69,6 +69,7 @@ Storage performance values for gp3 volumes on RDS have the following constraints
 + If you're using storage autoscaling, the same ratios between IOPS and maximum storage threshold \(in GiB\) also apply\. 
 
   For more information on storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
++ When you modify an EBS volume, it goes through a sequence of states\. While the volume is in the `optimizing` state, your volume performance is in between the source and target configuration specifications\. Transitional volume performance will be no less than the source volume performance\. For more information on volume modifications, see [Monitor the progress of volume modifications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modification.html) in the *Amazon EC2 User Guide*\.
 
 ## Provisioned IOPS SSD storage<a name="USER_PIOPS"></a>
 
@@ -126,7 +127,7 @@ The following table shows use cases and performance characteristics for the SSD 
 | Latency |  Single\-digit millisecond, provided consistently 99\.9% of the time  |  Single\-digit millisecond, provided consistently 99% of the time  |  Single\-digit millisecond, provided consistently 99% of the time  | 
 | Volume size |  100 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  |  20 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  |  20 GiB–64 TiB \(16 TiB on RDS for SQL Server\)  | 
 | Maximum IOPS | 256,000 \(64,000 on RDS for SQL Server\) | 64,000 \(16,000 on RDS for SQL Server\) |  64,000 \(16,000 on RDS for SQL Server\)  You can't provision IOPS directly on gp2 storage\. IOPS varies with the allocated storage size\.   | 
-| Maximum throughput | Scales based on Provisioned IOPS up to 4,000 MB/s | Provision additional throughput up to 4,000 MB/s | 1000 MB/s \(250 MB/s on RDS for SQL Server\) | 
+| Maximum throughput | Scales based on Provisioned IOPS up to 4,000 MB/s | Provision additional throughput up to 4,000 MB/s \(1000 MB/s on RDS for SQL Server | 1000 MB/s \(250 MB/s on RDS for SQL Server\) | 
 | AWS CLI and RDS API name | io1 | gp3 | gp2 | 
 
 ## Magnetic storage<a name="CHAP_Storage.Magnetic"></a>

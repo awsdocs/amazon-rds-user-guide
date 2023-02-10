@@ -30,11 +30,16 @@ Amazon RDS provides the following CAs to sign the server certificate for a DB in
 |  rds\-ca\-rsa4096\-g1  |  Uses a certificate authority with RSA 4096 private key algorithm and SHA384 signing algorithm for your DB instance server certificate\. This CA supports automatic server certificate rotation\.  | 
 |  rds\-ca\-ecc384\-g1  |  Uses a certificate authority with ECC 384 private key algorithm and SHA384 signing algorithm for your DB instance server certificate\. This CA supports automatic server certificate rotation\.  | 
 
+**Note**  
+If you are using the AWS CLI, you can see the validities of the certificate authorities listed above by using [describe\-certificates](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-certificates.html)\.
+
 When you use the rds\-ca\-rsa2048\-g1, rds\-ca\-rsa4096\-g1, or rds\-ca\-ecc384\-g1 CA with a DB instance, RDS manages the server certificate on the DB instance\. RDS rotates it automatically before it expires\. These CA certificates are included in the regional and global certificate bundle\.
 
 You can set the CA for a DB instance when you perform the following tasks:
 + Create a DB instance – You can set the CA when you create a DB instance\. For instructions, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 + Modify a DB instance – You can set the CA for a DB instance by modifying it\. For instructions, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+You can set the default CA for your AWS account by using the [modify\-certificates](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-certificates.html) command\.
 
 The available CAs depend on the DB engine and DB engine version\. When you use the AWS Management Console, you can choose the CA using the **Certificate authority** setting, as shown in the following image\.
 

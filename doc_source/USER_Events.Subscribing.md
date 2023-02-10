@@ -18,6 +18,8 @@ The following table explains the result when you specify or don't specify ***Res
 |  Specified  |  RDS notifies you about all events for the specified resource only\.  | If your Source type is Instances and your resource is myDBInstance1, RDS notifies you about all events for myDBInstance1 only\. | 
 |  Not specified  |  RDS notifies you about the events for the specified source type for all your Amazon RDS resources\.   |  If your **Source type** is **Instances**, RDS notifies you about all instance\-related events in your account\.  | 
 
+An Amazon SNS topic subscriber receives every message published to the topic by default\. To receive only a subset of the messages, the subscriber must assign a filter policy to the topic subscription\. For more information about SNS message filtering, see [Amazon SNS message filtering](https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html) in the *Amazon Simple Notification Service Developer Guide*
+
 ## Console<a name="USER_Events.Subscribing.Console"></a>
 
 **To subscribe to RDS event notification**

@@ -201,7 +201,7 @@ CloudFormation creates the resources that RDS Custom for SQL Server requires\. I
 The **Outputs** tab for this CloudFormation stack in the console should have information about all resources to be passed as parameters for creating an RDS Custom for SQL Server DB instance\. Make sure to use the VPC security group and DB subnet group created by CloudFormation for RDS Custom DB instances\. By default, RDS tries to attach the default VPC security group, which might not have the access that you need\.
 
 **Note**  
-When you delete a CloudFormation stack, all of the resources created by the stack are deleted except the KMS key\. The KMS key goes into a `pending-deletion` state and is deleted after 30 days\. To keep the KMS key, perform a [CancelKeyDeletion](https://docs.aws.amazon.com/s.kms/latest/APIReference/API_CancelKeyDeletion.html) operation during the 30\-day grace period\.
+When you delete a CloudFormation stack, all of the resources created by the stack are deleted except the KMS key\. The KMS key goes into a `pending-deletion` state and is deleted after 30 days\. To keep the KMS key, perform a [CancelKeyDeletion](https://docs.aws.amazon.com/kms/latest/APIReference/API_CancelKeyDeletion.html) operation during the 30\-day grace period\.
 
 If you used CloudFormation to create resources, you can skip [Configuring manually](#custom-setup-sqlserver.manual)\.
 

@@ -20,7 +20,7 @@ Amazon RDS encrypted DB instances provide an additional layer of data protection
 
 Amazon RDS also supports encrypting an Oracle or SQL Server DB instance with Transparent Data Encryption \(TDE\)\. TDE can be used with RDS encryption at rest, although using TDE and RDS encryption at rest simultaneously might slightly affect the performance of your database\. You must manage different keys for each encryption method\. For more information on TDE, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md) or [Support for Transparent Data Encryption in SQL Server](Appendix.SQLServer.Options.TDE.md)\.
 
-For an Amazon RDS encrypted DB instance, all logs, backups, and snapshots are encrypted\. Amazon RDS uses an AWS KMS key to encrypt these resources\. For more information about KMS keys, see [AWS KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys) in the *AWS Key Management Service Developer Guide*\. If you copy an encrypted snapshot, you can use a different KMS key to encrypt the target snapshot than the one that was used to encrypt the source snapshot\.
+For an Amazon RDS encrypted DB instance, all logs, backups, and snapshots are encrypted\. Amazon RDS uses an AWS KMS key to encrypt these resources\. For more information about KMS keys, see [AWS KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys) in the *AWS Key Management Service Developer Guide* and [AWS KMS key management](Overview.Encryption.Keys.md)\. If you copy an encrypted snapshot, you can use a different KMS key to encrypt the target snapshot than the one that was used to encrypt the source snapshot\.
 
 A read replica of an Amazon RDS encrypted instance must be encrypted using the same KMS key as the primary DB instance when both are in the same AWS Region\. If the primary DB instance and read replica are in different AWS Regions, you encrypt the read replica using the KMS key for that AWS Region\.
 
@@ -33,6 +33,8 @@ To encrypt a new DB instance, choose **Enable encryption** on the Amazon RDS con
 If you use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an encrypted DB instance, set the `--storage-encrypted` parameter\. If you use the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) API operation, set the `StorageEncrypted` parameter to true\.
 
 When you create an encrypted DB instance, you can choose a customer managed key or the AWS managed key for Amazon RDS to encrypt your DB instance\. If you don't specify the key identifier for a customer managed key, Amazon RDS uses the AWS managed key for your new DB instance\. Amazon RDS creates an AWS managed key for Amazon RDS for your AWS account\. Your AWS account has a different AWS managed key for Amazon RDS for each AWS Region\.
+
+For more information about KMS keys, see [AWS KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys) in the *AWS Key Management Service Developer Guide*\.
 
 Once you have created an encrypted DB instance, you can't change the KMS key used by that DB instance\. Therefore, be sure to determine your KMS key requirements before you create your encrypted DB instance\.
 

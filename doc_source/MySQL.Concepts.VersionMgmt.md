@@ -20,6 +20,7 @@ Dates with only a month and a year are approximate and are updated with an exact
 | MySQL engine version | Community release date | RDS release date | RDS end of standard support date | 
 | --- | --- | --- | --- | 
 | 8\.0 | 
+|  8\.0\.32  |  17 January 2023  |  7 February 2023  |  February 2024  | 
 |  8\.0\.31  |  11 October 2022  |  10 November 2022  |  November 2023  | 
 |  8\.0\.30  |  26 July 2022  |  9 September 2022  |  September 2023  | 
 |  8\.0\.28  |  18 January 2022  |  11 March 2022  |  June 2023  | 
@@ -28,6 +29,7 @@ Dates with only a month and a year are approximate and are updated with an exact
 |  8\.0\.25  |  11 May 2021  |  9 July 2021  |  20 April 2023  | 
 |  8\.0\.23  |  18 January 2021  |  31 March 2021  |  20 April 2023  | 
 | 5\.7 | 
+|  5\.7\.41  |  17 January 2023  |  7 February 2023  |  October 2023  | 
 |  5\.7\.40  |  11 October 2022  |  11 November 2022  |  October 2023  | 
 |  5\.7\.39  |  26 July 2022  |  29 September 2022  |  September 2023  | 
 |  5\.7\.38  |  26 April 2022  |  6 June 2022  |  June 2023  | 
@@ -78,8 +80,8 @@ Dates with only a month and a year are approximate and are updated with an exact
 
 | MySQL major version | Community release date | RDS release date | Community end of life date | RDS end of standard support date | 
 | --- | --- | --- | --- | --- | 
-|  MySQL 8\.0 Current minor version: 8\.0\.31  | 19 April 2018 | 23 October 2018 | April 2026 | April 2026 | 
-|  MySQL 5\.7 Current minor version: 5\.7\.40  | 21 October 2015 | 22 February 2016 | October 2023 | October 2023 | 
+|  MySQL 8\.0 Current minor version: 8\.0\.32  | 19 April 2018 | 23 October 2018 | April 2026 | April 2026 | 
+|  MySQL 5\.7 Current minor version: 5\.7\.41  | 21 October 2015 | 22 February 2016 | October 2023 | October 2023 | 
 |  MySQL 5\.6 Current minor version: N/A  | 5 February 2013 | 1 July 2013 | 5 February 2021 | 1 March 2022 | 
 
 ## Deprecated versions for Amazon RDS for MySQL<a name="MySQL.Concepts.DeprecatedVersions"></a>

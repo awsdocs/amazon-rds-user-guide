@@ -334,10 +334,12 @@ To resolve the problem, complete the following steps:
 
 After you create a MySQL or MariaDB read replica and the replica is available, Amazon RDS first replicates the changes made to the source DB instance from the time the read replica create operation started\. During this phase, the replication lag time for the read replica is greater than 0\. You can monitor this lag time in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\.
 
-The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MariaDB or MySQL `SHOW REPLICA STATUS` command\. For more information, see [SHOW REPLICA STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html)\. When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and resolving a MySQL or MariaDB read replication failure](#CHAP_Troubleshooting.MySQL.RR)\. A `ReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
+The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MariaDB or MySQL `SHOW REPLICA STATUS` command\. For more information, see [SHOW REPLICA STATUS Statement](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html) in the MySQL documentation\.
+
+When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and resolving a MySQL or MariaDB read replication failure](#CHAP_Troubleshooting.MySQL.RR)\. A `ReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
 
 **Note**  
-Previous versions of MariaDB and MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MariaDB version before 10\.5 or a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
+Previous versions of MariaDB and MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MariaDB version before 10\.5 or a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\.
 
 The `ReplicaLag` metric returns \-1 during a network outage or when a patch is applied during the maintenance window\. In this case, wait for network connectivity to be restored or for the maintenance window to end before you check the `ReplicaLag` metric again\.
 

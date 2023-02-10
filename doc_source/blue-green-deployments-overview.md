@@ -97,7 +97,7 @@ The user who deletes a blue/green deployment must have permissions to perform th
 
 ## Considerations for blue/green deployments<a name="blue-green-deployments-considerations"></a>
 
-Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` and \(resource ID\) of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
+Amazon RDS tracks resources in blue/green deployments with the `DbiResourceId` of each resource\. This resource ID is an AWS Region\-unique, immutable identifier for the resource\.
 
 The *resource* ID is separate from the DB ***instance* ID:
 
@@ -156,7 +156,7 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations for blue/green deployments<a name="blue-green-deployments-limitations"></a>
 
 The following limitations apply to blue/green deployments:
-+ MySQL version 8\.0\.13 and lower have a [community bug](https://bugs.mysql.com/bug.php?id=93901) that prevents RDS from supporting them for blue/green deployments\.
++ MySQL versions 8\.0\.13 and lower have a [community bug](https://bugs.mysql.com/bug.php?id=93901) that prevents RDS from supporting them for blue/green deployments\.
 + Blue/green deployments aren't supported for the following features:
   + Amazon RDS Proxy
   + Cascading read replicas

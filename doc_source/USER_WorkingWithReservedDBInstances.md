@@ -12,7 +12,7 @@ The new DB instance that you create must match the specifications of the reserve
 
 If the specifications of the new DB instance match an existing reserved DB instance for your account, you are billed at the discounted rate offered for the reserved DB instance\. Otherwise, the DB instance is billed at an on\-demand rate\. 
 
-You can modify a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
+You can modify a DB instance that you're using as a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
 
 For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\.
 

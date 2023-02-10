@@ -42,7 +42,7 @@ Feature availability and support varies across specific versions of each databas
 **Note**  
  For Aurora DB clusters, you can turn on cross\-VPC access\. To do this, create an additional endpoint for a proxy and specify a different VPC, subnets, and security groups with that endpoint\. For more information, see [Accessing Aurora and RDS databases across VPCs](rds-proxy-endpoints.md#rds-proxy-cross-vpc)\. 
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 
-+  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, check user authentication\. Make sure that all users who connect through a proxy authenticate through user names and passwords\. For details about IAM support in RDS Proxy, see [Setting up AWS Identity and Access Management \(IAM\) policies](rds-proxy-setup.md#rds-proxy-iam-setup)\. 
++  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, check user authentication\. Make sure that all users who connect through a proxy authenticate through sign\-in credentials\. For details about IAM support in RDS Proxy, see [Setting up AWS Identity and Access Management \(IAM\) policies](rds-proxy-setup.md#rds-proxy-iam-setup)\. 
 +  You can't use RDS Proxy with custom DNS\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session to the current connection\.

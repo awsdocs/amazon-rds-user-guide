@@ -107,7 +107,6 @@ The following examples set replication filters:
 + [Including databases in replication](#rep-filter-in-dbs-mysql)
 + [Including tables in replication](#rep-filter-in-tables-mysql)
 + [Including tables in replication with wildcard characters](#rep-filter-in-tables-wildcards-mysql)
-+ [Escaping wildcard characters in names](#rep-filter-escape-wildcards-mysql)
 + [Excluding databases from replication](#rep-filter-ex-dbs-mysql)
 + [Excluding tables from replication](#rep-filter-ex-tables-mysql)
 + [Excluding tables from replication using wildcard characters](#rep-filter-ex-tables-wildcards-mysql)<a name="rep-filter-in-dbs-mysql"></a>
@@ -119,14 +118,14 @@ For Linux, macOS, or Unix:
 ```
 aws rds modify-db-parameter-group \
   --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-do-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-do-db,ParameterValue='mydb1,mydb2',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-parameter-group ^
   --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-do-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-do-db,ParameterValue='mydb1,mydb2',ApplyMethod=immediate"
 ```<a name="rep-filter-in-tables-mysql"></a>
 
 **Example Including tables in replication**  
@@ -136,100 +135,82 @@ For Linux, macOS, or Unix:
 ```
 aws rds modify-db-parameter-group \
   --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-do-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-do-table,ParameterValue='mydb1.table1,mydb1.table2',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-parameter-group ^
   --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-do-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-do-table,ParameterValue='mydb1.table1,mydb1.table2',ApplyMethod=immediate"
 ```<a name="rep-filter-in-tables-wildcards-mysql"></a>
 
 **Example Including tables in replication using wildcard characters**  
-The following example includes tables with names that begin with `orders` and `returns` in database `mydb` in replication\.  
+The following example includes tables with names that begin with `order` and `return` in database `mydb` in replication\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-parameter-group \
   --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-wild-do-table,ParameterValue='mydb.order%,mydb.return%',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-parameter-group ^
   --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
-```<a name="rep-filter-escape-wildcards-mysql"></a>
-
-**Example Escaping wildcard characters in names**  
-The following example shows you how to use the escape character `\` to escape a wildcard character that is part of a name\.   
-Assume that you have several table names in database `mydb1` that start with `my_table`, and you want to include these tables in replication\. The table names include an underscore, which is also a wildcard character, so the example escapes the underscore in the table names\.  
-For Linux, macOS, or Unix:  
-
-```
-aws rds modify-db-parameter-group \
-  --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "my\_table%", "ApplyMethod":"immediate"}]"
-```
-For Windows:  
-
-```
-aws rds modify-db-parameter-group ^
-  --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "my\_table%", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-wild-do-table,ParameterValue='mydb.order%,mydb.return%',ApplyMethod=immediate"
 ```<a name="rep-filter-ex-dbs-mysql"></a>
 
 **Example Excluding databases from replication**  
-The following example excludes the `mydb1` and `mydb2` databases from replication\.  
+The following example excludes the `mydb5` and `mydb6` databases from replication\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-parameter-group \
   --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-ignore-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-ignore-db,ParameterValue='mydb5,mydb6',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-parameter-group ^
   --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-ignore-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-ignore-db,ParameterValue='mydb5,mydb6',ApplyMethod=immediate"
 ```<a name="rep-filter-ex-tables-mysql"></a>
 
 **Example Excluding tables from replication**  
-The following example excludes tables `table1` and `table2` in database `mydb1` from replication\.  
+The following example excludes tables `table1` in database `mydb5` and `table2` in database `mydb6` from replication\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-parameter-group \
   --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-ignore-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-ignore-table,ParameterValue='mydb5.table1,mydb6.table2',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-parameter-group ^
   --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-ignore-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-ignore-table,ParameterValue='mydb5.table1,mydb6.table2',ApplyMethod=immediate"
 ```<a name="rep-filter-ex-tables-wildcards-mysql"></a>
 
 **Example Excluding tables from replication using wildcard characters**  
-The following example excludes tables with names that begin with `orders` and `returns` in database `mydb` from replication\.  
+The following example excludes tables with names that begin with `order` and `return` in database `mydb7` from replication\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-parameter-group \
   --db-parameter-group-name myparametergroup \
-  --parameters "[{"ParameterName": "replicate-wild-ignore-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-wild-ignore-table,ParameterValue='mydb7.order%,mydb7.return%',ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
 aws rds modify-db-parameter-group ^
   --db-parameter-group-name myparametergroup ^
-  --parameters "[{"ParameterName": "replicate-wild-ignore-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+  --parameters "ParameterName=replicate-wild-ignore-table,ParameterValue='mydb7.order%,mydb7.return%',ApplyMethod=immediate"
 ```
 
 ### Viewing the replication filters for a read replica<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Viewing"></a>

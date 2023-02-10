@@ -9,7 +9,7 @@ If you want to connect to an EC2 instance that isn't in the same VPC as the RDS 
 **Topics**
 + [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
 + [Connecting an EC2 instance and an RDS database automatically](#ec2-rds-connect-connecting)
-+ [Viewing connecting compute resources](#ec2-rds-connect-viewing)
++ [Viewing connected compute resources](#ec2-rds-connect-viewing)
 
 ## Overview of automatic connectivity with an EC2 instance<a name="ec2-rds-connect-overview"></a>
 
@@ -85,7 +85,7 @@ You can only set up a connection between an EC2 instance and an RDS database aut
 
 1. To verify that the connection is made, choose **Connectivity and security** in the console and find the EC2 resource identifier under **Connected compute resource**\.
 
-## Viewing connecting compute resources<a name="ec2-rds-connect-viewing"></a>
+## Viewing connected compute resources<a name="ec2-rds-connect-viewing"></a>
 
 You can use the AWS Management Console to view the compute resources that are connected to an RDS database\. The resources shown include compute resource connections that were set up automatically\. You can set up connectivity with compute resources automatically in the following ways:
 + You can select the compute resource when you create the database\.

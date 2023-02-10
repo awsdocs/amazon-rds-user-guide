@@ -1,6 +1,6 @@
 # On\-Demand DB instances for Amazon RDS<a name="USER_OnDemandDBInstances"></a>
 
-Amazon RDS on\-demand DB instances are billed based on the class of the DB instance \(for example, db\.t2\.small or db\.m4\.large\)\. For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
+Amazon RDS on\-demand DB instances are billed based on the class of the DB instance \(for example, db\.t3\.small or db\.m5\.large\)\. For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 
 Billing starts for a DB instance as soon as the DB instance is available\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. Amazon RDS usage is billed in one\-second increments, with a minimum of 10 minutes\. In the case of billable configuration change, such as scaling compute or storage capacity, you're charged a 10\-minute minimum\. Billing continues until the DB instance terminates, which occurs when you delete the DB instance or if the DB instance fails\.
 
