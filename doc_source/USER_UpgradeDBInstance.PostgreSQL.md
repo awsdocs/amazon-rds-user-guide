@@ -211,7 +211,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
    Run the following command for each extension that you're using:
 
    ```
-   ALTER EXTENSION PostgreSQL-extension UPDATE TO 'new-version'
+   ALTER EXTENSION PostgreSQL-extension UPDATE TO 'new-version';
    ```
 
    For more information, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\. To learn more about upgrading PostGIS, see [Step 6: Upgrade the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update)\.
@@ -286,7 +286,7 @@ During the major version upgrade process, you can't do a point\-in\-time restore
 1. Run the `ANALYZE` operation to refresh the `pg_statistic` table\. You should do this for every database on all your PostgreSQL DB instances\. Optimizer statistics aren't transferred during a major version upgrade, so you need to regenerate all statistics to avoid performance issues\. Run the command without any parameters to generate statistics for all regular tables in the current database, as follows:
 
    ```
-   ANALYZE VERBOSE
+   ANALYZE VERBOSE;
    ```
 
    The `VERBOSE` flag is optional, but using it shows you the progress\. For more information, see [ANALYZE](https://www.postgresql.org/docs/10/sql-analyze.html) in the PostgreSQL documentation\. 
@@ -405,7 +405,7 @@ To update the `pg_repack` extension, drop the extension and then create the new 
 To upgrade an extension, use the following command\. 
 
 ```
-ALTER EXTENSION extension_name UPDATE TO 'new_version'
+ALTER EXTENSION extension_name UPDATE TO 'new_version';
 ```
 
 For the list of supported versions of PostgreSQL extensions, see [Supported PostgreSQL extension versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
