@@ -82,7 +82,7 @@ The following AWS services are integrated with Amazon RDS:
 + *Amazon EventBridge* is a serverless event bus service that makes it easy to connect your applications with data from a variety of sources\. For more information, see [Monitoring Amazon RDS events](working-with-events.md)\.
 + *Amazon CloudWatch Logs* lets you monitor, store, and access your log files from Amazon RDS  instances, CloudTrail, and other sources\. For more information, see [Monitoring Amazon RDS log files](USER_LogAccess.md)\.
 + *AWS CloudTrail* captures API calls and related events made by or on behalf of your AWS account and delivers the log files to an Amazon S3 bucket that you specify\. For more information, see [Monitoring Amazon RDS API calls in AWS CloudTrail](logging-using-cloudtrail.md)\.
-+ *Database Activity Streams* is an Amazon RDS  feature that provides a near\-real\-time stream of the activity in your Oracle DB instance\. For more information, see [Monitoring Amazon RDS for Oracle with Database Activity Streams](DBActivityStreams.md)\.
++ *Database Activity Streams* is an Amazon RDS  feature that provides a near\-real\-time stream of the activity in your Oracle DB instance\. For more information, see [Monitoring Amazon RDS with Database Activity Streams](DBActivityStreams.md)\.
 
 ### Manual monitoring tools<a name="monitoring_manual_tools"></a>
 

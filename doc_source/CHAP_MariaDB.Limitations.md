@@ -8,6 +8,7 @@ This list is not exhaustive\.
 **Topics**
 + [MariaDB file size limits in Amazon RDS](#RDS_Limits.FileSize.MariaDB)
 + [InnoDB reserved word](#MariaDB.Concepts.InnodbDatabaseName)
++ [Custom ports](#MariaDB.Concepts.CustomPorts)
 
 ## MariaDB file size limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
 
@@ -47,3 +48,7 @@ When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can i
 ## InnoDB reserved word<a name="MariaDB.Concepts.InnodbDatabaseName"></a>
 
 `InnoDB` is a reserved word for RDS for MariaDB\. You can't use this name for a MariaDB database\.
+
+## Custom ports<a name="MariaDB.Concepts.CustomPorts"></a>
+
+Amazon RDS blocks connections to custom port 33060 for the MariaDB engine\. Choose a different port for your MariaDB engine\.

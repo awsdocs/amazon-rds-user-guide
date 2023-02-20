@@ -591,7 +591,7 @@ The following example backs up a control file using the specified values for the
 
 ```
 BEGIN
-    rdsadmin.rdsadmin_rman_util.backup_tablespace(
+    rdsadmin.rdsadmin_rman_util.backup_current_controlfile(
         p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_tag                 => 'CONTROL_FILE_BACKUP',

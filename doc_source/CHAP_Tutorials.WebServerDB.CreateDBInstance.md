@@ -12,10 +12,16 @@ Create an Amazon RDS for MySQL DB instance that maintains the data used by a web
 
 1. Choose **Create database**\.
 
-1. On the **Create database** page, shown following, make sure that the **Standard create** option is chosen, and then choose **MySQL**\.  
-![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
+1. On the **Create database** page, choose **Standard create**\.
 
-1. In the **Templates** section, choose **Free tier**\.
+1. For **Engine type**, choose **MySQL**\.
+
+1. For **Templates**, choose **Free tier**\.
+
+   Your DB instance configuration should look similar to the following image\.
+
+1.   
+![\[Select enginetype and template\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tutorial-create-mysql.png)
 
 1. In the **Availability and durability** section, keep the defaults\.
 

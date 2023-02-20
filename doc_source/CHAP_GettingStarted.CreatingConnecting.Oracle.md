@@ -30,12 +30,12 @@ For information about creating DB instances with **Standard create**, see [Creat
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database** and ensure that **Easy create** is chosen\.  
+1. Choose **Create database** and make sure that **Easy create** is chosen\.  
 ![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
 
-1. In **Configuration**, choose **Oracle**\.
+1. For **Engine type**, choose **Oracle**\.
 
-1. For **DB instance size**, choose **Free tier**\. If **Free tier** isn't available, choose **Dev/Test**\.
+1. For **Edition**, leave the default of **Oracle Standard Edition Two**\.
 
 1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name of **database\-1**\.
 
@@ -82,7 +82,9 @@ If you need to change the master user password after the DB instance is availabl
 
 You can automatically connect an existing EC2 instance to the DB instance from the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your Oracle DB instance\.
 
-Before setting up a connection between an EC2 instance and an RDS database, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\. If you make changes to required security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the RDS database\.
+Before setting up a connection between an EC2 instance and an RDS database, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\.
+
+If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the RDS database\.
 
 **Note**  
 You can only set up a connection between an EC2 instance and an RDS database automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
@@ -107,11 +109,11 @@ You can only set up a connection between an EC2 instance and an RDS database aut
    The **Review and confirm** page appears\.  
 ![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-confirm.png)
 
-1. On the **Review and confirm** page, review the changes that RDS will make to set up a connection with the EC2 instance\. Do one of the following:
-   + If the changes are correct, choose **Set up connection**\.
-   + If the changes aren't correct, choose **Previous** or **Cancel**\.
+1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 
-1. To verify that the connection is made, choose **Connectivity and security** in the console and find the EC2 resource identifier under **Connected compute resource**\.
+   If the changes are correct, choose **Set up connection**\.
+
+   If the changes aren't correct, choose **Previous** or **Cancel**\.
 
 ## Connecting to your sample Oracle DB instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
 

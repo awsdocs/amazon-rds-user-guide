@@ -1,10 +1,11 @@
-# Monitoring Amazon RDS for Oracle with Database Activity Streams<a name="DBActivityStreams"></a><a name="das"></a>
+# Monitoring Amazon RDS with Database Activity Streams<a name="DBActivityStreams"></a><a name="das"></a>
 
-By using Database Activity Streams, you can monitor near\-real\-time streams of database activity\.
+By using Database Activity Streams, you can monitor near real\-time streams of database activity\.
 
 **Topics**
 + [Overview of Database Activity Streams](DBActivityStreams.Overview.md)
 + [Configuring unified auditing for Oracle Database](DBActivityStreams.configuring-auditing.md)
++ [Configuring auditing policy for Microsoft SQL Server](DBActivityStreams.configuring-auditing-SQLServer.md)
 + [Starting a database activity stream](DBActivityStreams.Enabling.md)
 + [Modifying a database activity stream](DBActivityStreams.Modifying.md)
 + [Getting the status of a database activity stream](DBActivityStreams.Status.md)

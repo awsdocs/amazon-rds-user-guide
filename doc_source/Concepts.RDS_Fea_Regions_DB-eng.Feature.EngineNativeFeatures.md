@@ -6,5 +6,5 @@ For more information on engine\-native features, see:
 + [MariaDB feature support on Amazon RDS](MariaDB.Concepts.FeatureSupport.md)
 + [MySQL feature support on Amazon RDS](MySQL.Concepts.FeatureSupport.md)
 + [RDS for Oracle features](Oracle.Concepts.FeatureSupport.md)
-+ [Working with PostgreSQL features supported by Amazon RDS for PostgreSQL](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport)
++ [Working with PostgreSQL features supported by Amazon RDS for PostgreSQL](PostgreSQL.Concepts.General.FeatureSupport.md)
 + [Microsoft SQL Server features on Amazon RDS](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport)

@@ -106,7 +106,7 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 Now, `ec2-user` \(and any future members of the `apache` group\) can add, delete, and edit files in the Apache document root\. This makes it possible for you to add content, such as a static website or a PHP application\. 
 
 **Note**  
-A web server running the HTTP protocol provides no transport security for the data that it sends or receives\. When you connect to an HTTP server using a web browser, much information is visible to eavesdroppers anywhere along the network pathway\. This information includes the URLs that you visit, the content of webpages that you receive, and the contents \(including passwords\) of any HTML forms\.   
+A web server running the HTTP protocol provides no transport security for the data that it sends or receives\. When you connect to an HTTP server using a web browser, much information is visible to eavesdroppers anywhere along the network pathway\. This information includes the URLs that you visit, the content of web pages that you receive, and the contents \(including passwords\) of any HTML forms\.   
 The best practice for securing your web server is to install support for HTTPS \(HTTP Secure\)\. This protocol protects your data with SSL/TLS encryption\. For more information, see [ Tutorial: Configure SSL/TLS with the Amazon Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-ami.html) in the *Amazon EC2 User Guide*\.
 
 ## Connect your Apache web server to your DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>

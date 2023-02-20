@@ -147,7 +147,11 @@ In RDS Custom for Oracle, PITR differs in the following important ways from PITR
 + If you set automation to `ALL_PAUSED`, RDS Custom pauses the upload of archived redo logs, including logs created before the latest restorable time \(LRT\)\. We recommend that you pause automation for a brief period\.
 
   To illustrate, assume that your LRT is 10 minutes ago\. You pause automation\. During the pause, RDS Custom doesn't upload archived redo logs\. If your DB instance crashes, you can only recover to a time before the LRT that existed when you paused\. When you resume automation, RDS Custom resumes uploading logs\. The LRT advances\. Normal PITR rules apply\. 
-+ In RDS Custom, you can manually specify an arbitrary number of hours to retain archived redo logs before RDS Custom deletes them after upload\. In RDS Custom, specify the number of hours manually in the following file: `/opt/aws/rdscustomagent/config/redo_logs_custom_configuration.json`\. The format is `{"archivedLogRetentionHours" : "num_of_hours"}`\. The number must be an integer in the range 1–840\.
++ In RDS Custom, you can manually specify an arbitrary number of hours to retain archived redo logs before RDS Custom deletes them after upload\. Specify the number of hours as follows:
+
+  1. Create a text file named `/opt/aws/rdscustomagent/config/redo_logs_custom_configuration.json`\.
+
+  1. Add a JSON object in the following format: `{"archivedLogRetentionHours" : "num_of_hours"}`\. The number must be an integer in the range 1–840\.
 + Assume that you plug a non\-CDB into a container database \(CDB\) as a PDB and then attempt PITR\. The operation succeeds only if you previously backed up the PDB\. After you create or modify a PDB, we recommend that you always back it up\.
 + We recommend that you don't customize database initialization parameters\. For example, modifying the following parameters affects PITR:
   + `CONTROL_FILE_RECORD_KEEP_TIME` affects the rules for uploading and deleting logs\.

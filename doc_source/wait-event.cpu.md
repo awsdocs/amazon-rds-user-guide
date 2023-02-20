@@ -92,7 +92,7 @@ The most likely causes of events that recur over a long period:
 
 If none of the likely causes turn out to be actual causes, the following situations might be occurring:
 + The CPU is swapping processes in and out\.
-+ The CPU might be managing page table entries if the *huge pages* feature has been turned off\. This memory management feature is turned on by default for all DB instance classes other than micro, small, and medium DB instance classes\. For more information, see [Huge pages for RDS for PostgreSQL ](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.HugePages)\. 
++ The CPU might be managing page table entries if the *huge pages* feature has been turned off\. This memory management feature is turned on by default for all DB instance classes other than micro, small, and medium DB instance classes\. For more information, see [Huge pages for RDS for PostgreSQL ](PostgreSQL.Concepts.General.FeatureSupport.md#PostgreSQL.Concepts.General.FeatureSupport.HugePages)\. 
 
 ## Actions<a name="wait-event.cpu.actions"></a>
 

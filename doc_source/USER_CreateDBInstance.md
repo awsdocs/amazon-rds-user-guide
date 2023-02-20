@@ -95,7 +95,7 @@ Before you create your DB instance, consider the following additional prerequisi
 
   To use IAM to access the RDS console, sign in to the AWS Management Console with your IAM user credentials\. Then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 + To tailor the configuration parameters for your DB instance, specify a DB parameter group with the required parameter settings\. For information about creating or modifying a DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
-+ Determine the TCP/IP port number to specify for your DB instance\. The firewalls at some companies block connections to the default ports for RDS DB instances\. If your company firewall blocks the default port, choose another port for your DB instance\.
++ Determine the TCP/IP port number to specify for your DB instance\. The firewalls at some companies block connections to the default ports for RDS DB instances\. If your company firewall blocks the default port, choose another port for your DB instance\. 
 
 ## Creating a DB instance<a name="USER_CreateDBInstance.Creating"></a>
 
@@ -117,12 +117,16 @@ For examples that use **Easy create** to walk you through creating and connectin
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database**\.
+1. Choose **Create database**, then choose **Standard create**\.
 
-1. In **Choose a database creation method**, select **Standard Create**\.
+1. For **Engine type**, choose MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL\.
 
-1. In **Engine options**, choose the engine type: MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL\. **Microsoft SQL Server** is shown here\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch01.png)
+   **Microsoft SQL Server** is shown here\.  
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/create-instance-sqlserver.png)
+
+1. For **Database management type**, if you're using Oracle or SQL Server choose **Amazon RDS** or **Amazon RDS Custom**\.
+
+   **Amazon RDS** is shown here\. For more information on RDS Custom, see [Working with Amazon RDS Custom](rds-custom.md)\.
 
 1. For **Edition**, if you're using Oracle or SQL Server choose the DB engine edition that you want to use\.
 
@@ -256,7 +260,7 @@ You can create a DB instance using the console, the [ create\-db\-instance](http
 |  Copy tags to snapshots  |  This option copies any DB instance tags to a DB snapshot when you create a snapshot\. For more information, see [Tagging Amazon RDS resources](USER_Tagging.md)\.   |  **CLI option:** `--copy-tags-to-snapshot` `--no-copy-tags-to-snapshot` **RDS API parameter:** `CopyTagsToSnapshot`  | All | 
 |  Database authentication  |  The database authentication option that you want to use\. Choose **Password authentication** to authenticate database users with database passwords only\. Choose **Password and IAM DB authentication** to authenticate database users with database passwords and user credentials through users and roles\. For more information, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. This option is only supported for MySQL and PostgreSQL\. Choose **Password and Kerberos authentication** to authenticate database users with database passwords and Kerberos authentication through an AWS Managed Microsoft AD created with AWS Directory Service\. Next, choose the directory or choose **Create a new Directory**\. For more information, see one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)  |  ***IAM:*** **CLI option:** `--enable-iam-database-authentication` `--no-enable-iam-database-authentication` **RDS API parameter:** `EnableIAMDatabaseAuthentication` ***Kerberos:*** **CLI option:** `--domain` `--domain-iam-role-name` **RDS API parameter:** `Domain` `DomainIAMRoleName`  |  Varies by authentication type  | 
 | Database management type |  Choose **Amazon RDS** if you don't need to customize your environment\. Choose **Amazon RDS Custom** if you want to customize the database, OS, and infrastructure\. For more information, see [Working with Amazon RDS Custom](rds-custom.md)\.  |  For the CLI and API, you specify the database engine type\.  |  Oracle SQL Server  | 
-|  Database port  |  The port that you want to access the DB instance through\. The default port is shown\.  The firewalls at some companies block connections to the default MariaDB, MySQL, and PostgreSQL ports\. If your company firewall blocks the default port, enter another port for your DB instance\.   |  **CLI option:** `--port` **RDS API parameter:** `Port`  | All | 
+|  Database port  |  The port that you want to access the DB instance through\. The default port is shown\.  The firewalls at some companies block connections to the default MariaDB, MySQL, and PostgreSQL ports\. If your company firewall blocks the default port, enter another port for your DB instance\.    |  **CLI option:** `--port` **RDS API parameter:** `Port`  | All | 
 |  DB engine version  |  The version of database engine that you want to use\.  |  **CLI option:** `--engine-version` **RDS API parameter:** `EngineVersion`  | All | 
 |  DB instance class  |  The configuration for your DB instance\. For example, a **db\.t3\.small** DB instance class has 2 GiB memory, 2 vCPUs, 1 virtual core, a variable ECU, and a moderate I/O capacity\. If possible, choose a DB instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory, the system can avoid writing to disk, which improves performance\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.  In RDS for Oracle, you can select **Include additional memory configurations**\. These configurations are optimized for a high ratio of memory to vCPU\. For example, **db\.r5\.6xlarge\.tpc2\.mem4x** is a db\.r5\.8x DB instance that has 2 threads per core \(tpc2\) and 4x the memory of a standard db\.r5\.6xlarge DB instance\. For more information, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\.  |  **CLI option:** `--db-instance-class` **RDS API parameter:** `DBInstanceClass`  | All | 
 |  DB instance identifier  |  The name for your DB instance\. Name your DB instances in the same way that you name your on\-premises servers\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the AWS Region you chose\.  |  **CLI option:** `--db-instance-identifier` **RDS API parameter:** `DBInstanceIdentifier`  | All | 

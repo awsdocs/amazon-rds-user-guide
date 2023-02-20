@@ -1,6 +1,6 @@
 # Getting the status of a database activity stream<a name="DBActivityStreams.Status"></a>
 
-You can get the status of an activity stream for your RDS for Oracle DB instance using the console or AWS CLI\.
+You can get the status of an activity stream for your Amazon RDS database instance using the console or AWS CLI\.
 
 ## Console<a name="DBActivityStreams.Status-collapsible-section-S1"></a>
 
@@ -14,7 +14,7 @@ You can get the status of an activity stream for your RDS for Oracle DB instance
 
 ## AWS CLI<a name="DBActivityStreams.Status-collapsible-section-S2"></a>
 
-You can get the activity stream configuration for a database as the response to a [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI request\.
+You can get the activity stream configuration for a database instance as the response to a [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI request\.
 
 The following example describes *my\-instance*\.
 

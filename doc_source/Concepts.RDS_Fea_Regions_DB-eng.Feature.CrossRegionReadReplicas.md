@@ -30,7 +30,7 @@ Cross\-Region read replicas for RDS for Oracle are available in all Regions with
 + For RDS for Oracle 19c, cross\-Region read replicas are available for instances of Oracle Database 19c that aren't container database \(CBD\) instances\.
 + For RDS for Oracle 12c, cross\-Region read replicas are available for Oracle Enterprise Edition \(EE\) of Oracle Database 12c Release 1 \(12\.1\) using 12\.1\.0\.2\.v10 and higher 12c releases\.
 
-For more information on additional requirements for cross\-Region read replicas with RDS for Oracle, see [Considerations for RDS for Oracle replicas](oracle-read-replicas.limitations.md)\. 
+For more information on additional requirements for cross\-Region read replicas with RDS for Oracle, see [Requirements and considerations for RDS for Oracle replicas](oracle-read-replicas.limitations.md)\. 
 
 ## Cross\-Region read replicas with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.pg"></a>
 

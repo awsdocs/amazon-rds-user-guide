@@ -9,6 +9,7 @@ As another example, you don't have access to the PostgreSQL `superuser` account\
 Following are some common DBA tasks for RDS for PostgreSQL\.
 
 **Topics**
++ [Collations supported in RDS for PostgreSQL](PostgreSQL-Collations.md)
 + [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.Roles.md)
 + [Working with the PostgreSQL autovacuum on Amazon RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md)
 + [Working with logging mechanisms supported by RDS for PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Auditing)

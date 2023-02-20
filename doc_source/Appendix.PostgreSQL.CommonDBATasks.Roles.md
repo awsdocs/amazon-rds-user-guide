@@ -32,7 +32,7 @@ CREATE ROLE postgres WITH LOGIN NOSUPERUSER INHERIT CREATEDB CREATEROLE NOREPLIC
 The properties `NOSUPERUSER`, `NOREPLICATION`, `INHERIT`, and `VALID UNTIL 'infinity'` are the default options for CREATE ROLE, unless otherwise specified\. 
 
 By default, `postgres` has privileges granted to the `rds_superuser` role\. The `rds_superuser` role allows the `postgres` user to do the following: 
-+ Add extensions that are available for use with Amazon RDS\. For more information, see [Working with PostgreSQL features supported by Amazon RDS for PostgreSQL](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) 
++ Add extensions that are available for use with Amazon RDS\. For more information, see [Working with PostgreSQL features supported by Amazon RDS for PostgreSQL](PostgreSQL.Concepts.General.FeatureSupport.md) 
 + Create roles for users and grant privileges to users\. For more information, see [CREATE ROLE](https://www.postgresql.org/docs/current/sql-createrole.html) and [GRANT](https://www.postgresql.org/docs/14/sql-grant.html) in the PostgreSQL documentation\. 
 + Create databases\. For more information, see [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html) in the PostgreSQL documentation\.
 + Grant `rds_superuser` privileges to user roles that don't have these privileges, and revoke privileges as needed\. We recommend that you grant this role only to those users who perform superuser tasks\. In other words, you can grant this role to database administrators \(DBAs\) or system administrators\.

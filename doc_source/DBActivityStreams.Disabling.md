@@ -2,7 +2,7 @@
 
 You can stop an activity stream using the console or AWS CLI\.
 
-If you delete your RDS for Oracle DB instance, the activity stream is stopped and the underlying Amazon Kinesis stream is deleted automatically\.
+If you delete your Amazon RDS database instance, the activity stream is stopped and the underlying Amazon Kinesis stream is deleted automatically\.
 
 ## Console<a name="DBActivityStreams.Disabling-collapsible-section-D1"></a>
 

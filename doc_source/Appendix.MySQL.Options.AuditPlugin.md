@@ -55,7 +55,7 @@ Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 f
 
 **Tip**  
 Log file entries are not in sequential order\. To order the entries, use the timestamp value\. To see the latest events, you might have to review all log files\. For more flexibility in sorting and searching the log data, turn on the setting to upload the audit logs to CloudWatch and view them using the CloudWatch interface\.  
- To view audit data with more types of fields and with output in JSON format, you can also use the Database Activity Streams feature\. For more information, see [Monitoring Amazon RDS for Oracle with Database Activity Streams](DBActivityStreams.md)\. 
+ To view audit data with more types of fields and with output in JSON format, you can also use the Database Activity Streams feature\. For more information, see [Monitoring Amazon RDS with Database Activity Streams](DBActivityStreams.md)\. 
 
 The audit log files include the following comma\-delimited information in rows, in the specified order:
 

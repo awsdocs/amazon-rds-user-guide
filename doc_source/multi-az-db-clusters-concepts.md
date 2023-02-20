@@ -4,6 +4,7 @@ A *Multi\-AZ DB cluster deployment* is a high availability deployment mode of Am
 
 **Topics**
 + [Region and version availability](#multi-az-db-clusters-concepts.RegionVersionAvailability)
++ [Instance class availability](#multi-az-db-clusters-concepts.InstanceAvailability)
 + [Overview of Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-overview)
 + [Creating and managing a Multi\-AZ DB cluster](#multi-az-db-clusters-creating-managing)
 + [Managing connections for Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-connection-management)
@@ -19,7 +20,13 @@ Multi\-AZ DB clusters aren't the same as Aurora DB clusters\. For information ab
 
 ## Region and version availability<a name="multi-az-db-clusters-concepts.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Multi\-AZ DB clusters, see [Multi\-AZ DB clusters](Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.md)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Multi\-AZ DB clusters, see [Multi\-AZ DB clusters](Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.md)\.
+
+## Instance class availability<a name="multi-az-db-clusters-concepts.InstanceAvailability"></a>
+
+Multi\-AZ DB cluster deployments are supported for a subset of DB instance classes\. For a list of supported instance classes, see [Settings for creating Multi\-AZ DB clusters](create-multi-az-db-cluster.md#create-multi-az-db-cluster-settings)\.
+
+For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 ## Overview of Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-overview"></a>
 

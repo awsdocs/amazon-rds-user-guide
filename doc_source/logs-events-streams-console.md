@@ -27,5 +27,5 @@ The **Configuration** tab displays information about database activity streams\.
 
 1. Choose **Configuration**\.
 
-   The following example shows the status of the database activity streams for your RDS for Oracle DB instance\.  
+   The following example shows the status of the database activity streams for your DB instance\.  
 ![\[Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-das.png)

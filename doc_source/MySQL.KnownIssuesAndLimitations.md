@@ -11,6 +11,7 @@ Known issues and limitations for working with Amazon RDS for MySQL are as follow
 + [MySQL parameter exceptions for Amazon RDS DB instances](#MySQL.Concepts.ParameterNotes)
 + [MySQL file size limits in Amazon RDS](#MySQL.Concepts.Limits.FileSize)
 + [MySQL Keyring Plugin not supported](#MySQL.Concepts.Limits.KeyRing)
++ [Custom ports](#MySQL.Concepts.KnownIssuesAndLimitations.CustomPorts)
 
 ## InnoDB reserved word<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbDatabaseName"></a>
 
@@ -141,3 +142,7 @@ ALTER TABLE table_name ENGINE=InnoDB;
 ## MySQL Keyring Plugin not supported<a name="MySQL.Concepts.Limits.KeyRing"></a>
 
 Currently, Amazon RDS for MySQL does not support the MySQL `keyring_aws` Amazon Web Services Keyring Plugin\.
+
+## Custom ports<a name="MySQL.Concepts.KnownIssuesAndLimitations.CustomPorts"></a>
+
+Amazon RDS blocks connections to custom port 33060 for the MySQL engine\. Choose a different port for your MySQL engine\.

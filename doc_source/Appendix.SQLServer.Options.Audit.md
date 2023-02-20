@@ -6,7 +6,12 @@ RDS uploads the completed audit logs to your S3 bucket, using the IAM role that 
 
 For more information, see [SQL Server Audit \(database engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the Microsoft SQL Server documentation\.
 
+## SQL Server Audit with Database Activity Streams<a name="Appendix.SQLServer.DAS.Audit"></a>
+
+You can use Database Activity Streams for RDS to integrate SQL Server Audit events with database activity monitoring tools from Imperva, McAfee, and IBM\. For more information about auditing with Database Activity Streams for RDS SQL Server, see [Auditing in Microsoft SQL Server](DBActivityStreams.Overview.md#DBActivityStreams.Overview.SQLServer-auditing)  
+
 **Topics**
++ [SQL Server Audit with Database Activity Streams](#Appendix.SQLServer.DAS.Audit)
 + [Support for SQL Server Audit](#Appendix.SQLServer.Options.Audit.Support)
 + [Adding SQL Server Audit to the DB instance options](#Appendix.SQLServer.Options.Audit.Adding)
 + [Using SQL Server Audit](#Appendix.SQLServer.Options.Audit.CreateAuditsAndSpecifications)

@@ -160,7 +160,7 @@ aws secretsmanager get-secret-value --secret-id your_secret_name
 
 1.  Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html)\. Include the **Add Role to Database** step\. 
 
-1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS key or your own KMS key\. Which one you use depends on which one you used to encrypt the Secrets Manager secrets\. 
+1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created, see [ Specifying KMS keys in IAM policy statements](https://docs.aws.amazon.com/kms/latest/developerguide/cmks-in-iam-policies.html)\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS key or your own KMS key\. Which one you use depends on which one you used to encrypt the Secrets Manager secrets\. 
 
    ```
    {
@@ -325,7 +325,14 @@ When using a shared VPC, you can't use the default security group for the VPC, o
 
 ### AWS CLI<a name="rds-proxy-creating.CLI"></a>
 
- To create a proxy, use the AWS CLI command [create\-db\-proxy](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-proxy.html)\. The `--engine-family` value is case\-sensitive\. 
+ To create a proxy by using the AWS CLI, call the [create\-db\-proxy](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-proxy.html) command with the following required parameters: 
++ `--db-proxy-name`
++ `--engine-family`
++ `--role-arn`
++ `--auth`
++ `--vpc-subnet-ids`
+
+The `--engine-family` value is case\-sensitive\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -357,6 +364,38 @@ aws rds create-db-proxy ^
     [--idle-client-timeout value] ^
     [--debug-logging | --no-debug-logging] ^
     [--tags comma_separated_list]
+```
+
+The following is an example of the JSON value for the `--auth` option\. This example   applies a different client authentication type to each secret\.
+
+```
+[
+  {
+    "Description": "proxy_description_1",
+    "UserName": "user_name_1",
+    "AuthScheme": "SECRETS",
+    "SecretArn": "arn:aws:kms:us-west-2:123456789123:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+    "IAMAuth": "DISABLED",
+  },
+  
+  {
+  "Description": "proxy_description_2",
+    "UserName": "user_name_2",
+    "AuthScheme": "SECRETS",
+    "SecretArn": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890cd",
+    "IAMAuth": "DISABLED",
+    
+  },
+  
+  {
+  "Description": "proxy_description_2",
+    "UserName": "user_name_2",
+    "AuthScheme": "SECRETS",
+    "SecretArn": "arn:aws:kms:us-west-2:111122221111:key/1234abcd-12ab-34cd-56ef-1234567890ef",
+    "IAMAuth": "REQUIRED"
+  }
+  
+]
 ```
 
 **Tip**  

@@ -23,6 +23,7 @@ If an activity stream has a failure while monitoring your DB instance, you are n
 **Topics**
 + [Accessing an activity stream from Kinesis](#DBActivityStreams.KinesisAccess)
 + [Audit log contents and examples](#DBActivityStreams.AuditLog)
++ [databaseActivityEventList JSON array](#DBActivityStreams.AuditLog.databaseActivityEventList)
 + [Processing a database activity stream using the AWS SDK](#DBActivityStreams.CodeExample)
 
 ## Accessing an activity stream from Kinesis<a name="DBActivityStreams.KinesisAccess"></a>
@@ -37,7 +38,7 @@ You can access your Kinesis stream either from the RDS console or the Kinesis co
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose the RDS for Oracle instance on which you started an activity stream\.
+1. Choose the Amazon RDS database instance on which you started an activity stream\.
 
 1. Choose **Configuration**\.
 
@@ -73,14 +74,13 @@ Monitored events are represented in the database activity stream as JSON strings
 + [Examples of an audit log for an activity stream](#DBActivityStreams.AuditLog.Examples)
 + [DatabaseActivityMonitoringRecords JSON object](#DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords)
 + [databaseActivityEvents JSON Object](#DBActivityStreams.AuditLog.databaseActivityEvents)
-+ [databaseActivityEventList JSON array](#DBActivityStreams.AuditLog.databaseActivityEventList)
 
 ### Examples of an audit log for an activity stream<a name="DBActivityStreams.AuditLog.Examples"></a>
 
 Following are sample decrypted JSON audit logs of activity event records\.
 
 **Example Activity event record of a CONNECT SQL statement**  
-Following is an activity event record of a login with the use of a `CONNECT` SQL statement \(`command`\) by a JDBC Thin Client \(`clientApplication`\)\.  
+The following activity event record shows a login with the use of a `CONNECT` SQL statement \(`command`\) by a JDBC Thin Client \(`clientApplication`\) for your Oracle DB\.  
 
 ```
 {
@@ -197,10 +197,78 @@ Following is an activity event record of a login with the use of a `CONNECT` SQL
     }
 }
 ```
+The following activity event record shows a login failure for your SQL Server DB\.  
+
+```
+{
+    "type": "DatabaseActivityMonitoringRecord",
+    "clusterId": "",
+    "instanceId": "db-4JCWQLUZVFYP7DIWP6JVQ77O3Q",
+    "databaseActivityEventList": [
+        {
+            "class": "LOGIN",
+            "clientApplication": "Microsoft SQL Server Management Studio",
+            "command": "LOGIN FAILED",
+            "commandText": "Login failed for user 'test'. Reason: Password did not match that for the login provided. [CLIENT: local-machine]",
+            "databaseName": "",
+            "dbProtocol": "SQLSERVER",
+            "dbUserName": "test",
+            "endTime": null,
+            "errorMessage": null,
+            "exitCode": 0,
+            "logTime": "2022-10-06 21:34:42.7113072+00",
+            "netProtocol": null,
+            "objectName": "",
+            "objectType": "LOGIN",
+            "paramList": null,
+            "pid": null,
+            "remoteHost": "local machine",
+            "remotePort": null,
+            "rowCount": 0,
+            "serverHost": "172.31.30.159",
+            "serverType": "SQLSERVER",
+            "serverVersion": "15.00.4073.23.v1.R1",
+            "serviceName": "sqlserver-ee",
+            "sessionId": 0,
+            "startTime": null,
+            "statementId": "0x1eb0d1808d34a94b9d3dcf5432750f02",
+            "substatementId": 1,
+            "transactionId": "0",
+            "type": "record",
+            "engineNativeAuditFields": {
+                "target_database_principal_id": 0,
+                "target_server_principal_id": 0,
+                "target_database_principal_name": "",
+                "server_principal_id": 0,
+                "user_defined_information": "",
+                "response_rows": 0,
+                "database_principal_name": "",
+                "target_server_principal_name": "",
+                "schema_name": "",
+                "is_column_permission": false,
+                "object_id": 0,
+                "server_instance_name": "EC2AMAZ-NFUJJNO",
+                "target_server_principal_sid": null,
+                "additional_information": "<action_info "xmlns=\"http://schemas.microsoft.com/sqlserver/2008/sqlaudit_data\"><pooled_connection>0</pooled_connection><error>0x00004818</error><state>8</state><address>local machine</address><PasswordFirstNibbleHash>B</PasswordFirstNibbleHash></action_info>"-->,
+                "duration_milliseconds": 0,
+                "permission_bitmask": "0x00000000000000000000000000000000",
+                "data_sensitivity_information": "",
+                "session_server_principal_name": "",
+                "connection_id": "98B4F537-0F82-49E3-AB08-B9D33B5893EF",
+                "audit_schema_version": 1,
+                "database_principal_id": 0,
+                "server_principal_sid": null,
+                "user_defined_event_id": 0,
+                "host_name": "EC2AMAZ-NFUJJNO"
+            }
+        }
+    ]
+}
+```
 If a database activity stream isn't enabled, then the last field in the JSON document is `"engineNativeAuditFields": { }`\. 
 
 **Example Activity event record of a CREATE TABLE statement**  
-Following is an example of a `CREATE TABLE` event for your Oracle database\.  
+The following example shows a `CREATE TABLE` event for your Oracle database\.  
 
 ```
 {
@@ -316,9 +384,77 @@ Following is an example of a `CREATE TABLE` event for your Oracle database\.
     }
 }
 ```
+The following example shows a `CREATE TABLE` event for your SQL Server database\.  
+
+```
+{
+    "type": "DatabaseActivityMonitoringRecord",
+    "clusterId": "",
+    "instanceId": "db-4JCWQLUZVFYP7DIWP6JVQ77O3Q",
+    "databaseActivityEventList": [
+        {
+            "class": "SCHEMA",
+            "clientApplication": "Microsoft SQL Server Management Studio - Query",
+            "command": "ALTER",
+            "commandText": "Create table [testDB].[dbo].[TestTable2](\r\ntextA varchar(6000),\r\n    textB varchar(6000)\r\n)",
+            "databaseName": "testDB",
+            "dbProtocol": "SQLSERVER",
+            "dbUserName": "test",
+            "endTime": null,
+            "errorMessage": null,
+            "exitCode": 1,
+            "logTime": "2022-10-06 21:44:38.4120677+00",
+            "netProtocol": null,
+            "objectName": "dbo",
+            "objectType": "SCHEMA",
+            "paramList": null,
+            "pid": null,
+            "remoteHost": "local machine",
+            "remotePort": null,
+            "rowCount": 0,
+            "serverHost": "172.31.30.159",
+            "serverType": "SQLSERVER",
+            "serverVersion": "15.00.4073.23.v1.R1",
+            "serviceName": "sqlserver-ee",
+            "sessionId": 84,
+            "startTime": null,
+            "statementId": "0x5178d33d56e95e419558b9607158a5bd",
+            "substatementId": 1,
+            "transactionId": "4561864",
+            "type": "record",
+            "engineNativeAuditFields": {
+                "target_database_principal_id": 0,
+                "target_server_principal_id": 0,
+                "target_database_principal_name": "",
+                "server_principal_id": 2,
+                "user_defined_information": "",
+                "response_rows": 0,
+                "database_principal_name": "dbo",
+                "target_server_principal_name": "",
+                "schema_name": "",
+                "is_column_permission": false,
+                "object_id": 1,
+                "server_instance_name": "EC2AMAZ-NFUJJNO",
+                "target_server_principal_sid": null,
+                "additional_information": "",
+                "duration_milliseconds": 0,
+                "permission_bitmask": "0x00000000000000000000000000000000",
+                "data_sensitivity_information": "",
+                "session_server_principal_name": "test",
+                "connection_id": "EE1FE3FD-EF2C-41FD-AF45-9051E0CD983A",
+                "audit_schema_version": 1,
+                "database_principal_id": 1,
+                "server_principal_sid": "0x010500000000000515000000bdc2795e2d0717901ba6998cf4010000",
+                "user_defined_event_id": 0,
+                "host_name": "EC2AMAZ-NFUJJNO"
+            }
+        }
+    ]
+}
+```
 
 **Example Activity event record of a SELECT statement**  
-Following is an example of a `SELECT` event\.  
+The following example shows a `SELECT` event for your Oracle DB\.  
 
 ```
 {
@@ -433,6 +569,74 @@ Following is an example of a `SELECT` event\.
     }
 }
 ```
+The following example shows a `SELECT` event for your SQL Server DB\.  
+
+```
+{
+    "type": "DatabaseActivityMonitoringRecord",
+    "clusterId": "",
+    "instanceId": "db-4JCWQLUZVFYP7DIWP6JVQ77O3Q",
+    "databaseActivityEventList": [
+        {
+            "class": "TABLE",
+            "clientApplication": "Microsoft SQL Server Management Studio - Query",
+            "command": "SELECT",
+            "commandText": "select * from [testDB].[dbo].[TestTable]",
+            "databaseName": "testDB",
+            "dbProtocol": "SQLSERVER",
+            "dbUserName": "test",
+            "endTime": null,
+            "errorMessage": null,
+            "exitCode": 1,
+            "logTime": "2022-10-06 21:24:59.9422268+00",
+            "netProtocol": null,
+            "objectName": "TestTable",
+            "objectType": "TABLE",
+            "paramList": null,
+            "pid": null,
+            "remoteHost": "local machine",
+            "remotePort": null,
+            "rowCount": 0,
+            "serverHost": "172.31.30.159",
+            "serverType": "SQLSERVER",
+            "serverVersion": "15.00.4073.23.v1.R1",
+            "serviceName": "sqlserver-ee",
+            "sessionId": 62,
+            "startTime": null,
+            "statementId": "0x03baed90412f564fad640ebe51f89b99",
+            "substatementId": 1,
+            "transactionId": "4532935",
+            "type": "record",
+            "engineNativeAuditFields": {
+                "target_database_principal_id": 0,
+                "target_server_principal_id": 0,
+                "target_database_principal_name": "",
+                "server_principal_id": 2,
+                "user_defined_information": "",
+                "response_rows": 0,
+                "database_principal_name": "dbo",
+                "target_server_principal_name": "",
+                "schema_name": "dbo",
+                "is_column_permission": true,
+                "object_id": 581577110,
+                "server_instance_name": "EC2AMAZ-NFUJJNO",
+                "target_server_principal_sid": null,
+                "additional_information": "",
+                "duration_milliseconds": 0,
+                "permission_bitmask": "0x00000000000000000000000000000001",
+                "data_sensitivity_information": "",
+                "session_server_principal_name": "test",
+                "connection_id": "AD3A5084-FB83-45C1-8334-E923459A8109",
+                "audit_schema_version": 1,
+                "database_principal_id": 1,
+                "server_principal_sid": "0x010500000000000515000000bdc2795e2d0717901ba6998cf4010000",
+                "user_defined_event_id": 0,
+                "host_name": "EC2AMAZ-NFUJJNO"
+            }
+        }
+    ]
+}
+```
 
 ### DatabaseActivityMonitoringRecords JSON object<a name="DBActivityStreams.AuditLog.DatabaseActivityMonitoringRecords"></a>
 
@@ -444,9 +648,9 @@ The database activity event records are in a JSON object that contains the follo
 | JSON Field | Data Type | Description | 
 | --- | --- | --- | 
 |  `type`  | string |  The type of JSON record\. The value is `DatabaseActivityMonitoringRecords`\.  | 
-| version | string | The version of the database activity monitoring records\. Oracle DB uses version 1\.3\. This version introduces the engineNativeAuditFields JSON object\.  | 
-|  [databaseActivityEvents](#DBActivityStreams.AuditLog.databaseActivityEvents)  | string |  A JSON object containing the activity events\.  | 
-| key | string | An encryption key you use to decrypt the [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList) databaseActivityEventList JSON array\. | 
+| version | string |  The version of the database activity monitoring records\. Oracle DB uses version 1\.3 and SQL Server uses version 1\.4\. These engine versions introduce the engineNativeAuditFields JSON object\.  | 
+|  [databaseActivityEvents](#DBActivityStreams.AuditLog.databaseActivityEvents)  | string |  A JSON object that contains the activity events\.  | 
+| key | string | An encryption key that you use to decrypt the [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)  | 
 
 ### databaseActivityEvents JSON Object<a name="DBActivityStreams.AuditLog.databaseActivityEvents"></a>
 
@@ -479,6 +683,13 @@ The `databaseActivityEvents` JSON object contains the following information\.
 }
 ```
 
+```
+           "type":"DatabaseActivityMonitoringRecords",
+           "version":"1.4",
+           "databaseActivityEvents":"encrypted audit records",
+           "key":"encrypted key"
+```
+
 Take the following steps to decrypt the contents of the `databaseActivityEvents` field:
 
 1.  Decrypt the value in the `key` JSON field using the KMS key you provided when starting database activity stream\. Doing so returns the data encryption key in clear text\. 
@@ -502,7 +713,7 @@ The audit log activity event record is a JSON object that contains the following
 | instanceId | string | The DB instance resource identifier\. It corresponds to the DB instance attribute DbiResourceId\. | 
 |  [databaseActivityEventList](#DBActivityStreams.AuditLog.databaseActivityEventList)   | string |  An array of activity audit records or heartbeat messages\.  | 
 
-### databaseActivityEventList JSON array<a name="DBActivityStreams.AuditLog.databaseActivityEventList"></a>
+## databaseActivityEventList JSON array<a name="DBActivityStreams.AuditLog.databaseActivityEventList"></a>
 
 The audit log payload is an encrypted `databaseActivityEventList` JSON array\. The following table lists alphabetically the fields for each activity event in the decrypted `DatabaseActivityEventList` array of an audit log\. 
 
@@ -546,6 +757,42 @@ The event structure is subject to change\. Amazon RDS might add new fields to ac
 |  `statementId`  |  number  |  `STATEMENT_ID` column in `UNIFIED_AUDIT_TRAIL`  |  Numeric ID for each statement run\. A statement can cause many actions\. A sample value is `142197`\.  | 
 |  `substatementId`  |  N/A  |  N/A  |  This field isn't used for RDS for Oracle and is always null\.  | 
 |  `transactionId`  |  string  |  `TRANSACTION_ID` column in `UNIFIED_AUDIT_TRAIL`  |  The identifier of the transaction in which the object is modified\. A sample value is `02000800D5030000`\.  | 
+
+
+**databaseActivityEventList fields for Amazon RDS for SQL Server**  
+
+| Field | Data Type | Source | Description | 
+| --- | --- | --- | --- | 
+|  `class`  |  string  |  ` sys.fn_get_audit_file.class_type` mapped to `sys.dm_audit_class_type_map.class_type_desc`  |  The class of activity event\. For more information, see [SQL Server Audit \(Database Engine\)](https://learn.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-database-engine?view=sql-server-ver16) in the Microsoft documentation\.  | 
+|  `clientApplication`  |  string  |  `sys.fn_get_audit_file.application_name`  |  The application that the client connects as reported by the client \(SQL Server version 14 and higher\)\. This field is null in SQL Server version 13\.  | 
+|  `command`  |  string  |  `sys.fn_get_audit_file.action_id` mapped to `sys.dm_audit_actions.name`  |  The general category of the SQL statement\. The value for this field depends on the value of the class\.  | 
+|  `commandText`  |  string  |  `sys.fn_get_audit_file.statement`  |  This field indicates the SQL statement\.  | 
+|  `databaseName`  |  string  |  `sys.fn_get_audit_file.database_name`  |  Name of the database\.  | 
+|  `dbProtocol`  |  string  |  N/A  |  The database protocol\. This value is `SQLSERVER`\.  | 
+|  `dbUserName`  |  string  |  `sys.fn_get_audit_file.server_principal_name`  |  The database user for the client authentication\.  | 
+|  `endTime`  |  string  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `engineNativeAuditFields`  |  object  |  Each field in `sys.fn_get_audit_file` that is not listed in this column\.  |  By default, this object is empty\. When you start the activity stream with the `--engine-native-audit-fields-included` option, this object includes other native engine audit fields, which are not returned by this JSON map\.  | 
+|  `errorMessage`  |  string  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `exitCode`  |  integer  |  `sys.fn_get_audit_file.succeeded`  |  Indicates whether the action that started the event succeeded\. This field can't be null\. For all the events except login events, this field reports whether the permission check succeeded or failed, but not whether the operation succeeded or failed\. Values include: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Monitoring.html)  | 
+|  `logTime`  |  string  |  `sys.fn_get_audit_file.event_time`  |  The event timestamp that is recorded by the SQL Server\.  | 
+|  `netProtocol`  |  string  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `objectName`  |  string  |  `sys.fn_get_audit_file.object_name`  |  The name of the database object if the SQL statement is operating on an object\.  | 
+|  `objectType`  |  string  |  `sys.fn_get_audit_file.class_type` mapped to `sys.dm_audit_class_type_map.class_type_desc`  |  The database object type if the SQL statement is operating on an object type\.  | 
+|  `paramList`  |  string  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `pid`  |  integer  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `remoteHost`  |  string  |  `sys.fn_get_audit_file.client_ip`  |  The IP address or hostname of the client that issued the SQL statement \(SQL Server version 14 and higher\)\. This field is null in SQL Server version 13\.  | 
+|  `remotePort`  |  integer  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `rowCount`  |  integer  |  `sys.fn_get_audit_file.affected_rows`  |  The number of table rows affected by the SQL statement \(SQL Server version 14 and higher\)\. This field is in SQL Server version 13\.  | 
+|  `serverHost`  |  string  |  Database Host  |  The IP address of the host database server\.  | 
+|  `serverType`  |  string  |  N/A  |  The database server type\. The value is `SQLSERVER`\.  | 
+|  `serverVersion`  |  string  |  Database Host  |  The database server version, for example, 15\.00\.4073\.23\.v1\.R1 for SQL Server 2017\.  | 
+|  `serviceName`  |  string  |  Database Host  |  The name of the service\. An example value is `sqlserver-ee`\.  | 
+|  `sessionId`  |  integer  |  `sys.fn_get_audit_file.session_id`  |  Unique identifier of the session\.  | 
+|  `startTime`  |  string  |  N/A  |  This field isn't used by Amazon RDS for SQL Server and the value is null\.  | 
+|  `statementId`  |  string  |  `sys.fn_get_audit_file.sequence_group_id`  |  A unique identifier for the client's SQL statement\. The identifier is different for each event that is generated\. A sample value is `0x38eaf4156267184094bb82071aaab644`\.  | 
+|  `substatementId`  |  integer  |  `sys.fn_get_audit_file.sequence_number`  |  An identifier to determine the sequence number for a statement\. This identifier helps when large records are split into multiple records\.  | 
+|  `transactionId`  |  integer  |  `sys.fn_get_audit_file.transaction_id`  |  An identifier of a transaction\. If there aren't any active transactions, the value is zero\.  | 
+|  `type`  |  string  |  Database activity stream generated  |  The type of event\. The values are `record` or `heartbeat`\.  | 
 
 ## Processing a database activity stream using the AWS SDK<a name="DBActivityStreams.CodeExample"></a>
 

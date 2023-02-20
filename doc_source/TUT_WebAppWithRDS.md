@@ -21,4 +21,4 @@ The following diagram shows the configuration when the tutorial is complete\.
 ![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
 **Note**  
-This tutorial uses the default VPC for your AWS account and automatically sets up connectivity between your EC2 instance and DB instance\. If you would rather configure a new VPC for this scenario instead, complete the tasks in [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+After you complete the tutorial, there is a public and private subnet in each Availability Zone in your VPC\. This tutorial uses the default VPC for your AWS account and automatically sets up connectivity between your EC2 instance and DB instance\. If you would rather configure a new VPC for this scenario instead, complete the tasks in [Tutorial: Create a VPC for use with a DB instance \(IPv4 only\)](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.

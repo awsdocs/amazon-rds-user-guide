@@ -81,7 +81,7 @@ You can't reduce the amount of storage when you restore a DB instance\. When you
 
 ### Console<a name="USER_RestoreFromSnapshot.CON"></a>
 
-**To restore a DB instancefrom a DB snapshot**
+**To restore a DB instance from a DB snapshot**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

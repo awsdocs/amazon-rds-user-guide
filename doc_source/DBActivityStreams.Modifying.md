@@ -1,6 +1,6 @@
 # Modifying a database activity stream<a name="DBActivityStreams.Modifying"></a>
 
-You might want to customize your RDS for Oracle audit policy when your activity stream is started\. If you don't want to lose time and data by stopping your activity stream, you can change the *audit policy state* to either of the following settings:
+You might want to customize your Amazon RDS audit policy when your activity stream is started\. If you don't want to lose time and data by stopping your activity stream, you can change the *audit policy state* to either of the following settings:
 
 **Locked \(default\)**  
 The audit policies in your database are read\-only\.
@@ -36,7 +36,7 @@ When you unlock your audit policy, it becomes read/write\. You can edit your aud
 
 1. Choose **Modify DB activity stream**\.
 
-   The status for the Oracle database shows **Configuring activity stream**\.
+   The status for the Amazon RDS database shows **Configuring activity stream**\.
 
 1. \(Optional\) Choose the DB instance link\. Then choose the **Configuration** tab\.
 
@@ -48,14 +48,14 @@ When you unlock your audit policy, it becomes read/write\. You can edit your aud
 
 ## AWS CLI<a name="DBActivityStreams.Modifying-collapsible-section-E2"></a>
 
-To modify the activity stream state for an Oracle DB instance, use the [modify\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-activity-stream.html) AWS CLI command\.
+To modify the activity stream state for the database instance, use the [modify\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-activity-stream.html) AWS CLI command\.
 
 
 ****  
 
 | Option | Required? | Description | 
 | --- | --- | --- | 
-|  `--resource-arn my-instance-ARN`  |  Yes  |  The Amazon Resource Name \(ARN\) of your RDS for Oracle DB instance\.  | 
+|  `--resource-arn my-instance-ARN`  |  Yes  |  The Amazon Resource Name \(ARN\) of your RDS database instance\.  | 
 |  `--audit-policy-state`  |  No  |  The new state of the audit policy for the database activity stream on your instance: `locked` or `unlocked`\.  | 
 
 The following example unlocks the audit policy for the activity stream started on *my\-instance\-ARN*\.

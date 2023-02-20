@@ -20,8 +20,6 @@ Create an Amazon EC2 instance in the public subnet of your VPC\.
 
    1. Under **Instance type**, choose **t2\.micro**\.
 
-   1. Under **Instance type**, choose **t2\.micro**\.
-
    1. Under **Key pair \(login\)**, choose a **Key pair name** to use an existing key pair\. To create a new key pair for the Amazon EC2 instance, choose **Create new key pair** and then use the **Create key pair** window to create it\.
 
       For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-key-pair) in the *Amazon EC2 User Guide for Linux Instances*\.
