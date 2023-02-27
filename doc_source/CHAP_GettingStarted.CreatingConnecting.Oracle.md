@@ -97,10 +97,10 @@ You can only set up a connection between an EC2 instance and an RDS database aut
 
 1. For **Actions**, choose **Set up EC2 connection**\.
 
-   The **Set up EC2 connection** page appears\.  
-![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-set-up.png)
+   The **Set up EC2 connection** page appears\.
 
-1. On the **Set up EC2 connection** page, choose the EC2 instance\.
+1. On the **Set up EC2 connection** page, choose the EC2 instance\.  
+![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-set-up.png)
 
    If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the RDS database\.
 
@@ -111,7 +111,7 @@ You can only set up a connection between an EC2 instance and an RDS database aut
 
 1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 
-   If the changes are correct, choose **Set up connection**\.
+   If the changes are correct, choose **Confirm and set up**\.
 
    If the changes aren't correct, choose **Previous** or **Cancel**\.
 

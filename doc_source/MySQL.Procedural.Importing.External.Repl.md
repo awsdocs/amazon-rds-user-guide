@@ -10,7 +10,7 @@ You can set up replication between an RDS for MySQL or MariaDB DB instance and a
 
 You can configure replication using the binary log file position of replicated transactions\.
 
-The permissions required to start replication on an Amazon RDS DB instance are restricted and not available to your Amazon RDS master user\. Because of this, make sure that you use the Amazon RDS [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS database\.
+The permissions required to start replication on an Amazon RDS DB instance are restricted and not available to your Amazon RDS master user\. Because of this, make sure that you use the Amazon RDS [mysql\.rds\_set\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_set_external_master) and [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) commands to set up replication between your live database and your Amazon RDS database\.
 
 To set the binary logging format for a MySQL or MariaDB database, update the `binlog_format` parameter\. If your DB instance uses the default DB instance parameter group, create a new DB parameter group to modify `binlog_format` settings\. We recommend that you use the default setting for `binlog_format`, which is `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binary log \(binlog\) format\. Reboot your DB instance for the change to take effect\.
 
@@ -116,15 +116,15 @@ Make sure that there isn't a space between the `-p` option and the entered passw
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com';
    ```
 
-1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the source instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 
+1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the source instance by using the [mysql\.rds\_set\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_set_external_master) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 
 
    ```
    CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306, 'repl_user', 'password', 'mysql-bin-changelog.000031', 107, 0);
    ```
 **Note**  
-On RDS for MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. On RDS for MySQL, one reason to use delayed replication is to turn on disaster recovery with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. Currently, RDS for MariaDB supports delayed replication but doesn't support the `mysql.rds_start_replication_until` procedure\.
+On RDS for MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql-stored-proc-replicating.md#mysql_rds_set_external_master_with_delay) stored procedure instead\. On RDS for MySQL, one reason to use delayed replication is to turn on disaster recovery with the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\. Currently, RDS for MariaDB supports delayed replication but doesn't support the `mysql.rds_start_replication_until` procedure\.
 
-1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication\.
+1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) command to start replication\.
 
    ```
    CALL mysql.rds_start_replication;

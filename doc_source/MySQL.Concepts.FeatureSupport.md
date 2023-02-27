@@ -54,9 +54,9 @@ For more information on MySQL events, see [Event syntax](https://dev.mysql.com/d
 ### Dumping and loading the buffer pool on demand<a name="MySQL.Concepts.InnoDBCacheWarming.OnDemand"></a>
 
 You can save and load the InnoDB cache "on demand\."
-+ To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql_rds_innodb_buffer_pool_dump_now.md) stored procedure\.
-+ To load the saved state of the buffer pool from disk, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_now](mysql_rds_innodb_buffer_pool_load_now.md) stored procedure\.
-+ To cancel a load operation in progress, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_abort](mysql_rds_innodb_buffer_pool_load_abort.md) stored procedure\.
++ To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql-stored-proc-warming.md#mysql_rds_innodb_buffer_pool_dump_now) stored procedure\.
++ To load the saved state of the buffer pool from disk, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_now](mysql-stored-proc-warming.md#mysql_rds_innodb_buffer_pool_load_now) stored procedure\.
++ To cancel a load operation in progress, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_abort](mysql-stored-proc-warming.md#mysql_rds_innodb_buffer_pool_load_abort) stored procedure\.
 
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 

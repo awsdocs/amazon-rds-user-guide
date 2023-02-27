@@ -13,15 +13,20 @@ Before upgrading your RDS for Oracle DB instance, familiarize yourself with the 
 
 ## Major and minor version upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview.versions"></a>
 
- Amazon RDS supports the following upgrades to an Oracle DB instance: 
-+ Major version upgrades
+Major versions are major releases of Oracle Database that occur every 1\-2 years\. Examples of major releases are Oracle Database 19c and Oracle Database 21c\. 
 
-  In general, a *major version upgrade* for a database engine can introduce changes that aren't compatible with existing applications\. To upgrade your DB instance to a major version, you must perform the action manually\.
-+ Minor version upgrades
+Minor versions, which are also called Release Updates \(RUs\), are typically released by Oracle every quarter\. Minor versions contain small feature enhancements and bug fixes\. Examples of minor versions are 21\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1 and 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1\. For more information, see [Release notes for Amazon Relational Database Service \(Amazon RDS\) for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes)\.
 
-  A *minor version upgrade* includes only changes that are backward\-compatible with existing applications\. If you enable auto minor version upgrades on your DB instance, minor version upgrades occur automatically\. In all other cases, you upgrade the DB instance manually\.
+RDS for Oracle supports the following upgrades to a DB instance\.
 
-When you upgrade the DB engine, an outage occurs\. The duration of the outage depends on your engine version and instance size\. 
+
+| Upgrade type | Application compatibility | Upgrade methods | Sample upgrade path | 
+| --- | --- | --- | --- | 
+| Major version | A major version upgrade can introduce changes that aren't compatible with existing applications\. | Manual only | From Oracle Database 19c to Oracle Database 21c | 
+| Minor version | A minor version upgrade includes only changes that are backward\-compatible with existing applications\. | Automatic or manual | From 21\.0\.0\.0\.ru\-2022\-07\.rur\-2022\-07\.r1 to 21\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1 | 
+
+**Important**  
+When you upgrade the DB engine, an outage occurs\. The duration of the outage depends on your engine version and DB instance size\.
 
 ## Expected support dates for RDS for Oracle major releases<a name="Aurora.VersionPolicy.MajorVersionLifetime"></a>
 
@@ -33,7 +38,7 @@ RDS for Oracle major versions remain available at least until the end of support
 |  Oracle Database 19c  |  April 30, 2024 without Extended Support or an Unlimited License Agreement April 30, 2027 with Extended Support or an Unlimited License Agreement  | 
 |  Oracle Database 21c  | April 30, 2024 | 
 
-Before we ask that you upgrade to a newer major version and to help you plan, we provide a reminder at least 12 months in advance\. We do so to communicate the detailed upgrade process\. Details include the timing of certain milestones, the impact on your DB instances, and the actions that we recommend that you take\. We recommend that you thoroughly test your applications with new RDS for Oracle versions before performing a major version upgrade\.
+Before we ask you to upgrade to a newer major version, we remind you at least 12 months in advance\. We detail the upgrade process, including the timing of important milestones, the impact on your DB instances, and recommended actions\. You should thoroughly test your applications with new RDS for Oracle versions before you upgrade to a major version\.
 
 After this advance notification period, an automatic upgrade to the subsequent major version might be applied to any RDS for Oracle DB instance still running the older version\. If so, the upgrade is started during scheduled maintenance windows\. 
 

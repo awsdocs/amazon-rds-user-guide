@@ -238,16 +238,16 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 You can use delayed replication as a strategy for disaster recovery\. With delayed replication, you specify the minimum amount of time, in seconds, to delay replication from the source to the read replica\. In the event of a disaster, such as a table deleted unintentionally, you complete the following steps to recover from the disaster quickly:
 + Stop replication to the read replica before the change that caused the disaster is sent to it\.
 
-  Use the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) stored procedure to stop replication\.
+  Use the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) stored procedure to stop replication\.
 + Start replication and specify that replication stops automatically at a log file location\.
 
-  You specify a location just before the disaster using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\.
+  You specify a location just before the disaster using the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\.
 + Promote the read replica to be the new source DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 **Note**  
 On RDS for MySQL 8\.0, delayed replication is supported for MySQL 8\.0\.26 and higher\. On RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and higher\.
 Use stored procedures to configure delayed replication\. You can't configure delayed replication with the AWS Management Console, the AWS CLI, or the Amazon RDS API\.
-On RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
+On RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until_gtid) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
 
 **Topics**
 + [Configuring delayed replication during read replica creation](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation)
@@ -257,13 +257,13 @@ On RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\
 
 ### Configuring delayed replication during read replica creation<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation"></a>
 
-To configure delayed replication for any future read replica created from a DB instance, run the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) stored procedure with the `target delay` parameter\.
+To configure delayed replication for any future read replica created from a DB instance, run the [mysql\.rds\_set\_configuration](mysql-stored-proc-configuring.md#mysql_rds_set_configuration) stored procedure with the `target delay` parameter\.
 
 **To configure delayed replication during read replica creation**
 
 1. Using a MySQL client, connect to the MySQL DB instance to be the source for read replicas as the master user\.
 
-1. Run the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) stored procedure with the `target delay` parameter\.
+1. Run the [mysql\.rds\_set\_configuration](mysql-stored-proc-configuring.md#mysql_rds_set_configuration) stored procedure with the `target delay` parameter\.
 
    For example, run the following stored procedure to specify that replication is delayed by at least one hour \(3,600 seconds\) for any read replica created from the current DB instance\.
 
@@ -275,15 +275,15 @@ After running this stored procedure, any read replica you create using the AWS C
 
 ### Modifying delayed replication for an existing read replica<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication.ExistingReplica"></a>
 
-To modify delayed replication for an existing read replica, run the [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md) stored procedure\.
+To modify delayed replication for an existing read replica, run the [mysql\.rds\_set\_source\_delay](mysql-stored-proc-replicating.md#mysql_rds_set_source_delay) stored procedure\.
 
 **To modify delayed replication for an existing read replica**
 
 1. Using a MySQL client, connect to the read replica as the master user\.
 
-1. Use the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) stored procedure to stop replication\.
+1. Use the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) stored procedure to stop replication\.
 
-1. Run the [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md) stored procedure\.
+1. Run the [mysql\.rds\_set\_source\_delay](mysql-stored-proc-replicating.md#mysql_rds_set_source_delay) stored procedure\.
 
    For example, run the following stored procedure to specify that replication to the read replica is delayed by at least one hour \(3600 seconds\)\.
 
@@ -291,17 +291,17 @@ To modify delayed replication for an existing read replica, run the [mysql\.rds\
    call mysql.rds_set_source_delay(3600);
    ```
 
-1. Use the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) stored procedure to start replication\.
+1. Use the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) stored procedure to start replication\.
 
 ### Setting a location to stop replication to a read replica<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication.StartUntil"></a>
 
-After stopping replication to the read replica, you can start replication and then stop it at a specified binary log file location using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\.
+After stopping replication to the read replica, you can start replication and then stop it at a specified binary log file location using the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\.
 
 **To start replication to a read replica and stop replication at a specific location**
 
 1. Using a MySQL client, connect to the source MySQL DB instance as the master user\.
 
-1. Run the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\.
+1. Run the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\.
 
    The following example initiates replication and replicates changes until it reaches location `120` in the `mysql-bin-changelog.000777` binary log file\. In a disaster recovery scenario, assume that location `120` is just before the disaster\.
 
@@ -366,7 +366,7 @@ When the `ReplicaLag` metric reaches 0, the replica has caught up to the source 
 
 ## Starting and stopping replication with MySQL read replicas<a name="USER_MySQL.Replication.ReadReplicas.StartStop"></a>
 
-You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
+You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) and [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
 
 If replication is stopped for more than 30 consecutive days, either manually or due to a replication error, Amazon RDS terminates replication between the source DB instance and all read replicas\. It does so to prevent increased storage requirements on the source DB instance and long failover times\. The read replica DB instance is still available\. However, replication can't be resumed because the binary logs required by the read replica are deleted from the source DB instance after replication is terminated\. You can create a new read replica for the source DB instance to reestablish replication\. 
 
@@ -375,7 +375,7 @@ If replication is stopped for more than 30 consecutive days, either manually or 
 For MySQL DB instances, in some cases read replicas present replication errors or data inconsistencies \(or both\) between the read replica and its source DB instance\. This problem occurs when some binary log \(binlog\) events or InnoDB redo logs aren't flushed during a failure of the read replica or the source DB instance\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\.
 
 **Warning**  
-In the parameter group associated with the source DB instance, we recommend keeping these parameters values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These parameters are dynamic\. If you don't want to use these settings, we recommend temporarily setting those values before executing any operation on the source DB instance that might cause it to restart\. These operations include, but are not limited to, rebooting, rebooting with failover, upgrading the database version, and changing the DB instance class or its storage\. The same recommendation applies to creating new read replicas for the source DB instance\.  
+In the parameter group associated with the source DB instance, we recommend keeping these parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These parameters are dynamic\. If you don't want to use these settings, we recommend temporarily setting those values before executing any operation on the source DB instance that might cause it to restart\. These operations include, but are not limited to, rebooting, rebooting with failover, upgrading the database version, and changing the DB instance class or its storage\. The same recommendation applies to creating new read replicas for the source DB instance\.  
 Failure to follow this guidance increases the risk of read replicas presenting replication errors or data inconsistencies \(or both\) between the read replica and its source DB instance\.
 
 The replication technologies for MySQL are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the read replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the read replica are serialized using a single I/O thread, which can lead to a lag between the source instance and read replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication implementation details](https://dev.mysql.com/doc/refman/8.0/en/replication-implementation-details.html)\.

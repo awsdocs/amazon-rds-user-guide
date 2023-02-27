@@ -296,7 +296,7 @@ Your source database was likely updated during the time that it took to copy and
 
 ![\[Replicate data from the external MySQL database to the database on RDS\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_5.png)
 
-The permissions required to start replication on an Amazon RDS database are restricted and not available to your Amazon RDS master user\. Because of this, make sure to use either the Amazon RDS [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command or the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command to configure replication, and the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication between your live database and your Amazon RDS database\.
+The permissions required to start replication on an Amazon RDS database are restricted and not available to your Amazon RDS master user\. Because of this, make sure to use either the Amazon RDS [mysql\.rds\_set\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_set_external_master) command or the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command to configure replication, and the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) command to start replication between your live database and your Amazon RDS database\.
 
 ### To start replication<a name="MySQL.Procedural.Importing.Start.Repl.Procedure"></a>
 
@@ -360,7 +360,7 @@ Earlier, you turned on binary logging and set a unique server ID for your source
 
    If the external instance is MariaDB 10\.0\.24 or higher, you should already have the GTID from which to start replication from step 2 of the procedure at "To create a backup copy of your existing database" in this topic\.
 
-1. Make the Amazon RDS database the replica\. If the external instance isn't MariaDB 10\.0\.24 or higher, connect to the Amazon RDS database as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Or use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
+1. Make the Amazon RDS database the replica\. If the external instance isn't MariaDB 10\.0\.24 or higher, connect to the Amazon RDS database as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_set_external_master) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Or use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master ('myserver.mydomain.com', 3306,
@@ -375,7 +375,7 @@ Earlier, you turned on binary logging and set a unique server ID for your source
 
    The `source_server_ip_address` is the IP address of source replication instance\. An EC2 private DNS address is currently not supported\.
 
-1. On the Amazon RDS database, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication\.
+1. On the Amazon RDS database, issue the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) command to start replication\.
 
    ```
    CALL mysql.rds_start_replication;
@@ -417,13 +417,13 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
 
    For a Multi\-AZ DB cluster, connect to the writer DB instance\.
 
-1. Stop replication for the Amazon RDS instance using the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) command\.
+1. Stop replication for the Amazon RDS instance using the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) command\.
 
    ```
    CALL mysql.rds_stop_replication;
    ```
 
-1. Run the [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) command on your Amazon RDS database to reset the replication configuration so this instance is no longer identified as a replica\.
+1. Run the [mysql\.rds\_reset\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_reset_external_master) command on your Amazon RDS database to reset the replication configuration so this instance is no longer identified as a replica\.
 
    ```
    CALL mysql.rds_reset_external_master;

@@ -15,14 +15,20 @@ Backup replication is available in all AWS Regions except the following:
 
 For more detailed information on limitations for source and destination backup Regions, see [Replicating automated backups to another AWS Region](USER_ReplicateBackups.md)\.
 
-Backup replication isn't available with the following engines:
-+ RDS for MariaDB
-+ RDS for MySQL
-
 **Topics**
++ [Backup replication with RDS for MariaDB](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.mdb)
++ [Backup replication with RDS for MySQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.my)
 + [Backup replication with RDS for Oracle](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.ora)
 + [Backup replication with RDS for PostgreSQL](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.pg)
 + [Backup replication with RDS for SQL Server](#Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.sq)
+
+## Backup replication with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.mdb"></a>
+
+Amazon RDS supports backup replication for all currently available versions of RDS for MariaDB\.
+
+## Backup replication with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.my"></a>
+
+Amazon RDS supports backup replication for all currently available versions of RDS for MySQL\.
 
 ## Backup replication with RDS for Oracle<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.ora"></a>
 

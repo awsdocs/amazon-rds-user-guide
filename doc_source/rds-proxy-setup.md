@@ -376,6 +376,7 @@ The following is an example of the JSON value for the `--auth` option\. This exa
     "AuthScheme": "SECRETS",
     "SecretArn": "arn:aws:kms:us-west-2:123456789123:key/1234abcd-12ab-34cd-56ef-1234567890ab",
     "IAMAuth": "DISABLED",
+    "ClientPasswordAuthType": "POSTGRES_SCRAM_SHA_256"
   },
   
   {
@@ -384,11 +385,12 @@ The following is an example of the JSON value for the `--auth` option\. This exa
     "AuthScheme": "SECRETS",
     "SecretArn": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890cd",
     "IAMAuth": "DISABLED",
+    "ClientPasswordAuthType": "POSTGRES_MD5"
     
   },
   
   {
-  "Description": "proxy_description_2",
+  "Description": "proxy_description_3",
     "UserName": "user_name_2",
     "AuthScheme": "SECRETS",
     "SecretArn": "arn:aws:kms:us-west-2:111122221111:key/1234abcd-12ab-34cd-56ef-1234567890ef",

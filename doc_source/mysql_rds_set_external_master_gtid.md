@@ -1,6 +1,6 @@
 # mysql\.rds\_set\_external\_master\_gtid<a name="mysql_rds_set_external_master_gtid"></a>
 
-Configures GTID\-based replication from a MariaDB instance running external to Amazon RDS to a MariaDB DB instance\. This stored procedure is supported only where the external MariaDB instance is version 10\.0\.24 or higher\. When setting up replication where one or both instances do not support MariaDB global transaction identifiers \(GTIDs\), use [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)\.
+Configures GTID\-based replication from a MariaDB instance running external to Amazon RDS to a MariaDB DB instance\. This stored procedure is supported only where the external MariaDB instance is version 10\.0\.24 or higher\. When setting up replication where one or both instances do not support MariaDB global transaction identifiers \(GTIDs\), use [mysql\.rds\_set\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_set_external_master)\.
 
 Using GTIDs for replication provides crash\-safety features not offered by binary log replication, so we recommend it in cases where the replicating instances support it\. 
 
@@ -54,7 +54,7 @@ The `mysql.rds_set_external_master_gtid` procedure must be run by the master use
 **Warning**  
 Do not use `mysql.rds_set_external_master_gtid` to manage replication between two Amazon RDS DB instances\. Use it only when replicating with a MariaDB instance running external to RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
 
-After calling `mysql.rds_set_external_master_gtid` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the read replica configuration\.
+After calling `mysql.rds_set_external_master_gtid` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) on the replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql-stored-proc-replicating.md#mysql_rds_reset_external_master) to remove the read replica configuration\.
 
 When `mysql.rds_set_external_master_gtid` is called, Amazon RDS records the time, user, and an action of "set master" in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
 

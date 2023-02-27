@@ -62,7 +62,7 @@ You can search for log entries that meet a specified criteria using the CloudWat
 
 **To search your RDS logs using the CloudWatch Logs console**
 
-1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
 1. In the navigation pane, choose **Log groups**\.
 

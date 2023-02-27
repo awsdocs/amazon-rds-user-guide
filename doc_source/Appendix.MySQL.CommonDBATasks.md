@@ -8,7 +8,7 @@ For information about working with MySQL log files on Amazon RDS, see [MySQL dat
 + [Ending a session or query](#Appendix.MySQL.CommonDBATasks.End)
 + [Skipping the current replication error](#Appendix.MySQL.CommonDBATasks.SkipError)
 + [Working with InnoDB tablespaces to improve crash recovery times](#Appendix.MySQL.CommonDBATasks.Tables)
-+ [Managing the global status history](#Appendix.MySQL.CommonDBATasks.GoSH)
++ [Managing the Global Status History](#Appendix.MySQL.CommonDBATasks.GoSH)
 
 ## Ending a session or query<a name="Appendix.MySQL.CommonDBATasks.End"></a>
 
@@ -62,10 +62,10 @@ CALL mysql.rds_skip_repl_error;
 
 This command has no effect if you run it on the source DB instance, or on a read replica that hasn't encountered a replication error\. 
 
-For more information, such as the versions of MySQL that support `mysql.rds_skip_repl_error`, see [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\. 
+For more information, such as the versions of MySQL that support `mysql.rds_skip_repl_error`, see [mysql\.rds\_skip\_repl\_error](mysql-stored-proc-replicating.md#mysql_rds_skip_repl_error)\. 
 
 **Important**  
-If you attempt to call `mysql.rds_skip_repl_error` and encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`, then upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\.
+If you attempt to call `mysql.rds_skip_repl_error` and encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`, then upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in [mysql\.rds\_skip\_repl\_error](mysql-stored-proc-replicating.md#mysql_rds_skip_repl_error)\.
 
 ### Setting the slave\_skip\_errors parameter<a name="Appendix.MySQL.CommonDBATasks.SkipError.parameter"></a>
 
@@ -140,9 +140,9 @@ To create a read replica and rebuild InnoDB tables to use the shared tablespace,
 
 1. Use the console or CLI to promote the read replica to be the instance\. Make sure that the parameter group used for the new standalone DB instance has the `innodb_file_per_table` parameter set to 0\. Change the name of the new standalone DB instance, and point any applications to the new standalone DB instance\. 
 
-## Managing the global status history<a name="Appendix.MySQL.CommonDBATasks.GoSH"></a>
+## Managing the Global Status History<a name="Appendix.MySQL.CommonDBATasks.GoSH"></a>
 
-MySQL maintains many status variables that provide information about its operation\. Their value can help you detect locking or memory issues on a DB instance \. The values of these status variables are cumulative since last time the DB instance was started\. You can reset most status variables to 0 by using the `FLUSH STATUS` command\. 
+MySQL maintains many status variables that provide information about its operation\. Their value can help you detect locking or memory issues on a DB instance\. The values of these status variables are cumulative since last time the DB instance was started\. You can reset most status variables to 0 by using the `FLUSH STATUS` command\. 
 
 To allow for monitoring of these values over time, Amazon RDS provides a set of procedures that will snapshot the values of these status variables over time and write them to a table, along with any changes since the last snapshot\. This infrastructure, called Global Status History \(GoSH\), is installed on all MySQL DB instances starting with versions 5\.5\.23\. GoSH is disabled by default\. 
 

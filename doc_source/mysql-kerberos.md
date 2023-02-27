@@ -279,6 +279,7 @@ At a command prompt, connect to one of the endpoints associated with your MySQL 
 +  Don't modify the DB instance port after enabling the feature\. 
 +  Don't use Kerberos authentication with read replicas\.
 + If you have auto minor version upgrade turned on for a MySQL DB instance that is using Kerberos authentication, you must turn off Kerberos authentication and then turn it back on after an automatic upgrade\. For more information about auto minor version upgrades, see [Automatic minor version upgrades for MySQL](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.Minor)\.
-+  To delete a DB instance with this feature enabled, first disable the feature\. To do this, use the `modify-db-instance` CLI command for the DB instance and specify `none` for the `--domain` parameter\. 
++  To delete a DB instance with this feature enabled, first disable the feature\. To do so, use the `modify-db-instance` CLI command for the DB instance and specify `none` for the `--domain` parameter\. 
 
    If you use the CLI or RDS API to delete a DB instance with this feature enabled, expect a delay\. 
++ You can't set up a forest trust relationship between your on\-premises or self\-hosted Microsoft Active Directory and the AWS Managed Microsoft AD\.

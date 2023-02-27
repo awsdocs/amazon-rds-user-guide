@@ -32,7 +32,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Asia Pacific \(Singapore\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Sydney\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Asia Pacific \(Tokyo\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
-| Canada \(Central\) | – | – | – | 
+| Canada \(Central\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | China \(Beijing\) | – | – | – | 
 | China \(Ningxia\) | – | – | – | 
 | Europe \(Frankfurt\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
@@ -43,7 +43,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 | Europe \(Stockholm\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | Middle East \(Bahrain\) | – | – | – | 
 | Middle East \(UAE\) | – | – | – | 
-| South America \(São Paulo\) | – | – | – | 
+| South America \(São Paulo\) | 19c with the January 2021 or higher RU/RUR | 18c with the January 2021 or higher RU/RUR | 12\.1 and 12\.2 with the January 2021 or higher RU/RUR | 
 | AWS GovCloud \(US\-East\) | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | 
 

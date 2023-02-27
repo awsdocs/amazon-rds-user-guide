@@ -6,7 +6,7 @@ You can set up replication based on global transaction identifiers \(GTIDs\) fro
 + Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to resynchronize your source instance and replica\. For information on backups and Point\-In\-Time Restore, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
 
 **Note**  
-The permissions required to start replication on a MariaDB DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your RDS for MariaDB database\. 
+The permissions required to start replication on a MariaDB DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) and [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) commands to set up replication between your live database and your RDS for MariaDB database\. 
 
 To start replication between an external source instance and a MariaDB DB instance on Amazon RDS, use the following procedure\. <a name="MariaDB.Procedural.Importing.External.Repl.Procedure"></a>
 
@@ -102,7 +102,7 @@ Make sure that there isn't a space between the `-p` option and the entered passw
    CALL mysql.rds_set_external_master_gtid ('mymasterserver.mydomain.com', 3306, 'repl_user', 'password', 'GTID', 0);
    ```
 
-1. On the MariaDB DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication\. 
+1. On the MariaDB DB instance, issue the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) command to start replication\. 
 
    ```
    CALL mysql.rds_start_replication; 

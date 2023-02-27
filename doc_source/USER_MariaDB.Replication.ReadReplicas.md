@@ -239,7 +239,7 @@ Previous versions of MariaDB used `SHOW SLAVE STATUS` instead of `SHOW REPLICA S
 You can use delayed replication as a strategy for disaster recovery\. With delayed replication, you specify the minimum amount of time, in seconds, to delay replication from the source to the read replica\. In the event of a disaster, such as a table deleted unintentionally, you complete the following steps to recover from the disaster quickly:
 + Stop replication to the read replica before the change that caused the disaster is sent to it\.
 
-  To stop replication, use the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) stored procedure\.
+  To stop replication, use the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) stored procedure\.
 + Promote the read replica to be the new source DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 **Note**  
@@ -254,13 +254,13 @@ You can use replication based on global transaction identifiers \(GTIDs\) in a d
 
 ### Configuring delayed replication during read replica creation<a name="USER_MariaDB.Replication.ReadReplicas.DelayReplication.ReplicaCreation"></a>
 
-To configure delayed replication for any future read replica created from a DB instance, run the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) stored procedure with the `target delay` parameter\.
+To configure delayed replication for any future read replica created from a DB instance, run the [mysql\.rds\_set\_configuration](mysql-stored-proc-configuring.md#mysql_rds_set_configuration) stored procedure with the `target delay` parameter\.
 
 **To configure delayed replication during read replica creation**
 
 1. Using a MariaDB client, connect to the MariaDB DB instance to be the source for read replicas as the master user\.
 
-1. Run the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) stored procedure with the `target delay` parameter\.
+1. Run the [mysql\.rds\_set\_configuration](mysql-stored-proc-configuring.md#mysql_rds_set_configuration) stored procedure with the `target delay` parameter\.
 
    For example, run the following stored procedure to specify that replication is delayed by at least one hour \(3,600 seconds\) for any read replica created from the current DB instance\.
 
@@ -272,15 +272,15 @@ After running this stored procedure, any read replica you create using the AWS C
 
 ### Modifying delayed replication for an existing read replica<a name="USER_MariaDB.Replication.ReadReplicas.DelayReplication.ExistingReplica"></a>
 
-To modify delayed replication for an existing read replica, run the [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md) stored procedure\.
+To modify delayed replication for an existing read replica, run the [mysql\.rds\_set\_source\_delay](mysql-stored-proc-replicating.md#mysql_rds_set_source_delay) stored procedure\.
 
 **To modify delayed replication for an existing read replica**
 
 1. Using a MariaDB client, connect to the read replica as the master user\.
 
-1. Use the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) stored procedure to stop replication\.
+1. Use the [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) stored procedure to stop replication\.
 
-1. Run the [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md) stored procedure\.
+1. Run the [mysql\.rds\_set\_source\_delay](mysql-stored-proc-replicating.md#mysql_rds_set_source_delay) stored procedure\.
 
    For example, run the following stored procedure to specify that replication to the read replica is delayed by at least one hour \(3600 seconds\)\.
 
@@ -288,7 +288,7 @@ To modify delayed replication for an existing read replica, run the [mysql\.rds\
    call mysql.rds_set_source_delay(3600);
    ```
 
-1. Use the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) stored procedure to start replication\.
+1. Use the [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication) stored procedure to start replication\.
 
 ### Promoting a read replica<a name="USER_MariaDB.Replication.ReadReplicas.DelayReplication.Promote"></a>
 
@@ -343,7 +343,7 @@ When the `ReplicaLag` metric reaches 0, the replica has caught up to the source 
 
 ## Starting and stopping replication with MariaDB read replicas<a name="USER_MariaDB.Replication.ReadReplicas.StartStop"></a>
 
-You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
+You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql-stored-proc-replicating.md#mysql_rds_stop_replication) and [mysql\.rds\_start\_replication](mysql-stored-proc-replicating.md#mysql_rds_start_replication)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
 
 If replication is stopped for more than 30 consecutive days, either manually or due to a replication error, Amazon RDS ends replication between the source DB instance and all read replicas\. It does so to prevent increased storage requirements on the source DB instance and long failover times\. The read replica DB instance is still available\. However, replication can't be resumed because the binary logs required by the read replica are deleted from the source DB instance after replication is ended\. You can create a new read replica for the source DB instance to reestablish replication\. 
 

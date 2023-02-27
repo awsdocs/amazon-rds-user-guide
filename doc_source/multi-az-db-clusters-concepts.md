@@ -493,7 +493,7 @@ The following limitations apply to Multi\-AZ DB clusters:
   + `mysql.rds_rotate_slow_log`
   + `mysql.rds_show_configuration`
 
-  RDS for MySQL Multi\-AZ DB clusters don't support other system stored procedures\. For information about these procedures, see [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)\.
+  RDS for MySQL Multi\-AZ DB clusters don't support other system stored procedures\. For information about these procedures, see [RDS for MySQL stored procedure reference](Appendix.MySQL.SQLRef.md)\.
 + RDS for PostgreSQL Multi\-AZ DB clusters don't support the following PostgreSQL extensions: `aws_s3`, `pg_transport`, and `pglogical`\.
 + RDS for PostgreSQL Multi\-AZ DB clusters don't support using a custom DNS server for outbound network access\.
 + RDS for PostgreSQL Multi\-AZ DB clusters don't support logical replication\.

@@ -7,7 +7,7 @@ You can make changes to the RDS DB instances in the green environment without af
 Because the green environment is a copy of the topology of the production environment, the green environment includes the features used by the DB instance\. These features include the read replicas, the storage configuration, DB snapshots, automated backups, Performance Insights, and Enhanced Monitoring\. If the blue DB instance is a Multi\-AZ DB instance deployment, then the green DB instance is also a Multi\-AZ DB instance deployment\.
 
 **Note**  
-Currently, blue/green deployments are supported only for RDS for MariaDB and RDS for MySQL\. 
+Currently, blue/green deployments are supported only for RDS for MariaDB and RDS for MySQL\. For Amazon Aurora availabilty, see [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html) in the *Amazon Aurora User Guide*\. 
 
 **Topics**
 + [Benefits of using Amazon RDS Blue/Green Deployments](#blue-green-deployments-benefits)

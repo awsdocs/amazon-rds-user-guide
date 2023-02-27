@@ -1,13 +1,16 @@
-# MariaDB Audit Plugin support<a name="Appendix.MySQL.Options.AuditPlugin"></a>
+# MariaDB Audit Plugin support for MySQL<a name="Appendix.MySQL.Options.AuditPlugin"></a>
 
-Amazon RDS supports using the MariaDB Audit Plugin on MySQL database instances\. The MariaDB Audit Plugin records database activity such as users logging on to the database, queries run against the database, and more\. The record of database activity is stored in a log file\.
+Amazon RDS offers an audit plugin for MySQL database instances based on the open source MariaDB Audit Plugin\. For more information, see the [Audit Plugin for MySQL Server GitHub repository](https://github.com/aws/audit-plugin-for-mysql)\.
+
+**Note**  
+The audit plugin for MySQL is based on the MariaDB Audit Plugin\. Throughout this article, we refer to it as MariaDB Audit Plugin\.
+
+The MariaDB Audit Plugin records database activity, including users logging on to the database and queries run against the database\. The record of database activity is stored in a log file\.
 
 **Note**  
 Currently, the MariaDB Audit Plugin is only supported for the following RDS for MySQL versions:   
 MySQL 8\.0\.25 and higher 8\.0 versions
 All MySQL 5\.7 versions
-
-An open source version of this plugin is available, so that you can use it with any MySQL database\. For more information, see the [ Audit Plugin for MySQL Server GitHub repository](https://github.com/aws/audit-plugin-for-mysql)\.
 
 ## Audit Plugin option settings<a name="Appendix.MySQL.Options.AuditPlugin.Options"></a>
 
@@ -62,7 +65,7 @@ The audit log files include the following comma\-delimited information in rows, 
 
 | Field | Description | 
 | --- | --- | 
-|  timestamp  |  The Unix time stamp for the logged event with microsecond precision\.  | 
+|  timestamp  |  The `YYYYMMDD` followed by the `HH:MI:SS` \(24\-hour clock\) for the logged event\.  | 
 |  serverhost  |  The name of the instance that the event is logged for\.  | 
 |  username  |  The connected user name of the user\.  | 
 |  host  |  The host that the user connected from\.  | 

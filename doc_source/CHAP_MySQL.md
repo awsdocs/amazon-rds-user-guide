@@ -50,4 +50,4 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 + [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)
 + [Local time zone for MySQL DB instances](MySQL.Concepts.LocalTimeZone.md)
 + [Known issues and limitations for Amazon RDS for MySQL](MySQL.KnownIssuesAndLimitations.md)
-+ [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)
++ [RDS for MySQL stored procedure reference](Appendix.MySQL.SQLRef.md)

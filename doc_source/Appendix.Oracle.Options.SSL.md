@@ -156,7 +156,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
 
 1. In the same directory, modify or create the sqlnet\.ora file and include the following parameters\.
 **Note**  
-To communicate with entities over a TLS secured connection, Oracle requires a wallet with the necessary certificates for authentication\. You can use Oracle's ORAPKI utility to create and maintain Oracle wallets, as shown in step 7\. For more information, see [Setting up Oracle wallet using ORAPKI](https://docs.oracle.com/cd/E87544_01/pt856pbr1/eng/pt/tsvt/task_SettingUpOracleWalletUsingORAPKI.html) in the Oracle documentation\.
+To communicate with entities over a TLS secured connection, Oracle requires a wallet with the necessary certificates for authentication\. You can use Oracle's ORAPKI utility to create and maintain Oracle wallets, as shown in step 7\. For more information, see [Setting up Oracle wallet using ORAPKI](https://docs.oracle.com/cd/E92519_02/pt856pbr3/eng/pt/tsvt/task_SettingUpOracleWalletUsingORAPKI.html) in the Oracle documentation\.
 
    ```
    WALLET_LOCATION = (SOURCE = (METHOD = FILE) (METHOD_DATA = (DIRECTORY = $ORACLE_HOME/ssl_wallet))) 

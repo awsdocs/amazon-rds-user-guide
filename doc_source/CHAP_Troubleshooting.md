@@ -392,8 +392,8 @@ Common situations that can cause replication errors include the following:
 + Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of safe and unsafe statements in binary logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\. 
 
 The following steps can help resolve your replication error: 
-+ If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Your MySQL or MariaDB DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\.
-+ If you encounter a binary log \(binlog\) position issue, you can change the replica replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command to change the replica replay position\. For version information, see [mysql\.rds\_next\_master\_log](mysql_rds_next_master_log.md)\.
++ If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Your MySQL or MariaDB DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\.rds\_skip\_repl\_error](mysql-stored-proc-replicating.md#mysql_rds_skip_repl_error)\.
++ If you encounter a binary log \(binlog\) position issue, you can change the replica replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command to change the replica replay position\. For version information, see [mysql\.rds\_next\_master\_log](mysql-stored-proc-replicating.md#mysql_rds_next_master_log)\.
 + You might encounter a temporary performance issue due to high DML load\. If so, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the read replica\. Doing this can help the read replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
 + You can delete the read replica and create an instance using the same DB instance identifier\. If you do this, the endpoint remains the same as that of your old read replica\.
 
@@ -507,7 +507,7 @@ If you need to skip a large number of errors, the replication lag can increase b
 
 You can mitigate this issue by increasing the number of hours that binary log files are retained on your replication source\. After you have increased the binlog retention time, you can restart replication and call the `mysql.rds_skip_repl_error` command as needed\.
 
-To set the binlog retention time, use the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) procedure\. Specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours\.
+To set the binlog retention time, use the [mysql\.rds\_set\_configuration](mysql-stored-proc-configuring.md#mysql_rds_set_configuration) procedure\. Specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours\.
 
 ```
 CALL mysql.rds_set_configuration('binlog retention hours', 48);

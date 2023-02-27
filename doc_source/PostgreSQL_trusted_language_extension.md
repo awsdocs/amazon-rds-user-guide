@@ -6,7 +6,7 @@ One key benefit of TLE is that you can use it in environments that don't provide
 
 TLE is designed to prevent access to unsafe resources for the extensions that you create using TLE\. Its runtime environment limits the impact of any extension defect to a single database connection\. TLE also gives database administrators fine\-grained control over who can install extensions, and it provides a permissions model for running them\.
 
-TLE is supported on RDS for PostgreSQL version 14\.5 and higher versions\. The Trusted Language Extensions development environment and runtime are packaged as the `pg_tle` PostgreSQL extension, version 1\.0\.1\. It supports creating extensions in JavaScript, Perl, PL/pgSQL, and SQL\. You install the `pg_tle` extension in your RDS for PostgreSQL DB instance in the same way that you install other PostgreSQL extensions\. After the `pg_tle` is set up, developers can use it to create new PostgreSQL extensions, known as *TLE extensions*\.
+TLE is supported on RDS for PostgreSQL version 14\.5 and higher versions\. The Trusted Language Extensions development environment and runtime are packaged as the `pg_tle` PostgreSQL extension, version 1\.0\.1\. It supports creating extensions in JavaScript, Perl, Tcl, PL/pgSQL, and SQL\. You install the `pg_tle` extension in your RDS for PostgreSQL DB instance in the same way that you install other PostgreSQL extensions\. After the `pg_tle` is set up, developers can use it to create new PostgreSQL extensions, known as *TLE extensions*\.
 
  
 
