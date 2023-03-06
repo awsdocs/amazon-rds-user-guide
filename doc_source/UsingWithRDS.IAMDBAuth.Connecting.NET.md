@@ -111,3 +111,5 @@ namespace ConsoleApp1
     }
 }
 ```
+
+If you want to connect to a DB instance through a proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.

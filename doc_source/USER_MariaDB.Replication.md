@@ -1,6 +1,6 @@
 # Working with MariaDB replication in Amazon RDS<a name="USER_MariaDB.Replication"></a>
 
-You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with read replicas](USER_ReadRepl.md)\. For specific information about working with read replicas on Amazon RDS for MariaDB, see [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)\. 
+You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with DB instance read replicas](USER_ReadRepl.md)\. For specific information about working with read replicas on Amazon RDS for MariaDB, see [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)\. 
 
 You can also configure replication based on binary log coordinates for a MariaDB DB instance\. For MariaDB instances, you can also configure replication based on global transaction IDs \(GTIDs\), which provides better crash safety\. For more information, see [Configuring GTID\-based replication with an external source instance](MariaDB.Procedural.Replication.GTID.md)\. 
 

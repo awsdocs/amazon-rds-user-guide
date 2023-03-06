@@ -1,6 +1,6 @@
 # Working with read replicas for Amazon RDS for PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas"></a>
 
-You can scale reads for your Amazon RDS for PostgreSQL DB instance by adding read replicas to the instance\. As with other Amazon RDS database engines, RDS for PostgreSQL uses the native replication mechanisms of PostgreSQL to keep read replicas up to date with changes on the source DB\. For general information about read replicas and Amazon RDS, see [Working with read replicas](USER_ReadRepl.md)\. 
+You can scale reads for your Amazon RDS for PostgreSQL DB instance by adding read replicas to the instance\. As with other Amazon RDS database engines, RDS for PostgreSQL uses the native replication mechanisms of PostgreSQL to keep read replicas up to date with changes on the source DB\. For general information about read replicas and Amazon RDS, see [Working with DB instance read replicas](USER_ReadRepl.md)\. 
 
 Following, you can find information specific to working with read replicas with RDS for PostgreSQL\. 
 
@@ -54,7 +54,7 @@ If the source DB instance of a Multi\-AZ deployment fails over to a standby, the
 + **PostgreSQL 13 and higher versions** – Restarting isn't required\. The read replicas are automatically synchronized with the new primary\. However, in some cases your client application might cache Domain Name Service \(DNS\) details for your read replicas\. If so, set the time\-to\-live \(TTL\) value to less than 30 seconds\. Doing this prevents the read replica from holding on to a stale IP address \(and thus, prevents it from synchronizing with the new primary\)\. To learn more about this and other best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\. 
 + **PostgreSQL 12 and all earlier versions** – The read replicas restart automatically after a fail over to the standby replica because the standby \(now primary\) has a different IP address and a different instance name\. Restarting synchronizes the read replica with the new primary\. 
 
-To learn more about failover, see [Failover process for Amazon RDS](Concepts.MultiAZSingleStandby.md#Concepts.MultiAZ.Failover)\. To learn more about how read replicas work in a Multi\-AZ deployment, see [Working with read replicas](USER_ReadRepl.md)\. 
+To learn more about failover, see [Failover process for Amazon RDS](Concepts.MultiAZSingleStandby.md#Concepts.MultiAZ.Failover)\. To learn more about how read replicas work in a Multi\-AZ deployment, see [Working with DB instance read replicas](USER_ReadRepl.md)\. 
 
 To provide failover support for a read replica, you can create the read replica as a Multi\-AZ DB instance so that Amazon RDS creates a standby of your replica in another Availability Zone \(AZ\)\. Creating your read replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
 

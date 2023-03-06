@@ -10,7 +10,6 @@ The options and parameters that are available depend on the DB engine and DB eng
 
 **Topics**
 + [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)
-+ [Creating a Multi\-AZ DB cluster](create-multi-az-db-cluster.md)
 + [Creating Amazon RDS resources with AWS CloudFormation](creating-resources-with-cloudformation.md)
 + [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)
 + [Working with option groups](USER_WorkingWithOptionGroups.md)

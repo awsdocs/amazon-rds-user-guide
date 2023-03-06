@@ -28,7 +28,7 @@ If your CSV file has column heading information, you can use this version of the
 
  If the `\copy` command fails, PostgreSQL outputs error messages\.
 
-You can also combine the `psql` command with the `\copy` meta\-command as shown in the following examples\. This example uses *source\-table* as the source table name, *source\-table\.csv* as the \.csv file, and *target\-db* as the target database:
+Creating a new DB instance in the preview environment `psql` command with the `\copy` meta\-command as shown in the following examples\. This example uses *source\-table* as the source table name, *source\-table\.csv* as the \.csv file, and *target\-db* as the target database:
 
 For Linux, macOS, or Unix:
 

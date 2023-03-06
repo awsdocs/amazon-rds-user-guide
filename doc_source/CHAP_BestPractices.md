@@ -335,7 +335,7 @@ The 2019 AWS re:Invent conference included a presentation on new features and be
 
 We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. 
 
-For information about backing up your DB instance, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
+For information about backing up your DB instance, see [Backing up and restoring](CHAP_CommonTasks.BackupRestore.md)\.
 
 ## Best practices for automating DB instance creation<a name="CHAP_BestPractices.AutoDBCreation"></a>
 

@@ -41,6 +41,3 @@ Amazon RDS supports backup replication for all currently available versions of R
 ## Backup replication with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.sq"></a>
 
 Amazon RDS supports backup replication for all currently available versions of RDS for SQL Server\.
-
-**Note**  
-Backup replication isn't supported for encrypted SQL Server DB instances\. Make sure to clear the **Enable encryption** check box when you create a SQL Server DB instance for which you want to use backup replication\.

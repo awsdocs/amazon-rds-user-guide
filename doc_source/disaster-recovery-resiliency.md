@@ -14,16 +14,16 @@ Amazon RDS creates automated backups of your DB instance during the backup windo
 
 You can create a DB instance by restoring from this DB snapshot as a disaster recovery solution if the source DB instance fails\.
 
-For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
+For more information, see [Backing up and restoring](CHAP_CommonTasks.BackupRestore.md)\.
 
 ## Replication<a name="disaster-recovery-resiliency.replication"></a>
 
 Amazon RDS uses the MariaDB, MySQL, Oracle, and PostgreSQL DB engines' built\-in replication functionality to create a special type of DB instance called a read replica from a source DB instance\. Updates made to the source DB instance are asynchronously copied to the read replica\. You can reduce the load on your source DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\. You can promote a read replica to a standalone instance as a disaster recovery solution if the source DB instance fails\. For some DB engines, Amazon RDS also supports other replication options\.
 
-For more information, see [Working with read replicas](USER_ReadRepl.md)\.
+For more information, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 ## Failover<a name="disaster-recovery-resiliency.failover"></a>
 
 Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for Oracle, PostgreSQL, MySQL, and MariaDB DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Database Mirroring \(DBM\)\.
 
-For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
+For more information, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.

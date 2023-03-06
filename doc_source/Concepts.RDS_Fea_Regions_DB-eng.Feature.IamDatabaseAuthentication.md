@@ -61,6 +61,7 @@ IAM database authentication with RDS for MySQL is available in all Regions for t
 ## IAM database authentication with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.pg"></a>
 
 IAM database authentication with RDS for PostgreSQL is available in all Regions for the following versions:
++ RDS for PostgreSQL 15 \(All versions\)
 + RDS for PostgreSQL 14 \(All versions\)
 + RDS for PostgreSQL 13 \(All versions\)
 + RDS for PostgreSQL 12 \(All versions\)

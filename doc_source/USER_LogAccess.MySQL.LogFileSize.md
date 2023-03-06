@@ -72,7 +72,7 @@ To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CL
 
 For RDS for MySQL version 8\.0\.28 and lower, the `innodb_log_file_size` parameter determines the size of redo logs\. The default value of this parameter is 256 MB\. For information about limitations related to this limit, see [Size limits on BLOBs written to the redo log](#USER_LogAccess.MySQL.LogFileSize.BLOBs)\. For more information on how redo log size is calculated for these versions of MySQL, see [ innodb\_log\_file\_size](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_log_file_size) in the MySQL documentation\.
 
-For RDS for MySQL version 8\.0\.30 and higher, the `innodb_redo_log_capacity` parameter is used instead of the `innodb_log_file_size` parameter\. The default value of the `innodb_redo_log_capacity` parameter is 2 GB\. For more information, see [ Changes in MySQL 8\.0\.30](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-30.html) in the MySQL documentation\.
+For RDS for MySQL version 8\.0\.30 and higher, the `innodb_redo_log_capacity` parameter is used instead of the `innodb_log_file_size` parameter\. The default value of the `innodb_redo_log_capacity` parameter is 256 MB\. For more information, see [ Changes in MySQL 8\.0\.30](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-30.html) in the MySQL documentation\.
 
 ## Size limits on BLOBs written to the redo log<a name="USER_LogAccess.MySQL.LogFileSize.BLOBs"></a>
 

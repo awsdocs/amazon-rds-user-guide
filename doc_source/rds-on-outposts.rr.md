@@ -10,7 +10,7 @@ Read replicas on RDS on Outposts have the following limitations:
 + Cascading read replicas aren't supported on RDS on Outposts\.
 + The source RDS on Outposts DB instance can't have local backups\. The backup target for the source DB instance must be your AWS Region\.
 
-You can create a read replica from an RDS on Outposts DB instance using the AWS Management Console, AWS CLI, or RDS API\. For more information on read replicas, see [Working with read replicas](USER_ReadRepl.md)\.
+You can create a read replica from an RDS on Outposts DB instance using the AWS Management Console, AWS CLI, or RDS API\. For more information on read replicas, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 ## Console<a name="outposts-rr.Console"></a>
 

@@ -1,4 +1,4 @@
-# Rebooting Multi\-AZ DB clusters and reader DB instances<a name="multi-az-db-clusters-concepts-rebooting"></a>
+# Rebooting a Multi\-AZ DB cluster and reader DB instances<a name="multi-az-db-clusters-concepts-rebooting"></a>
 
 You might need to reboot your Multi\-AZ DB cluster, usually for maintenance reasons\. For example, if you make certain modifications or change the DB cluster parameter group associated with a DB cluster, you reboot the DB cluster\. Doing so causes the changes to take effect\. 
 

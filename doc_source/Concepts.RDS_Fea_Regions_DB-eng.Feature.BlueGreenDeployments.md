@@ -12,4 +12,4 @@ The Blue/Green Deployments feature isn't available with the following engines:
 + RDS for Oracle
 + RDS for PostgreSQL
 
-The Blue/Green Deployments feature is available in all AWS Regions except for the Asia Pacific \(Melbourne\) Region\.
+The Blue/Green Deployments feature is available in all AWS Regions\.

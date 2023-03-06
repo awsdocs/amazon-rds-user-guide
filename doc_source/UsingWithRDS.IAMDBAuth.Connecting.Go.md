@@ -141,6 +141,8 @@ func main() {
 }
 ```
 
+If you want to connect to a DB instance through a proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.
+
 ## Connecting using IAM authentication and the AWS SDK for Go V1\.<a name="UsingWithRDS.IAMDBAuth.Connecting.GoV1"></a>
 
 You can connect to a DB instance using IAM authentication and the AWS SDK for Go V1
@@ -235,3 +237,5 @@ func main() {
     }
 }
 ```
+
+If you want to connect to a DB instance through a proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.

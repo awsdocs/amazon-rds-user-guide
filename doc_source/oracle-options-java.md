@@ -88,7 +88,7 @@ The Oracle user name is case\-sensitive, and it usually has all uppercase charac
 You can remove the `JVM` option from a DB instance\. There is a brief outage while the option is removed\. After you remove the `JVM` option, you don't need to restart your DB instance\. 
 
 **Warning**  
- Removing the `JVM` option can result in data loss if the DB instance is using data types that were enabled as part of the option\. Back up your data before proceeding\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\. 
+ Removing the `JVM` option can result in data loss if the DB instance is using data types that were enabled as part of the option\. Back up your data before proceeding\. For more information, see [Backing up and restoring](CHAP_CommonTasks.BackupRestore.md)\. 
 
 To remove the `JVM` option from a DB instance, do one of the following: 
 + Remove the `JVM` option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 

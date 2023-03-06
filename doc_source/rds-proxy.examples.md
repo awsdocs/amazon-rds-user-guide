@@ -65,17 +65,17 @@ mysql> select @@aurora_server_id;
 ```
 
 **Example Adjusting the max\_connections setting for an Aurora DB cluster**  
- This example demonstrates how you can adjust the `max_connections` setting for an Aurora MySQL DB cluster\. To do so, you create your own DB cluster parameter group based on the default parameter settings for clusters that are compatible with MySQL 5\.6 or 5\.7\. You specify a value for the `max_connections` setting, overriding the formula that sets the default value\. You associate the DB cluster parameter group with your DB cluster\.   
+ This example demonstrates how you can adjust the `max_connections` setting for an Aurora MySQL DB cluster\. To do so, you create your own DB cluster parameter group based on the default parameter settings for clusters that are compatible with MySQL 5\.7\. You specify a value for the `max_connections` setting, overriding the formula that sets the default value\. You associate the DB cluster parameter group with your DB cluster\.   
 
 ```
 export REGION=us-east-1
-export CLUSTER_PARAM_GROUP=rds-proxy-mysql-56-max-connections-demo
-export CLUSTER_NAME=rds-proxy-mysql-56
+export CLUSTER_PARAM_GROUP=rds-proxy-mysql-57-max-connections-demo
+export CLUSTER_NAME=rds-proxy-mysql-57
 
 aws rds create-db-parameter-group --region $REGION \
-  --db-parameter-group-family aurora5.6 \
+  --db-parameter-group-family aurora-mysql5.7 \
   --db-parameter-group-name $CLUSTER_PARAM_GROUP \
-  --description "Aurora MySQL 5.6 cluster parameter group for RDS Proxy demo."
+  --description "Aurora MySQL 5.7 cluster parameter group for RDS Proxy demo."
 
 aws rds modify-db-cluster --region $REGION \
   --db-cluster-identifier $CLUSTER_NAME \

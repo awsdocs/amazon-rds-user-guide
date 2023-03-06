@@ -1,16 +1,12 @@
 # Deleting a blue/green deployment<a name="blue-green-deployments-deleting"></a>
 
-You can delete blue/green deployment before or after switching it over\.
+You can delete a blue/green deployment before or after you switch it over\.
 
-When you delete a blue/green deployment before switching it over, Amazon RDS takes the following actions before deleting it:
+When you delete a blue/green deployment before switching it over, Amazon RDS optionally deletes the DB instances in the green environment:
++ If you choose to delete the DB instances in the green environment \(`--delete-target`\), they must have deletion protection turned off\.
++ If you don't delete the DB instances in the green environment \(`--no-delete-target`\), the instances are retained, but they're no longer part of a blue/green deployment\. Replication continues between the environments\.
 
-1. Stops replication from the blue environment to the green environment\.
-
-1. Optionally deletes the DB instances in the green environment\.
-   + If you choose to delete the DB instances in the green environment, make sure deletion protection isn't turned on for them\.
-   + If you don't delete the DB instances in the green environment, they are retained, but they are no longer part of a blue/green deployment\.
-
-The option to delete the green databases isn't available in the console after [switchover](blue-green-deployments-switching.md)\. When you delete blue/green deployments using the AWS CLI, you can't specify the `--delete-target` parameter if the deployment [status](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html) is `SWITCHOVER_COMPLETED`\.
+The option to delete the green databases isn't available in the console after [switchover](blue-green-deployments-switching.md)\. When you delete blue/green deployments using the AWS CLI, you can't specify the `--delete-target` option if the deployment [status](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html) is `SWITCHOVER_COMPLETED`\.
 
 **Important**  
 Deleting a blue/green deployment doesn't affect the blue environment\.

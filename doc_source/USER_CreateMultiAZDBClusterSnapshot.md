@@ -1,6 +1,6 @@
 # Creating a Multi\-AZ DB cluster snapshot<a name="USER_CreateMultiAZDBClusterSnapshot"></a>
 
-When you create a Multi\-AZ DB cluster snapshot, make sure to identify which Multi\-AZ DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\.
+When you create a Multi\-AZ DB cluster snapshot, make sure to identify which Multi\-AZ DB cluster you are going to back up, and then give your DB cluster snapshot a name so you can restore from it later\. You can also share a Multi\-AZ DB cluster snapshot\. For instructions, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
 
 You can create a Multi\-AZ DB cluster snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -53,3 +53,7 @@ For Windows:
 You can create a Multi\-AZ DB cluster snapshot by using the Amazon RDS API [CreateDBClusterSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterSnapshot.html) operation with the following parameters:
 + `DBClusterIdentifier`
 + `DBClusterSnapshotIdentifier`
+
+## Deleting a Multi\-AZ DB cluster snapshot<a name="USER_DeleteMultiAZDBClusterSnapshot"></a>
+
+You can delete Multi\-AZ DB snapshots managed by Amazon RDS when you no longer need them\. For instructions, see [Deleting a DB snapshot](USER_DeleteSnapshot.md)\.

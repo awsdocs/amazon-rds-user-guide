@@ -19,7 +19,7 @@ When creating or modifying an Oracle replica, you can place it in either of the 
 
 Read\-only  
 This is the default\. Active Data Guard transmits and applies changes from the source database to all read replica databases\.  
-You can create up to five read replicas from one source DB instance\. For general information about read replicas that applies to all DB engines, see [Working with read replicas](USER_ReadRepl.md)\. For information about Oracle Data Guard, see [Oracle Data Guard concepts and administration](https://docs.oracle.com/en/database/oracle/oracle-database/19/sbydb/oracle-data-guard-concepts.html#GUID-F78703FB-BD74-4F20-9971-8B37ACC40A65) in the Oracle documentation\.
+You can create up to five read replicas from one source DB instance\. For general information about read replicas that applies to all DB engines, see [Working with DB instance read replicas](USER_ReadRepl.md)\. For information about Oracle Data Guard, see [Oracle Data Guard concepts and administration](https://docs.oracle.com/en/database/oracle/oracle-database/19/sbydb/oracle-data-guard-concepts.html#GUID-F78703FB-BD74-4F20-9971-8B37ACC40A65) in the Oracle documentation\.
 
 Mounted  
 In this case, replication uses Oracle Data Guard, but the replica database doesn't accept user connections\. The primary use for mounted replicas is cross\-Region disaster recovery\.  

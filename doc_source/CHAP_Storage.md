@@ -45,7 +45,7 @@ By using General Purpose SSD gp3 storage volumes, you can customize storage perf
 For every RDS DB engine except RDS for SQL Server, when the storage size for gp3 volumes reaches a certain threshold, the baseline storage performance increases to 12,000 IOPS and 500 MiBps\. This is because of *volume striping*, where the storage uses four logical volumes instead of one\. RDS for SQL Server doesn't support volume striping, and therefore doesn't have a threshold value\.
 
 **Note**  
-General Purpose SSD gp3 storage is supported on Single\-AZ and Multi\-AZ DB instances, but isn't supported on Multi\-AZ DB clusters\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md) and [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
+General Purpose SSD gp3 storage is supported on Single\-AZ and Multi\-AZ DB instances, but isn't supported on Multi\-AZ DB clusters\. For more information, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md) and [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 
 Storage performance for gp3 volumes on Amazon RDS DB engines, including the threshold, is shown in the following table\.
 

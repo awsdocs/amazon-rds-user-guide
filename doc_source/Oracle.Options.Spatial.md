@@ -70,7 +70,7 @@ After you drop all objects that use data types provided by the `SPATIAL` option,
 
 1. Back up your data\.
 **Warning**  
-If the instance uses data types that were enabled as part of the option, and if you remove the `SPATIAL` option, you can lose data\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
+If the instance uses data types that were enabled as part of the option, and if you remove the `SPATIAL` option, you can lose data\. For more information, see [Backing up and restoring](CHAP_CommonTasks.BackupRestore.md)\.
 
 1. Check whether any existing objects reference data types or features of the `SPATIAL` option\. 
 

@@ -11,7 +11,7 @@ For example, you can use the following tools, depending on your requirements:
 + AWS Database Migration Service \(AWS DMS\) – Migrate databases without downtime\. For more information about AWS DMS, see [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) and the blog post [Migrating Oracle databases with near\-zero downtime using AWS DMS](http://aws.amazon.com/blogs/database/migrating-oracle-databases-with-near-zero-downtime-using-aws-dms/)\.
 
 **Important**  
-Before you use the preceding migration techniques, we recommend that you back up your database\. After you import the data, you can back up your RDS for Oracle DB instances by creating snapshots\. Later, you can restore the snapshots\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
+Before you use the preceding migration techniques, we recommend that you back up your database\. After you import the data, you can back up your RDS for Oracle DB instances by creating snapshots\. Later, you can restore the snapshots\. For more information, see [Backing up and restoring](CHAP_CommonTasks.BackupRestore.md)\.
 
 For many database engines, ongoing replication can continue until you are ready to switch over to the target database\. You can use AWS DMS to migrate to RDS for Oracle from either the same database engine or a different engine\. If you migrate from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that AWS DMS doesn't migrate\.
 

@@ -5,7 +5,7 @@ You can restore a snapshot to a Multi\-AZ DB cluster using the AWS Management Co
 + A snapshot of a Multi\-AZ DB instance deployment with a single DB instance
 + A snapshot of a Multi\-AZ DB cluster
 
-For information about Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
+For information about Multi\-AZ deployments, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
 
 **Tip**  
 You can migrate a Single\-AZ deployment or a Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster deployment by restoring a snapshot\.

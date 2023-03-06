@@ -1,6 +1,6 @@
 # Restoring from a Multi\-AZ DB cluster snapshot to a DB instance<a name="USER_RestoreFromMultiAZDBClusterSnapshot"></a>
 
-A *Multi\-AZ DB cluster snapshot* is a storage volume snapshot of your DB cluster, backing up the entire DB cluster and not just individual databases\. You can restore a Multi\-AZ DB cluster snapshot to a Single\-AZ deployment or Multi\-AZ DB instance deployment\. For information about Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
+A *Multi\-AZ DB cluster snapshot* is a storage volume snapshot of your DB cluster, backing up the entire DB cluster and not just individual databases\. You can restore a Multi\-AZ DB cluster snapshot to a Single\-AZ deployment or Multi\-AZ DB instance deployment\. For information about Multi\-AZ deployments, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
 
 **Note**  
 You can also restore a Multi\-AZ DB cluster snapshot to a new Multi\-AZ DB cluster\. For instructions, see [Restoring from a snapshot to a Multi\-AZ DB cluster](USER_RestoreFromMultiAZDBClusterSnapshot.Restoring.md)\.

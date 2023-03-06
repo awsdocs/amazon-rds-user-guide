@@ -29,7 +29,7 @@ Set up the `pg_cron` extension as follows:
 
    The `pg_cron` scheduler is set in the default PostgreSQL database named `postgres`\. The `pg_cron` objects are created in this `postgres` database and all scheduling actions run in this database\.
 
-1. You can use the default settings, or you can schedule jobs to run in other databases within your PostgreSQL DB instance\. To schedule jobs for other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than `postgres`](#PostgreSQL_pg_cron.otherDB)\.
+1. You can use the default settings, or you can schedule jobs to run in other databases within your PostgreSQL DB instance\. To schedule jobs for other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than the default database](#PostgreSQL_pg_cron.otherDB)\.
 
 ## Granting database users permissions to use pg\_cron<a name="PostgreSQL_pg_cron.permissions"></a>
 
@@ -63,7 +63,7 @@ When you create `pg_cron` jobs, check that the `max_worker_processes` setting is
 + [Vacuuming a table](#PostgreSQL_pg_cron.vacuum)
 + [Purging the pg\_cron history table](#PostgreSQL_pg_cron.job_run_details)
 + [Logging errors to the postgresql\.log file only](#PostgreSQL_pg_cron.log_run)
-+ [Scheduling a cron job for a database other than `postgres`](#PostgreSQL_pg_cron.otherDB)
++ [Scheduling a cron job for a database other than the default database](#PostgreSQL_pg_cron.otherDB)
 
 ### Vacuuming a table<a name="PostgreSQL_pg_cron.vacuum"></a>
 
@@ -129,7 +129,7 @@ postgres=> SHOW cron.log_run;
 
 For more information, see [Parameters for managing the pg\_cron extension](#PostgreSQL_pg_cron.parameters)\.
 
-### Scheduling a cron job for a database other than `postgres`<a name="PostgreSQL_pg_cron.otherDB"></a>
+### Scheduling a cron job for a database other than the default database<a name="PostgreSQL_pg_cron.otherDB"></a>
 
 The metadata for `pg_cron` is all held in the PostgreSQL default database named `postgres`\. Because background workers are used for running the maintenance cron jobs, you can schedule a job in any of your databases within the PostgreSQL DB instance:
 
@@ -191,7 +191,7 @@ postgres=> SELECT name, setting, short_desc FROM pg_settings WHERE name LIKE 'cr
 
 ### Function reference: cron\.schedule<a name="PostgreSQL_pg_cron.schedule"></a>
 
-This function schedules a cron job\. The job is initially scheduled in the default `postgres` database\. The function returns a `bigint` value representing the job identifier\. To schedule jobs to run in other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than `postgres`](#PostgreSQL_pg_cron.otherDB)\.
+This function schedules a cron job\. The job is initially scheduled in the default `postgres` database\. The function returns a `bigint` value representing the job identifier\. To schedule jobs to run in other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than the default database](#PostgreSQL_pg_cron.otherDB)\.
 
 The function has two syntax formats\.
 

@@ -164,7 +164,7 @@ The following limitations apply to blue/green deployments:
   + AWS CloudFormation
   + Multi\-AZ DB cluster deployments
 
-    Blue/green deployments are supported for Multi\-AZ DB instance deployments\. For more information about Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
+    Blue/green deployments are supported for Multi\-AZ DB instance deployments\. For more information about Multi\-AZ deployments, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
 + The following are limitations for changes in a blue/green deployment:
   + You can't change an unencrypted DB instance into an encrypted DB instance\.
   + You can't change an encrypted DB instance into an unencrypted DB instance\.

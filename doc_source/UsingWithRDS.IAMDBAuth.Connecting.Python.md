@@ -91,3 +91,5 @@ try:
 except Exception as e:
     print("Database connection failed due to {}".format(e))
 ```
+
+If you want to connect to a DB instance through a proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.

@@ -1,6 +1,6 @@
 # Working with RDS for Oracle replica backups<a name="oracle-read-replicas.backups"></a>
 
-You can create and restore backups of an RDS for Oracle replica\. Both automatic backups and manual snapshots are supported\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\. The following sections describe the key differences between managing backups of a primary and an RDS for Oracle replica\.
+You can create and restore backups of an RDS for Oracle replica\. Both automatic backups and manual snapshots are supported\. For more information, see [Backing up and restoring](CHAP_CommonTasks.BackupRestore.md)\. The following sections describe the key differences between managing backups of a primary and an RDS for Oracle replica\.
 
 ## Turning on RDS for Oracle replica backups<a name="oracle-read-replicas.backups.turning-on"></a>
 
@@ -12,9 +12,9 @@ An Oracle replica doesn't have automated backups turned on by default\. You turn
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
+1. In the navigation pane, choose **Databases**, and then choose the DB instance or Multi\-AZ DB cluster that you want to modify\.
 
-1. Choose **Modify**\. The **Modify DB instance** page appears\.
+1. Choose **Modify**\.
 
 1. For **Backup retention period**, choose a positive nonzero value, for example 3 days\.
 
@@ -22,14 +22,14 @@ An Oracle replica doesn't have automated backups turned on by default\. You turn
 
 1. Choose **Apply immediately**\.
 
-1. On the confirmation page, choose **Modify DB instance** to save your changes and enable automated backups\.
+1. Choose **Modify DB instance** or **Modify cluster** to save your changes and enable automated backups\.
 
 ### AWS CLI<a name="USER_WorkingWithAutomatedBackups.Enabling.CLI"></a>
 
-To enable automated backups, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\.
+To enable automated backups, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) or [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\.
 
 Include the following parameters:
-+ `--db-instance-identifier`
++ `--db-instance-identifier` \(or `--db-cluster-identifier` for a Multi\-AZ DB cluster\)
 + `--backup-retention-period`
 + `--apply-immediately` or `--no-apply-immediately`
 
@@ -55,8 +55,8 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Enabling.API"></a>
 
-To enable automated backups, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following required parameters:
-+ `DBInstanceIdentifier`
+To enable automated backups, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) or [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following required parameters:
++ `DBInstanceIdentifier` or `DBClusterIdentifier`
 + `BackupRetentionPeriod`
 
 ## Restoring an RDS for Oracle replica backup<a name="oracle-read-replicas.backups.restoring"></a>

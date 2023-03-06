@@ -1,4 +1,4 @@
-# Multi\-AZ deployments for high availability<a name="Concepts.MultiAZ"></a>
+# Configuring and managing a Multi\-AZ deployment<a name="Concepts.MultiAZ"></a>
 
 Multi\-AZ deployments can have one standby or two standby DB instances\. When the deployment has one standby DB instance, it's called a *Multi\-AZ DB instance deployment*\. A Multi\-AZ DB instance deployment has one standby DB instance that provides failover support, but doesn't serve read traffic\. When the deployment has two standby DB instances, it's called a *Multi\-AZ DB cluster deployment*\. A Multi\-AZ DB cluster deployment has standby DB instances that provide failover support and can also serve read traffic\.
 
@@ -16,3 +16,10 @@ You can use the AWS Management Console to determine whether a Multi\-AZ deployme
 **Topics**
 + [Multi\-AZ DB instance deployments](Concepts.MultiAZSingleStandby.md)
 + [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)
+
+In addition, the following topics apply to both DB instances and Multi\-AZ DB clusters:
++ [Tagging Amazon RDS resources](USER_Tagging.md)
++ [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)
++ [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)
++ [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)
++ [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)

@@ -4,9 +4,10 @@ AWS Lambda is an event\-driven compute service that lets you run code without pr
 
 **Note**  
 Invoking an AWS Lambda function is supported in these RDS for PostgreSQL versions:  
-14\.1 and higher minor versions
-13\.2 and higher minor versions
-12\.6 and higher minor versions
+All PostgreSQL 15 versions
+PostgreSQL 14\.1 and higher minor versions
+PostgreSQL 13\.2 and higher minor versions
+PostgreSQL 12\.6 and higher minor versions
 
 Setting up RDS for PostgreSQL to work with Lambda functions is a multi\-step process involving AWS Lambda, IAM, your VPC, and your RDS for PostgreSQL DB instance\. Following, you can find summaries of the necessary steps\. 
 

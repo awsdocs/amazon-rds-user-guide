@@ -1,4 +1,4 @@
-# Working with read replicas<a name="USER_ReadRepl"></a>
+# Working with DB instance read replicas<a name="USER_ReadRepl"></a>
 
 Amazon RDS uses the MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB engines' built\-in replication functionality to create a special type of DB instance called a read replica from a source DB instance\. The source DB instance becomes the primary DB instance\. Updates made to the primary DB instance are asynchronously copied to the read replica\. You can reduce the load on your primary DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\.
 
@@ -18,7 +18,7 @@ You can configure a read replica for a DB instance that also has a standby repli
 
 ![\[Read replica and standby replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-and-standby-replica.png)
 
-For more information about high availability and standby replicas, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
+For more information about high availability and standby replicas, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
 
 Read replicas are supported by the MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB engines\. In this section, you can find general information about using read replicas with all of these engines\.
 
@@ -189,7 +189,7 @@ The following steps show the general process for promoting a read replica to a D
 **Note**  
 The promotion process takes a few minutes to complete\. When you promote a read replica, replication is stopped and the read replica is rebooted\. When the reboot is complete, the read replica is available as a new DB instance\.
 
-1. \(Optional\) Modify the new DB instance to be a Multi\-AZ deployment\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) and [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
+1. \(Optional\) Modify the new DB instance to be a Multi\-AZ deployment\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) and [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\. 
 
 ### Console<a name="USER_ReadRepl.Promote.Console"></a>
 

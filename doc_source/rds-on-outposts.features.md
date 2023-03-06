@@ -12,7 +12,7 @@ The following table describes the Amazon RDS features supported by Amazon RDS on
 |  Rebooting a DB instance  |  Yes  |  —  |  [Rebooting a DB instance](USER_RebootInstance.md)  | 
 |  Stopping a DB instance  |  Yes  |  —  |  [Stopping an Amazon RDS DB instance temporarily](USER_StopInstance.md)  | 
 |  Starting a DB instance  |  Yes  |  —  |  [Starting an Amazon RDS DB instance that was previously stopped](USER_StartInstance.md)  | 
-|  Multi\-AZ deployments  |  Yes  |  Multi\-AZ deployments are supported on MySQL and PostgreSQL DB instances\.  |  [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md)  [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)  | 
+|  Multi\-AZ deployments  |  Yes  |  Multi\-AZ deployments are supported on MySQL and PostgreSQL DB instances\.  |  [Creating DB instances for Amazon RDS on AWS Outposts](rds-on-outposts.creating.md)  [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)  | 
 |  DB parameter groups  |  Yes  |  —  |  [Working with parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  Read replicas  |  Yes  |  Read replicas are supported for MySQL and PostgreSQL DB instances\.  |  [Creating read replicas for Amazon RDS on AWS Outposts](rds-on-outposts.rr.md)  | 
 |  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS resources](Overview.Encryption.md)  | 

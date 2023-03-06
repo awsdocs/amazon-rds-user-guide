@@ -2,6 +2,9 @@
 
 This tutorial creates an EC2 instance and an RDS for MySQL DB instance\. The tutorial shows you how to access the DB instance from the EC2 instance using a standard MySQL client\. As a best practice, this tutorial creates a private DB instance in a virtual private cloud \(VPC\)\. In most cases, other resources in the same VPC, such as EC2 instances, can access the DB instance, but resources outside of the VPC can't access it\.
 
+**Important**  
+There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.
+
 The following diagram shows the configuration when the tutorial is complete\.
 
 ![\[EC2 instance and MySQL DB instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-mysql.png)
@@ -171,14 +174,14 @@ You can only set up a connection between an EC2 instance and an RDS database aut
    The **Set up EC2 connection** page appears\.
 
 1. On the **Set up EC2 connection** page, choose the EC2 instance\.  
-![\[Set up EC2 connection page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-set-up.png)
+![\[Set up EC2 connection page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-set-up.png)
 
    If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the RDS database\.
 
 1. Choose **Continue**\.
 
    The **Review and confirm** page appears\.  
-![\[EC2 connection review and confirmation page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-confirm.png)
+![\[EC2 connection review and confirmation page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-confirm.png)
 
 1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
 

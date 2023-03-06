@@ -67,3 +67,5 @@ export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 5
                     
 psql "host=$RDSHOST port=5432 sslmode=verify-full sslrootcert=/sample_dir/global-bundle.pem dbname=DBName user=jane_doe password=$PGPASSWORD"
 ```
+
+If you want to connect to a DB instance through a proxy, see [Connecting to a proxy using IAM authentication](rds-proxy-setup.md#rds-proxy-connecting-iam)\.

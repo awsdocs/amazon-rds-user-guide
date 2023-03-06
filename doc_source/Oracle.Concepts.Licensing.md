@@ -95,6 +95,6 @@ If you have an unused BYOL Oracle license appropriate for the edition and class 
 
 ## Licensing Oracle Multi\-AZ deployments<a name="Oracle.Concepts.Licensing.MAZ"></a>
 
-Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. We recommend Multi\-AZ for production workloads\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
+Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. We recommend Multi\-AZ for production workloads\. For more information, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\. 
 
 If you use the Bring Your Own License model, you must have a license for both the primary DB instance and the standby DB instance in a Multi\-AZ deployment\. 

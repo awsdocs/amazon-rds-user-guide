@@ -8,6 +8,10 @@ If you don't have data stored on Amazon S3, you need to first create a bucket an
 + [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
 + [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) 
 
+Cross\-account import from Amazon S3 is supported\. For more information, see [ Granting cross\-account permissions](https://docs.aws.amazon.com/AmazonS3/latest/gsg/example-walkthroughs-managing-access-example2.html) in the *Amazon Simple Storage Service User Guide*\.
+
+You can use the customer managed key for encryption while importing data from S3\. For more information, see [ KMS keys stored in AWS KMS](https://docs.aws.amazon.com/AmazonS3/latest/gsg/UsingKMSEncryption.html) in the *Amazon Simple Storage Service User Guide*\.
+
 **Note**  
 Importing data from Amazon S3 isn't supported for Aurora Serverless v1\. It is supported for Aurora Serverless v2\.
 

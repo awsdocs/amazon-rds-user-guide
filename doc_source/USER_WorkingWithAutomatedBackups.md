@@ -1,28 +1,16 @@
 # Working with backups<a name="USER_WorkingWithAutomatedBackups"></a>
 
-Amazon RDS creates and saves automated backups of your DB instance during the backup window of your DB instance\. RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. RDS saves the automated backups of your DB instance according to the backup retention period that you specify\. If necessary, you can recover your database to any point in time during the backup retention period\.
+Amazon RDS creates and saves automated backups of your DB instance or Multi\-AZ DB cluster during the backup window of your database\. RDS creates a storage volume snapshot of your database, backing up the entire database and not just individual databases\. RDS saves the automated backups of your database according to the backup retention period that you specify\. If necessary, you can recover your database to any point in time during the backup retention period\.
 
 Automated backups follow these rules:
-+ Your DB instance must be in the `available` state for automated backups to occur\. Automated backups don't occur while your DB instance is in a state other than `available`, for example `storage_full`\.
-+ Automated backups don't occur while a DB snapshot copy is running in the same AWS Region for the same DB instance\.
++ Your database must be in the `available` state for automated backups to occur\. Automated backups don't occur while your database is in a state other than `available`, for example, `storage_full`\.
++ Automated backups don't occur while a DB snapshot copy is running in the same AWS Region for the same database\.
 
-You can also back up your DB instance manually, by manually creating a DB snapshot\. For more information about creating a DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\. 
+You can also back up your database manually by creating a DB snapshot\. For more information about manually creating a DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\. 
 
-The first snapshot of a DB instance contains the data for the full DB instance\. Subsequent snapshots of the same DB instance are incremental, which means that only the data that has changed after your most recent snapshot is saved\.
+The first snapshot of a database contains the data for the full database\. Subsequent snapshots of the same database are incremental, which means that only the data that has changed after your most recent snapshot is saved\.
 
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a DB snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
-
-**Topics**
-+ [Backup storage](#USER_WorkingWithAutomatedBackups.BackupStorage)
-+ [Backup window](#USER_WorkingWithAutomatedBackups.BackupWindow)
-+ [Backup retention period](#USER_WorkingWithAutomatedBackups.BackupRetention)
-+ [Enabling automated backups](#USER_WorkingWithAutomatedBackups.Enabling)
-+ [Retaining automated backups](#USER_WorkingWithAutomatedBackups.Retaining)
-+ [Deleting retained automated backups](#USER_WorkingWithAutomatedBackups-Deleting)
-+ [Disabling automated backups](#USER_WorkingWithAutomatedBackups.Disabling)
-+ [Using AWS Backup to manage automated backups](#AutomatedBackups.AWSBackup)
-+ [Automated backups with unsupported MySQL storage engines](#Overview.BackupDeviceRestrictions)
-+ [Automated backups with unsupported MariaDB storage engines](#Overview.BackupDeviceRestrictionsMariaDB)
 
 ## Backup storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
@@ -30,17 +18,17 @@ Your Amazon RDS backup storage for each AWS Region is composed of the automated 
 
 For more information about backup storage costs, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 
-If you chose to retain automated backups when you delete a DB instance, the automated backups are saved for the full retention period\. If you don't choose **Retain automated backups** when you delete a DB instance, all automated backups are deleted with the DB instance\. After they are deleted, the automated backups can't be recovered\. If you choose to have Amazon RDS create a final DB snapshot before it deletes your DB instance, you can use that to recover your DB instance\. Or you can use a previously created manual snapshot\. Manual snapshots are not deleted\. You can have up to 100 manual snapshots per Region\.
+If you choose to retain automated backups when you delete a database, the automated backups are saved for the full retention period\. If you don't choose **Retain automated backups** when you delete a database, all automated backups are deleted with the database\. After they are deleted, the automated backups can't be recovered\. If you choose to have Amazon RDS create a final DB snapshot before it deletes your database, you can use that to recover your database\. Optionally, you can use a previously created manual snapshot\. Manual snapshots are not deleted\. You can have up to 100 manual snapshots per Region\.
 
 ## Backup window<a name="USER_WorkingWithAutomatedBackups.BackupWindow"></a>
 
-Automated backups occur daily during the preferred backup window\. If the backup requires more time than allotted to the backup window, the backup continues after the window ends, until it finishes\. The backup window can't overlap with the weekly maintenance window for the DB instance\.
+Automated backups occur daily during the preferred backup window\. If the backup requires more time than allotted to the backup window, the backup continues after the window ends until it finishes\. The backup window can't overlap with the weekly maintenance window for the DB instance or Multi\-AZ DB cluster\.
 
-During the automatic backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. You might experience elevated latencies for a few minutes during backups for Multi\-AZ deployments\. For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity isn't suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for both Single\-AZ and Multi\-AZ deployments, because the backup is taken from the primary\.
+During the automatic backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. You might experience elevated latencies for a few minutes during backups for Multi\-AZ deployments\. For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity isn't suspended on your primary during backup for Multi\-AZ deployments because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for both Single\-AZ and Multi\-AZ deployments because the backup is taken from the primary\.
 
-Automated backups might occasionally be skipped if the DB instance has a heavy workload at the time a backup is supposed to start\. If a backup is skipped, you can still do a point\-in\-time\-recovery \(PITR\), and a backup is still attempted during the next backup window\. For more information on PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
+Automated backups might occasionally be skipped if the DB instance or cluster has a heavy workload at the time a backup is supposed to start\. If a backup is skipped, you can still do a point\-in\-time\-recovery \(PITR\), and a backup is still attempted during the next backup window\. For more information on PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
-If you don't specify a preferred backup window when you create the DB instance, Amazon RDS assigns a default 30\-minute backup window\. This window is selected at random from an 8\-hour block of time for each AWS Region\. The following table lists the time blocks for each AWS Region from which the default backup windows are assigned\.
+If you don't specify a preferred backup window when you create the DB instance or Multi\-AZ DB cluster, Amazon RDS assigns a default 30\-minute backup window\. This window is selected at random from an 8\-hour block of time for each AWS Region\. The following table lists the time blocks for each AWS Region from which the default backup windows are assigned\.
 
 
 ****  
@@ -48,18 +36,18 @@ If you don't specify a preferred backup window when you create the DB instance, 
 
 ## Backup retention period<a name="USER_WorkingWithAutomatedBackups.BackupRetention"></a>
 
-You can set the backup retention period when you create a DB instance\. If you don't set the backup retention period, the default backup retention period is one day if you create the DB instance using the Amazon RDS API or the AWS CLI\. The default backup retention period is seven days if you create the DB instance using the console\.
+You can set the backup retention period when you create a DB instance or Multi\-AZ DB cluster\. If you don't set the backup retention period, the default backup retention period is one day if you create the database using the Amazon RDS API or the AWS CLI\. The default backup retention period is seven days if you create the database using the console\.
 
-After you create a DB instance, you can modify the backup retention period\. You can set the backup retention period to between 0 and 35 days\. Setting the backup retention period to 0 disables automated backups\. Manual snapshot limits \(100 per Region\) do not apply to automated backups\.
+After you create a DB instance or cluster, you can modify the backup retention period\. You can set the backup retention period to between 0 and 35 days\. Setting the backup retention period to 0 disables automated backups\. Manual snapshot limits \(100 per Region\) don't apply to automated backups\.
 
-Automated backups aren't created while a DB instance is stopped\. Backups can be retained longer than the backup retention period if a DB instance has been stopped\. RDS doesn't include time spent in the `stopped` state when the backup retention window is calculated\.
+Automated backups aren't created while a DB instance or cluster is stopped\. Backups can be retained longer than the backup retention period if a database has been stopped\. RDS doesn't include time spent in the `stopped` state when the backup retention window is calculated\.
 
 **Important**  
 An outage occurs if you change the backup retention period from 0 to a nonzero value or from a nonzero value to 0\. This applies to both Single\-AZ and Multi\-AZ DB instances\.
 
 ## Enabling automated backups<a name="USER_WorkingWithAutomatedBackups.Enabling"></a>
 
-If your DB instance doesn't have automated backups enabled, you can enable them at any time\. You enable automated backups by setting the backup retention period to a positive nonzero value\. When automated backups are enabled, your RDS instance and database is taken offline and a backup is immediately created\.
+If your database doesn't have automated backups enabled, you can enable them at any time\. You enable automated backups by setting the backup retention period to a positive nonzero value\. When automated backups are turned on, your RDS instance and database is taken offline and a backup is immediately created\.
 
 **Note**  
 If you manage your backups in AWS Backup, you can't enable automated backups\. For more information, see [Using AWS Backup to manage automated backups](#AutomatedBackups.AWSBackup)\.
@@ -70,9 +58,9 @@ If you manage your backups in AWS Backup, you can't enable automated backups\. F
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
+1. In the navigation pane, choose **Databases**, and then choose the DB instance or Multi\-AZ DB cluster that you want to modify\.
 
-1. Choose **Modify**\. The **Modify DB instance** page appears\.
+1. Choose **Modify**\.
 
 1. For **Backup retention period**, choose a positive nonzero value, for example 3 days\.
 
@@ -80,14 +68,14 @@ If you manage your backups in AWS Backup, you can't enable automated backups\. F
 
 1. Choose **Apply immediately**\.
 
-1. On the confirmation page, choose **Modify DB instance** to save your changes and enable automated backups\.
+1. Choose **Modify DB instance** or **Modify cluster** to save your changes and enable automated backups\.
 
 ### AWS CLI<a name="USER_WorkingWithAutomatedBackups.Enabling.CLI"></a>
 
-To enable automated backups, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\.
+To enable automated backups, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) or [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\.
 
 Include the following parameters:
-+ `--db-instance-identifier`
++ `--db-instance-identifier` \(or `--db-cluster-identifier` for a Multi\-AZ DB cluster\)
 + `--backup-retention-period`
 + `--apply-immediately` or `--no-apply-immediately`
 
@@ -113,8 +101,8 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Enabling.API"></a>
 
-To enable automated backups, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following required parameters:
-+ `DBInstanceIdentifier`
+To enable automated backups, use the RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) or [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following required parameters:
++ `DBInstanceIdentifier` or `DBClusterIdentifier`
 + `BackupRetentionPeriod`
 
 ### Viewing automated backups<a name="USER_WorkingWithAutomatedBackups.viewing"></a>
@@ -139,9 +127,12 @@ To describe the retained automated backups for your existing DB instances using 
 
 ## Retaining automated backups<a name="USER_WorkingWithAutomatedBackups.Retaining"></a>
 
+**Note**  
+You can only retain automated backups of DB instances, not Multi\-AZ DB clusters\.
+
 When you delete a DB instance, you can retain automated backups\.
 
-Retained automated backups contain system snapshots and transaction logs from a DB instance\. They also include your DB instance properties like allocated storage and DB instance class, which are required to restore it to an active instance\.  
+Retained automated backups contain system snapshots and transaction logs from a DB instance\. They also include your DB instance properties like allocated storage and DB instance class, which are required to restore it to an active instance\.
 
 You can retain automated backups for RDS instances running the MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server engines\.
 
@@ -160,7 +151,7 @@ The system snapshots and transaction logs in a retained automated backup expire 
 
 You can remove a retained automated backup in the same way that you can delete a DB instance\. You can remove retained automated backups using the console or the RDS API operation `DeleteDBInstanceAutomatedBackup`\. 
 
-Final snapshots are independent of retained automated backups\. We strongly suggest that you take a final snapshot even if you retain automated backups, because the retained automated backups eventually expire\. The final snapshot doesn't expire\.
+Final snapshots are independent of retained automated backups\. We strongly suggest that you take a final snapshot even if you retain automated backups because the retained automated backups eventually expire\. The final snapshot doesn't expire\.
 
 ### Viewing retained backups<a name="USER_WorkingWithAutomatedBackups.viewing-retained"></a>
 
@@ -244,7 +235,7 @@ You can delete a retained automated backup by using the Amazon RDS API operation
 You might want to temporarily disable automated backups in certain situations, for example while loading large amounts of data\.
 
 **Important**  
-We highly discourage disabling automated backups because it disables point\-in\-time recovery\. Disabling automatic backups for a DB instance deletes all existing automated backups for the instance\. If you disable and then re\-enable automated backups, you can restore starting only from the time you re\-enabled automated backups\. 
+We highly discourage disabling automated backups because it disables point\-in\-time recovery\. Disabling automatic backups for a DB instance or Multi\-AZ DB cluster deletes all existing automated backups for the database\. If you disable and then re\-enable automated backups, you can restore starting only from the time you re\-enabled automated backups\. 
 
 ### Console<a name="USER_WorkingWithAutomatedBackups.Disabling.CON"></a>
 
@@ -252,9 +243,9 @@ We highly discourage disabling automated backups because it disables point\-in\-
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
+1. In the navigation pane, choose **Databases**, and then choose the DB instance or Multi\-AZ DB cluster that you want to modify\.
 
-1. Choose **Modify**\. The **Modify DB instance** page appears\.
+1. Choose **Modify**\.
 
 1. For **Backup retention period**, choose **0 days**\. 
 
@@ -262,41 +253,41 @@ We highly discourage disabling automated backups because it disables point\-in\-
 
 1. Choose **Apply immediately**\.
 
-1. On the confirmation page, choose **Modify DB instance** to save your changes and disable automated backups\.
+1. Choose **Modify DB instance** or **Modify cluster** to save your changes and disable automated backups\.
 
 ### AWS CLI<a name="USER_WorkingWithAutomatedBackups.Disabling.CLI"></a>
 
-To disable automated backups immediately, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command and set the backup retention period to 0 with `--apply-immediately`\. 
+To disable automated backups immediately, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) or [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command and set the backup retention period to 0 with `--apply-immediately`\.
 
 **Example**  
-The following example immediately disabled automatic backups\.  
+The following example immediately disables automatic backups on a Multi\-AZ DB cluster\.  
 For Linux, macOS, or Unix:  
 
 ```
-aws rds modify-db-instance \
-    --db-instance-identifier mydbinstance \
+aws rds modify-db-cluster \
+    --db-cluster-identifier mydbcluster \
     --backup-retention-period 0 \
     --apply-immediately
 ```
 For Windows:  
 
 ```
-aws rds modify-db-instance ^
-    --db-instance-identifier mydbinstance ^
+aws rds modify-db-cluster ^
+    --db-cluster-identifier mydbcluster ^
     --backup-retention-period 0 ^
     --apply-immediately
 ```
 
-To know when the modification is in effect, call `describe-db-instances` for the DB instance until the value for backup retention period is 0 and mydbinstance status is available\.
+To know when the modification is in effect, call `describe-db-instances` for the DB instance \(or `describe-db-clusters` for a Multi\-AZ DB cluster\) until the value for backup retention period is 0 and `mydbcluster` status is available\.
 
 ```
-aws rds describe-db-instances --db-instance-identifier mydbinstance
+aws rds describe-db-clusters --db-cluster-identifier mydcluster
 ```
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Disabling.API"></a>
 
-To disable automated backups immediately, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters: 
-+ `DBInstanceIdentifier = mydbinstance`
+To disable automated backups immediately, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) or [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation with the following parameters: 
++ `DBInstanceIdentifier = mydbinstance` \(or `DBClusterIdentifier = mydbcluster`\)
 + `BackupRetentionPeriod = 0`
 
 **Example**  
@@ -315,9 +306,9 @@ https://rds.amazonaws.com/
 
 ## Using AWS Backup to manage automated backups<a name="AutomatedBackups.AWSBackup"></a>
 
-AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud and on premises\. You can manage backups of your Amazon RDS DB instances in AWS Backup\.
+AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud and on premises\. You can manage backups of your Amazon RDS databases in AWS Backup\.
 
-To enable backups in AWS Backup, you use resource tagging to associate your DB instance with a backup plan\. For more information, see [Using tags to enable backups in AWS Backup](USER_Tagging.md#Tagging.RDS.AWSBackup)\.
+To enable backups in AWS Backup, use resource tagging to associate your database with a backup plan\. For more information, see [Using tags to enable backups in AWS Backup](USER_Tagging.md#Tagging.RDS.AWSBackup)\.
 
 **Note**  
 Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the DB snapshot quota for RDS\. Backups that were created with AWS Backup have names ending in `awsbackup:backup-job-number`\.
@@ -336,7 +327,7 @@ For more information about AWS Backup, see the [https://docs.aws.amazon.com/aws-
 
 ## Automated backups with unsupported MySQL storage engines<a name="Overview.BackupDeviceRestrictions"></a>
 
-For the MySQL DB engine, automated backups are only supported for the InnoDB storage engine\. Use of these features with other MySQL storage engines, including MyISAM, can lead to unreliable behavior while restoring from backups\. Specifically, since storage engines like MyISAM don't support reliable crash recovery, your tables can be corrupted in the event of a crash\. For this reason, we encourage you to use the InnoDB storage engine\. 
+For the MySQL DB engine, automated backups are only supported for the InnoDB storage engine\. Using these features with other MySQL storage engines, including MyISAM, can lead to unreliable behavior when you're restoring from backups\. Specifically, since storage engines like MyISAM don't support reliable crash recovery, your tables can be corrupted in the event of a crash\. For this reason, we encourage you to use the InnoDB storage engine\. 
 + To convert existing MyISAM tables to InnoDB tables, you can use the `ALTER TABLE` command, for example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
 + If you choose to use MyISAM, you can attempt to manually repair tables that become damaged after a crash by using the `REPAIR` command\. For more information, see [REPAIR TABLE statement](https://dev.mysql.com/doc/refman/8.0/en/repair-table.html) in the MySQL documentation\. However, as noted in the MySQL documentation, there is a good chance that you might not be able to recover all your data\. 
 + If you want to take a snapshot of your MyISAM tables before restoring, follow these steps: 
@@ -351,7 +342,7 @@ For the MySQL DB engine, automated backups are only supported for the InnoDB sto
      mysql> FLUSH TABLES myisam_table, myisam_table2 WITH READ LOCK;
      ```
 
-  1. Create a snapshot of your DB instance\. When the snapshot has completed, release the locks and resume activity on the MyISAM tables\. You can release the locks on your tables using the following command: 
+  1. Create a snapshot of your DB instance or Multi\-AZ DB cluster\. When the snapshot has completed, release the locks and resume activity on the MyISAM tables\. You can release the locks on your tables using the following command: 
 
      ```
      mysql> UNLOCK TABLES;
@@ -361,7 +352,7 @@ For the MySQL DB engine, automated backups are only supported for the InnoDB sto
 
 ## Automated backups with unsupported MariaDB storage engines<a name="Overview.BackupDeviceRestrictionsMariaDB"></a>
 
-For the MariaDB DB engine, automated backups are only supported with the InnoDB storage engine\. Use of these features with other MariaDB storage engines, including Aria, might lead to unreliable behavior while restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the InnoDB storage engine\. 
+For the MariaDB DB engine, automated backups are only supported with the InnoDB storage engine\. Using these features with other MariaDB storage engines, including Aria, can lead to unreliable behavior when you're restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the InnoDB storage engine\. 
 + To convert existing Aria tables to InnoDB tables, you can use the `ALTER TABLE` command\. For example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
 + If you choose to use Aria, you can attempt to manually repair tables that become damaged after a crash by using the `REPAIR TABLE` command\. For more information, see [http://mariadb\.com/kb/en/mariadb/repair\-table/](http://mariadb.com/kb/en/mariadb/repair-table/)\. 
 + If you want to take a snapshot of your Aria tables before restoring, follow these steps: 
@@ -370,4 +361,4 @@ For the MariaDB DB engine, automated backups are only supported with the InnoDB 
 
   1. Lock and flush each of your Aria tables\.
 
-  1. Create a snapshot of your DB instance\. When the snapshot has completed, release the locks and resume activity on the Aria tables\. These steps force Aria to flush data stored in memory to disk, thereby ensuring a clean start when you restore from a DB snapshot\. 
+  1. Create a snapshot of your DB instance or Multi\-AZ DB cluster\. When the snapshot has completed, release the locks and resume activity on the Aria tables\. These steps force Aria to flush data stored in memory to disk, thereby ensuring a clean start when you restore from a DB snapshot\. 

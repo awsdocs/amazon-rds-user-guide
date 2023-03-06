@@ -79,39 +79,39 @@ You can change the DB instance class to show the supported engine versions for i
 Following are the supported engine version and Region availability for Multi\-AZ DB clusters with RDS for PostgreSQL\.
 
 
-| Region | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | 
-| --- | --- | --- | 
-| US East \(Ohio\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| US East \(N\. Virginia\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| US West \(N\. California\) | – | – | 
-| US West \(Oregon\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Africa \(Cape Town\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Hong Kong\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Hyderabad\) | – | – | 
-| Asia Pacific \(Jakarta\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Melbourne\) | – | – | 
-| Asia Pacific \(Mumbai\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Osaka\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Seoul\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Singapore\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Sydney\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Asia Pacific \(Tokyo\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Canada \(Central\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| China \(Beijing\) | – | – | 
-| China \(Ningxia\) | – | – | 
-| Europe \(Frankfurt\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Europe \(Ireland\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Europe \(London\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Europe \(Milan\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Europe \(Paris\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Europe \(Spain\) | – | – | 
-| Europe \(Stockholm\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Europe \(Zurich\) | – | – | 
-| Middle East \(Bahrain\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| Middle East \(UAE\) | – | – | 
-| South America \(São Paulo\) | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| AWS GovCloud \(US\-East\) | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | 
+| Region | RDS for PostgreSQL 15 | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | 
+| --- | --- | --- | --- | 
+| US East \(Ohio\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| US East \(N\. Virginia\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| US West \(N\. California\) | – | – | – | 
+| US West \(Oregon\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Africa \(Cape Town\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Hong Kong\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Hyderabad\) | – | – | – | 
+| Asia Pacific \(Jakarta\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Melbourne\) | – | – | – | 
+| Asia Pacific \(Mumbai\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Osaka\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Seoul\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Singapore\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Sydney\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Asia Pacific \(Tokyo\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Canada \(Central\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| China \(Beijing\) | – | – | – | 
+| China \(Ningxia\) | – | – | – | 
+| Europe \(Frankfurt\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Ireland\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(London\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Milan\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Paris\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Spain\) | – | – | – | 
+| Europe \(Stockholm\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Europe \(Zurich\) | – | – | – | 
+| Middle East \(Bahrain\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| Middle East \(UAE\) | – | – | – | 
+| South America \(São Paulo\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| AWS GovCloud \(US\-East\) | – | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | – | 
 
 You can also list the supported versions in a Region for the db\.r5d\.large DB instance class by running the following AWS CLI command\.
 

@@ -137,7 +137,7 @@ Running a DB instance as a Multi\-AZ deployment can further reduce the impact of
 
 When you modify the database engine for your DB instance in a Multi\-AZ deployment, Amazon RDS upgrades both primary and secondary DB instances at once\. In this case, the database engine for the entire Multi\-AZ deployment is shut down during the upgrade\. 
 
-For more information on Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
+For more information on Multi\-AZ deployments, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
 
 ## The Amazon RDS maintenance window<a name="Concepts.DBMaintenance"></a>
 

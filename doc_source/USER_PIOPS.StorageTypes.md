@@ -309,7 +309,7 @@ Storage modification uses an I/O\-intensive operation if any of the following fa
 
 If your storage modification involves an I/O\-intensive operation, it consumes I/O resources and increases the load on your DB instance\. Storage modifications with I/O\-intensive operations involving General Purpose SSD \(gp2\) storage can deplete your I/O credit balance, resulting in longer conversion times\.
 
-We recommend as a best practice to schedule these storage modification requests outside of peak hours to help reduce the time required to complete the storage modification operation\. Alternatively, you can create a read replica of the DB instance and perform the storage modification on the read replica\. Then promote the read replica to be the primary DB instance\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
+We recommend as a best practice to schedule these storage modification requests outside of peak hours to help reduce the time required to complete the storage modification operation\. Alternatively, you can create a read replica of the DB instance and perform the storage modification on the read replica\. Then promote the read replica to be the primary DB instance\. For more information, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 For more information, see [Why is an Amazon RDS DB instance stuck in the modifying state when I try to increase the allocated storage?](https://aws.amazon.com/premiumsupport/knowledge-center/rds-stuck-modifying/)
 

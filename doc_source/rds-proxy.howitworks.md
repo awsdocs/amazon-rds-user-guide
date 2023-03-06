@@ -19,7 +19,7 @@
 
  RDS Proxy handles the infrastructure to perform connection pooling and the other features described in the sections that follow\. You see the proxies represented in the RDS console on the **Proxies** page\. 
 
- Each proxy handles connections to a single RDS DB instance or Aurora DB cluster\. The proxy automatically determines the current writer instance for RDS Multi\-AZ DB instances and Aurora provisioned clusters\. For Aurora multi\-master clusters, the proxy connects to one of the writer instances and uses the other writer instances as hot standby targets\.  
+Each proxy handles connections to a single RDS DB instance or Aurora DB cluster\. The proxy automatically determines the current writer instance for RDS Multi\-AZ DB instances and Aurora provisioned clusters\.
 
  The connections that a proxy keeps open and available for your database application to use make up the *connection pool*\. 
 

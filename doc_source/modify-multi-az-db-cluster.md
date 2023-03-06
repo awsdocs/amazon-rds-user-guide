@@ -23,7 +23,7 @@ You can modify a Multi\-AZ DB cluster using the AWS Management Console, the AWS 
 
 1. When all the changes are as you want them, choose **Continue** and check the summary of modifications\. 
 
-1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause downtime in some cases\. For more information, see [Using the Apply Immediately setting](#modify-multi-az-db-cluster-apply-immediately)\. 
+1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause downtime in some cases\. For more information, see [Applying changes immediately](#modify-multi-az-db-cluster-apply-immediately)\. 
 
 1. On the confirmation page, review your changes\. If they're correct, choose **Modify DB cluster** to save your changes\. 
 
@@ -34,7 +34,7 @@ You can modify a Multi\-AZ DB cluster using the AWS Management Console, the AWS 
 To modify a Multi\-AZ DB cluster by using the AWS CLI, call the [modify\-db\-cluster](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command\. Specify the DB cluster identifier and the values for the options that you want to modify\. For information about each option, see [Settings for modifying Multi\-AZ DB clusters](#modify-multi-az-db-cluster-settings)\. 
 
 **Example**  
-The following code modifies `my-multi-az-dbcluster` by setting the backup retention period to 1 week \(7 days\)\. The code turns on deletion protection by using `--deletion-protection`\. To turn off deletion protection, use `--no-deletion-protection`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\. For more information, see [Using the Apply Immediately setting](#modify-multi-az-db-cluster-apply-immediately)\.   
+The following code modifies `my-multi-az-dbcluster` by setting the backup retention period to 1 week \(7 days\)\. The code turns on deletion protection by using `--deletion-protection`\. To turn off deletion protection, use `--no-deletion-protection`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\. For more information, see [Applying changes immediately](#modify-multi-az-db-cluster-apply-immediately)\.   
 For Linux, macOS, or Unix:  
 
 ```
@@ -58,7 +58,7 @@ aws rds modify-db-cluster ^
 
 To modify a Multi\-AZ DB cluster by using the Amazon RDS API, call the [ModifyDBCluster](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) operation\. Specify the DB cluster identifier, and the parameters for the settings that you want to modify\. For information about each parameter, see [Settings for modifying Multi\-AZ DB clusters](#modify-multi-az-db-cluster-settings)\. 
 
-## Using the Apply Immediately setting<a name="modify-multi-az-db-cluster-apply-immediately"></a>
+## Applying changes immediately<a name="modify-multi-az-db-cluster-apply-immediately"></a>
 
 When you modify a Multi\-AZ DB cluster, you can apply the changes immediately\. To apply changes immediately, you choose the **Apply Immediately** option in the AWS Management Console\. Or you use the `--apply-immediately` option when calling the AWS CLI or set the `ApplyImmediately` parameter to `true` when using the Amazon RDS API\. 
 

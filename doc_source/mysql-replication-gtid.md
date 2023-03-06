@@ -149,8 +149,8 @@ You can disable GTID\-based replication for a MySQL DB instance with read replic
 1. On each read replica, run the following procedure\.
 
    ```
-   CALL mysql.rds_set_master_auto_position(0); (Aurora MySQL version 1 and 2)
-   CALL mysql.rds_set_source_auto_position(0); (Aurora MySQL version 3 and higher)
+   CALL mysql.rds_set_master_auto_position(0); (Aurora MySQL version 2)
+   CALL mysql.rds_set_source_auto_position(0); (Aurora MySQL version 3)
    ```
 
 1. Reset the `gtid_mode` to `ON_PERMISSIVE`\.

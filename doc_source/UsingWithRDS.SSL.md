@@ -47,7 +47,7 @@ The available CAs depend on the DB engine and DB engine version\. When you use t
 
 The console only shows the CAs that are available for the DB engine and DB engine version\. If you are using the AWS CLI, you can set the CA for a DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) or [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\.
 
-If you are using the AWS CLI, you can see the available CAs for your account by using the [describe\-certificates](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-certificates.html) command\. This command also shows the expiration date for each CA in `ValidTill` in the output\. You can find the CAs that are available for a specific DB engine and DB engine version using the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-certificates.html) command\.
+If you are using the AWS CLI, you can see the available CAs for your account by using the [describe\-certificates](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-certificates.html) command\. This command also shows the expiration date for each CA in `ValidTill` in the output\. You can find the CAs that are available for a specific DB engine and DB engine version using the [describe\-db\-engine\-versions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) command\.
 
 The following example shows the CAs available for the default RDS for PostgreSQL DB engine version\.
 
@@ -55,7 +55,7 @@ The following example shows the CAs available for the default RDS for PostgreSQL
 aws rds describe-db-engine-versions --default-only --engine postgres
 ```
 
-Your output is similar to the following\. The available CAs are listed in `SupportedCACertificatesIdentifiers`\. The output also shows whether the DB engine version supports rotating the certificate without restart in `SupportsCertificateRotationWithoutRestart`\.
+Your output is similar to the following\. The available CAs are listed in `SupportedCACertificateIdentifiers`\. The output also shows whether the DB engine version supports rotating the certificate without restart in `SupportsCertificateRotationWithoutRestart`\.
 
 ```
 {
@@ -78,7 +78,7 @@ Your output is similar to the following\. The available CAs are listed in `Suppo
             "SupportsGlobalDatabases": false,
             "SupportsBabelfish": false,
             "SupportsCertificateRotationWithoutRestart": true,
-            "SupportedCACertificatesIdentifiers": [
+            "SupportedCACertificateIdentifiers": [
                 "rds-ca-2019",
                 "rds-ca-rsa2048-g1",
                 "rds-ca-ecc384-g1",

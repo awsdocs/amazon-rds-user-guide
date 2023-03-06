@@ -1,7 +1,7 @@
 # Renaming a Multi\-AZ DB cluster<a name="multi-az-db-cluster-rename"></a>
 
 You can rename a Multi\-AZ DB cluster by using the AWS Management Console, the AWS CLI `modify-db-cluster` command, or the Amazon RDS API `ModifyDBCluster` operation\. Renaming a Multi\-AZ DB cluster can have significant effects\. The following is a list of considerations before you rename a Multi\-AZ DB cluster\.
-+ When you rename a Multi\-AZ DB cluster, the cluster endpoints for the Multi\-AZ DB cluster change\. These endpoints change because they include the name you assigned to the Multi\-AZ DB cluster\. You can redirect traffic from an old endpoint to a new one\. For more information about Multi\-AZ DB cluster endpoints, see [Managing connections for Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-connection-management)\.
++ When you rename a Multi\-AZ DB cluster, the cluster endpoints for the Multi\-AZ DB cluster change\. These endpoints change because they include the name you assigned to the Multi\-AZ DB cluster\. You can redirect traffic from an old endpoint to a new one\. For more information about Multi\-AZ DB cluster endpoints, see [Connecting to a Multi\-AZ DB cluster](multi-az-db-clusters-concepts-connection-management.md)\.
 + When you rename a Multi\-AZ DB cluster, the old DNS name that was used by the Multi\-AZ DB cluster is deleted, although it could remain cached for a few minutes\. The new DNS name for the renamed Multi\-AZ DB cluster becomes effective in about two minutes\. The renamed Multi\-AZ DB cluster isn't available until the new name becomes effective\.
 + You can't use an existing Multi\-AZ DB cluster name when renaming a cluster\.
 + Metrics and events associated with the name of a Multi\-AZ DB cluster are maintained if you reuse a DB cluster name\.
@@ -39,7 +39,7 @@ If you delete the old Multi\-AZ DB cluster, you are responsible for deleting any
 
 1. Choose **Continue**\.
 
-1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately setting](modify-multi-az-db-cluster.md#modify-multi-az-db-cluster-apply-immediately)\. 
+1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Applying changes immediately](modify-multi-az-db-cluster.md#modify-multi-az-db-cluster-apply-immediately)\. 
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify cluster** to save your changes\.
 

@@ -429,4 +429,4 @@ Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STA
    CALL mysql.rds_reset_external_master;
    ```
 
-1. Turn on additional Amazon RDS features such as Multi\-AZ support and read replicas\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md) and [Working with read replicas](USER_ReadRepl.md)\.
+1. Turn on additional Amazon RDS features such as Multi\-AZ support and read replicas\. For more information, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md) and [Working with DB instance read replicas](USER_ReadRepl.md)\.

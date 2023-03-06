@@ -35,6 +35,7 @@ For more information on additional requirements for cross\-Region read replicas 
 ## Cross\-Region read replicas with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.pg"></a>
 
 Cross\-Region read replicas with RDS for PostgreSQL are available in all Regions for the following versions:
++ RDS for PostgreSQL 15 \(All versions\)
 + RDS for PostgreSQL 14 \(All versions\)
 + RDS for PostgreSQL 13 \(All versions\)
 + RDS for PostgreSQL 12 \(All versions\)

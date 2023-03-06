@@ -1,6 +1,6 @@
 # Working with read replicas for Microsoft SQL Server in Amazon RDS<a name="SQLServer.ReadReplicas"></a>
 
-You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with read replicas](USER_ReadRepl.md)\. 
+You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with DB instance read replicas](USER_ReadRepl.md)\. 
 
 In this section, you can find specific information about working with read replicas on Amazon RDS for SQL Server\.
 

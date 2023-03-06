@@ -264,7 +264,7 @@ For MySQL user accounts configured to `REQUIRE SSL`, the connection attempt fail
 To enforce encryption for existing MySQL database user accounts, you can use the `ALTER USER` command\. The syntax varies, depending on the MySQL version, as shown in the following table\. For more information, see [ALTER USER](https://dev.mysql.com/doc/refman/8.0/en/alter-user.html) in *MySQL Reference Manual*\.
 
 
-| MySQL 5\.7, MySQL 8  | MySQL 5\.6 | 
+| MySQL 5\.7, MySQL 8\.0 | MySQL 5\.6 | 
 | --- | --- | 
 |  `ALTER USER 'user'@'%' REQUIRE SSL;`  |  `GRANT USAGE ON *.* to 'user'@'%' REQUIRE SSL;`  | 
 

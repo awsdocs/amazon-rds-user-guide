@@ -213,7 +213,7 @@ CALL mysql.rds_reset_external_master;
 The master user must run the `mysql.rds_reset_external_master` procedure\. This procedure must be run on the MySQL DB instance to be removed as a read replica of a MySQL instance running external to Amazon RDS\.
 
 **Note**  
-We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
+We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 For more information about using replication to import data from an instance of MySQL running external to Amazon RDS, see [Configuring binary log file position replication with an external source instance](MySQL.Procedural.Importing.External.Repl.md)\.
 
@@ -307,7 +307,7 @@ The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set 
 To use encrypted replication, configure source database instance to use SSL connections\. Also, import the certificate authority certificate, client certificate, and client key into the DB instance or DB cluster using the [mysql\.rds\_import\_binlog\_ssl\_material](#mysql_rds_import_binlog_ssl_material) procedure\.
 
 **Note**  
-We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
+We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 After calling `mysql.rds_set_external_master` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](#mysql_rds_start_replication) on the read replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](#mysql_rds_reset_external_master) to remove the read replica configuration\.
 
@@ -398,7 +398,7 @@ Before you run `mysql.rds_set_external_master_with_auto_position`, you must conf
 For more information, see [Configuring binary log file position replication with an external source instance](MySQL.Procedural.Importing.External.Repl.md)\.
 
 **Note**  
-We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
+We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 After calling `mysql.rds_set_external_master_with_auto_position` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](#mysql_rds_start_replication) on the read replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](#mysql_rds_reset_external_master) to remove the read replica configuration\.
 
@@ -499,7 +499,7 @@ The limit for this parameter is one day \(86400 seconds\)\.
 For more information, see [Configuring binary log file position replication with an external source instance](MySQL.Procedural.Importing.External.Repl.md)\.
 
 **Note**  
-We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
+We recommend that you use read replicas to manage replication between two Amazon RDS DB instances when possible\. When you do so, we recommend that you use only this and other replication\-related stored procedures\. These practices enable more complex replication topologies between Amazon RDS DB instances\. We offer these stored procedures primarily to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 After calling `mysql.rds_set_external_master_with_delay` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](#mysql_rds_start_replication) on the read replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](#mysql_rds_reset_external_master) to remove the read replica configuration\.
 
@@ -578,9 +578,9 @@ The limit for this parameter is one day \(86400 seconds\)\.
 
 The master user must run the `mysql.rds_set_source_delay` procedure\.
 
-For disaster recovery, you can use this procedure with the [mysql\.rds\_start\_replication\_until](#mysql_rds_start_replication_until) stored procedure or the [](#mysql_rds_start_replication_until_gtid) stored procedure\. To roll forward changes to a delayed read replica to the time just before a disaster, you can run the `mysql.rds_set_source_delay` procedure\. After the `mysql.rds_start_replication_until` or `mysql.rds_start_replication_until_gtid` procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+For disaster recovery, you can use this procedure with the [mysql\.rds\_start\_replication\_until](#mysql_rds_start_replication_until) stored procedure or the [mysql\.rds\_start\_replication\_until\_gtid](#mysql_rds_start_replication_until_gtid) stored procedure\. To roll forward changes to a delayed read replica to the time just before a disaster, you can run the `mysql.rds_set_source_delay` procedure\. After the `mysql.rds_start_replication_until` or `mysql.rds_start_replication_until_gtid` procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
-To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information on GTID\-based replication, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
+To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](#mysql_rds_skip_transaction_with_gtid) stored procedure\. For more information on GTID\-based replication, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
 
 The `mysql.rds_set_source_delay` procedure is available in these versions of RDS for MySQL:
 + MySQL 8\.0\.26 and higher 8\.0 versions
@@ -645,7 +645,7 @@ CALL mysql.rds_skip_repl_error;
 
 The master user must run the `mysql.rds_skip_repl_error` procedure on a read replica\. For more information about this procedure, see [Calling the mysql\.rds\_skip\_repl\_error procedure](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError.procedure)\.
 
-To determine if there are errors, run the MySQL `SHOW REPLICA STATUS\G` command\. If a replication error isn't critical, you can run `mysql.rds_skip_repl_error` to skip the error\. If there are multiple errors, `mysql.rds_skip_repl_error` deletes the first error, then warns that others are present\. You can then use `SHOW REPLICA STATUS\G` to determine the correct course of action for the next error\. For information about the values returned, see [SHOW REPLICA STATUS Statement](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html) in the MySQL documentation\.
+To determine if there are errors, run the MySQL `SHOW REPLICA STATUS\G` command\. If a replication error isn't critical, you can run `mysql.rds_skip_repl_error` to skip the error\. If there are multiple errors, `mysql.rds_skip_repl_error` deletes the first error, then warns that others are present\. You can then use `SHOW REPLICA STATUS\G` to determine the correct course of action for the next error\. For information about the values returned, see [SHOW REPLICA STATUS statement](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html) in the MySQL documentation\.
 
 **Note**  
 Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\.
@@ -675,7 +675,7 @@ CALL mysql.rds_set_configuration('binlog retention hours', 48);
 Initiates replication from an RDS for MySQL DB instance\.
 
 **Note**  
-You can use the [mysql\.rds\_start\_replication\_until](#mysql_rds_start_replication_until) or [](#mysql_rds_start_replication_until_gtid) stored procedure to initiate replication from an RDS for MySQL DB instance and stop replication at the specified binary log file location\.
+You can use the [mysql\.rds\_start\_replication\_until](#mysql_rds_start_replication_until) or [mysql\.rds\_start\_replication\_until\_gtid](#mysql_rds_start_replication_until_gtid) stored procedure to initiate replication from an RDS for MySQL DB instance and stop replication at the specified binary log file location\.
 
 ### Syntax<a name="mysql_rds_start_replication-syntax"></a>
 
@@ -693,7 +693,7 @@ To import data from an instance of MySQL external to Amazon RDS, call `mysql.rds
 
 To export data to an instance of MySQL external to Amazon RDS, call `mysql.rds_start_replication` and `mysql.rds_stop_replication` on the read replica to control some replication actions, such as purging binary logs\. For more information, see [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\.
 
-You can also call `mysql.rds_start_replication` on the read replica to restart any replication process that you previously stopped by calling `mysql.rds_stop_replication`\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
+You can also call `mysql.rds_start_replication` on the read replica to restart any replication process that you previously stopped by calling `mysql.rds_stop_replication`\. For more information, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 
 ## mysql\.rds\_start\_replication\_until<a name="mysql_rds_start_replication_until"></a>
 
@@ -807,4 +807,4 @@ If you are configuring replication to import data from an instance of MySQL runn
 
 If you are configuring replication to export data to an instance of MySQL external to Amazon RDS, you call `mysql.rds_start_replication` and `mysql.rds_stop_replication` on the read replica to control some replication actions, such as purging binary logs\. For more information, see [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\.
 
-You can also use `mysql.rds_stop_replication` to stop replication between two Amazon RDS DB instances\. You typically stop replication to perform a long running operation on the read replica, such as creating a large index on the read replica\. You can restart any replication process that you stopped by calling [mysql\.rds\_start\_replication](#mysql_rds_start_replication) on the read replica\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
+You can also use `mysql.rds_stop_replication` to stop replication between two Amazon RDS DB instances\. You typically stop replication to perform a long running operation on the read replica, such as creating a large index on the read replica\. You can restart any replication process that you stopped by calling [mysql\.rds\_start\_replication](#mysql_rds_start_replication) on the read replica\. For more information, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
