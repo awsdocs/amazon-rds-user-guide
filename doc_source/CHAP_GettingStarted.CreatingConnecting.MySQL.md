@@ -70,9 +70,9 @@ In this example, you use **Easy create** to create a DB instance running the MyS
 
 1. Choose **Create database**\.
 
-   To view the master user name and password for the DB instance, choose **View credential details**\.
+   To view the master username and password for the DB instance, choose **View credential details**\.
 
-   You can use the user name and password that appears to connect to the DB instance as the master user\.
+   You can use the username and password that appears to connect to the DB instance as the master user\.
 **Important**  
 You can't view the master user password again\. If you don't record it, you might have to change it\.   
 If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
@@ -148,7 +148,15 @@ If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses
 1. On the **Launch Status** page, note the identifier for your new EC2 instance, for example: `i-1234567890abcdef0`\.  
 ![\[EC2 instance identifier on Launch Status page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-ec2-id.png)
 
-1. Choose the EC2 instance identifier to open the list of EC2 instances\. 
+1. Choose the EC2 instance identifier to open the list of EC2 instances, and then select your EC2 instance\.
+
+1. In the **Details** tab, note the following values, which you need when you connect using SSH:
+
+   1. In **Instance summary**, note the value for **Public IPv4 DNS**\.  
+![\[EC2 public DNS name on Details tab of Instances page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-ec2-public-dns.png)
+
+   1. In **Instance details**, note the value for **Key pair name**\.  
+![\[EC2 key pair name on Details tab of Instance page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-ec2-key-pair.png)
 
 1. Wait until the **Instance state** for your EC2 instance has a status of **Running** before continuing\.
 
@@ -212,6 +220,18 @@ You can use any standard SQL client application to connect to the DB instance\. 
 
 1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
+   We recommend that you connect to your EC2 instance using SSH\. If the SSH client utility is installed on Windows, Linux, or Mac, you can connect to the instance using the following command format:
+
+   ```
+   ssh -i location_of_pem_file ec2-user@ec2-instance-public-dns-name
+   ```
+
+   For example, assume that `ec2-database-connect-key-pair.pem` is stored in `/dir1` on Linux, and the public IPv4 DNS for your EC2 instance is `ec2-12-345-678-90.compute-1.amazonaws.com`\. Your SSH command would look as follows:
+
+   ```
+   ssh -i /dir1/ec2-database-connect-key-pair.pem ec2-user@ec2-12-345-678-90.compute-1.amazonaws.com
+   ```
+
 1. Get the latest bug fixes and security updates by updating the software on your EC2 instance\. To do this, use the following command\.
 **Note**  
 The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
@@ -228,9 +248,9 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    sudo yum install mariadb
    ```
 
-1. Connect to the MySQL DB instance\. For example, enter the following command at a command prompt on a client computer\. This action lets you connect to the MySQL DB instance using the MySQL client\.
+1. Connect to the MySQL DB instance\. For example, enter the following command\. This action lets you connect to the MySQL DB instance using the MySQL client\.
 
-   Substitute the DB instance endpoint \(DNS name\) for `endpoint`, and substitute the master user name that you used for `admin`\. Provide the master password that you used when prompted for a password\.
+   Substitute the DB instance endpoint \(DNS name\) for `endpoint`, and substitute the master username that you used for `admin`\. Provide the master password that you used when prompted for a password\.
 
    ```
    mysql -h endpoint -P 3306 -u admin -p

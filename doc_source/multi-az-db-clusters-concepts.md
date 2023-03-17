@@ -47,6 +47,7 @@ The following diagram shows a Multi\-AZ DB cluster\.
 
 Multi\-AZ DB clusters typically have lower write latency when compared to Multi\-AZ DB instance deployments\. They also allow read\-only workloads to run on reader DB instances\. The RDS console shows the Availability Zone of the writer DB instance and the Availability Zones of the reader DB instances\. You can also use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI command or the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API operation to find this information\. 
 
+**Important**  
 To prevent replication errors in RDS for MySQL Multi\-AZ DB clusters, we strongly recommend that all tables have a primary key\.
 
 ## Limitations for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts.Limitations"></a>

@@ -1,28 +1,39 @@
-# Creating an Oracle DB instance and connecting to a database on an Oracle DB instance<a name="CHAP_GettingStarted.CreatingConnecting.Oracle"></a>
+# Creating and connecting to an Oracle DB instance<a name="CHAP_GettingStarted.CreatingConnecting.Oracle"></a>
 
-The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB instance is similar to your on\-premises Oracle database\. 
+This tutorial creates an EC2 instance and an RDS for Oracle DB instance\. The tutorial shows you how to access the DB instance from the EC2 instance using a standard Oracle client\. As a best practice, this tutorial creates a private DB instance in a virtual private cloud \(VPC\)\. In most cases, other resources in the same VPC, such as EC2 instances, can access the DB instance, but resources outside of the VPC can't access it\.
 
 **Important**  
-Before you can create or connect to a DB instance, make sure to complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
+There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.
 
-There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources that you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.
+The following diagram shows the configuration when the tutorial is complete\.
 
-In this topic, you create a sample Oracle DB instance and connect to it\. Finally, you delete the sample DB instance\. 
+![\[EC2 instance and Oracle DB instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-oracle.png)
 
-## Creating a sample Oracle DB instance<a name="CHAP_GettingStarted.Creating.Oracle"></a>
+This tutorial uses **Easy create** to create a DB instance running Oracle with the AWS Management Console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. The DB instance created by **Easy create** is private\. 
 
-The DB instance is where you run your Oracle databases\.
+When you use **Standard create** instead of **Easy create**, you can specify more configuration options when you create a DB instance, including ones for availability, security, backups, and maintenance\. To create a public DB instance, you must use **Standard create**\. For information about creating DB instances with **Standard create**, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-**Note**  
-RDS for Oracle supports a single\-tenant architecture, where a pluggable database \(PDB\) resides in a multitenant container database \(CDB\)\. For more information, see [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)\.
+**Topics**
++ [Prerequisites](#CHAP_GettingStarted.Prerequisites.Oracle)
++ [Step 1: Create an Oracle DB instance](#CHAP_GettingStarted.Creating.Oracle)
++ [Step 2: Create an EC2 instance](#CHAP_GettingStarted.Creating.Oracle.EC2)
++ [Step 3: Connect your EC2 instance and Oracle DB instance automatically](#CHAP_GettingStarted.Connecting.EC2.Oracle)
++ [Step 4: Connect your SQL client to an Oracle DB instance](#CHAP_GettingStarted.Connecting.Oracle)
++ [Step 5: Delete the EC2 instance and DB instance](#CHAP_GettingStarted.Deleting.Oracle)
 
-You can use **Easy create** to create a DB instance running Oracle with the AWS Management Console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+## Prerequisites<a name="CHAP_GettingStarted.Prerequisites.Oracle"></a>
 
-In this example, you use **Easy create** to create a DB instance running the Oracle database engine with a db\.m4\.large DB instance class\.
+Before you begin, complete the steps in the following sections:
++ [Sign up for an AWS account](CHAP_SettingUp.md#sign-up-for-aws)
++ [Create an administrative user](CHAP_SettingUp.md#create-an-admin)
 
-For information about creating DB instances with **Standard create**, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. If you want to use free tier, use **Standard create**\.
+## Step 1: Create an Oracle DB instance<a name="CHAP_GettingStarted.Creating.Oracle"></a>
 
-**To create an Oracle DB instance with Easy create enabled**
+The basic building block of Amazon RDS is the DB instance\. This environment is where you run your Oracle databases\.
+
+In this example, you use **Easy create** to create a DB instance running the Oracle database engine with a db\.m5\.large DB instance class\.
+
+**To create an Oracle DB instance with Easy create**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -30,57 +41,128 @@ For information about creating DB instances with **Standard create**, see [Creat
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database** and make sure that **Easy create** is chosen\.  
-![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
+1. Choose **Create database** and make sure that **Easy create** is chosen\.   
+![\[Easy create option.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
 
-1. For **Engine type**, choose **Oracle**\.
+1. In **Configuration**, choose **Oracle**\.
 
-1. For **Edition**, leave the default of **Oracle Standard Edition Two**\.
+1. For **DB instance size**, choose **Dev/Test**\.
 
-1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name of **database\-1**\.
+1. For **DB instance identifier**, enter **database\-test1**\.
 
-1. For **Master username**, enter a name for the master user, or leave the default name\.
+1. For **Master username**, enter a name for the master user, or keep the default name\.
 
    The **Create database** page should look similar to the following image\.  
-![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-oracle.png)
+![\[Create database page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-oracle2.png)
 
-1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** box is selected\.
+1. To use an automatically generated master password for the DB instance, select **Auto generate a password**\.
 
-   To enter your master password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
+   To enter your master password, make sure **Auto generate a password** is cleared, and then enter the same password in **Master password** and **Confirm password**\.
 
-1. \(Optional\) Open **View default settings for Easy create**\.  
-![\[Display Easy create settings for Oracle DB\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-settings.png)
+1. Open **View default settings for Easy create**\.  
+![\[Easy create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-Oracle.png)
 
-   You can examine the default settings used with **Easy create**\. The **Editable after database is created** column shows which options you can change after database creation\.
-   + To change settings with **No** in that column, use **Standard create**\. 
-   + To change settings with **Yes** in that column, either use **Standard create**, or modify the DB instance after it is created to change the settings\.
+   Note the setting for **VPC**\. Your DB instance and EC2 instance must reside in the same VPC to set up connectivity between them automatically in a later step\. If you didn't create a new VPC in the AWS Region, then the default VPC is selected\.
 
-   The following are important considerations for changing the default settings:
-   + In some cases, you might want your DB instance to use a specific virtual private cloud \(VPC\) based on the Amazon VPC service\. Or you might require a specific subnet group or security group\. If so, use **Standard create** to specify these resources\. You might have created these resources when you set up for Amazon RDS\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
-   + If you want to be able to access the DB instance from a client outside of its VPC, use **Standard create** to set **Public access** to **Yes**\.
-
-     If the DB instance should be private, leave **Public access** set to **No**\.
-   + If you want to use free tier, use **Standard create** to set the Oracle version lower than version 12\.2, and then choose **Free tier** in **Templates**\.
+   You can examine the default settings used with **Easy create**\. The **Editable after database is created** column shows which options you can change after you create the database\.
+   + If a setting has **No** in that column, and you want a different setting, you can use **Standard create** to create the DB instance\.
+   + If a setting has **Yes** in that column, and you want a different setting, you can either use **Standard create** to create the DB instance, or modify the DB instance after you create it to change the setting\.
 
 1. Choose **Create database**\.
 
-   If you used an automatically generated password, the **View credential details** button appears on the **Databases** page\.
+   To view the master username and password for the DB instance, choose **View credential details**\.
 
-   To view the master user name and password for the DB instance, choose **View credential details**\.
-
-   To connect to the DB instance as the master user, use the user name and password that appear\.
+   You can use the username and password that appears to connect to the DB instance as the master user\.
 **Important**  
 You can't view the master user password again\. If you don't record it, you might have to change it\.   
 If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-1. For **Databases**, choose the name of the new Oracle DB instance\.
+1. In the **Databases** list, choose the name of the new Oracle DB instance to show its details\.
 
-   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **Creating** until the DB instance is ready to use\. When the state changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
-![\[Displays the DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
+   The DB instance has a status of **Creating** until it is ready to use\.
 
-## Connecting an EC2 instance and an Oracle DB instance automatically<a name="CHAP_GettingStarted.Connecting.EC2.Oracle"></a>
+   Wait for the **Region & AZ** value to appear\. When it appears, make a note of the value because you need it later\. In the following image, the **Region & AZ** value is **us\-east\-1d**\.  
+![\[DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
 
-You can automatically connect an existing EC2 instance to the DB instance from the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your Oracle DB instance\.
+   When the status changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\. While the DB instance is being created, you can move on to the next step and create an EC2 instance\.
+
+## Step 2: Create an EC2 instance<a name="CHAP_GettingStarted.Creating.Oracle.EC2"></a>
+
+Create an Amazon EC2 instance that you will use to connect to your database\.
+
+**To create an EC2 instance**
+
+1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the upper\-right corner of the AWS Management Console, choose the AWS Region you used for the database previously\.
+
+1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown in the following image\.  
+![\[EC2 Dashboard.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
+
+   The **Launch an instance** page opens\.
+
+1. Choose the following settings on the **Launch an instance** page\.
+
+   1. Under **Name and tags**, for **Name**, enter **ec2\-database\-connect**\.
+
+   1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Amazon Linux**, and then choose the **Amazon Linux 2 AMI**\. Keep the default selections for the other choices\.  
+![\[Choose an Amazon Machine Image.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
+
+   1. Under **Instance type**, choose **t2\.micro**\.
+
+   1. Under **Key pair \(login\)**, choose a **Key pair name** to use an existing key pair\. To create a new key pair for the Amazon EC2 instance, choose **Create new key pair** and then use the **Create key pair** window to create it\.
+
+      For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-key-pair) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+   1. In **Network settings**, choose **Edit**\.
+
+      1. For **VPC**, choose the VPC that you used for the database\. If you didn't create a new VPC in the AWS Region, choose the default VPC\.
+
+      1. For **Subnet**, choose the subnet that is in the same Availability Zone as the database\. You noted the Availability Zone of the database when you created it previously\. If you don't know the Availability Zone of the database, you can find it in the database details\.
+
+      1. For **Auto\-assign public IP**, make sure **Enable** is selected\.
+
+         If this setting has changed to **Disable**, then there is more than one subnet in the Availability Zone, and **Subnet** is set to a private subnet\. In this case, change the **Subnet** setting to a public subnet in the Availability Zone\.
+
+      1. For **Firewall \(security groups\)**, keep the default values\.
+
+      1. For **Inbound security groups rules**, choose the source of SSH connections to the EC2 instance\.
+
+         For **Type**, choose **ssh**\.
+
+         For **Source type**, choose **My IP** if the displayed IP address is correct for SSH connections\.
+
+         Otherwise, choose **Custom** and specify the IP address or IP address range\. To determine your public IP address, open a different browser window or tab, and use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `192.0.2.1/32`\.
+
+         In many cases, you might connect through an internet service provider \(ISP\) or from behind your firewall without a static IP address\. If so, make sure to determine the range of IP addresses used by client computers\.
+**Warning**  
+If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses to access your public EC2 instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your EC2 instances using SSH\.
+
+         The following image shows an example of the **Inbound security groups rules** section\.  
+![\[Inbound security group rules for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettings.png)
+
+   1. Leave the default values for the remaining sections\.
+
+   1. Review a summary of your EC2 instance configuration in the **Summary** panel, and when you're ready, choose **Launch instance**\.
+
+1. On the **Launch Status** page, note the identifier for your new EC2 instance, for example: `i-1234567890abcdef0`\.  
+![\[EC2 instance identifier on Launch Status page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-ec2-id.png)
+
+1. Choose the EC2 instance identifier to open the list of EC2 instances, and then select your EC2 instance\.
+
+1. In the **Details** tab, note the following values, which you need when you connect using SSH:
+
+   1. In **Instance summary**, note the value for **Public IPv4 DNS**\.  
+![\[EC2 public DNS name on Details tab of Instances page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-ec2-public-dns.png)
+
+   1. In **Instance details**, note the value for **Key pair name**\.  
+![\[EC2 key pair name on Details tab of Instance page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-ec2-key-pair.png)
+
+1. Wait until the **Instance state** for your EC2 instance has a status of **Running** before continuing\.
+
+## Step 3: Connect your EC2 instance and Oracle DB instance automatically<a name="CHAP_GettingStarted.Connecting.EC2.Oracle"></a>
+
+You can automatically connect an existing EC2 instance to a DB instance using the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your Oracle DB instance\. For this tutorial, set up a connection between the EC2 instance and the Oracle DB instance that you created previously\.
 
 Before setting up a connection between an EC2 instance and an RDS database, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\.
 
@@ -115,62 +197,123 @@ You can only set up a connection between an EC2 instance and an RDS database aut
 
    If the changes aren't correct, choose **Previous** or **Cancel**\.
 
-## Connecting to your sample Oracle DB instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
+To set up connectivity, RDS adds a security group to the EC2 instance and a security group to the DB instance\.
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this procedure, you connect to your sample DB instance by using the Oracle sqlplus command line utility\. To download a standalone version of this utility, see [SQL\*Plus User's Guide and Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/SQL-Plus-instant-client.html#GUID-9DC272F8-0805-4582-87C6-67B2BC816A2C)\.
+## Step 4: Connect your SQL client to an Oracle DB instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
 
-**To connect to a DB instance using SQL\*Plus**
+You can use any standard SQL client application to connect to your DB instance\. In this example, you connect to an Oracle DB instance using the Oracle command\-line client\.
 
-1. Make sure your DB instance is associated with a security group that provides access to it\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
-
-   If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
-
-   If your DB instance is publicly accessible, make sure its associated security group has inbound rules for the IP addresses that you want to access it\. If your DB instance is private, make sure its associated security group has inbound rules for the security group of each resource to access it\. An example is the security group for an Amazon EC2 instance\.
+**To connect to an Oracle DB instance**
 
 1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
-   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
+   1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+   1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region for the DB instance\.
+
+   1. In the navigation pane, choose **Databases**\.
 
    1. Choose the Oracle DB instance name to display its details\. 
 
-   1. On the **Connectivity & security** tab, copy the following pieces of information:
-      + Endpoint
-      + Port
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Connect to an Oracle DB instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
-      You need both the endpoint and the port number to connect to the DB instance\.   
-![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
+1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-   1. On the **Configuration** tab, copy the following pieces of information:
-      + DB name \(not the DB instance ID\)
-      + Master user name
-
-      You need both the DB name and the master user name to connect to the DB instance\. 
-
-1. Enter the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. Use the following values:
-   + For `dbuser`, enter the name of the master user that you copied in the preceding steps\.
-   + For `HOST=endpoint`, enter the endpoint that you copied in the preceding steps\.
-   + For `PORT=portnum`, enter the port number that you copied in the preceding steps\.
-   + For `SID=DB_NAME`, enter the Oracle database name \(not the instance name\) that you copied in the preceding steps\.
+   We recommend that you connect to your EC2 instance using SSH\. If the SSH client utility is installed on Windows, Linux, or Mac, you can connect to the instance using the following command format:
 
    ```
-   sqlplus 'dbuser@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=endpoint)(PORT=portnum))(CONNECT_DATA=(SID=DB_NAME)))'
+   ssh -i location_of_pem_file ec2-user@ec2-instance-public-dns-name
    ```
 
-   You should see output similar to the following\. 
+   For example, assume that `ec2-database-connect-key-pair.pem` is stored in `/dir1` on Linux, and the public IPv4 DNS for your EC2 instance is `ec2-12-345-678-90.compute-1.amazonaws.com`\. Your SSH command would look as follows:
 
    ```
-   SQL*Plus: Release 11.1.0.7.0 - Production on Wed May 25 15:13:59 2011
+   ssh -i /dir1/ec2-database-connect-key-pair.pem ec2-user@ec2-12-345-678-90.compute-1.amazonaws.com
+   ```
+
+1. Get the latest bug fixes and security updates by updating the software on your EC2 instance\. To do so, use the following command\.
+**Note**  
+The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
+
+   ```
+   sudo yum update -y
+   ```
+
+1. In a web browser, go to [https://www\.oracle\.com/database/technologies/instant\-client/linux\-x86\-64\-downloads\.html](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html)\.
+
+1. For the latest database version that appears on the web page, copy the \.rpm links \(not the \.zip links\) for the Instant Client Basic Package and SQL\*Plus Package\. For example, the following links are for Oracle Database version 21\.9:
+   + https://download\.oracle\.com/otn\_software/linux/instantclient/219000/oracle\-instantclient\-basic\-21\.9\.0\.0\.0\-1\.el8\.x86\_64\.rpm
+   + https://download\.oracle\.com/otn\_software/linux/instantclient/219000/oracle\-instantclient\-sqlplus\-21\.9\.0\.0\.0\-1\.el8\.x86\_64\.rpm
+
+1. In your SSH session, run the `wget` command to the download the \.rpm files from the links that you obtained in the previous step\. The following example downloads the \.rpm files for Oracle Database version 21\.9:
+
+   ```
+   wget https://download.oracle.com/otn_software/linux/instantclient/219000/oracle-instantclient-basic-21.9.0.0.0-1.el8.x86_64.rpm
+   wget https://download.oracle.com/otn_software/linux/instantclient/219000/oracle-instantclient-sqlplus-21.9.0.0.0-1.el8.x86_64.rpm
+   ```
+
+1. Install the packages by running the `yum` command as follows:
+
+   ```
+   sudo yum install oracle-instantclient-*.rpm
+   ```
+
+1. Start SQL\*Plus and connect to the Oracle DB instance\. For example, enter the following command\.
+
+   Substitute the DB instance endpoint \(DNS name\) for `oracle-db-instance-endpoint` and substitute the master user name that you used for `admin`\. When you use **Easy create** for Oracle, the database name is `DATABASE`\. Provide the master password that you used when prompted for a password\.
+
+   ```
+   sqlplus admin@oracle-db-instance-endpoint:1521/DATABASE
+   ```
+
+   After you enter the password for the user, you should see output similar to the following\.
+
+   ```
+   SQL*Plus: Release 21.0.0.0.0 - Production on Wed Mar 1 16:41:28 2023
+   Version 21.9.0.0.0
+   
+   Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+   
+   Enter password: 
+   Last Successful login time: Wed Mar 01 2023 16:30:52 +00:00
+   
+   Connected to:
+   Oracle Database 19c Standard Edition 2 Release 19.0.0.0.0 - Production
+   Version 19.18.0.0.0
    
    SQL>
    ```
 
-For more information about connecting to an Oracle DB instance, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\. For information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+   For more information about connecting to an RDS for Oracle DB instance, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\. If you can't connect to your DB instance, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
-## Deleting your sample DB instance<a name="CHAP_GettingStarted.Deleting.Oracle"></a>
+   For security, it is a best practice to use encrypted connections\. Only use an unencrypted Oracle connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Securing Oracle DB instance connections](Oracle.Concepts.RestrictedDBAPrivileges.md)\.
 
-After you explore the sample DB instance that you created, delete it so that you're no longer charged for it\. 
+1. Run SQL commands\.
 
-**To delete a DB instance with no final DB snapshot**
+   For example, the following SQL command shows the current date:
+
+   ```
+   SELECT SYSDATE FROM DUAL;
+   ```
+
+## Step 5: Delete the EC2 instance and DB instance<a name="CHAP_GettingStarted.Deleting.Oracle"></a>
+
+After you connect to and explore the sample EC2 instance and DB instance that you created, delete them so you're no longer charged for them\.
+
+**To delete the EC2 instance**
+
+1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Instances**\.
+
+1. Select the EC2 instance, and choose **Instance state, Terminate instance**\.
+
+1. Choose **Terminate** when prompted for confirmation\.
+
+For more information about deleting an EC2 instance, see [Terminate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+**To delete the DB instance with no final DB snapshot**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -180,6 +323,6 @@ After you explore the sample DB instance that you created, delete it so that you
 
 1. For **Actions**, choose **Delete**\.
 
-1. For **Create final snapshot?**, choose **No**, and choose the acknowledgment\.
+1. Clear **Create final snapshot?** and **Retain automated backups**\.
 
-1. Choose **Delete**\. 
+1. Complete the acknowledgement and choose **Delete**\. 

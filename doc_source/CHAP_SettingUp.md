@@ -157,7 +157,7 @@ After you have completed the setup requirements, you can create a DB instance us
 | MariaDB | [Creating and connecting to a MariaDB DB instance](CHAP_GettingStarted.CreatingConnecting.MariaDB.md) | 
 | Microsoft SQL Server | [Creating a Microsoft SQL Server DB instance and connecting to it](CHAP_GettingStarted.CreatingConnecting.SQLServer.md) | 
 | MySQL | [Creating and connecting to a MySQL DB instance](CHAP_GettingStarted.CreatingConnecting.MySQL.md) | 
-| Oracle | [Creating an Oracle DB instance and connecting to a database on an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md) | 
+| Oracle | [Creating and connecting to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md) | 
 | PostgreSQL | [Creating a PostgreSQL DB instance and connecting to a database on a PostgreSQL DB instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md) | 
 
 **Note**  

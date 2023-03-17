@@ -4,8 +4,8 @@ With the `TIMEZONE_FILE_AUTOUPGRADE` option, you can upgrade the current time zo
 
 **Topics**
 + [Overview of Oracle time zone files](#Appendix.Oracle.Options.Timezone-file-autoupgrade.tz-overview)
-+ [Downtime during the time zone file update](#Appendix.Oracle.Options.Timezone-file-autoupgrade.considerations)
 + [Strategies for updating your time zone file](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies)
++ [Downtime during the time zone file update](#Appendix.Oracle.Options.Timezone-file-autoupgrade.considerations)
 + [Preparing to update the time zone file](#Appendix.Oracle.Options.Timezone-file-autoupgrade.preparing)
 + [Adding the time zone file autoupgrade option](#Appendix.Oracle.Options.Timezone-file-autoupgrade.adding)
 + [Checking your data after the update of the time zone file](#Appendix.Oracle.Options.Timezone-file-autoupgrade.checking)
@@ -33,9 +33,57 @@ Problems can occur when you transfer data between databases that use different v
 
 When you add the `TIMEZONE_FILE_AUTOUPGRADE` option in RDS for Oracle, RDS updates your time zone files automatically\. By ensuring that your databases use the same time zone file version, you avoid time\-consuming manual techniques when you move data between different environments\.
 
-When you add the `TIMESTAMP WITH TIME ZONE` option to your option group, you can choose whether to add the option immediately or during the maintenance window\. After your DB instance uses the new option, RDS checks whether it can install a newer DSTv*version* file\. For example, if your current version might be DSTv34, RDS might determine that DSTv35 is now available\. In this case, RDS immediately updates to the new version and updates all existing time zone files\.
+When you add the `TIMESTAMP WITH TIME ZONE` option to your option group, you can choose whether to add the option immediately or during the maintenance window\. After your DB instance uses the new option, RDS checks whether it can install a newer DSTv*version* file\. The target DSTv*version* depends on the following:
++ The minor engine version that your DB instance is currently running
++ The minor engine version to which you want to upgrade your DB instance
 
-To find the available DST versions, look at the patches in [Release notes for Amazon Relational Database Service \(Amazon RDS\) for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\. For example, [version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-19-0.html#oracle-version-RU-RUR.19.0.0.0.ru-2022-10.rur-2022-10.r1) lists patch 34533061: RDBMS \- DSTV39 UPDATE \- TZDATA2022C\.
+For example, if your current time zone file version is DSTv33, RDS might determine that DSTv34 is currently available on your DB instance file system\. In this case, when you add the `TIMESTAMP WITH TIME ZONE` option, RDS immediately updates your time zone file to DSTv34\.
+
+To find the available DST versions in the supported RDS release updates, look at the patches in [Release notes for Amazon Relational Database Service \(Amazon RDS\) for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\. For example, [version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/oracle-version-19-0.html#oracle-version-RU-RUR.19.0.0.0.ru-2022-10.rur-2022-10.r1) lists patch 34533061: RDBMS \- DSTV39 UPDATE \- TZDATA2022C\.
+
+## Strategies for updating your time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies"></a>
+
+You can upgrade your DB engine and update your time zone file independently\. Thus, you must choose among different update strategies, depending on whether you want to upgrade your database and time zone file at the same time\. 
+
+The examples in this section assume the following:
++ You have not yet added `TIMEZONE_FILE_AUTOUPGRADE` to the option group used by your DB instance\.
++ Your DB instance uses database version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and time zone file DSTv33\.
++ Your DB instance file system includes file DSTv34\. 
++ Release update 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1 includes DSTv35\. 
+
+To update your time zone file, you can use the following strategies\.
+
+**Topics**
++ [Update the time zone file without upgrading the engine](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.no-upgrade)
++ [Upgrade the time zone file and DB engine version](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade)
++ [Upgrade your DB engine version without updating the time zone file](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade-only)
+
+### Update the time zone file without upgrading the engine<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.no-upgrade"></a>
+
+In this scenario, your database is using DSTv33, but DSTv34 is available on your DB instance file system\. You want to update the time zone file used by your DB instance from DSTv33 to DSTv34, but you don't want to upgrade your engine to a new minor version, which includes DSTv35\. In your modify DB instance operation, do the following:
++ Add `TIMEZONE_FILE_AUTOUPGRADE` to the option group used by your DB instance\. Specify whether to add the option immediately or defer it to the maintenance window\.
++ Don’t change your engine version\.
+
+After the `TIMEZONE_FILE_AUTOUPGRADE` option is applied, RDS checks for a new DST version, sees that DSTv34 is available on the file system, and immediately starts the update\.
+
+### Upgrade the time zone file and DB engine version<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade"></a>
+
+In this scenario, your database is using DSTv33, but DSTv34 is available on your DB instance file system\. You want to upgrade your DB engine to minor version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1, which includes DSTv35, and update your time zone file to DSTv35 during the engine upgrade\. Thus, your goal is to skip DSTv34 and update your time zone files directly to DSTv35\. In your modify DB instance operation, do the following:
++ Add `TIMEZONE_FILE_AUTOUPGRADE` to the option group used by your DB instance\. Specify whether to add the option immediately or defer it to the maintenance window\.
++ Change your minor engine version\.
+
+After the `TIMEZONE_FILE_AUTOUPGRADE` option is applied, RDS checks for a new DST version, sees that DSTv35 is available in 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1, and immediately starts the update to DSTv35\. At the same time, RDS upgrades your DB engine to version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1\.
+
+### Upgrade your DB engine version without updating the time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade-only"></a>
+
+In this scenario, your database is using DSTv33, but DSTv34 is available on your DB instance file system\. You want to upgrade your DB engine to version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1, which includes DSTv35, but retain time zone file DSTv33\. You might choose this strategy for the following reasons:
++ Your data doesn't use the `TIMESTAMP WITH TIME ZONE` data type\.
++ Your data uses the `TIMESTAMP WITH TIME ZONE` data type, but your data is not affected by the time zone changes\.
++ You want to postpone updating the time zone file because you can't tolerate the extra downtime\.
+
+Your strategy depends on which of the following possibilities are true:
++ Your DB instance isn't associated with an option group that includes `TIMEZONE_FILE_AUTOUPGRADE`\. Leave your option group as it is so that RDS doesn't update your time zone file\.
++ Your DB instance is associated with an option group that includes `TIMEZONE_FILE_AUTOUPGRADE`\. Associate your DB instance with an option group that doesn't include `TIMEZONE_FILE_AUTOUPGRADE`, and then upgrade your DB engine to 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1\. 
 
 ## Downtime during the time zone file update<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.considerations"></a>
 
@@ -58,44 +106,6 @@ Additional downtime can occur when you do the following:
 
 **Note**  
 During the time zone file update, RDS for Oracle calls `PURGE DBA_RECYCLEBIN`\.
-
-## Strategies for updating your time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies"></a>
-
-You can upgrade your engine and update your time zone file independently\. Thus, you must choose among different update strategies, depending on whether you want to upgrade your database and time zone file at the same time\. 
-
-The examples in this section assume that your DB instance uses database version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and time zone file DSTv33\. Your DB instance file system includes file DSTv34\. Also assume that release update 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1 includes DSTv35\. To update your time zone file, you can use the following strategies\.
-
-**Topics**
-+ [Update the time zone file without upgrading the engine](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.no-upgrade)
-+ [Upgrade the time zone file and DB engine version](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade)
-+ [Upgrade your DB engine version without updating the time zone file](#Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade-only)
-
-### Update the time zone file without upgrading the engine<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.no-upgrade"></a>
-
-In this scenario, your database is using DSTv33, but DSTv34 is available\. You want to update the time zone file used by your DB instance from DSTv33 to DSTv34, but you don't want to upgrade your engine version\. In your modify DB instance operation, do the following:
-+ Add `TIMEZONE_FILE_AUTOUPGRADE` to the option group used by your DB instance\. Specify whether to add the option immediately or defer it to the maintenance window\.
-+ Don’t change your engine version\.
-
-After the option is applied, RDS checks for a new DST version, sees that DSTv35 is available, and immediately starts the update\.
-
-### Upgrade the time zone file and DB engine version<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade"></a>
-
-In this scenario, your database is using DSTv33, but DSTv34 is available\. You want to upgrade your DB engine to version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1 and update your time zone file to DSTv35 in the same operation\. In your modify DB instance operation, do the following:
-+ Add `TIMEZONE_FILE_AUTOUPGRADE` to the option group used by your DB instance\. Specify whether to add the option immediately or defer it to the maintenance window\.
-+ Change your engine version\.
-
-After the option is applied, RDS checks for a new DST version, sees that DSTv35 is available, and immediately starts the update\. At the same time, RDS upgrades your DB engine to version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1\.
-
-### Upgrade your DB engine version without updating the time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.strategies.upgrade-only"></a>
-
-In this scenario, your database is using DSTv33, but DSTv34 is available\. You want to upgrade your DB engine to version 19\.0\.0\.0\.ru\-2022\-10\.rur\-2022\-10\.r1 but retain time zone file DSTv33\. You might choose this strategy for the following reasons:
-+ Your data doesn't use the `TIMESTAMP WITH TIME ZONE` data type\.
-+ Your data uses the `TIMESTAMP WITH TIME ZONE` data type, but your data is not affected by the time zone changes\.
-+ You want to postpone updating the time zone file because you can't tolerate the extra downtime\.
-
-Your strategy depends on which of the following possibilities are true:
-+ Your DB instance isn't associated with an option group that includes `TIMEZONE_FILE_AUTOUPGRADE`\. Leave your option group as it is\.
-+ Your DB instance is associated with an option group that includes `TIMEZONE_FILE_AUTOUPGRADE`\. Associate your DB instance with an option group that doesn't include `TIMEZONE_FILE_AUTOUPGRADE`, and then modify the DB engine version\. 
 
 ## Preparing to update the time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.preparing"></a>
 

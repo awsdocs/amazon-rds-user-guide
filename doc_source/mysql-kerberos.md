@@ -174,17 +174,13 @@ Create or modify a MySQL DB instance for use with your directory\. You can use t
 
 Kerberos authentication is only supported for MySQL DB instances in a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows egress within the directory's VPC so the DB instance can communicate with the directory\.
 
-When you use the console to create a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
+When you use the console to create, modify, or restore a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
 
 ![\[Kerberos authentication setting when creating a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-authentication.png)
 
-When you use the console to modify or restore a DB instance, choose the directory in the **Kerberos authentication** section, or choose **Create a new directory**\.
-
-![\[Kerberos authentication setting when modifying or restoring a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-auth-modify-restore.png)
-
- Use the CLI or RDS API to associate a DB instance with a directory\. The following parameters are required for the DB instance to be able to use the domain directory you created: 
-+  For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\. 
-+  For the `--domain-iam-role-name` parameter, use the role you created that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. 
+When you use the AWS CLI or RDS API, associate a DB instance with a directory\. The following parameters are required for the DB instance to use the domain directory you created:
++ For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\.
++ For the `--domain-iam-role-name` parameter, use the role you created that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\.
 
  For example, the following CLI command modifies a DB instance to use a directory\. 
 

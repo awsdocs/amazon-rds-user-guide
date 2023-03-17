@@ -12,8 +12,6 @@ For more information on version and Region availability of RDS for SQL Server wi
 
 ## Overview of setting up Windows authentication<a name="USER_SQLServerWinAuth.overview"></a>
 
- To set up Windows authentication, complete the following general steps, described in more detail later: 
-
 Amazon RDS uses mixed mode for Windows Authentication\. This approach means that the *master user* \(the name and password used to create your SQL Server DB instance\) uses SQL Authentication\. Because the master user account is a privileged credential, you should restrict access to this account\.
 
 To get Windows Authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust\. The trust can be one\-way or two\-way\. For more information on setting up forest trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.

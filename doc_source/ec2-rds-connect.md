@@ -1,6 +1,6 @@
 # Connecting an EC2 instance and a DB instance automatically<a name="ec2-rds-connect"></a>
 
-You can use the RDS console to simplify setting up a connection between an EC2 instance and a DB instance\. For instructions about setting up a connection between an EC2 instance and a Multi\-AZ DB cluster, see [Connecting an EC2 instance and a Multi\-AZ DB cluster automatically](USER_VPC.Scenarios.md)\.
+You can use the RDS console to simplify setting up a connection between an EC2 instance and a DB instance\. For instructions about setting up a connection between an EC2 instance and a Multi\-AZ DB cluster, see [Connecting an EC2 instance and a Multi\-AZ DB cluster automatically](multiaz-ec2-rds-connect.md)\. 
 
 ![\[Automatically connect a DB instance with an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2.png)
 

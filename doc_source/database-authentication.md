@@ -6,8 +6,8 @@ Password, Kerberos, and IAM database authentication use different methods of aut
 
 For PostgreSQL, use only one of the following role settings for a user of a specific database: 
 + To use IAM database authentication, assign the `rds_iam` role to the user\.
-+ To use Kerberos authentication, assign the `rds_ad` role to the user\. 
-+ To use password authentication, don't assign either the `rds_iam` or `rds_ad` roles to the user\. 
++ To use Kerberos authentication, assign the `rds_ad` role to the user\.
++ To use password authentication, don't assign either the `rds_iam` or `rds_ad` roles to the user\.
 
 Don't assign both the `rds_iam` and `rds_ad` roles to a user of a PostgreSQL database either directly or indirectly by nested grant access\. If the `rds_iam` role is added to the master user, IAM authentication takes precedence over password authentication so the master user has to log in as an IAM user\.
 

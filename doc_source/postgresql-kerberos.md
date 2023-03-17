@@ -1,12 +1,12 @@
 # Using Kerberos authentication with Amazon RDS for PostgreSQL<a name="postgresql-kerberos"></a>
 
-You can use Kerberos to authenticate users when they connect to your DB instance running PostgreSQL\. To do so, you configure your DB instance to use AWS Directory Service for Microsoft Active Directory for Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. It's a feature available with AWS Directory Service\. To learn more, see [What is AWS Directory Service?](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the *AWS Directory Service Administration Guide*\.
+You can use Kerberos to authenticate users when they connect to your DB instance running PostgreSQL\. To do so, configure your DB instance to use AWS Directory Service for Microsoft Active Directory for Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. It's a feature available with AWS Directory Service\. To learn more, see [What is AWS Directory Service?](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the *AWS Directory Service Administration Guide*\.
 
-You create an AWS Managed Microsoft AD directory to store user credentials\. You then provide to your PostgreSQL DB instance the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB instance, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
+To start, create an AWS Managed Microsoft AD directory to store user credentials\. Then, provide to your PostgreSQL DB instance the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB instance, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
 
-Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
+Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized location for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
 
-You can also access credentials from your own on\-premises Microsoft Active Directory\. To do so you create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL instances with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
+In addition, you can access credentials from your own on\-premises Microsoft Active Directory\. To do so, create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL instances with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
 
 **Topics**
 + [Region and version availability](#postgresql-kerberos.RegionVersionAvailability)

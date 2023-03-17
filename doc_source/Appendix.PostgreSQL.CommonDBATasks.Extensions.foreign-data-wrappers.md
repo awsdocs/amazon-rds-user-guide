@@ -464,7 +464,7 @@ Perform these tasks on the RDS for PostgreSQL DB instance using an account that 
 1. Create a foreign server in the RDS for PostgreSQL DB instance:
 
    ```
-   test=> CREATE SERVER sqlserverdb FOREIGN DATA WRAPPER tds_fdw OPTIONS (servername 'mssql2019.aws-region.rds.amazonaws.com, port '1433', database 'tds_fdw_testing');
+   test=> CREATE SERVER sqlserverdb FOREIGN DATA WRAPPER tds_fdw OPTIONS (servername 'mssql2019.aws-region.rds.amazonaws.com', port '1433', database 'tds_fdw_testing');
    CREATE SERVER
    ```
 

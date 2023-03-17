@@ -9,121 +9,90 @@ To create a CEV, access the installation files and patches that are stored in yo
 For example, you can use the April 2021 RU/RUR for Oracle Database 19c, or any valid combination of installation files and patches\. For more information on the versions and Regions supported by RDS Custom for Oracle, see [RDS Custom with RDS for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.html#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora)\.
 
 **Topics**
-+ [Downloading your database installation files and patches from Oracle Software Delivery Cloud](#custom-cev.preparing.download)
-+ [Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)
-+ [Sharing your installation media in S3 across AWS accounts](#custom-cev.preparing.accounts)
-+ [Preparing the CEV manifest](#custom-cev.preparing.manifest)
-+ [Validating the CEV manifest](#custom-cev.preparing.validating)
-+ [Adding necessary IAM permissions](#custom-cev.preparing.iam)
++ [Step 1 \(Optional\): Downloading the manifest templates](#custom-cev.preparing.templates)
++ [Step 2: Downloading your database installation files and patches from Oracle Software Delivery Cloud](#custom-cev.preparing.download)
++ [Step 3: Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)
++ [Step 4 \(Optional\): Sharing your installation media in S3 across AWS accounts](#custom-cev.preparing.accounts)
++ [Step 5: Preparing the CEV manifest](#custom-cev.preparing.manifest)
++ [Step 6 \(Optional\): Validating the CEV manifest](#custom-cev.preparing.validating)
++ [Step 7: Adding necessary IAM permissions](#custom-cev.preparing.iam)
 
-## Downloading your database installation files and patches from Oracle Software Delivery Cloud<a name="custom-cev.preparing.download"></a>
+## Step 1 \(Optional\): Downloading the manifest templates<a name="custom-cev.preparing.templates"></a>
 
-The Oracle Database installation files and patches are hosted on Oracle Software Delivery Cloud\.
+A *CEV manifest* is a JSON document that includes the list of database installation \.zip files for your CEV\. To create a CEV, you need to identify and then download your installation files, and then create a manifest\.
 
-**To download the database installation files for Oracle Database 19c**
+RDS Custom for Oracle provides manifest templates with our recommended \.zip files for each supported Oracle Database release\. The following template is for the 19\.17\.0\.0\.0 RU:
 
-1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
+```
+{
+    "mediaImportTemplateVersion": "2020-08-14",
+    "databaseInstallationFileNames": [
+        "V982063-01.zip"
+    ],
+    "opatchFileNames": [
+        "p6880880_190000_Linux-x86-64.zip"
+    ],
+    "psuRuPatchFileNames": [
+        "p34419443_190000_Linux-x86-64.zip",
+        "p34411846_190000_Linux-x86-64.zip"
+    ],
+    "otherPatchFileNames": [
+        "p28852325_190000_Linux-x86-64.zip",
+        "p29997937_190000_Linux-x86-64.zip",
+        "p31335037_190000_Linux-x86-64.zip",
+        "p32327201_190000_Linux-x86-64.zip",
+        "p33613829_190000_Linux-x86-64.zip",
+        "p34006614_190000_Linux-x86-64.zip",
+        "p34533061_190000_Linux-x86-64.zip",
+        "p34533150_190000_Generic.zip",
+        "p28730253_190000_Linux-x86-64.zip",
+        "p29213893_1917000DBRU_Generic.zip",
+        "p33125873_1917000DBRU_Linux-x86-64.zip",
+        "p34446152_1917000DBRU_Linux-x86-64.zip"
+    ]
+}
+```
 
-1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
+Each template has an associated readme that includes instructions for downloading the patches, URLs for the \.zip files, and file checksums\. You can either use these templates as they are, or modify them with your own patches\. To review the templates, download [custom\-oracle\-manifest\.zip](samples/custom-oracle-manifest.zip) to your local disk and then open it with a file archiving application\. For more information, see [Step 5: Preparing the CEV manifest](#custom-cev.preparing.manifest)\.
 
-1. Choose **DLP: Oracle Database Enterprise Edition 19\.3\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
+## Step 2: Downloading your database installation files and patches from Oracle Software Delivery Cloud<a name="custom-cev.preparing.download"></a>
 
-1. Choose **Continue**\.
+When you have identified the installation files that you want for your CEV, download them to your local system\. The Oracle Database installation files and patches are hosted on Oracle Software Delivery Cloud\. Each CEV requires a base release, such as Oracle Database 19c or Oracle Database 12c Release 2 \(12\.2\), and an optional list of patches\.
 
-1. Clear the **Download Queue** check box\.
-
-1. Choose **Oracle Database 19\.3\.0\.0\.0 \- Long Term Release**\.
-
-1. Choose **Linux x86\-64** in **Platform/Languages**\.
-
-1. Choose **Continue**, and then sign the waiver\.
-
-1. Choose **V982063\-01\.zip**, choose **Download**, and then save the file\.
-**Note**  
-The SHA\-256 hash is `BA8329C757133DA313ED3B6D7F86C5AC42CD9970A28BF2E6233F3235233AA8D8`\.
-
-1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
-
-**To download the database installation files for Oracle Database 18c**
-
-1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
-
-1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
-
-1. Choose **DLP: Oracle Database 12c Enterprise Edition 18\.0\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
-
-1. Choose **Continue**\.
-
-1. Clear the **Download Queue** check box\.
-
-1. Choose **Oracle Database 18\.0\.0\.0\.0**\.
-
-1. Choose **Linux x86\-64** in **Platform/Languages**\.
-
-1. Choose **Continue**, and then sign the waiver\.
-
-1. Choose **V978967\-01\.zip**, choose **Download**, and then save the file\.
-**Note**  
-The SHA\-256 hash is `C96A4FD768787AF98272008833FE10B172691CF84E42816B138C12D4DE63AB96`\.
-
-1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
-
-**To download the database installation files for Oracle Database 12c Release 2 \(12\.2\)**
+**To download the database installation files for Oracle Database**
 
 1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
 
 1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
 
-1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.2\.0\.1\.0 \( Oracle Database Enterprise Edition \)**\.
+1. Choose one of the following base releases:
+   + **DLP: Oracle Database Enterprise Edition 19\.3\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
+   + Choose **DLP: Oracle Database 12c Enterprise Edition 18\.0\.0\.0\.0 \( Oracle Database Enterprise Edition \)**\.
+   + Choose **DLP: Oracle Database 12c Enterprise Edition 12\.2\.0\.1\.0 \( Oracle Database Enterprise Edition \)**\.
+   + Choose **DLP: Oracle Database 12c Enterprise Edition 12\.1\.0\.2\.0 \( Oracle Database Enterprise Edition \)**\.
 
 1. Choose **Continue**\.
 
 1. Clear the **Download Queue** check box\.
 
-1. Choose **Oracle Database 12\.2\.0\.1\.0**\.
+1. Choose the option that corresponds to your base release:
+   + **Oracle Database 19\.3\.0\.0\.0 \- Long Term Release**\.
+   + **Oracle Database 18\.0\.0\.0\.0**
+   + **Oracle Database 12\.2\.0\.1\.0**\.
+   + **Oracle Database 12\.1\.0\.2\.0**\.
 
 1. Choose **Linux x86\-64** in **Platform/Languages**\.
 
 1. Choose **Continue**, and then sign the waiver\.
 
-1. Choose **V839960\-01\.zip**, choose **Download**, and then save the file\.
-**Note**  
-The SHA\-256 hash is `96ED97D21F15C1AC0CCE3749DA6C3DAC7059BB60672D76B008103FC754D22DDE`\.
-
-1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
+1. Choose the \.zip file that corresponds to your database release:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
 
-**To download the database installation files for Oracle Database 12c Release 1 \(12\.1\)**
+1. Download your desired Oracle patches from `updates.oracle.com` or `support.oracle.com` to your local system\. You can find the URLs for the patches in the following locations:
+   + The readme files in the \.zip file that you downloaded in [Step 1 \(Optional\): Downloading the manifest templates](#custom-cev.preparing.templates)
+   + The patches listed in each Release Update \(RU\) in [Release notes for Amazon Relational Database Service \(Amazon RDS\) for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes)
 
-1. Go to [https://edelivery.oracle.com/](https://edelivery.oracle.com/) and sign in\.
-
-1. In the box, enter **Oracle Database Enterprise Edition** and choose **Search**\.
-
-1. Choose **DLP: Oracle Database 12c Enterprise Edition 12\.1\.0\.2\.0 \( Oracle Database Enterprise Edition \)**\.
-
-1. Choose **Continue**\.
-
-1. Clear the **Download Queue** check box\.
-
-1. Choose **Oracle Database 12\.1\.0\.2\.0**\.
-
-1. Choose **Linux x86\-64** in **Platform/Languages**\.
-
-1. Choose **Continue**, and then sign the waiver\.
-
-1. Choose **V46095\-01\_1of2\.zip** and **V46095\-01\_2of2\.zip**, choose **Download**, and then save the files\.
-
-   
-**Note**  
-The SHA\-256 hash for `V46095-01_1of2.zip` is `31FDC2AF41687B4E547A3A18F796424D8C1AF36406D2160F65B0AF6A9CD47355`\.  
-The SHA\-256 hash for `V46095-01_2of2.zip` is `03DA14F5E875304B28F0F3BB02AF0EC33227885B99C9865DF70749D1E220ACCD`\.
-
-1. Click the links in the following table to download the Oracle patches\. All URLs are for `updates.oracle.com` or `support.oracle.com`\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
-
-## Uploading your installation files to Amazon S3<a name="custom-cev.preparing.s3"></a>
+## Step 3: Uploading your installation files to Amazon S3<a name="custom-cev.preparing.s3"></a>
 
 Upload your Oracle installation and patch files to Amazon S3 using the AWS CLI\. The S3 bucket that contains your installation files must be in the same AWS Region as your CEV\.
 
@@ -202,7 +171,7 @@ aws s3 sync s3://source-bucket/ ^
     s3://my-custom-installation-files/123456789012/cev1/
 ```
 
-## Sharing your installation media in S3 across AWS accounts<a name="custom-cev.preparing.accounts"></a>
+## Step 4 \(Optional\): Sharing your installation media in S3 across AWS accounts<a name="custom-cev.preparing.accounts"></a>
 
 For the purposes of this section, the Amazon S3 bucket that contains your uploaded Oracle installation files is your *media bucket*\. Your organization might use multiple AWS accounts in an AWS Region\. If so, you might want to use one AWS account to populate your media bucket and a different AWS account to create CEVs\. If you don't intend to share your media bucket, skip to the next section\.
 
@@ -283,13 +252,13 @@ This section assumes the following:
 
 1. Create a CEV by following the steps in [Creating a CEV](custom-cev.create.md)\.
 
-## Preparing the CEV manifest<a name="custom-cev.preparing.manifest"></a>
+## Step 5: Preparing the CEV manifest<a name="custom-cev.preparing.manifest"></a>
 
 A CEV manifest is a JSON document that includes the following:
 + \(Required\) The list of installation \.zip files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they're listed in the manifest\.
 + \(Optional\) Installation parameters that set nondefault values for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\. Be aware that you can’t modify the installation parameters for an existing CEV or an existing DB instance\. You also can’t upgrade from one CEV to another CEV when the installation parameters have different settings\.
 
-For sample CEV manifests, see [CEV manifest examples](#custom-cev.preparing.manifest.examples)\.
+For sample CEV manifests, see the JSON templates that you downloaded in [Step 1 \(Optional\): Downloading the manifest templates](#custom-cev.preparing.templates)\. You can also review the samples in [CEV manifest examples](#custom-cev.preparing.manifest.examples)\.
 
 **Topics**
 + [JSON fields in the CEV manifest](#custom-cev.preparing.manifest.fields)
@@ -312,59 +281,7 @@ The following table describes the JSON fields in the manifest\.
 |  `OtherPatchFileNames`  |  The patches that aren't in the list of PSU and RU patches\. RDS Custom applies these patches after applying the PSU and RU patches\.  If you include `OtherPatchFileNames`, `opatchFileNames` is required\. Values for `opatchFileNames` must start with `p6880880_`\.    | 
 |  `installationParameters`  |  Nondefault settings for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\. You can set the following parameters: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)  | 
 
-Each Oracle Database release has a different list of supported installation files\. When you create your CEV manifest, make sure to specify only files that are supported by RDS Custom for Oracle\. Otherwise, CEV creation fails with an error\. 
-
-The following table shows valid values for Oracle Database 12c Release 1 \(12\.1\)\.
-
-
-**Valid values for Oracle Database 12c Release 1 \(12\.1\)**  
-
-| JSON field | Valid values for 12\.1 | 
-| --- | --- | 
-|  `MediaImportTemplateVersion`  |  2020\-08\-14  | 
-|  `databaseInstallationFileNames`  |  V46095\-01\_1of2\.zip V46095\-01\_2of2\.zip  | 
-|  `opatchFileNames`  |  p6880880\_121010\_Linux\-x86\-64\.zip  | 
-|  `psuRuPatchFileNames`  |  p32768233\_121020\_Linux\-x86\-64\.zip  | 
-|  `OtherPatchFileNames`  |  p32876425\_121020\_Linux\-x86\-64\.zip p18759211\_121020\_Linux\-x86\-64\.zip p19396455\_121020\_Linux\-x86\-64\.zip p20875898\_121020\_Linux\-x86\-64\.zip p22037014\_121020\_Linux\-x86\-64\.zip p22873635\_121020\_Linux\-x86\-64\.zip p23614158\_121020\_Linux\-x86\-64\.zip p24701840\_121020\_Linux\-x86\-64\.zip p25881255\_121020\_Linux\-x86\-64\.zip p27015449\_121020\_Linux\-x86\-64\.zip p28125601\_121020\_Linux\-x86\-64\.zip p28852325\_121020\_Linux\-x86\-64\.zip p29997937\_121020\_Linux\-x86\-64\.zip p31335037\_121020\_Linux\-x86\-64\.zip p32327201\_121020\_Linux\-x86\-64\.zip p32327208\_121020\_Generic\.zip p17969866\_12102210119\_Linux\-x86\-64\.zip p20394750\_12102210119\_Linux\-x86\-64\.zip p24835919\_121020\_Linux\-x86\-64\.zip p23262847\_12102201020\_Linux\-x86\-64\.zip p21171382\_12102201020\_Generic\.zip p21091901\_12102210720\_Linux\-x86\-64\.zip p33013352\_12102210720\_Linux\-x86\-64\.zip p25031502\_12102210720\_Linux\-x86\-64\.zip p23711335\_12102191015\_Generic\.zip p19504946\_121020\_Linux\-x86\-64\.zip  | 
-
-The following table shows valid values for Oracle Database 12c Release 2 \(12\.2\)\.
-
-
-**Valid values for Oracle Database 12c Release 2 \(12\.2\)**  
-
-| JSON field | Valid values for Oracle Database 12c Release 2 \(12\.2\) | 
-| --- | --- | 
-|  `MediaImportTemplateVersion`  |  2020\-08\-14  | 
-|  `databaseInstallationFileNames`  |  V839960\-01\.zip  | 
-|  `opatchFileNames`  |  p6880880\_122010\_Linux\-x86\-64\.zip  | 
-|  `psuRuPatchFileNames`  |  p33261817\_122010\_Linux\-x86\-64\.zip  | 
-|  `OtherPatchFileNames`  |  p33192662\_122010\_Linux\-x86\-64\.zip  p29213893\_122010\_Generic\.zip  p28730253\_122010\_Linux\-x86\-64\.zip  p26352615\_12201211019DBOCT2021RU\_Linux\-x86\-64\.zip  p23614158\_122010\_Linux\-x86\-64\.zip  p24701840\_122010\_Linux\-x86\-64\.zip  p25173124\_122010\_Linux\-x86\-64\.zip  p25881255\_122010\_Linux\-x86\-64\.zip  p27015449\_122010\_Linux\-x86\-64\.zip  p28125601\_122010\_Linux\-x86\-64\.zip  p28852325\_122010\_Linux\-x86\-64\.zip  p29997937\_122010\_Linux\-x86\-64\.zip  p31335037\_122010\_Linux\-x86\-64\.zip  p32327201\_122010\_Linux\-x86\-64\.zip  p32327208\_122010\_Generic\.zip  | 
-
-The following table shows valid values for Oracle Database 18c\.
-
-
-**Valid values for Oracle Database 18c**  
-
-| JSON field | Valid values for 18c | 
-| --- | --- | 
-|  `MediaImportTemplateVersion`  |  2020\-08\-14  | 
-|  `databaseInstallationFileNames`  |  V978967\-01\.zip  | 
-|  `opatchFileNames`  |   p6880880\_180000\_Linux\-x86\-64\.zip  | 
-|  `psuRuPatchFileNames`  |  p32126855\_180000\_Linux\-x86\-64\.zip  | 
-|  `OtherPatchFileNames`  |  p28730253\_180000\_Linux\-x86\-64\.zip  p27539475\_1813000DBRU\_Linux\-x86\-64\.zip  p29213893\_180000\_Generic\.zip  p29374604\_1813000DBRU\_Linux\-x86\-64\.zip  p29782284\_180000\_Generic\.zip  p28125601\_180000\_Linux\-x86\-64\.zip  p28852325\_180000\_Linux\-x86\-64\.zip  p29997937\_180000\_Linux\-x86\-64\.zip  p31335037\_180000\_Linux\-x86\-64\.zip  p31335142\_180000\_Generic\.zip  | 
-
-The following table shows valid values for Oracle Database 19c\.
-
-
-**Valid values for Oracle Database 19c**  
-
-| JSON field | Valid values for 19c | 
-| --- | --- | 
-|  `MediaImportTemplateVersion`  |  2020\-08\-14  | 
-|  `databaseInstallationFileNames`  |  V982063\-01\.zip  | 
-|  `opatchFileNames`  |  p6880880\_190000\_Linux\-x86\-64\.zip  | 
-|  `psuRuPatchFileNames`  |  p32126828\_190000\_Linux\-x86\-64\.zip  | 
-|  `OtherPatchFileNames`  |  p29213893\_1910000DBRU\_Generic\.zip p29782284\_1910000DBRU\_Generic\.zip p28730253\_190000\_Linux\-x86\-64\.zip p29374604\_1910000DBRU\_Linux\-x86\-64\.zip p28852325\_190000\_Linux\-x86\-64\.zip p29997937\_190000\_Linux\-x86\-64\.zip p31335037\_190000\_Linux\-x86\-64\.zip p31335142\_190000\_Generic\.zip  | 
+Each Oracle Database release has a different list of supported installation files\. When you create your CEV manifest, make sure to specify only files that are supported by RDS Custom for Oracle\. Otherwise, CEV creation fails with an error\. All patches listed in [Release notes for Amazon Relational Database Service \(Amazon RDS\) for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes) are supported\.
 
 ### Creating the CEV manifest<a name="custom-cev.preparing.manifest.creating"></a>
 
@@ -577,7 +494,7 @@ In the following example for Oracle Database 19c, RDS Custom applies p32126828, 
 }
 ```
 
-## Validating the CEV manifest<a name="custom-cev.preparing.validating"></a>
+## Step 6 \(Optional\): Validating the CEV manifest<a name="custom-cev.preparing.validating"></a>
 
 Optionally, verify that manifest is a valid JSON file by running the `json.tool` Python script\.
 
@@ -587,6 +504,6 @@ For example, if you change into the directory containing a CEV manifest named `m
 python -m json.tool < manifest.json
 ```
 
-## Adding necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
+## Step 7: Adding necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
 
 Make sure that the IAM principal that creates the CEV has the necessary policies described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.

@@ -8,7 +8,7 @@ The steps are as follows:
 
 1. Upload your database software to your Amazon S3 bucket\.
 
-   For more information, see [Uploading your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3)\.
+   For more information, see [Step 3: Uploading your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3)\.
 
 1. Create an RDS Custom custom engine version \(CEV\) from your media\.
 

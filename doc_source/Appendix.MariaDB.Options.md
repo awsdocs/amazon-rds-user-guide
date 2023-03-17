@@ -17,6 +17,9 @@ Amazon RDS supports using the MariaDB Audit Plugin on MariaDB database instances
 
 Amazon RDS supports the following settings for the MariaDB Audit Plugin option\. 
 
+**Note**  
+If you don't configure an option setting in the RDS console, RDS uses the default setting\. 
+
 
 | Option setting | Valid values | Default value | Description | 
 | --- | --- | --- | --- | 

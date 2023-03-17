@@ -1,6 +1,6 @@
-# Improving write performance with Amazon RDS Optimized Writes<a name="rds-optimized-writes"></a>
+# Improving write performance with Amazon RDS Optimized Writes for MySQL<a name="rds-optimized-writes"></a>
 
-You can improve the performance of write transactions with Amazon RDS Optimized Writes\. When your RDS for MySQL database uses RDS Optimized Writes, it can achieve up to two times higher write transaction throughput\.
+You can improve the performance of write transactions with Amazon RDS Optimized Writes for MySQL\. When your RDS for MySQL database uses RDS Optimized Writes, it can achieve up to two times higher write transaction throughput\.
 
 **Topics**
 + [Overview of RDS Optimized Writes](#rds-optimized-writes-overview)
@@ -15,7 +15,7 @@ Relational databases, like MySQL, provide the *ACID properties* of atomicity, co
 
 With RDS Optimized Writes turned on, RDS for MySQL databases write only once when flushing data to durable storage without using the doublewrite buffer\. RDS Optimized Writes is useful if you run write\-heavy workloads on your RDS for MySQL databases\. Examples of databases with write\-heavy workloads include ones that support digital payments, financial trading, and gaming applications\.
 
-These databases run on DB instance classes that use the AWS Nitro System\. Because of the hardware configuration in these systems, the database can write 16 KiB pages directly to data files reliably and durably in one step\. The AWS Nitro System makes RDS Optimized Writes possible\.
+These databases run on DB instance classes that use the AWS Nitro System\. Because of the hardware configuration in these systems, the database can write 16\-KiB pages directly to data files reliably and durably in one step\. The AWS Nitro System makes RDS Optimized Writes possible\.
 
 You can set the new database parameter `rds.optimized_writes` to control the RDS Optimized Writes feature for RDS for MySQL databases\. Access this parameter in the DB parameter groups of RDS for MySQL version 8\.0\. Set the parameter using the following values:
 + `AUTO` – Turn on RDS Optimized Writes if the database supports it\. Turn off RDS Optimized Writes if the database doesn't support it\. This setting is the default\.
@@ -43,11 +43,11 @@ When you use the RDS console to create an RDS for MySQL database, you can filter
 
 To choose a DB engine version that supports RDS Optimized Writes, filter for the RDS for MySQL DB engine versions that support it in **Engine version**, and then choose a version\.
 
-![\[DB engine version filter for RDS Optimized Writes\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-optimized-writes-version-filter.png)
+![\[DB engine version filter for RDS Optimized Writes.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-optimized-writes-version-filter.png)
 
 In the **Instance configuration** section, filter for the DB instance classes that support RDS Optimized Writes, and then choose a DB instance class\.
 
-![\[DB instance class filter for RDS Optimized Writes\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-optimized-writes-class-filter.png)
+![\[DB instance class filter for RDS Optimized Writes.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-optimized-writes-class-filter.png)
 
 After you make these selections, you can choose other settings that meet your requirements and finish creating the RDS for MySQL database with the console\.
 

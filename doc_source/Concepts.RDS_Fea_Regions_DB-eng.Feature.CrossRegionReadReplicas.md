@@ -46,11 +46,13 @@ Cross\-Region read replicas with RDS for PostgreSQL are available in all Regions
 
 Cross\-Region read replicas with RDS for SQL Server are available in all Regions except the following:
 + Africa \(Cape Town\)
-+ Asia Pacific \(Jakarta\)
 + Asia Pacific \(Hong Kong\)
-+ China \(Beijing\)
-+ China \(Ningxia\)
++ Asia Pacific \(Hyderabad\)
++ Asia Pacific \(Jakarta\)
++ Asia Pacific \(Melbourne\)
 + Europe \(Milan\)
++ Europe \(Spain\)
++ Europe \(Zurich\)
 + Middle East \(Bahrain\)
 + Middle East \(UAE\)
 
