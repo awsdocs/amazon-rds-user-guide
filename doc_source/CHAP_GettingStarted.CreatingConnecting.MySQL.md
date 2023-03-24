@@ -166,7 +166,7 @@ You can automatically connect an existing EC2 instance to a DB instance using th
 
 Before setting up a connection between an EC2 instance and an RDS database, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\.
 
-If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the RDS database\.
+If you make changes to security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the RDS database\.
 
 **Note**  
 You can only set up a connection between an EC2 instance and an RDS database automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.

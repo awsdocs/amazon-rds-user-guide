@@ -76,6 +76,4 @@ For RDS for MySQL version 8\.0\.30 and higher, the `innodb_redo_log_capacity` pa
 
 ## Size limits on BLOBs written to the redo log<a name="USER_LogAccess.MySQL.LogFileSize.BLOBs"></a>
 
-For RDS for MySQL version 8\.0\.28 and lower, there is a size limit on BLOBs written to the redo log\. To account for this limit, check the `innodb_log_file_size` parameter for your MySQL DB instance\. Make sure that it is 10 times larger than the largest BLOB data size found in your tables plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in these tables\. For information about how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information about the redo log BLOB size limit, see [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html) in the MySQL documentation\.
-
 For RDS for MySQL version 8\.0\.30 and higher, the `innodb_redo_log_capacity` parameter is used instead of the `innodb_log_file_size` parameter\. The size limit doesn't apply to the `innodb_redo_log_capacity` parameter\. For more information, see [Size limits on redo logs](#USER_LogAccess.MySQL.LogFileSize.RedoLogs)\.

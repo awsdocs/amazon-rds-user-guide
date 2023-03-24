@@ -2,7 +2,7 @@
 
 After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this topic, you connect to your DB instance by using either Microsoft SQL Server Management Studio \(SSMS\) or SQL Workbench/J\.
 
-For an example that walks you through the process of creating and connecting to a sample DB instance, see [Creating a Microsoft SQL Server DB instance and connecting to it](CHAP_GettingStarted.CreatingConnecting.SQLServer.md)\. 
+For an example that walks you through the process of creating and connecting to a sample DB instance, see [Creating and connecting to a Microsoft SQL Server DB instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md)\. 
 
 ## Before you connect<a name="sqlserver-before-connect"></a>
 

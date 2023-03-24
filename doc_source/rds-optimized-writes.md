@@ -30,10 +30,19 @@ To determine whether an RDS for MySQL database is using RDS Optimized Writes, vi
 ## Using RDS Optimized Writes<a name="rds-optimized-writes-using"></a>
 
 You can turn on RDS Optimized Writes when you create an RDS for MySQL database with the RDS console, the AWS CLI, or the RDS API\. RDS Optimized Writes is turned on automatically when both of the following conditions apply during database creation:
-+ You specify a DB engine version and DB instance class that support RDS Optimized Writes\. For information about the DB engine versions and DB instance classes that support RDS Optimized Writes, see [Limitations for RDS Optimized Writes](#rds-optimized-writes-limitations)\.
++ You specify a DB engine version and DB instance class that support RDS Optimized Writes\. 
+  + RDS Optimized Writes is supported for RDS for MySQL version 8\.0\.30 and higher\. For information about RDS for MySQL versions, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
+  + RDS Optimized Writes is supported for RDS for MySQL databases that use the following DB instance classes:
+    + db\.x2iedn
+    + db\.r6i
+    + db\.r6g
+    + db\.r6gd
+    + db\.r5b
+
+    For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 + In the parameter group associated with the database, the `rds.optimized_writes` parameter is set to `AUTO`\. In default parameter groups, this parameter is always set to `AUTO`\.
 
-You might want to use a DB engine version and DB instance class that support RDS Optimized Writes, but you don't want to use this feature\. In this case, specify a custom parameter group that has the `rds.optimized_writes` parameter set to `OFF` when you create the database\. If you want the database to use RDS Optimized Writes later, you can set the parameter to `AUTO` to turn it on\. For information about creating custom parameter groups and setting parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+If you want to use a DB engine version and DB instance class that support RDS Optimized Writes, but you don't want to use this feature, then specify a custom parameter group when you create the database\. In this parameter group, set the `rds.optimized_writes` parameter to `OFF`\. If you want the database to use RDS Optimized Writes later, you can set the parameter to `AUTO` to turn it on\. For information about creating custom parameter groups and setting parameters, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
@@ -88,17 +97,7 @@ You can create a DB instance using the [ CreateDBInstance](https://docs.aws.amaz
 ## Limitations for RDS Optimized Writes<a name="rds-optimized-writes-limitations"></a>
 
 The following limitations apply to RDS Optimized Writes:
-+ RDS Optimized Writes is supported for RDS for MySQL version 8\.0\.30 and higher\. For information about RDS for MySQL versions, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
-+ RDS Optimized Writes is supported for RDS for MySQL databases that use the following DB instance classes:
-  + db\.x2idn
-  + db\.x2iedn
-  + db\.r6g
-  + db\.r6gd
-  + db\.r6i
-  + db\.r5b
-
-  For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
-+ You can only modify a database to turn on RDS Optimized Writes if the database was created with a DB engine version and DB instance class that support the feature\. In this case, if RDS Optimized Writes is turned off for the database, you can turn it on by setting the `rds.optimized_writes` parameter to `AUTO`\.
++ You can only modify a database to turn on RDS Optimized Writes if the database was created with a DB engine version and DB instance class that support the feature\. In this case, if RDS Optimized Writes is turned off for the database, you can turn it on by setting the `rds.optimized_writes` parameter to `AUTO`\. For more information, see [Using RDS Optimized Writes](#rds-optimized-writes-using)\.
 + When you are restoring an RDS for MySQL database from a snapshot, you can only turn on RDS Optimized Writes for the database if all of the following conditions apply:
   + The snapshot was created from a database that supports RDS Optimized Writes\.
   + The snapshot is restored to a database that supports RDS Optimized Writes\.

@@ -8,7 +8,7 @@ For the latest webinars and blogs about RDS Custom, see [Amazon RDS Custom resou
 + [Addressing the challenge of database customization](#custom-intro.challenge)
 + [Management model and benefits for Amazon RDS Custom](#custom-intro.solution)
 + [Amazon RDS Custom architecture](custom-concept.md)
-+ [Security considerations for Amazon RDS Custom](custom-security.md)
++ [Security in Amazon RDS Custom](custom-security.md)
 + [Working with RDS Custom for Oracle](working-with-custom-oracle.md)
 + [Working with RDS Custom for SQL Server](working-with-custom-sqlserver.md)
 + [Troubleshooting DB issues for Amazon RDS Custom](custom-troubleshooting.md)

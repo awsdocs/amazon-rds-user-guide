@@ -6,7 +6,7 @@ Keeping all of your credentials in the same directory can save you time and effo
 
 ## Region and version availability<a name="oracle-kerberos-setting-up.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of RDS for Oracle with Kerberos authentication, see [Dual\-stack mode](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of RDS for Oracle with Kerberos authentication, see [Kerberos authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)\.
 
 **Note**  
 Kerberos authentication isn't supported for DB instance classes that are deprecated for RDS for Oracle DB instances\. For more information, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\.

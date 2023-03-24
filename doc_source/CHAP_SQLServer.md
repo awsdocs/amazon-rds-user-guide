@@ -331,7 +331,6 @@ Amazon RDS supports CDC for the following SQL Server editions and versions:
 + Microsoft SQL Server Enterprise Edition \(All versions\) 
 + Microsoft SQL Server Standard Edition: 
   + 2019
-  + ea 
   + 2017
   + 2016 version 13\.00\.4422\.0 SP1 CU2 and later
 

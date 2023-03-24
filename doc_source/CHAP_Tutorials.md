@@ -9,6 +9,7 @@ You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blo
 + [Tutorials in this guide](#CHAP_Tutorials.ThisGuide)
 + [Tutorials in other AWS guides](#CHAP_Tutorials.OtherGuides)
 + [Tutorials and sample code in GitHub](#CHAP_Tutorials.GitHub)
++ [Using this service with an AWS SDK](#sdk-general-information-section)
 
 ## Tutorials in this guide<a name="CHAP_Tutorials.ThisGuide"></a>
 
@@ -60,18 +61,27 @@ The following tutorials and sample code in GitHub show you how to perform common
 + [ Creating the Amazon Relational Database Service item tracker](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_rds_item_tracker)
 
   Learn how to create an application that tracks and reports on work items\. This application uses Amazon RDS, Amazon Simple Email Service, Elastic Beanstalk, and SDK for Java 2\.x\.
-+ [ SDK for Go code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/go/rds)
 
-  View a collection of SDK for Go code examples for Amazon RDS and Aurora\.
-+ [ SDK for Java 2\.x code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/rds/src/main/java/com/example/rds)
+## Using this service with an AWS SDK<a name="sdk-general-information-section"></a>
 
-  View a collection of SDK for Java 2\.x code examples for Amazon RDS and Aurora\.
-+ [ SDK for PHP code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php/example_code/rds)
+AWS software development kits \(SDKs\) are available for many popular programming languages\. Each SDK provides an API, code examples, and documentation that make it easier for developers to build applications in their preferred language\.
 
-  View a collection of SDK for PHP code examples for Amazon RDS and Aurora\.
-+ [AWS SDK for Python \(Boto3\) code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/example_code/rds)
 
-  View a collection of AWS SDK for Python \(Boto3\) code examples for Amazon RDS\.
-+ [ SDK for Ruby code examples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/ruby/example_code/rds)
+| SDK documentation | Code examples | 
+| --- | --- | 
+| [AWS SDK for C\+\+](https://docs.aws.amazon.com/sdk-for-cpp) | [AWS SDK for C\+\+ code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/cpp) | 
+| [AWS SDK for Go](https://docs.aws.amazon.com/sdk-for-go) | [AWS SDK for Go code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/gov2) | 
+| [AWS SDK for Java](https://docs.aws.amazon.com/sdk-for-java) | [AWS SDK for Java code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2) | 
+| [AWS SDK for JavaScript](https://docs.aws.amazon.com/sdk-for-javascript) | [AWS SDK for JavaScript code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3) | 
+| [AWS SDK for Kotlin](https://docs.aws.amazon.com/sdk-for-kotlin) | [AWS SDK for Kotlin code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/kotlin) | 
+| [AWS SDK for \.NET](https://docs.aws.amazon.com/sdk-for-net) | [AWS SDK for \.NET code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3) | 
+| [AWS SDK for PHP](https://docs.aws.amazon.com/sdk-for-php) | [AWS SDK for PHP code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php) | 
+| [AWS SDK for Python \(Boto3\)](https://docs.aws.amazon.com/pythonsdk) | [AWS SDK for Python \(Boto3\) code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python) | 
+| [AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby) | [AWS SDK for Ruby code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/ruby) | 
+| [AWS SDK for Rust](https://docs.aws.amazon.com/sdk-for-rust) | [AWS SDK for Rust code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rust_dev_preview) | 
+| [AWS SDK for Swift](https://docs.aws.amazon.com/sdk-for-swift) | [AWS SDK for Swift code examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/swift) | 
 
-  View a collection of SDK for Ruby code examples for Amazon RDS and Aurora\.
+For examples specific to this service, see [Code examples for Amazon RDS using AWS SDKs](service_code_examples.md)\.
+
+**Example availability**  
+Can't find what you need? Request a code example by using the **Provide feedback** link at the bottom of this page\.

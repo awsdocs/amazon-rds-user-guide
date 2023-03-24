@@ -253,11 +253,23 @@ This setting is represented by the **Idle client connection timeout** field in t
 
 ### MaxConnectionsPercent<a name="rds-proxy-connection-pooling-tuning.maxconnectionspercent"></a>
 
-You can limit the number of connections that an RDS Proxy can establish with the database\. You specify the limit as a percentage of the maximum connections available for your database\. The proxy doesn't create all of these connections in advance\. This setting reserves the right for the proxy to establish these connections as the workload needs them\.
+You can limit the number of connections that an RDS Proxy can establish with the target database\. You specify the limit as a percentage of the maximum connections available for your database\. This setting is represented by the **Connection pool maximum connections** field in the RDS console and the `MaxConnectionsPercent` setting in the AWS CLI and the API\. 
 
-For example, suppose that you configured RDS Proxy to use 75 percent of the maximum connections for your database\. In this case, your database supports a maximum of 1,000 concurrent connections\. Here, RDS Proxy can open up to 750 database connections\.
+The `MaxConnectionsPercent` value is expressed as a percentage of the `max_connections` setting for the RDS DB instance used by the target group\. The proxy doesn't create all of these connections in advance\. This setting reserves the right for the proxy to establish these connections as the workload needs them\.
 
-This setting is represented by the **Connection pool maximum connections** field in the RDS console and the `MaxConnectionsPercent` setting in the AWS CLI and the API\. To learn how to change the value of the **Connection pool maximum connections** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `MaxConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
+For example, for a registered database target with `max_connections` set to 1000, and `MaxConnectionsPercent` set to 95, RDS Proxy sets 950 connections as the upper limit for concurrent connections to that database target\.
+
+A common side\-effect of your workload reaching the maximum number of allowed database connections is an increase in overall query latency, along with an increase in the `DatabaseConnectionsBorrowLatency` metric\. You can monitor currently used and total allowed database connections by comparing the `DatabaseConnections` and `MaxDatabaseConnectionsAllowed` metrics\.
+
+When setting this parameter, note the following best practices:
++ Allow sufficient connection headroom for changes in workload pattern\. It is recommended to set the parameter at least 30% above your maximum recent monitored usage\. As RDS Proxy redistributes database connection quotas across multiple nodes, internal capacity changes might require at least 30% headroom for additional connections to avoid increased borrow latencies\.
++ RDS Proxy reserves a certain number of connections for active monitoring to support fast failover, traffic routing and internal operations\. The `MaxDatabaseConnectionsAllowed` metric does not include these reserved connections\. It represents the number of connections available to serve the workload, and can be lower than the value derived from the `MaxConnectionsPercent` setting\.
+
+  Minimal recommended `MaxConnectionsPercent` values
+  + db\.t3\.small: 30
+  + db\.t3\.medium or above: 20
+
+To learn how to change the value of the **Connection pool maximum connections** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `MaxConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
  For information on database connection limits, see [Maximum number of database connections](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.MaxConnections)\. 
 

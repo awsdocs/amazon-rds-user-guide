@@ -14,7 +14,7 @@ Amazon RDS features are different from engine\-native features and options\. For
 + [Dual\-stack mode](Concepts.RDS_Fea_Regions_DB-eng.Feature.DualStackMode.md)
 + [Export snapshots to S3](Concepts.RDS_Fea_Regions_DB-eng.Feature.ExportSnapshotToS3.md)
 + [IAM database authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.md)
-+ [Dual\-stack mode](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)
++ [Kerberos authentication](Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.md)
 + [Multi\-AZ DB clusters](Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.md)
 + [Performance Insights](Concepts.RDS_Fea_Regions_DB-eng.Feature.PerformanceInsights.md)
 + [RDS Custom](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md)

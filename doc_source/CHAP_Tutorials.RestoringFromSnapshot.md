@@ -30,9 +30,9 @@ Use the following procedure to restore from a snapshot in the AWS Management Con
 
    If you're restoring from a DB instance that you deleted after you made the DB snapshot, you can use the name of that DB instance\.
 
-1. Under **Availability & durability**, for **Multi\-AZ deployment** choose whether to create a standby instance in another Availability Zone\.
+1. Under **Availability & durability**, choose whether to create a standby instance in another Availability Zone\.
 
-   For this tutorial, use **No**, the default setting\.
+   For this tutorial, don't create a standby instance\.
 
 1. Under **Connectivity**, use the default settings for the following:
    + **Virtual private cloud \(VPC\)**
@@ -69,4 +69,4 @@ In some cases, you might restore from a DB snapshot of a DB instance that uses a
 
 The **Databases** page displays the restored DB instance, with a status of `Creating`\.
 
-![\[Restored DB instance on the Database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restore-instance4.png)
+![\[Restored DB instance on the Databases page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restore-instance4.png)

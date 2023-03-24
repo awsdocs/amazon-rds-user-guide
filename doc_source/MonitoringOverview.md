@@ -67,7 +67,7 @@ You can use the following automated tools to watch Amazon RDS and report when so
 
 Amazon RDS integrates with Amazon CloudWatch for additional monitoring capabilities\.
 + **Amazon CloudWatch** – This service monitors your AWS resources and the applications you run on AWS in real time\. You can use the following Amazon CloudWatch features with Amazon RDS:
-  + **Amazon CloudWatch metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database\. You don't get additional charges for Amazon RDS metrics in CloudWatch\. For more information, see [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\.
+  + **Amazon CloudWatch metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database\. You don't get additional charges for Amazon RDS metrics in CloudWatch\.  For more information, see [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\.
   + **Amazon CloudWatch alarms** – You can watch a single Amazon RDS metric over a specific time period\. You can then perform one or more actions based on the value of the metric relative to a threshold that you set\. For more information, see [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\.
 
 #### Amazon RDS Performance Insights and operating\-system monitoring<a name="MonitoringOverview.tools.automated.metrics.rds"></a>

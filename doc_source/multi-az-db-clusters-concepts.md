@@ -31,7 +31,7 @@ Feature availability and support varies across specific versions of each databas
 
 ## Instance class availability<a name="multi-az-db-clusters-concepts.InstanceAvailability"></a>
 
-Multi\-AZ DB cluster deployments are supported for a subset of DB instance classes\. For a list of supported instance classes, see [Settings for creating Multi\-AZ DB clusters](create-multi-az-db-cluster.md#create-multi-az-db-cluster-settings)\.
+Multi\-AZ DB cluster deployments are supported for a subset of DB instance classes\. For a list of supported instance classes, see the **DB instance class** row in [Settings for creating Multi\-AZ DB clusters](create-multi-az-db-cluster.md#create-multi-az-db-cluster-settings)\.
 
 For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 

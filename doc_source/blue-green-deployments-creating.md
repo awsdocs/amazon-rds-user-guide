@@ -40,7 +40,7 @@ You can create the blue/green deployment using the AWS Management Console, the A
 
 ### Console<a name="blue-green-deployments-creating-console"></a>
 
-**To create a blue/green deployment;**
+**To create a blue/green deployment**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

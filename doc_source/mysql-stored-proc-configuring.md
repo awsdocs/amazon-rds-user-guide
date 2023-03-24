@@ -46,7 +46,7 @@ To specify the number of hours to retain binary logs on a DB instance, use the `
 `call mysql.rds_set_configuration('binlog retention hours', 24);`
 
 **Note**  
-You can't use the value `0` for `binlog retention hours`\. Use `NULL` instead\.
+You can't use the value `0` for `binlog retention hours`\.
 
 For MySQL DB instances, the maximum `binlog retention hours` value is 168 \(7 days\)\.
 

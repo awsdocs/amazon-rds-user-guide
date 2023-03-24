@@ -158,9 +158,11 @@ aws secretsmanager get-secret-value --secret-id your_secret_name
 
 **To create an IAM policy that accesses your Secrets Manager secrets for use with your proxy**
 
-1.  Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html)\. Include the **Add Role to Database** step\. 
+1. Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html), choosing [Creating a role to delegate permissions to an AWS service](IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
-1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created, see [ Specifying KMS keys in IAM policy statements](https://docs.aws.amazon.com/kms/latest/developerguide/cmks-in-iam-policies.html)\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS key or your own KMS key\. Which one you use depends on which one you used to encrypt the Secrets Manager secrets\. 
+   Choose **AWS service** for the **Trusted entity type**\. Under **Use case**, select **RDS** from **Use cases for other AWS services** dropdown\. Select **RDS \- Add Role to Database**\.
+
+1. For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created, see [ Specifying KMS keys in IAM policy statements](https://docs.aws.amazon.com/kms/latest/developerguide/cmks-in-iam-policies.html)\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS key or your own KMS key\. Which one you use depends on which one you used to encrypt the Secrets Manager secrets\. 
 
    ```
    {
@@ -311,7 +313,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy '{
     Provide additional connectivity configuration: 
    +  **VPC security group**\. Choose an existing VPC security group\. You can also choose for the AWS Management Console to create a new security group for you and use that\. 
 **Note**  
- This security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\.  
+This security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\.  
 When using a shared VPC, you can't use the default security group for the VPC, or one that belongs to another account\. Choose a security group that belongs to your account\. If one doesn't exist, create one\. For more information about this limitation, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html#vpc-share-limitations)\. 
 
     \(Optional\) Provide advanced configuration: 
