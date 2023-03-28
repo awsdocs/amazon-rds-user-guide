@@ -363,7 +363,7 @@ aws rds describe-db-engine-versions --default-only --engine postgres
 For information on creating DB instances programmatically, see the following resources:
 + Using the AWS CLI – [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
 + Using the Amazon RDS API – [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
-+ Using AWS CloudFormation – [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html)
++ Using AWS CloudFormation – [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html)
 
 ## Amazon RDS new features and best practices presentation video<a name="CHAP_BestPractices.Presentation"></a>
 
