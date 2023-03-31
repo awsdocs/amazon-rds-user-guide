@@ -48,6 +48,8 @@ The following screen shows an inbound rule with a security group for its source\
 
 ![\[Adding a security group to another security group's rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-vpc-add-sg-rule.png)
 
+For more information about connecting to the DB instance from your EC2 instance, see [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md) \.
+
 ## A DB instance in a VPC accessed by an EC2 instance in a different VPC<a name="USER_VPC.Scenario3"></a>
 
 When your DB instances is in a different VPC from the EC2 instance you are using to access it, you can use VPC peering to access the DB instance\.

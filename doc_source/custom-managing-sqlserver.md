@@ -264,8 +264,8 @@ To modify an RDS Custom for SQL Server DB instance, use the [modify\-db\-instanc
 
 Modifying storage for an RDS Custom for SQL Server DB instance is similar to modifying storage for an Amazon RDS DB instance, but you can only do the following:
 + Increase the allocated storage size\.
-+ Change the storage type\. For example, you can modify the the storage type from io1 to gp2, or gp2 to io1\.
-+ Change the provisioned IOPS, if you're using the volume types that supports provisioned IOPS, such as io1\.
++ Change the storage type\. You can use available storage types such as General Purpose or Provisioned IOPS\. Provisioned IOPS is supported for gp3 and io1 storage types\.
++ Change the provisioned IOPS, if you're using the volume types that supports provisioned IOPS, such as io1 or gp3\.
 
 The following limitations apply to modifying the storage for an RDS Custom for SQL Server DB instance:
 + The minimum allocated storage size for RDS Custom for SQL Server is 20 GiB, and the maximum supported storage size is 16 TiB\.
@@ -297,7 +297,7 @@ For general information about storage modification, see [Working with storage fo
 
    1. Enter a new value for **Allocated storage**\. It must be greater than the current value, and from 20 GiB–16 TiB\.
 
-   1. Change the value for **Storage type**\. You can use available storage types like General Purpose \(gp2\) or Provisioned IOPS \(io1\) storage\.
+   1. Change the value for **Storage type**\. You can use available storage types like General Purpose or Provisioned IOPS\. Provisioned IOPS is supported for gp3 and io1 storage types\.
 
    1. If you are specifying volume types that support provisioned IOPS, you can define the **Provisioned IOPS** value\.
 
@@ -311,7 +311,7 @@ For general information about storage modification, see [Working with storage fo
 
 To modify the storage for an RDS Custom for SQL Server DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\. It must be greater than the current value, and from 20–16,384 GiB\.
-+ `--storage-type` – The storage type, for example, gp2 or io1\.
++ `--storage-type` – The storage type, for example, gp3, gp2, or io1\.
 + `--iops` – Provisioned IOPS for the DB instance\. You can specify this only for storage types that support provisioned IOPS, like io1\.
 + `--apply-immediately` – Use `--apply-immediately` to apply the storage changes immediately\.
 

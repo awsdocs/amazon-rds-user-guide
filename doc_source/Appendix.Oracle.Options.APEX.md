@@ -23,7 +23,7 @@ Oracle APEX consists of the following main components:
   + For APEX version 4\.1\.1, you can use Oracle APEX Listener version 1\.1\.4\.
   + You can use Oracle HTTP Server and `mod_plsql` listeners\.
 **Note**  
-Amazon RDS doesn't support the Oracle XML DB HTTP server with the embedded PL/SQL gateway; you can't use this as a listener for APEX\. In general, Oracle recommends against using the embedded PL/SQL gateway for applications that run on the internet\. 
+Amazon RDS doesn't support the Oracle XML DB HTTP server with the embedded PL/SQL gateway; you can't use this as a listener for APEX\. In general, Oracle recommends against using the embedded PL/SQL gateway for applications that run on the internet\.
 
   For more information about these listener types, see [About choosing a web listener](https://docs.oracle.com/database/apex-5.1/HTMIG/choosing-web-listener.htm#HTMIG29321) in the Oracle documentation\.
 
@@ -38,6 +38,7 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 | APEX version | Storage requirements | Supported Oracle Database versions | Notes | 
 | --- | --- | --- | --- | 
+|  Oracle APEX version 22\.2\.v1  |  106 MiB  |  All  |  This version includes patch 34628174: PSE BUNDLE FOR APEX 22\.2 \(PSES ON TOP OF 22\.2\.0\), PATCH\_VERSION 4\.  | 
 |  Oracle APEX version 22\.1\.v1  |  124 MiB  |  All  |  This version includes patch 34020981: PSE BUNDLE FOR APEX 22\.1 \(PSES ON TOP OF 22\.1\.0\), PATCH\_VERSION 6\.  | 
 |  Oracle APEX version 21\.2\.v1  |  125 MiB  |  All  |  This version includes patch 33420059: PSE BUNDLE FOR APEX 21\.2 \(PSES ON TOP OF 21\.2\.0\), PATCH\_VERSION 8\.  | 
 |  Oracle APEX version 21\.1\.v1  |  125 MiB  |  All  |  This version includes patch 32598392: PSE BUNDLE FOR APEX 21\.1, PATCH\_VERSION 3\.  | 

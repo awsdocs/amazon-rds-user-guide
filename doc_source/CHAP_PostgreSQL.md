@@ -34,6 +34,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance](PostgreSQL-Lambda.md)
 + [Common DBA tasks for Amazon RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
 + [Tuning with wait events for RDS for PostgreSQL](PostgreSQL.Tuning.md)
++ [Tuning RDS for PostgreSQL with Amazon DevOps Guru proactive insights](PostgreSQL.Tuning_proactive_insights.md)
 + [Using PostgreSQL extensions with Amazon RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.Extensions.md)
 + [Working with the supported foreign data wrappers for Amazon RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.Extensions.foreign-data-wrappers.md)
 + [Working with Trusted Language Extensions for PostgreSQL](PostgreSQL_trusted_language_extension.md)

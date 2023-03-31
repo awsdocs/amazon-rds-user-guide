@@ -292,6 +292,6 @@ In this step, you create a DB instance and use the VPC name, the DB subnet group
 **Note**  
 If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. For more information, see [DNS attributes for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html) in the *Amazon VPC User Guide*\.
 
-For details on how to create a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) \.
+For details on how to create a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 When prompted in the **Connectivity** section, enter the VPC name, the DB subnet group, and the VPC security group\.

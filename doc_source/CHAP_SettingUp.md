@@ -158,7 +158,7 @@ After you have completed the setup requirements, you can create a DB instance us
 | Microsoft SQL Server | [Creating and connecting to a Microsoft SQL Server DB instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md) | 
 | MySQL | [Creating and connecting to a MySQL DB instance](CHAP_GettingStarted.CreatingConnecting.MySQL.md) | 
 | Oracle | [Creating and connecting to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md) | 
-| PostgreSQL | [Creating a PostgreSQL DB instance and connecting to a database on a PostgreSQL DB instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md) | 
+| PostgreSQL | [Creating and connecting to a PostgreSQL DB instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md) | 
 
 **Note**  
 If you can't connect to a DB instance after you create it, see the troubleshooting information in [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.

@@ -230,8 +230,8 @@ In the following partial sample output, the pending `AutomationMode` value is `f
 Modifying an RDS Custom for Oracle DB instance is similar to modifying an Amazon RDS instance, but you can only do the following:
 + Change the DB instance class\.
 + Increase the allocated storage for your DB instance\.
-+ Change the storage type from io1 to gp2, or gp2 to io1\.
-+ Change the Provisioned IOPS, if you're using the io1 storage type\.
++ Change the storage type to io1, gp2, or gp3\.
++ Change the Provisioned IOPS, if you're using the io1 or gp3 storage types\.
 
 **Topics**
 + [Requirements and limitations when modifying your DB instance storage](#custom-managing.storage-modify)
@@ -248,7 +248,7 @@ Consider the following requirements and limitations when you modify the storage 
 + Any storage volumes that you attach manually to your RDS Custom DB instance are outside the support perimeter\.
 
   For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
-+ Magnetic \(standard\) Amazon EBS storage isn't supported for RDS Custom\.
++ Magnetic \(standard\) Amazon EBS storage isn't supported for RDS Custom\. You can choose only the io1, gp2, or gp3 SSD storage types\.
 
 For more information about Amazon EBS storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\. For general information about storage modification, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)\.
 
@@ -297,9 +297,9 @@ You can modify the DB instance class or storage using the console, AWS CLI, or R
 
    1. Enter a new value for **Allocated storage**\. It must be greater than the current value, and from 40 GiB–64 TiB\.
 
-   1. Change the value for **Storage type**\. You can use General Purpose \(gp2\) or Provisioned IOPS \(io1\) storage\.
+   1. Change the value for **Storage type** to **General Purpose SSD \(gp2\)**, **General Purpose SSD \(gp3\)**, or **Provisioned IOPS \(io1\)**\.
 
-   1. If using io1 storage, you can change the **Provisioned IOPS** value\.
+   1. If you use **Provisioned IOPS \(io1\)** or **General Purpose SSD \(gp3\)**, you can change the **Provisioned IOPS** value\.
 
 1. Choose **Continue**\.
 
@@ -312,8 +312,8 @@ You can modify the DB instance class or storage using the console, AWS CLI, or R
 To modify the storage for an RDS Custom for Oracle DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
 + `--db-instance-class` – A new instance class\. For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\. It must be greater than the current value, and from 40–65,536 GiB\.
-+ `--storage-type` – The storage type, gp2 or io1\.
-+ `--iops` – Provisioned IOPS for the DB instance, if using the io1 storage type\.
++ `--storage-type` – The storage type: gp2, gp3, or io1\.
++ `--iops` – Provisioned IOPS for the DB instance, if using the io1 or gp3 storage types\.
 + `--apply-immediately` – Use `--apply-immediately` to apply the storage changes immediately\.
 
   Or use `--no-apply-immediately` \(the default\) to apply the changes during the next maintenance window\.

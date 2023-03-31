@@ -17,7 +17,7 @@ For more information about certificate rotation, see [Rotating your SSL/TLS cert
 
 ## Determining whether applications are connecting to PostgreSQL DB instances using SSL<a name="ssl-certificate-rotation-postgresql.determining-server"></a>
 
-Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `0` \(off\)\. If the `rds.force_ssl` parameter is set to `1` \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `0` \(off\) for DB instances using PostgreSQL versions before version 15\. By default, `rds.force_ssl` is set to `1` \(on\) for DB instances using PostgreSQL version 15 and later major versions\. If the `rds.force_ssl` parameter is set to `1` \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
 If you are using RDS PostgreSQL version 9\.5 or later major version and `rds.force_ssl` is not set to `1` \(on\), query the `pg_stat_ssl` view to check connections using SSL\. For example, the following query returns only SSL connections and information about the clients using SSL\.
 

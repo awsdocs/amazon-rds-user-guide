@@ -9,19 +9,25 @@ To create a CEV, access the installation files and patches that are stored in yo
 For example, you can use the April 2021 RU/RUR for Oracle Database 19c, or any valid combination of installation files and patches\. For more information on the versions and Regions supported by RDS Custom for Oracle, see [RDS Custom with RDS for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.html#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora)\.
 
 **Topics**
-+ [Step 1 \(Optional\): Downloading the manifest templates](#custom-cev.preparing.templates)
-+ [Step 2: Downloading your database installation files and patches from Oracle Software Delivery Cloud](#custom-cev.preparing.download)
-+ [Step 3: Uploading your installation files to Amazon S3](#custom-cev.preparing.s3)
-+ [Step 4 \(Optional\): Sharing your installation media in S3 across AWS accounts](#custom-cev.preparing.accounts)
-+ [Step 5: Preparing the CEV manifest](#custom-cev.preparing.manifest)
-+ [Step 6 \(Optional\): Validating the CEV manifest](#custom-cev.preparing.validating)
-+ [Step 7: Adding necessary IAM permissions](#custom-cev.preparing.iam)
++ [Step 1 \(Optional\): Download the manifest templates](#custom-cev.preparing.templates)
++ [Step 2: Download your database installation files and patches from Oracle Software Delivery Cloud](#custom-cev.preparing.download)
++ [Step 3: Upload your installation files to Amazon S3](#custom-cev.preparing.s3)
++ [Step 4 \(Optional\): Share your installation media in S3 across AWS accounts](#custom-cev.preparing.accounts)
++ [Step 5: Prepare the CEV manifest](#custom-cev.preparing.manifest)
++ [Step 6 \(Optional\): Validate the CEV manifest](#custom-cev.preparing.validating)
++ [Step 7: Add necessary IAM permissions](#custom-cev.preparing.iam)
 
-## Step 1 \(Optional\): Downloading the manifest templates<a name="custom-cev.preparing.templates"></a>
+## Step 1 \(Optional\): Download the manifest templates<a name="custom-cev.preparing.templates"></a>
 
-A *CEV manifest* is a JSON document that includes the list of database installation \.zip files for your CEV\. To create a CEV, you need to identify and then download your installation files, and then create a manifest\.
+A *CEV manifest* is a JSON document that includes the list of database installation \.zip files for your CEV\. To create a CEV, do the following:
 
-RDS Custom for Oracle provides manifest templates with our recommended \.zip files for each supported Oracle Database release\. The following template is for the 19\.17\.0\.0\.0 RU:
+1. Identify the Oracle database installation files that you want to include in your CEV\.
+
+1. Download the installation files\.
+
+1. Create a JSON manifest that lists the installation files\.
+
+RDS Custom for Oracle provides JSON manifest templates with our recommended \.zip files for each supported Oracle Database release\. For example, the following template is for the 19\.17\.0\.0\.0 RU\.
 
 ```
 {
@@ -53,9 +59,9 @@ RDS Custom for Oracle provides manifest templates with our recommended \.zip fil
 }
 ```
 
-Each template has an associated readme that includes instructions for downloading the patches, URLs for the \.zip files, and file checksums\. You can either use these templates as they are, or modify them with your own patches\. To review the templates, download [custom\-oracle\-manifest\.zip](samples/custom-oracle-manifest.zip) to your local disk and then open it with a file archiving application\. For more information, see [Step 5: Preparing the CEV manifest](#custom-cev.preparing.manifest)\.
+Each template has an associated readme that includes instructions for downloading the patches, URLs for the \.zip files, and file checksums\. You can use these templates as they are or modify them with your own patches\. To review the templates, download [custom\-oracle\-manifest\.zip](samples/custom-oracle-manifest.zip) to your local disk and then open it with a file archiving application\. For more information, see [Step 5: Prepare the CEV manifest](#custom-cev.preparing.manifest)\.
 
-## Step 2: Downloading your database installation files and patches from Oracle Software Delivery Cloud<a name="custom-cev.preparing.download"></a>
+## Step 2: Download your database installation files and patches from Oracle Software Delivery Cloud<a name="custom-cev.preparing.download"></a>
 
 When you have identified the installation files that you want for your CEV, download them to your local system\. The Oracle Database installation files and patches are hosted on Oracle Software Delivery Cloud\. Each CEV requires a base release, such as Oracle Database 19c or Oracle Database 12c Release 2 \(12\.2\), and an optional list of patches\.
 
@@ -89,10 +95,10 @@ When you have identified the installation files that you want for your CEV, down
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html)
 
 1. Download your desired Oracle patches from `updates.oracle.com` or `support.oracle.com` to your local system\. You can find the URLs for the patches in the following locations:
-   + The readme files in the \.zip file that you downloaded in [Step 1 \(Optional\): Downloading the manifest templates](#custom-cev.preparing.templates)
+   + The readme files in the \.zip file that you downloaded in [Step 1 \(Optional\): Download the manifest templates](#custom-cev.preparing.templates)
    + The patches listed in each Release Update \(RU\) in [Release notes for Amazon Relational Database Service \(Amazon RDS\) for Oracle](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes)
 
-## Step 3: Uploading your installation files to Amazon S3<a name="custom-cev.preparing.s3"></a>
+## Step 3: Upload your installation files to Amazon S3<a name="custom-cev.preparing.s3"></a>
 
 Upload your Oracle installation and patch files to Amazon S3 using the AWS CLI\. The S3 bucket that contains your installation files must be in the same AWS Region as your CEV\.
 
@@ -171,7 +177,7 @@ aws s3 sync s3://source-bucket/ ^
     s3://my-custom-installation-files/123456789012/cev1/
 ```
 
-## Step 4 \(Optional\): Sharing your installation media in S3 across AWS accounts<a name="custom-cev.preparing.accounts"></a>
+## Step 4 \(Optional\): Share your installation media in S3 across AWS accounts<a name="custom-cev.preparing.accounts"></a>
 
 For the purposes of this section, the Amazon S3 bucket that contains your uploaded Oracle installation files is your *media bucket*\. Your organization might use multiple AWS accounts in an AWS Region\. If so, you might want to use one AWS account to populate your media bucket and a different AWS account to create CEVs\. If you don't intend to share your media bucket, skip to the next section\.
 
@@ -252,13 +258,13 @@ This section assumes the following:
 
 1. Create a CEV by following the steps in [Creating a CEV](custom-cev.create.md)\.
 
-## Step 5: Preparing the CEV manifest<a name="custom-cev.preparing.manifest"></a>
+## Step 5: Prepare the CEV manifest<a name="custom-cev.preparing.manifest"></a>
 
 A CEV manifest is a JSON document that includes the following:
 + \(Required\) The list of installation \.zip files that you uploaded to Amazon S3\. RDS Custom applies the patches in the order in which they're listed in the manifest\.
 + \(Optional\) Installation parameters that set nondefault values for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\. Be aware that you can’t modify the installation parameters for an existing CEV or an existing DB instance\. You also can’t upgrade from one CEV to another CEV when the installation parameters have different settings\.
 
-For sample CEV manifests, see the JSON templates that you downloaded in [Step 1 \(Optional\): Downloading the manifest templates](#custom-cev.preparing.templates)\. You can also review the samples in [CEV manifest examples](#custom-cev.preparing.manifest.examples)\.
+For sample CEV manifests, see the JSON templates that you downloaded in [Step 1 \(Optional\): Download the manifest templates](#custom-cev.preparing.templates)\. You can also review the samples in [CEV manifest examples](#custom-cev.preparing.manifest.examples)\.
 
 **Topics**
 + [JSON fields in the CEV manifest](#custom-cev.preparing.manifest.fields)
@@ -494,7 +500,7 @@ In the following example for Oracle Database 19c, RDS Custom applies p32126828, 
 }
 ```
 
-## Step 6 \(Optional\): Validating the CEV manifest<a name="custom-cev.preparing.validating"></a>
+## Step 6 \(Optional\): Validate the CEV manifest<a name="custom-cev.preparing.validating"></a>
 
 Optionally, verify that manifest is a valid JSON file by running the `json.tool` Python script\.
 
@@ -504,6 +510,6 @@ For example, if you change into the directory containing a CEV manifest named `m
 python -m json.tool < manifest.json
 ```
 
-## Step 7: Adding necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
+## Step 7: Add necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
 
-Make sure that the IAM principal that creates the CEV has the necessary policies described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
+Make sure that the IAM principal that creates the CEV has the necessary policies described in [Step 4: Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.

@@ -3,13 +3,13 @@
 Before you create a DB instance based on Amazon RDS Custom for Oracle, perform the following tasks\.
 
 **Topics**
-+ [Prerequisites for creating an RDS Custom for Oracle instance](#custom-setup-orcl.review)
-+ [Make sure that you have a symmetric encryption AWS KMS key](#custom-setup-orcl.cmk)
-+ [Download and install the AWS CLI](#custom-setup-orcl.cli)
-+ [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)
-+ [Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)
++ [Prerequisites for creating an RDS Custom for Oracle DB instance](#custom-setup-orcl.review)
++ [Step 1: Make sure that you have a symmetric encryption AWS KMS key](#custom-setup-orcl.cmk)
++ [Step 2: Download and install the AWS CLI](#custom-setup-orcl.cli)
++ [Step 3: Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)
++ [Step 4: Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)
 
-## Prerequisites for creating an RDS Custom for Oracle instance<a name="custom-setup-orcl.review"></a>
+## Prerequisites for creating an RDS Custom for Oracle DB instance<a name="custom-setup-orcl.review"></a>
 
 Before creating an RDS Custom for Oracle DB instance, make sure that you meet the following prerequisites:
 + You have access to [My Oracle Support](https://support.oracle.com/portal/) and [Oracle Software Delivery Cloud](https://edelivery.oracle.com/osdc/faces/Home.jspx) to download the supported list of installation files and patches for the Enterprise Edition of any of the following Oracle Database releases:
@@ -20,18 +20,21 @@ Before creating an RDS Custom for Oracle DB instance, make sure that you meet th
 
   If you use an unknown patch, custom engine version \(CEV\) creation fails\. In this case, contact the RDS Custom support team and ask it to add the missing patch\.
 
-  For more information, see [Step 2: Downloading your database installation files and patches from Oracle Software Delivery Cloud](custom-cev.preparing.md#custom-cev.preparing.download)\.
-+ You have access to Amazon S3 so that you can upload your Oracle installation files\. You use the installation files when you create your RDS Custom CEV\.
+  For more information, see [Step 2: Download your database installation files and patches from Oracle Software Delivery Cloud](custom-cev.preparing.md#custom-cev.preparing.download)\.
++ You have access to Amazon S3\. This service is required for the following reasons:
+  + You upload your Oracle installation files to S3 buckets\. You use the uploaded installation files to create your RDS Custom CEV\.
+  + RDS Custom for Oracle uses scripts downloaded from internally defined S3 buckets to perform actions on your DB instances\. These scripts are necessary for onboarding and RDS Custom automation\.
+  + RDS Custom for Oracle uploads certain files to S3 buckets located in your customer account\. These buckets use the following naming format: `do-not-delete-rds-custom-`*account\_id*\-*region*\-*six\_character\_alphanumeric\_string*\. For example, you might have a bucket named `do-not-delete-rds-custom-123456789012-us-east-1-12a3b4`\.
 
-  For more information, see [Step 3: Uploading your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3) and [Creating a CEV](custom-cev.create.md)\.
-+ You supply your own virtual private cloud \(VPC\) and security group configuration\. For more information, see [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
+  For more information, see [Step 3: Upload your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3) and [Creating a CEV](custom-cev.create.md)\.
++ You supply your own virtual private cloud \(VPC\) and security group configuration\. For more information, see [Step 3: Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 + The AWS Identity and Access Management \(IAM\) user that creates a CEV or RDS Custom DB instance has the required permissions for IAM, CloudTrail, and Amazon S3\.
 
-  For more information, see [Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)\.
+  For more information, see [Step 4: Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)\.
 
 For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 6\. For general requirements that apply to RDS Custom, see [Availability and requirements for Amazon RDS Custom for Oracle](custom-reqs-limits.md)\.
 
-## Make sure that you have a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
+## Step 1: Make sure that you have a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
 
 A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for Oracle DB instance, you supply the KMS key identifier\. For more information, see [Configuring a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
@@ -45,25 +48,27 @@ RDS Custom doesn't support AWS\-managed KMS keys\.
 
 Make sure that the symmetric encryption key that you use gives the AWS Identity and Access Management \(IAM\) role in your IAM instance profile access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy can give access to these operations\.
 
-For more information about configuring IAM for RDS Custom for Oracle, see [Configuring IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
+For more information about configuring IAM for RDS Custom for Oracle, see [Step 3: Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 
-## Download and install the AWS CLI<a name="custom-setup-orcl.cli"></a>
+## Step 2: Download and install the AWS CLI<a name="custom-setup-orcl.cli"></a>
 
 AWS provides you with a command\-line interface to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI\.
 
 For information about downloading and installing the AWS CLI, see [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)\.
 
-If you plan to access RDS Custom only from the AWS Management Console, skip this step\.
+Skip this step if either of the following is true:
++ You plan to access RDS Custom only from the AWS Management Console\.
++ You have already downloaded the AWS CLI for Amazon RDS or a different RDS Custom DB engine\.
 
-If you have already downloaded the AWS CLI for Amazon RDS or a different RDS Custom engine, skip this step\.
+## Step 3: Configure IAM and your VPC<a name="custom-setup-orcl.iam-vpc"></a>
 
-## Configuring IAM and your VPC<a name="custom-setup-orcl.iam-vpc"></a>
+Your RDS Custom DB instance is in a virtual private cloud \(VPC\) based on the Amazon VPC service, just like an Amazon EC2 instance or Amazon RDS instance\. You provide and configure your own VPC\. Thus, you have full control over your instance networking setup\.
 
 You can configure your IAM role and virtual private cloud \(VPC\) using either of the following techniques:
-+ [Configuring IAM and your VPC using AWS CloudFormation](#custom-setup-orcl.cf) \(recommended\)
-+ Following the procedures in [Creating your IAM role and instance profile manually](#custom-setup-orcl.iam) and [Configuring your VPC manually](#custom-setup-orcl.vpc)
++ [Configure IAM and your VPC using AWS CloudFormation](#custom-setup-orcl.cf) \(recommended\)
++ Follow the procedures in [Create your IAM role and instance profile manually](#custom-setup-orcl.iam) and [Configure your VPC manually](#custom-setup-orcl.vpc)
 
-### Configuring IAM and your VPC using AWS CloudFormation<a name="custom-setup-orcl.cf"></a>
+### Configure IAM and your VPC using AWS CloudFormation<a name="custom-setup-orcl.cf"></a>
 
 To simplify setup, you can use the AWS CloudFormation template files to create CloudFormation stacks\. To learn how to create stacks, see [Creating a stack on the AWS CloudFormation console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in *AWS CloudFormation User Guide*\.
 
@@ -162,7 +167,7 @@ Before beginning the following procedure, make sure that you know your route tab
 
    CloudFormation configures your VPC\.
 
-### Creating your IAM role and instance profile manually<a name="custom-setup-orcl.iam"></a>
+### Create your IAM role and instance profile manually<a name="custom-setup-orcl.iam"></a>
 
 To use RDS Custom, you create an IAM instance profile named `AWSRDSCustomInstanceProfileForRdsCustomInstance`\. You also create the IAM role `AWSRDSCustomInstanceRoleForRdsCustomInstance` for the instance profile\. You then add `AWSRDSCustomInstanceRoleForRdsCustomInstance` to your instance profile\.
 
@@ -403,13 +408,17 @@ aws iam add-role-to-instance-profile \
     --role-name AWSRDSCustomInstanceRoleForRdsCustomInstance
 ```
 
-### Configuring your VPC manually<a name="custom-setup-orcl.vpc"></a>
+### Configure your VPC manually<a name="custom-setup-orcl.vpc"></a>
 
-Your RDS Custom DB instance is in a virtual private cloud \(VPC\) based on the Amazon VPC service, just like an Amazon EC2 instance or Amazon RDS instance\. You provide and configure your own VPC\. Thus, you have full control over your instance networking setup\.
+If you don't use AWS CloudFormation to configure your VPC, you can configure your VPC endpoints manually\.
 
-RDS Custom sends communication from your DB instance to other AWS services\. To make sure that RDS Custom can communicate, it validates network connectivity to these services\.
+**Topics**
++ [Create VPC endpoints for dependent AWS services](#custom-setup-orcl.vpc.endpoints)
++ [Configure the instance metadata service](#custom-setup-orcl.vpc.imds)
 
-Your DB instance communicates with the following AWS services:
+#### Create VPC endpoints for dependent AWS services<a name="custom-setup-orcl.vpc.endpoints"></a>
+
+RDS Custom sends communication from your DB instance to other AWS services\. To make sure that RDS Custom can communicate, it validates network connectivity to the following AWS services:
 + Amazon CloudWatch
 + Amazon CloudWatch Logs
 + Amazon CloudWatch Events
@@ -419,88 +428,14 @@ Your DB instance communicates with the following AWS services:
 + AWS Secrets Manager
 + AWS Systems Manager
 
-Make sure that VPC components involved in communication between the DB instance and AWS services are configured with the following requirements:
+Make sure that VPC components involved in communication between your RDS Custom DB instance and AWS services are configured with the following requirements:
 + The DB instance can make outbound connections on port 443 to other AWS services\.
 + The VPC allows incoming responses to requests originating from your DB instance\.
 + Correctly resolve the domain names of endpoints for each AWS service\.
 
+RDS Custom relies on AWS Systems Manager connectivity for its automation\. For information about how to configure VPC endpoints, see [Creating VPC endpoints for Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html#sysman-setting-up-vpc-create)\. For the list of endpoints in each Region, see [AWS Systems Manager endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html) in the *Amazon Web Services General Reference*\.
+
 If you already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
-
-**Topics**
-+ [Configure your instance security group](#custom-setup-orcl.vpc.sg)
-+ [Configure endpoints for dependent AWS services](#custom-setup-orcl.vpc.endpoints)
-+ [Configure the instance metadata service](#custom-setup-orcl.vpc.imds)
-
-#### Configure your instance security group<a name="custom-setup-orcl.vpc.sg"></a>
-
-A *security group* acts as a virtual firewall for a VPC instance, controlling both inbound and outbound traffic\. An RDS Custom DB instance has a default security group that protects the instance\. Make sure that your security group permits traffic between RDS Custom and other AWS services\.
-
-**To configure your security group for RDS Custom**
-
-1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc](https://console.aws.amazon.com/vpc)\. 
-
-1. Allow RDS Custom to use the default security group, or create your own security group\.
-
-   For detailed instructions, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
-
-1. Make sure that your security group permits outbound connections on port 443\. RDS Custom needs this port to communicate with dependent AWS services\.
-
-1. If you have a private VPC and use VPC endpoints, make sure that the security group associated with the DB instance allows outbound connections on port 443 to VPC endpoints\. Also make sure that the security group associated with the VPC endpoint allows inbound connections on port 443 from the DB instance\.
-
-   If incoming connections aren't allowed, the RDS Custom instance can't connect to the AWS Systems Manager and Amazon EC2 endpoints\. For more information, see [Create a Virtual Private Cloud endpoint](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html) in the *AWS Systems Manager User Guide*\.
-
-For more information about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC Developer Guide*\.
-
-#### Configure endpoints for dependent AWS services<a name="custom-setup-orcl.vpc.endpoints"></a>
-
-Make sure that your VPC allows outbound traffic to the following AWS services with which the DB instance communicates:
-+ Amazon CloudWatch
-+ Amazon CloudWatch Logs
-+ Amazon CloudWatch Events
-+ Amazon EC2
-+ Amazon EventBridge
-+ Amazon S3
-+ AWS Secrets Manager
-+ AWS Systems Manager
-
-We recommend that you add endpoints for every service to your VPC using the following instructions\. However, you can use any solution that lets your VPC communicate with AWS service endpoints\. For example, you can use Network Address Translation \(NAT\) or AWS Direct Connect\.
-
-**To configure endpoints for AWS services with which RDS Custom works**
-
-1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
-
-1. On the navigation bar, use the Region selector to choose the AWS Region\.
-
-1. In the navigation pane, choose **Endpoints**\. In the main pane, choose **Create Endpoint**\.
-
-1. For **Service category**, choose **AWS services**\.
-
-1. For **Service Name**, choose the endpoint shown in the table\.
-
-1. For **VPC**, choose your VPC\.
-
-1. For **Subnets**, choose a subnet from each Availability Zone to include\.
-
-   The VPC endpoint can span multiple Availability Zones\. AWS creates an elastic network interface for the VPC endpoint in each subnet that you choose\. Each network interface has a Domain Name System \(DNS\) host name and a private IP address\.
-
-1. For **Security group**, choose or create a security group\.
-
-   You can use security groups to control access to your endpoint, much as you use a firewall\. For more information about security groups, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\. 
-
-1. Optionally, you can attach a policy to the VPC endpoint\. Endpoint policies can control access to the AWS service to which you are connecting\. The default policy allows all requests to pass through the endpoint\. If you're using a custom policy, make sure that requests from the DB instance are allowed in the policy\.
-
-1. Choose **Create endpoint**\.
-
-The following table explains how to find the list of endpoints that your VPC needs for outbound communications\.
-
-
-| Service | Endpoint format | Notes and links | 
-| --- | --- | --- | 
-|  AWS Systems Manager  |  Use the following endpoint formats: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html)  |  For the list of endpoints in each Region, see [AWS Systems Manager endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html) in the *Amazon Web Services General Reference*\.  | 
-|  AWS Secrets Manager  |  Use the endpoint format `secretsmanager.region.amazonaws.com`\.  |  For the list of endpoints in each Region, see [AWS Secrets Manager endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/asm.html) in the *Amazon Web Services General Reference*\.  | 
-|  Amazon CloudWatch  |  Use the following endpoint formats: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html)  | For the list of endpoints in every Region, see: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html) | 
-|  Amazon EC2  |  Use the following endpoint formats: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html)  |  For the list of endpoints in each Region, see [Amazon Elastic Compute Cloud endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/ec2-service.html) in the *Amazon Web Services General Reference*\.  | 
-|  Amazon S3  |  Use the endpoint format `s3.region.amazonaws.com`\.  |  For the list of endpoints in each Region, see [Amazon Simple Storage Service endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/s3.html) in the *Amazon Web Services General Reference*\.  To learn more about gateway endpoints for Amazon S3, see [Endpoints for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html) in the *Amazon VPC Developer Guide*\.  To learn how to create an access point, see [Creating access points](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/access-points-create-ap.html) in the *Amazon VPC Developer Guide*\. To learn how to create a gateway endpoints for Amazon S3, see [Gateway VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-gateway.html)\.  | 
 
 #### Configure the instance metadata service<a name="custom-setup-orcl.vpc.imds"></a>
 
@@ -513,7 +448,7 @@ For more information, see [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest
 
 RDS Custom for Oracle automation uses IMDSv2 by default, by setting `HttpTokens=enabled` on the underlying Amazon EC2 instance\. However, you can use IMDSv1 if you want\. For more information, see [Configure the instance metadata options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## Grant required permissions to your IAM user<a name="custom-setup-orcl.iam-user"></a>
+## Step 4: Grant required permissions to your IAM user<a name="custom-setup-orcl.iam-user"></a>
 
 Make sure that the IAM principal that creates the CEV or DB instance has either of the following policies:
 + The `AdministratorAccess` policy

@@ -37,7 +37,7 @@ To manually upgrade the engine version of a DB instance, you can use the AWS Man
 
 1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to upgrade\. 
 
-1. Choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB instance** page appears\.
 
 1. For **DB engine version**, choose the new version\.
 
@@ -45,7 +45,7 @@ To manually upgrade the engine version of a DB instance, you can use the AWS Man
 
 1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately setting](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
-1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB instance** to save your changes\. 
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
@@ -93,9 +93,31 @@ A *minor engine version* is an update to a DB engine version within a major engi
 
 If you want Amazon RDS to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. 
 
-When Amazon RDS designates a minor engine version as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
+**Topics**
++ [How automatic minor version upgrades work](#USER_UpgradeDBInstance.Upgrading.scheduled)
++ [Turning on automatic minor version upgrades](#USER_UpgradeDBInstance.Upgrading.turning-on-automatic)
++ [Determining the availability of maintenance updates](#USER_UpgradeDBInstance.Upgrading.availability)
++ [Finding automatic minor version upgrade targets](#USER_UpgradeDBInstance.Upgrading.targets)
+
+### How automatic minor version upgrades work<a name="USER_UpgradeDBInstance.Upgrading.scheduled"></a>
+
+Amazon RDS designates a minor engine version as the preferred minor engine version when the following conditions are met:
 + The database is running a minor version of the DB engine that is lower than the preferred minor engine version\.
 + The database has auto minor version upgrade enabled\.
+
+RDS schedules the upgrades to run automatically in the maintenance window\. During the upgrade, RDS performs the following basic steps:
+
+1. Runs a precheck to make sure the database is healthy and ready to be upgraded
+
+1. Upgrades the DB engine
+
+1. Runs post\-upgrade checks
+
+1. Marks the database upgrade as complete
+
+Automatic upgrades incur downtime\. The length of the downtime depends on various factors, including the DB engine type and the size of the database\.
+
+### Turning on automatic minor version upgrades<a name="USER_UpgradeDBInstance.Upgrading.turning-on-automatic"></a>
 
 You can control whether auto minor version upgrade is enabled for a DB instance when you perform the following tasks:
 + [Creating a DB instance](USER_CreateDBInstance.md)
@@ -110,7 +132,11 @@ When you perform these tasks, you can control whether auto minor version upgrade
 + Using the AWS CLI, set the `--auto-minor-version-upgrade|--no-auto-minor-version-upgrade` option\.
 + Using the RDS API, set the `AutoMinorVersionUpgrade` parameter\.
 
+### Determining the availability of maintenance updates<a name="USER_UpgradeDBInstance.Upgrading.availability"></a>
+
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB instance, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.
+
+### Finding automatic minor version upgrade targets<a name="USER_UpgradeDBInstance.Upgrading.targets"></a>
 
 You can use the following AWS CLI command to determine the current automatic minor upgrade target version for a specified minor DB engine version in a specific AWS Region\. You can find the possible `--engine` values for this command in the description for the `Engine` parameter in [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\.
 

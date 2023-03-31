@@ -65,7 +65,7 @@ The following are the burstable\-performance DB instance types available:
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.t3** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T3 instances are configured for Unlimited mode\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
-+ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. T2 instances can be configured for Unlimited mode\. We recommend using these instance classes only for development and test servers, or other non\-production servers\.
++ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. We recommend using these instance classes only for development and test servers, or other non\-production servers\.
 
 **Note**  
 The DB instance classes that use the AWS Nitro System \(db\.m5, db\.r5, db\.t3\) are throttled on combined read plus write workload\.
@@ -1001,17 +1001,17 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r5b\.xlarge\* | 4 | 19 | 32 | Yes | Up to 10,000 | Up to 10 | 
 | db\.r5b\.large\* | 2 | 10 | 16 | Yes | Up to 10,000 | Up to 10 | 
 | db\.r5b – Oracle memory\-optimized instance classes preconfigured for high memory, storage, and I/O | 
-| db\.r5b\.8xlarge\.tpc2\.mem3x | 32 | 347 | 768 | Yes | 60,000 | 25 | 
-| db\.r5b\.6xlarge\.tpc2\.mem4x | 24 | 347 | 768 | Yes | 60,000 | 25 | 
-| db\.r5b\.4xlarge\.tpc2\.mem4x | 16 | 264 | 512 | Yes | 40,000 | 20 | 
-| db\.r5b\.4xlarge\.tpc2\.mem3x | 16 | 173 | 384 | Yes | 30,000 | 10 | 
-| db\.r5b\.4xlarge\.tpc2\.mem2x | 16 | 132 | 256 | Yes | 20,000 | 10 | 
-| db\.r5b\.2xlarge\.tpc2\.mem8x | 8 | 264 | 512 | Yes | 40,000 | 20 | 
-| db\.r5b\.2xlarge\.tpc2\.mem4x | 8 | 132 | 256 | Yes | 20,000 | 10 | 
-| db\.r5b\.2xlarge\.tpc1\.mem2x | 4 | 71 | 128 | Yes | 10,000 | Up to 10 | 
-| db\.r5b\.xlarge\.tpc2\.mem4x | 4 | 71 | 128 | Yes | 10,000 | Up to 10 | 
-| db\.r5b\.xlarge\.tpc2\.mem2x | 4 | 38 | 64 | Yes | Up to 10,000 | Up to 10 | 
-| db\.r5b\.large\.tpc1\.mem2x | 1 | 19 | 32 | Yes | Up to 10,000 | Up to 10 | 
+| db\.r5b\.8xlarge\.tpc2\.mem3x | 32 | — | 768 | Yes | 60,000 | 25 | 
+| db\.r5b\.6xlarge\.tpc2\.mem4x | 24 | — | 768 | Yes | 60,000 | 25 | 
+| db\.r5b\.4xlarge\.tpc2\.mem4x | 16 | — | 512 | Yes | 40,000 | 20 | 
+| db\.r5b\.4xlarge\.tpc2\.mem3x | 16 | — | 384 | Yes | 30,000 | 10 | 
+| db\.r5b\.4xlarge\.tpc2\.mem2x | 16 | — | 256 | Yes | 20,000 | 10 | 
+| db\.r5b\.2xlarge\.tpc2\.mem8x | 8 | — | 512 | Yes | 40,000 | 20 | 
+| db\.r5b\.2xlarge\.tpc2\.mem4x | 8 | — | 256 | Yes | 20,000 | 10 | 
+| db\.r5b\.2xlarge\.tpc1\.mem2x | 8 | — | 128 | Yes | 10,000 | Up to 10 | 
+| db\.r5b\.xlarge\.tpc2\.mem4x | 4 | — | 128 | Yes | 10,000 | Up to 10 | 
+| db\.r5b\.xlarge\.tpc2\.mem2x | 4 | — | 64 | Yes | Up to 10,000 | Up to 10 | 
+| db\.r5b\.large\.tpc1\.mem2x | 2 | — | 32 | Yes | Up to 10,000 | Up to 10 | 
 | db\.r5 – memory\-optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | 19,000 | 25 | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | 13,600 | 20 | 
@@ -1022,18 +1022,18 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r5\.xlarge\* | 4 | 19 | 32 | Yes | Up to 4,750 | Up to 10 | 
 | db\.r5\.large\* | 2 | 10 | 16 | Yes | Up to 4,750 | Up to 10 | 
 | db\.r5 – Oracle memory\-optimized instance classes preconfigured for high memory, storage, and I/O | 
-| db\.r5\.12xlarge\.tpc2\.mem2x | 48 | 347 | 768 | Yes | 19,000 | 25 | 
-| db\.r5\.8xlarge\.tpc2\.mem3x | 32 | 347 | 768 | Yes | 19,000 | 25 | 
-| db\.r5\.6xlarge\.tpc2\.mem4x | 24 | 347 | 768 | Yes | 19,000 | 25 | 
-| db\.r5\.4xlarge\.tpc2\.mem4x | 16 | 264 | 512 | Yes | 13,600 | 20 | 
-| db\.r5\.4xlarge\.tpc2\.mem3x | 16 | 173 | 384 | Yes | 9,500 | 10 | 
-| db\.r5\.4xlarge\.tpc2\.mem2x | 16 | 132 | 256 | Yes | 6,800 | 10 | 
-| db\.r5\.2xlarge\.tpc2\.mem8x | 8 | 264 | 512 | Yes | 13,600 | 20 | 
-| db\.r5\.2xlarge\.tpc2\.mem4x | 8 | 132 | 256 | Yes | 6,800 | 10 | 
-| db\.r5\.2xlarge\.tpc1\.mem2x | 4 | 71 | 128 | Yes | 4,750 | Up to 10 | 
-| db\.r5\.xlarge\.tpc2\.mem4x | 4 | 71 | 128 | Yes | 4,750 | Up to 10 | 
-| db\.r5\.xlarge\.tpc2\.mem2x | 4 | 38 | 64 | Yes | Up to 4,750 | Up to 10 | 
-| db\.r5\.large\.tpc1\.mem2x | 1 | 19 | 32 | Yes | Up to 4,750 | Up to 10 | 
+| db\.r5\.12xlarge\.tpc2\.mem2x | 48 | — | 768 | Yes | 19,000 | 25 | 
+| db\.r5\.8xlarge\.tpc2\.mem3x | 32 | — | 768 | Yes | 19,000 | 25 | 
+| db\.r5\.6xlarge\.tpc2\.mem4x | 24 | — | 768 | Yes | 19,000 | 25 | 
+| db\.r5\.4xlarge\.tpc2\.mem4x | 16 | — | 512 | Yes | 13,600 | 20 | 
+| db\.r5\.4xlarge\.tpc2\.mem3x | 16 | — | 384 | Yes | 9,500 | 10 | 
+| db\.r5\.4xlarge\.tpc2\.mem2x | 16 | — | 256 | Yes | 6,800 | 10 | 
+| db\.r5\.2xlarge\.tpc2\.mem8x | 8 | — | 512 | Yes | 13,600 | 20 | 
+| db\.r5\.2xlarge\.tpc2\.mem4x | 8 | — | 256 | Yes | 6,800 | 10 | 
+| db\.r5\.2xlarge\.tpc1\.mem2x | 8 | — | 128 | Yes | 4,750 | Up to 10 | 
+| db\.r5\.xlarge\.tpc2\.mem4x | 4 | — | 128 | Yes | 4,750 | Up to 10 | 
+| db\.r5\.xlarge\.tpc2\.mem2x | 4 | — | 64 | Yes | Up to 4,750 | Up to 10 | 
+| db\.r5\.large\.tpc1\.mem2x | 2 | — | 32 | Yes | Up to 4,750 | Up to 10 | 
 | db\.r4 – memory\-optimized instance classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | 14,000 | 25 | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | 7,000 | 10 | 

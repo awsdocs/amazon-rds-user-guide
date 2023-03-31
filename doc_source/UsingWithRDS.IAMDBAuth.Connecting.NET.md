@@ -13,9 +13,7 @@ The following code examples show how to generate an authentication token, and th
 
 To run this code example, you need the [AWS SDK for \.NET](http://aws.amazon.com/sdk-for-net/), found on the AWS site\. The `AWSSDK.CORE` and the `AWSSDK.RDS` packages are required\. To connect to a DB instance, use the \.NET database connector for the DB engine, such as MySqlConnector for MariaDB or MySQL, or Npgsql for PostgreSQL\.
 
-This code connects to a MariaDB or MySQL DB instance\.
-
-Modify the values of the following variables as needed:
+This code connects to a MariaDB or MySQL DB instance\. Modify the values of the following variables as needed:
 + `server` – The endpoint of the DB instance that you want to access
 + `user` – The database account that you want to access
 + `database` – The database that you want to access

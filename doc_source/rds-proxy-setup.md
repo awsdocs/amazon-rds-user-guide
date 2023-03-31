@@ -311,7 +311,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy '{
    +  **Subnets**\. This field is prepopulated with all the subnets associated with your VPC\. You can remove any subnets that you don't need for this proxy\. You must leave at least two subnets\. 
 
     Provide additional connectivity configuration: 
-   +  **VPC security group**\. Choose an existing VPC security group\. You can also choose for the AWS Management Console to create a new security group for you and use that\. 
+   + **VPC security group**\. Choose an existing VPC security group\. You can also choose for the AWS Management Console to create a new security group for you and use that\. You must configure the **Inbound rules** to allow your applications to access the proxy\. You must also configure the **Outbound rules** to allow traffic from your DB targets\. 
 **Note**  
 This security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\.  
 When using a shared VPC, you can't use the default security group for the VPC, or one that belongs to another account\. Choose a security group that belongs to your account\. If one doesn't exist, create one\. For more information about this limitation, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html#vpc-share-limitations)\. 

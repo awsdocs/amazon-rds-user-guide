@@ -15,7 +15,7 @@ Feature availability and support varies across specific versions of each databas
 ## General requirements for RDS Custom for SQL Server<a name="custom-reqs-limits.reqsMS"></a>
 
 Make sure to follow these requirements for Amazon RDS Custom for SQL Server:
-+ Use the instance classes shown in [DB instance class support for RDS Custom for SQL Server](#custom-reqs-limits.instancesMS)\. The only storage types supported are solid state drives \(SSD\) of types gp2 and io1\. The maximum storage limit is 16 TiB\.
++ Use the instance classes shown in [DB instance class support for RDS Custom for SQL Server](#custom-reqs-limits.instancesMS)\. The only storage types supported are solid state drives \(SSD\) of types gp2, gp3, and io1\. The maximum storage limit is 16 TiB\.
 + Make sure that you have a symmetric encryption AWS KMS key to create an RDS Custom DB instance\. For more information, see [Make sure that you have a symmetric encryption AWS KMS key](custom-setup-sqlserver.md#custom-setup-sqlserver.cmk)\.
 + Make sure that you create an AWS Identity and Access Management \(IAM\) role and instance profile\. For more information, see [Creating your IAM role and instance profile manually](custom-setup-sqlserver.md#custom-setup-sqlserver.iam)\.
 + Make sure to supply a networking configuration that RDS Custom can use to access other AWS services\. For specific requirements, see [Configure networking, instance profile, and encryption](custom-setup-sqlserver.md#custom-setup-sqlserver.iam-vpc)\.

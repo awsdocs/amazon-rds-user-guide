@@ -13,6 +13,7 @@ Following are some common DBA tasks for RDS for PostgreSQL\.
 + [Understanding PostgreSQL roles and permissions](Appendix.PostgreSQL.CommonDBATasks.Roles.md)
 + [Working with the PostgreSQL autovacuum on Amazon RDS for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md)
 + [Working with logging mechanisms supported by RDS for PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
++ [Managing temporary files with PostgreSQL](PostgreSQL.ManagingTempFiles.md)
 + [Using pgBadger for log analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
 + [Working with parameters on your RDS for PostgreSQL DB instance](Appendix.PostgreSQL.CommonDBATasks.Parameters.md)
 

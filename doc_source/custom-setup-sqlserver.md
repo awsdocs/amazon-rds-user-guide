@@ -503,9 +503,7 @@ aws iam add-role-to-instance-profile \
 
 Your RDS Custom DB instance is in a virtual private cloud \(VPC\) based on the Amazon VPC service, just like an Amazon EC2 instance or Amazon RDS instance\. You provide and configure your own VPC\. Thus, you have full control over your instance networking setup\.
 
-RDS Custom sends communication from your DB instance to other AWS services\. To make sure that RDS Custom can communicate, it validates network connectivity to these services\.
-
-Your DB instance communicates with the following AWS services:
+RDS Custom sends communication from your DB instance to other AWS services\. To make sure that RDS Custom can communicate, it validates network connectivity to the following AWS services:
 + Amazon CloudWatch
 + Amazon CloudWatch Logs
 + Amazon CloudWatch Events
@@ -515,10 +513,12 @@ Your DB instance communicates with the following AWS services:
 + AWS Secrets Manager
 + AWS Systems Manager
 
-Make sure that VPC components involved in communication between the DB instance and AWS services are configured with the following requirements:
+Make sure that VPC components involved in communication between your RDS Custom DB instance and AWS services are configured with the following requirements:
 + The DB instance can make outbound connections on port 443 to other AWS services\.
 + The VPC allows incoming responses to requests originating from your DB instance\.
 + Correctly resolve the domain names of endpoints for each AWS service\.
+
+RDS Custom relies on AWS Systems Manager connectivity for its automation\. For information about how to configure VPC endpoints, see [Creating VPC endpoints for Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html#sysman-setting-up-vpc-create)\. For the list of endpoints in each Region, see [AWS Systems Manager endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html) in the *Amazon Web Services General Reference*\.
 
 If you already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
 

@@ -16,7 +16,7 @@ We recommend that you import your database to Amazon RDS by using backup files i
 
 The following are some limitations and recommendations for importing backup files from Amazon S3:
 + You can only import your data to a new DB instance, not an existing DB instance\.
-+ You must use Percona XtraBackup to create the backup of your on\-premises database\.
++ You must use Percona XtraBackup to create the backup of your on\-premises database\. 
 + You can't import data from a DB snapshot export to Amazon S3\.
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\.
 + You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 8\.0, and the default minor version for your AWS Region is 8\.0\.28, then you must import your data into a MySQL version 8\.0\.28 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
@@ -58,7 +58,7 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 
 ## Creating your database backup<a name="MySQL.Procedural.Importing.Backup"></a>
 
-Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-LATEST/)\. 
+Use the Percona XtraBackup software to create your backup\. We recommend that you use the latest version of Percona XtraBackup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-LATEST/)\. 
 
 **Warning**  
 When creating a database backup, XtraBackup might save credentials in the xtrabackup\_info file\. Make sure you examine that file so that the `tool_command` setting in it doesn't contain any sensitive information\.

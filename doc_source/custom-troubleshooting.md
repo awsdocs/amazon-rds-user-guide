@@ -53,9 +53,9 @@ CEV creation might fail because of the following issues:
 + The Amazon S3 bucket containing your installation files isn't in the same AWS Region as your CEV\.
 + When you request CEV creation in an AWS Region for the first time, RDS Custom creates an S3 bucket for storing RDS Custom resources \(such as CEV artifacts, AWS CloudTrail logs, and transaction logs\)\.
 
-  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
-+ The caller doesn't have permissions to get files from your S3 bucket that contains the installation media files\. These permissions are described in [Step 7: Adding necessary IAM permissions](custom-cev.preparing.md#custom-cev.preparing.iam)\.
-+ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
+  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Step 4: Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
++ The caller doesn't have permissions to get files from your S3 bucket that contains the installation media files\. These permissions are described in [Step 7: Add necessary IAM permissions](custom-cev.preparing.md#custom-cev.preparing.iam)\.
++ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Step 4: Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
 + Installation media files listed in the CEV manifest aren't in your S3 bucket\.
 + The SHA\-256 checksums of the installation files are unknown to RDS Custom\.
 

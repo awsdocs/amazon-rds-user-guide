@@ -9,7 +9,7 @@ You can upgrade your DB engine to a minor version manually or automatically\. To
 
 Whether you upgrade manually or automatically, a minor version upgrade entails downtime\. Keep this in mind when planning your upgrades\.
 
-## Turning on automatic minor version upgrades<a name="oracle-minor-version-upgrade-tuning-on"></a>
+## Turning on automatic minor version upgrades for Oracle<a name="oracle-minor-version-upgrade-tuning-on"></a>
 
 In an automatic minor version upgrade, RDS applies the latest available minor version to your Oracle database without manual intervention\. An Amazon RDS for Oracle DB instance schedules your upgrade during the next maintenance window in the following circumstances:
 + Your DB instance has the **Auto minor version upgrade** option turned on\.
@@ -18,7 +18,7 @@ In an automatic minor version upgrade, RDS applies the latest available minor ve
 
 To learn how to turn on automatic upgrades, see [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\.
 
-## Before an automatic minor version upgrade is scheduled<a name="oracle-minor-version-upgrade-advance"></a>
+## Before an automatic minor version upgrade for Oracle is scheduled<a name="oracle-minor-version-upgrade-advance"></a>
 
 RDS publishes an advance notice before it begins scheduling automatic upgrades\. You can find the notification in the **Maintenance & backups** tab of the database details page\. The message has the following format:
 
@@ -50,7 +50,7 @@ aws rds describe-pending-maintenance-actions
 
 For more information about [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html), see the *AWS CLI Command Reference*\.
 
-## When RDS schedules automatic minor version upgrades<a name="oracle-minor-version-upgrade-scheduled"></a>
+## When RDS schedules automatic minor version upgrades for Oracle<a name="oracle-minor-version-upgrade-scheduled"></a>
 
 When the availability date for automatic upgrades arrives, RDS begins scheduling upgrades\. For most AWS Regions, RDS schedules your upgrade to the latest quarterly RU approximately four to six weeks after the availability date\. The scheduled date varies depending on the AWS Region and other factors\. For more information about RUs and RURs, see [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)\.
 
@@ -62,7 +62,7 @@ Automatic minor version upgrade to engine-version
 
 The preceding message indicates that RDS has scheduled your DB engine to be upgraded in the next maintenance window\.
 
-## Managing an automatic minor version upgrade<a name="oracle-minor-version-upgrade-managing"></a>
+## Managing an automatic minor version upgrade for Oracle<a name="oracle-minor-version-upgrade-managing"></a>
 
 When a new minor version becomes available, you can upgrade your DB instance to this version manually\. The following example upgrades the DB instance named `orclinst1` immediately:
 

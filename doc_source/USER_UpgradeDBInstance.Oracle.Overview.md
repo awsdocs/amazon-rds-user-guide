@@ -1,6 +1,6 @@
 # Overview of RDS for Oracle engine upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
 
-Before upgrading your RDS for Oracle DB instance, familiarize yourself with the following concepts\. 
+Before upgrading your RDS for Oracle DB instance, familiarize yourself with the following concepts\.
 
 **Topics**
 + [Major and minor version upgrades](#USER_UpgradeDBInstance.Oracle.Overview.versions)

@@ -171,7 +171,7 @@ In this step, you create a file system policy for your EFS file system\.
                    "elasticfilesystem:ClientWrite",
                    "elasticfilesystem:ClientRootAccess"
                ],
-               "Resource": "arn:aws:elasticfilesystem:Region:123456789012:file-system/fs-1234567890abcdef0"
+               "Resource": "arn:aws:elasticfilesystem:us-east-1:123456789012:file-system/fs-1234567890abcdef0"
            }
        ]
    }
@@ -336,7 +336,7 @@ The following example uses Oracle Data Pump to export the table named `MY_TABLE`
 DECLARE
   v_hdnl NUMBER;
 BEGIN
-  v_hdnl := DBMS_DATAPUMP.OPEN(operation => 'EXPORT', job_mode => 'SCHEMA', job_name=>null);
+  v_hdnl := DBMS_DATAPUMP.OPEN(operation => 'EXPORT', job_mode => 'TABLE', job_name=>null);
   DBMS_DATAPUMP.ADD_FILE(
     handle    => v_hdnl,
     filename  => 'datapump.dmp',
@@ -347,7 +347,7 @@ BEGIN
     filename  => 'datapump-exp.log',
     directory => 'DATA_PUMP_DIR_EFS',
     filetype  => dbms_datapump.ku$_file_type_log_file);
-  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''MY_TABLE'')');
+  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'NAME_EXPR','IN (''MY_TABLE'')');
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /
@@ -361,7 +361,7 @@ DECLARE
 BEGIN
   v_hdnl := DBMS_DATAPUMP.OPEN(
     operation => 'IMPORT',
-    job_mode  => 'SCHEMA',
+    job_mode  => 'TABLE',
     job_name  => null);
   DBMS_DATAPUMP.ADD_FILE(
     handle    => v_hdnl,
@@ -373,7 +373,7 @@ BEGIN
     filename  => 'datapump-imp.log',
     directory => 'DATA_PUMP_DIR_EFS',
     filetype  => dbms_datapump.ku$_file_type_log_file);
-  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''MY_TABLE'')');
+  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'NAME_EXPR','IN (''MY_TABLE'')');
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /

@@ -39,7 +39,7 @@ The open mode for the CDB root is `READ WRITE` on the primary and `MOUNTED` on a
 
 Create an Amazon RDS Custom for Oracle DB instance using either the AWS Management Console or the AWS CLI\. The procedure is similar to the procedure for creating an Amazon RDS DB instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-If you included installation parameters in your CEV manifest, then your DB instance uses the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group that you specified\. The `oratab` file, which is created by Oracle Database during installation, points to the real installation location rather than to a symbolic link\. When RDS Custom runs commands, it runs as the configured OS user rather than the default user `rdsdb`\. For more information, see [Step 5: Preparing the CEV manifest](custom-cev.preparing.md#custom-cev.preparing.manifest)\.
+If you included installation parameters in your CEV manifest, then your DB instance uses the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group that you specified\. The `oratab` file, which is created by Oracle Database during installation, points to the real installation location rather than to a symbolic link\. When RDS Custom runs commands, it runs as the configured OS user rather than the default user `rdsdb`\. For more information, see [Step 5: Prepare the CEV manifest](custom-cev.preparing.md#custom-cev.preparing.manifest)\.
 
 Before you attempt to create or connect to an RDS Custom DB instance, complete the tasks in [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)\.
 
@@ -55,37 +55,45 @@ Before you attempt to create or connect to an RDS Custom DB instance, complete t
 
 1. In **Choose a database creation method**, select **Standard create**\.
 
-1. In **Engine options**, choose **Oracle** for the DB engine type\. Oracle Database is the only supported DB engine\.
+1. In the **Engine options** section, do the following:
 
-1. For **Database management type**, choose **Amazon RDS Custom**\.
+   1. For **Engine type**, choose **Oracle**\.
 
-1. For **Edition**, choose **Oracle Enterprise Edition**\.
+   1. For **Database management type**, choose **Amazon RDS Custom**\.
 
-1. For **Architecture settings**, choose **Multitenant architecture** if you want your database to be a CDB\. At creation, your CDB contains one PDB and one PDB seed\. If you don't choose **Multitenant architecture**, your database is a non\-CDB, which means it can't contain PDBs\.
+   1. For **Architecture settings**, do one of the following:
+      + Select **Multitenant architecture** to create a container database \(CDB\)\. At creation, your CDB contains one PDB and one PDB seed\.
+      + Clear **Multitenant architecture** to create a non\-CDB\. A non\-CDB can't contain PDBs\.
 
-1. For **Database version**, choose the RDS Custom custom engine version \(CEV\) that you previously created\. The CEV has the following format: `major-engine-version.customized_string`\. An example identifier is `19.cdb_cev1`\.
+   1. For **Edition**, choose **Oracle Enterprise Edition**\.
 
-   If you chose **Multitenant architecture** in the previous step, you can only specify a Multitenant CEV\. The console filters out CEVs that were created as non\-CDBs\.
+   1. For **Custom engine version**, choose an existing RDS Custom custom engine version \(CEV\)\. A CEV has the following format: `major-engine-version.customized_string`\. An example identifier is `19.cdb_cev1`\.
+
+      If you chose **Multitenant architecture** in the previous step, you can only specify a Multitenant CEV\. The console filters out CEVs that were created as non\-CDBs\.
 
 1. In **Templates**, choose **Production**\.
 
-1. In **Settings**, enter a unique name for the **DB instance identifier**\.
+1. In the **Settings** section, do the following:
 
-1. Enter your master password by doing the following:
+   1. For **DB instance identifier**, enter a unique name for your DB instance\.
 
-   1. In the **Settings** section, open **Credential Settings**\.
+   1. For **Master username**, enter a username\. You can retrieve this value from the console later\. 
 
-   1. Clear the **Auto generate a password** check box\.
+      When you connect to a non\-CDB, the master user is the user for the non\-CDB\. When you connect to a CDB, the master user is the user for the PDB\. To connect to the CDB root, log in to the host, start a SQL client, and create an administrative user with SQL commands\. 
 
-   1. Change the **Master username** value and enter the same password in **Master password** and **Confirm password**\. By default, the new RDS Custom DB instance uses an automatically generated password for the master user\.
+   1. Clear **Auto generate a password**\.
 
-   When you connect to a non\-CDB, the master user is the user for the non\-CDB\. When you connect to a CDB, the master user is the user for the PDB\. To connect to the CDB root, log in to the host, start a SQL client, and create an administrative user with SQL commands\. 
-
-1. In **DB instance size**, choose a **DB instance class**\.
+1. Choose a **DB instance class**\.
 
    For supported classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 
-1. Choose **Storage** settings\.
+1. In the **Storage** section, do the following:
+
+   1. For **Storage type**, choose an SSD type: io1, gp2, or gp3\. If you choose the io1 or gp3 storage types, also choose a rate for **Provisioned IOPS**\.
+
+   1. For **Allocated storage**, choose a storage size\. The default is 40 GiB\.
+
+1. For **Connectivity**, specify your **Virtual private cloud \(VPC\)**, **DB subnet group**, and **VPC security group \(firewall\)**\.
 
 1. For **RDS Custom security**, do the following:
 
@@ -95,28 +103,26 @@ Before you attempt to create or connect to an RDS Custom DB instance, complete t
 
    1. For **Encryption**, choose **Enter a key ARN** to list the available AWS KMS keys\. Then choose your key from the list\. 
 
-      An AWS KMS key is required for RDS Custom\. For more information, see [Make sure that you have a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
+      An AWS KMS key is required for RDS Custom\. For more information, see [Step 1: Make sure that you have a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
 
-1. \(Optional\) Choose **Add new tag** to apply an identifier to this DB instance\.
-**Important**  
-You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom for Oracle resources](custom-managing.md#custom-managing.tagging)\.
+1. For **Database options**, do the following:
 
-1. For **Initial database name**, enter a name or leave the default value `ORCL`\. In Oracle Multitenant, the initial database name is the PDB name\.
+   1. \(Optional\) For **Initial database name**, enter a name\. The default value is **ORCL**\. In the multitenant architecture, the initial database name is the PDB name\.
 
-   The **System ID \(SID\)** value of `RDSCDB` is the name of the Oracle database instance that manages your database files\. In this context, the term "Oracle database instance" refers exclusively to the system global area \(SGA\) and Oracle background processes\. The Oracle SID is also the name of your CDB\. You can't change this value\.
+      The **System ID \(SID\)** value of `RDSCDB` is the name of the Oracle database instance that manages your database files\. In this context, the term "Oracle database instance" refers exclusively to the system global area \(SGA\) and Oracle background processes\. The Oracle SID is also the name of your CDB\. You can't change this value\.
 
-1. For the remaining sections, specify your preferred RDS Custom DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. The following settings don't appear in the console and aren't supported:
-   + **Processor features**
-   + **Storage autoscaling**
-   + **Availability & durability**
-   + **Password and Kerberos authentication** option in **Database authentication** \(only **Password authentication** is supported\)
-   + **Database options** group in **Additional configuration**
-   + **Performance Insights**
-   + **Log exports**
-   + **Enable auto minor version upgrade**
-   + **Deletion protection**
+   1. For **Backup retention period** choose a value\. You can't choose **0 days**\.
 
-   **Backup retention period** is supported, but you can't choose **0 days**\.
+   1. For the remaining sections, specify your preferred RDS Custom DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. The following settings don't appear in the console and aren't supported:
+      + **Processor features**
+      + **Storage autoscaling**
+      + **Availability & durability**
+      + **Password and Kerberos authentication** option in **Database authentication** \(only **Password authentication** is supported\)
+      + **Database options** group in **Additional configuration**
+      + **Performance Insights**
+      + **Log exports**
+      + **Enable auto minor version upgrade**
+      + **Deletion protection**
 
 1. Choose **Create database**\.
 **Important**  
@@ -259,7 +265,7 @@ Complete the task in the following steps:
 
 ### Configure your DB instance to allow SSH connections<a name="custom-managing.ssh.port-22"></a>
 
-Make sure that your DB instance security group permits inbound connections on port 22 for TCP\. To learn how to configure your instance security group, see [Configure your instance security group](custom-setup-orcl.md#custom-setup-orcl.vpc.sg)\.
+Make sure that your DB instance security group permits inbound connections on port 22 for TCP\.
 
 ### Retrieve your secret key<a name="custom-managing.ssh.obtaining-key"></a>
 
