@@ -8,10 +8,13 @@ Automated backups follow these rules:
 
 You can also back up your database manually by creating a DB snapshot\. For more information about manually creating a DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\. 
 
-The first snapshot of a database contains the data for the full database\. Subsequent snapshots of the same database are incremental\*, which means that only the data that has changed after your most recent snapshot is saved\.
+The first snapshot of a database contains the data for the full database\. Subsequent snapshots of the same database are incremental<sup>\*</sup>, which means that only the data that has changed after your most recent snapshot is saved\.
 
-**Note**
-\* Unless you perform failover to the standby instance which was never backed up before, then first snapshot will be full instead of incemental\. 
+---
+**NOTE** 
+<sup>\*</sup> Unless you perform failover to the standby instance which was never backed up before, then first snapshot will be full instead of incemental\. 
+
+---
 
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a DB snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
 
