@@ -12,6 +12,7 @@ The first snapshot of a database contains the data for the full database\. Subse
 
 ---
 **NOTE** 
+
 <sup>\*</sup> Unless you perform failover to the standby instance which was never backed up before, then first snapshot will be full instead of incemental\. 
 
 ---
