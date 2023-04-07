@@ -251,7 +251,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    Substitute the DB instance endpoint \(DNS name\) for `endpoint`, and substitute the master username that you used for `postgres`\. Provide the master password that you used when prompted for a password\.
 
    ```
-   psql -h endpoint -P 5432 -u postgres -p
+   psql --host=endpoint --port=5432 --username=postgres
    ```
 
    After you enter the password for the user, you should see output similar to the following:

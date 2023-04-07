@@ -21,7 +21,7 @@ You might see elevated latencies for a standard DB instance deployment as a resu
 
 We recommend the following actions to improve availability:
 + Allocate enough additional capacity for your mission\-critical applications to allow recovery and failover if there is an underlying host issue\. This applies to all Outposts that contain subnets in your DB subnet group\. For more information, see [Resilience in AWS Outposts](https://docs.aws.amazon.com/outposts/latest/userguide/disaster-recovery-resiliency.html)\.
-+ Create multiple connections from each of your Outposts to the AWS Region\.
++ Provide redundant network connectivity for your Outposts\.
 + Use more than two Outposts\. Having more than two Outposts allows Amazon RDS to recover a DB instance\. RDS does this recovery by moving the DB instance to another Outpost if the current Outpost experiences a failure\.
 + Provide dual power sources and redundant network connectivity for your Outpost\.
 

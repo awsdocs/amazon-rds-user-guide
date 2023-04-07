@@ -9,6 +9,7 @@ Following, you can find instructions for creating, managing, and maintaining you
 + [Working with custom engine versions for RDS Custom for SQL Server](custom-cev-sqlserver.md)
 + [Creating and connecting to a DB instance for Amazon RDS Custom for SQL Server](custom-creating-sqlserver.md)
 + [Managing an Amazon RDS Custom for SQL Server DB instance](custom-managing-sqlserver.md)
++ [Managing a Multi\-AZ deployment for RDS Custom for SQL Server](custom-sqlserver-multiaz.md)
 + [Backing up and restoring an Amazon RDS Custom for SQL Server DB instance](custom-backup-sqlserver.md)
 + [Migrating an on\-premises database to Amazon RDS Custom for SQL Server](custom-migrating.md)
 + [Upgrading a DB instance for Amazon RDS Custom for SQL Server](custom-upgrading-sqlserver.md)

@@ -25,9 +25,18 @@ Before you create and manage a DB instance for Amazon RDS Custom for SQL Server 
 
 ## Prerequisites for setting up RDS Custom for SQL Server<a name="custom-setup-sqlserver.review"></a>
 
-Before creating an RDS Custom for SQL Server DB instance, make sure that your environment meets the requirements described in this topic\. Not all of them require action from you; if any action is necessary, the corresponding section describes it\.
+Before creating an RDS Custom for SQL Server DB instance, make sure that your environment meets the requirements described in this topic\. As part of this setup process, make sure to configure the following prerequisites:
++ Configure the specified AWS Identity and Access Management \(IAM\) users and roles\.
 
-As part of this setup process, make sure to configure the specified AWS Identity and Access Management \(IAM\) users and roles\. These are either used to create an RDS Custom DB instance or passed as a parameter in a creation request\. If the account that you're using is part of an AWS organization, it might have service control policies \(SCPs\) restricting account level permissions\. Make sure that the SCPs don't restrict the permissions on users and roles that you create using the following procedures\. For more information about SCPs, see [Service control policies \(SCPs\)](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) in the *AWS Organizations User Guide*\. Use the [describe\-organization](https://docs.aws.amazon.com/cli/latest/reference/organizations/describe-organization.html) AWS CLI command to check whether your account is part of an AWS organization\.
+  These are either used to create an RDS Custom DB instance or passed as a parameter in a creation request\.
++ Confirm there aren't any service control policies \(SCPs\) restricting account level permissions\.
+
+  If the account that you're using is part of an AWS organization, it might have service control policies \(SCPs\) restricting account level permissions\. Make sure that the SCPs don't restrict the permissions on users and roles that you create using the following procedures\.
+
+  For more information about SCPs, see [Service control policies \(SCPs\)](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) in the *AWS Organizations User Guide*\. Use the [describe\-organization](https://docs.aws.amazon.com/cli/latest/reference/organizations/describe-organization.html) AWS CLI command to check whether your account is part of an AWS organization\.
+
+**Note**  
+For a step\-by\-step tutorial on how to set up prerequisites and launch Amazon RDS Custom for SQL Server, see the blog post [Get started with Amazon RDS Custom for SQL Server using an CloudFormation template \(Network setup\)](http://aws.amazon.com/blogs/database/get-started-with-amazon-rds-custom-for-sql-server-using-an-aws-cloudformation-template-network-setup/)
 
 For each task, you can find descriptions following for the requirements and limitations specific to that task\. For example, when you create your RDS Custom for SQL Server DB instance, use one of the SQL Server instances listed in [DB instance class support for RDS Custom for SQL Server](custom-reqs-limits-MS.md#custom-reqs-limits.instancesMS)\.
 
@@ -124,7 +133,7 @@ The following networking configurations are designed to work best with DB instan
 
 To simplify setup, you can use an AWS CloudFormation template file to create a CloudFormation stack\. To learn how to create stacks, see [Creating a stack on the AWS CloudFormation console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in the *AWS CloudFormation User Guide*\.
 
-For a tutorial on how to lauch Amazon RDS Custom for SQL Server using an AWS CloudFormation template, see [Get started with Amazon RDS Custom for SQL Server using an AWS CloudFormation template](https://aws.amazon.com/blogs/database/get-started-with-amazon-rds-custom-for-sql-server-using-an-aws-cloudformation-template-network-setup/) in the *AWS Database Blog *\.
+For a tutorial on how to launch Amazon RDS Custom for SQL Server using an AWS CloudFormation template, see [Get started with Amazon RDS Custom for SQL Server using an AWS CloudFormation template](https://aws.amazon.com/blogs/database/get-started-with-amazon-rds-custom-for-sql-server-using-an-aws-cloudformation-template-network-setup/) in the *AWS Database Blog *\.
 
 **Topics**
 + [Resources created by CloudFormation](#custom-setup-sqlserver.cf.list)
@@ -154,7 +163,7 @@ Use the following procedures to create the CloudFormation stack for RDS Custom f
 
 1. Open the context \(right\-click\) menu for the link [ custom\-sqlserver\-onboard\.zip](samples/custom-sqlserver-onboard.zip) and choose **Save Link As**\.
 
-1. Save the file to your computer\.
+1. Save and extract the file to your computer\.
 
 #### Configuring resources using CloudFormation<a name="custom-setup-sqlserver.cf.config"></a>
 
@@ -172,7 +181,7 @@ Use the following procedures to create the CloudFormation stack for RDS Custom f
 
    1. For **Template source**, choose **Upload a template file**\.
 
-   1. For **Choose file**, navigate to and then choose `custom-sqlserver-onboard.json`\.
+   1. For **Choose file**, navigate to and then choose the correct file\.
 
 1. Choose **Next**\.
 
@@ -196,6 +205,40 @@ Use the following procedures to create the CloudFormation stack for RDS Custom f
 
    1. Choose **Create stack**\.
 
+1. **\(Optional\):** You can update the SQS permissions in the instance profile role\.
+
+   If you want to deploy only a Single\-AZ DB instance, you can edit the CloudFormation template file to remove SQS permissions\. SQS permissions are only required for a Multi\-AZ deployment and allow RDS Custom for SQL Server to call Amazon SQS to perform specific actions\. Because they are not required for a Single\-AZ deployment, you may opt to remove these permissions to follow the principle of least privilege\.
+
+   If you want to configure a Multi\-AZ deployment, you don't need to remove the SQS permissions\.
+**Note**  
+If you remove the SQS permissions and later choose to modify to a Multi\-AZ deployment, the Multi\-AZ creation will fail\. You would need to re\-add the SQS permissions before modifying to a Multi\-AZ deployment\.
+
+   To make this optional change to the CloudFormation template, open the CloudFormation console at [https://console\.aws\.amazon\.com/cloudformation](https://console.aws.amazon.com/cloudformation/), and edit the template file by removing the following lines:
+
+   ```
+                    {
+           "Sid": "SendMessageToSQSQueue",
+           "Effect": "Allow",
+           "Action": [
+             "SQS:SendMessage",
+             "SQS:ReceiveMessage",
+             "SQS:DeleteMessage",                                    
+             "SQS:GetQueueUrl"
+       
+           ],
+           "Resource": [
+             {
+               "Fn::Sub": "arn:${AWS::Partition}:sqs:${AWS::Region}:${AWS::AccountId}:do-not-delete-rds-custom-*"
+             }
+           ],
+           "Condition": {
+             "StringLike": {
+               "aws:ResourceTag/AWSRDSCustom": "custom-sqlserver"
+             }
+           }
+         }
+   ```
+
 CloudFormation creates the resources that RDS Custom for SQL Server requires\. If the stack creation fails, read through the **Events** tab to see which resource creation failed and its status reason\.
 
 The **Outputs** tab for this CloudFormation stack in the console should have information about all resources to be passed as parameters for creating an RDS Custom for SQL Server DB instance\. Make sure to use the VPC security group and DB subnet group created by CloudFormation for RDS Custom DB instances\. By default, RDS tries to attach the default VPC security group, which might not have the access that you need\.
@@ -208,6 +251,9 @@ If you used CloudFormation to create resources, you can skip [Configuring manual
 ### Configuring manually<a name="custom-setup-sqlserver.manual"></a>
 
 If you choose to configure resources manually, perform the following tasks\.
+
+**Note**  
+To simplify setup, you can use the AWS CloudFormation template file to create a CloudFormation stack rather than a manual configuration\. For more information, see [Configuring with AWS CloudFormation](#custom-setup-sqlserver.cf)\.
 
 **Topics**
 + [Make sure that you have a symmetric encryption AWS KMS key](#custom-setup-sqlserver.cmk)
@@ -476,6 +522,24 @@ aws iam put-role-policy \
                 "Action": "logs:DescribeLogGroups",
                 "Resource": "arn:aws:logs:'$REGION':'$ACCOUNT_ID':log-group:*"
             }
+                    {
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": "custom-sqlserver"
+                }
+            },
+            "Action": [
+                "SQS:SendMessage",
+                "SQS:ReceiveMessage",
+                "SQS:DeleteMessage",
+                "SQS:GetQueueUrl"
+            ],
+            "Resource": [
+                "arn:aws:sqs:'$REGION':'$ACCOUNT_ID':do-not-delete-rds-custom-*"
+            ],
+            "Effect": "Allow",
+            "Sid": "SendMessageToSQSQueue"
+        }
         ]
     }'
 ```
@@ -513,14 +577,20 @@ RDS Custom sends communication from your DB instance to other AWS services\. To 
 + AWS Secrets Manager
 + AWS Systems Manager
 
-Make sure that VPC components involved in communication between your RDS Custom DB instance and AWS services are configured with the following requirements:
+If RDS Custom can't communicate with the necessary services, it creates the following event:
+
+```
+Database instance in incompatible-network. SSM Agent connection not available. Amazon RDS can't connect to the dependent AWS services.
+```
+
+To avoid `incompatible-network` errors, make sure that VPC components involved in communication between your RDS Custom DB instance and AWS services satisfy the following requirements:
 + The DB instance can make outbound connections on port 443 to other AWS services\.
-+ The VPC allows incoming responses to requests originating from your DB instance\.
-+ Correctly resolve the domain names of endpoints for each AWS service\.
++ The VPC allows incoming responses to requests originating from your RDS Custom DB instance\.
++ RDS Custom can correctly resolve the domain names of endpoints for each AWS service\.
 
 RDS Custom relies on AWS Systems Manager connectivity for its automation\. For information about how to configure VPC endpoints, see [Creating VPC endpoints for Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html#sysman-setting-up-vpc-create)\. For the list of endpoints in each Region, see [AWS Systems Manager endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html) in the *Amazon Web Services General Reference*\.
 
-If you already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
+If you already configured a VPC for a different RDS Custom DB engine, you can reuse that VPC and skip this process\.
 
 **Topics**
 + [Configure your VPC security group](#custom-setup-sqlserver.vpc.sg)

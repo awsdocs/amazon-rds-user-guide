@@ -227,9 +227,14 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 ## Adding a new database user<a name="rds-proxy-new-db-user"></a>
 
  In some cases, you might add a new database user to an RDS DB instance or Aurora cluster that's associated with a proxy\. If so, add or repurpose a Secrets Manager secret to store the credentials for that user\. To do this, choose one of the following options: 
-+  Create a new Secrets Manager secret, using the procedure described in [Setting up database credentials in AWS Secrets Manager](rds-proxy-setup.md#rds-proxy-secrets-arns)\. 
-+  Update the IAM role to give RDS Proxy access to the new Secrets Manager secret\. To do so, update the resources section of the IAM role policy\. 
-+  If the new user takes the place of an existing one, update the credentials stored in the proxy's Secrets Manager secret for the existing user\. 
+
+1. Create a new Secrets Manager secret, using the procedure described in [Setting up database credentials in AWS Secrets Manager](rds-proxy-setup.md#rds-proxy-secrets-arns)\. 
+
+1. Update the IAM role to give RDS Proxy access to the new Secrets Manager secret\. To do so, update the resources section of the IAM role policy\. 
+
+1. Modify the RDS Proxy to add the new Secrets Manager secret under **Secrets Manager secrets**\.
+
+1.  If the new user takes the place of an existing one, update the credentials stored in the proxy's Secrets Manager secret for the existing user\. 
 
 ## Changing the password for a database user<a name="rds-proxy-changing-db-user-password"></a>
 

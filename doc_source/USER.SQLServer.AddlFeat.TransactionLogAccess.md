@@ -58,6 +58,7 @@ The following requirements must be met before enabling access to transaction log
 If your DB instance has storage encryption enabled , the AWS KMS \(KMS\) actions and key must be provided in the IAM role provided in the native backup and restore option group\.
 
   Optionally, if you intend to use the `rds_restore_log` stored procedure to perform point in time database restores, we recommend using the same Amazon S3 path for the native backup and restore option group and access to transaction log backups\. This method ensures that when Amazon RDS assumes the role from the option group to perform the restore log functions, it has access to retrieve transaction log backups from the same Amazon S3 path\.
++  If the DB instance is encrypted, regardless of encryption type \(AWS managed key or Customer managed key\), you must provide a Customer managed KMS key in the IAM role and in the `rds_tlog_backup_copy_to_S3` stored procedure\. 
 
 ## Limitations and recommendations<a name="USER.SQLServer.AddlFeat.TransactionLogAccess.Limitations"></a>
 
@@ -73,6 +74,7 @@ Access to transaction log backups has the following limitations and recommendati
 +  You can only run the stored procedures that are provided with access to transaction log backups on the primary DB instance\. You can’t run these stored procedures on an RDS for SQL Server read replica or on a secondary instance of a Multi\-AZ DB cluster\. 
 +  If the RDS for SQL Server DB instance is rebooted while the `rds_tlog_backup_copy_to_S3` stored procedure is running, the task will automatically restart from the beginning when the DB instance is back online\. Any transaction log backups that had been copied to the Amazon S3 bucket while the task was running before the reboot will be overwritten\. 
 + The Microsoft SQL Server system databases and the `RDSAdmin` database cannot be configured for access to transaction log backups\.
++  Copying to buckets encrypted by SSE\-KMS isn't supported\. 
 
 ## Setting up access to transaction log backups<a name="USER.SQLServer.AddlFeat.TransactionLogAccess.Enabling"></a>
 
@@ -172,7 +174,7 @@ exec msdb.dbo.rds_tlog_backup_copy_to_S3
 	@db_name='mydatabasename',
 	[@kms_key_arn='arn:aws:kms:region:account-id:key/key-id'],	
 	[@backup_file_start_time='2022-09-01 01:00:15'],
-	[@backup_file_end_time=''2022-09-01 21:30:45''],
+	[@backup_file_end_time='2022-09-01 21:30:45'],
 	[@starting_lsn=149000000112100001],
 	[@ending_lsn=149000000120400001],
 	[@rds_backup_starting_seq_id=5],
@@ -211,7 +213,7 @@ Following are the valid input parameter combinations for the `rds_tlog_backup_co
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />          @db_name = 'testdb1',<br />          @backup_file_end_time='2022-08-30 00:00:00';</pre>  | Copies transaction log backups from the last seven days up to the provided `backup_file_end_time`\. In this example, the stored procedure will copy transaction log backups from '2022\-08\-23 00:00:00 up to '2022\-08\-30 00:00:00'\.  | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />         @db_name='testdb1',<br />         @starting_lsn =1490000000040007,<br />         @ending_lsn =  1490000000050009;</pre>  | Copies transaction log backups that are available from the last seven days and are between the provided range of the `starting_lsn` and `ending_lsn`\. In this example, the stored procedure will copy transaction log backups from the last seven days with an LSN range between 1490000000040007 and 1490000000050009\.   | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />        @db_name='testdb1',<br />        @starting_lsn =1490000000040007;</pre>  |  Copies transaction log backups that are available from the last seven days, beginning from the provided `starting_lsn`\. In this example, the stored procedure will copy transaction log backups from LSN 1490000000040007 up to the latest transaction log backup\.   | 
-|  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />        @db_name='testdb1',<br />        @ending_lsn  =  1490000000050009;</pre>  |  Copies transaction log backups that are available from the last seven days, up to the provided `ending_lsn`\. In this example, the stored procedure will copy transaction log backups beginning from the last seven days up to lsn 1490000000050009\.   | 
+|  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />        @db_name='testdb1',<br />        @ending_lsn  =1490000000050009;</pre>  |  Copies transaction log backups that are available from the last seven days, up to the provided `ending_lsn`\. In this example, the stored procedure will copy transaction log backups beginning from the last seven days up to lsn 1490000000050009\.   | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />       @db_name='testdb1',<br />       @rds_backup_starting_seq_id= 2000,<br />       @rds_backup_ending_seq_id= 5000;</pre>  |  Copies transaction log backups that are available from the last seven days, and exist between the provided range of `rds_backup_starting_seq_id` and `rds_backup_ending_seq_id`\. In this example, the stored procedure will copy transaction log backups beginning from the last seven days and within the provided rds backup sequence id range, starting from seq\_id 2000 up to seq\_id 5000\.   | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />       @db_name='testdb1',<br />       @rds_backup_starting_seq_id= 2000;</pre>  |  Copies transaction log backups that are available from the last seven days, beginning from the provided `rds_backup_starting_seq_id`\. In this example, the stored procedure will copy transaction log backups beginning from seq\_id 2000, up to the latest transaction log backup\.   | 
 |  <pre>exec msdb.dbo.rds_tlog_backup_copy_to_S3<br />      @db_name='testdb1',<br />      @rds_backup_ending_seq_id= 5000;</pre>  |  Copies transaction log backups that are available from the last seven days, up to the provided `rds_backup_ending_seq_id`\. In this example, the stored procedure will copy transaction log backups beginning from the last seven days, up to seq\_id 5000\.   | 

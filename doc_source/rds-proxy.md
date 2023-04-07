@@ -39,7 +39,7 @@ Feature availability and support varies across specific versions of each databas
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 
 +  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, check user authentication\. Make sure that all users who connect through a proxy authenticate through sign\-in credentials\. For details about IAM support in RDS Proxy, see [Setting up AWS Identity and Access Management \(IAM\) policies](rds-proxy-setup.md#rds-proxy-iam-setup)\. 
 +  You can't use RDS Proxy with custom DNS\. 
-+  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
++  Each proxy can be associated with a single target DB instance \. However, you can associate multiple proxies with the same DB instance \.
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session to the current connection\.
 
 For additional limitations for each DB engine, see the following sections:

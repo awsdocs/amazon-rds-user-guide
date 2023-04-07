@@ -16,7 +16,7 @@ Before a DB instance can serve as a source instance for replication, you must en
 
 Creating a SQL Server read replica doesn't require an outage for the primary DB instance\. Amazon RDS sets the necessary parameters and permissions for the source DB instance and the read replica without any service interruption\. A snapshot is taken of the source DB instance, and this snapshot becomes the read replica\. No outage occurs when you delete a read replica\. 
 
-You can create up to five read replicas from one source DB instance\. For replication to operate effectively, we recommend that you configure each read replica with the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\.
+You can create up to 15 read replicas from one source DB instance\. For replication to operate effectively, we recommend that you configure each read replica with the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\.
 
 The SQL Server DB engine version of the source DB instance and all of its read replicas must be the same\. Amazon RDS upgrades the primary immediately after upgrading the read replicas, regardless of the maintenance window\. For more information about upgrading the DB engine version, see [Upgrading the Microsoft SQL Server DB engine](USER_UpgradeDBInstance.SQLServer.md)\.
 
@@ -28,6 +28,7 @@ The following limitations apply to SQL Server read replicas on Amazon RDS:
 + Read replicas are only available on the SQL Server Enterprise Edition \(EE\) engine\.
 + Read replicas are available for SQL Server versions 2016–2019\.
 + The source DB instance to be replicated must be a Multi\-AZ deployment with Always On AGs\.
++ You can create up to 15 read replicas from one source DB instance\.
 + Read replicas are only available for DB instances running on DB instance classes with four or more vCPUs\.
 + The following aren't supported on Amazon RDS for SQL Server:
   + Backup retention of read replicas

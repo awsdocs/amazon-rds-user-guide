@@ -284,7 +284,7 @@ When the index is corrupted and autovacuum is attempting to run on the table, yo
 
 As part of its operation, *autovacuum* performs several [ vacuum phases](https://www.postgresql.org/docs/current/progress-reporting.html#VACUUM-PHASES) while running on a table\. Before the table is cleaned up, all of its indexes are first vacuumed\. When removing multiple large indexes, this phase consumes a significant amount of time and resources\. Therefore, as a best practice, be sure to control the number of indexes on a table and eliminate unused indexes\.
 
-For this process, first check the overall index size\. Then, determine if there are potentially unused indexes that may be removed as shown in the following examples\.
+For this process, first check the overall index size\. Then, determine if there are potentially unused indexes that can be removed as shown in the following examples\.
 
 **To check the size of the table and its indexes**
 
@@ -302,7 +302,7 @@ pg_size_pretty
 (1 row)
 ```
 
-In this example, the size of indexes are larger than the table\. This difference can cause performance issues as the indexes are bloated or unused\. which impacts the autovacuum as well as insert operations\.
+In this example, the size of indexes is larger than the table\. This difference can cause performance issues as the indexes are bloated or unused, which impacts the autovacuum as well as insert operations\.
 
 **To check for unused indexes**
 

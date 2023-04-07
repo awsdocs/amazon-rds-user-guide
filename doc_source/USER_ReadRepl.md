@@ -2,6 +2,8 @@
 
 Amazon RDS uses the MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB engines' built\-in replication functionality to create a special type of DB instance called a read replica from a source DB instance\. The source DB instance becomes the primary DB instance\. Updates made to the primary DB instance are asynchronously copied to the read replica\. You can reduce the load on your primary DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\.
 
+These sections discuss DB *instance* read replicas\. For information about Multi\-AZ DB *cluster* read replicas, see [Working with Multi\-AZ DB cluster read replicas](USER_MultiAZDBCluster_ReadRepl.md)\.
+
 ![\[Read replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-replica.png)
 
 **Note**  

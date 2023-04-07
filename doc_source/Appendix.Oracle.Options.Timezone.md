@@ -11,15 +11,23 @@ The time zone option is a permanent and persistent option\. Therefore, you can't
 + Remove the option group from a DB instance after you add the group\.
 + Modify the time zone setting of the option to a different time zone\.
 
-If you accidentally set the time zone incorrectly, you need to recover the DB instance to its previous time zone setting\. We strongly urge you to use one of the following strategies, depending on your situation:
-+ Your DB instance currently uses the default option group\.
+If you accidentally set the time zone incorrectly, you must recover your DB instance to its previous time zone setting\. We strongly urge you to use one of the following strategies, depending on your situation:
 
-  Take a snapshot of your DB instance, and then add the time zone option to your DB instance\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
-+ Your DB instance currently uses a nondefault option group\.
+Your DB instance currently uses the default option group\. In this case, complete the following steps:  
 
-  Take a snapshot of your DB instance, create a new option group with the time zone option, and then add the option group to your instance\.
+1. Take a snapshot of your DB instance\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
-We strongly urge you to test the time zone option on a test DB instance before you add it to a production DB instance\. Adding the time zone option can cause problems with tables that use system date to add dates or times\. We recommend that you analyze your data and applications to determine the impact of changing the time zone\. 
+1. Add the time zone option to your DB instance\.
+
+Your DB instance currently uses a nondefault option group\. In this case, complete the following steps:  
+
+1. Take a snapshot of your DB instance\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
+
+1. Create a new option group with the time zone option\.
+
+1. Add the option group to your DB instance\.
+
+We strongly urge you to test the time zone option on a test DB instance before you add it to a production DB instance\. Adding the time zone option can cause problems with tables that use system date to add dates or times\. We recommend that you analyze your data and applications to assess the impact of changing the time zone\. 
 
 ## Time zone option settings<a name="Appendix.Oracle.Options.Timezone.Options"></a>
 

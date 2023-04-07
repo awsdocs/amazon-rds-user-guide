@@ -3,29 +3,11 @@
 Amazon RDS Custom for SQL Server supports a subset of the usual management tasks for Amazon RDS DB instances\. Following, you can find instructions for the supported RDS Custom for SQL Server management tasks using the AWS Management Console and the AWS CLI\.
 
 **Topics**
-+ [Working with high availability features for RDS Custom for SQL Server](#custom-managing.AO)
 + [Pausing and resuming RDS Custom automation](#custom-managing-sqlserver.pausing)
 + [Modifying an RDS Custom for SQL Server DB instance](#custom-managing.modify-sqlserver)
 + [Modifying the storage for an RDS Custom for SQL Server DB instance](#custom-managing-sqlserver.storage-modify)
 + [Tagging RDS Custom for SQL Server resources](#custom-managing-sqlserver.tagging)
 + [Deleting an RDS Custom for SQL Server DB instance](#custom-managing-sqlserver.deleting)
-
-## Working with high availability features for RDS Custom for SQL Server<a name="custom-managing.AO"></a>
-
-To support replication between RDS Custom for SQL Server instances, you can configure high availability \(HA\) with Always On Availability Groups \(AGs\)\. The primary DB instance automatically synchronizes data to the standby instances\.
-
-You can configure your high availability environment in the following ways:
-+ Configure standby instances in different Availability Zones \(AZs\) to be resilient to AZ failures\.
-+ Place your standby databases in mounted or read\-only mode\.
-+ Fail over or switch over from the primary database to a standby database with no data loss\.
-+ Migrate data by configuring high availability for your on\-premises instance, and then failing over or switching over to the RDS Custom standby database\.
-+ Use a virtual private network \(VPN\) tunnel to encrypt data in transit for your high availability instances\. Encryption in transit isn't configured automatically by RDS Custom\.
-+ Configure Always On AGs to monitor your high availability instances\.
-+ Allow the observer to perform automatic failover when necessary conditions are met\.
-
-You can also use other encryption technology, such as Secure Sockets Layer \(SSL\), to encrypt data in transit\.
-
-You're responsible for configuring VPC flow logs and CloudWatch alarms to monitor traffic mirroring to prevent data leakage\.
 
 ## Pausing and resuming RDS Custom automation<a name="custom-managing-sqlserver.pausing"></a>
 
@@ -210,9 +192,16 @@ Modifying an RDS Custom for SQL Server DB instance is similar to doing this for 
 + Changing the backup retention period and backup window
 + Changing the maintenance window
 + Upgrading the DB engine version when a new version becomes available
++ Changing the allocated storage, provisioned IOPS, and storage type
++ Changing the database port
++ Changing the DB instance identifier
++ Changing the master credentials
++ Allowing and removing Multi\-AZ deployments
++ Allowing public access
++ Changing the security groups
++ Changing subnet groups
 
 The following limitations apply to modifying an RDS Custom for SQL Server DB instance:
-+ Multi\-AZ deployments aren't supported\.
 + Custom DB option and parameter groups aren't supported\.
 + Any storage volumes that you attach manually to your RDS Custom DB instance are outside the support perimeter\.
 

@@ -55,6 +55,7 @@ To prevent replication errors in RDS for MySQL Multi\-AZ DB clusters, we strongl
 The following limitations apply to Multi\-AZ DB clusters: 
 + Multi\-AZ DB clusters only support Provisioned IOPS storage\.
 + You can't change a Single\-AZ DB instance deployment or Multi\-AZ DB instance deployment into a Multi\-AZ DB cluster\. As an alternative, you can restore a snapshot of a Single\-AZ DB instance deployment or Multi\-AZ DB instance deployment to a Multi\-AZ DB cluster\.
++ You can't change a Multi\-AZ DB cluster deployment into a Single\-AZ DB instance or Multi\-AZ DB instance\. As an alternative, you can restore a snapshot of a Multi\-AZ DB cluster deployment to a Single\-AZ DB instance deployment or Multi\-AZ DB instance deployment\.
 + Multi\-AZ DB clusters don't support modifications at the DB instance level because all modifications are done at the DB cluster level\.
 + Multi\-AZ DB clusters don't support the following features:
   + Amazon RDS Proxy
@@ -66,7 +67,6 @@ The following limitations apply to Multi\-AZ DB clusters:
 
     As an alternative, you can restore a Multi\-AZ DB cluster to a point in time and specify a different port\.
   + Option groups
-  + Creating a read replica with a Multi\-AZ DB cluster source
   + Reserved DB instances
   + Restoring a Multi\-AZ DB cluster snapshot from an Amazon S3 bucket
   + Storage autoscaling by setting the maximum allocated storage

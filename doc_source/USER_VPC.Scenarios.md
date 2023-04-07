@@ -73,7 +73,7 @@ We recommend the following configuration:
  
 + A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.
 + A subnet of size /24 \(for example CIDR: 10\.0\.0\.0/24\)\. This size provides 256 private IP addresses\.
-+ An Amazon RDS DB instancethat is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.
++ An Amazon RDS DB instance that is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.
 + An internet gateway which connects the VPC to the internet and to other AWS products\.
 + A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
 

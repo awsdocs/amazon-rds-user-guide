@@ -158,7 +158,7 @@ aws secretsmanager get-secret-value --secret-id your_secret_name
 
 **To create an IAM policy that accesses your Secrets Manager secrets for use with your proxy**
 
-1. Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html), choosing [Creating a role to delegate permissions to an AWS service](IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
+1. Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html), choosing [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
    Choose **AWS service** for the **Trusted entity type**\. Under **Use case**, select **RDS** from **Use cases for other AWS services** dropdown\. Select **RDS \- Add Role to Database**\.
 

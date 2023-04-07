@@ -35,7 +35,7 @@ RDS Custom for SQL Server supports the DB instance classes shown in the followin
 ## Limitations for RDS Custom for SQL Server<a name="custom-reqs-limits.limitsMS"></a>
 
 The following limitations apply to RDS Custom for SQL Server:
-+ You can't create read replicas in Amazon RDS for RDS Custom for SQL Server DB instances\. However, you can configure high availability manually using Always On Availability Groups\. For more information, see [Working with high availability features for RDS Custom for SQL Server](custom-managing-sqlserver.md#custom-managing.AO)\.
++ You can't create read replicas in Amazon RDS for RDS Custom for SQL Server DB instances\. However, you can configure high availability automatically with a Multi\-AZ deployment\. For more information, see [Managing a Multi\-AZ deployment for RDS Custom for SQL Server](custom-sqlserver-multiaz.md)\.
 + You can't modify the time zone of an existing RDS Custom for SQL Server DB instance\.
 + You can't modify the server\-level collation of an existing RDS Custom for SQL Server DB instance\.
 + Transparent Data Encryption \(TDE\) for database encryption isn't supported for RDS Custom for SQL Server\. However, you can use KMS for storage\-level encryption\. For more information on using KMS with RDS Custom for SQL Server, see [Make sure that you have a symmetric encryption AWS KMS key](custom-setup-sqlserver.md#custom-setup-sqlserver.cmk)\.
@@ -44,7 +44,6 @@ The following limitations apply to RDS Custom for SQL Server:
 + Not all options are supported\. For example, when you create an RDS Custom for SQL Server DB instance, you can't do the following:
   + Change the number of CPU cores and threads per core on the DB instance class\.
   + Turn on storage autoscaling\.
-  + Create a Multi\-AZ deployment\. However, you can configure high availability manually using Always On Availability Groups\. For more information, see [Working with high availability features for RDS Custom for SQL Server](custom-managing-sqlserver.md#custom-managing.AO)\.
   + Configure Kerberos authentication using the AWS Management Console\. However, you can configure Windows Authentication manually and use Kerberos\.
   + Specify your own DB parameter group, option group, or character set\.
   + Turn on Performance Insights\.

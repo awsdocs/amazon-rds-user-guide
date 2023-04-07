@@ -14,3 +14,4 @@ The options and parameters that are available depend on the DB engine and DB eng
 + [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)
 + [Working with option groups](USER_WorkingWithOptionGroups.md)
 + [Working with parameter groups](USER_WorkingWithParamGroups.md)
++ [Creating an Amazon ElastiCache cluster using Amazon RDS DB instance settings](creating-elasticache-cluster-with-RDS-settings.md)

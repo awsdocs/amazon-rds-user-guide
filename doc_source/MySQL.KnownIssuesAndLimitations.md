@@ -78,7 +78,7 @@ For more information, see [Index merge optimization](https://dev.mysql.com/doc/r
 
 ## Log file size<a name="MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize"></a>
 
-For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, see [Changes in MySQL 5\.6\.20](https://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\. 
+For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\. For information on the `innodb_log_file_size` parameter, see [ the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size)\. 
 
 ## MySQL parameter exceptions for Amazon RDS DB instances<a name="MySQL.Concepts.ParameterNotes"></a>
 

@@ -8,10 +8,16 @@ To authenticate to your RDS DB instance, you can use one of the authentication m
 
 You can connect to a MySQL DB instance by using tools like the MySQL command\-line client\. For more information on using the MySQL command\-line client, see [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For information about installing MySQL \(including the MySQL command\-line client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
 
-Most Linux distributions include the MariaDB client instead of the Oracle MySQL client\. To install the MySQL command\-line client on most RPM\-based Linux distributions, including Amazon Linux 2, run the following command:
+Most Linux distributions include the MariaDB client instead of the Oracle MySQL client\. To install the MySQL command\-line client on Amazon Linux 2023, run the following command:
 
 ```
-yum install mariadb
+sudo dnf install mariadb105
+```
+
+To install the MySQL command\-line client on Amazon Linux 2, run the following command:
+
+```
+sudo yum install mariadb
 ```
 
 To install the MySQL command\-line client on most DEB\-based Linux distributions, run the following command:

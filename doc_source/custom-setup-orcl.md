@@ -428,14 +428,20 @@ RDS Custom sends communication from your DB instance to other AWS services\. To 
 + AWS Secrets Manager
 + AWS Systems Manager
 
-Make sure that VPC components involved in communication between your RDS Custom DB instance and AWS services are configured with the following requirements:
+If RDS Custom can't communicate with the necessary services, it creates the following event:
+
+```
+Database instance in incompatible-network. SSM Agent connection not available. Amazon RDS can't connect to the dependent AWS services.
+```
+
+To avoid `incompatible-network` errors, make sure that VPC components involved in communication between your RDS Custom DB instance and AWS services satisfy the following requirements:
 + The DB instance can make outbound connections on port 443 to other AWS services\.
-+ The VPC allows incoming responses to requests originating from your DB instance\.
-+ Correctly resolve the domain names of endpoints for each AWS service\.
++ The VPC allows incoming responses to requests originating from your RDS Custom DB instance\.
++ RDS Custom can correctly resolve the domain names of endpoints for each AWS service\.
 
 RDS Custom relies on AWS Systems Manager connectivity for its automation\. For information about how to configure VPC endpoints, see [Creating VPC endpoints for Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html#sysman-setting-up-vpc-create)\. For the list of endpoints in each Region, see [AWS Systems Manager endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html) in the *Amazon Web Services General Reference*\.
 
-If you already configured a VPC for a different RDS Custom engine, you can reuse that VPC and skip this process\.
+If you already configured a VPC for a different RDS Custom DB engine, you can reuse that VPC and skip this process\.
 
 #### Configure the instance metadata service<a name="custom-setup-orcl.vpc.imds"></a>
 
