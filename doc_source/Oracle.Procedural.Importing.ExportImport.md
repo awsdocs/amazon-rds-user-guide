@@ -4,7 +4,9 @@ You might consider Oracle Export/Import utilities for migrations in the followin
 + Your data size is small\.
 + Data types such as binary float and double aren't required\.
 
-The import process creates the necessary schema objects, so you don't need to run a script to create the objects beforehand\. To download Oracle export and import utilities, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\.
+The import process creates the necessary schema objects\. Thus, you don't need to run a script to create the objects beforehand\. 
+
+The easiest way to install the Oracle the export and import utilities is to install the Oracle Instant Client\. To download the software, go to [https://www\.oracle\.com/database/technologies/instant\-client\.html](https://www.oracle.com/database/technologies/instant-client.html)\. For documentation, see [Instant Client for SQL\*Loader, Export, and Import](https://docs.oracle.com/en/database/oracle/oracle-database/21/sutil/instant-client-sql-loader-export-import.html#GUID-FF1B6F75-09F5-4911-9317-9776FAD15965) in the *Oracle Database Utilities* manual\.
 
 **To export tables and then import them**
 

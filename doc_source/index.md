@@ -469,6 +469,7 @@ sponsored by Amazon.
    + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
    + [Upgrading a PostgreSQL DB snapshot engine version](USER_UpgradeDBSnapshot.PostgreSQL.md)
    + [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md)
+   + [Improving query performance for RDS for PostgreSQL with Amazon RDS Optimized Reads](USER_PostgreSQL.optimizedreads.md)
    + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
       + [Importing a PostgreSQL database from an Amazon EC2 instance](PostgreSQL.Procedural.Importing.EC2.md)
       + [Using the \copy command to import data to a table on a PostgreSQL DB instance](PostgreSQL.Procedural.Importing.Copy.md)

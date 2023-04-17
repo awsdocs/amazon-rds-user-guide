@@ -13,7 +13,7 @@ IAM database authentication isn't available with the following engines:
 
 ## IAM database authentication with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.mdb"></a>
 
-Following are the supported engines and Region availability for IAM database authentication with RDS for MariaDB\.
+The following Regions and engine versions are available for IAM database authentication with RDS for MariaDB\.
 
 
 | Region | RDS for MariaDB 10\.6 | RDS for MariaDB 10\.5 | RDS for MariaDB 10\.4 | RDS for MariaDB 10\.3 | 
@@ -54,16 +54,15 @@ Following are the supported engines and Region availability for IAM database aut
 ## IAM database authentication with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.my"></a>
 
 IAM database authentication with RDS for MySQL is available in all Regions for the following versions:
-+ RDS for MySQL 8\.0 \(All versions\)
-+ RDS for MySQL 5\.7 \(All versions\)
-+ RDS for MySQL 5\.6 \(All versions\)
++ RDS for MySQL 8\.0 – All available versions
++ RDS for MySQL 5\.7 – All available versions
 
 ## IAM database authentication with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.pg"></a>
 
 IAM database authentication with RDS for PostgreSQL is available in all Regions for the following versions:
-+ RDS for PostgreSQL 15 \(All versions\)
-+ RDS for PostgreSQL 14 \(All versions\)
-+ RDS for PostgreSQL 13 \(All versions\)
-+ RDS for PostgreSQL 12 \(All versions\)
-+ RDS for PostgreSQL 11 \(All versions\)
-+ RDS for PostgreSQL 10 \(All versions\)
++ RDS for PostgreSQL 15 – All available versions
++ RDS for PostgreSQL 14 – All available versions
++ RDS for PostgreSQL 13 – All available versions
++ RDS for PostgreSQL 12 – All available versions
++ RDS for PostgreSQL 11 – All available versions
++ RDS for PostgreSQL 10 – All available versions

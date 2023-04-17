@@ -55,7 +55,7 @@ GRANT
 Exit the session and reconnect to your RDS for PostgreSQL DB instance as `gis_admin`\.
 
 ```
-postgres=> --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=gis_admin --password --dbname=lab_gis
+postgres=> psql --host=111122223333.aws-region.rds.amazonaws.com --port=5432 --username=gis_admin --password --dbname=lab_gis
 Password for user gis_admin:...
 lab_gis=>
 ```

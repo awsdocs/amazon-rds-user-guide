@@ -91,7 +91,7 @@ You can collect more detailed information about your database activities, includ
 | log\_checkpoints | 1 | Logs each checkpoint\. | 
 | log\_lock\_waits | – | Logs long lock waits\. By default, this parameter isn't set\. | 
 | log\_min\_duration\_sample | – | \(ms\) Sets the minimum execution time above which a sample of statements is logged\. Sample size is set using the log\_statement\_sample\_rate parameter\. | 
-| log\_min\_duration\_statement | all | Sets the type of statements logged\. | 
+| log\_min\_duration\_statement | – | Any SQL statement that runs atleast for the specified amount of time or longer gets logged\. By default, this parameter isn't set\. Turning on this parameter can help you find unoptimized queries\. | 
 | log\_statement | – | Sets the type of statements logged\. By default, this parameter isn't set, but you can change it to `all`, `ddl`, or `mod` to specify the types of SQL statements that you want logged\. If you specify anything other than `none` for this parameter, you should also take additional steps to prevent the exposure of passwords in the log files\. For more information, see [Mitigating risk of password exposure when using query loggingMitigating password exposure risk](#USER_LogAccess.Concepts.PostgreSQL.Query_Logging.mitigate-risk)\.  | 
 | log\_statement\_sample\_rate | – | The percentage of statements exceeding the time specified in `log_min_duration_sample` to be logged, expressed as a floating point value between 0\.0 and 1\.0\.  | 
 | log\_statement\_stats | – | Writes cumulative performance statistics to the server log\. | 
@@ -116,7 +116,7 @@ Logs all DDL statements and data manipulation language \(DML\) statements, such 
 **none**  
 No SQL statements get logged\. We recommend this setting to avoid the risk of exposing passwords in the logs\.log\_min\_duration\_statement
 
-Any SQL statement that runs longer than the number of milliseconds specified by this parameter setting gets logged\. By default, this parameter isn't set\. Turning on this parameter can help you find unoptimized queries\.
+Any SQL statement that runs atleast for the specified amount of time or longer gets logged\. By default, this parameter isn't set\. Turning on this parameter can help you find unoptimized queries\.
 
 **–1–2147483647**  
 The number of milliseconds \(ms\) of runtime over which a statement gets logged\.

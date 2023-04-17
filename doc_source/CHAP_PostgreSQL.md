@@ -29,6 +29,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Upgrading a PostgreSQL DB snapshot engine version](USER_UpgradeDBSnapshot.PostgreSQL.md)
 + [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md)
++ [Improving query performance for RDS for PostgreSQL with Amazon RDS Optimized Reads](USER_PostgreSQL.optimizedreads.md)
 + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
 + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)
 + [Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance](PostgreSQL-Lambda.md)

@@ -219,7 +219,11 @@ To adjust the preferred maintenance window, use the Amazon RDS API [https://docs
 RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB instances occasionally require operating system updates\. Amazon RDS upgrades the operating system to a newer version to improve database performance and customers’ overall security posture\. Typically, the updates take about 10 minutes\. Operating system updates don't change the DB engine version or DB instance class of a DB instance\.
 
 Operating system updates can be either optional or mandatory:
-+ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\. To be notified when a new optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
++ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
+
+  To be notified when a new, minor version, optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
+**Note**  
+`RDS-EVENT-0230` doesn't apply to major version upgrades\.
 + A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
 
 **Note**  
@@ -293,15 +297,16 @@ Operating system updates are specific to DB engine version and DB instance class
 
 ### Mandatory operating system updates schedule<a name="Mandatory_OS_Updates.Schedule"></a>
 
-We plan to use the following schedule for mandatory operating system updates\. For each date in the table, the start time is 00:00 Universal Coordinated Time \(UTC\)\.
+We plan to use the following schedule for mandatory operating system updates\. The **Apply date** refers to when Amazon RDS *starts* to apply mandatory updates\. For each date in the table, the start time is 00:00 Universal Coordinated Time \(UTC\)\. 
 
 
 | DB engine | Apply date | 
 | --- | --- | 
-|  RDS for MySQL  |  August 31, 2022\*  | 
-|  RDS for MariaDB  |  August 31, 2022  | 
-|  RDS for PostgreSQL  |  August 31, 2022  | 
+|  RDS for MySQL  | January 30, 2023 | 
+|  RDS for MariaDB  |  January 30, 2023  | 
+|  RDS for PostgreSQL  |  March 31, 2023  | 
 
-\* For RDS for MySQL, the date applies to the Asia Pacific \(Jakarta\) Region only\. Mandatory operating system updates are complete for other AWS Regions\.
+**Note**  
+The dates in the table apply to customers who didn't experience mandatory operating system updates in 2022\. To confirm whether the mandatory operating system updates in 2023 impact you, check the **Pending maintenance** section in the console for operating system updates\. For more information, see the Console section under [Working with operating system updates](#OS_Updates)\.
 
- After the apply date, Amazon RDS will automatically upgrade the operating system for your DB instances to the latest version in a subsequent maintenance window\. To avoid an automatic upgrade, we recommend that you schedule your update before the apply date\. 
+After the apply date, Amazon RDS automatically upgrades the operating system for your DB instances to the latest version in a subsequent maintenance window\. To avoid an automatic upgrade, we recommend that you schedule your update before the apply date\. 

@@ -4,10 +4,16 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 + If you created your DB instance as *public*, devices and Amazon EC2 instances outside the VPC can connect to your database\. 
 + If you created your DB instance as *private*, only Amazon EC2 instances and devices inside the Amazon VPC can connect to your database\. 
 
-To connect to your DB instance from an EC2 instance, you can install a PostgreSQL client on the EC2 instance\. For example, to install psql on Amazon Linux 2, run the following command: 
+To connect to your DB instance from an EC2 instance, you can install a PostgreSQL client on the EC2 instance\. To install the psql client on Amazon Linux 2023, run the following command: 
 
 ```
-sudo amazon-linux-extras install postgresql14
+sudo dnf install postgresql15
+```
+
+To install the psql client on Amazon Linux 2, run the following command:
+
+```
+sudo amazon-linux-extras install postgresql15
 ```
 
 To check whether your DB instance is public or private, use the AWS Management Console to view the **Connectivity & security** tab for your instance\. Under **Security**, you can find the "Publicly accessible" value, with No for private, Yes for public\. 

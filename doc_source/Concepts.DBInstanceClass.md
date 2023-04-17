@@ -19,6 +19,9 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 Amazon RDS supports three types of DB instance classes: general purpose, memory\-optimized, and burstable performance\. For more information about Amazon EC2 instance types, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\.
 
 The following are the general\-purpose DB instance types available:
++ **db\.m7g** – General\-purpose DB instance classes powered by AWS Graviton3 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\.
+
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton3 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.m6g** – General\-purpose DB instance classes powered by AWS Graviton2 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
@@ -43,6 +46,9 @@ The following are the memory\-optimized DB instance types available:
 + **db\.x2i** – Instance classes optimized for memory\-intensive applications\. The db\.x2iedn and db\.x2idn classes are powered by third\-generation Intel Xeon Scalable processors \(Ice Lake\)\. They include up to 3\.8 TB of local NVMe SSD storage, up to 100 Gbps of networking bandwidth, and up to 4 TiB \(db\.x2iden\) or 2 TiB \(db\.x2idn\) of memory\. The db\.x2iezn class is powered by second\-generation Intel Xeon Scalable processors \(Cascade Lake\) with an all\-core turbo frequency of up to 4\.5 GHz and up to 1\.5 TiB of memory\.
 + **db\.x1e** – Instance classes optimized for memory\-intensive applications\. These instance classes offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\.
 + **db\.x1** – Instance classes optimized for memory\-intensive applications\. These instance classes offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
++ **db\.r7g** – Instance classes powered by AWS Graviton3 processors\. These instance classes are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
+
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton3 processors\. To do so, complete the same steps as with any other DB instance modification\.
 + **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These instance classes are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
@@ -89,6 +95,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
+| db\.m7g – general\-purpose instance classes powered by AWS Graviton3 processors | 
+| db\.m7g\.16xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.m7g\.12xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.m7g\.8xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.m7g\.4xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.m7g\.2xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.m7g\.xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.m7g\.large | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
 | db\.m6g – general\-purpose instance classes powered by AWS Graviton2 processors | 
 | db\.m6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 and higher | No | All PostgreSQL 15 versions, all PostgreSQL 14 versions, all PostgreSQL 13 versions, PostgreSQL 12\.7 and higher | 
 | db\.m6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 and higher | No | All PostgreSQL 15 versions, all PostgreSQL 14 versions, all PostgreSQL 13 versions, PostgreSQL 12\.7 and higher | 
@@ -188,6 +202,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1 – memory\-optimized instance classes | 
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
+| db\.r7g – general\-purpose instance classes powered by AWS Graviton3 processors | 
+| db\.r7g\.16xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.r7g\.12xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.r7g\.8xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.r7g\.4xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.r7g\.2xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.r7g\.xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
+| db\.r7g\.large | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 and higher | No | All PostgreSQL 15 versions, all PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
 | db\.r6g\.12xlarge | All MariaDB 10\.6 versions, all MariaDB 10\.5 versions, and all MariaDB 10\.4 versions | No | MySQL 8\.0\.23 and higher | No | All PostgreSQL 15 versions, all PostgreSQL 14 versions, all PostgreSQL 13 versions; PostgreSQL 12\.7 and higher | 
@@ -834,15 +856,15 @@ The relative measure of the integer processing power of an Amazon EC2 instance\.
 **Memory \(GiB\)**  
 The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
 
-**EBS\-Optimized**  
+**EBS\-optimized**  
 The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*   
 EBS\-optimized instances have a baseline and maximum IOPS rate\. The maximum IOPS rate is enforced at the DB instance level\. A set of EBS volumes that combine to have an IOPS rate that is higher than the maximum can't exceed the instance\-level threshold\. For example, if the maximum IOPS for a DB instance type is 40,000, and you attach four 64,000 IOPS EBS volumes, the maximum IOPS is 40,000 rather than 256,000\. For the IOPS maximum specific to each instance type, see [Supported instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-**Max\. Bandwidth \(Mbps\)**  
-The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
+**Max\. EBS bandwidth \(Mbps\)**  
+The maximum EBS bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
 General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.*
 
-**Network Performance**  
+**Network bandwidth**  
 The network speed relative to other DB instance classes\.
 
 In the following table, you can find hardware details about the Amazon RDS DB instance classes\. 
@@ -850,8 +872,16 @@ In the following table, you can find hardware details about the Amazon RDS DB in
 For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.Support)\. 
 
 
-| Instance class | vCPU | ECU | Memory \(GiB\) | EBS optimized | Max\. bandwidth \(Mbps\) | Network performance \(Gbps\) | 
+| Instance class | vCPU | ECU | Memory \(GiB\) | EBS optimized | Max\. EBS bandwidth \(Mbps\) | Network bandwidth \(Gbps\) | 
 | --- | --- | --- | --- | --- | --- | --- | 
+| db\.m7g – general\-purpose instance classes powered by AWS Graviton3 processors | 
+| db\.m7g\.16xlarge | 256 | — | 128 | Yes | 20,000 | 30 | 
+| db\.m7g\.12xlarge | 192 | — | 96 | Yes | 15,000 | 22\.5 | 
+| db\.m7g\.8xlarge | 128 | — | 64 | Yes | 10,000 | 15 | 
+| db\.m7g\.4xlarge | 64 | — | 32 | Yes | Up to 10,000 | Up to 15 | 
+| db\.m7g\.2xlarge\* | 32 | — | 16 | Yes | Up to 10,000 | Up to 15 | 
+| db\.m7g\.xlarge\* | 16 | — | 8 | Yes | Up to 10,000 | Up to 12\.5 | 
+| db\.m7g\.large\* | 8 | — | 4 | Yes | Up to 10,000 | Up to 12\.5 | 
 | db\.m6g – general\-purpose instance classes powered by AWS Graviton2 processors | 
 | db\.m6g\.16xlarge | 64 | — | 256 | Yes | 19,000 | 25 | 
 | db\.m6g\.12xlarge | 48 | — | 192 | Yes | 13,500 | 20 | 
@@ -956,6 +986,14 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.x1 – memory\-optimized instance classes | 
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | 14,000 | 25 | 
 | db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | 7,000 | 10 | 
+| db\.r7g – general\-purpose instance classes powered by AWS Graviton3 processors | 
+| db\.r7g\.16xlarge | 512 | — | 128 | Yes | 20,000 | 30 | 
+| db\.r7g\.12xlarge | 384 | — | 96 | Yes | 15,000 | 22\.5 | 
+| db\.r7g\.8xlarge | 256 | — | 64 | Yes | 10,000 | 15 | 
+| db\.r7g\.4xlarge | 128 | — | 32 | Yes | Up to 10,000 | Up to 15 | 
+| db\.r7g\.2xlarge\* | 64 | — | 16 | Yes | Up to 10,000 | Up to 15 | 
+| db\.r7g\.xlarge\* | 32 | — | 8 | Yes | Up to 10,000 | Up to 12\.5 | 
+| db\.r7g\.large\* | 16 | — | 4 | Yes | Up to 10,000 | Up to 12\.5 | 
 | db\.r6g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | 64 | — | 512 | Yes | 19,000 | 25 | 
 | db\.r6g\.12xlarge | 48 | — | 384 | Yes | 13,500 | 20 | 

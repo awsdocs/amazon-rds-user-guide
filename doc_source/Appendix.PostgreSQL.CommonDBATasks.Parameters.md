@@ -184,7 +184,7 @@ You can also use the Console\. Choose **Parameter groups** from the Amazon RDS m
 |  `temp_buffers`  | Dynamic | Sets the maximum number of temporary buffers used by each session\. | 
 | temp\_file\_limit | Dynamic | Sets the maximum size in KB to which the temporary files can grow\. | 
 |  `temp_tablespaces`  | Dynamic | Sets the tablespaces to use for temporary tables and sort files\. | 
-|  `timezone`  | Dynamic | Sets the time zone for displaying and interpreting time stamps\. | 
+|  `timezone`  | Dynamic | Sets the time zone for displaying and interpreting time stamps\. The Internet Assigned Numbers Authority \(IANA\) publishes new time zones at [ https://www\.iana\.org/time\-zones](https://www.iana.org/time-zones) several times a year\. Every time RDS releases a new minor maintenance release of PostgreSQL, it ships with the latest time zone data at the time of the release\. When you use the latest RDS for PostgreSQL versions, you have recent time zone data from RDS\. To ensure that your DB instance has recent time zone data, we recommend upgrading to a higher DB engine version\. You can't modify the time zone tables in PostgreSQL DB instances manually\. RDS doesn't modify or reset the time zone data of running DB instances\. New time zone data is installed only when you perform a database engine version upgrade\. | 
 |  `track_activities`  | Dynamic | Collects information about running commands\. | 
 |  `track_activity_query_size`  | Static | Sets the size reserved for pg\_stat\_activity\.current\_query, in bytes\. | 
 |  `track_counts`  | Dynamic | Collects statistics on database activity\. | 

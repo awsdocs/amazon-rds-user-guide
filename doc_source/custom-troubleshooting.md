@@ -53,9 +53,9 @@ CEV creation might fail because of the following issues:
 + The Amazon S3 bucket containing your installation files isn't in the same AWS Region as your CEV\.
 + When you request CEV creation in an AWS Region for the first time, RDS Custom creates an S3 bucket for storing RDS Custom resources \(such as CEV artifacts, AWS CloudTrail logs, and transaction logs\)\.
 
-  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Step 4: Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
+  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Step 4: Grant required permissions to your IAM principal](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
 + The caller doesn't have permissions to get files from your S3 bucket that contains the installation media files\. These permissions are described in [Step 7: Add necessary IAM permissions](custom-cev.preparing.md#custom-cev.preparing.iam)\.
-+ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Step 4: Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
++ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Step 4: Grant required permissions to your IAM principal](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
 + Installation media files listed in the CEV manifest aren't in your S3 bucket\.
 + The SHA\-256 checksums of the installation files are unknown to RDS Custom\.
 
@@ -201,18 +201,15 @@ The Amazon EC2 host replacement feature covers the majority of Amazon EC2 impair
 ## Troubleshooting upgrades for RDS Custom for Oracle<a name="custom-troubleshooting-upgrade"></a>
 
 Your upgrade of an RDS Custom for Oracle instance might fail\. Following, you can find techniques that you can use during upgrades of RDS Custom DB for Oracle DB instances:
-+ Examine the following log files:
-  + All upgrade output log files reside in the `/tmp` directory on the DB instance\.
-  + These log files are named `catupg*.log`\.
-  + A master output file named `/tmp/catupgrd0.log` reports all errors, and the steps performed\.
-  + The `alert.log` file for the DB instance is located in the `/rdsdbdata/log/trace` directory\. Examine this file regularly as a best practice\.
++ Examine the upgrade output log files in the `/tmp` directory on your DB instance\. The names of the logs depend on your DB engine version\. For example, you might see logs that contain the strings `catupgrd` or `catup`\.
++ Examine the `alert.log` file located in the `/rdsdbdata/log/trace` directory\.
 + Run the following `grep` command in the `root` directory to track the upgrade OS process\. This command shows where the log files are being written and determine the state of the upgrade process\.
 
   ```
   ps -aux | grep upg
   ```
 
-  The output resembles the following\.
+  The following shows sample output\.
 
   ```
   root     18884  0.0  0.0 235428  8172 ?        S<   17:03   0:00 /usr/bin/sudo -u rdsdb /rdsdbbin/scripts/oracle-control ORCL op_apply_upgrade_sh RDS-UPGRADE/2.upgrade.sh
@@ -225,11 +222,11 @@ Your upgrade of an RDS Custom for Oracle instance might fail\. Following, you ca
 + Run the following SQL query to verify the current state of the components to find the database version and the options installed on the DB instance\.
 
   ```
-  set linesize 180
-  column comp_id format a15
-  column comp_name format a40 trunc
-  column status format a15 trunc
-  select comp_id, comp_name, version, status from dba_registry order by 1;
+  SET LINESIZE 180
+  COLUMN COMP_ID FORMAT A15
+  COLUMN COMP_NAME FORMAT A40 TRUNC
+  COLUMN STATUS FORMAT A15 TRUNC
+  SELECT COMP_ID, COMP_NAME, VERSION, STATUS FROM DBA_REGISTRY ORDER BY 1;
   ```
 
   The output resembles the following\.
@@ -247,14 +244,15 @@ Your upgrade of an RDS Custom for Oracle instance might fail\. Following, you ca
 + Run the following SQL query to check for invalid objects that might interfere with the upgrade process\.
 
   ```
-  set pages 1000 lines 2000
-  col OBJECT for a40
-  Select substr(owner,1,12) owner,
-         substr(object_name,1,30) object,
-         substr(object_type,1,30) type, status,
-         created
-  from
-         dba_objects where status <>'VALID' and owner in ('SYS','SYSTEM','RDSADMIN','XDB');
+  SET PAGES 1000 LINES 2000
+  COL OBJECT FOR A40
+  SELECT SUBSTR(OWNER,1,12) OWNER,
+         SUBSTR(OBJECT_NAME,1,30) OBJECT,
+         SUBSTR(OBJECT_TYPE,1,30) TYPE, STATUS,
+         CREATED
+  FROM   DBA_OBJECTS 
+  WHERE  STATUS <>'VALID' 
+  AND    OWNER IN ('SYS','SYSTEM','RDSADMIN','XDB');
   ```
 
 ## Troubleshooting replica promotion for RDS Custom for Oracle<a name="custom-troubleshooting-promote"></a>

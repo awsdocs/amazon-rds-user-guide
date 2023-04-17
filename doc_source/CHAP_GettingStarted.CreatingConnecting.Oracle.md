@@ -106,7 +106,7 @@ Create an Amazon EC2 instance that you will use to connect to your database\.
    1. Under **Name and tags**, for **Name**, enter **ec2\-database\-connect**\.
 
    1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Amazon Linux**, and then choose the **Amazon Linux 2 AMI**\. Keep the default selections for the other choices\.  
-![\[Choose an Amazon Machine Image.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
+![\[Choose an Amazon Machine Image.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-ec2-os.png)
 
    1. Under **Instance type**, choose **t2\.micro**\.
 

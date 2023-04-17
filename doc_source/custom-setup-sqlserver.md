@@ -272,7 +272,7 @@ You have the following options:
 
 RDS Custom doesn't support AWS\-managed KMS keys\.
 
-Make sure that the symmetric encryption key that you use gives the AWS Identity and Access Management \(IAM\) role in your IAM instance profile access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy can give access to these operations\.
+Make sure that your symmetric encryption key grants access to the `kms:Decrypt` and `kms:GenerateDataKey` operations to the AWS Identity and Access Management \(IAM\) role in your IAM instance profile\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy grants access to these operations\.
 
 #### Creating your IAM role and instance profile manually<a name="custom-setup-sqlserver.iam"></a>
 

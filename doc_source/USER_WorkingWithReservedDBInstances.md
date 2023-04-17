@@ -14,6 +14,13 @@ If the specifications of the new DB instance match an existing reserved DB insta
 
 You can modify a DB instance that you're using as a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
 
+**Topics**
++ [Offering types](#USER_WorkingWithReservedDBInstances.OfferingTypes)
++ [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)
++ [Reserved DB instance billing example](#USER_WorkingWithReservedDBInstances.BillingExample)
++ [Reserved DB instances for a Multi\-AZ DB cluster](#USER_WorkingWithReservedDBInstances.MultiAZDBClusters)
++ [Deleting a reserved DB instance](#USER_WorkingWithReservedDBInstances.Cancelling)
+
 For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\.
 
 ### Offering types<a name="USER_WorkingWithReservedDBInstances.OfferingTypes"></a>
@@ -50,22 +57,22 @@ For details about using size\-flexible reserved instances with Aurora, see [Rese
 You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\.
 
 
-| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Multi\-AZ normalized units \(deployment with two DB instances\) | 
-| --- | --- | --- | 
-| micro | 0\.5 | 1 | 
-| small | 1 | 2 | 
-| medium | 2 | 4 | 
-| large | 4 | 8 | 
-| xlarge | 8 | 16 | 
-| 2xlarge | 16 | 32 | 
-| 4xlarge | 32 | 64 | 
-| 6xlarge | 48 | 96 | 
-| 8xlarge | 64 | 128 | 
-| 10xlarge | 80 | 160 | 
-| 12xlarge | 96 | 192 | 
-| 16xlarge | 128 | 256 | 
-| 24xlarge | 192 | 384 | 
-| 32xlarge | 256 | 512 | 
+| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Multi\-AZ DB instance normalized units \(deployment with one DB instance and one standby\) | Multi\-AZ DB cluster normalized units \(deployment with one DB instance and two standbys\) | 
+| --- | --- | --- | --- | 
+|  micro  |  0\.5  |  1  | 1\.5 | 
+|  small  |  1  |  2  | 3 | 
+|  medium  |  2  |  4  | 6 | 
+|  large  |  4  |  8  | 12 | 
+|  xlarge  |  8  |  16  | 24 | 
+|  2xlarge  |  16  |  32  | 48 | 
+|  4xlarge  |  32  |  64  | 96 | 
+|  6xlarge  |  48  |  96  | 144 | 
+|  8xlarge  |  64  |  128  | 192 | 
+|  10xlarge  |  80  |  160  | 240 | 
+|  12xlarge  |  96  |  192  | 288 | 
+|  16xlarge  |  128  |  256  | 384 | 
+|  24xlarge  |  192  |  384  | 576 | 
+|  32xlarge  |  256  |  512  | 768 | 
 
 For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\.
 
@@ -88,6 +95,20 @@ If you choose to use an on\-demand DB instance instead of a reserved DB instance
 
 **Note**  
 The prices in this example are sample prices and might not match actual prices\. For Amazon RDS pricing information, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing)\.
+
+### Reserved DB instances for a Multi\-AZ DB cluster<a name="USER_WorkingWithReservedDBInstances.MultiAZDBClusters"></a>
+
+To purchase the equivalent reserved DB instances for a Multi\-AZ DB cluster, you can do one of the following:
++ Reserve three Single\-AZ DB instances that are the same size as the instances in the cluster\.
++ Reserve one Multi\-AZ DB instance and one Single\-AZ DB instance that are the same size as the DB instances in the cluster\.
+
+For example, suppose that you have one cluster consisting of three db\.m6gd\.large DB instances\. In this case, you can either purchase three db\.m6gd\.large Single\-AZ reserved DB instances, or one db\.m6gd\.large Multi\-AZ reserved DB instance and one db\.m6gd\.large Single\-AZ reserved DB instance\. Either of these options reserves the maximum reserved instance discount for the Multi\-AZ DB cluster\.
+
+Alternately, you can use size\-flexible DB instances and purchase a larger DB instance to cover smaller DB instances in one or more clusters\. For example, if you have two clusters with six total db\.m6gd\.large DB instances, you can purchase three db\.m6gd\.xl Single\-AZ reserved DB instances\. Doing so reserves all six DB instances in the two clusters\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
+
+You might reserve DB instances that are the same size as the DB instances in the cluster, but reserve fewer DB instances than the total number of DB instances in the cluster\. However, if you do so, the cluster is only partially reserved\. For example, suppose that you have one cluster with three db\.m6gd\.large DB instances, and you purchase one db\.m6gd\.large Multi\-AZ reserved DB instance\. In this case, the cluster is only partially reserved, because only two of the three instances in the cluster are covered by reserved DB instances\. The remaining DB instance is charged at the on\-demand db\.m6gd\.large hourly rate\.
+
+For more information about Multi\-AZ DB clusters, see [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
 
 ### Deleting a reserved DB instance<a name="USER_WorkingWithReservedDBInstances.Cancelling"></a>
 
@@ -117,9 +138,11 @@ You can use the AWS Management Console to work with reserved DB instances as sho
 
 1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Deployment Option**, choose whether you want a Multi\-AZ deployment\.
+1. For **Deployment Option**, choose whether you want a Single\-AZ or Multi\-AZ DB instance deployment\.
+**Note**  
+To purchase the equivalent reserved DB instances for a Multi\-AZ DB cluster deployment, either purchase three Single\-AZ reserved DB instances, or one Multi\-AZ and one Single\-AZ reserved DB instance\. For more information, see [Reserved DB instances for a Multi\-AZ DB cluster](#USER_WorkingWithReservedDBInstances.MultiAZDBClusters)\.
 
-1. For **Term**, choose the length of time you want the DB instance reserved\.
+1. For **Term**, choose the length of time to reserve the the DB instance\.
 
 1. For **Offering type**, choose the offering type\. 
 
@@ -141,7 +164,9 @@ After you have information about the available reserved DB instance offerings, y
 
 1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Multi\-AZ deployment**, choose whether you want a Multi\-AZ deployment\.
+1. For **Multi\-AZ deployment**, choose whether you want a Single\-AZ or Multi\-AZ DB instance deployment\.
+**Note**  
+To purchase the equivalent reserved DB instances for a Multi\-AZ DB cluster deployment, either purchase three Single\-AZ reserved DB instances, or one Multi\-AZ and one Single\-AZ reserved DB instance\. For more information, see [Reserved DB instances for a Multi\-AZ DB cluster](#USER_WorkingWithReservedDBInstances.MultiAZDBClusters)\.
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 

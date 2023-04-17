@@ -8,35 +8,41 @@ Connect to your EC2 instance and install the web server\.
 
 **To connect to your EC2 instance and install the Apache web server with PHP**
 
-1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
+1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+   We recommend that you connect to your EC2 instance using SSH\. If the SSH client utility is installed on Windows, Linux, or Mac, you can connect to the instance using the following command format:
+
+   ```
+   ssh -i location_of_pem_file ec2-user@ec2-instance-public-dns-name
+   ```
+
+   For example, assume that `ec2-database-connect-key-pair.pem` is stored in `/dir1` on Linux, and the public IPv4 DNS for your EC2 instance is `ec2-12-345-678-90.compute-1.amazonaws.com`\. Your SSH command would look as follows:
+
+   ```
+   ssh -i /dir1/ec2-database-connect-key-pair.pem ec2-user@ec2-12-345-678-90.compute-1.amazonaws.com
+   ```
 
 1. Get the latest bug fixes and security updates by updating the software on your EC2 instance\. To do this, use the following command\.
 **Note**  
 The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
 
    ```
-   sudo yum update -y
+   sudo dnf update -y
    ```
 
-1. After the updates complete, install the PHP software using the `amazon-linux-extras install` command\. This command installs multiple software packages and related dependencies at the same time\.
+1. After the updates complete, install the Apache web server, PHP, and MariaDB software using the following command\. This command installs multiple software packages and related dependencies at the same time\.
 
    ```
-   sudo amazon-linux-extras install php8.0 mariadb10.5
+   sudo dnf install -y httpd php php-mysqli mariadb105
    ```
 
-   If you receive an error stating `sudo: amazon-linux-extras: command not found`, your instance wasn't launched with an Amazon Linux 2 AMI\. You might be using the Amazon Linux AMI instead\. You can view your version of Amazon Linux using the following command\.
+   If you receive an error, your instance probably wasn't launched with an Amazon Linux 2023 AMI\. You might be using the Amazon Linux 2 AMI instead\. You can view your version of Amazon Linux using the following command\.
 
    ```
    cat /etc/system-release
    ```
 
    For more information, see [Updating instance software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
-
-1. Install the Apache web server\.
-
-   ```
-   sudo yum install -y httpd
-   ```
 
 1. Start the web server with the command shown following\.
 

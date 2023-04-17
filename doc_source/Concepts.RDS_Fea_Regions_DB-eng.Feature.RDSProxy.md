@@ -12,156 +12,156 @@ RDS Proxy isn't available with RDS for Oracle\.
 
 ## RDS Proxy with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.mdb"></a>
 
-Following are the supported engines and Region availability for RDS Proxy with RDS for MariaDB\.
+The following Regions and engine versions are available for RDS Proxy with RDS for MariaDB\.
 
 
 | Region | RDS for MariaDB 10\.6 | RDS for MariaDB 10\.5 | RDS for MariaDB 10\.4 | RDS for MariaDB 10\.3 | 
 | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | – | All versions | All versions | All versions | 
-| US East \(N\. Virginia\) | – | All versions | All versions | All versions | 
-| US West \(N\. California\) | – | All versions | All versions | All versions | 
-| US West \(Oregon\) | – | All versions | All versions | All versions | 
-| Africa \(Cape Town\) | – | All versions | All versions | All versions | 
-| Asia Pacific \(Hong Kong\) | – | All versions | All versions | All versions | 
+| US East \(Ohio\) | – | All available versions | All available versions | All available versions | 
+| US East \(N\. Virginia\) | – | All available versions | All available versions | All available versions | 
+| US West \(N\. California\) | – | All available versions | All available versions | All available versions | 
+| US West \(Oregon\) | – | All available versions | All available versions | All available versions | 
+| Africa \(Cape Town\) | – | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Hong Kong\) | – | All available versions | All available versions | All available versions | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | – | All versions | All versions | All versions | 
+| Asia Pacific \(Jakarta\) | – | All available versions | All available versions | All available versions | 
 | Asia Pacific \(Melbourne\) | – | – | – | – | 
-| Asia Pacific \(Mumbai\) | – | All versions | All versions | All versions | 
-| Asia Pacific \(Osaka\) | – | All versions | All versions | All versions | 
-| Asia Pacific \(Seoul\) | – | All versions | All versions | All versions | 
-| Asia Pacific \(Singapore\) | – | All versions | All versions | All versions | 
-| Asia Pacific \(Sydney\) | – | All versions | All versions | All versions | 
-| Asia Pacific \(Tokyo\) | – | All versions | All versions | All versions | 
-| Canada \(Central\) | – | All versions | All versions | All versions | 
-| China \(Beijing\) | – | All versions | All versions | All versions | 
-| China \(Ningxia\) | – | All versions | All versions | All versions | 
-| Europe \(Frankfurt\) | – | All versions | All versions | All versions | 
-| Europe \(Ireland\) | – | All versions | All versions | All versions | 
-| Europe \(London\) | – | All versions | All versions | All versions | 
-| Europe \(Milan\) | – | All versions | All versions | All versions | 
-| Europe \(Paris\) | – | All versions | All versions | All versions | 
+| Asia Pacific \(Mumbai\) | – | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Osaka\) | – | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Seoul\) | – | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Singapore\) | – | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Sydney\) | – | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Tokyo\) | – | All available versions | All available versions | All available versions | 
+| Canada \(Central\) | – | All available versions | All available versions | All available versions | 
+| China \(Beijing\) | – | All available versions | All available versions | All available versions | 
+| China \(Ningxia\) | – | All available versions | All available versions | All available versions | 
+| Europe \(Frankfurt\) | – | All available versions | All available versions | All available versions | 
+| Europe \(Ireland\) | – | All available versions | All available versions | All available versions | 
+| Europe \(London\) | – | All available versions | All available versions | All available versions | 
+| Europe \(Milan\) | – | All available versions | All available versions | All available versions | 
+| Europe \(Paris\) | – | All available versions | All available versions | All available versions | 
 | Europe \(Spain\) | – | – | – | – | 
-| Europe \(Stockholm\) | – | All versions | All versions | All versions | 
+| Europe \(Stockholm\) | – | All available versions | All available versions | All available versions | 
 | Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | – | All versions | All versions | All versions | 
+| Middle East \(Bahrain\) | – | All available versions | All available versions | All available versions | 
 | Middle East \(UAE\) | – | – | – | – | 
-| South America \(São Paulo\) | – | All versions | All versions | All versions | 
+| South America \(São Paulo\) | – | All available versions | All available versions | All available versions | 
 | AWS GovCloud \(US\-East\) | – | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | – | 
 
 ## RDS Proxy with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.my"></a>
 
-Following are the supported engines and Region availability for RDS Proxy with RDS for MySQL\.
+The following Regions and engine versions are available for RDS Proxy with RDS for MySQL\.
 
 
-| Region | RDS for MySQL 8\.0 | RDS for MySQL 5\.7 | RDS for MySQL 5\.6 | 
-| --- | --- | --- | --- | 
-| US East \(Ohio\) | All versions | All versions | All versions | 
-| US East \(N\. Virginia\) | All versions | All versions | All versions | 
-| US West \(N\. California\) | All versions | All versions | All versions | 
-| US West \(Oregon\) | All versions | All versions | All versions | 
-| Africa \(Cape Town\) | All versions | All versions | All versions | 
-| Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | 
-| Asia Pacific \(Hyderabad\) | – | – | – | 
-| Asia Pacific \(Jakarta\) | All versions | All versions | All versions | 
-| Asia Pacific \(Melbourne\) | – | – | – | 
-| Asia Pacific \(Mumbai\) | All versions | All versions | All versions | 
-| Asia Pacific \(Osaka\) | All versions | All versions | All versions | 
-| Asia Pacific \(Seoul\) | All versions | All versions | All versions | 
-| Asia Pacific \(Singapore\) | All versions | All versions | All versions | 
-| Asia Pacific \(Sydney\) | All versions | All versions | All versions | 
-| Asia Pacific \(Tokyo\) | All versions | All versions | All versions | 
-| Canada \(Central\) | All versions | All versions | All versions | 
-| China \(Beijing\) | All versions | All versions | All versions | 
-| China \(Ningxia\) | All versions | All versions | All versions | 
-| Europe \(Frankfurt\) | All versions | All versions | All versions | 
-| Europe \(Ireland\) | All versions | All versions | All versions | 
-| Europe \(London\) | All versions | All versions | All versions | 
-| Europe \(Milan\) | All versions | All versions | All versions | 
-| Europe \(Paris\) | All versions | All versions | All versions | 
-| Europe \(Spain\) | – | – | – | 
-| Europe \(Stockholm\) | All versions | All versions | All versions | 
-| Europe \(Zurich\) | – | – | – | 
-| Middle East \(Bahrain\) | All versions | All versions | All versions | 
-| Middle East \(UAE\) | – | – | – | 
-| South America \(São Paulo\) | All versions | All versions | All versions | 
-| AWS GovCloud \(US\-East\) | – | – | – | 
-| AWS GovCloud \(US\-West\) | – | – | – | 
+| Region | RDS for MySQL 8\.0 | RDS for MySQL 5\.7 | 
+| --- | --- | --- | 
+| US East \(Ohio\) | All available versions | All available versions | 
+| US East \(N\. Virginia\) | All available versions | All available versions | 
+| US West \(N\. California\) | All available versions | All available versions | 
+| US West \(Oregon\) | All available versions | All available versions | 
+| Africa \(Cape Town\) | All available versions | All available versions | 
+| Asia Pacific \(Hong Kong\) | All available versions | All available versions | 
+| Asia Pacific \(Hyderabad\) | – | – | 
+| Asia Pacific \(Jakarta\) | All available versions | All available versions | 
+| Asia Pacific \(Melbourne\) | – | – | 
+| Asia Pacific \(Mumbai\) | All available versions | All available versions | 
+| Asia Pacific \(Osaka\) | All available versions | All available versions | 
+| Asia Pacific \(Seoul\) | All available versions | All available versions | 
+| Asia Pacific \(Singapore\) | All available versions | All available versions | 
+| Asia Pacific \(Sydney\) | All available versions | All available versions | 
+| Asia Pacific \(Tokyo\) | All available versions | All available versions | 
+| Canada \(Central\) | All available versions | All available versions | 
+| China \(Beijing\) | All available versions | All available versions | 
+| China \(Ningxia\) | All available versions | All available versions | 
+| Europe \(Frankfurt\) | All available versions | All available versions | 
+| Europe \(Ireland\) | All available versions | All available versions | 
+| Europe \(London\) | All available versions | All available versions | 
+| Europe \(Milan\) | All available versions | All available versions | 
+| Europe \(Paris\) | All available versions | All available versions | 
+| Europe \(Spain\) | – | – | 
+| Europe \(Stockholm\) | All available versions | All available versions | 
+| Europe \(Zurich\) | – | – | 
+| Middle East \(Bahrain\) | All available versions | All available versions | 
+| Middle East \(UAE\) | – | – | 
+| South America \(São Paulo\) | All available versions | All available versions | 
+| AWS GovCloud \(US\-East\) | – | – | 
+| AWS GovCloud \(US\-West\) | – | – | 
 
 ## RDS Proxy with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.pg"></a>
 
-Following are the supported engines and Region availability for RDS Proxy with RDS for PostgreSQL\.
+The following Regions and engine versions are available for RDS Proxy with RDS for PostgreSQL\.
 
 
 | Region | RDS for PostgreSQL 15 | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | RDS for PostgreSQL 12 | RDS for PostgreSQL 11 | RDS for PostgreSQL 10 | 
 | --- | --- | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| US East \(N\. Virginia\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| US West \(N\. California\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| US West \(Oregon\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Africa \(Cape Town\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Hong Kong\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
+| US East \(Ohio\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| US East \(N\. Virginia\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| US West \(N\. California\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| US West \(Oregon\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Africa \(Cape Town\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Hong Kong\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Jakarta\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
 | Asia Pacific \(Melbourne\) | – | – | – | – | – | – | 
-| Asia Pacific \(Mumbai\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Osaka\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Seoul\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Singapore\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Sydney\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Tokyo\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Canada \(Central\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| China \(Beijing\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| China \(Ningxia\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Frankfurt\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Ireland\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(London\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Milan\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Paris\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Mumbai\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Osaka\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Seoul\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Singapore\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Sydney\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Tokyo\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Canada \(Central\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| China \(Beijing\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| China \(Ningxia\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Frankfurt\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Ireland\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(London\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Milan\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Paris\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
 | Europe \(Spain\) | – | – | – | – | – | – | 
-| Europe \(Stockholm\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
-| Europe \(Zurich\) | – | – | – | – | – | 
-| Middle East \(Bahrain\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
+| Europe \(Stockholm\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Zurich\) | – | – | – | – | – | – | 
+| Middle East \(Bahrain\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
 | Middle East \(UAE\) | – | – | – | – | – | – | 
-| South America \(São Paulo\) | Version 15\.2 | All versions | All versions | All versions | All versions | All versions | 
+| South America \(São Paulo\) | All available versions | All available versions | All available versions | All available versions | All available versions | All available versions | 
 | AWS GovCloud \(US\-East\) | – | – | – | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | – | – | – | 
 
 ## RDS Proxy with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDS_Proxy.sq"></a>
 
-Following are the supported engines and Region availability for RDS Proxy with RDS for SQL Server\.
+The following Regions and engine versions are available for RDS Proxy with RDS for SQL Server\.
 
 
 | Region | RDS for SQL Server 2019 | RDS for SQL Server 2017 | RDS for SQL Server 2016 | RDS for SQL Server 2014 | 
 | --- | --- | --- | --- | --- | 
-| US East \(Ohio\) | All versions | All versions | All versions | All versions | 
-| US East \(N\. Virginia\) | All versions | All versions | All versions | All versions | 
-| US West \(N\. California\) | All versions | All versions | All versions | All versions | 
-| US West \(Oregon\) | All versions | All versions | All versions | All versions | 
-| Africa \(Cape Town\) | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Hong Kong\) | All versions | All versions | All versions | All versions | 
+| US East \(Ohio\) | All available versions | All available versions | All available versions | All available versions | 
+| US East \(N\. Virginia\) | All available versions | All available versions | All available versions | All available versions | 
+| US West \(N\. California\) | All available versions | All available versions | All available versions | All available versions | 
+| US West \(Oregon\) | All available versions | All available versions | All available versions | All available versions | 
+| Africa \(Cape Town\) | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Hong Kong\) | All available versions | All available versions | All available versions | All available versions | 
 | Asia Pacific \(Hyderabad\) | – | – | – | – | 
-| Asia Pacific \(Jakarta\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Jakarta\) | All available versions | All available versions | All available versions | All available versions | 
 | Asia Pacific \(Melbourne\) | – | – | – | – | 
-| Asia Pacific \(Mumbai\) | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Osaka\) | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Seoul\) | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Singapore\) | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Sydney\) | All versions | All versions | All versions | All versions | 
-| Asia Pacific \(Tokyo\) | All versions | All versions | All versions | All versions | 
-| Canada \(Central\) | All versions | All versions | All versions | All versions | 
-| China \(Beijing\) | All versions | All versions | All versions | All versions | 
-| China \(Ningxia\) | All versions | All versions | All versions | All versions | 
-| Europe \(Frankfurt\) | All versions | All versions | All versions | All versions | 
-| Europe \(Ireland\) | All versions | All versions | All versions | All versions | 
-| Europe \(London\) | All versions | All versions | All versions | All versions | 
-| Europe \(Milan\) | All versions | All versions | All versions | All versions | 
-| Europe \(Paris\) | All versions | All versions | All versions | All versions | 
+| Asia Pacific \(Mumbai\) | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Osaka\) | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Seoul\) | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Singapore\) | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Sydney\) | All available versions | All available versions | All available versions | All available versions | 
+| Asia Pacific \(Tokyo\) | All available versions | All available versions | All available versions | All available versions | 
+| Canada \(Central\) | All available versions | All available versions | All available versions | All available versions | 
+| China \(Beijing\) | All available versions | All available versions | All available versions | All available versions | 
+| China \(Ningxia\) | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Frankfurt\) | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Ireland\) | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(London\) | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Milan\) | All available versions | All available versions | All available versions | All available versions | 
+| Europe \(Paris\) | All available versions | All available versions | All available versions | All available versions | 
 | Europe \(Spain\) | – | – | – | – | 
-| Europe \(Stockholm\) | All versions | All versions | All versions | All versions | 
+| Europe \(Stockholm\) | All available versions | All available versions | All available versions | All available versions | 
 | Europe \(Zurich\) | – | – | – | – | 
-| Middle East \(Bahrain\) | All versions | All versions | All versions | All versions | 
+| Middle East \(Bahrain\) | All available versions | All available versions | All available versions | All available versions | 
 | Middle East \(UAE\) | – | – | – | – | 
-| South America \(São Paulo\) | All versions | All versions | All versions | All versions | 
+| South America \(São Paulo\) | All available versions | All available versions | All available versions | All available versions | 
 | AWS GovCloud \(US\-East\) | – | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | – | 

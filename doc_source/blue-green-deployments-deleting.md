@@ -13,8 +13,6 @@ Deleting a blue/green deployment doesn't affect the blue environment\.
 
 You can delete a blue/green deployment using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-**Topics**
-
 ## Console<a name="blue-green-deployments-deleting-console"></a>
 
 **To delete a blue/green deployment**

@@ -13,7 +13,7 @@ RDS Custom isn't available with the following engines:
 
 ## RDS Custom for Oracle<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.ora"></a>
 
-Following are the supported engine versions and Region availability for RDS Custom for Oracle\.
+The following Regions and engine versions are available for RDS Custom for Oracle\.
 
 
 | Region | RDS for Oracle 19c | RDS for Oracle 18c | RDS for Oracle 12c | 
@@ -49,7 +49,7 @@ Following are the supported engine versions and Region availability for RDS Cust
 
 ## RDS Custom for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq"></a>
 
-Following are the supported engine versions and Region availability for RDS Custom for SQL Server\.
+The following Regions and engine versions are available for RDS Custom for SQL Server\.
 
 
 | Region | RDS for SQL Server 2019 | 

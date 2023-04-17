@@ -136,7 +136,23 @@ To determine whether a DB instance is in dual\-stack mode by using the console, 
 
 You can modify an IPv4\-only DB instance to use dual\-stack mode\. To do so, change the network type of the DB instance\. The modification might result in downtime\.
 
-Before modifying a DB instance to use dual\-stack mode, make sure that its DB subnet group supports dual\-stack mode\. If the DB subnet group associated with the DB instance doesn't support dual\-stack mode, specify a different DB subnet group that supports it when you modify the DB instance\. If you modify the DB subnet group of a DB instance before you change the DB instance to use dual\-stack mode, make sure that the DB subnet group is valid for the DB instance before and after the change\.
+It is recommended that you change the network type of your Amazon RDS instances during a maintenance window\. Setting the network type of new instances to dual stack by default is currently unsuspported\. Set network type manually by using the modify\-db\-instance command\. 
+
+Before modifying a DB instance to use dual\-stack mode, make sure that its DB subnet group supports dual\-stack mode\. If the DB subnet group associated with the DB instance doesn't support dual\-stack mode, specify a different DB subnet group that supports it when you modify the DB instance\. Modifying the DB subnet group of a DB instance can cause downtime\.
+
+If you modify the DB subnet group of a DB instance before you change the DB instance to use dual\-stack mode, make sure that the DB subnet group is valid for the DB instance before and after the change\. 
+
+For exmaple: 
+
+For RDS for PostgreSQL, RDS for MySQL, RDS for Oracle, and RDS for MariaDB Single\-AZ instances, we recommend that you call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with just the `--network-type` parameter with value `DUAL` to change the network to dual stack\. Adding other parameters along with the `--network-type` parameter in the same API call could result in downtime\. If you wish to modify multiple parameters, please ensure that the network type modification API action is successfully completed before sending another `modify-db-instance` request with other parameters\. 
+
+Network type modifications for RDS for PostgreSQL, RDS for MySQL, RDS for Oracle, and RDS for MariaDB Multi\-AZ instances cause a brief downtime and trigger a failover if you only use the `--network-type` parameter or if you combine parameters in a modify\-db\-instance command\.
+
+Network type modifications on RDS for SQL Server Single\-AZ or Multi\-AZ instances cause downtime if you only use the `--network-type` parameter or if you combine parameters in a modify\-db\-instance command\. Network type modifications cause failover in an SQL Server Multi\-AZ instance\.
+
+```
+aws rds modify-db-instance --db-instance-identifier my-instance --network-type "DUAL" 
+```
 
 If you can't connect to the DB instance after the change, make sure that the client and database security firewalls and route tables are accurately configured to allow cross traffic to the database on the selected network \(either IPv4 or IPv6\)\. You might also need to modify operating system parameter, libraries, or drivers to connect using an IPv6 address\.
 

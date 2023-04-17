@@ -24,14 +24,14 @@ Amazon RDS features are different from engine\-native features and options\. For
 
 ## Table conventions<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.TableConventions"></a>
 
-The tables in the feature sections use these patterns to specify version numbers and level of support:
-+  **Version x\.y** – The specific version alone is supported\. 
-+ **Version x\.y and higher** – The version and all higher minor versions are supported\. For example, "version 10\.11 and higher" means that versions 10\.11, 10\.11\.1, and 10\.12 are supported\.
-+ **\-** – The feature isn't currently available for that particular RDS feature for the given RDS DB engine, or in that specific AWS Region\.
+The tables in the feature sections use these patterns to specify version numbers and level of availability:
++  **Version x\.y** – The specific version alone is available\. 
++ **Version x\.y and higher** – The version and all higher minor versions are available\. For example, "version 10\.11 and higher" means that versions 10\.11, 10\.11\.1, and 10\.12 are available\.
++ **—** – The feature isn't currently available for the selected RDS DB engine or in the specified AWS Region\.
 
 ## Feature quick reference<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.QuickReferenceTable"></a>
 
-The following quick reference table lists each feature and supported RDS DB engine\. Region and specific version availability appears in the later feature sections\.
+The following quick reference table lists each feature and available RDS DB engine\. Region and specific version availability appears in the later feature sections\.
 
 
 | Feature | RDS for MariaDB | RDS for MySQL | RDS for Oracle | RDS for PostgreSQL | RDS for SQL Server | 

@@ -141,7 +141,7 @@ For general information about PITR, see [Restoring a DB instance to a specified 
 
 In RDS Custom for Oracle, PITR differs in the following important ways from PITR in Amazon RDS:
 + The restored database has the same name as in the source DB instance\. You can't specify a different name\. The default is `ORCL`\.
-+ `AWSRDSCustomIamRolePolicy` requires new permissions\. For more information, see [Add an access policy to AWSRDSCustomInstanceRoleForRdsCustomInstance](custom-setup-orcl.md#custom-setup-orcl.iam.add-policy)\.
++ `AWSRDSCustomIamRolePolicy` requires new permissions\. For more information, see [Step 2: Add an access policy to AWSRDSCustomInstanceRoleForRdsCustomInstance](custom-setup-orcl.md#custom-setup-orcl.iam.add-policy)\.
 + All RDS Custom for Oracle DB instances must have backup retention set to a nonzero value\.
 + If you change the operating system or DB instance time zone, PITR might not work\. For information about changing time zones, see [Changing the time zone of an RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.timezone)\.
 + If you set automation to `ALL_PAUSED`, RDS Custom pauses the upload of archived redo logs, including logs created before the latest restorable time \(LRT\)\. We recommend that you pause automation for a brief period\.

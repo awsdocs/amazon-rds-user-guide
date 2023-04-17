@@ -4,6 +4,8 @@ A *Multi\-AZ DB cluster deployment* is a high availability deployment mode of Am
 
 You can import data from an on\-premises database to a Multi\-AZ DB cluster by following the instructions in [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
 
+You can purchase reserved DB instances for a Multi\-AZ DB cluster\. For more information, see [Reserved DB instances for a Multi\-AZ DB cluster](USER_WorkingWithReservedDBInstances.md#USER_WorkingWithReservedDBInstances.MultiAZDBClusters)\.
+
 **Topics**
 + [Region and version availability](#multi-az-db-clusters-concepts.RegionVersionAvailability)
 + [Instance class availability](#multi-az-db-clusters-concepts.InstanceAvailability)
@@ -67,7 +69,6 @@ The following limitations apply to Multi\-AZ DB clusters:
 
     As an alternative, you can restore a Multi\-AZ DB cluster to a point in time and specify a different port\.
   + Option groups
-  + Reserved DB instances
   + Restoring a Multi\-AZ DB cluster snapshot from an Amazon S3 bucket
   + Storage autoscaling by setting the maximum allocated storage
 

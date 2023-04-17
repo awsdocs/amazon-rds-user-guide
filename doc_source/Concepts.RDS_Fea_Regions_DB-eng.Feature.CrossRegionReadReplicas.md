@@ -12,16 +12,16 @@ By using cross\-Region read replicas in Amazon RDS, you can create a MariaDB, My
 ## Cross\-Region read replicas with RDS for MariaDB<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.mdb"></a>
 
 Cross\-Region read replicas with RDS for MariaDB are available in all Regions for the following versions:
-+ RDS for MariaDB 10\.6 \(All versions\)
-+ RDS for MariaDB 10\.5 \(All versions\)
-+ RDS for MariaDB 10\.4 \(All versions\)
-+ RDS for MariaDB 10\.3 \(All versions\)
++ RDS for MariaDB 10\.6 \(All available versions\)
++ RDS for MariaDB 10\.5 \(All available versions\)
++ RDS for MariaDB 10\.4 \(All available versions\)
++ RDS for MariaDB 10\.3 \(All available versions\)
 
 ## Cross\-Region read replicas with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.my"></a>
 
 Cross\-Region read replicas with RDS for MySQL are available in all Regions for the following versions:
-+ RDS for MySQL 8\.0 \(All versions\)
-+ RDS for MySQL 5\.7 \(All versions\)
++ RDS for MySQL 8\.0 \(All available versions\)
++ RDS for MySQL 5\.7 \(All available versions\)
 
 ## Cross\-Region read replicas with RDS for Oracle<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.ora"></a>
 
@@ -35,12 +35,12 @@ For more information on additional requirements for cross\-Region read replicas 
 ## Cross\-Region read replicas with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.pg"></a>
 
 Cross\-Region read replicas with RDS for PostgreSQL are available in all Regions for the following versions:
-+ RDS for PostgreSQL 15 \(All versions\)
-+ RDS for PostgreSQL 14 \(All versions\)
-+ RDS for PostgreSQL 13 \(All versions\)
-+ RDS for PostgreSQL 12 \(All versions\)
-+ RDS for PostgreSQL 11 \(All versions\)
-+ RDS for PostgreSQL 10 \(All versions\)
++ RDS for PostgreSQL 15 \(All available versions\)
++ RDS for PostgreSQL 14 \(All available versions\)
++ RDS for PostgreSQL 13 \(All available versions\)
++ RDS for PostgreSQL 12 \(All available versions\)
++ RDS for PostgreSQL 11 \(All available versions\)
++ RDS for PostgreSQL 10 \(All available versions\)
 
 ## Cross\-Region read replicas with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.sq"></a>
 
@@ -58,5 +58,5 @@ Cross\-Region read replicas with RDS for SQL Server are available in all Regions
 
 Cross\-Region read replicas with RDS for SQL Server are available for the following versions using Microsoft SQL Server Enterprise Edition:
 + RDS for SQL Server 2019 \(Version 15\.00\.4073\.23 and higher\)
-+ RDS for SQL Server 2017 \(Version 14\.00\.3049\.1 and higher\)
-+ RDS for SQL Server 2016 \(Version 13\.00\.5216\.0 and higher\)
++ RDS for SQL Server 2017 \(Version 14\.00\.3281\.6 and higher\)
++ RDS for SQL Server 2016 \(Version 13\.00\.6300\.2 and higher\)

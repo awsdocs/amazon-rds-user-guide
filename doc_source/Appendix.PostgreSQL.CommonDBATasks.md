@@ -15,6 +15,7 @@ Following are some common DBA tasks for RDS for PostgreSQL\.
 + [Working with logging mechanisms supported by RDS for PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
 + [Managing temporary files with PostgreSQL](PostgreSQL.ManagingTempFiles.md)
 + [Using pgBadger for log analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
++ [Using PGSnapper for monitoring PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Snapper)
 + [Working with parameters on your RDS for PostgreSQL DB instance](Appendix.PostgreSQL.CommonDBATasks.Parameters.md)
 
 ## Working with logging mechanisms supported by RDS for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
@@ -39,3 +40,7 @@ For example, the following command correctly formats an Amazon RDS for PostgreSQ
 ```
 ./pgbadger -f stderr -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 
 ```
+
+## Using PGSnapper for monitoring PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Snapper"></a>
+
+You can use PGSnapper to assist with periodic collection of Amazon RDS for PostgreSQL performance\-related statistics and metrics\. For more information, see[ Monitor Amazon RDS for PostgreSQL performance using PGSnapper](https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-postgresql-and-amazon-aurora-postgresql-performance-using-pgsnapper/)\.

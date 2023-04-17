@@ -67,6 +67,7 @@ Before you switchover, we strongly recommend that you adhere to best practices b
 + Identify a time when traﬃc is lowest on your production environment\. During the switchover, writes are cut oﬀ from the databases in both environments\. Long\-running transactions, such as active DDLs can, increase your switchover time, resulting in longer downtime for your production workloads\.
 + Make sure the DB instances in both environments are in `Available` state\.
 + Make sure the primary DB instance in the green environment is healthy and replicating\.
++ Make sure that your network and client configurations don’t increase the DNS cache Time\-To\-Live \(TTL\) beyond five seconds, which is the default for RDS DNS zones\.  Otherwise, applications will continue to send write traffic to the blue environment after  switchover\.
 + Make sure data loading is complete before switching over\. For more information, see [Handling lazy loading when you create a blue/green deployment](blue-green-deployments-creating.md#blue-green-deployments-creating-lazy-loading)\.
 
 **Note**  

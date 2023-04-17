@@ -4,9 +4,9 @@ With AWS Secrets Manager, you can replace hard\-coded credentials in your code, 
 
 You can specify that Amazon RDS manages the master user password in Secrets Manager for an Amazon RDS DB instance or Multi\-AZ DB cluster\. RDS generates the password, stores it in Secrets Manager, and rotates it regularly\. For more information, see [Password management with Amazon RDS and AWS Secrets Manager](rds-secrets-manager.md)\.
 
-Secrets Manager integration is available for all RDS DB engines and all versions\.
+Secrets Manager integration is supported for all RDS DB engines and all versions\.
 
-Secrets Manager integration is available in all AWS Regions except the following:
+Secrets Manager integration is supported in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 + China \(Beijing\)

@@ -20,10 +20,10 @@ Dates with only a month and a year are approximate and are updated with an exact
 | MySQL engine version | Community release date | RDS release date | RDS end of standard support date | 
 | --- | --- | --- | --- | 
 | 8\.0 | 
-|  8\.0\.32  |  17 January 2023  |  7 February 2023  |  February 2024  | 
-|  8\.0\.31  |  11 October 2022  |  10 November 2022  |  November 2023  | 
+|  8\.0\.32  |  17 January 2023  |  7 February 2023  |  March 2024  | 
+|  8\.0\.31  |  11 October 2022  |  10 November 2022  |  March 2024  | 
 |  8\.0\.30  |  26 July 2022  |  9 September 2022  |  September 2023  | 
-|  8\.0\.28  |  18 January 2022  |  11 March 2022  |  June 2023  | 
+|  8\.0\.28  |  18 January 2022  |  11 March 2022  |  September 2023  | 
 |  8\.0\.27  |  19 October 2021  |  10 January 2022  |  20 April 2023  | 
 |  8\.0\.26  |  20 July 2021  |  25 October 2021  |  20 April 2023  | 
 |  8\.0\.25  |  11 May 2021  |  9 July 2021  |  20 April 2023  | 
@@ -32,8 +32,8 @@ Dates with only a month and a year are approximate and are updated with an exact
 |  5\.7\.41  |  17 January 2023  |  7 February 2023  |  October 2023  | 
 |  5\.7\.40  |  11 October 2022  |  11 November 2022  |  October 2023  | 
 |  5\.7\.39  |  26 July 2022  |  29 September 2022  |  September 2023  | 
-|  5\.7\.38  |  26 April 2022  |  6 June 2022  |  June 2023  | 
-|  5\.7\.37  |  18 January 2022  |  11 March 2022  |  June 2023  | 
+|  5\.7\.38  |  26 April 2022  |  6 June 2022  |  September 2023  | 
+|  5\.7\.37  |  18 January 2022  |  11 March 2022  |  September 2023  | 
 |  5\.7\.36  |  19 October 2021  |  10 January 2022  |  20 April 2023  | 
 |  5\.7\.34  |  20 April 2021  |  9 July 2021  |  20 April 2023  | 
 |  5\.7\.33  |  18 January 2021  |  31 March 2021  |  20 April 2023  | 

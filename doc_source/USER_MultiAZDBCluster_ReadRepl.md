@@ -172,7 +172,7 @@ To create a read replica, specify a Multi\-AZ DB cluster as the replication sour
 
 ### Comparing reader DB instances and DB instance read replicas<a name="multi-az-db-clusters-readerdb-vs-dbrr"></a>
 
-A *DB instance *read replica from a Multi\-AZ DB cluster is different than the *reader DB instances* of the Multi\-AZ DB cluster in the following ways:
+A *DB instance read replica* of a Multi\-AZ DB cluster is different than the *reader DB instances* of the Multi\-AZ DB cluster in the following ways:
 + The reader DB instances act as automatic failover targets, while DB instance read replicas do not\.
 + Reader DB instances must acknowledge a change from the writer DB instance before the change can be committed\. For DB instance read replicas, however, updates are asynchronously copied to the read replica without requiring acknowledgement\.
 + Reader DB instances always share the same instance class, storage type, and engine version as the writer DB instance of the Multi\-AZ DB cluster\. DB instance read replicas, however, don’t necessarily have to share the same configurations as the source cluster\.

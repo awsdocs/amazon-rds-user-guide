@@ -2,9 +2,9 @@
 
 You might consider Oracle SQL\*Loader for large databases that contain a limited number of objects\. Because the process of exporting from a source database and loading to a target database is specific to the schema, the following example creates the sample schema objects, exports from a source, and then loads the data into a target database\. 
 
-To download Oracle SQL\*Loader, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\. 
+The easiest way to install Oracle SQL\*Loader is to install the Oracle Instant Client\. To download the software, go to [https://www\.oracle\.com/database/technologies/instant\-client\.html](https://www.oracle.com/database/technologies/instant-client.html)\. For documentation, see [Instant Client for SQL\*Loader, Export, and Import](https://docs.oracle.com/en/database/oracle/oracle-database/21/sutil/instant-client-sql-loader-export-import.html#GUID-FF1B6F75-09F5-4911-9317-9776FAD15965) in the *Oracle Database Utilities* manual\.
 
-****
+**To import data using Oracle SQL\*Loader**
 
 1. Create a sample source table using the following SQL statement\.
 

@@ -13,7 +13,7 @@ Multi\-AZ DB clusters aren't available with the following engines:
 
 ## Multi\-AZ DB clusters with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.my"></a>
 
-Following are the supported engines and Region availability for Multi\-AZ DB clusters with RDS for MySQL\.
+The following Regions and engine versions are available for Multi\-AZ DB clusters with RDS for MySQL\.
 
 
 | Region | RDS for MySQL 8\.0 | 
@@ -50,7 +50,7 @@ Following are the supported engines and Region availability for Multi\-AZ DB clu
 | AWS GovCloud \(US\-East\) | – | 
 | AWS GovCloud \(US\-West\) | – | 
 
-You can also list the supported versions in a Region for the db\.r5d\.large DB instance class by running the following AWS CLI command\.
+You can also list the available versions in a Region for the db\.r5d\.large DB instance class by running the following AWS CLI command\.
 
 For Linux, macOS, or Unix:
 
@@ -72,11 +72,11 @@ aws rds describe-orderable-db-instance-options ^
 --output text
 ```
 
-You can change the DB instance class to show the supported engine versions for it\.
+You can change the DB instance class to show the available engine versions for it\.
 
 ## Multi\-AZ DB clusters with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.pg"></a>
 
-Following are the supported engine version and Region availability for Multi\-AZ DB clusters with RDS for PostgreSQL\.
+The following Regions and engine versions are available for Multi\-AZ DB clusters with RDS for PostgreSQL\.
 
 
 | Region | RDS for PostgreSQL 15 | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | 
@@ -113,7 +113,7 @@ Following are the supported engine version and Region availability for Multi\-AZ
 | AWS GovCloud \(US\-East\) | – | – | – | 
 | AWS GovCloud \(US\-West\) | – | – | – | 
 
-You can also list the supported versions in a Region for the db\.r5d\.large DB instance class by running the following AWS CLI command\.
+You can also list the available versions in a Region for the db\.r5d\.large DB instance class by running the following AWS CLI command\.
 
 For Linux, macOS, or Unix:
 
@@ -135,4 +135,4 @@ aws rds describe-orderable-db-instance-options ^
 --output text
 ```
 
-You can change the DB instance class to show the supported engine versions for it\.
+You can change the DB instance class to show the available engine versions for it\.

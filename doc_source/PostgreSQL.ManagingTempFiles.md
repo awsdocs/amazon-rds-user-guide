@@ -23,7 +23,7 @@ You can use the following parameters and functions to manage the temporary files
   2023-02-06 23:48:35 UTC:205.251.233.182(12456):adminuser@postgres:[31236]:LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp31236.4", size 180428800
   2023-02-06 23:48:35 UTC:205.251.233.182(12456):adminuser@postgres:[31236]:STATEMENT:  select a.aid from pgbench_accounts a, pgbench_accounts b where a.bid=b.bid order by a.bid limit 10;
   ```
-+ **[https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-GENFILE](https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-GENFILE)** – This function provides visibility into the current temporary file usage\. The completed query doesn't appear in the results of the function\. In the following example, you can view the results of this function\.
++ **[https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-GENFILE](https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-GENFILE)** – This function that is available from RDS for PostgreSQL 13 and above provides visibility into the current temporary file usage\. The completed query doesn't appear in the results of the function\. In the following example, you can view the results of this function\.
 
   ```
   postgres=> select * from pg_ls_tmpdir();

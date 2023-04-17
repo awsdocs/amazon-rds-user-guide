@@ -1,13 +1,13 @@
 # Setting up your environment for Amazon RDS Custom for Oracle<a name="custom-setup-orcl"></a>
 
-Before you create a DB instance based on Amazon RDS Custom for Oracle, perform the following tasks\.
+Before you create an Amazon RDS Custom for Oracle DB instance, perform the following tasks\.
 
 **Topics**
 + [Prerequisites for creating an RDS Custom for Oracle DB instance](#custom-setup-orcl.review)
-+ [Step 1: Make sure that you have a symmetric encryption AWS KMS key](#custom-setup-orcl.cmk)
++ [Step 1: Create or reuse a symmetric encryption AWS KMS key](#custom-setup-orcl.cmk)
 + [Step 2: Download and install the AWS CLI](#custom-setup-orcl.cli)
 + [Step 3: Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)
-+ [Step 4: Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)
++ [Step 4: Grant required permissions to your IAM principal](#custom-setup-orcl.iam-user)
 
 ## Prerequisites for creating an RDS Custom for Oracle DB instance<a name="custom-setup-orcl.review"></a>
 
@@ -30,11 +30,11 @@ Before creating an RDS Custom for Oracle DB instance, make sure that you meet th
 + You supply your own virtual private cloud \(VPC\) and security group configuration\. For more information, see [Step 3: Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 + The AWS Identity and Access Management \(IAM\) user that creates a CEV or RDS Custom DB instance has the required permissions for IAM, CloudTrail, and Amazon S3\.
 
-  For more information, see [Step 4: Grant required permissions to your IAM user](#custom-setup-orcl.iam-user)\.
+  For more information, see [Step 4: Grant required permissions to your IAM principal](#custom-setup-orcl.iam-user)\.
 
 For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 6\. For general requirements that apply to RDS Custom, see [Availability and requirements for Amazon RDS Custom for Oracle](custom-reqs-limits.md)\.
 
-## Step 1: Make sure that you have a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
+## Step 1: Create or reuse a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
 
 A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for Oracle DB instance, you supply the KMS key identifier\. For more information, see [Configuring a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)\.
 
@@ -46,7 +46,7 @@ You have the following options:
 
 RDS Custom doesn't support AWS\-managed KMS keys\.
 
-Make sure that the symmetric encryption key that you use gives the AWS Identity and Access Management \(IAM\) role in your IAM instance profile access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy can give access to these operations\.
+Make sure that your symmetric encryption key grants access to the `kms:Decrypt` and `kms:GenerateDataKey` operations to the AWS Identity and Access Management \(IAM\) role in your IAM instance profile\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy grants access to these operations\.
 
 For more information about configuring IAM for RDS Custom for Oracle, see [Step 3: Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 
@@ -183,7 +183,7 @@ The following section explains how to perform the task without using CloudFormat
 
 1. Add the `AWSRDSCustomInstanceRoleForRdsCustomInstance` IAM role to the instance profile\.
 
-#### Create the role AWSRDSCustomInstanceRoleForRdsCustomInstance<a name="custom-setup-orcl.iam.create-role"></a>
+#### Step 1: Create the role AWSRDSCustomInstanceRoleForRdsCustomInstance<a name="custom-setup-orcl.iam.create-role"></a>
 
 The following example creates the role `AWSRDSCustomInstanceRoleForRdsCustomInstance`\. Using the trust policy, Amazon EC2 can assume the role\.
 
@@ -204,13 +204,20 @@ aws iam create-role \
     }'
 ```
 
-#### Add an access policy to AWSRDSCustomInstanceRoleForRdsCustomInstance<a name="custom-setup-orcl.iam.add-policy"></a>
+#### Step 2: Add an access policy to AWSRDSCustomInstanceRoleForRdsCustomInstance<a name="custom-setup-orcl.iam.add-policy"></a>
 
 When you embed an inline policy in an IAM role, the inline policy is used as part of the role's access \(permissions\) policy\. You create the `AWSRDSCustomIamRolePolicy` policy that permits Amazon EC2 to send and receive messages and perform various actions\.
 
-The following example creates the access policy named `AWSRDSCustomIamRolePolicy`, and adds it to the IAM role `AWSRDSCustomInstanceRoleForRdsCustomInstance`\. This example assumes that you have set the `$REGION` and `$ACCOUNT_ID` variables in the AWS CLI\. This example also requires the Amazon Resource Name \(ARN\) of the AWS KMS key that you want to use for your RDS Custom DB instances\.
+The following example creates the access policy named `AWSRDSCustomIamRolePolicy`, and adds it to the IAM role `AWSRDSCustomInstanceRoleForRdsCustomInstance`\. This example assumes that you have set the following environment variables:
 
-To specify more than one KMS key, add it to the `Resources` section of statement ID \(Sid\) 11\.
+`$REGION`  
+Set this variable to the AWS Region in you plan to create your DB instance\.
+
+`$ACCOUNT_ID`  
+Set this variable to your AWS account number\.
+
+`$KMS_KEY`  
+Set this variable to the Amazon Resource Name \(ARN\) of the AWS KMS key that you want to use for your RDS Custom DB instances\. To specify more than one KMS key, add it to the `Resources` section of statement ID \(Sid\) 11\.
 
 ```
 aws iam put-role-policy \
@@ -369,7 +376,7 @@ aws iam put-role-policy \
               "kms:GenerateDataKey"
             ],
             "Resource": [
-              "arn:aws:kms:'$REGION':'$ACCOUNT_ID':key/abcd1234-5678-eeff-9012-123456abcdef"
+              "arn:aws:kms:'$REGION':'$ACCOUNT_ID':key/$KMS_KEY"
             ]
           },
           {
@@ -389,7 +396,7 @@ aws iam put-role-policy \
 }'
 ```
 
-#### Create your RDS Custom instance profile<a name="custom-setup-orcl.iam.create-profile"></a>
+#### Step 3: Create your RDS Custom instance profile<a name="custom-setup-orcl.iam.create-profile"></a>
 
 Create your IAM instance profile as follows, naming it `AWSRDSCustomInstanceProfileForRdsCustomInstance`\.
 
@@ -398,7 +405,7 @@ aws iam create-instance-profile \
     --instance-profile-name AWSRDSCustomInstanceProfileForRdsCustomInstance
 ```
 
-#### Add AWSRDSCustomInstanceRoleForRdsCustomInstance to your RDS Custom instance profile<a name="custom-setup-orcl.iam.add-profile"></a>
+#### Step 4: Add AWSRDSCustomInstanceRoleForRdsCustomInstance to your RDS Custom instance profile<a name="custom-setup-orcl.iam.add-profile"></a>
 
 Add the IAM role `AWSRDSCustomInstanceRoleForRdsCustomInstance` to the profile `AWSRDSCustomInstanceProfileForRdsCustomInstance`\.
 
@@ -454,18 +461,18 @@ For more information, see [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest
 
 RDS Custom for Oracle automation uses IMDSv2 by default, by setting `HttpTokens=enabled` on the underlying Amazon EC2 instance\. However, you can use IMDSv1 if you want\. For more information, see [Configure the instance metadata options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-## Step 4: Grant required permissions to your IAM user<a name="custom-setup-orcl.iam-user"></a>
+## Step 4: Grant required permissions to your IAM principal<a name="custom-setup-orcl.iam-user"></a>
 
 Make sure that the IAM principal that creates the CEV or DB instance has either of the following policies:
 + The `AdministratorAccess` policy
 + The `AmazonRDSFullAccess` policy with required permissions for Amazon S3 and AWS KMS \(required for both CEV and DB creation\), CEV creation, and DB instance creation\.
 
 **Topics**
-+ [Permissions required for Amazon S3 and AWS KMS](#custom-setup-orcl.s3-kms)
-+ [Permissions required for creating a CEV](#custom-setup-orcl.cev)
-+ [Permissions required for creating a DB instance from a CEV](#custom-setup-orcl.db)
++ [IAM permissions required for Amazon S3 and AWS KMS](#custom-setup-orcl.s3-kms)
++ [IAM permissions required for creating a CEV](#custom-setup-orcl.cev)
++ [IAM permissions required for creating a DB instance from a CEV](#custom-setup-orcl.db)
 
-### Permissions required for Amazon S3 and AWS KMS<a name="custom-setup-orcl.s3-kms"></a>
+### IAM permissions required for Amazon S3 and AWS KMS<a name="custom-setup-orcl.s3-kms"></a>
 
 To create CEVs or RDS Custom for Oracle DB instances, the IAM principal needs to access Amazon S3 and AWS KMS\. The following sample JSON policy grants the required permissions\.
 
@@ -499,7 +506,7 @@ To create CEVs or RDS Custom for Oracle DB instances, the IAM principal needs to
 
 For more information about the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.
 
-### Permissions required for creating a CEV<a name="custom-setup-orcl.cev"></a>
+### IAM permissions required for creating a CEV<a name="custom-setup-orcl.cev"></a>
 
 To create a CEV, the IAM principal needs the following additional permissions:
 
@@ -545,7 +552,7 @@ The following sample JSON policy grants the additional permissions to bucket *my
 
 You can grant similar permissions for Amazon S3 to caller accounts using an S3 bucket policy\.
 
-### Permissions required for creating a DB instance from a CEV<a name="custom-setup-orcl.db"></a>
+### IAM permissions required for creating a DB instance from a CEV<a name="custom-setup-orcl.db"></a>
 
 To create a DB instance from an existing CEV, the IAM principal needs the following additional permissions:
 

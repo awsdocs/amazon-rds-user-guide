@@ -13,7 +13,7 @@ Kerberos authentication isn't available with the following engines:
 
 ## Kerberos authentication with RDS for MySQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.my"></a>
 
-Following are the supported engines and Region availability for Kerberos authentication with RDS for MySQL\.
+The following Regions and engine versions are available for Kerberos authentication with RDS for MySQL\.
 
 
 | Region | RDS for MySQL 8\.0 | RDS for MySQL 5\.7 | RDS for MySQL 5\.6 | 
@@ -52,7 +52,7 @@ Following are the supported engines and Region availability for Kerberos authent
 
 ## Kerberos authentication with RDS for Oracle<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.ora"></a>
 
-Following are the supported engines and Region availability for Kerberos authentication with RDS for Oracle\.
+The following Regions and engine versions are available for Kerberos authentication with RDS for Oracle\.
 
 
 | Region | RDS for Oracle 21c | RDS for Oracle 19c | RDS for Oracle 12c | 
@@ -91,7 +91,7 @@ Following are the supported engines and Region availability for Kerberos authent
 
 ## Kerberos authentication with RDS for PostgreSQL<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.pg"></a>
 
-Following are the supported engines and Region availability for Kerberos authentication with RDS for PostgreSQL\.
+The following Regions and engine versions are available for Kerberos authentication with RDS for PostgreSQL\.
 
 
 | Region | RDS for PostgreSQL 15 | RDS for PostgreSQL 14 | RDS for PostgreSQL 13 | RDS for PostgreSQL 12 | RDS for PostgreSQL 11 | RDS for PostgreSQL 10 | 
@@ -130,7 +130,7 @@ Following are the supported engines and Region availability for Kerberos authent
 
 ## Kerberos authentication with RDS for SQL Server<a name="Concepts.RDS_Fea_Regions_DB-eng.Feature.KerberosAuthentication.sq"></a>
 
-Following are the supported engines and Region availability for Kerberos authentication with RDS for SQL Server\.
+The following Regions and engine versions are available for Kerberos authentication with RDS for SQL Server\.
 
 
 | Region | RDS for SQL Server 2019 | RDS for SQL Server 2017 | RDS for SQL Server 2016 | RDS for SQL Server 2014 | 

@@ -1,6 +1,6 @@
 # Connecting an EC2 instance and a DB instance automatically<a name="ec2-rds-connect"></a>
 
-You can use the RDS console to simplify setting up a connection between an EC2 instance and a DB instance\. For instructions about setting up a connection between an EC2 instance and a Multi\-AZ DB cluster, see [Connecting an EC2 instance and a Multi\-AZ DB cluster automatically](multiaz-ec2-rds-connect.md)\. 
+You can use the RDS console to simplify setting up a connection between an EC2 instance and a DB instance\. You can use the RDS console to simplify setting up a connection between an EC2 instance and a DB instance\. Often, your DB instance is in a private subnet and your EC2 instance is in a public subnet within a VPC\. You can use a SQL client on your EC2 instance to connect to your DB instance\. The EC2 instance can also run web servers or applications that access your private DB instance\. For instructions about setting up a connection between an EC2 instance and a Multi\-AZ DB cluster, see [Connecting an EC2 instance and a Multi\-AZ DB cluster automatically](multiaz-ec2-rds-connect.md)\. 
 
 ![\[Automatically connect a DB instance with an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2.png)
 
@@ -10,6 +10,7 @@ If you want to connect to an EC2 instance that isn't in the same VPC as the DB i
 + [Overview of automatic connectivity with an EC2 instance](#ec2-rds-connect-overview)
 + [Connecting an EC2 instance and an RDS database automatically](#ec2-rds-connect-connecting)
 + [Viewing connected compute resources](#ec2-rds-connect-viewing)
++ [Connecting to a DB instance that is running a specific DB engine](#ec2-rds-Connect-DBEngine)
 
 ## Overview of automatic connectivity with an EC2 instance<a name="ec2-rds-connect-overview"></a>
 
@@ -115,3 +116,12 @@ For a compute resource to be listed, the following conditions must apply:
 
 1. On the **Connectivity & security** tab, view the compute resources in the **Connected compute resources**\.  
 ![\[Connected compute resources.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ec2-connected-compute-resources.png)
+
+## Connecting to a DB instance that is running a specific DB engine<a name="ec2-rds-Connect-DBEngine"></a>
+
+For information about connecting to a DB instance that is running a specific DB engine, follow the instructions for your DB engine:
++ [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)
++ [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)
++ [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)
++ [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)
++ [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)

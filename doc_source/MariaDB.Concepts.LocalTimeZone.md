@@ -12,6 +12,8 @@ If you are replicating across AWS Regions, then the source DB instance and the r
 
 When you restore a DB instance from a DB snapshot, the local time zone is set to UTC\. You can update the time zone to your local time zone after the restore is complete\. If you restore a DB instance to a point in time, then the local time zone for the restored DB instance is the time zone setting from the parameter group of the restored DB instance\.
 
+The Internet Assigned Numbers Authority \(IANA\) publishes new time zones at [ https://www\.iana\.org/time\-zones](https://www.iana.org/time-zones) several times a year\. Every time RDS releases a new minor maintenance release of MariaDB, it ships with the latest time zone data at the time of the release\. When you use the latest RDS for MariaDB versions, you have recent time zone data from RDS\. To ensure that your DB instance has recent time zone data, we recommend upgrading to a higher DB engine version\. Alternatively, you can modify the time zone tables in MariaDB DB instances manually\. To do so, you can use SQL commands or run the [mysql\_tzinfo\_to\_sql tool](https://mariadb.com/kb/en/mysql_tzinfo_to_sql/) in a SQL client\. After updating the time zone data manually, reboot your DB instance so that the changes take effect\. RDS doesn't modify or reset the time zone data of running DB instances\. New time zone data is installed only when you perform a database engine version upgrade\.
+
 You can set your local time zone to one of the following values\.
 
 

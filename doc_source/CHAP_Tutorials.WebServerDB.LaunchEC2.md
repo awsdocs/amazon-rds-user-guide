@@ -13,9 +13,9 @@ Create an Amazon EC2 instance in the public subnet of your VPC\.
 
 1. Choose the following settings in the **Launch an instance** page\.
 
-   1. Under **Name and tags**, for **Name**, enter **ec2\-database\-connect**\.
+   1. Under **Name and tags**, for **Name**, enter **tutorial\-ec2\-instance\-web\-server**\.
 
-   1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Amazon Linux**, and then choose the **Amazon Linux 2 AMI**\. Keep the defaults for the other choices\.  
+   1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Amazon Linux**, and then choose the **Amazon Linux 2023 AMI**\. Keep the defaults for the other choices\.  
 ![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
 
    1. Under **Instance type**, choose **t2\.micro**\.
@@ -42,10 +42,18 @@ If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses
 
    1. Review a summary of your instance configuration in the **Summary** panel, and when you're ready, choose **Launch instance**\.
 
-1. On the **Launch Status** page, shown following, note the identifier for your new EC2 instance, for example: `i-03a6ad47e97ba9dc5`\.  
-![\[Launch Status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_19.png)
+1. On the **Launch Status** page, note the identifier for your new EC2 instance, for example: `i-1234567890abcdef0`\.  
+![\[EC2 instance identifier on Launch Status page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-ec2-id.png)
 
-1. Choose **View all instances** to find your instance\. 
+1. Choose the EC2 instance identifier to open the list of EC2 instances, and then select your EC2 instance\.
+
+1. In the **Details** tab, note the following values, which you need when you connect using SSH:
+
+   1. In **Instance summary**, note the value for **Public IPv4 DNS**\.  
+![\[EC2 public DNS name on Details tab of Instances page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-ec2-public-dns.png)
+
+   1. In **Instance details**, note the value for **Key pair name**\.  
+![\[EC2 key pair name on Details tab of Instance page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-ec2-key-pair.png)
 
 1. Wait until **Instance state** for your instance is **Running** before continuing\.
 

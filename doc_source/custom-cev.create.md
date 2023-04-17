@@ -36,7 +36,7 @@ For more information, see [Creating an RDS Custom for Oracle DB instance](custom
 
 1. In the **RDS Custom encryption** section, select **Enter a key ARN** to list the available AWS KMS keys\.
 
-   Then select your KMS key from the list\. An AWS KMS key is required for RDS Custom\. For more information, see [Step 1: Make sure that you have a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
+   Then select your KMS key from the list\. An AWS KMS key is required for RDS Custom\. For more information, see [Step 1: Create or reuse a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
 
 1. Choose **Create custom engine version**\.
 

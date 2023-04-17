@@ -8,6 +8,7 @@ You can create an RDS Custom DB instance, and then connect to it using Secure Sh
 + [RDS Custom service\-linked role](#custom-creating.slr)
 + [Connecting to your RDS Custom DB instance using SSH](#custom-creating.ssh)
 + [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)
++ [Logging in to your RDS Custom for Oracle database as SYS](#custom-creating.sysdba)
 
 ## Overview of Amazon RDS Custom for Oracle architecture<a name="custom-creating.overview"></a>
 
@@ -24,9 +25,9 @@ When you create a CDB instance using the Oracle Multitenant architecture, your C
 + PDB seed \(`PDB$SEED`\)
 + PDB
 
-By default, your CDB is named `RDSCDB`, which is also the name of the Oracle System ID \(Oracle SID\), and your PDB is named `ORCL`\. You can choose a different name for your PDB, but the Oracle SID and the PDB name can’t be the same\.
+By default, your CDB is named `RDSCDB`, which is also the name of the Oracle System ID \(Oracle SID\), and your initial PDB is named `ORCL`\. You can choose a different name for your PDB, but the Oracle SID and the PDB name can’t be the same\.
 
-If you want additional PDBs, create them manually using Oracle SQL\. RDS Custom for Oracle doesn't restrict the number of PDBs that you can create using Oracle SQL\. RDS Custom for Oracle doesn't supply APIs for PDBs\. In general, you are responsible for creating and managing PDBs, as in an on\-premises deployment\.
+RDS Custom for Oracle doesn't supply APIs for PDBs\. If you want additional PDBs, create them manually using Oracle SQL\. RDS Custom for Oracle doesn't restrict the number of PDBs that you can create\. In general, you are responsible for creating and managing PDBs, as in an on\-premises deployment\.
 
 **Note**  
 If you create a PDB, we recommend that you take a manual snapshot afterward in case you need to perform point\-in\-time recovery \(PITR\)\.
@@ -103,7 +104,7 @@ Before you attempt to create or connect to an RDS Custom DB instance, complete t
 
    1. For **Encryption**, choose **Enter a key ARN** to list the available AWS KMS keys\. Then choose your key from the list\. 
 
-      An AWS KMS key is required for RDS Custom\. For more information, see [Step 1: Make sure that you have a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
+      An AWS KMS key is required for RDS Custom\. For more information, see [Step 1: Create or reuse a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
 
 1. For **Database options**, do the following:
 
@@ -462,3 +463,92 @@ A successful connection looks like the following\.
 Starting session with SessionId: yourid-abcdefghijklm1234
 [ssm-user@ip-123-45-67-89 bin]$
 ```
+
+## Logging in to your RDS Custom for Oracle database as SYS<a name="custom-creating.sysdba"></a>
+
+After you create your RDS Custom DB instance, you can log in to your Oracle database as user `SYS`, which gives you `SYSDBA` privileges\. You have the following login options:
++ Get the `SYS` password from Secrets Manager, and specify this password in your SQL client\.
++ Use OS authentication to log in to your database\. In this case, you don't need a password\.
+
+### Finding the SYS password for your RDS Custom for Oracle database<a name="custom-creating.sysdba.pwd"></a>
+
+Your can log in to your Oracle database as `SYS` or `SYSTEM` or by specifying the master user name in an API call\. The password for `SYS` and `SYSTEM` is stored in Secrets Manager\. The secret uses the naming format do\-not\-delete\-rds\-custom\-*resource\_id*\-*uuid*\. You can find the password using the AWS Management Console\.
+
+#### Console<a name="custom-creating.sysdba.pwd.console"></a>
+
+**To find the SYS password for your database in Secrets Manager**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the RDS console, complete the following steps:
+
+   1. In the navigation pane, choose **Databases**\.
+
+   1. Choose the name of your RDS Custom for Oracle DB instance\.
+
+   1. Choose **Configuration**\.
+
+   1. Copy the value underneath **Resource ID**\. For example, you resource ID might be **db\-ABC12CDE3FGH4I5JKLMNO6PQR7**\.
+
+1. Open the Secrets Manager console at [https://console\.aws\.amazon\.com/secretsmanager/](https://console.aws.amazon.com/secretsmanager/)\.
+
+1. In the Secrets Manager console, complete the following steps:
+
+   1. In the left navigation pane, choose **Secrets**\.
+
+   1. Filter the secrets by the resource ID that you copied in step 5\.
+
+   1. Choose the secret named **do\-not\-delete\-rds\-custom\-*resource\_id*\-*uuid***, where *resource\_id* is the resource ID that you copied in step 5\. For example, if your resource ID is **db\-ABC12CDE3FGH4I5JKLMNO6PQR7**, your secret will be named **do\-not\-delete\-rds\-custom\-db\-ABC12CDE3FGH4I5JKLMNO6PQR7**\.
+
+   1. In **Secret value**, choose **Retrieve secret value**\.
+
+   1. In **Key/value**, copy the value for **password**\.
+
+1. Install SQL\*Plus on your DB instance and log in to your database as `SYS`\. For more information, see [Step 4: Connect your SQL client to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md#CHAP_GettingStarted.Connecting.Oracle)\.
+
+### Logging in to your RDS Custom for Oracle database using OS authentication<a name="custom-creating.sysdba.pwd"></a>
+
+The OS user `rdsdb` owns the Oracle database binaries\. You can switch to the `rdsdb` user and log in to your RDS Custom for Oracle database without a password\.
+
+1. Connect to your DB instance with AWS Systems Manager\. For more information, see [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)\.
+
+1. In a web browser, go to [https://www\.oracle\.com/database/technologies/instant\-client/linux\-x86\-64\-downloads\.html](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html)\.
+
+1. For the latest database version that appears on the web page, copy the \.rpm links \(not the \.zip links\) for the Instant Client Basic Package and SQL\*Plus Package\. For example, the following links are for Oracle Database version 21\.9:
+   + https://download\.oracle\.com/otn\_software/linux/instantclient/219000/oracle\-instantclient\-basic\-21\.9\.0\.0\.0\-1\.el8\.x86\_64\.rpm
+   + https://download\.oracle\.com/otn\_software/linux/instantclient/219000/oracle\-instantclient\-sqlplus\-21\.9\.0\.0\.0\-1\.el8\.x86\_64\.rpm
+
+1. In your SSH session, run the `wget` command to the download the \.rpm files from the links that you obtained in the previous step\. The following example downloads the \.rpm files for Oracle Database version 21\.9:
+
+   ```
+   wget https://download.oracle.com/otn_software/linux/instantclient/219000/oracle-instantclient-basic-21.9.0.0.0-1.el8.x86_64.rpm
+   wget https://download.oracle.com/otn_software/linux/instantclient/219000/oracle-instantclient-sqlplus-21.9.0.0.0-1.el8.x86_64.rpm
+   ```
+
+1. Install the packages by running the `yum` command as follows:
+
+   ```
+   sudo yum install oracle-instantclient-*.rpm
+   ```
+
+1. Switch to the `rdsdb` user\.
+
+   ```
+   sudo su - rdsdb
+   ```
+
+1. Log in to your database using OS authentication\.
+
+   ```
+   $ sqlplus / as sysdba
+   
+   SQL*Plus: Release 21.0.0.0.0 - Production on Wed Apr 12 20:11:08 2023
+   Version 21.9.0.0.0
+   
+   Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+   
+   
+   Connected to:
+   Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+   Version 19.10.0.0.0
+   ```

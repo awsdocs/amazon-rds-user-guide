@@ -41,7 +41,7 @@ Amazon RDS support for Kerberos and Active Directory provides the benefits of si
 
 You can make it possible for your database users to authenticate against DB instances in two ways\. They can use credentials stored either in AWS Directory Service for Microsoft Active Directory or in your on\-premises Active Directory\.
 
-Microsoft SQL Server, MySQL, and PostgreSQL DB instances support one\- and two\-way forest trust relationships\. Oracle DB instances support one\- and two\-way external and forest trust relationships\. For more information, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/setup_trust.html) in the *AWS Directory Service Administration Guide*\.
+Microsoft SQL Server and PostgreSQL DB instances support one\- and two\-way forest trust relationships\. Oracle DB instances support one\- and two\-way external and forest trust relationships\. For more information, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 For information about Kerberos authentication with a specific DB engine, see the following:
 + [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)
