@@ -10,15 +10,15 @@ The steps are as follows:
 
    For more information, see [Step 3: Upload your installation files to Amazon S3](custom-cev.preparing.md#custom-cev.preparing.s3)\.
 
-1. Create an RDS Custom custom engine version \(CEV\) from your media\.
+1. Create an RDS Custom for Oracle custom engine version \(CEV\) from your media\.
 
    For more information, see [Creating a CEV](custom-cev.create.md)\.
 
-1. Create an RDS Custom DB instance from a CEV\.
+1. Create an RDS Custom for Oracle DB instance from a CEV\.
 
    For more information, see [Creating an RDS Custom for Oracle DB instance](custom-creating.md#custom-creating.create)\.
 
-1. Connect your application to the RDS Custom DB instance endpoint\.
+1. Connect your application to the DB instance endpoint\.
 
    For more information, see [Connecting to your RDS Custom DB instance using SSH](custom-creating.md#custom-creating.ssh) and [Connecting to your RDS Custom DB instance using AWS Systems Manager](custom-creating.md#custom-creating.ssm)\.
 
@@ -34,7 +34,9 @@ For RDS Custom, you supply your own media\. When you create a custom engine vers
 
 ## Custom engine version<a name="custom-concept.workflow.cev"></a>
 
-An RDS Custom custom engine version \(CEV\) is a binary volume snapshot of a database version and AMI\. You store your database installation files in Amazon S3\. When you create your CEV, you specify the files in a JSON document called a CEV manifest\. You can also specify installation parameters that set nondefault values for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\.
+An RDS Custom custom engine version \(CEV\) is a binary volume snapshot of a database version and AMI\. By default, RDS Custom for Oracle uses the most recent AMI that Amazon EC2 makes available\. You can also choose to reuse an existing AMI\.
+
+You store your database installation files in Amazon S3\. When you create your CEV, you specify the files in a JSON document called a CEV manifest\. You can also specify installation parameters that set nondefault values for the Oracle base, Oracle home, and the ID and name of the UNIX/Linux user and group\.
 
 Name your CEV using a customer\-specified string\. The name format is the following, depending on your Oracle Database release:
 + `19.customized_string`

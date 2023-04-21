@@ -29,3 +29,4 @@ This information includes the following:
 + The date and time of the event
 + The source name and source type of the event
 + A message associated with the event
++ Event notifications include tags from when the message was sent and may not reflect tags at the time when the event occurred

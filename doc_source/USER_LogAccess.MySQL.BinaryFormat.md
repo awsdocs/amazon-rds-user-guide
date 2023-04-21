@@ -40,7 +40,7 @@ Enabling binary logging increases the number of write disk I/O operations to the
 
 1. From **Parameter group actions**, choose **Edit**\.
 
-1. Set the `binlog_format` parameter to the binary logging format of your choice \(**ROW**, **STATEMENT**, or **MIXED**\)\. You can also use the value `OFF` to turn off binary logging\.
+1. Set the `binlog_format` parameter to the binary logging format of your choice \(`ROW`, `STATEMENT`, or `MIXED`\)\. You can also use the value `OFF` to turn off binary logging\.
 
 1. Choose **Save changes** to save the updates to the DB parameter group\.
 

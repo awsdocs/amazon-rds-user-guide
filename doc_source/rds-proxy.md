@@ -38,7 +38,7 @@ Feature availability and support varies across specific versions of each databas
 +  Your RDS Proxy must be in the same virtual private cloud \(VPC\) as the database\. The proxy can't be publicly accessible, although the database can be\. For example, if you're prototyping on a local host, you can't connect to your RDS Proxy unless you set up dedicated networking\. This is the case because your local host is outside of the proxy's VPC\.
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 
 +  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, check user authentication\. Make sure that all users who connect through a proxy authenticate through sign\-in credentials\. For details about IAM support in RDS Proxy, see [Setting up AWS Identity and Access Management \(IAM\) policies](rds-proxy-setup.md#rds-proxy-iam-setup)\. 
-+  You can't use RDS Proxy with custom DNS\. 
++  You can't use RDS Proxy with custom DNS when using SSL hostname validation\. 
 +  Each proxy can be associated with a single target DB instance \. However, you can associate multiple proxies with the same DB instance \.
 + Any statement with a text size greater than 16 KB causes the proxy to pin the session to the current connection\.
 
@@ -79,7 +79,7 @@ For additional limitations for each DB engine, see the following sections:
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\.
 +  You can't use RDS Proxy with an RDS for MySQL DB instance that has the `read_only` parameter in its DB parameter group set to `1`\.
 + RDS Proxy doesn't support MySQL compressed mode\. For example, it doesn't support the compression used by the `--compress` or `-C` options of the `mysql` command\.
-+  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\.
++  Some SQL statements and functions such as `SET LOCAL`can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\.
 
 **Important**  
  For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 

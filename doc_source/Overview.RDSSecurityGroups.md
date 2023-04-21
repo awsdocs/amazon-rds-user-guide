@@ -42,3 +42,6 @@ You can create a VPC security group for a DB instance by using the VPC console\.
 You can associate a security group with a DB instance by using **Modify** on the RDS console, the `ModifyDBInstance` Amazon RDS API, or the `modify-db-instance` AWS CLI command\.
 
  For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security group considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
+
+**Note**  
+The RDS console displays different security group rule names for your database if the Port value is configured to a non\-default value\.

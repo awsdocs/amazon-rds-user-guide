@@ -48,34 +48,48 @@ EXEC rdsadmin.rdsadmin_util.rename_global_name(p_new_global_name => 'new_global_
 
 Amazon RDS only supports Oracle Managed Files \(OMF\) for data files, log files, and control files\. When you create data files and log files, you can't specify the physical file names\. 
 
-By default, tablespaces are created with auto\-extend enabled, and no maximum size\. Because of these default settings, tablespaces can grow to consume all allocated storage\. We recommend that you specify an appropriate maximum size on permanent and temporary tablespaces, and that you carefully monitor space usage\. 
-
-The following example creates a tablespace named `users2` with a starting size of 1 gigabyte and a maximum size of 10 gigabytes: 
+By default, if you don't specify a data file size, tablespaces are created with the default of `AUTOEXTEND ON`, and no maximum size\. In the following example, the tablespace *users1* is autoextensible\.
 
 ```
-CREATE TABLESPACE users2 DATAFILE SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
+CREATE TABLESPACE users1;
 ```
 
-The following example creates temporary tablespace named `temp01`:
+Because of these default settings, tablespaces can grow to consume all allocated storage\. We recommend that you specify an appropriate maximum size on permanent and temporary tablespaces, and that you carefully monitor space usage\. 
+
+The following example creates a tablespace named *users2* with a starting size of 1 gigabyte\. Because a data file size is specified, but `AUTOEXTEND ON` isn't specified, the tablespace isn't autoextensible\.
+
+```
+CREATE TABLESPACE users2 DATAFILE SIZE 1G;
+```
+
+The following example creates a tablespace named *users3* with a starting size of 1 gigabyte, autoextend turned on, and a maximum size of 10 gigabytes\.
+
+```
+CREATE TABLESPACE users3 DATAFILE SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
+```
+
+The following example creates a temporary tablespace named *temp01*\.
 
 ```
 CREATE TEMPORARY TABLESPACE temp01;
 ```
 
- We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with Amazon RDS for Oracle\. However, you can add a datafile to a smallfile tablespace\. 
-
-You can resize a bigfile tablespace by using `ALTER TABLESPACE`\. You can specify the size in kilobytes \(K\), megabytes \(M\), gigabytes \(G\), or terabytes \(T\)\. 
-
-The following example resizes a bigfile tablespace named `users2` to 200 MB\.
+We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with RDS for Oracle\. However, you can add a data file to a smallfile tablespace\. To determine whether a tablespace is bigfile or smallfile, query `DBA_TABLESPACES` as follows\.
 
 ```
-ALTER TABLESPACE users2 RESIZE 200M;
+SELECT TABLESPACE NAME, BIGFILE FROM DBA_TABLESPACE;
 ```
 
-The following example adds an additional datafile to a smallfile tablespace named **users2**\. 
+You can resize a bigfile tablespace by using `ALTER TABLESPACE`\. You can specify the size in kilobytes \(K\), megabytes \(M\), gigabytes \(G\), or terabytes \(T\)\. The following example resizes a bigfile tablespace named *users\_bf* to 200 MB\.
 
 ```
-ALTER TABLESPACE users2 ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
+ALTER TABLESPACE users_bf RESIZE 200M;
+```
+
+The following example adds an additional data file to a smallfile tablespace named *users\_sf*\.
+
+```
+ALTER TABLESPACE users_sf ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
 ```
 
 ## Setting the default tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>

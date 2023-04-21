@@ -136,19 +136,31 @@ Feature availability and support varies across specific versions of each databas
 For RDS for Oracle you can use database activity streams with the following DB instance classes:
 + db\.m4\.\*large
 + db\.m5\.\*large
++ db\.m5d\.\*large
++ db\.m6i\.\*large
 + db\.r4\.\*large
 + db\.r5\.\*large
++ db\.r5\.\*large\.tpc\*\.mem\*x
++ db\.r5b\.\*large
++ db\.r5b\.\*large\.tpc\*\.mem\*x
++ db\.r5d\.\*large
++ db\.r6i\.\*large
++ db\.x2idn\.\*large
++ db\.x2iedn\.\*large
++ db\.x2iezn\.\*large
 + db\.z1d\.\*large
 
 For RDS for SQL Server you can use database activity streams with the following DB instance classes:
 + db\.m4\.\*large
 + db\.m5\.\*large
++ db\.m5d\.\*large
++ db\.m6i\.\*large
 + db\.r4\.\*large
 + db\.r5\.\*large
++ db\.r5b\.\*large
++ db\.r5d\.\*large
++ db\.r6i\.\*large
 + db\.x1e\.\*large
 + db\.z1d\.\*large
-
-**Note**  
-The memory optimized db\.r5 classes, which use the naming pattern db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*, aren't supported\.
 
 For more information about instance class types, see [DB instance classes](Concepts.DBInstanceClass.md)\.

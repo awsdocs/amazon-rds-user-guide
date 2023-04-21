@@ -265,14 +265,17 @@ To simplify setup, you can use the AWS CloudFormation template file to create a 
 A symmetric encryption AWS KMS key is required for RDS Custom\. When you create an RDS Custom for SQL Server DB instance, make sure to supply the KMS key identifier\. For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for SQL Server](custom-creating-sqlserver.md)\.
 
 You have the following options:
-+ If you have an existing KMS key in your AWS account, you can use it with RDS Custom\. No further action is necessary\.
-+ If you already created a symmetric encryption KMS key for a different RDS Custom engine, you can reuse the same KMS key\. No further action is necessary\.
-+ If you don't have an existing symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
++ If you have an existing customer managed KMS key in your AWS account, you can use it with RDS Custom\. No further action is necessary\.
++ If you already created a customer managed symmetric encryption KMS key for a different RDS Custom engine, you can reuse the same KMS key\. No further action is necessary\.
++ If you don't have an existing customer managed symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
 + If you're creating a CEV or RDS Custom DB instance, and your KMS key is in a different AWS account, make sure to use the AWS CLI\. You can't use the AWS console with cross\-account KMS keys\.
 
-RDS Custom doesn't support AWS\-managed KMS keys\.
+**Important**  
+RDS Custom doesn't support AWS managed KMS keys\.
 
 Make sure that your symmetric encryption key grants access to the `kms:Decrypt` and `kms:GenerateDataKey` operations to the AWS Identity and Access Management \(IAM\) role in your IAM instance profile\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy grants access to these operations\.
+
+For more information, see [Step 3: Configure IAM and your VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
 
 #### Creating your IAM role and instance profile manually<a name="custom-setup-sqlserver.iam"></a>
 
@@ -577,7 +580,7 @@ RDS Custom sends communication from your DB instance to other AWS services\. To 
 + AWS Secrets Manager
 + AWS Systems Manager
 
-If RDS Custom can't communicate with the necessary services, it creates the following event:
+If RDS Custom can't communicate with the necessary services, it publishes the following event:
 
 ```
 Database instance in incompatible-network. SSM Agent connection not available. Amazon RDS can't connect to the dependent AWS services.

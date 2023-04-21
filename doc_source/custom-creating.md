@@ -90,7 +90,9 @@ Before you attempt to create or connect to an RDS Custom DB instance, complete t
 
 1. In the **Storage** section, do the following:
 
-   1. For **Storage type**, choose an SSD type: io1, gp2, or gp3\. If you choose the io1 or gp3 storage types, also choose a rate for **Provisioned IOPS**\.
+   1. For **Storage type**, choose an SSD type: io1, gp2, or gp3\. You have the following additional options:
+      + For io1 or gp3, choose a rate for **Provisioned IOPS**\. The default is 1000 for io1 and 12000 for gp3\.
+      + For gp3, choose a rate for **Storage throughput**\. The default is 500 MiBps\.
 
    1. For **Allocated storage**, choose a storage size\. The default is 40 GiB\.
 
@@ -153,13 +155,14 @@ You create an RDS Custom DB instance by using the [create\-db\-instance](https:/
 The following options are required:
 + `--db-instance-identifier`
 + `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom for Oracle](custom-reqs-limits.md#custom-reqs-limits.instances)\)
-+ `--engine engine_type` \(where *`engine-type`* is `custom-oracle-ee-cdb` for a CDB and `custom-oracle-ee` for a non\-CDB\)
++ `--engine engine-type` \(where *`engine-type`* is `custom-oracle-ee-cdb` for a CDB and `custom-oracle-ee` for a non\-CDB\)
 + `--engine-version cev` \(where *`cev`* is the name of the custom engine version that you specified in [Creating a CEV](custom-cev.create.md)\)
-+ `--kms-key-id`
++ `--kms-key-id my-kms-key`
++ `--backup-retention-period days` \(where *`days`* is a value greater than `0`\)
 + `--no-auto-minor-version-upgrade`
-+ `--custom-iam-instance-profile`
++ `--custom-iam-instance-profile AWSRDSCustomInstanceRole-us-east-1` \(where *`region`* is the AWS Region where you are creating your DB instance\)
 
-The following example creates an RDS Custom DB instance named `my-cdb-instance`\. The database is a CDB\. The PDB name is *my\-pdb*\. The backup retention period is three days\.
+The following example creates an RDS Custom DB instance named `my-cdb-instance`\. The database is a CDB\. The PDB name is *mypdb*\. The backup retention period is three days\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -169,19 +172,18 @@ For Linux, macOS, or Unix:
  2.     --engine custom-oracle-ee-cdb \
  3.     --db-instance-identifier my-cdb-instance \
  4.     --engine-version 19.cdb_cev1 \
- 5.     --db-name my-pdb \
+ 5.     --db-name mypdb \
  6.     --allocated-storage 250 \
  7.     --db-instance-class db.m5.xlarge \
  8.     --db-subnet-group mydbsubnetgroup \
  9.     --master-username myawsuser \
 10.     --master-user-password mypassword \
 11.     --backup-retention-period 3 \
-12.     --no-multi-az \
-13.     --port 8200 \
-14.     --license-model bring-your-own-license \
-15.     --kms-key-id my-kms-key \
-16.     --no-auto-minor-version-upgrade \
-17.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+12.     --port 8200 \
+13.     --license-model bring-your-own-license \
+14.     --kms-key-id my-kms-key \
+15.     --no-auto-minor-version-upgrade \
+16.     --custom-iam-instance-profile AWSRDSCustomInstanceRole-us-east-1
 ```
 For Windows:  
 
@@ -190,19 +192,18 @@ For Windows:
  2.     --engine custom-oracle-ee-cdb ^
  3.     --db-instance-identifier my-cdb-instance ^
  4.     --engine-version 19.cdb_cev1 ^
- 5.     --db-name my-pdb ^
+ 5.     --db-name mypdb ^
  6.     --allocated-storage 250 ^
  7.     --db-instance-class db.m5.xlarge ^
  8.     --db-subnet-group mydbsubnetgroup ^
  9.     --master-username myawsuser ^
 10.     --master-user-password mypassword ^
 11.     --backup-retention-period 3 ^
-12.     --no-multi-az ^
-13.     --port 8200 ^
-14.     --license-model bring-your-own-license ^
-15.     --kms-key-id my-kms-key ^
-16.     --no-auto-minor-version-upgrade ^
-17.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+12.     --port 8200 ^
+13.     --license-model bring-your-own-license ^
+14.     --kms-key-id my-kms-key ^
+15.     --no-auto-minor-version-upgrade ^
+16.     --custom-iam-instance-profile AWSRDSCustomInstanceRole-us-east-1
 ```
 
 Get details about your instance by using the `describe-db-instances` command\.

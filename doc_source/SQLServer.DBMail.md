@@ -241,7 +241,7 @@ To create the Database Mail profile, you use the [sysmail\_add\_profile\_sp](htt
 
 ### Creating the Database Mail account<a name="SQLServer.DBMail.Configure.Account"></a>
 
-To create the Database Mail account, you use the [sysmail\_add\_account\_sp](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sysmail-add-account-sp-transact-sql) stored procedure\. The following example creates an account named `SES` that uses Amazon Simple Email Service\.
+To create the Database Mail account, you use the [sysmail\_add\_account\_sp](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sysmail-add-account-sp-transact-sql) stored procedure\. The following example creates an account named `SES` on an RDS for SQL Server DB instance in a private VPC, using Amazon Simple Email Service\.
 
 Using Amazon SES requires the following parameters:
 + `@email_address` – An Amazon SES verified identity\. For more information, see [Verified identities in Amazon SES](https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html)\.
@@ -263,7 +263,7 @@ Using Amazon SES requires the following parameters:
       @description         = 'Mail account for sending outgoing notifications.',
       @email_address       = 'nobody@example.com',
       @display_name        = 'Automated Mailer',
-      @mailserver_name     = 'email-smtp.us-west-2.amazonaws.com',
+      @mailserver_name     = 'vpce-0a1b2c3d4e5f-01234567.email-smtp.us-west-2.vpce.amazonaws.com',
       @port                = 587,
       @enable_ssl          = 1,
       @username            = 'Smtp_Username',

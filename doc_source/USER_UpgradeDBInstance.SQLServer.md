@@ -9,10 +9,10 @@ In contrast, *minor version upgrades* include only changes that are backward\-co
 Alternatively, you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. You can confirm whether the minor version upgrade will be automatic by using the `describe-db-engine-versions` AWS CLI command\. For example:
 
 ```
-aws rds describe-db-engine-versions --engine sqlserver-se --engine-version 14.00.3049.1.v1
+aws rds describe-db-engine-versions --engine sqlserver-se --engine-version 14.00.3281.6.v1
 ```
 
-In the following example, the CLI command returns a response indicating that upgrades are automatic\.
+In the following example, the CLI command returns a response indicating that `AutoUpgrade` is **true**\.
 
 ```
 ...
@@ -20,8 +20,8 @@ In the following example, the CLI command returns a response indicating that upg
 "ValidUpgradeTarget": [
     {
         "Engine": "sqlserver-se",
-        "EngineVersion": "14.00.3192.2.v1",
-        "Description": "SQL Server 2017 14.00.3192.2.v1",
+        "EngineVersion": "14.00.3281.6.v1",
+        "Description": "SQL Server 2017 14.00.3281.6.v1",
         "AutoUpgrade": true,
         "IsMajorVersionUpgrade": false
     }
@@ -77,7 +77,7 @@ For Linux, macOS, or Unix:
 ```
 aws rds describe-db-engine-versions \
     --engine sqlserver-se \
-    --engine-version 14.00.3049.1.v1 \
+    --engine-version 14.00.3281.6.v1 \
     --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" \
     --output table
 ```
@@ -86,11 +86,11 @@ For Windows:
 ```
 aws rds describe-db-engine-versions ^
     --engine sqlserver-se ^
-    --engine-version 14.00.3049.1.v1 ^
+    --engine-version 14.00.3281.6.v1 ^
     --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" ^
     --output table
 ```
-The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL Server 2017 or 2019 versions\.  
+The output shows that you can upgrade version 14\.00\.3281\.6 to the latest available SQL Server 2017 or 2019 versions\.  
 
 ```
 --------------------------
@@ -101,8 +101,14 @@ The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL 
 |  14.00.3294.2.v1       |
 |  14.00.3356.20.v1      |
 |  14.00.3381.3.v1       |
+|  14.00.3401.7.v1       | 
+|  14.00.3421.10.v1      |
+|  14.00.3451.2.v1       |
 |  15.00.4043.16.v1      |
 |  15.00.4073.23.v1      |
+|  15.00.4153.1.v1       |
+|  15.00.4198.2.v1       |
+|  15.00.4236.7.v1       |
 +------------------------+
 ```
 

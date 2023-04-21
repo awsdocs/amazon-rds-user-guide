@@ -9,5 +9,3 @@ Secrets Manager integration is supported for all RDS DB engines and all versions
 Secrets Manager integration is supported in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
-+ China \(Beijing\)
-+ China \(Ningxia\)

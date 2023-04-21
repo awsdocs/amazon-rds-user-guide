@@ -35,6 +35,8 @@ You can turn on RDS Optimized Writes when you create an RDS for MariaDB database
   + RDS Optimized Writes is supported for RDS for MariaDB databases that use the following DB instance classes: 
     + db\.x2idn
     + db\.x2iedn
+    + db\.m7g
+    + db\.r7g
     + db\.r6g
     + db\.r6gd
     + db\.r6i
@@ -101,7 +103,11 @@ You can create a DB instance using the [ CreateDBInstance](https://docs.aws.amaz
 
 The following limitations apply to RDS Optimized Writes: 
 + You can only modify a database to turn on RDS Optimized Writes if the database was created with a DB engine version and DB instance class that support the feature\. In this case, if RDS Optimized Writes is turned off for the database, you can turn it on by setting the `rds.optimized_writes` parameter to `AUTO`\. For more information, see [Using RDS Optimized Writes](#rds-optimized-writes-using-mariadb)\.
++ You can only modify a database to turn on RDS Optimized Writes if the database was created *after* the feature was released\. The underlying file system format and organization that RDS Optimized Writes needs is incompatible with the file system format of databases created before the feature was released\. By extension, you can't use any snapshots of previously created instances with this feature because the snapshots use the older, incompatible file system\. 
+**Important**  
+To convert from the old format to the new format, you need to perform a full database migration\. If you want to use this feature on DB instances that were created *before* the feature was released, create a new empty DB instance and manually migrate your older DB instance to the newer DB instance\. You can migrate your older DB instance using the native `mysqldump` tool, replication, or AWS Database Migration Service\. For more information, see [mariadb\-dump/mysqldump](https://mariadb.com/kb/en/mariadb-dumpmysqldump/) in the MariaDB documentation, [Working with MariaDB replication in Amazon RDS](USER_MariaDB.Replication.md), and the [https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\. For help with migrating using AWS tools, contact support\.
 + When you are restoring an RDS for MariaDB database from a snapshot, you can only turn on RDS Optimized Writes for the database if all of the following conditions apply:
   + The snapshot was created from a database that supports RDS Optimized Writes\.
+  + The snapshot was created from a database that was created *after* RDS Optimized Writes was released\.
   + The snapshot is restored to a database that supports RDS Optimized Writes\.
-  + The restored database is associated with a parameter group with the `rds.optimized_writes` parameter set to `AUTO`\.
+  + The restored database is associated with a parameter group that has the `rds.optimized_writes` parameter set to `AUTO`\.

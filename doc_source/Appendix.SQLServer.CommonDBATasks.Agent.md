@@ -52,13 +52,15 @@ SELECT * from msdb.dbo.rds_fn_get_system_database_sync_objects();
 
 ![\[SQL Server Agent jobs are replicating\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLAgentJob.png)
 
-You can use the following function to find the last time objects were synchronized\.
+You can use the following function to find the last time objects were synchronized in UTC time\.
 
 ```
 SELECT * from msdb.dbo.rds_fn_server_object_last_sync_time();
 ```
 
 For example, suppose that you modify a SQL Server Agent job at 01:00\. You expect the most recent synchronization time to be after 01:00, indicating that synchronization has taken place\.
+
+After synchronization, the values returned for `date_created` and `date_modified` on the secondary node are expected to match\.
 
 ![\[Last time server objects were synchronized was 01:21:23\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLAgentJob_last_sync_time.png)
 

@@ -34,9 +34,14 @@ Make sure to follow these requirements for Amazon RDS Custom for Oracle:
 
 The following limitations apply to RDS Custom for Oracle:
 + You can't provide your own AMI\.
++ You can specify a nondefault AMI, but only if it has been previously used by a CEV\.
++ You can't modify a CEV to use a different AMI\.
 + Not all options are supported\. For example, when you create or modify an RDS Custom for Oracle DB instance, you can't do the following:
   + Change the number of CPU cores and threads per core on the DB instance class\.
   + Turn on storage autoscaling\.
+  + Create a Multi\-AZ deployment\.
+**Note**  
+Multi\-AZ isn't supported\. For an alternative HA solution, see the blog article [Build high availability for Amazon RDS Custom for Oracle using read replicas](http://aws.amazon.com/blogs/database/build-high-availability-for-amazon-rds-custom-for-oracle-using-read-replicas/)\.
   + Set backup retention to `0`\.
   + Configure Kerberos authentication\.
   + Specify your own DB parameter group or option group\.

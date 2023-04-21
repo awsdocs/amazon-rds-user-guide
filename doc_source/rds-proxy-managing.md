@@ -415,11 +415,12 @@ You can minimize pinning by doing the following:
 ### Conditions that cause pinning for RDS for MariaDB and RDS for MySQL<a name="rds-proxy-pinning.mysql"></a>
 
  For MySQL and MariaDB, the following interactions also cause pinning: 
-+  Explicit  table lock statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
-+  Creating named locks by using `GET_LOCK` causes the proxy to pin the session\.  
-+  Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the session pinning filters property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
-+  Creating a temporary table causes the proxy to pin the session\. That way, the contents of the temporary table are preserved throughout the session regardless of transaction boundaries\. 
-+  Calling the functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
++ Explicit  table lock statements `LOCK TABLE`, `LOCK TABLES`, or `FLUSH TABLES WITH READ LOCK` cause the proxy to pin the session\. 
++ Creating named locks by using `GET_LOCK` causes the proxy to pin the session\.  
++ Setting a user variable or a system variable \(with some exceptions\) causes the proxy to pin the session\. If this situation reduces your connection reuse too much, you can choose for `SET` operations not to cause pinning\. For information about how to do so by setting the session pinning filters property, see [Creating an RDS Proxy](rds-proxy-setup.md#rds-proxy-creating) and [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)\. 
++ RDS Proxy does not pin connections when you use SET LOCAL\.
++ Creating a temporary table causes the proxy to pin the session\. That way, the contents of the temporary table are preserved throughout the session regardless of transaction boundaries\. 
++ Calling the functions `ROW_COUNT`, `FOUND_ROWS`, and `LAST_INSERT_ID` sometimes causes pinning\.  
 
  Calling stored procedures and stored functions doesn't cause pinning\. RDS Proxy doesn't detect any session state changes resulting from such calls\. Therefore, make sure that your application doesn't change session state inside stored routines and rely on that session state to persist across transactions\. For example, if a stored procedure creates a temporary table that is intended to persist across transactions, that application currently isn't compatible with RDS Proxy\. 
 

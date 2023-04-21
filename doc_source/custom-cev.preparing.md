@@ -502,9 +502,7 @@ In the following example for Oracle Database 19c, RDS Custom applies p32126828, 
 
 ## Step 6 \(Optional\): Validate the CEV manifest<a name="custom-cev.preparing.validating"></a>
 
-Optionally, verify that manifest is a valid JSON file by running the `json.tool` Python script\.
-
-For example, if you change into the directory containing a CEV manifest named `manifest.json`, run the following command\.
+Optionally, verify that manifest is a valid JSON file by running the `json.tool` Python script\. For example, if you change into the directory containing a CEV manifest named `manifest.json`, run the following command\.
 
 ```
 python -m json.tool < manifest.json

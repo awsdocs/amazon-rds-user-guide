@@ -18,9 +18,17 @@ Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS
 
 You can either create your RDS Custom for Oracle DB instance with the Oracle Multitenant architecture \(`custom-oracle-ee-cdb` engine type\) or with the traditional non\-CDB architecture \(`custom-oracle-ee` engine type\)\. When you create a container database \(CDB\), it contains one pluggable database \(PDB\) and one PDB seed\. You can create additional PDBs manually using Oracle SQL\.
 
-In the RDS Custom for Oracle shared responsibility model, you are responsible for managing PDBs and creating any additional PDBs\. RDS Custom doesn't restrict the number of PDBs\. You can manually create, modify, and delete PDBs by connecting to the CDB root and running a SQL command\. Create PDBs on an Amazon EBS data volume to prevent the DB instance from going outside the support perimeter\.
+### PDB and CDB names<a name="custom-managing.pdb-names"></a>
+
+When you create an RDS Custom for Oracle CDB instance, you specify a name for the initial PDB\. By default, your initial PDB is named `ORCL`\. You can choose a different name\. 
+
+Your CDB is always named `RDSCDB`\. You can't change this value\. The CDB name is also the name of your Oracle system identifier \(SID\), which uniquely identifies the memory and processes that manage your CDB\. For more information about the SID, see [Oracle System Identifier \(SID\)](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/oracle-database-instance.html#GUID-8BB8140D-63ED-454E-AAC3-1964F80D102D) in *Oracle Database Concepts*\.
 
 You can't rename existing PDBs using Amazon RDS APIs\. You also can't rename the CDB using the `modify-db-instance` command\.
+
+### PDB management<a name="custom-managing.pdb-creation"></a>
+
+In the RDS Custom for Oracle shared responsibility model, you are responsible for managing PDBs and creating any additional PDBs\. RDS Custom doesn't restrict the number of PDBs\. You can manually create, modify, and delete PDBs by connecting to the CDB root and running a SQL statement\. Create PDBs on an Amazon EBS data volume to prevent the DB instance from going outside the support perimeter\.
 
 To modify your CDBs or PDBs, complete the following steps:
 
@@ -30,7 +38,9 @@ To modify your CDBs or PDBs, complete the following steps:
 
 1. Back up any modified PDBs\.
 
-1. Resume automation\.
+1. Resume RDS Custom automation\.
+
+### Automatic recovery of the CDB root<a name="custom-managing.cdb-root"></a>
 
 RDS Custom keeps the CDB root open in the same way as it keeps a non\-CDB open\. If the state of the CDB root changes, the monitoring and recovery automation attempts to recover the CDB root to the desired state\. You receive RDS event notifications when the root CDB is shut down \(`RDS-EVENT-0004`\) or restarted \(`RDS-EVENT-0006`\), similar to the non\-CDB architecture\. RDS Custom attempts to open all PDBs in `READ WRITE` mode at DB instance startup\. If some PDBs can't be opened, RDS Custom publishes the following event: `tenant database shutdown`\. 
 

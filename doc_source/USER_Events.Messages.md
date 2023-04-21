@@ -12,7 +12,6 @@ Amazon RDS generates a significant number of events in categories that you can s
 + [RDS Proxy events](#USER_Events.Messages.rds-proxy)
 + [Blue/green deployment events](#USER_Events.Messages.BlueGreenDeployments)
 + [Custom engine version events](#USER_Events.Messages.CEV)
-+ [Message attributes](#USER_Events.Messages.Attributes)
 
 ## DB cluster events<a name="USER_Events.Messages.cluster"></a>
 
@@ -97,7 +96,7 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0224 |  Storage autoscaling has triggered a pending scale storage task that would reach the maximum storage threshold\. Increase the maximum storage threshold\.  | 
 |  failure  | RDS\-EVENT\-0237 |  The DB instance has a storage type that's currently unavailable in the Availability Zone\. Autoscaling will retry later\.  | 
 | failure | RDS\-EVENT\-0254 |  The storage for your AWS account has exceeded the allowed storage quota\. Increase the quota to let the autoscaling operation proceed\.  | 
-|  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
+|  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0227 |  The Aurora storage subsystem is running low on space\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
@@ -256,15 +255,3 @@ The following table shows the event category and a list of events when a custom 
 |  Category  | Amazon RDS event ID |  Description  | 
 | --- | --- | --- | 
 |  failure  | RDS\-EVENT\-0198 |  Creation failed for custom engine version\. The message includes details about the failure, such as missing files\.  | 
-
-## Message attributes<a name="USER_Events.Messages.Attributes"></a>
-
-The following table shows the message attribute for RDS events\.
-
-
-| Amazon RDS event attribute |  Description  | 
-| --- | --- | 
-| Event ID |  Identifier for the RDS event message\. For example, RDS\-EVENT\-0006\.  | 
-| Resource |  The ARN identifier for the resource emitting the event\. For example, `arn:aws:rds:ap-southeast-2:123456789012:db:database-1`\.  | 
-
-By default, an Amazon SNS topic subscriber receives every message published to the topic\. To receive only a subset of the messages, the subscriber must assign a filter policy to the topic subscription\. For more information about SNS message filtering, see [Amazon SNS message filtering](https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html) in the *Amazon Simple Notification Service Developer Guide*

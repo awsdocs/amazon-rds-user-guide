@@ -9,6 +9,7 @@ Your DB instance and your Amazon S3 bucket must be in the same AWS Region\.
 + [Configuring IAM permissions for RDS for Oracle integration with Amazon S3](#oracle-s3-integration.preparing)
 + [Adding the Amazon S3 integration option](#oracle-s3-integration.preparing.option-group)
 + [Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket](#oracle-s3-integration.using)
++ [Troubleshooting Amazon S3 integration](#oracle-s3-integration.troubleshooting)
 + [Removing the Amazon S3 integration option](#oracle-s3-integration.removing)
 
 ## Configuring IAM permissions for RDS for Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
@@ -25,19 +26,19 @@ RDS for Oracle supports uploading files from a DB instance in one account to an 
 
 ### Step 1: Create an IAM policy for your Amazon RDS role<a name="oracle-s3-integration.preparing.policy"></a>
 
-In this step, you create an AWS Identity and Access Management \(IAM\) policy with the permissions required to transfer files from your Amazon S3 bucket to your RDS DB instance\.
+In this step, you create an AWS Identity and Access Management \(IAM\) policy with the permissions required to transfer files from your Amazon S3 bucket to your RDS DB instance\. This step assumes that you have already created an S3 bucket\.
 
-To create the policy, make sure you have the following:
+Before you create the policy, note the following pieces of information:
 + The Amazon Resource Name \(ARN\) for your bucket
 + The ARN for your AWS KMS key, if your bucket uses SSE\-KMS or SSE\-S3 encryption
 **Note**  
-An Oracle DB instance can't access Amazon S3 buckets encrypted with SSE\-C\.
+An RDS for Oracle DB instance can't access Amazon S3 buckets encrypted with SSE\-C\.
 
 For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html) in the *Amazon Simple Storage Service User Guide*\.
 
 #### Console<a name="oracle-s3-integration.preparing.policy.console"></a>
 
-**To create an IAM policy to allow Amazon RDS access to an Amazon S3 bucket**
+**To create an IAM policy to allow Amazon RDS to access your Amazon S3 bucket**
 
 1. Open the [IAM Management Console](https://console.aws.amazon.com/iam/home?#home)\.
 
@@ -55,23 +56,34 @@ For more information, see [Protecting data using server\-side encryption](https:
 
    *Object permissions* are permissions for object operations in Amazon S3\. You must grant them for objects in a bucket, not the bucket itself\. For more information, see [Permissions for object operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
 
-1. Choose **Resources**, and choose **Add ARN** for **bucket**\.
+1. Choose **Resources**, and then do the following:
 
-1. In the **Add ARN\(s\)** dialog box, provide the details about your resource, and choose **Add**\.
+   1. Choose **Specific**\.
 
-   Specify the Amazon S3 bucket to allow access to\. For instance, to allow Amazon RDS to access the Amazon S3 bucket named `example-bucket`, set the ARN value to `arn:aws:s3:::example-bucket`\.
+   1. For **bucket**, choose **Add ARN**\. Enter your bucket ARN\. The bucket name is filled in automatically\. Then choose **Add**\.
 
-1. If the **object** resource is listed, choose **Add ARN** for **object**\.
-
-1. In the **Add ARN\(s\)** dialog box, provide the details about your resource\.
-
-   For the Amazon S3 bucket, specify the Amazon S3 bucket to allow access to\. For the object, you can choose **Any** to grant permissions to any object in the bucket\.
+   1. If the **object** resource is shown, either choose **Add ARN** to add resources manually or choose **Any**\.
 **Note**  
 You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to allow Amazon RDS to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing access permissions to your Amazon S3 resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
 
 1. \(Optional\) Choose **Add additional permissions** to add resources to the policy\. For example, do the following:
-   + If your bucket is encrypted with a custom KMS key, select **KMS** for the service\. Select **Encrypt**, **ReEncrypt**, **Decrypt**, **DescribeKey**, and **GenerateDataKey** for actions\. Enter the ARN of your custom key as the resource\. For more information, see [Protecting Data Using Server\-Side Encryption with KMS keys Stored in AWS Key Management Service \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) in the *Amazon Simple Storage Service User Guide*\.
-   + If you want Amazon RDS to access to access other buckets, add the ARNs for these buckets\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
+
+   1. If your bucket is encrypted with a custom KMS key, select **KMS** for the service\. 
+
+   1. For **Manual actions**, select the following:
+      + **Encrypt**
+      + **ReEncrypt from** and **ReEncrypt to**
+      + **Decrypt**
+      + **DescribeKey**
+      + **GenerateDataKey**
+
+   1. For **Resources**, choose **Specific**\.
+
+   1. For **key**, choose **Add ARN**\. Enter the ARN of your custom key as the resource, and then choose **Add**\.
+
+      For more information, see [Protecting Data Using Server\-Side Encryption with KMS keys Stored in AWS Key Management Service \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) in the *Amazon Simple Storage Service User Guide*\.
+
+   1. If you want Amazon RDS to access to access other buckets, add the ARNs for these buckets\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
 
 1. Choose **Next: Tags** and then **Next: Review**\.
 
@@ -273,7 +285,7 @@ This step assumes that you have created the IAM policy in [Step 1: Create an IAM
 
 #### Console<a name="oracle-s3-integration.preparing.role.console"></a>
 
-**To create an IAM role to allow Amazon RDS access to an Amazon S3 bucket**
+**To create an IAM role to allow Amazon RDS to access an Amazon S3 bucket**
 
 1. Open the [IAM Management Console](https://console.aws.amazon.com/iam/home?#home)\.
 
@@ -281,17 +293,13 @@ This step assumes that you have created the IAM policy in [Step 1: Create an IAM
 
 1. Choose **Create role**\.
 
-1. For **AWS service**, choose **RDS**\.
+1. Choose **AWS service**\.
 
-1. For **Select your use case**, choose **RDS – Add Role to Database**\.
+1. For **Use cases for other AWS services:**, choose **RDS** and then **RDS – Add Role to Database**\. Then choose **Next**\.
 
-1. Choose **Next**\.
+1. For **Search** under **Permissions policies**, enter the name of the IAM policy you created in [Step 1: Create an IAM policy for your Amazon RDS role](#oracle-s3-integration.preparing.policy), and select the policy when it appears in the list\. Then choose **Next**\.
 
-1. For **Search** under **Permissions policies**, enter the name of the IAM policy you created, and choose the policy when it appears in the list\.
-
-1. Choose **Next**\.
-
-1. Set **Role name** to a name for your IAM role, for example `rds-s3-integration-role`\. You can also add an optional **Description** value\.
+1. For **Role name**, enter a name for your IAM role, for example, `rds-s3-integration-role`\. You can also add an optional **Description** value\.
 
 1. Choose **Create role**\.
 
@@ -394,7 +402,7 @@ This step assumes that you have created the IAM policy in [Step 1: Create an IAM
 The last step in configuring permissions for Amazon S3 integration is associating your IAM role with your DB instance\. Note the following requirements:
 + You must have access to an IAM role with the required Amazon S3 permissions policy attached to it\. 
 + You can only associate one IAM role with your RDS for Oracle DB instance at a time\.
-+ The status of your instance must be `available`\.
++ Your DB instance must be in the **Available** state\.
 
 #### Console<a name="oracle-s3-integration.preparing.instance.console"></a>
 
@@ -404,13 +412,11 @@ The last step in configuring permissions for Amazon S3 integration is associatin
 
 1. Choose **Databases** from the navigation pane\.
 
-1. If your database instance is unavailable, choose **Actions** and then **Start**\. When the instance status shows **Started**, go to the next step\.
-
-1. Choose the Oracle DB instance name to display its details\.
+1. Choose the RDS for Oracle DB instance name to display its details\.
 
 1. On the **Connectivity & security** tab, scroll down to the **Manage IAM roles** section at the bottom of the page\.
 
-1. Choose the role to add in the **Add IAM roles to this instance** section\.
+1. For **Add IAM roles to this instance**, choose the role that you created in [Step 3: Create an IAM role for your DB instance and attach your policy](#oracle-s3-integration.preparing.role)\.
 
 1. For **Feature**, choose **S3\_INTEGRATION**\.  
 ![\[Add S3_INTEGRATION role\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ora-s3-integration-role.png)
@@ -443,7 +449,7 @@ Replace `your-role-arn` with the role ARN that you noted in a previous step\. `S
 
 ## Adding the Amazon S3 integration option<a name="oracle-s3-integration.preparing.option-group"></a>
 
-To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS for Oracle DB instance must be associated with an option group that includes the `S3_INTEGRATION` option\.
+To integrate Amazon RDS for Oracle with Amazon S3, your DB instance must be associated with an option group that includes the `S3_INTEGRATION` option\.
 
 ### Console<a name="oracle-s3-integration.preparing.option-group.console"></a>
 
@@ -457,11 +463,11 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS for Ora
 
    For information about adding an option to an option group, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
-1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
+1. Create a new RDS for Oracle DB instance and associate the option group with it, or modify an RDS for Oracle DB instance to associate the option group with it\.
 
    For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-   For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+   For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ### AWS CLI<a name="oracle-s3-integration.preparing.option-group.cli"></a>
 
@@ -492,15 +498,15 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS for Ora
       --options OptionName=S3_INTEGRATION,OptionVersion=1.0
    ```
 
-1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
+1. Create a new RDS for Oracle DB instance and associate the option group with it, or modify an RDS for Oracle DB instance to associate the option group with it\.
 
    For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-   For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+   For information about modifying an RDS for Oracle DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ## Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket<a name="oracle-s3-integration.using"></a>
 
-To transfer files between an Oracle DB instance and an Amazon S3 bucket, you can use the Amazon RDS package `rdsadmin_s3_tasks`\. You can compress files with GZIP when uploading them, and decompress them when downloading\.
+To transfer files between an RDS for Oracle DB instance and an Amazon S3 bucket, you can use the Amazon RDS package `rdsadmin_s3_tasks`\. You can compress files with GZIP when uploading them, and decompress them when downloading\.
 
 **Note**  
 The procedures in `rdsadmin_s3_tasks` upload or download the files in a single directory\. You can't include subdirectories in these operations\.
@@ -683,7 +689,7 @@ You can use the `UTL_FILE.FREMOVE` Oracle procedure to remove files from a direc
 
 ### Monitoring the status of a file transfer<a name="oracle-s3-integration.using.task-status"></a>
 
-File transfer tasks publish Amazon RDS events when they start and when they complete\. For information about viewing events, see [Viewing Amazon RDS events](USER_ListEvents.md)\.
+File transfer tasks publish Amazon RDS events when they start and when they complete\. The event message contains the task ID for the file transfer\. For information about viewing events, see [Viewing Amazon RDS events](USER_ListEvents.md)\.
 
 You can view the status of an ongoing task in a bdump file\. The bdump files are located in the `/rdsdbdata/log/trace` directory\. Each bdump file name is in the following format\.
 
@@ -696,11 +702,30 @@ Replace `task-id` with the ID of the task that you want to monitor\.
 **Note**  
 Tasks are executed asynchronously\.
 
-You can use the `rdsadmin.rds_file_util.read_text_file` stored procedure to view the contents of bdump files\. For example, the following query returns the contents of the `dbtask-1546988886389-2444.log` bdump file\.
+You can use the `rdsadmin.rds_file_util.read_text_file` stored procedure to view the contents of bdump files\. For example, the following query returns the contents of the `dbtask-1234567890123-1234.log` bdump file\.
 
 ```
-SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-1546988886389-2444.log'));
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-1234567890123-1234.log'));
 ```
+
+The following sample shows the log file for a failed transfer\.
+
+```
+TASK_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1234567890123-1234
+
+
+TEXT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2023-04-17 18:21:33.993 UTC [INFO ] File #1: Uploading the file /rdsdbdata/datapump/A123B4CDEF567890G1234567890H1234/sample.dmp to Amazon S3 with bucket name mys3bucket and key sample.dmp.
+2023-04-17 18:21:34.188 UTC [ERROR] RDS doesn't have permission to write to Amazon S3 bucket name mys3bucket and key sample.dmp.
+2023-04-17 18:21:34.189 UTC [INFO ] The task failed.
+```
+
+## Troubleshooting Amazon S3 integration<a name="oracle-s3-integration.troubleshooting"></a>
+
+For troubleshooting tips, see the AWS re:Post article [How do troubleshoot issues when I integrate Amazon RDS for Oracle with Amazon S3?](https://repost.aws/en/knowledge-center/rds-oracle-s3-integration)\.
 
 ## Removing the Amazon S3 integration option<a name="oracle-s3-integration.removing"></a>
 

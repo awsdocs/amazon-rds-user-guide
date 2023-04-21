@@ -127,6 +127,9 @@ Before you can back up or restore TDE certificates on RDS for SQL Server, make s
 1. Make sure that you have a symmetric encryption KMS key\. You have the following options:
    + If you have an existing KMS key in your account, you can use it\. No further action is necessary\.
    + If you don't have an existing symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
+   + Enable Amazon S3 integration to transfer files between the RDS DB instance and Amazon S3\.
+
+     For more information on enabling Amazon S3 integration, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
 ### Limitations<a name="TDE.Limitations"></a>
 
@@ -299,7 +302,7 @@ The following procedure restores an RDS for SQL Server TDE certificate to an on\
 
 **To restore a TDE certificate**
 
-1. Copy the TDE certificate backup file and private key file from Amazon S3 to the destination instance\.
+1. Copy the TDE certificate backup file and private key file from Amazon S3 to the destination instance\. For more information on copying files from Amazon S3, see [Transferring files between RDS for SQL Server and Amazon S3](User.SQLServer.Options.S3-integration.md#Appendix.SQLServer.Options.S3-integration.using)\.
 
 1. Use your KMS key to decrypt the output cipher text to retrieve the plain text of the data key\. The cipher text is located in the S3 metadata of the private key backup file\.
 

@@ -164,6 +164,7 @@ sponsored by Amazon.
          + [Overview of Amazon RDS event notification](USER_Events.overview.md)
          + [Granting permissions to publish notifications to an Amazon SNS topic](USER_Events.GrantingPermissions.md)
          + [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)
+         + [Amazon RDS event notification tags and attributes](USER_Events.TagsAttributesForFiltering.md)
          + [Listing Amazon RDS event notification subscriptions](USER_Events.ListSubscription.md)
          + [Modifying an Amazon RDS event notification subscription](USER_Events.Modifying.md)
          + [Adding a source identifier to an Amazon RDS event notification subscription](USER_Events.AddingSource.md)

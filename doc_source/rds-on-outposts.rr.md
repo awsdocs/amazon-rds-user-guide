@@ -2,13 +2,14 @@
 
 Amazon RDS on AWS Outposts uses the MySQL and PostgreSQL DB engines' built\-in replication functionality to create a read replica from a source DB instance\. The source DB instance becomes the primary DB instance\. Updates made to the primary DB instance are asynchronously copied to the read replica\. You can reduce the load on your primary DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\.
 
-When you create a read replica from an RDS on Outposts DB instance, the read replica can use a customer\-owned IP address \(CoIP\)\. For more information, see [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)\.
+When you create a read replica from an RDS on Outposts DB instance, the read replica use a customer\-owned IP address \(CoIP\)\. For more information, see [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)\.
 
 Read replicas on RDS on Outposts have the following limitations:
 + You can't create read replicas for RDS for SQL Server on RDS on Outposts DB instances\.
 + Cross\-Region read replicas aren't supported on RDS on Outposts\.
 + Cascading read replicas aren't supported on RDS on Outposts\.
 + The source RDS on Outposts DB instance can't have local backups\. The backup target for the source DB instance must be your AWS Region\.
++ Read replicas require customer\-owned IP \(CoIP\) pools\. For more information, see [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)\.
 
 You can create a read replica from an RDS on Outposts DB instance using the AWS Management Console, AWS CLI, or RDS API\. For more information on read replicas, see [Working with DB instance read replicas](USER_ReadRepl.md)\.
 

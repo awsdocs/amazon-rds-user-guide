@@ -4,7 +4,7 @@ You can delete a DB Multi\-AZ DB cluster using the AWS Management Console, the A
 
 The time required to delete a Multi\-AZ DB cluster can vary depending on certain factors\. These are the backup retention period \(that is, how many backups to delete\), how much data is deleted, and whether a final snapshot is taken\.
 
-You can't delete a Multi\-AZ DB cluster when deletion protection is turned on for it\. For more information, see [Deletion protection](USER_DeleteInstance.md#USER_DeleteInstance.DeletionProtection)\. You can turn off deletion protection by modifying the Multi\-AZ DB cluster\. For more information, see [Modifying a Multi\-AZ DB cluster](modify-multi-az-db-cluster.md)\.
+You can't delete a Multi\-AZ DB cluster when deletion protection is turned on for it\. For more information, see [Prerequisites for deleting a DB instance](USER_DeleteInstance.md#USER_DeleteInstance.DeletionProtection)\. You can turn off deletion protection by modifying the Multi\-AZ DB cluster\. For more information, see [Modifying a Multi\-AZ DB cluster](modify-multi-az-db-cluster.md)\.
 
 ## Console<a name="USER_DeleteMultiAZDBCluster.Deleting.CON"></a>
 

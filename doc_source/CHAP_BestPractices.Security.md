@@ -9,4 +9,8 @@ Use AWS Identity and Access Management \(IAM\) accounts to control access to Ama
 
 For more information about Amazon RDS security, see [Security in Amazon RDS](UsingWithRDS.md)\. For more information about IAM, see [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, see [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\. 
 
+AWS Security Hub uses security controls to evaluate resource configurations and security standards to help you comply with various compliance frameworks\. For more information about using Security Hub to evaluate RDS resources, see [Amazon Relational Database Service controls](https://docs.aws.amazon.com/securityhub/latest/userguide/rds-controls.html) in the AWS Security Hub User Guide\.
+
+You can monitor your usage of RDS as it relates to security best practices by using Security Hub\. For more information, see [What is AWS Security Hub?](https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html)\.
+
 Use the AWS Management Console, the AWS CLI, or the RDS API to change the password for your master user\. If you use another tool, such as a SQL client, to change the master user password, it might result in privileges being revoked for the user unintentionally\.

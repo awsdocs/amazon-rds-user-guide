@@ -28,8 +28,9 @@ To list diagnostic incidents for Oracle, use the Amazon RDS function `rdsadmin.r
 This function uses the following common parameters:
 +  `incident_id`
 +  `problem_id`
++  `last`
 
-If you specify both of the preceding parameters, `incident_id` overrides `problem_id`\. For more information, see [Common parameters for diagnostic procedures](#Appendix.Oracle.CommonDBATasks.CommonDiagParameters)\.
+If you specify `incident_id` and `problem_id`, then `incident_id` overrides `problem_id`\. For more information, see [Common parameters for diagnostic procedures](#Appendix.Oracle.CommonDBATasks.CommonDiagParameters)\.
 
 This function uses the following additional parameter\.
 
@@ -117,7 +118,7 @@ To list diagnostic problems for Oracle, use the Amazon RDS function `rdsadmin.rd
 
 By default, the function lists the 50 most recent problems\. 
 
-This function uses the common parameter `problem_id`\. For more information, see [Common parameters for diagnostic procedures](#Appendix.Oracle.CommonDBATasks.CommonDiagParameters)\.
+This function uses the common parameters `problem_id` and `last`\. For more information, see [Common parameters for diagnostic procedures](#Appendix.Oracle.CommonDBATasks.CommonDiagParameters)\.
 
 To get the task ID for all problems, call the `rdsadmin.rdsadmin_adrci_util.list_adrci_problems` function without any arguments, and store the output in a SQL client variable\.
 
@@ -237,7 +238,7 @@ TEXT
 
 ## Showing trace files<a name="Appendix.Oracle.CommonDBATasks.ShowTrace"></a>
 
-You can show trace files using the Amazon RDS function `rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile`\.
+You can use the Amazon RDS function `rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile` to list trace files under the trace directory and all incident directories under the current ADR home\. You can also show the contents of trace files and incident trace files\.
 
 This function uses the following parameter\.
 
@@ -248,7 +249,7 @@ This function uses the following parameter\.
 | --- | --- | --- | --- | --- | --- | 
 |  `filename`  |  varchar2  | A valid trace file name |  Null  |  No  |  If the value is null, the function shows all trace files\. If it isn't null, the function shows the specified file\.  | 
 
-To show the trace file, call the Amazon RDS function `rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile` with the `incident_id` parameter\.
+To show the trace file, call the Amazon RDS function `rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile`\.
 
 ```
 SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile;
