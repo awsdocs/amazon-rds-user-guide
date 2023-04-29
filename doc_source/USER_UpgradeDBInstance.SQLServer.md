@@ -12,7 +12,7 @@ Alternatively, you can enable the **Auto minor version upgrade** option when cre
 aws rds describe-db-engine-versions --engine sqlserver-se --engine-version 14.00.3281.6.v1
 ```
 
-In the following example, the CLI command returns a response indicating that `AutoUpgrade` is **true**\.
+In the following example, the CLI command returns a response showing `AutoUpgrade` is **true**, indicating that upgrades are automatic\.
 
 ```
 ...
@@ -35,6 +35,7 @@ For more information about performing upgrades, see [Upgrading a SQL Server DB i
 + [Overview of upgrading](#USER_UpgradeDBInstance.SQLServer.Overview)
 + [Major version upgrades](#USER_UpgradeDBInstance.SQLServer.Major)
 + [Multi\-AZ and in\-memory optimization considerations](#USER_UpgradeDBInstance.SQLServer.MAZ)
++ [Read replica considerations](#USER_UpgradeDBInstance.SQLServer.readreplica)
 + [Option group considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG)
 + [Parameter group considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.PG)
 + [Testing an upgrade](#USER_UpgradeDBInstance.SQLServer.UpgradeTesting)
@@ -131,6 +132,12 @@ Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby instances are upgraded\. Amazon RDS does rolling upgrades\. You have an outage only for the duration of a failover\.
 
 SQL Server 2014 through 2019 Enterprise Edition support in\-memory optimization\.
+
+## Read replica considerations<a name="USER_UpgradeDBInstance.SQLServer.readreplica"></a>
+
+During a database version upgrade, Amazon RDS upgrades all of your read replicas along with the primary DB instance\. Amazon RDS does not support database version upgrades on the read replicas separately\. For more information on read replicas, see [Working with read replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)\.
+
+When you perform a database version upgrade of the primary DB instance, all its read\-replicas are also automatically upgraded\. Amazon RDS will upgrade all of the read replicas simultaneously before upgrading the primary DB instance\. Read replicas may not be available until the database version upgrade on the primary DB instance is complete\.
 
 ## Option group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.OG"></a>
 

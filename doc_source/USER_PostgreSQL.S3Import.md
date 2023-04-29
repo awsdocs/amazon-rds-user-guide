@@ -62,6 +62,8 @@ The functions for importing data from Amazon S3 and exporting data to Amazon S3 
 **To import S3 data into Amazon RDS**
 
 First, gather the details that you need to supply to the function\. These include the name of the table on your RDS for PostgreSQL DB instance, and the bucket name, file path, file type, and AWS Region where the Amazon S3 data is stored\. For more information, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service User Guide*\.
+**Note**  
+Multi part data import from Amazon S3 isn't currently supported\.
 
 1. Get the name of the table into which the `aws_s3.table_import_from_s3` function is to import the data\. As an example, the following command creates a table `t1` that can be used in later steps\. 
 

@@ -5,7 +5,7 @@ Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS
 **Topics**
 + [Working with container databases \(CDBs\) in RDS Custom for Oracle](#custom-managing.multitenant)
 + [Working with high availability features for RDS Custom for Oracle](#custom-managing.ha)
-+ [Pausing and resuming RDS Custom automation](#custom-managing.pausing)
++ [Customizing your RDS Custom environment](#custom-managing.customizing-env)
 + [Modifying your RDS Custom for Oracle DB instance](#custom-managing.modifying)
 + [Changing the time zone of an RDS Custom for Oracle DB instance](#custom-managing.timezone)
 + [Changing the character set of an RDS Custom for Oracle DB instance](#custom-managing.character-set)
@@ -59,23 +59,55 @@ To learn how to configure high availability, see the whitepaper [Build high avai
 + Configure Oracle Fast\-Failover Observer \(FSFO\) to monitor your high availability instances\.
 + Allow the observer to perform automatic failover when necessary conditions are met\.
 
-## Pausing and resuming RDS Custom automation<a name="custom-managing.pausing"></a>
+## Customizing your RDS Custom environment<a name="custom-managing.customizing-env"></a>
 
-RDS Custom automatically provides monitoring and instance recovery for an RDS Custom for Oracle DB instance\. If you need to customize your DB instance, do the following:
+RDS Custom for Oracle includes built\-in features that allow you to customize your DB instance environment without pausing automation\. For example, you can use RDS APIs to customize your environment as follows:
++ Create and restore DB snapshots to create a clone environment\.
++ Create read replicas\.
++ Modify storage settings\.
++ Change the CEV to apply release updates
 
-1. Pause RDS Custom automation for a specified period\. The pause ensures that your customizations don't interfere with RDS Custom automation\.
+For some customizations, such as changing the time zone or character set, you can't use the RDS APIs\. In these cases, you need to change the environment manually by accessing your Amazon EC2 instance as the root user or logging in to your Oracle database as `SYSDBA`\. 
 
-1. Customize the RDS Custom for Oracle DB instance as needed\.
+To customize your instance manually, you must pause and resume RDS Custom automation\. This pause ensures that your customizations don't interfere with RDS Custom automation\. In this way, you avoid breaking the support perimeter, which places the instance in the `unsupported-configuration` state until you fix the underlying issues\. Pausing and resuming are the only supported automation tasks when you modify an RDS Custom for Oracle DB instance\.
 
-1. Do either of the following:
+### General steps for customizing your RDS Custom environment<a name="custom-managing.pausing.general-steps"></a>
+
+To customize your RDS Custom DB instance, complete the following steps:
+
+1. Pause RDS Custom automation for a specified period using the console or CLI\. 
+
+1. Identify your underlying Amazon EC2 instance\.
+
+1. Connect to your underlying Amazon EC2 instance using SSH keys or AWS Systems Manager\.
+
+1. Verify your current configuration settings at the database or operating system layer\.
+
+   You can validate your changes by comparing the initial configuration to the changed configuration\. Depending on the type of customization, use OS tools or database queries\.
+
+1. Customize your RDS Custom for Oracle DB instance as needed\.
+
+1. Reboot your instance or database, if required\.
+**Note**  
+In an on\-premises Oracle CDB, you can preserve a specified open mode for PDBs using a built\-in command or after a startup trigger\. This mechanism brings PDBs to a specified state when the CDB restarts\. When opening your CDB, RDS Custom automation discards any user\-specified preserved states and attempts to open all PDBs\. If RDS Custom can't open all PDBs, the following event is issued: `The following PDBs failed to open: list-of-PDBs`\.
+
+1. Verify your new configuration settings by comparing them with the previous settings\.
+
+1. Resume RDS Custom automation in either of the following ways:
    + Resume automation manually\.
-**Important**  
-Pausing and resuming automation are the only supported automation tasks when modifying an RDS Custom for Oracle DB instance\.
    + Wait for the pause period to end\. In this case, RDS Custom resumes monitoring and instance recovery automatically\.
 
-In an on\-premises Oracle CDB, you can preserve a specified open mode for PDBs using a built\-in command or after a startup trigger\. This mechanism brings PDBs to a specified state when the CDB restarts\. When opening your CDB, RDS Custom automation always discards any user\-specified preserved states and attempts to open all PDBs\. If RDS Custom can't open all PDBs, the following event is issued: `The following PDBs failed to open: list-of-PDBs`\.
+1. Verify the RDS Custom automation framework
 
-### Console<a name="custom-managing.pausing.console"></a>
+   If you followed the preceding steps correctly, RDS Custom starts an automated backup\. The status of the instance in the console shows **Available**\.
+
+For best practices and step\-by\-step instructions, see the AWS blog posts [Make configuration changes to an Amazon RDS Custom for Oracle instance: Part 1](http://aws.amazon.com/blogs/database/part-1-make-configuration-changes-to-an-amazon-rds-custom-for-oracle-instance/) and [Recreate an Amazon RDS Custom for Oracle database: Part 2](http://aws.amazon.com/blogs/database/part-2-recreate-an-amazon-rds-custom-for-oracle-database/)\.
+
+### Pausing and resuming your RDS Custom DB instance<a name="custom-managing.pausing"></a>
+
+You can pause and resume automation for your DB instance using the console or CLI\. 
+
+#### Console<a name="custom-managing.pausing.console"></a>
 
 **To pause or resume RDS Custom automation**
 
@@ -101,7 +133,7 @@ In an on\-premises Oracle CDB, you can preserve a specified open mode for PDBs u
 
    In the **Summary** pane, **RDS Custom automation mode** indicates the automation status\. If automation is paused, the value is **Paused\. Automation resumes in *num* minutes**\.
 
-### AWS CLI<a name="custom-managing.pausing.CLI"></a>
+#### AWS CLI<a name="custom-managing.pausing.CLI"></a>
 
 To pause or resume RDS Custom automation, use the `modify-db-instance` AWS CLI command\. Identify the DB instance using the required parameter `--db-instance-identifier`\. Control the automation mode with the following parameters:
 + `--automation-mode` specifies the pause state of the DB instance\. Valid values are `all-paused`, which pauses automation, and `full`, which resumes it\.
@@ -380,7 +412,7 @@ Make sure to follow these procedures\. If they aren't followed, it can result in
 
 **To change the time zone for a primary DB instance**
 
-1. Pause RDS Custom automation\. For more information, see [Pausing and resuming RDS Custom automation](#custom-managing.pausing)\.
+1. Pause RDS Custom automation\. For more information, see [Pausing and resuming your RDS Custom DB instance](#custom-managing.pausing)\.
 
 1. \(Optional\) Change the time zone of the DB instance, for example by using the following command\.
 
@@ -432,7 +464,7 @@ Changing the character set of an RDS Custom for Oracle DB instance has the follo
 
 **To change the character set of an RDS Custom for Oracle DB instance**
 
-1. Pause RDS Custom automation\. For more information, see [Pausing and resuming RDS Custom automation](#custom-managing.pausing)\.
+1. Pause RDS Custom automation\. For more information, see [Pausing and resuming your RDS Custom DB instance](#custom-managing.pausing)\.
 
 1. Log in to your database as a user with `SYSDBA` privileges\.
 
@@ -457,7 +489,7 @@ Changing the character set of an RDS Custom for Oracle DB instance has the follo
    AL32UTF8
    ```
 
-1. Resume RDS Custom automation\. For more information, see [Pausing and resuming RDS Custom automation](#custom-managing.pausing)\.
+1. Resume RDS Custom automation\. For more information, see [Pausing and resuming your RDS Custom DB instance](#custom-managing.pausing)\.
 
 ## Setting the NLS\_LANG value in RDS Custom for Oracle<a name="custom-managing.nlslang"></a>
 

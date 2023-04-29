@@ -60,7 +60,7 @@ To turn on RDS Optimized Reads, do one of the following:
 + Create an RDS for MySQL DB instance using one of these DB instance classes\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 + Modify an existing RDS for MySQL DB instance to use one of these DB instance classes\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-RDS Optimized Reads is available in all AWS Regions where one or more of these DB instance classes are supported, except for China \(Beijing\) and China \(Ningxia\)\. For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+RDS Optimized Reads is available in all AWS Regions where one or more of these DB instance classes are supported\. For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 DB instance class availability differs for AWS Regions\. To determine whether a DB instance class is supported in a specific AWS Region, see [Determining DB instance class support in AWS Regions](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.RegionSupport)\.
 

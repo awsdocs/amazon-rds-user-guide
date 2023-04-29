@@ -54,7 +54,7 @@ In the following list, you find some of the other predefined roles that are crea
 + **rdsadmin** – A role that's created to handle many of the management tasks that the administrator with `superuser` privileges would perform on a standalone PostgreSQL database\. This role is used internally by RDS for PostgreSQL for many management tasks\. 
 + **rdstopmgr** – A role that's used internally by Amazon RDS to support Multi\-AZ deployments\. 
 
-To see all predefined roles, you can connect to your RDS for PostgreSQL DB instance and use the `psq1 \du` metacommand\. The output looks as follows: 
+To see all predefined roles, you can connect to your RDS for PostgreSQL DB instance and use the `psql \du` metacommand\. The output looks as follows: 
 
 ```
 List of roles

@@ -130,7 +130,7 @@ To describe the retained automated backups for your existing DB instances using 
 **Note**  
 You can only retain automated backups of DB instances, not Multi\-AZ DB clusters\.
 
-When you delete a DB instance, you can choose to retain automated backups for up to seven days\.
+When you delete a DB instance, you can choose to retain automated backups\. Automated backups can be retained for a number of days equal to the backup retention period configured for the DB instance at the time when you delete it\.
 
 Retained automated backups contain system snapshots and transaction logs from a DB instance\. They also include your DB instance properties like allocated storage and DB instance class, which are required to restore it to an active instance\.
 

@@ -156,7 +156,7 @@ Feature availability and support varies across specific versions of each databas
 ## Limitations for blue/green deployments<a name="blue-green-deployments-limitations"></a>
 
 The following limitations apply to blue/green deployments:
-+ MySQL versions 8\.0\.13 and lower have a [community bug](https://bugs.mysql.com/bug.php?id=93901) that prevents RDS from supporting them for blue/green deployments\.
++ MySQL versions 8\.0\.11 through 8\.0\.13 have a [community bug](https://bugs.mysql.com/bug.php?id=93901) that prevents RDS from supporting them for blue/green deployments\.
 + Blue/green deployments aren't supported for the following features:
   + Amazon RDS Proxy
   + Cascading read replicas

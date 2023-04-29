@@ -517,4 +517,3 @@ Managing master user passwords with Secrets Manager isn't supported for the foll
 + Amazon RDS Blue/Green Deployments
 + Amazon RDS Custom
 + Oracle Data Guard switchover
-+ Oracle Multitenant

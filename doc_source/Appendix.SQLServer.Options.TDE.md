@@ -127,9 +127,10 @@ Before you can back up or restore TDE certificates on RDS for SQL Server, make s
 1. Make sure that you have a symmetric encryption KMS key\. You have the following options:
    + If you have an existing KMS key in your account, you can use it\. No further action is necessary\.
    + If you don't have an existing symmetric encryption KMS key in your account, create a KMS key by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
-   + Enable Amazon S3 integration to transfer files between the RDS DB instance and Amazon S3\.
 
-     For more information on enabling Amazon S3 integration, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
+1. Enable Amazon S3 integration to transfer files between the DB instance and Amazon S3\.
+
+   For more information on enabling Amazon S3 integration, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
 ### Limitations<a name="TDE.Limitations"></a>
 

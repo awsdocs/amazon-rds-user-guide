@@ -510,4 +510,4 @@ python -m json.tool < manifest.json
 
 ## Step 7: Add necessary IAM permissions<a name="custom-cev.preparing.iam"></a>
 
-Make sure that the IAM principal that creates the CEV has the necessary policies described in [Step 4: Grant required permissions to your IAM principal](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
+Make sure that the IAM principal that creates the CEV has the necessary policies described in [Step 4: Grant required permissions to your IAM user or role](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.

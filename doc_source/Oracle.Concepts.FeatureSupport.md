@@ -87,7 +87,7 @@ This feature changes to Continuous Query Notification in Oracle Database 12c Rel
 
   For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\.
 + Partitioning
-+ Sharding
++ Application\-level sharding \(but not the Oracle Sharding feature\)
 + Spatial and Graph
 
   For more information, see [Oracle Spatial](Oracle.Options.Spatial.md)\.

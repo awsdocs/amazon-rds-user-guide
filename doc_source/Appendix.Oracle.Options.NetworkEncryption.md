@@ -85,7 +85,7 @@ When a connection is attempted, the preceding lines generate a trace file on the
 
 ## Modifying NNE option settings<a name="Oracle.Options.NNE.ModifySettings"></a>
 
-After you enable NNE, you can modify settings for the option\. For more information about how to modify option settings, see [Modifying an option setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [NNE option settings](#Oracle.Options.NNE.Options)\. 
+After you enable NNE, you can modify its settings\. Currently, you can modify NNE option settings only with the AWS CLI or RDS API\. You can't use the console\. To learn how to modify option settings using the CLI, see [AWS CLI](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption.CLI)\. For more information about each setting, see [NNE option settings](#Oracle.Options.NNE.Options)\. 
 
 **Topics**
 + [Modifying CRYPTO\_CHECKSUM\_\* values](#Oracle.Options.NNE.ModifySettings.checksum)

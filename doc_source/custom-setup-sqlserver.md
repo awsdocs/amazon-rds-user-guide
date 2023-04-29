@@ -31,9 +31,11 @@ Before creating an RDS Custom for SQL Server DB instance, make sure that your en
   These are either used to create an RDS Custom DB instance or passed as a parameter in a creation request\.
 + Confirm there aren't any service control policies \(SCPs\) restricting account level permissions\.
 
-  If the account that you're using is part of an AWS organization, it might have service control policies \(SCPs\) restricting account level permissions\. Make sure that the SCPs don't restrict the permissions on users and roles that you create using the following procedures\.
+  If the account that you're using is part of an AWS Organization, it might have service control policies \(SCPs\) restricting account level permissions\. Make sure that the SCPs don't restrict the permissions on users and roles that you create using the following procedures\.
 
-  For more information about SCPs, see [Service control policies \(SCPs\)](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) in the *AWS Organizations User Guide*\. Use the [describe\-organization](https://docs.aws.amazon.com/cli/latest/reference/organizations/describe-organization.html) AWS CLI command to check whether your account is part of an AWS organization\.
+  For more information about SCPs, see [Service control policies \(SCPs\)](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) in the *AWS Organizations User Guide*\. Use the [describe\-organization](https://docs.aws.amazon.com/cli/latest/reference/organizations/describe-organization.html) AWS CLI command to check whether your account is part of an AWS Organization\.
+
+  For more information about AWS Organizations, see [What is AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html) in the *AWS Organizations User Guide*\.
 
 **Note**  
 For a step\-by\-step tutorial on how to set up prerequisites and launch Amazon RDS Custom for SQL Server, see the blog post [Get started with Amazon RDS Custom for SQL Server using an CloudFormation template \(Network setup\)](http://aws.amazon.com/blogs/database/get-started-with-amazon-rds-custom-for-sql-server-using-an-aws-cloudformation-template-network-setup/)
@@ -44,11 +46,13 @@ For general requirements that apply to RDS Custom for SQL Server, see [General r
 
 ## Download and install the AWS CLI<a name="custom-setup-sqlserver.cli"></a>
 
-You can use the AWS Command Line Interface \(AWS CLI\) to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI\. For information about downloading and installing the AWS CLI, see [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)\.
+AWS provides you with a command\-line interface to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI\.
 
-If you plan to access RDS Custom only from the AWS Management Console, skip this step\.
+For information about downloading and installing the AWS CLI, see [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)\.
 
-If you have already downloaded the AWS CLI for Amazon RDS or RDS Custom for Oracle, skip this step\.
+Skip this step if either of the following is true:
++ You plan to access RDS Custom only from the AWS Management Console\.
++ You have already downloaded the AWS CLI for Amazon RDS or a different RDS Custom DB engine\.
 
 ## Grant required permissions to your IAM principal<a name="custom-setup-sqlserver.iam-user"></a>
 
@@ -125,7 +129,7 @@ You can configure your IAM instance profile role, virtual private cloud \(VPC\),
 + [Configuring with AWS CloudFormation](#custom-setup-sqlserver.cf) \(recommended\)
 + [Configuring manually](#custom-setup-sqlserver.manual)
 
-If your account is part of an AWS organization, make sure that the permissions required by the instance profile role aren’t restricted by service control policies \(SCPs\)\.
+If your account is part of an AWS Organization, make sure that the permissions required by the instance profile role aren’t restricted by service control policies \(SCPs\)\.
 
 The following networking configurations are designed to work best with DB instances that aren't publicly accessible\. That is, you can’t connect directly to the DB instance from outside the VPC\. 
 
@@ -275,7 +279,7 @@ RDS Custom doesn't support AWS managed KMS keys\.
 
 Make sure that your symmetric encryption key grants access to the `kms:Decrypt` and `kms:GenerateDataKey` operations to the AWS Identity and Access Management \(IAM\) role in your IAM instance profile\. If you have a new symmetric encryption key in your account, no changes are required\. Otherwise, make sure that your symmetric encryption key's policy grants access to these operations\.
 
-For more information, see [Step 3: Configure IAM and your VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
+For more information, see [Step 3: Configure IAM and your Amazon VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
 
 #### Creating your IAM role and instance profile manually<a name="custom-setup-sqlserver.iam"></a>
 
@@ -321,7 +325,7 @@ Make sure that the permissions in the access policy aren't restricted by SCPs or
 The following example creates the access policy named `AWSRDSCustomSQLServerIamRolePolicy`, and adds it to the `AWSRDSCustomSQLServerInstanceRole` role\. This example assumes that the `'$REGION'`, `$ACCOUNT_ID`, and `'$CUSTOMER_KMS_KEY_ID'` variables have been set\. `'$CUSTOMER_KMS_KEY_ID'` is the ID, not the Amazon Resource Name \(ARN\), of the KMS key that you defined in [Make sure that you have a symmetric encryption AWS KMS key](#custom-setup-sqlserver.cmk)\.
 
 ```
-aws iam put-role-policy \
+                     aws iam put-role-policy \
     --role-name AWSRDSCustomSQLServerInstanceRole \
     --policy-name AWSRDSCustomSQLServerIamRolePolicy \
     --policy-document '{
@@ -520,12 +524,6 @@ aws iam put-role-policy \
                 "Resource": "arn:aws:logs:'$REGION':'$ACCOUNT_ID':log-group:rds-custom-instance-*"
             },
             {
-                "Sid": "cwlOperations2",
-                "Effect": "Allow",
-                "Action": "logs:DescribeLogGroups",
-                "Resource": "arn:aws:logs:'$REGION':'$ACCOUNT_ID':log-group:*"
-            }
-                    {
             "Condition": {
                 "StringLike": {
                     "aws:ResourceTag/AWSRDSCustom": "custom-sqlserver"

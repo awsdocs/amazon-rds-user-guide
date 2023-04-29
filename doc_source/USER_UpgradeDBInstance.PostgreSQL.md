@@ -208,7 +208,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 1. **Upgrade certain extensions before a major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. For example, upgrading from versions 9\.5\.x or 9\.6\.x to version 11\.x skips a major version\. The extensions to update include PostGIS and related extensions for processing spatial data\. 
    + `address_standardizer`
    + `address_standardizer_data_us`
-   + `postgis`
+   + `postgis_raster`
    + `postgis_tiger_geocoder`
    + `postgis_topology`
 

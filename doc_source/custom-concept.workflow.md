@@ -20,7 +20,7 @@ The steps are as follows:
 
 1. Connect your application to the DB instance endpoint\.
 
-   For more information, see [Connecting to your RDS Custom DB instance using SSH](custom-creating.md#custom-creating.ssh) and [Connecting to your RDS Custom DB instance using AWS Systems Manager](custom-creating.md#custom-creating.ssm)\.
+   For more information, see [Connecting to your RDS Custom DB instance using SSH](custom-creating.md#custom-creating.ssh) and [Connecting to your RDS Custom DB instance using Session Manager](custom-creating.md#custom-creating.ssm)\.
 
 1. \(Optional\) Access the host to customize your software\.
 
@@ -64,4 +64,4 @@ When you connect to a non\-CDB, the master user is the user for the non\-CDB\. W
 
 ## RDS Custom customization<a name="custom-concept.workflow.db-customization"></a>
 
-You can access the RDS Custom host to install or customize software\. To avoid conflicts between your changes and the RDS Custom automation, you can pause the automation for a specified period\. During this period, RDS Custom doesn't perform monitoring or instance recovery\. At the end of the period, RDS Custom resumes full automation\. For more information, see [Pausing and resuming RDS Custom automation](custom-managing.md#custom-managing.pausing)\.
+You can access the RDS Custom host to install or customize software\. To avoid conflicts between your changes and the RDS Custom automation, you can pause the automation for a specified period\. During this period, RDS Custom doesn't perform monitoring or instance recovery\. At the end of the period, RDS Custom resumes full automation\. For more information, see [Pausing and resuming your RDS Custom DB instance](custom-managing.md#custom-managing.pausing)\.

@@ -137,7 +137,7 @@ ${ORACLE_HOME}/oracle_common/bin/rcu \
 -scriptLocation /tmp/rcuscripts \
 -f < /tmp/passwordfile.txt
 ```
-Now you can edit the generated script, connect to your Oracle DB instance, and run the script\. The generated script is named `script_systemLoad.sql`\. For information about connecting to your Oracle DB instance, see [Step 4: Connect your SQL client to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md#CHAP_GettingStarted.Connecting.Oracle)\.   
+Now you can edit the generated script, connect to your Oracle DB instance, and run the script\. The generated script is named `script_systemLoad.sql`\. For information about connecting to your Oracle DB instance, see [Step 3: Connect your SQL client to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md#CHAP_GettingStarted.Connecting.Oracle)\.   
 The following example populates the schemas for the SOA Infrastructure component \(and its dependencies\)\.   
 For Linux, macOS, or Unix:  
 

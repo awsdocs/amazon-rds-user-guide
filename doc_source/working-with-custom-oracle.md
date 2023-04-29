@@ -11,4 +11,5 @@ Following, you can find instructions for creating, managing, and maintaining you
 + [Managing an Amazon RDS Custom for Oracle DB instance](custom-managing.md)
 + [Working with Oracle replicas for RDS Custom for Oracle](custom-rr.md)
 + [Backing up and restoring an Amazon RDS Custom for Oracle DB instance](custom-backup.md)
++ [Migrating an on\-premises database to RDS Custom for Oracle](custom-migrating-oracle.md)
 + [Upgrading a DB instance for Amazon RDS Custom for Oracle](custom-upgrading.md)

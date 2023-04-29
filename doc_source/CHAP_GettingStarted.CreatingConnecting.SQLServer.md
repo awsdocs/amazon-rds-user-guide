@@ -2,6 +2,8 @@
 
 This tutorial creates an EC2 instance and an RDS for Microsoft SQL Server DB instance\. The tutorial shows you how to access the DB instance from the EC2 instance using the Microsoft SQL Server Management Studio client\. As a best practice, this tutorial creates a private DB instance in a virtual private cloud \(VPC\)\. In most cases, other resources in the same VPC, such as EC2 instances, can access the DB instance, but resources outside of the VPC can't access it\. 
 
+After you complete the tutorial, there is a public and private subnet in each Availability Zone in your VPC\. In one Availability Zone, the EC2 instance is in the public subnet, and the DB instance is in the private subnet\.
+
 **Important**  
 There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.
 
@@ -15,12 +17,11 @@ When you use **Standard create** instead of **Easy create**, you can specify mor
 
 **Topics**
 + [Prerequisites](#CHAP_GettingStarted.Prerequisites.SQLServer)
-+ [Step 1: Create a SQL Server DB instance](#CHAP_GettingStarted.Creating.SQLServer)
-+ [Step 2: Create an EC2 instance](#CHAP_GettingStarted.Creating.SQLServer.EC2)
-+ [Step 3: Connect your EC2 instance and SQL Server DB instance automatically](#CHAP_GettingStarted.Connecting.EC2.SQLServer)
-+ [Step 4: Connect to your SQL Server DB instance](#CHAP_GettingStarted.Connecting.SQLServer)
-+ [Step 5: Explore your sample SQL Server DB instance](#CHAP_GettingStarted.SQLServer.Exploring)
-+ [Step 6: Delete the EC2 instance and DB instance](#CHAP_GettingStarted.Deleting.SQLServer)
++ [Step 1: Create an EC2 instance](#CHAP_GettingStarted.Creating.SQLServer.EC2)
++ [Step 2: Create a SQL Server DB instance](#CHAP_GettingStarted.Creating.SQLServer)
++ [Step 3: Connect to your SQL Server DB instance](#CHAP_GettingStarted.Connecting.SQLServer)
++ [Step 4: Explore your sample SQL Server DB instance](#CHAP_GettingStarted.SQLServer.Exploring)
++ [Step 5: Delete the EC2 instance and DB instance](#CHAP_GettingStarted.Deleting.SQLServer)
 
 ## Prerequisites<a name="CHAP_GettingStarted.Prerequisites.SQLServer"></a>
 
@@ -28,7 +29,57 @@ Before you begin, complete the steps in the following sections:
 + [Sign up for an AWS account](CHAP_SettingUp.md#sign-up-for-aws)
 + [Create an administrative user](CHAP_SettingUp.md#create-an-admin)
 
-## Step 1: Create a SQL Server DB instance<a name="CHAP_GettingStarted.Creating.SQLServer"></a>
+## Step 1: Create an EC2 instance<a name="CHAP_GettingStarted.Creating.SQLServer.EC2"></a>
+
+Create an Amazon EC2 instance that you will use to connect to your database\.
+
+**To create an EC2 instance**
+
+1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the upper\-right corner of the AWS Management Console, choose the AWS Region you used for the database previously\.
+
+1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown in the following image\.  
+![\[EC2 Dashboard.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
+
+   The **Launch an instance** page opens\.
+
+1. Choose the following settings on the **Launch an instance** page\.
+
+   1. Under **Name and tags**, for **Name**, enter **ec2\-database\-connect**\.
+
+   1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Windows**, and then choose the **Microsoft Windows Server 2022 Base**\. Keep the default selections for the other choices\.  
+![\[Choose an Amazon Machine Image.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tutorial_ec2_sqlserver_create1.png)
+
+   1. Under **Instance type**, choose **t2\.micro**\.
+
+   1. Under **Key pair \(login\)**, choose a **Key pair name** to use an existing key pair\. To create a new key pair for the Amazon EC2 instance, choose **Create new key pair** and then use the **Create key pair** window to create it\.
+
+      For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+
+   1. For **Firewall \(security groups\)** in Network settings, choose **Allow RDP traffic from** to connect to the EC2 instance\. 
+
+      You can choose **My IP** if the displayed IP address is correct for RDP connections\. Otherwise, you can determine the IP address to use to connect to EC2 instances in your VPC using RDP\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com/)\. An example of an IP address is 192\.0\.2\.1/32\.
+
+       In many cases, you might connect through an internet service provider \(ISP\) or from behind your firewall without a static IP address\. If so, make sure to determine the range of IP addresses used by client computers\.
+**Warning**  
+If you use `0.0.0.0/0` for RDP access, you make it possible for all IP addresses to access your public EC2 instances using RDP\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your EC2 instances using RDP\.
+
+      The following image shows an example of the **Inbound security groups rules** section\.  
+![\[Inbound security group rules for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettingsRDSMS.png)
+
+   1. Keep the default values for the remaining sections\.
+
+   1. Review a summary of your EC2 instance configuration in the **Summary** panel, and when you're ready, choose **Launch instance**\.
+
+1. On the **Launch Status** page, note the identifier for your new EC2 instance, for example: `i-1234567890abcdef0`\.  
+![\[EC2 instance identifier on Launch Status page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-ec2-id.png)
+
+1. Choose the EC2 instance identifier to open the list of EC2 instances\. 
+
+1. Wait until the **Instance state** for your EC2 instance has a status of **Running** before continuing\.
+
+## Step 2: Create a SQL Server DB instance<a name="CHAP_GettingStarted.Creating.SQLServer"></a>
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your SQL Server databases\.
 
@@ -58,14 +109,17 @@ In this example, you use **Easy create** to create a DB instance running the SQL
 
 1. For **Master username**, enter a name for the master user, or keep the default name\.
 
+1. To set up a connection with the EC2 instance you created previously, open **Set up EC2 connection \- *optional***\.
+
+   Select **Connect to an EC2 compute resource**\. Choose the EC2 instance you created previously\.  
+![\[Set up EC2 connection option.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Setup_Conn-EasyCreate.png)
+
 1. To use an automatically generated master password for the DB instance, select the **Auto generate a password** box\.
 
    To enter your master password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. Open **View default settings for Easy create**\.  
 ![\[Easy create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-sqlserver-confirm.png)
-
-   Note the setting for **VPC**\. Your DB instance and EC2 instance must reside in the same VPC to set up connectivity between them automatically in a later step\. If you didn't create a new VPC in the AWS Region, then the default VPC is selected\.
 
    You can examine the default settings used with **Easy create**\. The **Editable after database is created** column shows which options you can change after you create the database\.
    + If a setting has **No** in that column, and you want a different setting, you can use **Standard create** to create the DB instance\.
@@ -82,117 +136,12 @@ If you need to change the master user password after the DB instance is availabl
 
 1. In the **Databases** list, choose the name of the new SQL Server DB instance to show its details\.
 
-   The DB instance has a status of **Creating** until it is ready to use\.
-
-   Wait for the **Region & AZ** value to appear\. When it appears, make a note of the value because you need it later\. In the following image, the **Region & AZ** value is **us\-west\-2b**\.  
+   The DB instance has a status of **Creating** until it is ready to use\.  
 ![\[Screen capture of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-sqlserver-launch.png)
 
    When the status changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\. While the DB instance is being created, you can move on to the next step and create an EC2 instance\.
 
-## Step 2: Create an EC2 instance<a name="CHAP_GettingStarted.Creating.SQLServer.EC2"></a>
-
-Create an Amazon EC2 instance that you will use to connect to your database\.
-
-**To create an EC2 instance**
-
-1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
-
-1. In the upper\-right corner of the AWS Management Console, choose the AWS Region you used for the database previously\.
-
-1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown in the following image\.  
-![\[EC2 Dashboard.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
-
-   The **Launch an instance** page opens\.
-
-1. Choose the following settings on the **Launch an instance** page\.
-
-   1. Under **Name and tags**, for **Name**, enter **ec2\-database\-connect**\.
-
-   1. Under **Application and OS Images \(Amazon Machine Image\)**, choose **Windows**, and then choose the **Microsoft Windows Server 2022 Base**\. Keep the default selections for the other choices\.  
-![\[Choose an Amazon Machine Image.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tutorial_ec2_sqlserver_create1.png)
-
-   1. Under **Instance type**, choose **t2\.micro**\.
-
-   1. Under **Key pair \(login\)**, choose a **Key pair name** to use an existing key pair\. To create a new key pair for the Amazon EC2 instance, choose **Create new key pair** and then use the **Create key pair** window to create it\.
-
-      For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Windows Instances*\.
-
-   1. In **Network settings**, choose **Edit**\.
-
-      1. For **VPC**, choose the VPC that you used for the database\. If you didn't create a new VPC in the AWS Region, choose the default VPC\.
-
-      1. For **Subnet**, choose the subnet that is in the same Availability Zone as the database\. You noted the Availability Zone of the database when you created it previously\. If you don't know the Availability Zone of the database, you can find it in the database details\.
-
-      1. For **Auto\-assign public IP**, make sure **Enable** is selected\.
-
-         If this setting has changed to **Disable**, then there is more than one subnet in the Availability Zone, and **Subnet** is set to a private subnet\. In this case, change the **Subnet** setting to a public subnet in the Availability Zone\.
-
-      1. For **Firewall \(security groups\)**, keep the default values\.
-
-      1. For **Inbound security groups rules**, choose the source of Remote Desktop Protocol \(RDP\) connections to the EC2 instance\.
-
-         For **Source Type**, choose **My IP** if the displayed IP address is correct for RDP connections\.
-
-         Otherwise, choose **Custom** and specify the IP address or IP address range\. To determine your public IP address, open a different browser window or tab, and use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `192.0.2.1/32`\.
-
-         In many cases, you might connect through an internet service provider \(ISP\) or from behind your firewall without a static IP address\. If so, make sure to determine the range of IP addresses used by client computers\.
-**Warning**  
-If you use `0.0.0.0/0` for RDP access, you make it possible for all IP addresses to access your public EC2 instances using RDP\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your EC2 instances using RDP\.
-
-         The following image shows an example of the **Inbound security groups rules** section\.  
-![\[Inbound security group rules for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettings_sqlserver.png)
-
-   1. Keep the default values for the remaining sections\.
-
-   1. Review a summary of your EC2 instance configuration in the **Summary** panel, and when you're ready, choose **Launch instance**\.
-
-1. On the **Launch Status** page, note the identifier for your new EC2 instance, for example: `i-0b3434748fd2a6bb4`\.  
-![\[EC2 instance identifier on Launch Status page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/getting-started-ec2-id_sqlserver.png)
-
-1. Choose the EC2 instance identifier to open the list of EC2 instances\. 
-
-1. Wait until the **Instance state** for your EC2 instance has a status of **Running** before continuing\.
-
-## Step 3: Connect your EC2 instance and SQL Server DB instance automatically<a name="CHAP_GettingStarted.Connecting.EC2.SQLServer"></a>
-
-You can automatically connect an existing EC2 instance to a DB instance using the RDS console\. The RDS console simplifies setting up the connection between an EC2 instance and your SQL Server DB instance\. For this tutorial, set up a connection between the EC2 instance and the SQL Server DB instance that you created previously\.
-
-Before setting up a connection between an EC2 instance and an RDS database, make sure you meet the requirements described in [Overview of automatic connectivity with an EC2 instance](ec2-rds-connect.md#ec2-rds-connect-overview)\.
-
-If you change these security groups after you configure connectivity, the changes might affect the connection between the EC2 instance and the RDS database\.
-
-**Note**  
-You can only set up a connection between an EC2 instance and an RDS database automatically by using the AWS Management Console\. You can't set up a connection automatically with the AWS CLI or RDS API\.
-
-**To connect an EC2 instance and an RDS database automatically**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**, and then choose the RDS database\.
-
-1. For **Actions**, choose **Set up EC2 connection**\.
-
-   The **Set up EC2 connection** page appears\.
-
-1. On the **Set up EC2 connection** page, choose the EC2 instance\.  
-![\[Set up EC2 connection page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-set-up-sqlserver.png)
-
-   If no EC2 instances exist in the same VPC, choose **Create EC2 instance** to create one\. In this case, make sure the new EC2 instance is in the same VPC as the RDS database\.
-
-1. Choose **Continue**\.
-
-   The **Review and confirm** page appears\.  
-![\[EC2 connection review and confirmation page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/auto-connect-rds-ec2-confirm-sqlserver.png)
-
-1. On the **Review and confirm** page, review the changes that RDS will make to set up connectivity with the EC2 instance\.
-
-   If the changes are correct, choose **Confirm and set up**\.
-
-   If the changes aren't correct, choose **Previous** or **Cancel**\.
-
-To set up connectivity, RDS adds a security group to the EC2 instance and a security group to the DB instance\.
-
-## Step 4: Connect to your SQL Server DB instance<a name="CHAP_GettingStarted.Connecting.SQLServer"></a>
+## Step 3: Connect to your SQL Server DB instance<a name="CHAP_GettingStarted.Connecting.SQLServer"></a>
 
 In the following procedure, you connect to your DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
@@ -249,7 +198,7 @@ For more information about connecting to a Microsoft SQL Server DB instance, see
 
 For information about connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
-## Step 5: Explore your sample SQL Server DB instance<a name="CHAP_GettingStarted.SQLServer.Exploring"></a>
+## Step 4: Explore your sample SQL Server DB instance<a name="CHAP_GettingStarted.SQLServer.Exploring"></a>
 
 You can explore your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
@@ -277,7 +226,7 @@ You can explore your sample DB instance by using Microsoft SQL Server Management
    1. Run the query\. SSMS returns the SQL Server version of your Amazon RDS DB instance\.   
 ![\[SQL Query Window.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Query.png)
 
-## Step 6: Delete the EC2 instance and DB instance<a name="CHAP_GettingStarted.Deleting.SQLServer"></a>
+## Step 5: Delete the EC2 instance and DB instance<a name="CHAP_GettingStarted.Deleting.SQLServer"></a>
 
 After you connect to and explore the sample EC2 instance and DB instance that you created, delete them so you're no longer charged for them\.
 

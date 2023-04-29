@@ -6,8 +6,8 @@ You can create an RDS Custom DB instance, and then connect to it using Secure Sh
 + [Overview of Amazon RDS Custom for Oracle architecture](#custom-creating.overview)
 + [Creating an RDS Custom for Oracle DB instance](#custom-creating.create)
 + [RDS Custom service\-linked role](#custom-creating.slr)
++ [Connecting to your RDS Custom DB instance using Session Manager](#custom-creating.ssm)
 + [Connecting to your RDS Custom DB instance using SSH](#custom-creating.ssh)
-+ [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)
 + [Logging in to your RDS Custom for Oracle database as SYS](#custom-creating.sysdba)
 
 ## Overview of Amazon RDS Custom for Oracle architecture<a name="custom-creating.overview"></a>
@@ -251,147 +251,11 @@ When you create an RDS Custom DB instance, both the Amazon RDS and RDS Custom se
 
 The first time that you create an RDS Custom for Oracle DB instance, you might receive the following error: The service\-linked role is in the process of being created\. Try again later\. If you do, wait a few minutes and then try again to create the DB instance\.
 
-## Connecting to your RDS Custom DB instance using SSH<a name="custom-creating.ssh"></a>
+## Connecting to your RDS Custom DB instance using Session Manager<a name="custom-creating.ssm"></a>
 
-After you create your RDS Custom DB instance, you can connect to this instance using an SSH client\. The procedure is the same as for connecting to an Amazon EC2 instance\. For more information, see [Connecting to your Linux instance using SSH](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)\.
+After you create your RDS Custom DB instance, you can connect to it using AWS Systems Manager Session Manager\. This is the preferred technique when your DB instance isn't publicly accessible\.
 
-To connect to the DB instance, you need the key pair associated with the instance\. RDS Custom creates the key pair on your behalf\. The pair name uses the prefix `do-not-delete-rds-custom-ssh-privatekey-db-`\. AWS Secrets Manager stores your private key as a secret\.
-
-Complete the task in the following steps:
-
-1. [Configure your DB instance to allow SSH connections](#custom-managing.ssh.port-22)
-
-1. [Retrieve your secret key](#custom-managing.ssh.obtaining-key)
-
-1. [Connect to your EC2 instance using the ssh utility](#custom-managing.ssh.connecting)
-
-### Configure your DB instance to allow SSH connections<a name="custom-managing.ssh.port-22"></a>
-
-Make sure that your DB instance security group permits inbound connections on port 22 for TCP\.
-
-### Retrieve your secret key<a name="custom-managing.ssh.obtaining-key"></a>
-
-Retrieve the secret key using either AWS Management Console or the AWS CLI\.
-
-#### Console<a name="custom-managing.ssh.obtaining-key.console"></a>
-
-**To retrieve the secret key**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**, and then choose the RDS Custom DB instance to which you want to connect\.
-
-1. Choose **Configuration**\.
-
-1. Note the **Resource ID** value\. For example, the resource ID might be `db-ABCDEFGHIJKLMNOPQRS0123456`\.
-
-1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
-
-1. In the navigation pane, choose **Instances**\.
-
-1. Find the name of your EC2 instance, and choose the instance ID associated with it\. For example, the EC2 instance ID might be `i-abcdefghijklm01234`\.
-
-1. In **Details**, find **Key pair name**\. The pair name includes the resource ID\. For example, the pair name might be `do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c`\.
-
-1. In the instance summary, find **Public IPv4 DNS**\. For the example, the public Domain Name System \(DNS\) address might be `ec2-12-345-678-901.us-east-2.compute.amazonaws.com`\.
-
-1. Open the AWS Secrets Manager console at [https://console\.aws\.amazon\.com/secretsmanager/](https://console.aws.amazon.com/secretsmanager/)\.
-
-1. Choose the secret that has the same name as your key pair\.
-
-1. Choose **Retrieve secret value**\.
-
-1. Copy the private key into a text file, and then save the file with the `.pem` extension\. For example, save the file as `/tmp/do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem`\.
-
-#### AWS CLI<a name="custom-managing.ssh.obtaining-key.CLI"></a>
-
-To retrieve the private key, use the AWS CLI\.
-
-**Example**  
-To find the DB resource ID of your RDS Custom DB instance, use `aws rds [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)`\.  
-
-```
-aws rds describe-db-instances \
-    --query 'DBInstances[*].[DBInstanceIdentifier,DbiResourceId]' \
-    --output text
-```
-The following sample output shows the resource ID for your RDS Custom instance\. The prefix is `db-`\.  
-
-```
-db-ABCDEFGHIJKLMNOPQRS0123456
-```
-To find the EC2 instance ID of your DB instance, use `aws ec2 describe-instances`\. The following example uses `db-ABCDEFGHIJKLMNOPQRS0123456` for the resource ID\.  
-
-```
-aws ec2 describe-instances \
-    --filters "Name=tag:Name,Values=db-ABCDEFGHIJKLMNOPQRS0123456" \
-    --output text \
-    --query 'Reservations[*].Instances[*].InstanceId'
-```
-The following sample output shows the EC2 instance ID\.  
-
-```
-i-abcdefghijklm01234
-```
-To find the key name, specify the EC2 instance ID\.  
-
-```
-aws ec2 describe-instances \
-    --instance-ids i-0bdc4219e66944afa \
-    --output text \
-    --query 'Reservations[*].Instances[*].KeyName'
-```
-The following sample output shows the key name, which uses the prefix `do-not-delete-rds-custom-ssh-privatekey-`\.  
-
-```
-do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c
-```
-To save the private key in a \.pem file named after the key, use `aws secretsmanager`\. The following example saves the file in your `/tmp` directory\.  
-
-```
-aws secretsmanager get-secret-value \
-    --secret-id do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c \
-    --query SecretString \
-    --output text >/tmp/do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem
-```
-
-### Connect to your EC2 instance using the ssh utility<a name="custom-managing.ssh.connecting"></a>
-
-The following example assumes that you created a \.pem file that contains your private key\.
-
-Change to the directory that contains your \.pem file\. Using `chmod`, set the permissions to `400`\.
-
-```
-cd /tmp
-chmod 400 do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem
-```
-
-To obtain your public DNS name, use the command `ec2 describe-instances`\.
-
-```
-aws ec2 describe-instances \
-    --instance-ids i-abcdefghijklm01234 \
-    --output text \
-    --query 'Reservations[*].Instances[*].PublicDnsName'
-```
-
-The following sample output shows the public DNS name\.
-
-```
-ec2-12-345-678-901.us-east-2.compute.amazonaws.com
-```
-
-In the ssh utility, specify the \.pem file and the public DNS name of the instance\.
-
-```
-ssh -i \
-    "do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem" \
-    ec2-user@ec2-12-345-678-901.us-east-2.compute.amazonaws.com
-```
-
-## Connecting to your RDS Custom DB instance using AWS Systems Manager<a name="custom-creating.ssm"></a>
-
-After you create your RDS Custom DB instance, you can connect to it using AWS Systems Manager Session Manager\. Session Manager is an Systems Manager capability that you can use to manage Amazon EC2 instances through a browser\-based shell or through the AWS CLI\. For more information, see [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)\.
+Session Manager allows you to access Amazon EC2 instances through a browser\-based shell or through the AWS CLI\. For more information, see [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)\.
 
 ### Console<a name="custom-managing.ssm.console"></a>
 
@@ -465,6 +329,176 @@ Starting session with SessionId: yourid-abcdefghijklm1234
 [ssm-user@ip-123-45-67-89 bin]$
 ```
 
+## Connecting to your RDS Custom DB instance using SSH<a name="custom-creating.ssh"></a>
+
+The Secure Shell Protocol \(SSH\) is a network protocol that supports encrypted communication over an unsecured network\. After you create your RDS Custom DB instance, you can connect to it using an ssh client\. For more information, see [Connecting to your Linux instance using SSH](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)\.
+
+Your SSH connection technique depends on whether your DB instance is private, meaning that it doesn't accept connections from the public internet\. In this case, you must use SSH tunneling to connect the ssh utility to your instance\. This technique transports data with a dedicated data stream \(tunnel\) inside an existing SSH session\. You can configure SSH tunneling using AWS Systems Manager\. 
+
+**Note**  
+Various strategies are supported for accessing private instances\. To learn how to connect an ssh client to private instances using bastion hosts, see [Linux Bastion Hosts on AWS](http://aws.amazon.com/solutions/implementations/linux-bastion/)\. To learn how to configure port forwarding, see [Port Forwarding Using AWS Systems Manager Session Manager](http://aws.amazon.com/blogs/aws/new-port-forwarding-using-aws-system-manager-sessions-manager/)\.
+
+If your DB instance is in a public subnet and has the publicly available setting, then no SSH tunneling is required\. You can connect with SSH just as would to a public Amazon EC2 instance\.
+
+To connect an ssh client to your DB instance, complete the following steps:
+
+1. [Step 1: Configure your DB instance to allow SSH connections](#custom-managing.ssh.port-22)
+
+1. [Step 2: Retrieve your SSH secret key and EC2 instance ID](#custom-managing.ssh.obtaining-key)
+
+1. [Step 3: Connect to your EC2 instance using the ssh utility](#custom-managing.ssh.connecting)
+
+### Step 1: Configure your DB instance to allow SSH connections<a name="custom-managing.ssh.port-22"></a>
+
+To make sure that your DB instance can accept SSH connections, do the following:
++ Make sure that your DB instance security group permits inbound connections on port 22 for TCP\.
+
+  To learn how to configure the security group for your DB instance, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
++ If you don't plan to use SSH tunneling, make sure your DB instance resides in a public subnet and is publicly accessible\.
+
+  In the console, the relevant field is **Publicly accessible** on the **Connectivity & security** tab of the database details page\. To check your settings in the CLI, run the following command:
+
+  ```
+  aws rds describe-db-instances \
+  --query 'DBInstances[*].{DBInstanceIdentifier:DBInstanceIdentifier,PubliclyAccessible:PubliclyAccessible}' \
+  --output table
+  ```
+
+  To change the accessibility settings for your DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+### Step 2: Retrieve your SSH secret key and EC2 instance ID<a name="custom-managing.ssh.obtaining-key"></a>
+
+To connect to the DB instance using SSH, you need the SSH key pair associated with the instance\. RDS Custom creates the SSH key pair on your behalf, naming it with the prefix `do-not-delete-rds-custom-ssh-privatekey-db-`\. AWS Secrets Manager stores your SSH private key as a secret\.
+
+Retrieve your SSH secret key using either AWS Management Console or the AWS CLI\. If your instance has a public DNS, and you don't intend to use SSH tunneling, then also retrieve the DNS name\. You specify the DNS name for public connections\.
+
+#### Console<a name="custom-managing.ssh.obtaining-key.console"></a>
+
+**To retrieve the secret SSH key**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the RDS Custom DB instance to which you want to connect\.
+
+1. Choose **Configuration**\.
+
+1. Note the **Resource ID** value\. For example, the DB instance resource ID might be `db-ABCDEFGHIJKLMNOPQRS0123456`\.
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Instances**\.
+
+1. Find the name of your EC2 instance, and choose the instance ID associated with it\. For example, the EC2 instance ID might be `i-abcdefghijklm01234`\.
+
+1. In **Details**, find **Key pair name**\. The pair name includes the DB instance resource ID\. For example, the pair name might be `do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c`\.
+
+1. If your EC2 instance is public, note the **Public IPv4 DNS**\. For the example, the public Domain Name System \(DNS\) address might be `ec2-12-345-678-901.us-east-2.compute.amazonaws.com`\.
+
+1. Open the AWS Secrets Manager console at [https://console\.aws\.amazon\.com/secretsmanager/](https://console.aws.amazon.com/secretsmanager/)\.
+
+1. Choose the secret that has the same name as your key pair\.
+
+1. Choose **Retrieve secret value**\.
+
+1. Copy the SSH private key into a text file, and then save the file with the `.pem` extension\. For example, save the file as `/tmp/do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem`\.
+
+#### AWS CLI<a name="custom-managing.ssh.obtaining-key.CLI"></a>
+
+To retrieve the SSH private key and save it in a \.pem file, you can use the AWS CLI\.
+
+1. Find the DB resource ID of your RDS Custom DB instance using `aws rds [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)`\.
+
+   ```
+   aws rds describe-db-instances \
+       --query 'DBInstances[*].[DBInstanceIdentifier,DbiResourceId]' \
+       --output text
+   ```
+
+   The following sample output shows the resource ID for your RDS Custom instance\. The prefix is `db-`\.
+
+   ```
+   db-ABCDEFGHIJKLMNOPQRS0123456
+   ```
+
+1. Find the EC2 instance ID of your DB instance using `aws ec2 describe-instances`\. The following example uses `db-ABCDEFGHIJKLMNOPQRS0123456` for the resource ID\.
+
+   ```
+   aws ec2 describe-instances \
+       --filters "Name=tag:Name,Values=db-ABCDEFGHIJKLMNOPQRS0123456" \
+       --output text \
+       --query 'Reservations[*].Instances[*].InstanceId'
+   ```
+
+   The following sample output shows the EC2 instance ID\.
+
+   ```
+   i-abcdefghijklm01234
+   ```
+
+1. To find the key name, specify the EC2 instance ID\. The following example describes EC2 instance *i\-0bdc4219e66944afa*\.
+
+   ```
+   aws ec2 describe-instances \
+       --instance-ids i-0bdc4219e66944afa \
+       --output text \
+       --query 'Reservations[*].Instances[*].KeyName'
+   ```
+
+   The following sample output shows the key name, which uses the prefix `do-not-delete-rds-custom-ssh-privatekey-`\.
+
+   ```
+   do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c
+   ```
+
+1. Save the private key in a \.pem file named after the key using `aws secretsmanager`\. The following example saves the file in your `/tmp` directory\.
+
+   ```
+   aws secretsmanager get-secret-value \
+       --secret-id do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c \
+       --query SecretString \
+       --output text >/tmp/do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem
+   ```
+
+### Step 3: Connect to your EC2 instance using the ssh utility<a name="custom-managing.ssh.connecting"></a>
+
+Your connection technique depends on whether you are connecting to a private DB instance or connecting to a public instance\. A private connection requires you to configure SSH tunneling through AWS Systems Manager\.
+
+**To connect to an EC2 instance using the ssh utility**
+
+1. For private connections, modify your SSH configuration file to proxy commands to AWS Systems Manager Session Manager\. For public connections, skip to Step 2\.
+
+   Add the following lines to `~/.ssh/config`\. These lines proxy SSH commands for hosts whose names begin with `i-` or `mi-`\.
+
+   ```
+   Host i-* mi-*
+       ProxyCommand sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+   ```
+
+1. Change to the directory that contains your \.pem file\. Using `chmod`, set the permissions to `400`\.
+
+   ```
+   cd /tmp
+   chmod 400 do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem
+   ```
+
+1. Run the ssh utility, specifying the \.pem file and either the public DNS name \(for public connections\) or the EC2 instance ID \(for private connections\)\. Log in as user `ec2-user`\.
+
+   The following example connects to a public instance using the DNS name *ec2\-12\-345\-678\-901\.us\-east\-2\.compute\.amazonaws\.com*\.
+
+   ```
+   ssh -i \
+       "do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem" \
+       ec2-user@ec2-12-345-678-901.us-east-2.compute.amazonaws.com
+   ```
+
+   The following example connects to a private instance using the EC2 instance ID *i\-0bdc4219e66944afa*\. 
+
+   ```
+   ssh -i \
+       "do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem" \
+       ec2-user@i-0bdc4219e66944afa
+   ```
+
 ## Logging in to your RDS Custom for Oracle database as SYS<a name="custom-creating.sysdba"></a>
 
 After you create your RDS Custom DB instance, you can log in to your Oracle database as user `SYS`, which gives you `SYSDBA` privileges\. You have the following login options:
@@ -505,13 +539,13 @@ Your can log in to your Oracle database as `SYS` or `SYSTEM` or by specifying th
 
    1. In **Key/value**, copy the value for **password**\.
 
-1. Install SQL\*Plus on your DB instance and log in to your database as `SYS`\. For more information, see [Step 4: Connect your SQL client to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md#CHAP_GettingStarted.Connecting.Oracle)\.
+1. Install SQL\*Plus on your DB instance and log in to your database as `SYS`\. For more information, see [Step 3: Connect your SQL client to an Oracle DB instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md#CHAP_GettingStarted.Connecting.Oracle)\.
 
 ### Logging in to your RDS Custom for Oracle database using OS authentication<a name="custom-creating.sysdba.pwd"></a>
 
 The OS user `rdsdb` owns the Oracle database binaries\. You can switch to the `rdsdb` user and log in to your RDS Custom for Oracle database without a password\.
 
-1. Connect to your DB instance with AWS Systems Manager\. For more information, see [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)\.
+1. Connect to your DB instance with AWS Systems Manager\. For more information, see [Connecting to your RDS Custom DB instance using Session Manager](#custom-creating.ssm)\.
 
 1. In a web browser, go to [https://www\.oracle\.com/database/technologies/instant\-client/linux\-x86\-64\-downloads\.html](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html)\.
 

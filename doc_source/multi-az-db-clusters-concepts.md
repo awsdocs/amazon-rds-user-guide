@@ -1,6 +1,6 @@
 # Multi\-AZ DB cluster deployments<a name="multi-az-db-clusters-concepts"></a>
 
-A *Multi\-AZ DB cluster deployment* is a high availability deployment mode of Amazon RDS with two readable standby DB instances\. A Multi\-AZ DB cluster has a writer DB instance and two reader DB instances in three separate Availability Zones in the same AWS Region\. Multi\-AZ DB clusters provide high availability, increased capacity for read workloads, and lower write latency when compared to Multi\-AZ DB instance deployments\.
+A *Multi\-AZ DB cluster deployment* is a semisynchronous, high availability deployment mode of Amazon RDS with two readable standby DB instances\. A Multi\-AZ DB cluster has a writer DB instance and two reader DB instances in three separate Availability Zones in the same AWS Region\. Multi\-AZ DB clusters provide high availability, increased capacity for read workloads, and lower write latency when compared to Multi\-AZ DB instance deployments\.
 
 You can import data from an on\-premises database to a Multi\-AZ DB cluster by following the instructions in [Importing data to an Amazon RDS MariaDB or MySQL database with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
 
@@ -39,7 +39,9 @@ For more information about DB instance classes, see [DB instance classes](Concep
 
 ## Overview of Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-overview"></a>
 
-With a Multi\-AZ DB cluster, Amazon RDS replicates data from the writer DB instance to both of the reader DB instances using the DB engine's native replication capabilities\. When a change is made on the writer DB instance, it's sent to each reader DB instance\. Acknowledgment from at least one reader DB instance is required for a change to be committed\.
+With a Multi\-AZ DB cluster, Amazon RDS replicates data from the writer DB instance to both of the reader DB instances using the DB engine's native replication capabilities\. When a change is made on the writer DB instance, it's sent to each reader DB instance\. 
+
+Multi\-AZ DB cluster deployments use semisynchronous replication, which requires acknowledgment from at least one reader DB instance in order for a change to be committed\. It doesn't require acknowledgment that events have been fully executed and committed on *all* replicas\.
 
 Reader DB instances act as automatic failover targets and also serve read traffic to increase application read throughput\. If an outage occurs on your writer DB instance, RDS manages failover to one of the reader DB instances\. RDS does this based on which reader DB instance has the most recent change record\.
 

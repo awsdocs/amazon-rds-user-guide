@@ -8,6 +8,8 @@ You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blo
 **Topics**
 + [Tutorials in this guide](#CHAP_Tutorials.ThisGuide)
 + [Tutorials in other AWS guides](#CHAP_Tutorials.OtherGuides)
++ [AWS workshop and lab content portal for Amazon RDS PostgreSQL](#CHAP_Tutorials_postgreslabs)
++ [AWS workshop and lab content portal for Amazon RDS MySQL](#CHAP_Tutorials_sqllabs)
 + [Tutorials and sample code in GitHub](#CHAP_Tutorials.GitHub)
 + [Using this service with an AWS SDK](#sdk-general-information-section)
 
@@ -54,6 +56,26 @@ The following tutorials in other AWS guides show you how to perform common tasks
 + [ Manually Enabling Access to an Amazon RDS Instance in a VPC](https://docs.aws.amazon.com/quicksight/latest/user/rds-vpc-access.html) in the *Amazon QuickSight User Guide*
 
   Learn how to enable Amazon QuickSight access to an Amazon RDS DB instance in a VPC\.
+
+## AWS workshop and lab content portal for Amazon RDS PostgreSQL<a name="CHAP_Tutorials_postgreslabs"></a>
+
+The below collection of workshops and other hands\-on content helps you to gain an understanding of the Amazon RDS PostgreSQL features and capabilities: 
++ [ Creating a DB instance ](https://catalog.us-east-1.prod.workshops.aws/workshops/2a5fc82d-2b5f-4105-83c2-91a1b4d7abfe/en-US/2-foundation/lab1-create/task1)
+
+  Learn how to create the DB instance\.
++ [ Performance Monitoring with RDS Tools ](https://catalog.us-east-1.prod.workshops.aws/workshops/31babd91-aa9a-4415-8ebf-ce0a6556a216/en-US/)
+
+  Learn how to use AWS and SQL tools\(Cloudwatch, Enhanced Monitoring, Slow Query Logs, Performance Insights, PostgreSQL Catalog Views\) to understand performance issues and identify ways to improve performance of your database\.
+
+## AWS workshop and lab content portal for Amazon RDS MySQL<a name="CHAP_Tutorials_sqllabs"></a>
+
+The below collection of workshops and other hands\-on content helps you to gain an understanding of the Amazon RDS MySQL features and capabilities: 
++ [ Creating a DB instance ](https://catalog.us-east-1.prod.workshops.aws/workshops/0135d1da-9f07-470c-9845-44ead3c78212/en-US/lab3/task1)
+
+  Learn how to create the DB instance\.
++ [ Using Performance Insights ](https://catalog.us-east-1.prod.workshops.aws/workshops/0135d1da-9f07-470c-9845-44ead3c78212/en-US/lab8)
+
+  Learn how to monitor and tune your DB instance using Performance insights\.
 
 ## Tutorials and sample code in GitHub<a name="CHAP_Tutorials.GitHub"></a>
 

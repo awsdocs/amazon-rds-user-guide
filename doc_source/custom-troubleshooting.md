@@ -31,7 +31,7 @@ The following example retrieves details for the events that have occurred for th
 
 The procedure for subscribing to events is the same for RDS Custom and Amazon RDS DB instances\. For more information, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
 
-To subscribe to RDS Custom event notification using the CLI, use `create-event-subscription` command\. Include the following required parameters:
+To subscribe to RDS Custom event notification using the CLI, use the `create-event-subscription` command\. Include the following required parameters:
 + `--subscription-name`
 + `--sns-topic-arn`
 
@@ -53,9 +53,9 @@ CEV creation might fail because of the following issues:
 + The Amazon S3 bucket containing your installation files isn't in the same AWS Region as your CEV\.
 + When you request CEV creation in an AWS Region for the first time, RDS Custom creates an S3 bucket for storing RDS Custom resources \(such as CEV artifacts, AWS CloudTrail logs, and transaction logs\)\.
 
-  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Step 4: Grant required permissions to your IAM principal](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
+  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Step 4: Grant required permissions to your IAM user or role](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
 + The caller doesn't have permissions to get files from your S3 bucket that contains the installation media files\. These permissions are described in [Step 7: Add necessary IAM permissions](custom-cev.preparing.md#custom-cev.preparing.iam)\.
-+ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Step 4: Grant required permissions to your IAM principal](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
++ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Step 4: Grant required permissions to your IAM user or role](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
 + Installation media files listed in the CEV manifest aren't in your S3 bucket\.
 + The SHA\-256 checksums of the installation files are unknown to RDS Custom\.
 
@@ -257,7 +257,7 @@ Your upgrade of an RDS Custom for Oracle instance might fail\. Following, you ca
 
 ## Troubleshooting replica promotion for RDS Custom for Oracle<a name="custom-troubleshooting-promote"></a>
 
-You can promote managed Oracle replicas in RDS Custom for Oracle using the console, `promote-read-replica` AWS CLI command, or `PromoteReadReplica` API\. If you delete your primary DB instance, and all replicas are healthy, RDS Custom for Oracle promotes your managed replicas to standalone instances automatically\. If a replica has paused automation or is outside the support perimeter, you must fix the replica before RDS Custom can promote it automatically\. For more information, see [Replica promotion requirements and limitations](custom-rr.md#custom-rr.promotion-reqs)\.
+You can promote managed Oracle replicas in RDS Custom for Oracle using the console, `promote-read-replica` AWS CLI command, or `PromoteReadReplica` API\. If you delete your primary DB instance, and all replicas are healthy, RDS Custom for Oracle promotes your managed replicas to standalone instances automatically\. If a replica has paused automation or is outside the support perimeter, you must fix the replica before RDS Custom can promote it automatically\. For more information, see [Replica promotion limitations for RDS Custom for Oracle](custom-rr.md#custom-rr.promotion-reqs)\.
 
 The replica promotion workflow might become stuck in the following situation:
 + The primary DB instance is in the state `STORAGE_FULL`\.

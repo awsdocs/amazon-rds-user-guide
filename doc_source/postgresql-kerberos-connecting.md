@@ -1,6 +1,6 @@
 # Connecting to PostgreSQL with Kerberos authentication<a name="postgresql-kerberos-connecting"></a>
 
-You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command\-line interface such as psql\. For more information about connecting, see  [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)  \. For information about obtaining the endpoint, port number, and other details needed for connection, see [Step 4: Connect to a PostgreSQL DB instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md#CHAP_GettingStarted.Connecting.PostgreSQL)\. 
+You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command\-line interface such as psql\. For more information about connecting, see  [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)  \. For information about obtaining the endpoint, port number, and other details needed for connection, see [Step 3: Connect to a PostgreSQL DB instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md#CHAP_GettingStarted.Connecting.PostgreSQL)\. 
 
 ## pgAdmin<a name="collapsible-section-pgAdmin"></a>
 

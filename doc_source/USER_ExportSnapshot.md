@@ -45,6 +45,7 @@ Exporting DB snapshot data to Amazon S3 has the following limitations:
   , ; { } ( ) \n \t = (space)
   ```
 + Tables with slashes \(/\) in their names are skipped during export\.
++ RDS for PostgreSQL temporary and unlogged tables are skipped during export\.
 + If the data contains a large object, such as a BLOB or CLOB, that is close to or greater than 500 MB, then the export fails\.
 + If a table contains a large row that is close to or greater than 2 GB, then the table is skipped during export\.
 + We strongly recommend that you use a unique name for each export task\. If you don't use a unique task name, you might receive the following error message:

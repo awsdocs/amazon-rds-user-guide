@@ -2,7 +2,7 @@
 
 Amazon RDS on AWS Outposts uses the MySQL and PostgreSQL DB engines' built\-in replication functionality to create a read replica from a source DB instance\. The source DB instance becomes the primary DB instance\. Updates made to the primary DB instance are asynchronously copied to the read replica\. You can reduce the load on your primary DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\.
 
-When you create a read replica from an RDS on Outposts DB instance, the read replica use a customer\-owned IP address \(CoIP\)\. For more information, see [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)\.
+When you create a read replica from an RDS on Outposts DB instance, the read replica uses a customer\-owned IP address \(CoIP\)\. For more information, see [Customer\-owned IP addresses for Amazon RDS on AWS Outposts](rds-on-outposts.coip.md)\.
 
 Read replicas on RDS on Outposts have the following limitations:
 + You can't create read replicas for RDS for SQL Server on RDS on Outposts DB instances\.
