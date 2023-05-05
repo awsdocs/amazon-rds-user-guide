@@ -236,6 +236,20 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
 1.  If the new user takes the place of an existing one, update the credentials stored in the proxy's Secrets Manager secret for the existing user\. 
 
+If you have you have the run the following command for your PostgreSQL databases:
+
+```
+REVOKE CONNECT ON DATABASE postgres FROM PUBLIC;
+```
+
+Grant the `rdsproxyadmin` user the `CONNECT` privilege so the user can monitor connections on the target database\. 
+
+```
+GRANT CONNECT ON DATABASE postgres TO rdsproxyadmin;
+```
+
+You can also allow other target database users to perform health checks by changing `rdsproxyadmin` to the database user in the command above\.
+
 ## Changing the password for a database user<a name="rds-proxy-changing-db-user-password"></a>
 
  In some cases, you might change the password for a database user in an RDS DB instance or Aurora cluster that's associated with a proxy\. If so, update the corresponding Secrets Manager secret with the new password\. 

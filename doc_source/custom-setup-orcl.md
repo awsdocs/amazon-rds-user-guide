@@ -32,7 +32,7 @@ Before creating an RDS Custom for Oracle DB instance, make sure that you meet th
 
   For more information, see [Step 4: Grant required permissions to your IAM user or role](#custom-setup-orcl.iam-user)\.
 
-For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 9\. For general requirements that apply to RDS Custom, see [Availability and requirements for Amazon RDS Custom for Oracle](custom-reqs-limits.md)\.
+For each task, the following sections describe the requirements and limitations specific to the task\. For example, when you create your RDS Custom DB for Oracle instance, use either the db\.m5 or db\.r5 instance classes running Oracle Linux 7 Update 9\. For general requirements that apply to RDS Custom, see [RDS Custom for Oracle requirements and limitations](custom-reqs-limits.md)\.
 
 ## Step 1: Create or reuse a symmetric encryption AWS KMS key<a name="custom-setup-orcl.cmk"></a>
 
@@ -87,8 +87,8 @@ A CloudFormation stack is a collection of AWS resources that you can manage as a
 
 #### IAM and VPC resources created by CloudFormation<a name="custom-setup-orcl.cf.resources"></a>
 
-When you use the CloudFormation template, it creates a stack that includes the following resources in your AWS account:
-+ An EC2 instance profile named `AWSRDSCustomInstanceProfile-region`
+When you use the CloudFormation templates, they create stacks that includes the following resources in your AWS account:
++ An Amazon EC2 instance profile named `AWSRDSCustomInstanceProfile-region`
 + An IAM role named `AWSRDSCustomInstanceRole-region`
 + A DB subnet group named `rds-custom-private`
 + The following VPC endpoints, which are necessary for your DB instance to communicate with dependent AWS services:
@@ -454,7 +454,9 @@ aws iam put-role-policy \
 
 #### Step 3: Create your RDS Custom instance profile<a name="custom-setup-orcl.iam.create-profile"></a>
 
-Create your IAM instance profile as follows, naming it using the format `AWSRDSCustomInstanceProfile-region`\. The following example assumes that you have set the environment variable `$REGION` to the AWS Region in which you want to create your DB instance\.
+An instance profile is a container that includes a single IAM role\. RDS Custom uses the instance profile to pass the role to the instance\.
+
+If you use the CLI to create a role, you create the role and instance profile as separate actions, with potentially different names\. Create your IAM instance profile as follows, naming it using the format `AWSRDSCustomInstanceProfile-region`\. The following example assumes that you have set the environment variable `$REGION` to the AWS Region in which you want to create your DB instance\.
 
 ```
 aws iam create-instance-profile \

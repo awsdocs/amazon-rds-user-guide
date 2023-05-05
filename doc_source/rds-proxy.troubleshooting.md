@@ -66,7 +66,19 @@ aws secretsmanager get-secret-value --secret-id your_secret_id
 
 ## Common issues and solutions<a name="rds-proxy-diagnosis"></a>
 
- For possible causes and solutions to some common problems that you might encounter using RDS Proxy, see the following\. 
+For possible causes and solutions to some common problems that you might encounter using RDS Proxy, see the following\. 
+
+After running `aws rds describe-db-proxy-targets`, if the `TargetHealth` description states `Proxy does not have any registered credentials`, verify the following:
++ There are credentials registered for the user to access the proxy\.
++ The IAM role to access the proxy secret from Secrets Manager is valid\.
++ The DB proxy is using an authentication method\.
+
+You might encounter the following RDS events while creating or connecting to a DB proxy\.
+
+
+| Category | RDS event ID | Description | 
+| --- | --- | --- | 
+|  failure  | RDS\-EVENT\-0243 | RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\. | 
 
  You might encounter the following issues while creating a new proxy or connecting to a proxy\. 
 

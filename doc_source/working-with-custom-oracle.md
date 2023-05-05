@@ -4,7 +4,7 @@ Following, you can find instructions for creating, managing, and maintaining you
 
 **Topics**
 + [RDS Custom for Oracle workflow](custom-concept.workflow.md)
-+ [Availability and requirements for Amazon RDS Custom for Oracle](custom-reqs-limits.md)
++ [RDS Custom for Oracle requirements and limitations](custom-reqs-limits.md)
 + [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)
 + [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)
 + [Configuring a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)

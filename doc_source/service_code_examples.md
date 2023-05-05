@@ -31,5 +31,4 @@ For a complete list of AWS SDK developer guides and code examples, see [Using th
 + [Scenarios](service_code_examples_scenarios.md)
   + [Get started with DB instances](example_rds_Scenario_GetStartedInstances_section.md)
 + [Cross\-service examples](service_code_examples_cross-service_examples.md)
-  + [Create a lending library REST API](example_cross_AuroraRestLendingLibrary_section.md)
   + [Create an Aurora Serverless work item tracker](example_cross_RDSDataTracker_section.md)

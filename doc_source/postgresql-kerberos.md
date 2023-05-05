@@ -8,6 +8,8 @@ Keeping all of your credentials in the same directory can save you time and effo
 
 In addition, you can access credentials from your own on\-premises Microsoft Active Directory\. To do so, create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL instances with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
 
+A database can use password authentication or password authentication with either Kerberos or AWS Identity and Access Management \(IAM\) authentication\. For more information about IAM authentication, see [IAM database authentication for MariaDB, MySQL, and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
+
 **Topics**
 + [Region and version availability](#postgresql-kerberos.RegionVersionAvailability)
 + [Overview of Kerberos authentication for PostgreSQL DB instances](#postgresql-kerberos-overview)

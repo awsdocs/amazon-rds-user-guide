@@ -56,7 +56,7 @@ Create an Amazon EC2 instance that you will use to connect to your database\.
 
       For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-key-pair) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-   1. For **Allow SSH traffic** in Network settings, choose the source of SSH connections to the EC2 instance\. 
+   1. For **Allow SSH traffic** in **Network settings**, choose the source of SSH connections to the EC2 instance\. 
 
       You can choose **My IP** if the displayed IP address is correct for SSH connections\. Otherwise, you can determine the IP address to use to connect to EC2 instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com/)\. An example of an IP address is 192\.0\.2\.1/32\.
 
@@ -64,8 +64,8 @@ Create an Amazon EC2 instance that you will use to connect to your database\.
 **Warning**  
 If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses to access your public EC2 instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your EC2 instances using SSH\.
 
-      The following image shows an example of the **Inbound security groups rules** section\.  
-![\[Inbound security group rules for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettings.png)
+      The following image shows an example of the **Network settings** section\.  
+![\[Network settings for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettings.png)
 
    1. Leave the default values for the remaining sections\.
 
@@ -200,10 +200,10 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    wget https://download.oracle.com/otn_software/linux/instantclient/219000/oracle-instantclient-sqlplus-21.9.0.0.0-1.el8.x86_64.rpm
    ```
 
-1. Install the packages by running the `yum` command as follows:
+1. Install the packages by running the `dnf` command as follows:
 
    ```
-   sudo yum install oracle-instantclient-*.rpm
+   sudo dnf install oracle-instantclient-*.rpm
    ```
 
 1. Start SQL\*Plus and connect to the Oracle DB instance\. For example, enter the following command\.

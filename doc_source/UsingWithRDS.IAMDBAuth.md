@@ -47,6 +47,8 @@ When using IAM database authentication, the following limitations apply:
 
   For more information about global condition context keys, see [AWS global condition context keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
 + For PostgreSQL, if the IAM role \(`rds_iam`\) is added to a user \(including the RDS master user\), IAM authentication takes precedence over password authentication, so the user must log in as an IAM user\.
++ For PostgreSQL, Amazon RDS does not support enabling both IAM and Kerberos authentication methods at the same time\.
++ For PostgreSQL, you cannot use IAM authentication to establish a replication connection\.
 
 ## Recommendations for IAM database authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 

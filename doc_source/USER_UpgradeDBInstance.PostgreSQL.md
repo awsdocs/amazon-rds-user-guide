@@ -17,6 +17,7 @@ For more information about database engine versions, and the policy for deprecat
 **Topics**
 + [Overview of upgrading PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
 + [PostgreSQL version numbers](#USER_UpgradeDBInstance.PostgreSQL.VersionID)
++ [RDS version number](#USER_UpgradeDBInstance.PostgreSQL.rds.version)
 + [Choosing a major version upgrade for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
 + [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)
 + [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)
@@ -86,6 +87,29 @@ The version numbering sequence for the PostgreSQL database engine is as follows:
 + For PostgreSQL versions earlier than 10, the engine version number is in the form *major\.major\.minor*\. The major engine version number is both the integer and the first fractional part of the version number\. For example, 9\.6 is a major version\. The minor version number is the third part of the version number\. For example, for version 9\.6\.12, the 12 is the minor version number\.
 
   A major version upgrade increases the major part of the version number\. For example, an upgrade from *9\.6*\.12 to *10*\.11 is a major version upgrade, where *9\.6* and *10* are the major version numbers\.
+
+## RDS version number<a name="USER_UpgradeDBInstance.PostgreSQL.rds.version"></a>
+
+RDS version numbers use the `major.minor.patch` naming scheme\. A RDS patch version includes important bug fixes added to a minor version after its release\. To identify the Amazon RDS version number of your DB instance, you must first create the `rds_tools` extension by using the following command:
+
+```
+CREATE EXTENSION rds_tools;
+```
+
+Starting with the release of PostgreSQL version 15\.2\-R2, you can find out the RDS version number of your RDS for PostgreSQL DB instance with the following SQL query:
+
+```
+postgres=> SELECT rds_tools.rds_version();
+```
+
+For example, querying an RDS PostgreSQL 15\.2 DB instance returns the following:
+
+```
+rds_version
+----------------
+ 15.2.R2
+(1 row)
+```
 
 ## Choosing a major version upgrade for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 

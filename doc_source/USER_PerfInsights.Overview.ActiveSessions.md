@@ -1,6 +1,6 @@
 # Database load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
 
-*Database load \(DB load\)* measures the level of activity in your database\. The key metric in Performance Insights is `DBLoad`, which is collected every second\.
+*Database load \(DB load\)* measures the level of session activity in your database\. The key metric in Performance Insights is `DBLoad`, which is collected every second\.
 
 **Topics**
 + [Active sessions](#USER_PerfInsights.Overview.ActiveSessions.active-sessions)
@@ -12,17 +12,25 @@
 
 A *database session* represents an application's dialogue with a relational database\. An active session is a connection that has submitted work to the DB engine and is waiting for a response\. 
 
-A session is active when it's either running on CPU or waiting for a resource to become available so that it can proceed\. For example, an active session might wait for a page to be read into memory, and then consume CPU while it reads data from the page\. 
+A session is active when it's either running on CPU or waiting for a resource to become available so that it can proceed\. For example, an active session might wait for a page \(or block\) to be read into memory, and then consume CPU while it reads data from the page\. 
 
 ## Average active sessions<a name="USER_PerfInsights.Overview.ActiveSessions.AAS"></a>
 
-The *average active sessions \(AAS\)* is the unit for the `DBLoad` metric in Performance Insights\. To get the average active sessions, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples for a specific time period\. The following table shows 5 consecutive samples of a running query\.
+The *average active sessions \(AAS\)* is the unit for the `DBLoad` metric in Performance Insights\. It measures how many sessions are concurrently active on the database\.
+
+Every second, Performance Insights samples the number of sessions concurrently running a query\. For each active session, Performance Insights collects the following data:
++ SQL statement
++ Session state \(running on CPU or waiting\)
++ Host
++ User running the SQL
+
+Performance Insights calculates the AAS by dividing the total number of sessions by the number of samples for a specific time period\. For example, the following table shows 5 consecutive samples of a running query taken at 1\-second intervals\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.ActiveSessions.html)
 
-In the preceding example, the DB load for the time interval was 2 AAS\. This measurement means that, on average, 2 sessions were active at a time during the time period when the 5 samples were taken\.
+In the preceding example, the DB load for the time interval was 2 AAS\. This measurement means that, on average, 2 sessions were active at any given time during the interval when the 5 samples were taken\.
 
-An analogy for DB load is activity in a warehouse\. Suppose that the warehouse employs 100 workers\. If 1 order comes in, 1 worker fulfills the order while the other workers are idle\. If 100 orders come in, all 100 workers fulfill orders simultaneously\. If you periodically sample how many workers are active over a given time period, you can calculate the average number of active workers\. The calculation shows that, on average, *N* workers are busy fulfilling orders at any given time\. If the average was 50 workers yesterday and 75 workers today, the activity level in the warehouse increased\. In the same way, DB load increases as session activity increases\. 
+An analogy for DB load is worker activity in a warehouse\. Suppose that the warehouse employs 100 workers\. If 1 order comes in, 1 worker fulfills the order while 99 workers are idle\. If 100 orders come in, all 100 workers fulfill orders simultaneously\. If every 15 minutes a manager writes down how many workers are simultaneously active, adds these numbers at the end of the day, and then divides the total by the number of samples, the manager calculates the average number of workers active at any given time\. If the average was 50 workers yesterday and 75 workers today, then the average activity level in the warehouse increased\. Similarly, DB load increases as database session activity increases\.
 
 ## Average active executions<a name="USER_PerfInsights.Overview.ActiveSessions.AAE"></a>
 

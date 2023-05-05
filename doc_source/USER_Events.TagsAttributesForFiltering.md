@@ -12,7 +12,7 @@ The following table shows the message attributes for RDS events sent to the topi
 
 | Amazon RDS event attribute |  Description  | 
 | --- | --- | 
-| Event ID |  Identifier for the RDS event message, for example, RDS\-EVENT\-0006\.  | 
+| EventID |  Identifier for the RDS event message, for example, RDS\-EVENT\-0006\.  | 
 | Resource |  The ARN identifier for the resource emitting the event, for example, `arn:aws:rds:ap-southeast-2:123456789012:db:database-1`\.  | 
 
 The RDS tags provide data about the resource that was affected by the service event\. RDS adds the current state of the tags in the message body when the notification is sent to SNS or EventBridge\.

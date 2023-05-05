@@ -1,8 +1,8 @@
 # Creating an Amazon ElastiCache cluster using Amazon RDS DB instance settings<a name="creating-elasticache-cluster-with-RDS-settings"></a>
 
-You can use the Amazon RDS console for creating ElastiCache clusters\. ElastiCache is a fully managed, in\-memory caching service that provides microsecond read and write latencies that support flexible, real\-time use cases\. ElastiCache can help you accelerate application and database performance\. You can use ElastiCache as a primary data store for use cases that don't require data durability, such as gaming leaderboards, streaming, and data analytics\. ElastiCache helps remove the complexity associated with deploying and managing a distributed computing environment\.
+ElastiCache is a fully managed, in\-memory caching service that provides microsecond read and write latencies that support flexible, real\-time use cases\. ElastiCache can help you accelerate application and database performance\. You can use ElastiCache as a primary data store for use cases that don't require data durability, such as gaming leaderboards, streaming, and data analytics\. ElastiCache helps remove the complexity associated with deploying and managing a distributed computing environment\. For more information, see [Common ElastiCache Use Cases and How ElastiCache Can Help](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/elasticache-use-cases.html) for Memcached and [Common ElastiCache Use Cases and How ElastiCache Can Help](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-use-cases.html) for Redis\. You can use the Amazon RDS console for creating ElastiCache clusters\. 
 
-Amazon ElastiCache works with both the Redis and Memcached engines\.  If you're unsure which engine you want to use, see [Comparing Memcached and Redis](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html)\. For more information about Amazon ElastiCache, see the [Amazon ElastiCache User Guide](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/)\.
+Amazon ElastiCache works with both the Redis and Memcached engines\. If you're unsure which engine you want to use, see [Comparing Memcached and Redis](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html)\. For more information about Amazon ElastiCache, see the [Amazon ElastiCache User Guide](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/)\.
 
 **Topics**
 + [Overview of ElastiCache cluster creation with RDS DB instance settings](#creating-elasticache-cluster-with-RDS-settings-overview)
@@ -13,9 +13,21 @@ Amazon ElastiCache works with both the Redis and Memcached engines\.  If you're 
 
 You can create an ElastiCache cluster from Amazon RDS using the same configuration settings as a newly created or existing RDS DB instance\.
 
-When you create an ElastiCache cluster from RDS, you can set the cluster configuration settings according to your requirements\. The newly created ElastiCache cluster inherits the following settings from the associated RDS DB instance:
+You can use the newly created ElastiCache cluster in your applications as a primary data store for applications that don't require data durability\. Your applications that use Redis or Memcached can use ElastiCache with almost no modification\.
+
+When you create an ElastiCache cluster from RDS, the ElastiCache cluster inherits the following settings from the associated RDS DB instance:
 + ElastiCache connectivity settings
 + ElastiCache security settings
+
+You can also set the cluster configuration settings according to your requirements\.
+
+### Setting up ElastiCache in your applications<a name="creating-elasticache-cluster-with-RDS-settings-overview-SettingUpELC"></a>
+
+Your applications must be set up to utilize ElastiCache clusters\. You can also optimize and improve cluster performance by setting up your applications to use caching strategies depending on your requirements\.
++  To access your ElastiCache cluster and get started, see [Getting started with Amazon ElastiCache for Redis](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/GettingStarted.html) and [Getting started with Amazon ElastiCache for Memcached](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/GettingStarted.html)\. 
++  For more information about caching strategies, see [Caching strategies and best practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/BestPractices.html) for Memcached and [Caching strategies and best practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/BestPractices.html) for Redis\. 
++  For more information about high availability in ElastiCache for Redis clusters, see [ High availability using replication groups](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/BestPractices.html)\. 
++  You might incur costs associated with backup storage, data transfer within or across regions, or use of AWS Outposts\. For pricing details, see [ Amazon ElastiCache pricing](http://aws.amazon.com/elasticache/pricing/)\. 
 
 ## Creating an ElastiCache cluster with settings from a new RDS DB instance<a name="creating-elasticache-cluster-with-RDS-settings-new-DB"></a>
 

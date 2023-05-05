@@ -56,7 +56,7 @@ Create an Amazon EC2 instance that you will use to connect to your database\.
 
       For more information about creating a new key pair, see [Create a key pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-key-pair) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-   1. For **Allow SSH traffic** in Network settings, choose the source of SSH connections to the EC2 instance\. 
+   1. For **Allow SSH traffic** in **Network settings**, choose the source of SSH connections to the EC2 instance\. 
 
       You can choose **My IP** if the displayed IP address is correct for SSH connections\. Otherwise, you can determine the IP address to use to connect to EC2 instances in your VPC using Secure Shell \(SSH\)\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com/)\. An example of an IP address is 192\.0\.2\.1/32\.
 
@@ -64,8 +64,8 @@ Create an Amazon EC2 instance that you will use to connect to your database\.
 **Warning**  
 If you use `0.0.0.0/0` for SSH access, you make it possible for all IP addresses to access your public EC2 instances using SSH\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, authorize only a specific IP address or range of addresses to access your EC2 instances using SSH\.
 
-      The following image shows an example of the **Inbound security groups rules** section\.  
-![\[Inbound security group rules for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettings.png)
+      The following image shows an example of the **Network settings** section\.  
+![\[Network settings for an EC2 instance.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2_RDS_Connect_NtwkSettings.png)
 
    1. Leave the default values for the remaining sections\.
 
@@ -144,7 +144,7 @@ If you need to change the master user password after the DB instance is availabl
    The DB instance has a status of **Creating** until it is ready to use\.  
 ![\[DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch06.png)
 
-   When the status changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\. While the DB instance is being created, you can move on to the next step and create an EC2 instance\.
+   When the status changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.
 
 ## Step 3: Connect to a MySQL DB instance<a name="CHAP_GettingStarted.Connecting.MySQL"></a>
 

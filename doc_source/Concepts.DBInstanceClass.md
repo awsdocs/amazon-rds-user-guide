@@ -2,7 +2,7 @@
 
 The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class that you need depends on your processing power and memory requirements\.
 
-A DB instance class consists of both the DB instance type and the size\. For example, db\.m6g is a general\-purpose DB instance type powered by AWS Graviton2 processors\. Within the db\.m6g instance type, db\.m6g\.2xlarge is a DB instance class\.
+A DB instance class consists of both the DB instance class type and the size\. For example, db\.r6g is a memory\-optimized DB instance class type powered by AWS Graviton2 processors\. Within the db\.r6g instance class type, db\.r6g\.2xlarge is a DB instance class\. The size of this class is 2xlarge\.
 
 For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -16,7 +16,7 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 
 ## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon RDS supports the following types of DB instance classes:
+Amazon RDS supports DB instance classes for the following use cases:
 + [General\-purpose](#Concepts.DBInstanceClass.Types.general-purpose)
 + [Memory\-optimized](#Concepts.DBInstanceClass.Types.memory)
 + [Burstable\-performance](#Concepts.DBInstanceClass.Types.burstable)
@@ -25,7 +25,7 @@ Amazon RDS supports the following types of DB instance classes:
 
 ### General\-purpose instance class types<a name="Concepts.DBInstanceClass.Types.general-purpose"></a>
 
-The following general\-purpose DB instance types are available:
+The following general\-purpose DB instance class types are available:
 + **db\.m7g** – General\-purpose DB instance classes powered by AWS Graviton3 processors\. These instance classes deliver balanced compute, memory, and networking for a broad range of general\-purpose workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton3 processors\. To do so, complete the same steps as with any other DB instance modification\.
@@ -37,8 +37,7 @@ The following general\-purpose DB instance types are available:
 + **db\.m5** –General\-purpose DB instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.m4** – General\-purpose DB instance classes that provide more computing capacity than the previous db\.m3 instance classes\.
 
-  For the RDS for Oracle DB engines, Amazon RDS has started the end\-of\-life process for db\.m4 DB instance classes using the following schedule, which includes upgrade recommendations\. For RDS for Oracle DB instances that use db\.m4 instance classes, we recommend that you upgrade to a db\.m5 instance class as soon as possible\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
+  For the RDS for Oracle DB engines, Amazon RDS no longer supports db\.m4 DB instance classes\. If you had previously created RDS for Oracle db\.m4 DB instances, Amazon RDS automatically upgrades those DB instances to equivalent db\.m5 DB instance classes\.
 + **db\.m3** – General\-purpose DB instance classes that provide more computing capacity than the previous db\.m1 instance classes\.
 
   For the RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB engines, Amazon RDS has started the end\-of\-life process for db\.m3 DB instance classes using the following schedule, which includes upgrade recommendations\. For all RDS DB instances that use db\.m3 DB instance classes, we recommend that you upgrade to a db\.m5 DB instance class as soon as possible\.    
@@ -78,7 +77,7 @@ The memory\-optimized R family supports the following instance class types:
 
 ### Burstable\-performance instance class types<a name="Concepts.DBInstanceClass.Types.burstable"></a>
 
-The following burstable\-performance DB instance types are available:
+The following burstable\-performance DB instance class types are available:
 + **db\.t4g** – General\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These instance classes deliver better price performance than previous burstable\-performance DB instance classes for a broad set of burstable general\-purpose workloads\. Amazon RDS T4g instances are configured for Unlimited mode\. This means that they can burst beyond the baseline over a 24\-hour window for an additional charge\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors\. To do so, complete the same steps as with any other DB instance modification\.
@@ -160,12 +159,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes |  All PostgreSQL 15, 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
 | db\.m5\.large | Yes | Yes | Yes | Yes |  All PostgreSQL 15, 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
 | db\.m4 – general\-purpose instance classes | 
-| db\.m4\.16xlarge | Yes |  Yes  | MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
-| db\.m4\.10xlarge | Yes |  Yes  | Yes |  Yes  | Lower than PostgreSQL 13 | 
-| db\.m4\.4xlarge | Yes |  Yes  | Yes |  Yes  | Lower than PostgreSQL 13 | 
-| db\.m4\.2xlarge | Yes |  Yes  | Yes |  Yes  | Lower than PostgreSQL 13 | 
-| db\.m4\.xlarge | Yes |  Yes  | Yes |  Yes  | Lower than PostgreSQL 13 | 
-| db\.m4\.large | Yes |  Yes  | Yes |  Yes  | Lower than PostgreSQL 13 | 
+| db\.m4\.16xlarge | Yes |  Yes  | MySQL 8\.0, 5\.7 |  Deprecated  | Lower than PostgreSQL 13 | 
+| db\.m4\.10xlarge | Yes |  Yes  | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m4\.4xlarge | Yes |  Yes  | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m4\.2xlarge | Yes |  Yes  | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m4\.xlarge | Yes |  Yes  | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m4\.large | Yes |  Yes  | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m3 – general\-purpose instance classes | 
 | db\.m3\.2xlarge | No |  Yes  | Yes |  Deprecated  | Deprecated | 
 | db\.m3\.xlarge | No |  Yes  | Yes |  Deprecated  | Deprecated | 
@@ -301,12 +300,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5\.xlarge | Yes | Yes | Yes |  Yes  |  All PostgreSQL 15, 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
 | db\.r5\.large | Yes | Yes | Yes |  Yes  |  All PostgreSQL 15, 14, 13, 12, and 11 versions; 10\.17 and higher; 9\.6\.22 and higher  | 
 | db\.r4 – memory\-optimized instance classes | 
-| db\.r4\.16xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
-| db\.r4\.8xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
-| db\.r4\.4xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
-| db\.r4\.2xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
-| db\.r4\.xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
-| db\.r4\.large | Yes |  Yes  | All MySQL 8\.0, 5\.7 |  Yes  | Lower than PostgreSQL 13 | 
+| db\.r4\.16xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r4\.8xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r4\.4xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r4\.2xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r4\.xlarge | Yes |  Yes  | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r4\.large | Yes |  Yes  | All MySQL 8\.0, 5\.7 | Deprecated | Lower than PostgreSQL 13 | 
 | db\.r3 – memory\-optimized instance classes | 
 | db\.r3\.8xlarge\*\* | Yes |  Yes  | Yes |  Deprecated  | Deprecated | 
 | db\.r3\.4xlarge | Yes |  Yes  | Yes |  Deprecated  | Deprecated | 
@@ -376,7 +375,7 @@ You can use the AWS CLI to determine which DB instance classes are supported for
 |  MariaDB  |  `mariadb`  |  [MariaDB on Amazon RDS versions](MariaDB.Concepts.VersionMgmt.md)  | 
 |  Microsoft SQL Server  |  `sqlserver-ee` `sqlserver-se` `sqlserver-ex` `sqlserver-web`  |  [Microsoft SQL Server versions on Amazon RDS](CHAP_SQLServer.md#SQLServer.Concepts.General.VersionSupport)  | 
 |  MySQL  |  `mysql`  |  [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)  | 
-|  Oracle  |  `oracle-ee` `oracle-se2` `oracle-se`  |  [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)  | 
+|  Oracle  |  `oracle-ee` `oracle-se2`  |  [https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html](https://docs.aws.amazon.com/AmazonRDS/latest/OracleReleaseNotes/Welcome.html)  | 
 |  PostgreSQL  |  `postgres`  |  [Available PostgreSQL database versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions)  | 
 
 For information about AWS Region names, see [AWS RegionsAvailability Zones](Concepts.RegionsAndAvailabilityZones.md#Concepts.RegionsAndAvailabilityZones.Regions)\.
@@ -762,8 +761,8 @@ In addition, you can run the following commands for DB instance class processor 
 + [describe\-db\-snapshots](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-snapshots.html) – Shows the processor information for the specified DB snapshot\.
 + [describe\-valid\-db\-instance\-modifications](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html) – Shows the valid modifications to the processor for the specified DB instance\.
 In the output of the preceding commands, the values for the processor features are not null only if the following conditions are met:  
-+ You are using an Oracle DB instance\.
-+ Your Oracle DB instance supports changing processor values\.
++ You are using an RDS for Oracle DB instance\.
++ Your RDS for Oracle DB instance supports changing processor values\.
 + The current CPU core and thread settings are set to nondefault values\.
 If the preceding conditions aren't met, you can get the instance type using [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)\. You can get the processor information for this instance type by running the EC2 operation [describe\-instance\-types](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instance-types.html)\.
 
@@ -843,14 +842,14 @@ ProcessFeatures "Name=coreCount,Value=<value>" "Name=threadsPerCore,Value=<value
 
 Specify the number of CPU cores with the `coreCount` feature name, and specify whether multiple threads per core are enabled with the `threadsPerCore` feature name\. 
 
-You can view the valid processor values for a particular instance class by running the [DescribeOrderableDBInstanceOptions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation and specifying the instance class for the `DBInstanceClass` parameter\. You can also use the following operations:
+You can view the valid processor values for a particular DB instance class by running the [DescribeOrderableDBInstanceOptions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation and specifying the instance class for the `DBInstanceClass` parameter\. You can also use the following operations:
 + [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) – Shows the processor information for the specified DB instance\.
 + [DescribeDBSnapshots](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshots.html) – Shows the processor information for the specified DB snapshot\.
 + [DescribeValidDBInstanceModifications](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDBInstanceModifications.html) – Shows the valid modifications to the processor for the specified DB instance\.
 
 In the output of the preceding operations, the values for the processor features are not null only if the following conditions are met:
-+ You are using an Oracle DB instance\.
-+ Your Oracle DB instance supports changing processor values\.
++ You are using an RDS for Oracle DB instance\.
++ Your RDS for Oracle DB instance supports changing processor values\.
 + The current CPU core and thread settings are set to nondefault values\.
 
 If the preceding conditions aren't met, you can get the instance type using [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. You can get the processor information for this instance type by running the EC2 operation [DescribeInstanceTypes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceTypes.html)\.
@@ -870,7 +869,7 @@ The RAM, in gibibytes, allocated to the DB instance\. There is often a consisten
 
 **EBS\-optimized**  
 The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*   
-EBS\-optimized instances have a baseline and maximum IOPS rate\. The maximum IOPS rate is enforced at the DB instance level\. A set of EBS volumes that combine to have an IOPS rate that is higher than the maximum can't exceed the instance\-level threshold\. For example, if the maximum IOPS for a DB instance type is 40,000, and you attach four 64,000 IOPS EBS volumes, the maximum IOPS is 40,000 rather than 256,000\. For the IOPS maximum specific to each instance type, see [Supported instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support) in the *Amazon EC2 User Guide for Linux Instances*\.
+EBS\-optimized instances have a baseline and maximum IOPS rate\. The maximum IOPS rate is enforced at the DB instance level\. A set of EBS volumes that combine to have an IOPS rate that is higher than the maximum can't exceed the instance\-level threshold\. For example, if the maximum IOPS for a particular DB instance class is 40,000, and you attach four 64,000 IOPS EBS volumes, the maximum IOPS is 40,000 rather than 256,000\. For the IOPS maximum specific to each EC2 instance type, see [Supported instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#ebs-optimization-support) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 **Max\. EBS bandwidth \(Mbps\)**  
 The maximum EBS bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
@@ -1119,6 +1118,6 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.t2\.small | 1 | Variable | 2 | No | — | Low | 
 | db\.t2\.micro | 1 | Variable | 1 | No | — | Low | 
 
-\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
+\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of the underlying EC2 instance types, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
 
-\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.
+\*\* The r3\.8xlarge DB instance class doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. For this instance class, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

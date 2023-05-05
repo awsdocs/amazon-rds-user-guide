@@ -25,6 +25,7 @@ Find the possible status values for DB instances in the following table\. This t
 |  **Configuring\-log\-exports**  | Billed |  Publishing log files to Amazon CloudWatch Logs is being enabled or disabled for this DB instance\.  | 
 |  **Converting\-to\-vpc**  | Billed |  The DB instance is being converted from a DB instance that is not in an Amazon Virtual Private Cloud \(Amazon VPC\) to a DB instance that is in an Amazon VPC\.  | 
 |  **Creating**  | Not billed |  The DB instance is being created\. The DB instance is inaccessible while it is being created\.   | 
+|  **Delete\-precheck**  | Not billed |  Amazon RDS is validating that read replicas are healthy and are safe to delete\.  | 
 |  **Deleting**  | Not billed |  The DB instance is being deleted\.  | 
 |  **Failed**  | Not billed |  The DB instance has failed and Amazon RDS can't recover it\. Perform a point\-in\-time restore to the latest restorable time of the DB instance to recover the data\.   | 
 |  **Inaccessible\-encryption\-credentials**  | Not billed |  The AWS KMS key used to encrypt or decrypt the DB instance can't be accessed or recovered\.   | 

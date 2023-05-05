@@ -11,18 +11,18 @@ For more information about working with events, see the following:
 The following table shows the event category and a list of events when an RDS Proxy is the source type\.
 
 
-|  Category  | RDS event ID |  Description  | 
-| --- | --- | --- | 
-| configuration change | RDS\-EVENT\-0204 |  RDS modified the DB proxy \(RDS Proxy\)\.  | 
-|  configuration change  | RDS\-EVENT\-0207 |  RDS modified the endpoint of the DB proxy \(RDS Proxy\)\.    | 
-|  configuration change  | RDS\-EVENT\-0213 | RDS detected the addition of the DB instance and automatically added it to the target group of the DB proxy \(RDS Proxy\)\.  | 
-|  configuration change  | RDS\-EVENT\-0214 |  RDS detected the deletion of the DB instance and automatically removed it from the target group of the DB proxy \(RDS Proxy\)\.  | 
-|  configuration change  | RDS\-EVENT\-0215 |  RDS detected the deletion of the DB cluster and automatically removed it from the target group of the DB proxy \(RDS Proxy\)\.  | 
-|  creation  | RDS\-EVENT\-0203 |  RDS created the DB proxy \(RDS Proxy\)\.  | 
-|  creation  | RDS\-EVENT\-0206 |  RDS created the endpoint for the DB proxy \(RDS Proxy\)\.  | 
-| deletion | RDS\-EVENT\-0205 |  RDS deleted the DB proxy \(RDS Proxy\)\.  | 
-|  deletion  | RDS\-EVENT\-0208 |  RDS deleted the endpoint of DB proxy \(RDS Proxy\)\.  | 
-|  failure  | RDS\-EVENT\-0243 |  RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
+|  Category  | RDS event ID |  Message  |  Notes  | 
+| --- | --- | --- | --- | 
+| configuration change | RDS\-EVENT\-0204 |  RDS modified DB proxy *name*\.  |  | 
+| configuration change | RDS\-EVENT\-0207 |  RDS modified the end point of the DB proxy *name*\.  |  | 
+| configuration change | RDS\-EVENT\-0213 |  RDS detected the addition of the DB instance and automatically added it to the target group of the DB proxy *name*\.  |  | 
+|  configuration change  | RDS\-EVENT\-0214 |  RDS detected deletion of DB instance *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
+|  configuration change  | RDS\-EVENT\-0215 |  RDS detected deletion of DB cluster *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
+|  creation  | RDS\-EVENT\-0203 |  RDS created DB proxy *name*\.  |  | 
+|  creation  | RDS\-EVENT\-0206 |  RDS created endpoint *name* for DB proxy *name*\.  |  | 
+| deletion | RDS\-EVENT\-0205 |  RDS deleted DB proxy *name*\.  |  | 
+|  deletion  | RDS\-EVENT\-0208 |  RDS deleted endpoint *name* for DB proxy *name*\.  |  | 
+|  failure  | RDS\-EVENT\-0243 |  RDS failed to provision capacity for proxy *name* because there aren't enough IP addresses available in your subnets: *name*\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses as recommended in the RDS Proxy documentation\.  |  To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
 
 The following is an example of an RDS Proxy event in JSON format\. The event shows that RDS modified the endpoint named `my-endpoint` of the RDS Proxy named `my-rds-proxy`\. The event ID is RDS\-EVENT\-0207\.
 

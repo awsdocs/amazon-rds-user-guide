@@ -41,7 +41,7 @@ $ psql -h db-name.555555555555.ap-southeast-1.rds.amazonaws.com
 
 ## Requiring an SSL connection to a PostgreSQL DB instance<a name="PostgreSQL.Concepts.General.SSL.Requiring"></a>
 
-You can require that connections to your PostgreSQL DB instance use SSL by using the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB instance\. 
+You can require that connections to your PostgreSQL DB instance use SSL by using the `rds.force_ssl` parameter\. The default `rds.force_ssl` parameter is set to 1 \(on\) for RDS for PostgreSQL version 15\. All other RDS for PostgreSQL major version 14 and older have the default value for `rds.force_ssl` parameter set to 0 \(off\)\. You can set the `rds.force_ssl` parameter to 1 \(on\) to require SSL for connections to your DB instance\. 
 
 To change the value of this parameter, you need to create a custom DB parameter group\. You then change the value for `rds.force_ssl` in your custom DB parameter group to `1` to turn on this feature\. If you prepare the custom DB parameter group before creating your RDS for PostgreSQL DB instance you can choose it \(instead of a default parameter group\) during the creation process\. If you do this after your RDS for PostgreSQL DB instance is already running, you need to reboot the instance so that your instance uses the custom parameter group\. For more information, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
 
@@ -139,6 +139,7 @@ The PostgreSQL configuration parameter [ssl\_ciphers](https://www.postgresql.org
 
 | PostgreSQL engine version | Cipher suites | 
 | --- | --- | 
+| 15 | HIGH:\!aNULL:\!3DES | 
 | 14 | HIGH:\!aNULL:\!3DES | 
 | 13 | HIGH:\!aNULL:\!3DES | 
 | 12 | HIGH:\!aNULL:\!3DES | 
