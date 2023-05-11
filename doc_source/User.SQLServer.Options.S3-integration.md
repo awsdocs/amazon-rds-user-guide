@@ -46,7 +46,7 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
 1. For **Actions**, choose the following to grant the access that your DB instance requires:
    + `ListAllMyBuckets` – required
    + `ListBucket` – required
-   + `GetBucketACL` – required
+   + `GetBucketAcl` – required
    + `GetBucketLocation` – required
    + `GetObject` – required for downloading files from S3 to `D:\S3\`
    + `PutObject` – required for uploading files from `D:\S3\` to S3
@@ -99,7 +99,7 @@ To grant Amazon RDS access to an Amazon S3 bucket, use the following process:
 Include the appropriate actions to grant the access your DB instance requires:
 + `ListAllMyBuckets` – required
 + `ListBucket` – required
-+ `GetBucketACL` – required
++ `GetBucketAcl` – required
 + `GetBucketLocation` – required
 + `GetObject` – required for downloading files from S3 to `D:\S3\`
 + `PutObject` – required for uploading files from `D:\S3\` to S3
@@ -126,7 +126,7 @@ Include the appropriate actions to grant the access your DB instance requires:
    	                "Effect": "Allow",
    	                "Action": [
    	                    "s3:ListBucket",
-   	                    "s3:GetBucketACL",
+   	                    "s3:GetBucketAcl",
    	                    "s3:GetBucketLocation"
    	                ],
    	                "Resource": "arn:aws:s3:::bucket_name"
@@ -164,7 +164,7 @@ Include the appropriate actions to grant the access your DB instance requires:
                "Effect": "Allow",
                "Action": [
                    "s3:ListBucket",
-                   "s3:GetBucketACL",
+                   "s3:GetBucketAcl",
                    "s3:GetBucketLocation"
                ],
                "Resource": "arn:aws:s3:::bucket_name"
