@@ -35,7 +35,9 @@ Currently, Amazon RDS supports the following server collations:
 |  Korean\_Wansung\_CI\_AS  |  Korean\-Wansung, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Latin1\_General\_100\_BIN  |  Latin1\-General\-100, binary sort  | 
 |  Latin1\_General\_100\_BIN2  |  Latin1\-General\-100, binary code point sort order  | 
+|  Latin1\_General\_100\_BIN2\_UTF8  |  Latin1\-General\-100, binary code point sort order, UTF\-8 encoded  | 
 |  Latin1\_General\_100\_CI\_AS  |  Latin1\-General\-100, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Latin1\_General\_100\_CI\_AS\_SC\_UTF8  |  Latin1\-General\-100, case\-insensitive, accent\-sensitive, supplementary characters, UTF\-8 encoded  | 
 |  Latin1\_General\_BIN  |  Latin1\-General, binary sort  | 
 |  Latin1\_General\_BIN2  |  Latin1\-General, binary code point sort order  | 
 |  Latin1\_General\_CI\_AI  |  Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive  | 

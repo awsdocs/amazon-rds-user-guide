@@ -13,7 +13,7 @@ sudo dnf install postgresql15
 To install the psql client on Amazon Linux 2, run the following command:
 
 ```
-sudo amazon-linux-extras install postgresql15
+sudo amazon-linux-extras install postgresql14
 ```
 
 To check whether your DB instance is public or private, use the AWS Management Console to view the **Connectivity & security** tab for your instance\. Under **Security**, you can find the "Publicly accessible" value, with No for private, Yes for public\. 
@@ -145,6 +145,11 @@ If when trying to connect you receive an error like `FATAL: database name does n
 If you can't connect to the DB instance, the most common error is `Could not connect to server: Connection timed out.` If you receive this error, check the following:
 + Check that the host name used is the DB instance endpoint and that the port number used is correct\. 
 + Make sure that the DB instance's public accessibility is set to **Yes** to allow external connections\. To modify the **Public access** setting, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
++ Make sure that the user connecting to the database has CONNECT access to it\. You can use the following query to provide connect access to the database\.
+
+  ```
+  GRANT CONNECT ON DATABASE database name TO username;
+  ```
 + Check that the security group assigned to the DB instance has rules to allow access through any firewall your connection might go through\. For example, if the DB instance was created using the default port of 5432, your company might have firewall rules blocking connections to that port from external company devices\.
 
   To fix this, modify the DB instance to use a different port\. Also, make sure that the security group applied to the DB instance allows connections to the new port\. To modify the **Database port** setting, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.

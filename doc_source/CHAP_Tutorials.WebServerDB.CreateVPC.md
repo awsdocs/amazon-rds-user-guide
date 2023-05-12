@@ -194,18 +194,6 @@ If you added resources in the VPC that you created for this tutorial, you might 
 
    1. For **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
 
-1. Delete the NAT gateway\.
-
-   1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
-
-   1. Choose **VPC Dashboard**, and then choose **NAT Gateways**\.
-
-   1. Select the NAT gateway of the VPC that you created\. Use the VPC ID to identify the correct NAT gateway\.
-
-   1. For **Actions**, choose **Delete NAT gateway**\.
-
-   1. On the confirmation page, enter **delete**, and then choose **Delete**\.
-
 1. Delete the VPC\.
 
    1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
@@ -219,15 +207,3 @@ If you added resources in the VPC that you created for this tutorial, you might 
       The confirmation page shows other resources that are associated with the VPC that will also be deleted, including the subnets associated with it\.
 
    1. On the confirmation page, enter **delete**, and then choose **Delete**\.
-
-1. Release the Elastic IP addresses:
-
-   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
-
-   1. Choose **Amazon EC2 Dashboard**, and then choose **Elastic IPs**\.
-
-   1. Select the Elastic IP address you want to release\.
-
-   1. For **Actions**, choose **Release Elastic IP addresses**\.
-
-   1. On the confirmation page, choose **Release**\.

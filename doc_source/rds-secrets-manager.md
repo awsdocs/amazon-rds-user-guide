@@ -29,7 +29,7 @@ You can specify that RDS manages the master user password in Secrets Manager for
 
 When you specify that RDS manages the master user password in Secrets Manager, RDS generates the password and stores it in Secrets Manager\. You can interact directly with the secret to retrieve the credentials for the master user\. You can also specify a customer managed key to encrypt the secret, or use the KMS key that is provided by Secrets Manager\.
 
-RDS manages the settings for the secret and rotates the secret every seven days by default\. You can modify some of the settings, such as the rotation schedule\. If you delete a DB instance that manages a secret in Secrets Manager, the secret and its associated metadata are also deleted\.
+RDS manages the settings for the secret and rotates the secret every seven days by default\. You can modify some of the settings, such as the rotation schedule after the DB instance creation\. If you delete a DB instance that manages a secret in Secrets Manager, the secret and its associated metadata are also deleted\.
 
 To connect to a DB instance or Multi\-AZ DB cluster with the credentials in a secret, you can retrieve the secret from Secrets Manager\. For more information, see [ Retrieve secrets from AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html) and [Connect to a SQL database with credentials in an AWS Secrets Manager secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_jdbc.html) in the *AWS Secrets Manager User Guide*\.
 

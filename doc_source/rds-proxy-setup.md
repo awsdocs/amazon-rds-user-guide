@@ -313,8 +313,8 @@ aws kms create-key --description "$PREFIX-test-key" --policy '{
     Provide additional connectivity configuration: 
    + **VPC security group**\. Choose an existing VPC security group\. You can also choose for the AWS Management Console to create a new security group for you and use that\. You must configure the **Inbound rules** to allow your applications to access the proxy\. You must also configure the **Outbound rules** to allow traffic from your DB targets\. 
 **Note**  
-This security group must allow access to the database the proxy connects to\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\.  
-When using a shared VPC, you can't use the default security group for the VPC, or one that belongs to another account\. Choose a security group that belongs to your account\. If one doesn't exist, create one\. For more information about this limitation, see [Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html#vpc-share-limitations)\. 
+This security group must allow connections from the proxy to the database\. The same security group is used for ingress from your applications to the proxy, and for egress from the proxy to the database\. For example, suppose that you use the same security group for your database and your proxy\. In this case, make sure that you specify that resources in that security group can communicate with other resources in the same security group\. If your proxy uses Secrets Manager to store database credentials, the proxy VPC security group must also allow outbound connections to Secrets Manager\.  
+When using a shared VPC, you can't use the default security group for the VPC, or one that belongs to another account\. Choose a security group that belongs to your account\. If one doesn't exist, create one\. For more information about this limitation, see [ Work with shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html#vpc-share-limitations)\. 
 
     \(Optional\) Provide advanced configuration: 
    +  **Enable enhanced logging**\. You can enable this setting to troubleshoot proxy compatibility or performance issues\. 
@@ -480,7 +480,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
 ## Connecting to a database through RDS Proxy<a name="rds-proxy-connecting"></a>
 
- You connect to an RDS DB instance or Aurora DB cluster through a proxy in generally the same way as you connect directly to the database\. The main difference is that you specify the proxy endpoint instead of the instance or cluster endpoint\. For an Aurora DB cluster, by default all proxy connections have read/write capability and use the writer instance\. If you normally use the reader endpoint for read\-only connections, you can create an additional read\-only endpoint for the proxy\. You can use that endpoint the same way\. For more information, see [Overview of proxy endpoints](rds-proxy-endpoints.md#rds-proxy-endpoints-overview)\. 
+You connect to an RDS DB instance through a proxy in generally the same way as you connect directly to the database\. The main difference is that you specify the proxy endpoint instead of the instance endpoint\. For more information, see [Overview of proxy endpoints](rds-proxy-endpoints.md#rds-proxy-endpoints-overview)\. 
 
 **Topics**
 + [Connecting to a proxy using native authentication](#rds-proxy-connecting-native)

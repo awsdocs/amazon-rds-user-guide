@@ -3,7 +3,7 @@
 Amazon RDS instances are billed based on the following components:
 + DB instance hours \(per hour\) – Based on the DB instance class of the DB instance \(for example, db\.t2\.small or db\.m4\.large\)\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. RDS usage is billed in 1\-second increments, with a minimum of 10 minutes\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 + Storage \(per GiB per month\) – Storage capacity that you have provisioned to your DB instance\. If you scale your provisioned storage capacity within the month, your bill is prorated\. For more information, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
-+ I/O requests \(per 1 million requests per month\) – Total number of storage I/O requests that you have made in a billing cycle, for Amazon RDS magnetic storage only\.
++ Input/output \(I/O\) requests \(per 1 million requests\) – Total number of storage I/O requests that you have made in a billing cycle, for Amazon RDS magnetic storage only\.
 + Provisioned IOPS \(per IOPS per month\) – Provisioned IOPS rate, regardless of IOPS consumed, for Amazon RDS Provisioned IOPS \(SSD\) and General Purpose \(SSD\) gp3 storage\. Provisioned storage for EBS volumes are billed in 1\-second increments, with a minimum of 10 minutes\.
 + Backup storage \(per GiB per month\) – *Backup storage *is the storage that is associated with automated database backups and any active database snapshots that you have taken\. Increasing your backup retention period or taking additional database snapshots increases the backup storage consumed by your database\. Per second billing doesn't apply to backup storage \(metered in GB\-month\)\.
 

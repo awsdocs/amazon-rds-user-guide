@@ -213,7 +213,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1 – memory\-optimized instance classes | 
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
-| db\.r7g – general\-purpose instance classes powered by AWS Graviton3 processors | 
+| db\.r7g – memory\-optimized instance classes powered by AWS Graviton3 processors | 
 | db\.r7g\.16xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
 | db\.r7g\.12xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
 | db\.r7g\.8xlarge | MariaDB 10\.6\.10 and higher 10\.6 versions, MariaDB 10\.5\.17 and higher 10\.5 versions, and MariaDB 10\.4\.26 and higher 10\.4 versions | No | MySQL 8\.0\.28 and higher | No | PostgreSQL 15\.2 and higher 15 versions, PostgreSQL 14\.5 and higher 14 versions, and PostgreSQL 13\.4 and higher 13 versions | 
@@ -997,7 +997,7 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.x1 – memory\-optimized instance classes | 
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | 14,000 | 25 | 
 | db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | 7,000 | 10 | 
-| db\.r7g – general\-purpose instance classes powered by AWS Graviton3 processors | 
+| db\.r7g – memory\-optimized instance classes powered by AWS Graviton3 processors | 
 | db\.r7g\.16xlarge | 64 | — | 512 | Yes | 20,000 | 30 | 
 | db\.r7g\.12xlarge | 48 | — | 384 | Yes | 15,000 | 22\.5 | 
 | db\.r7g\.8xlarge | 32 | — | 256 | Yes | 10,000 | 15 | 

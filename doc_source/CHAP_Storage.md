@@ -1,6 +1,8 @@
 # Amazon RDS DB instance storage<a name="CHAP_Storage"></a>
 
-DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\. 
+DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\.
+
+In some cases, your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors that affect storage performance](#CHAP_Storage.Other.Factors)\.
 
 For more information about instance storage pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\.
 
@@ -17,11 +19,25 @@ The following list briefly describes the three storage types:
   For more information about Provisioned IOPS storage, including the storage size ranges, see [Provisioned IOPS SSD storage](#USER_PIOPS)\.
 + **Magnetic** – Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS SSD for any new storage needs\. The maximum amount of storage allowed for DB instances on magnetic storage is less than that of the other storage types\. For more information, see [Magnetic storage](#CHAP_Storage.Magnetic)\.
 
+When you select General Purpose SSD or Provisioned IOPS SSD, depending on the engine selected and the amount of storage requested, Amazon RDS automatically stripes across multiple volumes to enhance performance, as shown in the following table\.
+
+
+| Database engine | Amazon RDS storage size | Amount of volumes provisioned | 
+| --- | --- | --- | 
+| MariaDB, MySQL, and PostgreSQL | Less than 400 GiB | 1 | 
+| MariaDB, MySQL, and PostgreSQL | Between 400 and 64,000 GiB | 4 | 
+| Oracle | Less than 200 GiB | 1 | 
+| Oracle | Between 200 and 64,000 GiB | 4 | 
+| SQL Server | Any | 1 | 
+
+When you modify a General Purpose SSD or Provisioned IOPS SSD volume, it goes through a sequence of states\. While the volume is in the `optimizing` state, your volume performance is in between the source and target configuration specifications\. Transitional volume performance will be no less than the lowest of the two specifications\. For more information on volume modifications, see [Monitor the progress of volume modifications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modifications.html) in the *Amazon EC2 User Guide*\.
+
+**Important**  
+When you modify an instance’s storage so that it goes from one volume to four volumes, or when you modify an instance using magnetic storage, Amazon RDS does not use the Elastic Volumes feature\. Instead, Amazon RDS provisions new volumes and transparently moves the data from the old volume to the new volumes\. This operation consumes a significant amount of IOPS and throughput of both the old and new volumes\. Depending on the size of the volume and the amount of database workload present during the modification, this operation can consume a high amount of IOPS, significantly increase IO latency, and take several hours to complete, while the RDS instance remains in the `Modifying` state\.
+
 ## General Purpose SSD storage<a name="Concepts.Storage.GeneralSSD"></a>
 
-General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads that aren't latency sensitive\. The following are the storage size ranges for General Purpose SSD DB instances:
-+ MariaDB, MySQL, Oracle, and PostgreSQL database instances: 20 GiB–64 TiB
-+ SQL Server Enterprise, Standard, Web, and Express Editions: 20 GiB–16 TiB
+General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads that aren't latency sensitive\.
 
 **Note**  
 DB instances that use General Purpose SSD storage can experience much longer latency after read replica creation, Multi\-AZ conversion, and DB snapshot restoration than instances that use Provisioned IOPS storage\. If you need a DB instance with minimum latency after these operations, we recommend using [Provisioned IOPS SSD storage](#USER_PIOPS)\.
@@ -30,19 +46,36 @@ Amazon RDS offers two types of General Purpose SSD storage: [gp2 storage](#gp2-s
 
 ### gp2 storage<a name="gp2-storage"></a>
 
-When your applications don't need high storage performance, you can use General Purpose SSD gp2 storage\. Baseline I/O performance for gp2 storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(21\.36 TiB and greater\) is 64,000 IOPS\.
+When your applications don't need high storage performance, you can use General Purpose SSD gp2 storage\. Baseline I/O performance for gp2 storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for one 100\-GiB volume is 300 IOPS\. Baseline performance for one 1,000 GiB volume is 3,000 IOPS\. Maximum baseline performance for one gp2 volume \(5334 GiB and greater\) is 16,000 IOPS\.
 
-Volumes below 1 TiB in size also have the ability to burst to 3,000 IOPS for extended periods of time\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html#EBSVolumeTypes_gp2) in the *Amazon EC2 User Guide*\. For a more detailed description of how baseline performance and I/O credit balance affect performance, see the post [Understanding burst vs\. baseline performance with Amazon RDS and gp2](http://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/) on the AWS Database Blog\.
+Individual gp2 volumes below 1,000 GiB in size also have the ability to burst to 3,000 IOPS for extended periods of time\. Volume I/O credit balance determines burst performance\. For more information about volume I/O credits, see [I/O credits and burst performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#EBSVolumeTypes_gp2) in the *Amazon EC2 User Guide*\. For a more detailed description of how baseline performance and I/O credit balance affect performance, see the post [Understanding burst vs\. baseline performance with Amazon RDS and gp2](http://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/) on the AWS Database Blog\.
 
 Many workloads never deplete the burst balance\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
 
-For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is often irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\. However, for DB instances between 1 TiB and 4 TiB, storage is *striped* across four Amazon EBS volumes providing burst performance of up to 12,000 IOPS\. For volumes above 4TiB of storage, baseline IOPS exceeds the maximum burst of 12,000 IOPS\. This applies to RDS database engines other than Microsoft SQL Server, which doesn't support volume striping\.
+For gp2 volumes larger than 1,000 GiB, the baseline performance is greater than the burst performance\. For such volumes, burst is irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\. However, for DB instances of certain engines and sizes, storage is *striped* across four volumes providing four times the baseline throughput, and four times the burst IOPS of a single volume\. Storage performance for gp2 volumes on Amazon RDS DB engines, including the threshold, is shown in the following table\.
+
+
+| DB engine | RDS Storage size | Range of Baseline IOPS | Range of Baseline Throughput | Burst IOPS | 
+| --- | --- | --- | --- | --- | 
+| MariaDB, MySQL, and PostgreSQL | Between 20 and 399 GiB | 100\-1197 IOPS | 128\-250 MiB/s | 3,000 | 
+| MariaDB, MySQL, and PostgreSQL | Between 400 and 1,335 GiB  | 1,200\-4,005 IOPS | 500\-1,000 MiB/s | 12,000 | 
+| MariaDB, MySQL, and PostgreSQL | Between 1,336 and 3,999 GiB  | 4008\-11,997 IOPS | 1,000 MiB/s | 12,000 | 
+| MariaDB, MySQL, and PostgreSQL | Between 4,000 and 65,536 GiB  | 12,000\-64,000 IOPS | 1,000 MiB/s | N/A\* | 
+| Oracle | Between 20 and 199 GiB | 100\-597 IOPS | 128\-250 MiB/s | 3,000 | 
+| Oracle | Between 200 and 1,335 GiB | 600\-4,005 IOPS | 500\-1,000 MiB/s | 12,000 | 
+| Oracle | Between 1,336 and 3,999 GiB | 4008\-11,997 IOPS | 1,000 MiB/s | 12,000 | 
+| Oracle | Between 4,000 and 65,536 GiB | 12,000\-64,000 IOPS | 1,000 MiB/s | N/A\* | 
+| SQL Server | Between 20 and 333 GiB | 100\-999 IOPS | 128\-250 MiB/s | 3,000 | 
+| SQL Server | Between 334 and 999 GiB | 1,002\-2,997 IOPS | 250 MiB/s | 3,000 | 
+| SQL Server | Between 1,000 and 16,384 GiB | 3,000\-16,000 IOPS | 250 MiB/s | N/A\* | 
+
+\* The baseline performance of the volume exceeds the maximum burst performance\.
 
 ### gp3 storage<a name="gp3-storage"></a>
 
-By using General Purpose SSD gp3 storage volumes, you can customize storage performance independently of storage capacity\. *Storage performance* is the combination of I/O operations per second \(IOPS\) and how fast the storage volume can perform reads and writes \(storage throughput\)\. On gp3 storage volumes, Amazon RDS provides a baseline storage performance of 3000 IOPS and 125 MiBps\.
+By using General Purpose SSD gp3 storage volumes, you can customize storage performance independently of storage capacity\. *Storage performance* is the combination of I/O operations per second \(IOPS\) and how fast the storage volume can perform reads and writes \(storage throughput\)\. On gp3 storage volumes, Amazon RDS provides a baseline storage performance of 3000 IOPS and 125 MiB/s\.
 
-For every RDS DB engine except RDS for SQL Server, when the storage size for gp3 volumes reaches a certain threshold, the baseline storage performance increases to 12,000 IOPS and 500 MiBps\. This is because of *volume striping*, where the storage uses four logical volumes instead of one\. RDS for SQL Server doesn't support volume striping, and therefore doesn't have a threshold value\.
+For every RDS DB engine except RDS for SQL Server, when the storage size for gp3 volumes reaches a certain threshold, the baseline storage performance increases to 12,000 IOPS and 500 MiB/s\. This is because of *volume striping*, where the storage uses four volumes instead of one\. RDS for SQL Server doesn't support volume striping, and therefore doesn't have a threshold value\.
 
 **Note**  
 General Purpose SSD gp3 storage is supported on Single\-AZ and Multi\-AZ DB instances, but isn't supported on Multi\-AZ DB clusters\. For more information, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md) and [Multi\-AZ DB cluster deployments](multi-az-db-clusters-concepts.md)\.
@@ -52,15 +85,15 @@ Storage performance for gp3 volumes on Amazon RDS DB engines, including the thre
 
 | DB engine | Storage size | Baseline storage performance | Range of Provisioned IOPS | Range of provisioned storage throughput | 
 | --- | --- | --- | --- | --- | 
-| MariaDB, MySQL, and PostgreSQL | Less than 400 GiB | 3,000 IOPS/125 MiBps | N/A | N/A | 
-| MariaDB, MySQL, and PostgreSQL | 400 GiB and higher | 12,000 IOPS/500 MiBps | 12,000–64,000 IOPS | 500–4,000 MiBps | 
-| Oracle | Less than 200 GiB | 3,000 IOPS/125 MiBps | N/A | N/A | 
-| Oracle | 200 GiB and higher | 12,000 IOPS/500 MiBps | 12,000–64,000 IOPS | 500–4,000 MiBps | 
-| SQL Server | 20 GiB–16 TiB | 3,000 IOPS/125 MiBps | 3,000–16,000 IOPS | 125–1,000 MiBps | 
+| MariaDB, MySQL, and PostgreSQL | Less than 400 GiB | 3,000 IOPS/125 MiB/s | N/A | N/A | 
+| MariaDB, MySQL, and PostgreSQL | 400 GiB and higher | 12,000 IOPS/500 MiB/s | 12,000–64,000 IOPS | 500–4,000 MiB/s | 
+| Oracle | Less than 200 GiB | 3,000 IOPS/125 MiB/s | N/A | N/A | 
+| Oracle | 200 GiB and higher | 12,000 IOPS/500 MiB/s | 12,000–64,000 IOPS | 500–4,000 MiB/s | 
+| SQL Server | 20 GiB–16 TiB | 3,000 IOPS/125 MiB/s | 3,000–16,000 IOPS | 125–1,000 MiB/s | 
 
 For every DB engine except RDS for SQL Server, you can provision additional IOPS and storage throughput when storage size is at or above the threshold value\. For RDS for SQL Server, you can provision additional IOPS and storage throughput for any available storage size\. For all DB engines, you pay for only the additional provisioned storage performance\. For more information, see [Amazon RDS pricing](http://aws.amazon.com/rds/pricing/)\.
 
-Although the added Provisioned IOPS and storage throughput aren't dependent on the storage size, they are related to each other\. When you raise the IOPS above 32,000 for MariaDB and MySQL, the storage throughput value automatically increases from 500 MiBps\. For example, when you set the IOPS to 40,000 on RDS for MySQL, the storage throughput must be at least 625 MiBps\. The automatic increase doesn't happen for Oracle, PostgreSQL, and SQL Server DB instances\.
+Although the added Provisioned IOPS and storage throughput aren't dependent on the storage size, they are related to each other\. When you raise the IOPS above 32,000 for MariaDB and MySQL, the storage throughput value automatically increases from 500 MiB/s\. For example, when you set the IOPS to 40,000 on RDS for MySQL, the storage throughput must be at least 625 MiB/s\. The automatic increase doesn't happen for Oracle, PostgreSQL, and SQL Server DB instances\.
 
 Storage performance values for gp3 volumes on RDS have the following constraints:
 + The maximum ratio of storage throughput to IOPS is 0\.25 for all supported DB engines\.
@@ -69,21 +102,27 @@ Storage performance values for gp3 volumes on RDS have the following constraints
 + If you're using storage autoscaling, the same ratios between IOPS and maximum storage threshold \(in GiB\) also apply\. 
 
   For more information on storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
-+ When you modify an EBS volume, it goes through a sequence of states\. While the volume is in the `optimizing` state, your volume performance is in between the source and target configuration specifications\. Transitional volume performance will be no less than the source volume performance\. For more information on volume modifications, see [Monitor the progress of volume modifications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-modification.html) in the *Amazon EC2 User Guide*\.
 
 ## Provisioned IOPS SSD storage<a name="USER_PIOPS"></a>
 
-For a production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS \(I/O operations per second\) storage\. Provisioned IOPS storage is a storage type that delivers predictable performance, and consistently low latency\. Provisioned IOPS storage is optimized for online transaction processing \(OLTP\) workloads that have consistent performance requirements\. Provisioned IOPS helps performance tuning of these workloads\.
-
-In some cases, your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors that affect storage performance](#CHAP_Storage.Other.Factors)\.
+For a production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. Provisioned IOPS storage is a storage type that delivers predictable performance, and consistently low latency\. Provisioned IOPS storage is optimized for online transaction processing \(OLTP\) workloads that require consistent performance\. Provisioned IOPS helps performance tuning of these workloads\.
 
 When you create a DB instance, you specify the IOPS rate and the size of the volume\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
 
 ### io1 storage<a name="USER_PIOPS.io1"></a>
 
-For I/O\-intensive workloads, you can use Provisioned IOPS SSD io1 storage and achieve up to 256,000 I/O operations per second \(IOPS\)\. The following table shows the range of Provisioned IOPS and storage size for each database engine\.
+For I/O\-intensive workloads, you can use Provisioned IOPS SSD io1 storage and achieve up to 256,000 I/O operations per second \(IOPS\)\. The throughput of io1 volumes varies based on the amount of IOPS provisioned per volume and on the size of the IO operations being executed\. For more information about throughput of io1 volumes, see [Provisioned IOPS volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/provisioned-iops.html#EBSVolumeTypes_piops) in the *Amazon EC2 User Guide*\.
 
-<a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
+The following table shows the range of Provisioned IOPS and and maximum throughput for each database engine and storage size range\.
+
+
+| Database engine | Range of storage size | Range of Provisioned IOPS | Maximum throughput | 
+| --- | --- | --- | --- | 
+| MariaDB, MySQL, and PostgreSQL | Between 100 and 399 GiB | 1,000–19,950 IOPS | 500 MiB/s | 
+| MariaDB, MySQL, and PostgreSQL | Between 400 and 65,536 GiB | 1,000–256,000 IOPS | 4,000 MiB/s | 
+| Oracle | Between 100 and 199 GiB | 1,000–9,950 IOPS | 500 MiB/s | 
+| Oracle | Between 200 and 65,536 GiB | 1,000–256,000 IOPS | 4,000 MiB/s | 
+| SQL Server | Between 20 and 16,384 GiB | 1,000–64,000 IOPS | 1,000 MiB/s | 
 
 **Note**  
 For SQL Server, the maximum 64,000 IOPS is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5\*, m6i, r5\*, r6i, and z1d instance types\. Other instance types guarantee performance up to 32,000 IOPS\.  

@@ -18,6 +18,7 @@ The AWS JDBC Driver for MySQL supports IAM database authentication\. For more in
 + [CLI and SDK support](#UsingWithRDS.IAMDBAuth.cli-sdk)
 + [Limitations for IAM database authentication](#UsingWithRDS.IAMDBAuth.Limitations)
 + [Recommendations for IAM database authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
++ [Unsupported AWS global condition context keys](#UsingWithRDS.IAMDBAuth.GlobalContextKeys)
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
@@ -57,3 +58,15 @@ We recommend the following when using IAM database authentication:
 
   The database engines that work with Amazon RDS don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB instance\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. 
 + The size of an IAM database authentication token depends on many things including the number of IAM tags, IAM service policies, ARN lengths, as well as other IAM and database properties\. The minimum size of this token is generally about 1 KB but can be larger\. Since this token is used as the password in the connection string to the database using IAM authentication, you should ensure that your database driver \(e\.g\., ODBC\) and/or any tools do not limit or otherwise truncate this token due to its size\. A truncated token will cause the authentication validation done by the database and IAM to fail\.
+
+## Unsupported AWS global condition context keys<a name="UsingWithRDS.IAMDBAuth.GlobalContextKeys"></a>
+
+ IAM database authentication does not support the following subset of AWS global condition context keys\. 
++ `aws:Referer`
++ `aws:SourceIp`
++ `aws:SourceVpc`
++ `aws:SourceVpce`
++ `aws:UserAgent`
++ `aws:VpcSourceIp`
+
+For more information, see [AWS global condition context keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\. 

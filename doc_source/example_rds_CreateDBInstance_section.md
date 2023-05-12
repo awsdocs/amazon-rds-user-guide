@@ -101,65 +101,19 @@ The source code for these examples is in the [AWS Code Examples GitHub repositor
   
 
 ```
-    public static void createDatabaseInstance(RdsClient rdsClient,
-                                                  String dbInstanceIdentifier,
-                                                  String dbName,
-                                                  String masterUsername,
-                                                  String masterUserPassword) {
+    public static void createSnapshot(RdsClient rdsClient, String dbInstanceIdentifier, String dbSnapshotIdentifier) {
 
         try {
-            CreateDbInstanceRequest instanceRequest = CreateDbInstanceRequest.builder()
+            CreateDbSnapshotRequest snapshotRequest = CreateDbSnapshotRequest.builder()
                 .dbInstanceIdentifier(dbInstanceIdentifier)
-                .allocatedStorage(100)
-                .dbName(dbName)
-                .engine("mysql")
-                .dbInstanceClass("db.m4.large")
-                .engineVersion("8.0.15")
-                .storageType("standard")
-                .masterUsername(masterUsername)
-                .masterUserPassword(masterUserPassword)
+                .dbSnapshotIdentifier(dbSnapshotIdentifier)
                 .build();
 
-            CreateDbInstanceResponse response = rdsClient.createDBInstance(instanceRequest);
-            System.out.print("The status is " + response.dbInstance().dbInstanceStatus());
+            CreateDbSnapshotResponse response = rdsClient.createDBSnapshot(snapshotRequest);
+            System.out.print("The Snapshot id is " + response.dbSnapshot().dbiResourceId());
 
         } catch (RdsException e) {
-           System.out.println(e.getLocalizedMessage());
-           System.exit(1);
-        }
-    }
-
-    // Waits until the database instance is available
-    public static void waitForInstanceReady(RdsClient rdsClient, String dbInstanceIdentifier) {
-
-        Boolean instanceReady = false;
-        String instanceReadyStr = "";
-        System.out.println("Waiting for instance to become available.");
-
-        try {
-            DescribeDbInstancesRequest instanceRequest = DescribeDbInstancesRequest.builder()
-                .dbInstanceIdentifier(dbInstanceIdentifier)
-                .build();
-
-            // Loop until the cluster is ready
-            while (!instanceReady) {
-
-                DescribeDbInstancesResponse response = rdsClient.describeDBInstances(instanceRequest);
-                List<DBInstance> instanceList = response.dbInstances();
-                for (DBInstance instance : instanceList) {
-                    instanceReadyStr = instance.dbInstanceStatus();
-                    if (instanceReadyStr.contains("available"))
-                        instanceReady = true;
-                    else {
-                        System.out.print(".");
-                        Thread.sleep(sleepTime * 1000);
-                    }
-                }
-            }
-            System.out.println("Database instance is available!");
-
-        } catch (RdsException | InterruptedException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
             System.exit(1);
         }
     }

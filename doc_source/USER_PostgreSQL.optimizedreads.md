@@ -118,6 +118,4 @@ The following limitations apply to RDS Optimized Reads in PostgreSQL:
 + Transactions can fail when the instance store is full\.
 + If a source instance doesn't have local storage, then read replica with local storage is unsupported\.
 + Point\-in\-time restore from a local storage instance to non\-local storage instance is unsupported\.
-+ RDS Optimized Reads in PostgreSQL is available in all Regions except the following:
-  + China \(Beijing\) Region
-  + China \(Ningxia\)
++ RDS Optimized Reads in PostgreSQL is available in all AWS Regions\.
