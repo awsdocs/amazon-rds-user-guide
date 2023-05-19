@@ -6,6 +6,14 @@ Some maintenance items require that Amazon RDS take your DB instance offline for
 
 Deferred DB instance modifications that you have chosen not to apply immediately are also applied during the maintenance window\. For example, you might choose to change the DB instance class or parameter group during the maintenance window\. Such modifications that you specify using the **pending reboot** setting don't show up in the **Pending maintenance** list\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
+**Topics**
++ [Viewing pending maintenance](#USER_UpgradeDBInstance.Maintenance.Viewing)
++ [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)
++ [Maintenance for Multi\-AZ deployments](#USER_UpgradeDBInstance.Maintenance.Multi-AZ)
++ [The Amazon RDS maintenance window](#Concepts.DBMaintenance)
++ [Adjusting the preferred DB instance maintenance window](#AdjustingTheMaintenanceWindow)
++ [Working with operating system updates](#OS_Updates)
+
 ## Viewing pending maintenance<a name="USER_UpgradeDBInstance.Maintenance.Viewing"></a>
 
 View whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\.
@@ -135,9 +143,11 @@ Running a DB instance as a Multi\-AZ deployment can further reduce the impact of
 
 1. Perform maintenance on the old primary, which becomes the new standby\.
 
-When you modify the database engine for your DB instance in a Multi\-AZ deployment, Amazon RDS upgrades both primary and secondary DB instances at once\. In this case, the database engine for the entire Multi\-AZ deployment is shut down during the upgrade\. 
+If you upgrade the database engine for your DB instance in a Multi\-AZ deployment, Amazon RDS modifies both primary and secondary DB instances at the same time\. In this case, both the primary and secondary DB instances in the Multi\-AZ deployment are unavailable during the upgrade\. This operation causes downtime until the upgrade is complete\. The duration of the downtime varies based on the size of your DB instance\.
 
-For more information on Multi\-AZ deployments, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
+If your DB instance runs RDS for MySQL or RDS for MariaDB, you can minimize the downtime required for an upgrade by using a blue/green deployment\. For more information, see [Using Amazon RDS Blue/Green Deployments for database updates](blue-green-deployments.md)\. If you upgrade an RDS for SQL Server DB instance in a Multi\-AZ deployment, then Amazon RDS performs rolling upgrades, so you have an outage only for the duration of a failover\. For more information, see [Multi\-AZ and in\-memory optimization considerations](USER_UpgradeDBInstance.SQLServer.md#USER_UpgradeDBInstance.SQLServer.MAZ)\.
+
+For more information about Multi\-AZ deployments, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
 
 ## The Amazon RDS maintenance window<a name="Concepts.DBMaintenance"></a>
 
@@ -169,7 +179,7 @@ For this example, we assume that a DB instance named *mydbinstance* exists and h
 
 1. In the navigation pane, choose **Databases**, and then select the DB instance that you want to modify\. 
 
-1. Choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB instance** page appears\.
 
 1. In the **Maintenance** section, update the maintenance window\.
 **Note**  
@@ -181,7 +191,7 @@ The maintenance window and the backup window for the DB instance cannot overlap\
 
 1. To apply the changes to the maintenance window immediately, select **Apply immediately**\. 
 
-1.  Choose **Modify DB Instance** to save your changes\. 
+1.  Choose **Modify DB instance** to save your changes\. 
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
@@ -219,17 +229,17 @@ To adjust the preferred maintenance window, use the Amazon RDS API [https://docs
 RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL DB instances occasionally require operating system updates\. Amazon RDS upgrades the operating system to a newer version to improve database performance and customers’ overall security posture\. Typically, the updates take about 10 minutes\. Operating system updates don't change the DB engine version or DB instance class of a DB instance\.
 
 Operating system updates can be either optional or mandatory:
-+ An **optional update** doesn’t have an apply date and can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
++ An **optional update** can be applied at any time\. While these updates are optional, we recommend that you apply them periodically to keep your RDS fleet up to date\. RDS *does not* apply these updates automatically\.
 
-  To be notified when a new, minor version, optional update becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
+  To be notified when a new, optional operating system patch becomes available, you can subscribe to [RDS\-EVENT\-0230](USER_Events.Messages.md#RDS-EVENT-0230) in the security patching event category\. For information about subscribing to RDS events, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
 **Note**  
-`RDS-EVENT-0230` doesn't apply to major version upgrades\.
-+ A **mandatory update** is required and has an apply date\. Plan to schedule your update before this date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version\. The update is performed in a subsequent maintenance window for the DB instance\.
+`RDS-EVENT-0230` doesn't apply to operating system distribution upgrades\.
++ A **mandatory update** is required and has an apply date\. Plan to schedule your update before this apply date\. After the specified apply date, Amazon RDS automatically upgrades the operating system for your DB instance to the latest version during one of your assigned maintenance windows\.
 
 **Note**  
 Staying current on all optional and mandatory updates might be required to meet various compliance obligations\. We recommend that you apply all updates made available by RDS routinely during your maintenance windows\.
 
-You can use the AWS Management Console or the AWS CLI to determine whether an update is optional or mandatory\.
+You can use the AWS Management Console or the AWS CLI to get information about the type of operating system upgrade\.
 
 ### Console<a name="OS_Updates.CheckMaintenanceStatus.CON"></a>
 
@@ -253,7 +263,7 @@ A mandatory update has its maintenance **Status** set to **required** and has an
 
 ### AWS CLI<a name="OS_Updates.CheckMaintenanceStatus.CLI"></a>
 
-To determine whether an update is optional or mandatory using the AWS CLI, call the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command\.
+To get update information from the AWS CLI, use the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) command\.
 
 ```
 aws rds describe-pending-maintenance-actions

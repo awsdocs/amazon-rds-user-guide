@@ -1,28 +1,17 @@
 # Working with DB instance read replicas<a name="USER_ReadRepl"></a>
 
-Amazon RDS uses the MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB engines' built\-in replication functionality to create a special type of DB instance called a read replica from a source DB instance\. The source DB instance becomes the primary DB instance\. Updates made to the primary DB instance are asynchronously copied to the read replica\. You can reduce the load on your primary DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\.
+A read replica is a read\-only copy of a DB instance\. You can reduce the load on your primary DB instance by routing queries from your applications to the read replica\. In this way, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\.
 
-These sections discuss DB *instance* read replicas\. For information about Multi\-AZ DB *cluster* read replicas, see [Working with Multi\-AZ DB cluster read replicas](USER_MultiAZDBCluster_ReadRepl.md)\.
+To create a read replica from a source DB instance, Amazon RDS uses the built\-in replication features of the DB engine\. For information about using read replicas with a specific engine, see the following sections:
++ [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)
++ [Working with read replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
++ [Working with MySQL read replicas](USER_MySQL.Replication.ReadReplicas.md)
++ [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)
++ [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md)
+
+After you create a read replica from a source DB instance, the source becomes the primary DB instance\. When you make updates to the primary DB instance, Amazon RDS copies them asynchronously to the read replica\. The following diagram shows a source DB instance replicating to a read replica in a different Availability Zone \(AZ\)\. Client have read/write access to the primary DB instance and read\-only access to the replica\.
 
 ![\[Read replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-replica.png)
-
-**Note**  
-The information following applies to creating Amazon RDS read replicas either in the same AWS Region as the source DB instance, or in a separate AWS Region\. The information following doesn't apply to setting up replication with an instance that is running on an Amazon EC2 instance or that is on\-premises\.
-
-When you create a read replica, you first specify an existing DB instance as the source\. Then Amazon RDS takes a snapshot of the source instance and creates a read\-only instance from the snapshot\. Amazon RDS then uses the asynchronous replication method for the DB engine to update the read replica whenever there is a change to the primary DB instance\. The read replica operates as a DB instance that allows only read\-only connections\. Applications connect to a read replica the same way they do to any DB instance\. Amazon RDS replicates all databases from the source DB instance\.
-
-**Note**  
-The Oracle DB engine supports replica databases in mounted mode\. A mounted replica doesn't accept user connections and so can't serve a read\-only workload\. The primary use for mounted replicas is cross\-Region disaster recovery\. For more information, see [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
-
-In some cases, a read replica resides in a different AWS Region from its primary DB instance\. In these cases, Amazon RDS sets up a secure communications channel between the primary DB instance and the read replica\. Amazon RDS establishes any AWS security configurations needed to enable the secure channel, such as adding security group entries\. For more information about cross\-Region read replicas, see [Creating a read replica in a different AWS Region](#USER_ReadRepl.XRgn)\.
-
-You can configure a read replica for a DB instance that also has a standby replica configured for high availability in a Multi\-AZ deployment\. Replication with the standby replica is synchronous, and the standby replica can't serve read traffic\.
-
-![\[Read replica and standby replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-and-standby-replica.png)
-
-For more information about high availability and standby replicas, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
-
-Read replicas are supported by the MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB engines\. In this section, you can find general information about using read replicas with all of these engines\.
 
 **Topics**
 + [Overview of Amazon RDS read replicas](#USER_ReadRepl.Overview)
@@ -31,14 +20,21 @@ Read replicas are supported by the MariaDB, Microsoft SQL Server, MySQL, Oracle,
 + [Monitoring read replication](#USER_ReadRepl.Monitoring)
 + [Creating a read replica in a different AWS Region](#USER_ReadRepl.XRgn)
 
-For information about using read replicas with a specific engine, see the following sections:
-+ [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)
-+ [Working with read replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
-+ [Working with MySQL read replicas](USER_MySQL.Replication.ReadReplicas.md)
-+ [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)
-+ [Working with read replicas for Amazon RDS for PostgreSQL](USER_PostgreSQL.Replication.ReadReplicas.md)
-
 ## Overview of Amazon RDS read replicas<a name="USER_ReadRepl.Overview"></a>
+
+The following sections discuss DB *instance* read replicas\. For information about Multi\-AZ DB *cluster* read replicas, see [Working with Multi\-AZ DB cluster read replicas](USER_MultiAZDBCluster_ReadRepl.md)\.
+
+**Topics**
++ [Use cases for read replicas](#USER_ReadRepl.Overview.use-cases)
++ [How read replicas work](#USER_ReadRepl.Overview.how-it-works)
++ [Read replicas in a Multi\-AZ deployment](#USER_ReadRepl.Overview.maz-replicas)
++ [Cross\-Region read replicas](#USER_ReadRepl.Overview.xregion-replicas)
++ [Differences among read replicas for DB engines](#USER_ReadRepl.Overview.Differences)
++ [Read replica storage types](#USER_ReadRepl.Overview.replica-storage)
++ [Restrictions for creating a replica from a replica](#USER_ReadRepl.Overview.circular-replication)
++ [Considerations when deleting replicas](#USER_ReadRepl.Overview.deletion-considerations)
+
+### Use cases for read replicas<a name="USER_ReadRepl.Overview.use-cases"></a>
 
 Deploying one or more read replicas for a given source DB instance might make sense in a variety of scenarios, including the following: 
 + Scaling beyond the compute or I/O capacity of a single DB instance for read\-heavy database workloads\. You can direct this excess read traffic to one or more read replicas\.
@@ -46,20 +42,31 @@ Deploying one or more read replicas for a given source DB instance might make se
 + Business reporting or data warehousing scenarios where you might want business reporting queries to run against a read replica, rather than your production DB instance\. 
 + Implementing disaster recovery\. You can promote a read replica to a standalone instance as a disaster recovery solution if the primary DB instance fails\.
 
-By default, a read replica is created with the same storage type as the source DB instance\. However, you can create a read replica that has a different storage type from the source DB instance based on the options listed in the following table\.
+### How read replicas work<a name="USER_ReadRepl.Overview.how-it-works"></a>
 
-<a name="rds-read-replica-storage-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
+When you create a read replica, you first specify an existing DB instance as the source\. Then Amazon RDS takes a snapshot of the source instance and creates a read\-only instance from the snapshot\. Amazon RDS then uses the asynchronous replication method for the DB engine to update the read replica whenever there is a change to the primary DB instance\. 
 
-**Note**  
-When you increase the allocated storage of a read replica, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\.
+The read replica operates as a DB instance that allows only read\-only connections\. An exception is the RDS for Oracle DB engine, which supports replica databases in mounted mode\. A mounted replica doesn't accept user connections and so can't serve a read\-only workload\. The primary use for mounted replicas is cross\-Region disaster recovery\. For more information, see [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.
 
-Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new read replica from an existing DB instance\. For example, if **MyDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MyDBInstance**\. For MariaDB and MySQL, and for certain versions of PostgreSQL, you can create a read replica from an existing read replica\. For example, from **ReadReplica1**, you can create a new read replica, such as **ReadReplica2**\. For Oracle and SQL Server, you can't create a read replica from an existing read replica\. 
+Applications connect to a read replica just as they do to any DB instance\. Amazon RDS replicates all databases from the source DB instance\.
 
-If you no longer need read replicas, you can explicitly delete them using the same mechanisms for deleting a DB instance\. If you delete a source DB instance without deleting its read replicas in the same AWS Region, each read replica is promoted to a standalone DB instance\. For information about deleting a DB instance, see [Deleting a DB instance](USER_DeleteInstance.md)\. For information about read replica promotion, see [Promoting a read replica to be a standalone DB instance](#USER_ReadRepl.Promote)\.
+### Read replicas in a Multi\-AZ deployment<a name="USER_ReadRepl.Overview.maz-replicas"></a>
 
-If you have cross\-Region read replicas, see [Cross\-Region replication considerations](#USER_ReadRepl.XRgn.Cnsdr) for information related to deleting the source DB instance for a cross\-Region read replica\.
+You can configure a read replica for a DB instance that also has a standby replica configured for high availability in a Multi\-AZ deployment\. Replication with the standby replica is synchronous\. Unlike a read replica, a standby replica can't serve read traffic\. 
 
-### Differences between read replicas for different DB engines<a name="USER_ReadRepl.Overview.Differences"></a>
+In the following scenario, clients have read/write access to a primary DB instance in one AZ\. The primary instance copies updates asynchronously to a read replica in a second AZ and also copies them synchronously to a standby replica in a third AZ\. Clients have read access only to the read replica\.
+
+![\[Read replica and standby replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-and-standby-replica.png)
+
+For more information about high availability and standby replicas, see [Configuring and managing a Multi\-AZ deployment](Concepts.MultiAZ.md)\.
+
+### Cross\-Region read replicas<a name="USER_ReadRepl.Overview.xregion-replicas"></a>
+
+In some cases, a read replica resides in a different AWS Region from its primary DB instance\. In these cases, Amazon RDS sets up a secure communications channel between the primary DB instance and the read replica\. Amazon RDS establishes any AWS security configurations needed to enable the secure channel, such as adding security group entries\. For more information about cross\-Region read replicas, see [Creating a read replica in a different AWS Region](#USER_ReadRepl.XRgn)\.
+
+The information in this chapter applies to creating Amazon RDS read replicas either in the same AWS Region as the source DB instance, or in a separate AWS Region\. The following information doesn't apply to setting up replication with an instance that is running on an Amazon EC2 instance or that is on\-premises\.
+
+### Differences among read replicas for DB engines<a name="USER_ReadRepl.Overview.Differences"></a>
 
 Because Amazon RDS DB engines implement replication differently, there are several significant differences you should know about, as shown in the following table\.
 
@@ -72,6 +79,27 @@ Because Amazon RDS DB engines implement replication differently, there are sever
 |  Can backups be performed on the replica?  |  Yes\. Automatic backups and manual snapshots are supported on RDS for MySQL or RDS for MariaDB read replicas\.   |  Yes\. Automatic backups and manual snapshots are supported on RDS for Oracle read replicas\.   |  Yes, you can create a manual snapshot of RDS for PostgreSQL read replicas, but automatic backups aren't supported\.   |  No\. Automatic backups and manual snapshots aren't supported on RDS for SQL Server read replicas\.  | 
 |  Can you use parallel replication?  |  Yes\. All supported MariaDB and MySQL versions allow for parallel replication threads\.   |  Yes\. Redo log data is always transmitted in parallel from the primary database to all of its read replicas\.  |  No\. PostgreSQL has a single process handling replication\.  |  Yes\. Redo log data is always transmitted in parallel from the primary database to all of its read replicas\.  | 
 |  Can you maintain a replica in a mounted rather than a read\-only state?  |  No\.  |  Yes\. The primary use for mounted replicas is cross\-Region disaster recovery\. An Active Data Guard license isn't required for mounted replicas\. For more information, see [Working with read replicas for Amazon RDS for Oracle](oracle-read-replicas.md)\.  |  No\.  |  No\.  | 
+
+### Read replica storage types<a name="USER_ReadRepl.Overview.replica-storage"></a>
+
+By default, a read replica is created with the same storage type as the source DB instance\. However, you can create a read replica that has a different storage type from the source DB instance based on the options listed in the following table\.
+
+<a name="rds-read-replica-storage-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
+
+**Note**  
+When you increase the allocated storage of a read replica, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\.
+
+### Restrictions for creating a replica from a replica<a name="USER_ReadRepl.Overview.circular-replication"></a>
+
+Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new read replica from an existing DB instance\. For example, if **MySourceDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MySourceDBInstance**\. 
+
+For RDS for MariaDB and RDS for MySQL, and for certain versions of RDS for PostgreSQL, you can create a read replica from an existing read replica\. For example, you can create new read replica **ReadReplica2** from exiting replica **ReadReplica1**\. For RDS for Oracle and RDS for SQL Server, you can't create a read replica from an existing read replica\. 
+
+### Considerations when deleting replicas<a name="USER_ReadRepl.Overview.deletion-considerations"></a>
+
+If you no longer need read replicas, you can explicitly delete them using the same mechanisms for deleting a DB instance\. If you delete a source DB instance without deleting its read replicas in the same AWS Region, each read replica is promoted to a standalone DB instance\. For information about deleting a DB instance, see [Deleting a DB instance](USER_DeleteInstance.md)\. For information about read replica promotion, see [Promoting a read replica to be a standalone DB instance](#USER_ReadRepl.Promote)\.
+
+If you have cross\-Region read replicas, see [Cross\-Region replication considerations](#USER_ReadRepl.XRgn.Cnsdr) for information related to deleting the source DB instance for a cross\-Region read replica\.
 
 ## Creating a read replica<a name="USER_ReadRepl.Create"></a>
 
@@ -88,7 +116,7 @@ When creating a read replica, there are a few things to consider\. First, you mu
 
 **Note**  
 Within an AWS Region, we strongly recommend that you create all read replicas in the same virtual private cloud \(VPC\) based on Amazon VPC as the source DB instance\. If you create a read replica in a different VPC from the source DB instance, classless inter\-domain routing \(CIDR\) ranges can overlap between the replica and the RDS system\. CIDR overlap makes the replica unstable, which can negatively impact applications connecting to it\. If you receive an error when creating the read replica, choose a different destination DB subnet group\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.  
-You can't create a read replica in a different AWS account from the source DB instance\.
+There is no direct way to create a read replica in another AWS account using the console or AWS CLI\.
 
 ### Console<a name="USER_ReadRepl.Create.Console"></a>
 

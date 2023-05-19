@@ -37,7 +37,7 @@ Make sure to follow these requirements for Amazon RDS Custom for Oracle:
 + Use only the approved database installation and patch files\. For more information, see [Step 2: Download your database installation files and patches from Oracle Software Delivery Cloud](custom-cev.preparing.md#custom-cev.preparing.download)\.
 + Create an AWS Identity and Access Management \(IAM\) role and instance profile\. For more information, see [Step 3: Configure IAM and your Amazon VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
 + Make sure to supply a networking configuration that RDS Custom can use to access other AWS services\. For specific requirements, see [Step 3: Configure IAM and your Amazon VPC](custom-setup-orcl.md#custom-setup-orcl.iam-vpc)\.
-+ Make sure that the combined number of RDS Custom and Amazon RDS DB instances doesn't exceed your quota limit\. For example, if your quota for Amazon RDS is 40 DB instances, you can have 20RDS Custom for Oracle DB instances and 20 Amazon RDS DB instances\.
++ Make sure that the combined number of RDS Custom and Amazon RDS DB instances doesn't exceed your quota limit\. For example, if your quota for Amazon RDS is 40 DB instances, you can have 20 RDS Custom for Oracle DB instances and 20 Amazon RDS DB instances\.
 
 ## General limitations for RDS Custom for Oracle<a name="custom-reqs-limits.limits"></a>
 

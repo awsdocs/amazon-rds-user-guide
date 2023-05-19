@@ -35,6 +35,12 @@ For more information about Multi\-AZ DB cluster deployments, see [Multi\-AZ DB c
 |  global failover  | RDS\-EVENT\-0185 |  Global failover to DB cluster *name* in Region *name* finished\.  |  The global database failover is finished on the primary DB cluster\. Replicas might take long to come online after the failover completes\.  | 
 |  global failover  | RDS\-EVENT\-0186 |  Global failover to DB cluster *name* in Region *name* is cancelled\.  |    | 
 |  global failover  | RDS\-EVENT\-0187 |  Global failover to DB cluster *name* in Region *name* failed\.  |    | 
+|  maintenance  | RDS\-EVENT\-0176 |  Database cluster engine major version has been upgraded\.  |  | 
+|  maintenance  | RDS\-EVENT\-0286 |  Database cluster engine version upgrade started\.  |  | 
+|  maintenance  | RDS\-EVENT\-0287 |  Operating system upgrade requirement detected\.  |  | 
+|  maintenance  | RDS\-EVENT\-0288 |  Cluster operating system upgrade starting\.  |  | 
+|  maintenance  | RDS\-EVENT\-0289 |  Cluster operating system upgrade completed\.  |  | 
+|  maintenance  | RDS\-EVENT\-0290 |  Database cluster has been patched: source version *version\_number* => *new\_version\_number*\.  |  | 
 | notification | RDS\-EVENT\-0172 |  Renamed cluster from *name* to *name*\.  |    | 
 
 ## DB instance events<a name="USER_Events.Messages.instance"></a>

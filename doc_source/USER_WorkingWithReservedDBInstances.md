@@ -49,7 +49,7 @@ When you purchase a reserved DB instance, one thing that you specify is the inst
 
 If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.r5\.large can apply to a db\.r5\.xlarge, but not to a db\.r6g\.large, because db\.r5 and db\.r6g are different instance class types\.
 
-Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. Flexibility means that you can move freely between configurations within the same DB instance class type\. For example, you can move from a Single\-AZ deployment running on one large DB instance \(four normalized units\) to a Multi\-AZ deployment running on two small DB instances \(2\*2 = 4 normalized units\)\.
+Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. Flexibility means that you can move freely between configurations within the same DB instance class type\. For example, you can move from a Single\-AZ deployment running on one large DB instance \(four normalized units per hour\) to a Multi\-AZ deployment running on two small DB instances \(2\*2 = 4 normalized units per hour\)\.
 
 Size\-flexible reserved DB instances are available for the following Amazon RDS database engines:
 + MariaDB
@@ -59,25 +59,25 @@ Size\-flexible reserved DB instances are available for the following Amazon RDS 
 
 For details about using size\-flexible reserved instances with Aurora, see [Reserved DB instances for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithReservedDBInstances.html)\. 
 
-You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units of usage on one db\.r3\.small\. The following table shows the number of normalized units for each DB instance size\.
+You can compare usage for different reserved DB instance sizes by using normalized units per hour\. For example, one unit of usage on two db\.r3\.large DB instances is equivalent to eight normalized units per hour of usage on one db\.r3\.small\. The following table shows the number of normalized units per hour for each DB instance size\.
 
 
-| Instance size | Single\-AZ normalized units \(deployment with one DB instance\) | Single\-AZ normalized units for Aurora I/O\-Optimized | Multi\-AZ DB instance normalized units \(deployment with one DB instance and one standby\) | Multi\-AZ DB cluster normalized units \(deployment with one DB instance and two standbys\) | 
-| --- | --- | --- | --- | --- | 
-|  micro  |  0\.5  | 0\.65 |  1  | 1\.5 | 
-|  small  |  1  | 1\.3 |  2  | 3 | 
-|  medium  |  2  | 2\.6 |  4  | 6 | 
-|  large  |  4  | 5\.2 |  8  | 12 | 
-|  xlarge  |  8  | 10\.4 |  16  | 24 | 
-|  2xlarge  |  16  | 20\.8 |  32  | 48 | 
-|  4xlarge  |  32  | 41\.6 |  64  | 96 | 
-|  6xlarge  |  48  | 62\.4 |  96  | 144 | 
-|  8xlarge  |  64  | 83\.2 |  128  | 192 | 
-|  10xlarge  |  80  | 104 |  160  | 240 | 
-|  12xlarge  |  96  | 124\.8 |  192  | 288 | 
-|  16xlarge  |  128  | 166\.4 |  256  | 384 | 
-|  24xlarge  |  192  | 249\.2 |  384  | 576 | 
-|  32xlarge  |  256  | 332\.8 |  512  | 768 | 
+| Instance size | Single\-AZ normalized units per hour \(deployment with one DB instance\) | Multi\-AZ DB instance normalized units per hour \(deployment with one DB instance and one standby\) | Multi\-AZ DB cluster normalized units per hour \(deployment with one DB instance and two standbys\) | 
+| --- | --- | --- | --- | 
+|  micro  |  0\.5  |  1  | 1\.5 | 
+|  small  |  1  |  2  | 3 | 
+|  medium  |  2  |  4  | 6 | 
+|  large  |  4  |  8  | 12 | 
+|  xlarge  |  8  |  16  | 24 | 
+|  2xlarge  |  16  |  32  | 48 | 
+|  4xlarge  |  32  |  64  | 96 | 
+|  6xlarge  |  48  |  96  | 144 | 
+|  8xlarge  |  64  |  128  | 192 | 
+|  10xlarge  |  80  |  160  | 240 | 
+|  12xlarge  |  96  |  192  | 288 | 
+|  16xlarge  |  128  |  256  | 384 | 
+|  24xlarge  |  192  |  384  | 576 | 
+|  32xlarge  |  256  |  512  | 768 | 
 
 For example, suppose that you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same AWS Region\. In this case, the billing benefit is applied in full to both instances\.
 

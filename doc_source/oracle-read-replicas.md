@@ -1,6 +1,6 @@
 # Working with read replicas for Amazon RDS for Oracle<a name="oracle-read-replicas"></a>
 
-To configure replication between Oracle DB instances, you can create replica databases\. For an overview of Amazon RDS read replicas, see [Overview of Amazon RDS read replicasOverview](USER_ReadRepl.md#USER_ReadRepl.Overview)\. For a summary of the differences between Oracle replicas and other DB engines, see [Differences between read replicas for different DB engines](USER_ReadRepl.md#USER_ReadRepl.Overview.Differences)\.
+To configure replication between Oracle DB instances, you can create replica databases\. For an overview of Amazon RDS read replicas, see [Overview of Amazon RDS read replicasOverview](USER_ReadRepl.md#USER_ReadRepl.Overview)\. For a summary of the differences between Oracle replicas and other DB engines, see [Differences among read replicas for DB engines](USER_ReadRepl.md#USER_ReadRepl.Overview.Differences)\.
 
 **Topics**
 + [Overview of RDS for Oracle replicas](oracle-read-replicas.overview.md)

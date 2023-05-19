@@ -289,11 +289,12 @@ SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 
 ### Diagnosing and resolving incompatible parameters status for a memory limit<a name="CHAP_Troubleshooting.incompatible-parameters-memory"></a>
 
-A MariaDB or MySQL DB instance can be placed in **incompatible\-parameters** status for a memory limit when both of the following conditions are met:
-+ The DB instance is either restarted at least three time in one hour or at least five times in one day, or an attempt to restart the DB instance fails\.
+A MariaDB or MySQL DB instance can be placed in **incompatible\-parameters** status for a memory limit when the following conditions are met:
++ The DB instance is restarted at least three times in one hour or at least five times in one day when the DB instance status is **Available**\.
++ An attempt to restart the DB instance fails because a maintenance action or monitoring process couldn't restart the DB instance\.
 + The potential memory usage of the DB instance exceeds 1\.2 times the memory allocated to its DB instance class\.
 
-When a DB instance is restarted for the third time in one hour or for the fifth time in one day, Amazon RDS for MySQL performs a check for memory usage\. The check makes the a calculation of the potential memory usage of the DB instance\. The value returned by the calculation is the sum of the following values:
+When a DB instance is restarted for the third time in one hour or for the fifth time in one day, it performs a check for memory usage\. The check makes a calculation of the potential memory usage of the DB instance\. The value returned by the calculation is the sum of the following values:
 + **Value 1** – The sum of the following parameters: 
   + `innodb_additional_mem_pool_size`
   + `innodb_buffer_pool_size`

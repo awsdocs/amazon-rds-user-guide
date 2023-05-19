@@ -203,7 +203,7 @@ You can use conditions in your identity\-based policy to control access to Amazo
 15.          "Action":[
 16.             "rds:CreateDBSnapshot"
 17.          ],
-18.          "Resource":""arn:aws:rds:*:123456789012:db:*"",
+18.          "Resource":"arn:aws:rds:*:123456789012:db:*",
 19.          "Condition":{
 20.             "StringEquals":{
 21.                 "rds:db-tag/stage":[
@@ -454,7 +454,7 @@ The following policy allows permission to perform the `CreateDBSnapshot` API ope
  7.          "Action":[
  8.             "rds:CreateDBSnapshot"
  9.          ],
-10.          "Resource":""arn:aws:rds:*:123456789012:snapshot:*""
+10.          "Resource":"arn:aws:rds:*:123456789012:snapshot:*"
 11.       },
 12.       {
 13.          "Sid":"AllowDevTestToCreateSnapshot",
@@ -462,7 +462,7 @@ The following policy allows permission to perform the `CreateDBSnapshot` API ope
 15.          "Action":[
 16.             "rds:CreateDBSnapshot"
 17.          ],
-18.          "Resource":""arn:aws:rds:*:123456789012:db:*"",
+18.          "Resource":"arn:aws:rds:*:123456789012:db:*",
 19.          "Condition":{
 20.             "StringEquals":{
 21.                 "rds:db-tag/stage":[
