@@ -99,7 +99,7 @@ DB instance class support varies according to the version and edition of SQL Ser
 **Oracle**  
 DB instance class support varies according to the Oracle Database version and edition\. RDS for Oracle supports additional memory\-optimized instance classes\. These classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For the vCPU count and memory allocation for each optimized class, see [Supported RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
-In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\.
+In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. Amazon RDS periodically deprecates major and minor versions\. For information about current supported versions, see topics for the individual DB engines: [MariaDB versions](MariaDB.Concepts.VersionMgmt.md#MariaDB.Concepts.VersionMgmt.Supported), [Microsoft SQL Server versions](CHAP_SQLServer.md#SQLServer.Concepts.General.VersionSupport), [MySQL versions](MySQL.Concepts.VersionMgmt.md), [Oracle versions](Oracle.Concepts.database-versions.md), and [PostgreSQL versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions)\.
 
 
 ****  

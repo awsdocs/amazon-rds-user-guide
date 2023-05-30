@@ -34,6 +34,7 @@ RDS supports SSRS for SQL Server Standard and Enterprise Editions on the followi
 The following limitations and recommendations apply to running SSRS on RDS for SQL Server:
 + You can't use SSRS on DB instances that have read replicas\.
 + Instances must use AWS Managed Microsoft AD for SSRS web portal and web server authentication\.
++ You can't back up the reporting server databases that are created with the SSRS option\.
 + Importing and restoring report server databases from other instances of SSRS isn't supported\.
 
   Make sure to use the databases that are created when the `SSRS` option is added to the RDS DB instance\. For more information, see [Report server databases](#SSRS.DBs)\.

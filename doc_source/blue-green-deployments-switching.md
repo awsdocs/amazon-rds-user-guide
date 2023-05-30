@@ -55,6 +55,8 @@ When you switch over a blue/green deployment, RDS performs the following actions
 
    After switchover, the previous production primary DB instance only allows read operations until it is rebooted\.
 
+You can monitor the status of a switchover using Amazon EventBridge\. For more information, see [Blue/green deployment events](USER_Events.Messages.md#USER_Events.Messages.BlueGreenDeployments)\.
+
 If you have tags configured in the blue environment, these tags are moved to the new production environment during switchover\. The previous production environment also retains these tags\. For more information about tags, see [Tagging Amazon RDS resources](USER_Tagging.md)\.
 
 If the switchover starts and then stops before finishing for any reason, then any changes are rolled back, and no changes are made to either environment\.

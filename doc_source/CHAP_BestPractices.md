@@ -57,19 +57,21 @@ To troubleshoot performance issues, it's important to understand the baseline pe
 
 If you use Multi\-AZ DB clusters, monitor the time difference between the latest transaction on the writer DB instance and the latest applied transaction on a reader DB instance\. This difference is called *replica lag*\. For more information, see [Replica lag and Multi\-AZ DB clusters](multi-az-db-clusters-concepts.md#multi-az-db-clusters-concepts-replica-lag)\.
 
+You can view the combined Performance Insights and CloudWatch metrics in the Performance Insights dashboard and monitor your DB instance\. To use this monitoring view, Performance Insights must be turned on for your DB instance\. For information about this monitoring view, see [Viewing combined metrics in the Amazon RDS console](Viewing_Unifiedmetrics.md)\.
+
 **To view performance metrics**
 
 1.  Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
 1.  In the navigation pane, choose **Databases**, and then choose a DB instance\. 
 
-1.  Choose **Monitoring**\. The first eight performance metrics display\. The metrics default to showing information for the current day\. 
+1.  Choose **Monitoring**\.
 
-1.  Use the numbered buttons at top right to page through the additional metrics, or adjust the settings to see more metrics\. 
+   The dashboard provides the performance metrics\. The metrics default to show the information for the last three hours\. 
+
+1.  Use the numbered buttons in the upper\-right to page through the additional metrics, or adjust the settings to see more metrics\. 
 
 1.  Choose a performance metric to adjust the time range in order to see data for other than the current day\. You can change the **Statistic**, **Time Range**, and **Period** values to adjust the information displayed\. For example, you might want to see the peak values for a metric for each day of the last two weeks\. If so, set **Statistic** to **Maximum**, **Time Range** to **Last 2 Weeks**, and **Period** to **Day**\. 
-**Note**  
- Changing the **Statistic**, **Time Range**, and **Period** values changes them for all metrics\. The updated values persist for the remainder of your session or until you change them again\. 
 
  You can also view performance metrics using the CLI or API\. For more information, see [Viewing metrics in the Amazon RDS console](USER_Monitoring.md)\. 
 

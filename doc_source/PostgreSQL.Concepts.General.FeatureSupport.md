@@ -77,10 +77,7 @@ There are several limitations to using PostgreSQL event triggers on Amazon RDS\.
 
 *Huge pages* are a memory management feature that reduces overhead when a DB instance is working with large contiguous chunks of memory, such as that used by shared buffers\. This PostgreSQL feature is supported by all currently available RDS for PostgreSQL versions\. You allocate huge pages for your application by using calls to `mmap` or `SYSV` shared memory\. RDS for PostgreSQL supports both 4\-KB and 2\-MB page sizes\. 
 
-You can turn huge pages on or off by changing the value of the `huge_pages` parameter\. The feature is turned on by default for all DB instance classes other than micro, small, and medium DB instance classes\.
-
-**Note**  
-Huge pages aren't supported for db\.m1, db\.m2, and db\.m3 DB instance classes\.
+You can turn huge pages on or off by changing the value of the `huge_pages` parameter\. The feature is turned on by default for all the DB instance classes other than micro, small, and medium DB instance classes\.
 
 RDS for PostgreSQL uses huge pages based on the available shared memory\. If the DB instance can't use huge pages due to shared memory constraints, Amazon RDS prevents the DB instance from starting\. In this case, Amazon RDS sets the status of the DB instance to an incompatible parameters state\. If this occurs, you can set the `huge_pages` parameter to `off` to allow Amazon RDS to start the DB instance\.
 

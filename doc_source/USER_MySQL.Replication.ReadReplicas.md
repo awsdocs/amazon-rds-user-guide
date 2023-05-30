@@ -17,7 +17,7 @@ Following, you can find specific information about working with read replicas on
 
 Before a MySQL DB instance can serve as a replication source, make sure to enable automatic backups on the source DB instance\. To do this, set the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. Automatic backups are supported for read replicas running any version of MySQL\. You can configure replication based on binary log coordinates for a MySQL DB instance\. 
 
-On RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
+On RDS for MySQL version 5\.7\.37 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.28 and higher 8\.0 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
 
 You can create up to 15 read replicas from one DB instance within the same Region\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
@@ -245,9 +245,9 @@ You can use delayed replication as a strategy for disaster recovery\. With delay
 + Promote the read replica to be the new source DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 **Note**  
-On RDS for MySQL 8\.0, delayed replication is supported for MySQL 8\.0\.26 and higher\. On RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and higher\.
+On RDS for MySQL 8\.0, delayed replication is supported for MySQL 8\.0\.28 and higher\. On RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.37 and higher\.
 Use stored procedures to configure delayed replication\. You can't configure delayed replication with the AWS Management Console, the AWS CLI, or the Amazon RDS API\.
-On RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until_gtid) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
+On RDS for MySQL 5\.7\.37 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.28 and higher 8\.0 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until_gtid) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql-stored-proc-replicating.md#mysql_rds_start_replication_until) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS for MySQL](mysql-replication-gtid.md)\.
 
 **Topics**
 + [Configuring delayed replication during read replica creation](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation)

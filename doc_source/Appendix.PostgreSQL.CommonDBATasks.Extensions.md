@@ -28,6 +28,7 @@ To learn more about the `rds_superuser` role, see [Understanding PostgreSQL role
 + [Using pglogical to synchronize data across instances](#Appendix.PostgreSQL.CommonDBATasks.pglogical)
 + [Reducing bloat in tables and indexes with the pg\_repack extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
 + [Upgrading and using the PLV8 extension](#PostgreSQL.Concepts.General.UpgradingPLv8)
++ [Using PL/Rust to write PostgreSQL functions in the Rust language](#PostgreSQL.Concepts.General.Using.PL_Rust)
 + [Managing spatial data with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)
 
 ## Using functions from the orafce extension<a name="Appendix.PostgreSQL.CommonDBATasks.orafce"></a>
@@ -1050,7 +1051,7 @@ The upgrade process drops all your existing PLV8 functions\. Thus, we recommend 
 1. Drop the functions and extensions\. The following example drops any PLV8 based objects\. The cascade option ensures that any dependent are dropped\.
 
    ```
-   DROP EXTENSION pvl8 CASCADE;
+   DROP EXTENSION plv8 CASCADE;
    ```
 
    If your PostgreSQL instance contains objects based on plcoffee or plls, repeat this step for those extensions\.
@@ -1084,3 +1085,132 @@ The upgrade process drops all your existing PLV8 functions\. Thus, we recommend 
    ---------------+------------+----------
     plv8_version  | pg_catalog | plv8
    ```
+
+## Using PL/Rust to write PostgreSQL functions in the Rust language<a name="PostgreSQL.Concepts.General.Using.PL_Rust"></a>
+
+PL/Rust is a trusted Rust language extension for PostgreSQL\. You can use it for stored procedures, functions, and other procedural code that's callable from SQL\. This language extension is supported by PostgreSQL 15\.2\-R2 and higher\. For more information, see [PL/Rust](https://github.com/tcdi/plrust#readme) on GitHub\. 
+
+**Topics**
++ [Setting up PL/Rust](#PL_Rust-setting-up)
++ [Creating functions with PL/Rust](#PL_Rust-create-function)
++ [PL/Rust limitations](#PL_Rust-limitations)
+
+### Setting up PL/Rust<a name="PL_Rust-setting-up"></a>
+
+To install the plrust extension on your DB instance, add plrust to the `shared_preload_libraries` parameter in the DB parameter group associated with your DB instance\. With the plrust extension installed, you can create functions\. 
+
+To modify the `shared_preload_libraries` parameter, your DB instance must be associated with a custom parameter group\. For information about creating a custom DB parameter group, see [Working with parameter groups](USER_WorkingWithParamGroups.md)\.
+
+You can install the plrust extension using the AWS Management Console or the AWS CLI\.
+
+The following steps assume that your DB instance is associated with a custom DB parameter group\.
+
+#### Console<a name="PL_Rust-setting-up.CON"></a>
+
+**Install the plrust extension in the `shared_preload_libraries` parameter**
+
+Complete the following steps using an account that is a member of the `rds_superuser` group \(role\)\.
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the name of your DB instance to display its details\.
+
+1. Open the **Configuration** tab for your DB instance and find the DB instance parameter group link\.
+
+1. Choose the link to open the custom parameters associated with your DB instance\. 
+
+1. In the **Parameters** search field, type `shared_pre` to find the **`shared_preload_libraries`** parameter\.
+
+1. Choose **Edit parameters** to access the property values\.
+
+1. Add plrust to the list in the **Values** field\. Use a comma to separate items in the list of values\.
+
+1. Reboot the DB instance so that your change to the `shared_preload_libraries` parameter takes effect\. The initial reboot may require additional time to complete\.
+
+1. When the instance is available, verify that plrust has been initialized\. Use `psql` to connect to the DB instance, and then run the following command\.
+
+   ```
+   SHOW shared_preload_libraries;
+   ```
+
+   Your output should look similar to the following:
+
+   ```
+   shared_preload_libraries 
+   --------------------------
+   rdsutils,plrust
+   (1 row)
+   ```
+
+#### AWS CLI<a name="PL_Rust-setting-up-CLI"></a>
+
+**Install the plrust extension in the shared\_preload\_libraries parameter**
+
+Complete the following steps using an account that is a member of the `rds_superuser` group \(role\)\.
+
+1. Use the [modify\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) AWS CLI command to add plrust to the `shared_preload_libraries` parameter\.
+
+   ```
+   aws rds modify-db-parameter-group \
+      --db-parameter-group-name custom-param-group-name \
+      --parameters "ParameterName=shared_preload_libraries,ParameterValue=plrust,ApplyMethod=pending-reboot" \
+      --region aws-region
+   ```
+
+1. Use the [reboot\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance) AWS CLI command to reboot the DB instance and initialize the plrust library\. The initial reboot may require additional time to complete\.
+
+   ```
+   aws rds reboot-db-instance \
+       --db-instance-identifier your-instance \
+       --region aws-region
+   ```
+
+1. When the instance is available, you can verify that plrust has been initialized\. Use `psql` to connect to the DB instance, and then run the following command\.
+
+   ```
+   SHOW shared_preload_libraries;
+   ```
+
+   Your output should look similar to the following:
+
+   ```
+   shared_preload_libraries
+   --------------------------
+   rdsutils,plrust
+   (1 row)
+   ```
+
+### Creating functions with PL/Rust<a name="PL_Rust-create-function"></a>
+
+PL/Rust will compile the function as a dynamic library, load it, and execute it\.
+
+The following Rust function filters multiples out of an array\.
+
+```
+postgres=> CREATE LANGUAGE plrust;
+CREATE EXTENSION
+```
+
+```
+CREATE OR REPLACE FUNCTION filter_multiples(a BIGINT[], multiple BIGINT) RETURNS BIGINT[]
+    IMMUTABLE STRICT
+    LANGUAGE PLRUST AS
+$$
+    Ok(Some(a.into_iter().filter(|x| x.unwrap() % multiple != 0).collect()))
+$$;
+        
+WITH gen_values AS (
+SELECT ARRAY(SELECT * FROM generate_series(1,100)) as arr)
+SELECT filter_multiples(arr, 3)
+from gen_values;
+```
+
+### PL/Rust limitations<a name="PL_Rust-limitations"></a>
++ By default, database users can't use PL/Rust\. To provide access to PL/Rust, connect as a user with rds\_superuser privilege, and run the following command:
+
+  ```
+  postgres=> GRANT USAGE ON LANGUAGE PLRUST TO user;
+  ```
++ The RDS environment doesn't support crates at this time\. Specifying crates results in an error\.

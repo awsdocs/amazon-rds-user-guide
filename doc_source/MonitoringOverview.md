@@ -49,7 +49,7 @@ Monitoring is an important part of maintaining the reliability, availability, an
 
 ### Automated monitoring tools<a name="MonitoringOverview.tools.automated"></a>
 
-We recommend that you automate monitoring tasks as much as possible\. 
+We recommend that you automate monitoring tasks as much as possible\.
 
 **Topics**
 + [Amazon RDS instance status and recommendations](#MonitoringOverview.tools.automated.rds)

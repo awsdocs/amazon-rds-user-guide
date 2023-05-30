@@ -18,7 +18,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 **Topics**
 + [Common management tasks for Amazon RDS for PostgreSQL](#CHAP_PostgreSQL.CommonTasks)
 + [Working with the database preview environment](#working-with-the-database-preview-environment)
-+ [PostgreSQL version 15 in the database preview environment](#PostgreSQL.Concepts.General.version15)
++ [PostgreSQL version 16 in the database preview environment](#PostgreSQL.Concepts.General.version16)
 + [Available PostgreSQL database versions](#PostgreSQL.Concepts.General.DBVersions)
 + [Supported PostgreSQL extension versions](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
 + [Working with PostgreSQL features supported by Amazon RDS for PostgreSQL](PostgreSQL.Concepts.General.FeatureSupport.md)
@@ -119,11 +119,14 @@ To create an instance in the Database Preview Environment using the RDS API or t
 rds-preview.us-east-2.amazonaws.com
 ```
 
-## PostgreSQL version 15 in the database preview environment<a name="PostgreSQL.Concepts.General.version15"></a>
+## PostgreSQL version 16 in the database preview environment<a name="PostgreSQL.Concepts.General.version16"></a>
 
-PostgreSQL version 15 is now available in the Amazon RDS Database Preview Environment\. PostgreSQL version 15 contains several improvements that are described in the following PostgreSQL documentation:
-+ [ PostgreSQL 15](https://www.postgresql.org/docs/15/release-15.html)
-+ [ PostgreSQL 15 Beta 3 Released\!](https://www.postgresql.org/about/news/2496/)
+****  
+***This is preview documentation for Amazon RDS PostgreSQL version 16\. It is subject to change\.***
+
+PostgreSQL version 16 is now available in the Amazon RDS Database Preview Environment\. PostgreSQL version 16 contains several improvements that are described in the following PostgreSQL documentation:
++ [ PostgreSQL 16](https://www.postgresql.org/docs/16/release-16.html)
++ [ PostgreSQL 16 Beta 1 Released\!](https://www.postgresql.org/about/news/postgresql-16-beta-1-released-2643/)
 
 For information on the Database Preview Environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\.
 

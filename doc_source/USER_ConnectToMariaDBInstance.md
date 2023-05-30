@@ -128,7 +128,7 @@ After you enter the password for the user, you see output similar to the followi
 ```
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 31
-Server version: 10.5.15-MariaDB-log Source distribution
+Server version: 10.6.10-MariaDB-log Source distribution
  
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
   

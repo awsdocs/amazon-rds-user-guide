@@ -114,6 +114,7 @@ sponsored by Amazon.
    + [Overview of monitoring metrics in Amazon RDS](MonitoringOverview.md)
    + [Viewing instance status and recommendations](accessing-monitoring.md)
    + [Viewing metrics in the Amazon RDS console](USER_Monitoring.md)
+   + [Viewing combined metrics in the Amazon RDS console](Viewing_Unifiedmetrics.md)
    + [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)
       + [Overview of Amazon RDS and Amazon CloudWatch](cw-metrics-overview.md)
       + [Viewing DB instance metrics in the CloudWatch console and AWS CLI](metrics_dimensions.md)

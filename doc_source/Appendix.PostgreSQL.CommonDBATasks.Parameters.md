@@ -163,7 +163,7 @@ You can also use the Console\. Choose **Parameter groups** from the Amazon RDS m
 |  `quote_all_identifiers`  | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
 |  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. This parameter has no value unless query plan management \(QPM\) is turned on\. When QPM is on, the default value for this parameter 4\.  | 
 | rds\.adaptive\_autovacuum | Dynamic | Automatically tunes the autovacuum parameters whenever the transaction ID thresholds are exceeded\. | 
-| rds\.force\_ssl | Dynamic | Requires the use of SSL connections\. Default is 0 \(false\), so connections aren't required \(forced\) to use SSL\. | 
+| rds\.force\_ssl | Dynamic | Requires the use of SSL connections\. The default value is set to 1 \(on\) for RDS for PostgreSQL version 15\. All other RDS for PostgreSQL major version 14 and older have the default value set to 0 \(off\)\. | 
 |  `rds.log_retention_period`  | Dynamic | Sets log retention such that Amazon RDS deletes PostgreSQL logs that are older than n minutes\. | 
 | rds\.restrict\_password\_commands | Static | Restricts who can manage passwords to users with the rds\_password role\. Set this parameter to 1 to enable password restriction\. The default is 0\.  | 
 |  `search_path`  | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 

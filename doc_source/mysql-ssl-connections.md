@@ -15,14 +15,14 @@ An SSL/TLS certificate created by Amazon RDS is the trusted root entity and shou
 
 For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For more information about using SSL/TLS with MySQL, see [Using new SSL/TLS certificates for MySQL DB instances](ssl-certificate-rotation-mysql.md)\.
 
-MySQL uses OpenSSL for secure connections\. Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
+MySQL uses OpenSSL for secure connections\. Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\.
 
 
 ****  
 
 | MySQL version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
 | --- | --- | --- | --- | 
-|  MySQL 8\.0  |  Supported for MySQL 8\.0\.27 and lower  |  Supported for MySQL 8\.0\.27 and lower  |  Supported  | 
+|  MySQL 8\.0  |  Not supported  | Not supported |  Supported  | 
 |  MySQL 5\.7  |  Supported  |  Supported  |  Supported  | 
 
 You can require SSL/TLS connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL/TLS connections on the user account `encrypted_user`\.
@@ -99,7 +99,7 @@ You will see output similar to the following\.
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 9738
-Server version: 8.0.23 Source distribution
+Server version: 8.0.28 Source distribution
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 

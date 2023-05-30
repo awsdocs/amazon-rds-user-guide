@@ -147,6 +147,8 @@ You can create a Multi\-AZ DB cluster by choosing **Multi\-AZ DB cluster** in th
 
    You can configure connectivity between an Amazon EC2 instance and the new DB cluster during DB cluster creation\. For more information, see [Configure automatic network connectivity with an EC2 instance](#create-multi-az-db-cluster-prerequisites-VPC-automatic)\.
 
+1. In the **Connectivity** section under **VPC security group \(firewall\)**, if you select **Create new**, a VPC security group is created is added to the database with an inbound rule that allows your local computer's IP address to access the database\. 
+
 1. For the remaining sections, specify your DB cluster settings\. For information about each setting, see [Settings for creating Multi\-AZ DB clusters](#create-multi-az-db-cluster-settings)\.
 
 1. Choose **Create database**\. 

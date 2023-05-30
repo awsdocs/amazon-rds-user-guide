@@ -1,6 +1,6 @@
 # MariaDB on Amazon RDS versions<a name="MariaDB.Concepts.VersionMgmt"></a>
 
-For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.5 to 10\.6\. A version change is considered minor if only the minor version number changes, for example going from version 10\.6\.5 to 10\.6\.7\. 
+For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.5 to 10\.6\. A version change is considered minor if only the minor version number changes, for example going from version 10\.6\.10 to 10\.6\.12\.
 
 **Topics**
 + [Supported MariaDB minor versions on Amazon RDS](#MariaDB.Concepts.VersionMgmt.Supported)
@@ -26,28 +26,21 @@ Dates with only a month and a year are approximate and are updated with an exact
 |  10\.6\.11  |  7 November 2022  |  18 November 2022  |  November 2023  | 
 |  10\.6\.10  |  19 September 2022  |  30 September 2022  |  September 2023  | 
 |  10\.6\.8  |  20 May 2022  |  8 July 2022  |  September 2023  | 
-|  10\.6\.7  |  12 Februray 2022  |  4 March 2022  |  20 April 2023  | 
-|  10\.6\.5  |  8 November 2021  |  3 February 2022  |  20 April 2023  | 
 | 10\.5 | 
 |  10\.5\.19  |  6 February 2023  |  28 February 2023  |  February 2024  | 
 |  10\.5\.18  |  7 November 2022  |  18 November 2022  |  November 2023  | 
 |  10\.5\.17  |  15 August 2022  |  16 September 2022  |  September 2023  | 
 |  10\.5\.16  |  20 May 2022  |  8 July 2022  |  September 2023  | 
-|  10\.5\.15  |  12 February 2022  |  4 March 2022  |  20 April 2023  | 
-|  10\.5\.13  |  8 November 2021  |  8 December 2021  |  20 April 2023  | 
-|  10\.5\.12  |  6 August 2021  |  2 September 2021  |  20 April 2023  | 
 | 10\.4 | 
 |  10\.4\.28  |  6 February 2023  |  28 February 2023  |  February 2024  | 
 |  10\.4\.27  |  7 November 2022  |  18 November 2022  |  November 2023  | 
 |  10\.4\.26  |  15 August 2022  |  16 September 2022  |  September 2023  | 
 |  10\.4\.25  |  20 May 2022  |  8 July 2022  |  September 2023  | 
-|  10\.4\.24  |  12 February 2022  |  4 March 2022  |  20 April 2023  | 
 | 10\.3 | 
 |  10\.3\.38  |  6 February 2023  |  28 February 2023  |  October 2023  | 
 |  10\.3\.37  |  7 November 2022  |  18 November 2022  |  October 2023  | 
 |  10\.3\.36  |  15 August 2022  |  16 September 2022  |  September 2023  | 
 |  10\.3\.35  |  20 May 2022  |  8 July 2022  |  September 2023  | 
-|  10\.3\.34  |  12 February 2022  |  4 March 2022  |  20 April 2023  | 
 
 You can specify any currently supported MariaDB version when creating a new DB instance\. You can specify the major version \(such as MariaDB 10\.5\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 

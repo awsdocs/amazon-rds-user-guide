@@ -387,6 +387,9 @@ For more information about this function, see [aws\_s3\.table\_import\_from\_s3]
 
 The `aws_s3.table_import_from_s3` function returns text\. To specify other kinds of files for import from an Amazon S3 bucket, see one of the following examples\. 
 
+**Note**  
+Importing 0 bytes file will cause an error\.
+
 **Topics**
 + [Importing an Amazon S3 file that uses a custom delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)
 + [Importing an Amazon S3 compressed \(gzip\) file](#USER_PostgreSQL.S3Import.FileFormats.gzip)

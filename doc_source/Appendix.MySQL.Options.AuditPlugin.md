@@ -8,8 +8,8 @@ The audit plugin for MySQL is based on the MariaDB Audit Plugin\. Throughout thi
 The MariaDB Audit Plugin records database activity, including users logging on to the database and queries run against the database\. The record of database activity is stored in a log file\.
 
 **Note**  
-Currently, the MariaDB Audit Plugin is only supported for the following RDS for MySQL versions:   
-MySQL 8\.0\.25 and higher 8\.0 versions
+Currently, the MariaDB Audit Plugin is only supported for the following RDS for MySQL versions:  
+MySQL 8\.0\.28 and higher 8\.0 versions
 All MySQL 5\.7 versions
 
 ## Audit Plugin option settings<a name="Appendix.MySQL.Options.AuditPlugin.Options"></a>

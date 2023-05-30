@@ -72,7 +72,7 @@ Amazon RDS attempts to establish GTID\-based replication between the MySQL DB in
 
 ## Configuring GTID\-based replication for existing read replicas<a name="mysql-replication-gtid.configuring-existing-read-replicas"></a>
 
-For an existing MySQL DB instance with read replicas that doesn't use GTID\-based replication, you can configure GTID\-based replication between the DB instance and the read replicas\.
+For an existing MySQL DB instance with read replicas that doesn't use GTID\-based repl ication, you can configure GTID\-based replication between the DB instance and the read replicas\.
 
 **To enable GTID\-based replication for existing read replicas**
 

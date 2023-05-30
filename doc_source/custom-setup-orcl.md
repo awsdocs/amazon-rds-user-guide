@@ -432,7 +432,7 @@ aws iam put-role-policy \
               "kms:GenerateDataKey"
             ],
             "Resource": [
-              "arn:aws:kms:'$REGION':'$ACCOUNT_ID':key/$KMS_KEY"
+              "arn:aws:kms:'$REGION':'$ACCOUNT_ID':key/'$KMS_KEY'"
             ]
           },
           {

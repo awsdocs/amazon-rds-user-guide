@@ -184,10 +184,9 @@ For more information about reader and writer DB instances, see [Overview of Mult
 ### Considerations<a name="multi-az-db-clusters-instance-read-replica-considerations"></a>
 
 Consider the following before you create a DB instance read replica from a Multi\-AZ DB cluster:
-+ You can only create a DB instance read replica with an RDS for MySQL Multi\-AZ DB cluster as the source\. You can't create a DB instance read replica with an RDS for PostgreSQL Multi\-AZ DB cluster as the source\. 
 + When you create the DB instance read replica, it must be on the same major version as its source cluster, and the same or higher minor version\. After you create it, you can optionally upgrade the read replica to a higher minor version than the source cluster\.
 + When you create the DB instance read replica, the allocated storage must be the same as the allocated storage of the source Multi\-AZ DB cluster\. You can change the allocated storage after the read replica is created\.
-+ The `gtid-mode` parameter must be set to `ON` for the source Multi\-AZ DB cluster\. For more information, see [Working with DB cluster parameter groups for Multi\-AZ DB clusters](USER_WorkingWithDBClusterParamGroups.md)\.
++ For RDS for MySQL, the `gtid-mode` parameter must be set to `ON` for the source Multi\-AZ DB cluster\. For more information, see [Working with DB cluster parameter groups for Multi\-AZ DB clusters](USER_WorkingWithDBClusterParamGroups.md)\.
 + An active, long\-running transaction can slow the process of creating the read replica\. We recommend that you wait for long\-running transactions to complete before creating a read replica\.
 + We strongly recommend that you create all read replicas in the same virtual private cloud \(VPC\) based on Amazon VPC of the source Multi\-AZ DB cluster\.
 
@@ -255,11 +254,12 @@ After you promote the read replica, wait for the status of the promoted DB insta
 ### Limitations for creating a DB instance read replica from a Multi\-AZ DB cluster<a name="multi-az-db-clusters-create-instance-read-replica-limitations"></a>
 
 The following limitations apply to creating a DB instance read replica from a Multi\-AZ DB cluster deployment\.
-+ You can't create a DB instance read replica with an RDS for PostgreSQL Multi\-AZ DB cluster as the source\. 
 + You can't create a DB instance read replica in an AWS account that's different from the AWS account that owns the source Multi\-AZ DB cluster\.
 + You can't create a DB instance read replica in a different AWS Region from the source Multi\-AZ DB cluster\.
 + You can't recover a DB instance read replica to a point in time\.
 + Storage encryption must have the same settings on the source Multi\-AZ DB cluster and DB instance read replica\.
 + If the source Multi\-AZ DB cluster is encrypted, the DB instance read replica must be encrypted using the same KMS key\.
 + To perform a minor version upgrade on the source Multi\-AZ DB cluster, you must first perform the minor version upgrade on the DB instance read replica\.
-+ The DB instance read replica doesn't support cascading read replicas\. 
++ The DB instance read replica doesn't support cascading read replicas\.
++ For RDS for PostgreSQL, the source Multi\-AZ DB cluster must be running version 15\.2\-R2 or higher in order to create a DB instance read replica\. 
++ You can perform a major version upgrade on the source Multi\-AZ DB cluster of a DB instance read replica, but replication to the read replica stops and can't be restarted\. 

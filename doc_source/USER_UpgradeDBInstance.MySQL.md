@@ -43,14 +43,14 @@ aws rds describe-db-engine-versions ^
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
-For example, to identify the valid upgrade targets for a MySQL version 8\.0\.23 DB instance, run the following AWS CLI command:
+For example, to identify the valid upgrade targets for a MySQL version 8\.0\.28 DB instance, run the following AWS CLI command:
 
 For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-engine-versions \
   --engine mysql \
-  --engine-version 8.0.23 \
+  --engine-version 8.0.28 \
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
@@ -59,7 +59,7 @@ For Windows:
 ```
 aws rds describe-db-engine-versions ^
   --engine mysql ^
-  --engine-version 8.0.23 ^
+  --engine-version 8.0.28 ^
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 

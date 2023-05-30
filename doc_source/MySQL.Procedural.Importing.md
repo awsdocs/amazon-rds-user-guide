@@ -20,7 +20,7 @@ The following are some limitations and recommendations for importing backup file
 + You can't import data from a DB snapshot export to Amazon S3\.
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\.
 + You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 8\.0, and the default minor version for your AWS Region is 8\.0\.28, then you must import your data into a MySQL version 8\.0\.28 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](MySQL.Concepts.VersionMgmt.md)\.
-+ Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 8\.0 to version 5\.7, and you can't migrate from version 8\.0\.28 to version 8\.0\.27\.
++ Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 8\.0 to version 5\.7, and you can't migrate from version 8\.0\.32 to version 8\.0\.31\.
 + You can't import a MySQL 5\.5 or 5\.6 database\. 
 + You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.7 database to an RDS for MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
@@ -285,7 +285,7 @@ For Linux, macOS, or Unix:
  9.     --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename \
 10.     --s3-prefix bucketprefix \
 11.     --source-engine mysql \
-12.     --source-engine-version 8.0.28 \
+12.     --source-engine-version 8.0.32 \
 13.     --max-allocated-storage 1000
 ```
 For Windows:  
@@ -302,7 +302,7 @@ For Windows:
  9.     --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename ^
 10.     --s3-prefix bucketprefix ^
 11.     --source-engine mysql ^
-12.     --source-engine-version 8.0.28 ^
+12.     --source-engine-version 8.0.32 ^
 13.     --max-allocated-storage 1000
 ```
 

@@ -44,14 +44,14 @@ aws rds describe-db-engine-versions ^
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
-For example, to identify the valid upgrade targets for a MariaDB version 10\.5\.15 DB instance, run the following AWS CLI command:
+For example, to identify the valid upgrade targets for a MariaDB version 10\.5\.17 DB instance, run the following AWS CLI command:
 
 For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-engine-versions \
   --engine mariadb \
-  --engine-version 10.5.15 \
+  --engine-version 10.5.17 \
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
@@ -60,7 +60,7 @@ For Windows:
 ```
 aws rds describe-db-engine-versions ^
   --engine mariadb ^
-  --engine-version 10.5.15 ^
+  --engine-version 10.5.17 ^
   --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
 ```
 
@@ -137,14 +137,14 @@ aws rds describe-db-engine-versions ^
 --output text
 ```
 
-For example, the following AWS CLI command determines the automatic minor upgrade target for MariaDB minor version 10\.5\.12 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+For example, the following AWS CLI command determines the automatic minor upgrade target for MariaDB minor version 10\.5\.16 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
 
 For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-engine-versions \
 --engine mariadb \
---engine-version 10.5.12 \
+--engine-version 10.5.16 \
 --region us-east-2 \
 --query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
 --output table
@@ -155,7 +155,7 @@ For Windows:
 ```
 aws rds describe-db-engine-versions ^
 --engine mariadb ^
---engine-version 10.5.12 ^
+--engine-version 10.5.16 ^
 --region us-east-2 ^
 --query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
 --output table
@@ -169,16 +169,15 @@ Your output is similar to the following\.
 +--------------+-----------------+
 |  AutoUpgrade |  EngineVersion  |
 +--------------+-----------------+
-|  False       |  10.5.13        |
-|  False       |  10.5.15        |
-|  False       |  10.5.16        |
 |  True        |  10.5.17        |
 |  False       |  10.5.18        |
+|  False       |  10.5.19        |
 |  False       |  10.6.5         |
 |  False       |  10.6.7         |
 |  False       |  10.6.8         |
 |  False       |  10.6.10        |
-|  False       |  10.6.11        |
+|  False       |  10.6.11        | 
+|  False       |  10.6.12        |
 +--------------+-----------------+
 ```
 

@@ -139,7 +139,7 @@ After you enter the password for the user, you should see output similar to the 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 9738
-Server version: 8.0.23 Source distribution
+Server version: 8.0.28 Source distribution
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 
