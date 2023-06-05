@@ -408,16 +408,28 @@ You can grant some or all of the following permissions as needed to Windows\-aut
 **Example**  
 
 ```
+-- Create a server-level SQL login for the domain user, if it doesn't already exist
+USE [master]
+GO
+CREATE LOGIN [mydomain\user_name] FROM WINDOWS
+GO						
+						
+-- Create a database-level account for the domain user, if it doesn't already exist						
 USE [SSISDB]
 GO
 CREATE USER [mydomain\user_name] FOR LOGIN [mydomain\user_name]
+
+-- Add SSIS role membership to the domain user
 ALTER ROLE [ssis_admin] ADD MEMBER [mydomain\user_name]
 ALTER ROLE [ssis_logreader] ADD MEMBER [mydomain\user_name]
 GO
 
+-- Add MSDB role membership to the domain user
 USE [msdb]
 GO
 CREATE USER [mydomain\user_name] FOR LOGIN [mydomain\user_name]
+
+-- Grant MSDB stored procedure privileges to the domain user
 GRANT EXEC ON msdb.dbo.rds_msbi_task TO [mydomain\user_name] with grant option
 GRANT SELECT ON msdb.dbo.rds_fn_task_status TO [mydomain\user_name] with grant option
 GRANT EXEC ON msdb.dbo.rds_task_status TO [mydomain\user_name] with grant option
@@ -434,9 +446,15 @@ GRANT EXEC ON msdb.dbo.sp_delete_proxy TO [mydomain\user_name] with grant option
 GRANT EXEC ON msdb.dbo.sp_enum_login_for_proxy to [mydomain\user_name] with grant option
 GRANT EXEC ON msdb.dbo.sp_enum_proxy_for_subsystem TO [mydomain\user_name]  with grant option
 GRANT EXEC ON msdb.dbo.rds_sqlagent_proxy TO [mydomain\user_name] WITH GRANT OPTION
+
+
+-- Add the SQLAgentUserRole privilege to the domain user
+USE [msdb]
+GO
 ALTER ROLE [SQLAgentUserRole] ADD MEMBER [mydomain\user_name]
 GO
 
+-- Grant the ALTER ANY CREDENTIAL privilege to the domain user
 USE [master]
 GO
 GRANT ALTER ANY CREDENTIAL TO [mydomain\user_name]

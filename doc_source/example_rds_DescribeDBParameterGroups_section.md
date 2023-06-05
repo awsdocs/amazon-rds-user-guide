@@ -5,6 +5,9 @@ The following code examples show how to describe Amazon RDS DB parameter groups\
 **Note**  
 The source code for these examples is in the [AWS Code Examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples)\. Have feedback on a code example? [Create an Issue](https://github.com/awsdocs/aws-doc-sdk-examples/issues/new/choose) in the code examples repo\. 
 
+Action examples are code excerpts from larger programs and must be run in context\. You can see this action in context in the following code example: 
++  [Get started with DB instances](example_rds_Scenario_GetStartedInstances_section.md) 
+
 ------
 #### [ \.NET ]
 

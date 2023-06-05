@@ -136,6 +136,6 @@ To switch over a blue/green deployment by using the Amazon RDS API, use the [htt
 
 ## After switchover<a name="blue-green-deployments-switching-after"></a>
 
-After a switchover, the DB instances in the previous blue environment are retained\. Standard costs apply to these resources\.
+After a switchover, the DB instances in the previous blue environment are retained\. Standard costs apply to these resources\. Replication between the blue and green environments stops\.
 
 RDS renames the DB instances in the blue environment by appending `-oldn` to the current resource name, where `n` is a number\. The DB instances are read\-only until you set the `read_only` parameter to `0`\. 

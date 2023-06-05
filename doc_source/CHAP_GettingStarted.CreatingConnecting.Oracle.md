@@ -232,7 +232,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    SQL>
    ```
 
-   For more information about connecting to an RDS for Oracle DB instance, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\. If you can't connect to your DB instance, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+   For more information about connecting to an RDS for Oracle DB instance, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\. If you can't connect to your DB instance, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
    For security, it is a best practice to use encrypted connections\. Only use an unencrypted Oracle connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Securing Oracle DB instance connections](Oracle.Concepts.RestrictedDBAPrivileges.md)\.
 

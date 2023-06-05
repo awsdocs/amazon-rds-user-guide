@@ -123,5 +123,5 @@ For information about connecting to a DB instance that is running a specific DB 
 + [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)
 + [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)
 + [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)
-+ [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)
++ [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)
 + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)

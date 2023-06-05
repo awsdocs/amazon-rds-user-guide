@@ -27,6 +27,9 @@ Modify the values of the following variables as needed:
 
   For `ssl_ca`, specify an SSL certificate\. To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
+
 This code connects to a MariaDB or MySQL DB instance\.
 
 Before running this code, install the PyMySQL driver by following the instructions in the [ Python Package Index](https://pypi.org/project/PyMySQL/)\.

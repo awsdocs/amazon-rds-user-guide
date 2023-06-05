@@ -39,6 +39,9 @@ The first several characters of the token look like the following\.
 rdsmysql.123456789012.us-west-2.rds.amazonaws.com:3306/?Action=connect&DBUser=jane_doe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=900...
 ```
 
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
+
 ## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect"></a>
 
 The general format for connecting is shown following\.

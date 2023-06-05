@@ -34,8 +34,8 @@ The following Regions and engine versions are available for Multi\-AZ DB cluster
 | Asia Pacific \(Sydney\) | Version 8\.0\.28 and higher | 
 | Asia Pacific \(Tokyo\) | Version 8\.0\.28 and higher | 
 | Canada \(Central\) | Version 8\.0\.28 and higher | 
-| China \(Beijing\) | – | 
-| China \(Ningxia\) | – | 
+| China \(Beijing\) | Version 8\.0\.28 and higher | 
+| China \(Ningxia\) | Version 8\.0\.28 and higher | 
 | Europe \(Frankfurt\) | Version 8\.0\.28 and higher | 
 | Europe \(Ireland\) | Version 8\.0\.28 and higher | 
 | Europe \(London\) | Version 8\.0\.28 and higher | 
@@ -97,8 +97,8 @@ The following Regions and engine versions are available for Multi\-AZ DB cluster
 | Asia Pacific \(Sydney\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
 | Asia Pacific \(Tokyo\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
 | Canada \(Central\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
-| China \(Beijing\) | – | – | – | 
-| China \(Ningxia\) | – | – | – | 
+| China \(Beijing\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
+| China \(Ningxia\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
 | Europe \(Frankfurt\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
 | Europe \(Ireland\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 
 | Europe \(London\) | All PostgreSQL 15 versions | Version 14\.5 and higher | Version 13\.4 and version 13\.7 and higher | 

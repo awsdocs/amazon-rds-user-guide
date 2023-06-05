@@ -5,6 +5,9 @@ The following code examples show how to create an Amazon RDS DB instance and wai
 **Note**  
 The source code for these examples is in the [AWS Code Examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples)\. Have feedback on a code example? [Create an Issue](https://github.com/awsdocs/aws-doc-sdk-examples/issues/new/choose) in the code examples repo\. 
 
+Action examples are code excerpts from larger programs and must be run in context\. You can see this action in context in the following code example: 
++  [Get started with DB instances](example_rds_Scenario_GetStartedInstances_section.md) 
+
 ------
 #### [ \.NET ]
 
@@ -101,19 +104,65 @@ The source code for these examples is in the [AWS Code Examples GitHub repositor
   
 
 ```
-    public static void createSnapshot(RdsClient rdsClient, String dbInstanceIdentifier, String dbSnapshotIdentifier) {
+    public static void createDatabaseInstance(RdsClient rdsClient,
+                                                  String dbInstanceIdentifier,
+                                                  String dbName,
+                                                  String masterUsername,
+                                                  String masterUserPassword) {
 
         try {
-            CreateDbSnapshotRequest snapshotRequest = CreateDbSnapshotRequest.builder()
+            CreateDbInstanceRequest instanceRequest = CreateDbInstanceRequest.builder()
                 .dbInstanceIdentifier(dbInstanceIdentifier)
-                .dbSnapshotIdentifier(dbSnapshotIdentifier)
+                .allocatedStorage(100)
+                .dbName(dbName)
+                .engine("mysql")
+                .dbInstanceClass("db.m4.large")
+                .engineVersion("8.0.15")
+                .storageType("standard")
+                .masterUsername(masterUsername)
+                .masterUserPassword(masterUserPassword)
                 .build();
 
-            CreateDbSnapshotResponse response = rdsClient.createDBSnapshot(snapshotRequest);
-            System.out.print("The Snapshot id is " + response.dbSnapshot().dbiResourceId());
+            CreateDbInstanceResponse response = rdsClient.createDBInstance(instanceRequest);
+            System.out.print("The status is " + response.dbInstance().dbInstanceStatus());
 
         } catch (RdsException e) {
-            System.out.println(e.getLocalizedMessage());
+           System.out.println(e.getLocalizedMessage());
+           System.exit(1);
+        }
+    }
+
+    // Waits until the database instance is available
+    public static void waitForInstanceReady(RdsClient rdsClient, String dbInstanceIdentifier) {
+
+        Boolean instanceReady = false;
+        String instanceReadyStr = "";
+        System.out.println("Waiting for instance to become available.");
+
+        try {
+            DescribeDbInstancesRequest instanceRequest = DescribeDbInstancesRequest.builder()
+                .dbInstanceIdentifier(dbInstanceIdentifier)
+                .build();
+
+            // Loop until the cluster is ready
+            while (!instanceReady) {
+
+                DescribeDbInstancesResponse response = rdsClient.describeDBInstances(instanceRequest);
+                List<DBInstance> instanceList = response.dbInstances();
+                for (DBInstance instance : instanceList) {
+                    instanceReadyStr = instance.dbInstanceStatus();
+                    if (instanceReadyStr.contains("available"))
+                        instanceReady = true;
+                    else {
+                        System.out.print(".");
+                        Thread.sleep(sleepTime * 1000);
+                    }
+                }
+            }
+            System.out.println("Database instance is available!");
+
+        } catch (RdsException | InterruptedException e) {
+            System.err.println(e.getMessage());
             System.exit(1);
         }
     }

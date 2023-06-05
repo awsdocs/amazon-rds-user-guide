@@ -36,6 +36,9 @@ The first several characters of the generated token look like the following\.
 rdspostgres.123456789012.us-west-2.rds.amazonaws.com:5432/?Action=connect&DBUser=jane_doe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=900...
 ```
 
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
+
 ## Connecting to an Amazon RDS PostgreSQL instance<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect.PostgreSQL"></a>
 
 The general format for using psql to connect is shown following\.
@@ -58,6 +61,9 @@ The parameters are as follows:
 + `dbname` – The database that you want to access
 + `user` – The database account that you want to access
 + `password` – A signed IAM authentication token
+
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
 
 The following example shows using psql to connect\. In the example, psql uses the environment variable `RDSHOST` for the host and the environment variable `PGPASSWORD` for the generated token\. Also, */sample\_dir/* is the full path to the SSL certificate file that contains the public key\.
 

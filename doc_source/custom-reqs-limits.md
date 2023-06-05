@@ -31,7 +31,7 @@ RDS Custom for Oracle supports the following DB instance classes\.
 
 Make sure to follow these requirements for Amazon RDS Custom for Oracle:
 + Use [Oracle Software Delivery Cloud](https://edelivery.oracle.com/) to download Oracle installation and patch files\. For more information, see [Prerequisites for creating an RDS Custom for Oracle DB instance](custom-setup-orcl.md#custom-setup-orcl.review)\.
-+ Use the DB instance classes shown in [DB instance class support for RDS Custom for Oracle](#custom-reqs-limits.instances)\. The DB instances must run Oracle Linux 7 Update 6\.
++ Use the DB instance classes shown in [DB instance class support for RDS Custom for Oracle](#custom-reqs-limits.instances)\. The DB instances must run Oracle Linux 7 Update 9\.
 + Specify the gp2, gp3, or io1 solid state drives for storage\. The maximum storage limit is 64 TiB\.
 + Make sure that you have an AWS KMS key to create an RDS Custom DB instance\. For more information, see [Step 1: Create or reuse a symmetric encryption AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
 + Use only the approved database installation and patch files\. For more information, see [Step 2: Download your database installation files and patches from Oracle Software Delivery Cloud](custom-cev.preparing.md#custom-cev.preparing.download)\.

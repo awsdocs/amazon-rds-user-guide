@@ -102,6 +102,14 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0224 |  Storage autoscaling has triggered a pending scale storage task that will reach or exceed the maximum storage threshold\. Increase the maximum storage threshold\.  |  | 
 |  failure  | RDS\-EVENT\-0237 |  DB instance has a storage type that's currently unavailable in the Availability Zone\. Autoscaling will retry later\.  |  | 
 | failure | RDS\-EVENT\-0254 |  Underlying storage quota for this customer account has exceeded the limit\. Please increase the allowed storage quota to let the scaling go through on the instance\.  |  | 
+|  failure  |  RDS\-EVENT\-0278  |  The DB instance creation failed\. *message*  |  The *message* includes details about the failure\.  | 
+|  failure  |  RDS\-EVENT\-0279  |  The promotion of the RDS Custom read replica failed\. *message*  |  The *message* includes details about the failure\.  | 
+|  failure  |  RDS\-EVENT\-0280  |  RDS Custom couldn't upgrade the DB instance because the pre\-check failed\. *message*  |  The *message* includes details about the failure\.  | 
+|  failure  |  RDS\-EVENT\-0281  |  RDS Custom couldn't modify the DB instance because the pre\-check failed\. *message*  |  The *message* includes details about the failure\.  | 
+|  failure  |  RDS\-EVENT\-0282  |  RDS Custom couldn't modify the DB instance because the Elastic IP permissions aren't correct\. Please confirm the Elastic IP address is tagged with `AWSRDSCustom`\.  |    | 
+|  failure  |  RDS\-EVENT\-0283  |  RDS Custom couldn't modify the DB instance because the Elastic IP limit has been reached in your account\. Release unused Elastic IPs or request a quota increase for your Elastic IP address limit\.  |    | 
+|  failure  |  RDS\-EVENT\-0284  |  RDS Custom couldn't convert the instance to high availability because the pre\-check failed\. *message*  |  The *message* includes details about the failure\.  | 
+|  failure  |  RDS\-EVENT\-0285  |  RDS Custom couldn't create a final snapshot for the DB instance because *message*\.  |  The *message* includes details about the failure\.  | 
 |  low storage  | RDS\-EVENT\-0007 |  Allocated storage has been exhausted\. Allocate additional storage to resolve\.  |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The free storage capacity for DB instance: *name* is low at *percentage* of the provisioned storage \[Provisioned Storage: *size*, Free Storage: *size*\]\. You may want to increase the provisioned storage to address this issue\.  |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0227 |  Your Aurora cluster's storage is dangerously low with only *amount* terabytes remaining\. Please take measures to reduce the storage load on your cluster\.  |  The Aurora storage subsystem is running low on space\.  | 
@@ -152,7 +160,6 @@ The following table shows the event category and a list of events when a DB inst
 |  recovery  | RDS\-EVENT\-0066 |  Instance will be degraded while mirroring is reestablished: *message*\.  |  The SQL Server DB instance is re\-establishing its mirror\. Performance will be degraded until the mirror is reestablished\. A database was found with non\-FULL recovery model\. The recovery model was changed back to FULL and mirroring recovery was started\. \(<dbname>: <recovery model found>\[,\.\.\.\]\)"  | 
 |  recovery  | RDS\-EVENT\-0166 |  *message*  |  The RDS Custom DB instance is inside the support perimeter\.  | 
 |  restoration  | RDS\-EVENT\-0019 |  Restored from DB instance *name* to *name*\.  |  The DB instance has been restored from a point\-in\-time backup\.  | 
-|  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot *snapshot\_name*  |  The DB instance has been restored from a DB snapshot\.  | 
 |  security  | RDS\-EVENT\-0068 |  Decrypting hsm partition password to update instance\.  |  RDS is decrypting the AWS CloudHSM partition password to make updates to the DB instance\. For more information see [Oracle Database Transparent Data Encryption \(TDE\) with AWS CloudHSM](https://docs.aws.amazon.com/cloudhsm/latest/userguide/oracle-tde.html) in the *AWS CloudHSM User Guide*\.  | 
 |  security patching  | RDS\-EVENT\-0230 |  A system update is available for your DB instance\. For information about applying updates, see 'Maintaining a DB instance' in the RDS User Guide\.  |    A new Operating System update is available\. A new, minor version, operating system update is available for your DB instance\. For information about applying updates, see [Working with operating system updates](USER_UpgradeDBInstance.Maintenance.md#OS_Updates)\.  | 
 
@@ -223,6 +230,7 @@ The following table shows the event category and a list of events when an RDS Pr
 | configuration change | RDS\-EVENT\-0204 |  RDS modified DB proxy *name*\.  |  | 
 | configuration change | RDS\-EVENT\-0207 |  RDS modified the end point of the DB proxy *name*\.  |  | 
 | configuration change | RDS\-EVENT\-0213 |  RDS detected the addition of the DB instance and automatically added it to the target group of the DB proxy *name*\.  |  | 
+|  configuration change  | RDS\-EVENT\-0213 | RDS detected creation of DB instance *name* and automatically added it to target group *name* of DB proxy *name*\.  |  | 
 |  configuration change  | RDS\-EVENT\-0214 |  RDS detected deletion of DB instance *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
 |  configuration change  | RDS\-EVENT\-0215 |  RDS detected deletion of DB cluster *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
 |  creation  | RDS\-EVENT\-0203 |  RDS created DB proxy *name*\.  |  | 
@@ -260,4 +268,5 @@ The following table shows the event category and a list of events when a custom 
 
 |  Category  | Amazon RDS event ID |  Message  |  Notes  | 
 | --- | --- | --- | --- | 
-|  failure  | RDS\-EVENT\-0198 |  Creation failed for custom engine version *name*\. *message*  | The message includes details about the failure, such as missing files\. | 
+|  failure  | RDS\-EVENT\-0198 |  Creation failed for custom engine version *name*\. *message*  | The *message* includes details about the failure, such as missing files\. | 
+|  failure  | RDS\-EVENT\-0277 |  Failure during deletion of custom engine version *name*\. *message*  | The *message* includes details about the failure\. | 

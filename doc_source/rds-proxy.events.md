@@ -16,6 +16,7 @@ The following table shows the event category and a list of events when an RDS Pr
 | configuration change | RDS\-EVENT\-0204 |  RDS modified DB proxy *name*\.  |  | 
 | configuration change | RDS\-EVENT\-0207 |  RDS modified the end point of the DB proxy *name*\.  |  | 
 | configuration change | RDS\-EVENT\-0213 |  RDS detected the addition of the DB instance and automatically added it to the target group of the DB proxy *name*\.  |  | 
+|  configuration change  | RDS\-EVENT\-0213 | RDS detected creation of DB instance *name* and automatically added it to target group *name* of DB proxy *name*\.  |  | 
 |  configuration change  | RDS\-EVENT\-0214 |  RDS detected deletion of DB instance *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
 |  configuration change  | RDS\-EVENT\-0215 |  RDS detected deletion of DB cluster *name* and automatically removed it from target group *name* of DB proxy *name*\.  |  | 
 |  creation  | RDS\-EVENT\-0203 |  RDS created DB proxy *name*\.  |  | 

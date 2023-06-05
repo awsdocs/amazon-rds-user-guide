@@ -18,7 +18,6 @@ The wait events in this section are specific to RDS for PostgreSQL\.
 + [Lock:Relation](wait-event.lockrelation.md)
 + [Lock:transactionid](wait-event.locktransactionid.md)
 + [Lock:tuple](wait-event.locktuple.md)
-+ [LWLock:BufferMapping \(LWLock:buffer\_mapping\)](wait-event.lwl-buffer-mapping.md)
 + [LWLock:BufferIO](wait-event.lwlockbufferio.md)
 + [LWLock:buffer\_content \(BufferContent\)](wait-event.lwlockbuffercontent.md)
 + [LWLock:lock\_manager \(LWLock:lockmanager\)](wait-event.lw-lock-manager.md)

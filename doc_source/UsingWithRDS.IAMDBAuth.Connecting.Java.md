@@ -18,6 +18,9 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 
 If you are writing programs using the AWS SDK for Java, you can get a signed authentication token using the `RdsIamAuthTokenGenerator` class\. Using this class requires that you provide AWS credentials\. To do this, you create an instance of the `DefaultAWSCredentialsProviderChain` class\. `DefaultAWSCredentialsProviderChain` uses the first AWS access key and secret key that it finds in the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\. For more information about AWS access keys, see [Managing access keys for users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
 
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
+
 After you create an instance of `RdsIamAuthTokenGenerator`, you can call the `getAuthToken` method to obtain a signed token\. Provide the AWS Region, host name, port number, and user name\. The following code example illustrates how to do this\.
 
 ```

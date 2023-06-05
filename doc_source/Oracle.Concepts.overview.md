@@ -7,7 +7,7 @@ You can read the following sections to get an overview of RDS for Oracle\.
 + [RDS for Oracle releases](Oracle.Concepts.database-versions.md)
 + [RDS for Oracle licensing options](Oracle.Concepts.Licensing.md)
 + [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)
-+ [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)
++ [RDS for Oracle database architecture](oracle-multi-architecture.md)
 + [RDS for Oracle parameters](Oracle.Concepts.FeatureSupport.Parameters.md)
 + [RDS for Oracle character sets](Appendix.OracleCharacterSets.md)
 + [RDS for Oracle limitations](Oracle.Concepts.limitations.md)

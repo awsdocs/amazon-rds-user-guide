@@ -38,7 +38,7 @@ If you don't specify a preferred backup window when you create the DB instance o
 
 You can set the backup retention period when you create a DB instance or Multi\-AZ DB cluster\. If you don't set the backup retention period, the default backup retention period is one day if you create the database using the Amazon RDS API or the AWS CLI\. The default backup retention period is seven days if you create the database using the console\.
 
-After you create a DB instance or cluster, you can modify the backup retention period\. You can set the backup retention period to between 0 and 35 days\. Setting the backup retention period to 0 disables automated backups\. Manual snapshot limits \(100 per Region\) don't apply to automated backups\.
+After you create a DB instance or cluster, you can modify the backup retention period\. You can set the backup retention period of a DB instance to between 0 and 35 days\. Setting the backup retention period to 0 disables automated backups\. You can set the backup retention period of a multi\-AZ DB cluster to between 1 and 35 days\. Manual snapshot limits \(100 per Region\) don't apply to automated backups\.
 
 Automated backups aren't created while a DB instance or cluster is stopped\. Backups can be retained longer than the backup retention period if a database has been stopped\. RDS doesn't include time spent in the `stopped` state when the backup retention window is calculated\.
 

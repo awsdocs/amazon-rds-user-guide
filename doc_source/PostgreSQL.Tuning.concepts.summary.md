@@ -16,7 +16,6 @@ The following table lists the wait events for RDS for PostgreSQL that most commo
 |  [Lock:Relation](wait-event.lockrelation.md)  |  This event occurs when a query is waiting to acquire a lock on a table or view that's currently locked by another transaction\.  | 
 |  [Lock:transactionid](wait-event.locktransactionid.md)  | This event occurs when a transaction is waiting for a row\-level lock\. | 
 |  [Lock:tuple](wait-event.locktuple.md)  |  This event occurs when a backend process is waiting to acquire a lock on a tuple\.  | 
-|  [LWLock:BufferMapping \(LWLock:buffer\_mapping\)](wait-event.lwl-buffer-mapping.md)  |  This event occurs when a session is waiting to associate a data block with a buffer in the shared buffer pool\.  | 
 |  [LWLock:BufferIO](wait-event.lwlockbufferio.md)  |  This event occurs when RDS for PostgreSQL is waiting for other processes to finish their input/output \(I/O\) operations when concurrently trying to access a page\.  | 
 |  [LWLock:buffer\_content \(BufferContent\)](wait-event.lwlockbuffercontent.md)  |  This event occurs when a session is waiting to read or write a data page in memory while another session has that page locked for writing\.  | 
 |  [LWLock:lock\_manager \(LWLock:lockmanager\)](wait-event.lw-lock-manager.md)  | This event occurs when the RDS for PostgreSQL engine maintains the shared lock's memory area to allocate, check, and deallocate a lock when a fast path lock isn't possible\. | 

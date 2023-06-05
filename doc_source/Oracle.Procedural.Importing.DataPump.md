@@ -134,7 +134,7 @@ In this step, you create the schemas into which you plan to import data and gran
 
 **To create users and grant necessary privileges on the RDS for Oracle target instance**
 
-1. Use SQL\*Plus or Oracle SQL Developer to log in as the master user to the RDS for Oracle DB instance into which the data will be imported\. For information about connecting to a DB instance, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+1. Use SQL\*Plus or Oracle SQL Developer to log in as the master user to the RDS for Oracle DB instance into which the data will be imported\. For information about connecting to a DB instance, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 1. Create the required tablespaces before you import the data\. For more information, see [Creating and sizing tablespaces](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles)\.
 
@@ -350,7 +350,7 @@ This process imports a dump file into the `DATA_PUMP_DIR` directory, a preconfig
 
 To grant privileges to the user on the RDS for Oracle target DB instance, take the following steps:
 
-1. Use SQL Plus or Oracle SQL Developer to connect to the RDS for Oracle DB instance into which you intend to import the data\. Connect as the Amazon RDS master user\. For information about connecting to the DB instance, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+1. Use SQL Plus or Oracle SQL Developer to connect to the RDS for Oracle DB instance into which you intend to import the data\. Connect as the Amazon RDS master user\. For information about connecting to the DB instance, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 1. Create the required tablespaces before you import the data\. For more information, see [Creating and sizing tablespaces](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles)\.
 

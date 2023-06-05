@@ -1,4 +1,4 @@
-# Connecting to your Oracle DB instance<a name="USER_ConnectToOracleInstance"></a>
+# Connecting to your RDS for Oracle DB instance<a name="USER_ConnectToOracleInstance"></a>
 
 After Amazon RDS provisions your Oracle DB instance, you can use any standard SQL client application to connect to the DB instance\. In this topic, you connect to a DB instance that is running the Oracle database engine by using Oracle SQL Developer or SQL\*Plus\. 
 

@@ -110,7 +110,7 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
 
    1. Use a SQL client to connect to the DB instance as the master user\.
 
-      For information about connecting to an Oracle DB instance using a SQL client, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+      For information about connecting to an Oracle DB instance using a SQL client, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
    1. Run the following query:
 
@@ -155,7 +155,7 @@ You can't download SQLT 12\.1\.160429 from the My Oracle Support site\. Oracle h
 
 1.  From the command prompt, open SQL\*Plus, and connect to the DB instance as the master user\. 
 
-   For information about connecting to a DB instance using SQL\*Plus, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+   For information about connecting to a DB instance using SQL\*Plus, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 1.  Get the SQL ID of a SQL statement: 
 

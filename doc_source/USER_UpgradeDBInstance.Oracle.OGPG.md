@@ -30,7 +30,7 @@ The following table describes supported and unsupported upgrade paths\.
 |  Non\-CDB to CDB  |  No  | 
 |  CDB to non\-CDB  |  No  | 
 
-For more information about Oracle Multitenant in RDS for Oracle, see [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)\.
+For more information about Oracle Multitenant in RDS for Oracle, see [Overview of RDS for Oracle CDBs](oracle-multitenant.md#Oracle.Concepts.single-tenant)\.
 
 ## Option group considerations<a name="USER_UpgradeDBInstance.Oracle.OGPG.OG"></a>
 

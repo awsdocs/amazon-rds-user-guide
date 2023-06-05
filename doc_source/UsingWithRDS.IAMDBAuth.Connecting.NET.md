@@ -25,6 +25,9 @@ This code connects to a MariaDB or MySQL DB instance\. Modify the values of the 
 
   To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
+
 ```
 using System;
 using System.Data;
@@ -75,6 +78,9 @@ Modify the values of the following variables as needed:
 + `Root Certificate` – The full path to the SSL certificate for Amazon RDS
 
   To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
+
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
 
 ```
 using System;

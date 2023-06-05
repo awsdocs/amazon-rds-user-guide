@@ -15,6 +15,8 @@ Modify the values of the following variables as needed:
 + `dbName` – The database that you want to access
 + `dbUser` – The database account that you want to access
 + `dbHost` – The endpoint of the DB instance that you want to access
+**Note**  
+You cannot use a custom Route 53 DNS record instead of the DB instance endpoint to generate the authentication token\.
 + `dbPort` – The port number used for connecting to your DB instance
 + `region` – The AWS Region where the DB instance is running
 

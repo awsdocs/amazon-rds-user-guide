@@ -64,6 +64,7 @@ The following limitations apply to Multi\-AZ DB clusters:
 + Multi\-AZ DB clusters don't support the following features:
   + Amazon RDS Proxy
   + Support for IPv6 connections \(dual\-stack mode\)
+  + Cross\-Region automated backups
   + Exporting Multi\-AZ DB cluster snapshot data to an Amazon S3 bucket
   + IAM DB authentication
   + Kerberos authentication
@@ -71,6 +72,8 @@ The following limitations apply to Multi\-AZ DB clusters:
 
     As an alternative, you can restore a Multi\-AZ DB cluster to a point in time and specify a different port\.
   + Option groups
+  + Point\-in\-time\-recovery \(PITR\) for deleted clusters
+  + Reserved DB instances
   + Restoring a Multi\-AZ DB cluster snapshot from an Amazon S3 bucket
   + Storage autoscaling by setting the maximum allocated storage
 

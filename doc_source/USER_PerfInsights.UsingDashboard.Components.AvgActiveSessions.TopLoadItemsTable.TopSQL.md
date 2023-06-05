@@ -53,7 +53,7 @@ For a description of the SQL statistics for the Amazon RDS engines, see [SQL sta
 
 ## Load by waits \(AAS\)<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable.TopSQL.Load-by-waits"></a>
 
-In **Top SQL**, the **Load by waits \(AAS\)** column illustrates the percentage of the database load associated with each top load item\. This column reflects the load for that item by whatever grouping is currently selected in the **DB Load Chart**\. 
+In **Top SQL**, the **Load by waits \(AAS\)** column illustrates the percentage of the database load associated with each top load item\. This column reflects the load for that item by whatever grouping is currently selected in the **DB Load Chart**\. For more information about Average active sessions \(AAS\), see [Average active sessions](USER_PerfInsights.Overview.ActiveSessions.md#USER_PerfInsights.Overview.ActiveSessions.AAS)\.
 
 For example, you might group the **DB load** chart by wait states\. You examine SQL queries in the top load items table\. In this case, the **DB Load by Waits** bar is sized, segmented, and color\-coded to show how much of a given wait state that query is contributing to\. It also shows which wait states are affecting the selected query\.
 

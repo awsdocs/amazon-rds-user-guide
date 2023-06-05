@@ -77,7 +77,7 @@ You can set other NLS initialization parameters in your SQL client\. For example
 ALTER SESSION SET NLS_LANGUAGE=GERMAN;
 ```
 
-For information about connecting to an Oracle DB instance with a SQL client, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+For information about connecting to an Oracle DB instance with a SQL client, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 ## National character set<a name="Appendix.OracleCharacterSets.nchar-character-set"></a>
 

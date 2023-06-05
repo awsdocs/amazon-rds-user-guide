@@ -81,4 +81,4 @@ After you connect to the Oracle DB instance in a SQL client, the following query
 4.         p_filename  => 'sqlnet-parameters'));
 ```
 
-For information about connecting to an Oracle DB instance in a SQL client, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+For information about connecting to an Oracle DB instance in a SQL client, see [Connecting to your RDS for Oracle DB instance](USER_ConnectToOracleInstance.md)\.
