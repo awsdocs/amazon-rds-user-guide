@@ -1,10 +1,13 @@
 # Creating a CEV for RDS Custom for SQL Server<a name="custom-cev-sqlserver.create"></a>
 
-You can create a custom engine version \(CEV\) using the AWS Management Console or the AWS CLI\. You can then use the CEV to create an RDS Custom for SQL Server DB instance\. 
+You can create a custom engine version \(CEV\) using the AWS Management Console or the AWS CLI\. You can then use the CEV to create an RDS Custom for SQL Server DB instance\.
 
 Make sure that the Amazon Machine Image \(AMI\) is in the same AWS account and Region as your CEV\. Otherwise, the process to create a CEV fails\.
 
 For more information, see [Creating and connecting to a DB instance for Amazon RDS Custom for SQL Server](custom-creating-sqlserver.md)\.
+
+**Important**  
+The steps to create a CEV are the same for AMIs created with pre\-installed SQL Server and those created using bring your own media \(BYOM\)\.
 
 ## Console<a name="custom-cev-sqlserver.create.console"></a>
 

@@ -80,9 +80,9 @@ This feature changes to Continuous Query Notification in Oracle Database 12c Rel
 + Multimedia
 
   For more information, see [Oracle Multimedia](Oracle.Options.Multimedia.md)\.
-+ Multitenant \(single\-tenant architecture only\)
++ Multitenant \(single\-tenant configuration only\)
 
-  This feature is available for all Oracle Database 19c and higher releases\. For more information, see [Overview of RDS for Oracle CDBs](oracle-multitenant.md#Oracle.Concepts.single-tenant) and [Limitations of a single\-tenant CDB](Oracle.Concepts.limitations.md#Oracle.Concepts.single-tenant-limitations)\.
+  The multitenant architecture is supported for all Oracle Database 19c and higher releases\. For more information, see [Overview of RDS for Oracle CDBs](oracle-multitenant.md#Oracle.Concepts.single-tenant) and [Limitations of a single\-tenant CDB](Oracle.Concepts.limitations.md#Oracle.Concepts.single-tenant-limitations)\.
 + Network encryption
 
   For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\.
@@ -113,6 +113,8 @@ Amazon RDS for Oracle doesn't support the following Oracle Database features:
 + Automatic Storage Management \(ASM\)
 + Database Vault
 + Flashback Database
+**Note**  
+For alternative solutions, see the AWS Database Blog entry [Alternatives to the Oracle flashback database feature in Amazon RDS for Oracle](http://aws.amazon.com/blogs/database/alternatives-to-the-oracle-flashback-database-feature-in-amazon-rds-for-oracle/)\.
 + FTP and SFTP
 + Hybrid partitioned tables
 + Messaging Gateway

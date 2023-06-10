@@ -238,6 +238,7 @@ The following table shows the event category and a list of events when an RDS Pr
 | deletion | RDS\-EVENT\-0205 |  RDS deleted DB proxy *name*\.  |  | 
 |  deletion  | RDS\-EVENT\-0208 |  RDS deleted endpoint *name* for DB proxy *name*\.  |  | 
 |  failure  | RDS\-EVENT\-0243 |  RDS failed to provision capacity for proxy *name* because there aren't enough IP addresses available in your subnets: *name*\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses as recommended in the RDS Proxy documentation\.  |  To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\.  | 
+|  failure | RDS\-EVENT\-0275 |  RDS throttled some connections to DB proxy \(RDS Proxy\)\.  |  | 
 
 ## Blue/green deployment events<a name="USER_Events.Messages.BlueGreenDeployments"></a>
 

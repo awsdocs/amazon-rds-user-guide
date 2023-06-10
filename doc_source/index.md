@@ -224,6 +224,7 @@ sponsored by Amazon.
       + [RDS Custom for SQL Server workflow](custom-sqlserver.workflow.md)
       + [Requirements and limitations for Amazon RDS Custom for SQL Server](custom-reqs-limits-MS.md)
       + [Setting up your environment for Amazon RDS Custom for SQL Server](custom-setup-sqlserver.md)
+      + [Bring Your Own Media with RDS Custom for SQL Server](custom-sqlserver.byom.md)
       + [Working with custom engine versions for RDS Custom for SQL Server](custom-cev-sqlserver.md)
          + [Preparing to create a CEV for RDS Custom for SQL Server](custom-cev-sqlserver.preparing.md)
          + [Creating a CEV for RDS Custom for SQL Server](custom-cev-sqlserver.create.md)

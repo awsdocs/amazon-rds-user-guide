@@ -5,10 +5,11 @@
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 **Note**  
-You can filter new Amazon RDS features on the [What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products**, choose **Amazon RDS**\. Then search using keywords such as **RDS Proxy** or **Oracle 2022**\.
+You can filter new Amazon RDS features on the [What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products**, choose **Amazon RDS**\. Then search using keywords such as **RDS Proxy** or **Oracle 2023**\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [RDS Custom for SQL Server supports Bring Your Own Media \(BYOM\)](#WhatsNew) | You can now create a Custom Engine Version \(CEV\) using your own SQL Server media\. For more information, see [Bring Your Own Media with RDS Custom for SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-sqlserver.byom.html)\. | June 8, 2023 | 
 | [RDS for Oracle can convert an Oracle Database 19c non\-CDB to a CDB](#WhatsNew) | If your DB instance runs Oracle Database 19c with the April 2021 or higher RU, you can convert a non\-CDB to a CDB \(container database\)\. After you convert the architecture, you can upgrade your 19c CDB to a 21c CDB\. This step is necessary because you can't upgrade your database and convert the architecture using a single command\. For more information, see [ Converting an RDS for Oracle non\-CDB into a CDB](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-multitenant.html#oracle-cdb-converting)\. | May 31, 2023 | 
 | [Update to AWS managed policy permissions](#WhatsNew) | The `AmazonRDSCustomServiceRolePolicy` of the `AWSServiceRoleForRDSCustom` service\-linked role has new permissions that allow RDS Custom to create network interfaces\. For more information, see [ Amazon RDS updates to AWS managed policies](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-manpol-updates.html)\. | May 30, 2023 | 
 | [Multi\-AZ DB clusters available in the China Regions](#WhatsNew) | Multi\-AZ DB clusters are now available in the AWS Regions China \(Beijing\) and China \(Ningxia\)\. For more information, see [Multi\-AZ DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.MultiAZDBClusters.html)\. | May 30, 2023 | 

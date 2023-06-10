@@ -79,6 +79,7 @@ You might encounter the following RDS events while creating or connecting to a D
 | Category | RDS event ID | Description | 
 | --- | --- | --- | 
 |  failure  | RDS\-EVENT\-0243 | RDS couldn't provision capacity for the proxy because there aren't enough IP addresses available in your subnets\. To fix the issue, make sure that your subnets have the minimum number of unused IP addresses\. To determine the recommended number for your instance class, see [Planning for IP address capacity](rds-proxy-setup.md#rds-proxy-network-prereqs.plan-ip-address)\. | 
+|  failure  | RDS\-EVENT\-0275 |  RDS throttled some connections to DB proxy \(RDS Proxy\)\.  | 
 
  You might encounter the following issues while creating a new proxy or connecting to a proxy\. 
 

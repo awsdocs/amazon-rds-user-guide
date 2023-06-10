@@ -207,7 +207,7 @@ The transaction logs for each database are uploaded to an S3 bucket named `do-no
 
 You can restore an RDS Custom for SQL Server DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### Console<a name="custom-backup.pitr2.CON"></a>
+### Console<a name="custom-backup-sqs.pitr2.CON"></a>
 
 **To restore an RDS Custom DB instance to a specified time**
 

@@ -23,7 +23,7 @@ Dates with only a month and a year are approximate and are updated with an exact
 |  8\.0\.32  |  17 January 2023  |  7 February 2023  |  March 2024  | 
 |  8\.0\.31  |  11 October 2022  |  10 November 2022  |  March 2024  | 
 |  8\.0\.30  |  26 July 2022  |  9 September 2022  |  September 2023  | 
-|  8\.0\.28  |  18 January 2022  |  11 March 2022  |  September 2023  | 
+|  8\.0\.28  |  18 January 2022  |  11 March 2022  | March 2024 | 
 | 5\.7 | 
 |  5\.7\.41  |  17 January 2023  |  7 February 2023  |  October 2023  | 
 |  5\.7\.40  |  11 October 2022  |  11 November 2022  |  October 2023  | 

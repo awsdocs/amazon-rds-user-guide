@@ -10,7 +10,7 @@ Following, you can find a summary of the Amazon RDS Custom for SQL Server requir
 
 ## Region and version availability<a name="custom-reqs-limits-MS.RegionVersionAvailability"></a>
 
-Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Amazon RDS Custom for SQL Server, see [RDS Custom](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md)\. 
+Feature availability and support varies across specific versions of each database engine, and across AWS Regions\. For more information on version and Region availability of Amazon RDS with Amazon RDS Custom for SQL Server, see [RDS Custom for SQL Server](Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.md#Concepts.RDS_Fea_Regions_DB-eng.Feature.RDSCustom.sq)\. 
 
 ## General requirements for RDS Custom for SQL Server<a name="custom-reqs-limits.reqsMS"></a>
 

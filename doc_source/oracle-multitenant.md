@@ -13,7 +13,7 @@ In the Oracle multitenant architecture, a container database \(CDB\) can include
 
 You can create an RDS for Oracle DB instance as a container database \(CDB\) when you run Oracle Database 19c or higher\. A CDB differs from a non\-CDB because it can contain pluggable databases \(PDBs\)\. A PDB is a portable collection of schemas and objects that appears to an application as a separate database\.
 
-Starting with Oracle Database 21c, all databases are CDBs\. If your DB instance runs Oracle Database 19c, you can create either a CDB or a non\-CDB\. A non\-CDB uses the traditional Oracle database architecture and can't contain PDBs\. You can convert an Oracle Database 19c non\-CDB to a CDB, but you can't convert a CDB to a non\-CDB\.
+Starting with Oracle Database 21c, all databases are CDBs\. If your DB instance runs Oracle Database 19c, you can create either a CDB or a non\-CDB\. A non\-CDB uses the traditional Oracle database architecture and can't contain PDBs\. You can convert an Oracle Database 19c non\-CDB to a CDB, but you can't convert a CDB to a non\-CDB\. You can only upgrade a CDB to a CDB\.
 
 **Topics**
 + [Single\-tenant configuration](#single-tenant-access)
@@ -26,7 +26,7 @@ Starting with Oracle Database 21c, all databases are CDBs\. If your DB instance 
 
 RDS for Oracle supports the single\-tenant configuration of the Oracle multitenant architecture\. This means that an RDS for Oracle DB instance can contain only one PDB\. You name the PDB when you create your DB instance\. The CDB name defaults to `RDSCDB` and can't be changed\.
 
-In RDS for Oracle, you interact with the PDB rather than the CDB\. Your experience with a PDB is mostly identical to your experience with a non\-CDB\. You use the same Amazon RDS APIs in the single\-tenant configuration as you do in the non\-CDB architecture\. You can't access the CDB itself\.
+In RDS for Oracle, your client application interacts with the PDB rather than the CDB\. Your experience with a PDB is mostly identical to your experience with a non\-CDB\. You use the same Amazon RDS APIs in the single\-tenant configuration as you do in the non\-CDB architecture\. You can't access the CDB itself\.
 
 ### Creation and conversion options in a CDB<a name="oracle-cdb-creation-conversion"></a>
 
@@ -39,7 +39,7 @@ Although Oracle Database 21c supports only CDBs, Oracle Database 19c supports bo
 | Oracle Database 19c | CDB or non\-CDB | Non\-CDB to CDB \(April 2021 RU or higher\) | 21c CDB \(from 19c CDB only\) | 
 | Oracle Database 12c \(desupported\) | Non\-CDB only | N/A | 19c non\-CDB | 
 
-As shown in the preceding table, you can't directly upgrade a non\-CDB to a CDB in a new major version\. But you can convert an Oracle Database 19c non\-CDB to an Oracle Database 19c CDB\. Then you can upgrade the Oracle Database 19c CDB to an Oracle Database 21c CDB\.
+As shown in the preceding table, you can't directly upgrade a non\-CDB to a CDB in a new major version\. But you can convert an Oracle Database 19c non\-CDB to an Oracle Database 19c CDB, and then upgrade the Oracle Database 19c CDB to an Oracle Database 21c CDB\. For more information, see [Converting an RDS for Oracle non\-CDB to a CDB](#oracle-cdb-converting)\.
 
 ### User accounts and privileges in a CDB<a name="Oracle.Concepts.single-tenant.users"></a>
 
@@ -233,12 +233,37 @@ The non\-CDB conversion operation has the following requirements:
 + Make sure that you specify `oracle-ee-cdb` or `oracle-se2-cdb` for the engine type\. These are the only supported values\.
 + Make sure that your DB engine runs Oracle Database 19c with an April 2021 or later RU\.
 
-The conversion operation has the following limitations:
+The operation has the following limitations:
 + You can't convert a CDB to a non\-CDB\. You can only convert a non\-CDB to a CDB\.
-+ You can't convert a primary or replica database that has Oracle Data Guard turned on\.
-+ You can't upgrade the DB engine version and convert a non\-CDB to a CDB in the same CLI command\.
++ You can't convert a primary or replica database that has Oracle Data Guard enabled\.
++ You can't upgrade the DB engine version and convert a non\-CDB to a CDB in the same operation\.
 + The considerations for option and parameter groups are the same as for upgrading the DB engine\. For more information, see [Considerations for Oracle DB upgrades](USER_UpgradeDBInstance.Oracle.OGPG.md)\.
-+ You can't use the AWS Management Console to perform the operation\. Use the CLI or API instead\.
+
+### Console<a name="oracle-cdb-converting.console"></a>
+
+**To convert a non\-CDB to a CDB**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where your DB instance resides\.
+
+1. In the navigation pane, choose **Databases**, and then choose the non\-CDB instance that you want to convert to a CDB instance\. 
+
+1. Choose **Modify**\.
+
+1. For **Architecture settings**, select **Multitenant architecture**\.
+
+1. \(Optional\) For **DB parameter group**, choose a new parameter group for your CDB instance\. The same parameter group considerations apply when converting a DB instance as when upgrading a DB instance\. For more information, see [Parameter group considerations](USER_UpgradeDBInstance.Oracle.OGPG.md#USER_UpgradeDBInstance.Oracle.OGPG.PG)\.
+
+1. \(Optional\) For **Option group**, choose a new option group for your CDB instance\. The same option group considerations apply when converting a DB instance as when upgrading a DB instance\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.OGPG.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\.
+
+1. When all the changes are as you want them, choose **Continue** and check the summary of modifications\. 
+
+1. \(Optional\) Choose **Apply immediately** to apply the changes immediately\. Choosing this option can cause downtime in some cases\. For more information, see [Using the Apply Immediately setting](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\.
+
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB instance**\.
+
+   Or choose **Back** to edit your changes or **Cancel** to cancel your changes\.
 
 ### AWS CLI<a name="oracle-cdb-converting.cli"></a>
 
